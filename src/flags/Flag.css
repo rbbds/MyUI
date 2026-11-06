@@ -6,3 +6,4 @@
 .rb-flag--md{width:var(--flag-md-width)}
 .rb-flag--lg{width:var(--flag-lg-width)}
 .rb-flag--xl{width:var(--flag-xl-width)}
+.rb-control__icon .rb-flag svg{width:100%;height:100%}

@@ -362,13 +362,14 @@ export default [
     figma: { node: '17011:1731', base: 'Flags (Icons-pagina)' },
     react: 'CountrySelect',
     stories: { file: '../flags/Flags.stories', items: ['Playground', 'WithValue', 'Europe', 'Controlled', 'FlagSizes', 'AllFlags'] },
-    summary: 'Landkeuze met vlaggen en zoeken. Een Combobox met landnamen uit de browser (Intl) en vlaggen uit country-flag-icons (MIT). Importeer uit @rbbds/ui/flags, zodat de vlaggen alleen geladen worden als je ze gebruikt.',
+    summary: 'Landkeuze met vlaggen en zoeken. Twee varianten: Select met een vlag in de leading slot (alleen het gekozen land, native) of Country select (Combobox met vlag per optie en zoeken). Landnamen komen uit de browser (Intl) en vlaggen uit country-flag-icons (MIT). Importeer uit @rbbds/ui/flags, zodat de vlaggen alleen geladen worden als je ze gebruikt.',
     use: ['Woonland, nationaliteit, land van een adres.', 'Taal- of regiokeuze waar een vlag helpt bij herkennen.'],
     avoid: ['Taalkeuze alleen met vlaggen: een vlag is een land, geen taal. Zet altijd de naam van de taal erbij.', 'Lijsten met maar een paar landen zonder zoekbehoefte: gebruik Radio of Select.'],
     anatomy: ['Combobox.', 'Flag (3:2, 16, 20, 24 of 32 breed) voor elk land.', 'Groep Veelgekozen (optioneel) en Alle landen, alfabetisch.'],
     figmaProps: [
       ['Flag/XX', 'component per land', '40 vlaggen in Figma: EU27, GB, US, CA, AU, CH, NO, IS, TR, MA, SR, CW, AW en EU. In code zijn alle ruim 250 vlaggen beschikbaar.'],
-      ['Combobox / Combobox option', 'zie Combobox', 'Zet Leading op een Flag.'],
+      ['Select: Icon leading + Leading icon', 'boolean + instance swap', 'Eenvoudige variant: zet Icon leading aan en wissel naar Flag/XX.'],
+      ['Combobox / Combobox option', 'zie Combobox', 'Zoekbare variant: zet Leading op een Flag.'],
     ],
     reactProps: [
       ['countries', 'string[]', 'ISO-codes om de lijst te beperken. Standaard alle landen.'],
