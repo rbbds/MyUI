@@ -1,0 +1,105 @@
+{
+  "name": "Combobox",
+  "page": "Form inputs",
+  "figma": {
+    "node": "17011:1731",
+    "base": "_Combobox option"
+  },
+  "react": "Combobox",
+  "summary": "Select met zoeken en een visual per optie (vlag, avatar of icoon). Typen filtert de lijst, pijltjes en Enter kiezen. Basis voor Country select.",
+  "use": [
+    "Lange lijsten waarin de gebruiker wil zoeken, zoals landen of organisaties.",
+    "Opties die een visual nodig hebben om sneller te herkennen."
+  ],
+  "avoid": [
+    "Korte lijsten zonder visual: gebruik Select (native), dat werkt beter op mobiel.",
+    "Vrije invoer die niet in de lijst staat: dit component accepteert alleen opties uit de lijst."
+  ],
+  "anatomy": [
+    "Label, hint en foutmelding (zoals Input).",
+    "Veld met de visual van de gekozen optie, tekst en chevron.",
+    "Listbox met optionele groepskoppen en opties (visual, label, vinkje bij de gekozen optie)."
+  ],
+  "figmaProps": [
+    [
+      "Combobox: State",
+      "Closed, Open",
+      ""
+    ],
+    [
+      "Combobox option: State",
+      "Default, Active, Disabled",
+      "Active = gemarkeerd met toetsenbord of muis."
+    ],
+    [
+      "_Combobox option: Label / Leading / Show leading / Selected",
+      "tekst / instance swap / boolean / boolean",
+      "Leading wisselt naar een Flag, Avatar of Icon."
+    ]
+  ],
+  "reactProps": [
+    [
+      "options",
+      "ComboboxOption[]",
+      "{ value, label, icon?, group?, keywords?, disabled? }"
+    ],
+    [
+      "value / defaultValue",
+      "string | null",
+      ""
+    ],
+    [
+      "onChange",
+      "(value, option) => void",
+      ""
+    ],
+    [
+      "label, hint, error, required, size, disabled, name",
+      "",
+      "Gelijk aan Input. name zet een hidden input voor formulieren."
+    ],
+    [
+      "placeholder / emptyText / toggleLabel",
+      "string",
+      "Teksten zijn aan te passen voor andere talen."
+    ]
+  ],
+  "behaviour": [
+    "Klik of pijl omlaag opent de lijst; de gekozen optie is dan gemarkeerd.",
+    "Typen filtert op label en keywords, zonder accenten (belgie vindt België).",
+    "Enter kiest, Escape sluit zonder te kiezen, Tab kiest de gemarkeerde optie als er gezocht is.",
+    "Bij het sluiten zonder keuze komt de vorige waarde terug in het veld."
+  ],
+  "a11y": [
+    "APG-patroon combobox met listbox popup: role combobox, aria-expanded, aria-controls en aria-activedescendant.",
+    "Groepen zijn role group met een label; de visual is decoratief (aria-hidden), het label draagt de naam.",
+    "De chevronknop zit niet in de tabvolgorde; het veld zelf opent de lijst."
+  ],
+  "content": [
+    "Placeholder als actie: \"Kies een land\".",
+    "Groepskoppen kort: \"Veelgekozen\", \"Alle landen\"."
+  ],
+  "do": [
+    "Zet de meest gekozen opties bovenaan in een eigen groep.",
+    "Voeg keywords toe voor andere namen of codes."
+  ],
+  "dont": [
+    "Een visual als enige onderscheid tussen opties.",
+    "Gebruiken voor 3 tot 5 opties: kies dan Radio of Select."
+  ],
+  "tokens": [
+    "--combobox-*",
+    "--menu-*",
+    "--menu-item-*",
+    "verder --input-*"
+  ],
+  "related": [
+    "Select",
+    "Country select",
+    "Command menu"
+  ],
+  "open": [
+    "Meervoudige keuze (multi select met tags) bestaat nog niet.",
+    "Asynchroon laden van opties bestaat nog niet."
+  ]
+}

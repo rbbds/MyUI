@@ -26,6 +26,10 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./flags": {
+      "types": "./dist/types/flags/index.d.ts",
+      "import": "./dist/flags.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css"
   },
@@ -43,6 +47,7 @@
     "react-dom": ">=18"
   },
   "dependencies": {
+    "country-flag-icons": "^1.6.20",
     "lucide-react": "^1.70.0"
   },
   "devDependencies": {

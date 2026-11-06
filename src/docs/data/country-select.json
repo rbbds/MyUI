@@ -1,0 +1,102 @@
+{
+  "name": "Country select",
+  "page": "Form inputs",
+  "figma": {
+    "node": "17011:1731",
+    "base": "Flags (Icons-pagina)"
+  },
+  "react": "CountrySelect",
+  "summary": "Landkeuze met vlaggen en zoeken. Een Combobox met landnamen uit de browser (Intl) en vlaggen uit country-flag-icons (MIT). Importeer uit @rbbds/ui/flags, zodat de vlaggen alleen geladen worden als je ze gebruikt.",
+  "use": [
+    "Woonland, nationaliteit, land van een adres.",
+    "Taal- of regiokeuze waar een vlag helpt bij herkennen."
+  ],
+  "avoid": [
+    "Taalkeuze alleen met vlaggen: een vlag is een land, geen taal. Zet altijd de naam van de taal erbij.",
+    "Lijsten met maar een paar landen zonder zoekbehoefte: gebruik Radio of Select."
+  ],
+  "anatomy": [
+    "Combobox.",
+    "Flag (3:2, 16, 20, 24 of 32 breed) voor elk land.",
+    "Groep Veelgekozen (optioneel) en Alle landen, alfabetisch."
+  ],
+  "figmaProps": [
+    [
+      "Flag/XX",
+      "component per land",
+      "40 vlaggen in Figma: EU27, GB, US, CA, AU, CH, NO, IS, TR, MA, SR, CW, AW en EU. In code zijn alle ruim 250 vlaggen beschikbaar."
+    ],
+    [
+      "Combobox / Combobox option",
+      "zie Combobox",
+      "Zet Leading op een Flag."
+    ]
+  ],
+  "reactProps": [
+    [
+      "countries",
+      "string[]",
+      "ISO-codes om de lijst te beperken. Standaard alle landen."
+    ],
+    [
+      "preferred",
+      "string[]",
+      "Bovenaan in een eigen groep, bijvoorbeeld ['NL', 'BE', 'DE']."
+    ],
+    [
+      "locale",
+      "string",
+      "Taal van de landnamen. Standaard 'nl-NL'."
+    ],
+    [
+      "preferredLabel / allLabel",
+      "string",
+      "Groepskoppen."
+    ],
+    [
+      "hideFlags",
+      "boolean",
+      ""
+    ],
+    [
+      "Flag: code, size, title",
+      "string / 'sm' | 'md' | 'lg' | 'xl' / string",
+      "Zonder title is de vlag decoratief."
+    ],
+    [
+      "flagCodes / hasFlagFor",
+      "string[] / (code) => boolean",
+      "Helpers."
+    ]
+  ],
+  "behaviour": [
+    "Zoeken werkt op de Nederlandse naam, de Engelse naam en de ISO-code (dui, germany, DE).",
+    "Verder gelijk aan Combobox."
+  ],
+  "a11y": [
+    "Vlaggen naast de landnaam zijn decoratief. Een losse vlag zonder tekst krijgt een title.",
+    "Lichte vlaggen (bijvoorbeeld JP, CY) hebben een rand van 1 px zodat ze op een witte achtergrond zichtbaar blijven."
+  ],
+  "content": [
+    "Gebruik de officiële Nederlandse landnaam uit Intl; schrijf geen eigen namen."
+  ],
+  "do": [
+    "Zet het land van de organisatie in preferred.",
+    "Importeer uit @rbbds/ui/flags."
+  ],
+  "dont": [
+    "Vlaggen gebruiken voor talen zonder taalnaam.",
+    "Het hele vlaggenpakket importeren in een pagina die het niet gebruikt."
+  ],
+  "tokens": [
+    "--flag-*",
+    "--combobox-*"
+  ],
+  "related": [
+    "Combobox",
+    "Select"
+  ],
+  "open": [
+    "Telefoonnummer met landcode (flag + prefix) bestaat nog niet."
+  ]
+}

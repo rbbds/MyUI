@@ -5,8 +5,10 @@ import { docs } from '../../docs/content/index.mjs';
 const PAGES = { 'Buttons': '16944:5', 'Form inputs': '16944:6', 'Selection controls': '16944:7', 'Badges & tags': '16944:8', 'Avatars': '16944:9', 'Feedback': '16944:10', 'Overlays': '16944:11', 'Navigation': '16944:12', 'Data display': '16944:13', 'Content': '16944:14', 'Utilities': '16944:15' };
 const tpl = readFileSync(new URL('./figma-builder.js', import.meta.url), 'utf8').split('\n').filter(l => !l.trim().startsWith('//')).join('\n');
 mkdirSync('docs/figma-payload', { recursive: true });
+// Optional: node build-figma-payload.mjs date-picker combobox → only those docs (smaller script).
+const only = process.argv.slice(2);
 for (const [name, id] of Object.entries(PAGES)) {
-  const list = docs.filter(d => d.page === name);
+  const list = docs.filter(d => d.page === name && (!only.length || only.includes(d.id)));
   if (!list.length) continue;
   const slim = list.map(({ id: _i, stories: _s, ...d }) => d);
   const src = tpl.replace('__PAGE_ID__', id).replace('__DOCS__', JSON.stringify(slim));

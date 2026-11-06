@@ -1,5 +1,5 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { ButtonIcon } from '../Button/Button';
 import { Field, type FieldBaseProps } from './Field';
@@ -27,13 +27,29 @@ export const parseDate = (s: string): Date | null => {
 };
 
 /* ---------- Calendar ---------- */
+export type CalendarView = 'day' | 'month' | 'year';
+
 export interface CalendarProps {
   value?: Date | null;
   onChange?: (date: Date) => void;
-  /** First month shown. Defaults to the month of `value`, or today. */
+  /** Month shown when there is no value. Defaults to today. */
   defaultMonth?: Date;
   min?: Date;
   max?: Date;
+  disablePast?: boolean;
+  disableFuture?: boolean;
+  /** Return true to disable a specific day. */
+  shouldDisableDate?: (date: Date) => boolean;
+  /** Enabled views, in order. Defaults to `['year', 'day']`, like MUI. */
+  views?: CalendarView[];
+  /** View shown first. Defaults to `day` when enabled. */
+  openTo?: CalendarView;
+  /** Show the days of the previous and next month in the grid. Off by default. */
+  showDaysOutsideCurrentMonth?: boolean;
+  /** Always render this many weeks (e.g. 6) so the height never changes. */
+  fixedWeekNumber?: number;
+  yearsPerRow?: 3 | 4;
+  yearsOrder?: 'asc' | 'desc';
   locale?: string;
   /** 1 = Monday (default), 0 = Sunday. */
   weekStartsOn?: 0 | 1;
@@ -41,93 +57,223 @@ export interface CalendarProps {
   autoFocus?: boolean;
   previousLabel?: string;
   nextLabel?: string;
+  /** Accessible label of the view switch button. Receives the view that opens on click. */
+  switchViewLabel?: (next: CalendarView) => string;
   className?: string;
 }
 
-export function Calendar({ value, onChange, defaultMonth, min, max, locale = 'nl-NL', weekStartsOn = 1, autoFocus, previousLabel = 'Vorige maand', nextLabel = 'Volgende maand', className }: CalendarProps) {
+const DEFAULT_MIN = new Date(1900, 0, 1);
+const DEFAULT_MAX = new Date(2099, 11, 31);
+const switchDefault = (v: CalendarView) => (v === 'year' ? 'Kies een jaar' : v === 'month' ? 'Kies een maand' : 'Terug naar dagen');
+
+export function Calendar({
+  value, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
+  views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
+  yearsPerRow = 3, yearsOrder = 'asc', locale = 'nl-NL', weekStartsOn = 1, autoFocus,
+  previousLabel = 'Vorige maand', nextLabel = 'Volgende maand', switchViewLabel = switchDefault, className,
+}: CalendarProps) {
   const today = startOfDay(new Date());
-  const [focused, setFocused] = useState<Date>(() => startOfDay(value ?? defaultMonth ?? today));
-  const view = new Date(focused.getFullYear(), focused.getMonth(), 1);
-  const grid = useRef<HTMLTableElement>(null);
+  const lo = startOfDay(new Date(Math.max((min ?? DEFAULT_MIN).getTime(), disablePast ? today.getTime() : -Infinity)));
+  const hi = startOfDay(new Date(Math.min((max ?? DEFAULT_MAX).getTime(), disableFuture ? today.getTime() : Infinity)));
+  const clamp = (d: Date) => (d < lo ? lo : d > hi ? hi : d);
+
+  const [view, setView] = useState<CalendarView>(() => (openTo && views.includes(openTo) ? openTo : views.includes('day') ? 'day' : views[0]));
+  const [focused, setFocused] = useState<Date>(() => clamp(startOfDay(value ?? defaultMonth ?? today)));
+  const month = new Date(focused.getFullYear(), focused.getMonth(), 1);
+  const body = useRef<HTMLDivElement>(null);
   const moveFocus = useRef(Boolean(autoFocus));
   const titleId = useId();
 
-  const isDisabled = (d: Date) => (min && d < startOfDay(min)) || (max && d > startOfDay(max)) || false;
+  const isDisabled = (d: Date) => d < lo || d > hi || Boolean(shouldDisableDate?.(d));
+  const monthDisabled = (y: number, m: number) => new Date(y, m + 1, 0) < lo || new Date(y, m, 1) > hi;
+  const yearDisabled = (y: number) => y < lo.getFullYear() || y > hi.getFullYear();
+
   const weeks = useMemo(() => {
-    const offset = (view.getDay() - weekStartsOn + 7) % 7;
-    const start = addDays(view, -offset);
-    return Array.from({ length: 6 }, (_, w) => Array.from({ length: 7 }, (_, d) => addDays(start, w * 7 + d)));
-  }, [view.getTime(), weekStartsOn]); // eslint-disable-line react-hooks/exhaustive-deps
+    const offset = (month.getDay() - weekStartsOn + 7) % 7;
+    const start = addDays(month, -offset);
+    const daysInMonth = new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate();
+    const count = fixedWeekNumber ?? Math.ceil((offset + daysInMonth) / 7);
+    return Array.from({ length: count }, (_, w) => Array.from({ length: 7 }, (_, d) => addDays(start, w * 7 + d)));
+  }, [month.getTime(), weekStartsOn, fixedWeekNumber]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const weekdays = weeks[0].map((d) => ({
-    short: d.toLocaleDateString(locale, { weekday: 'short' }).replace('.', ''),
+    narrow: d.toLocaleDateString(locale, { weekday: 'narrow' }).toUpperCase(),
     long: d.toLocaleDateString(locale, { weekday: 'long' }),
   }));
 
-  useEffect(() => {
-    if (!moveFocus.current) return;
-    grid.current?.querySelector<HTMLButtonElement>(`[data-date="${key(focused)}"]`)?.focus();
-  }, [focused]);
+  const years = useMemo(() => {
+    const list = Array.from({ length: hi.getFullYear() - lo.getFullYear() + 1 }, (_, i) => lo.getFullYear() + i);
+    return yearsOrder === 'desc' ? list.reverse() : list;
+  }, [lo.getTime(), hi.getTime(), yearsOrder]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const go = (d: Date) => { moveFocus.current = true; setFocused(d); };
-  const onKey = (e: KeyboardEvent<HTMLButtonElement>) => {
+  /* focus management: move DOM focus to the focused cell of the current view */
+  useEffect(() => {
+    const el = body.current?.querySelector<HTMLButtonElement>('[tabindex="0"]');
+    if (!el) return;
+    if (view === 'year') el.scrollIntoView?.({ block: 'center' });
+    if (moveFocus.current) el.focus();
+  }, [focused, view]);
+
+  const go = (d: Date) => { moveFocus.current = true; setFocused(clamp(d)); };
+  const nextView = (from: CalendarView) => views[views.indexOf(from) + 1] ?? null;
+  /* MUI: the header button toggles between the day view and the first other view */
+  const switchTarget: CalendarView | null = view === 'day' ? (views.find((v) => v !== 'day') ?? null) : views.includes('day') ? 'day' : null;
+  const toView = (v: CalendarView) => { moveFocus.current = true; setView(v); };
+
+  const pickYear = (y: number) => {
+    const d = clamp(new Date(y, focused.getMonth(), Math.min(focused.getDate(), new Date(y, focused.getMonth() + 1, 0).getDate())));
+    setFocused(d);
+    const n = nextView('year');
+    if (n) toView(n); else onChange?.(d);
+  };
+  const pickMonth = (m: number) => {
+    const y = focused.getFullYear();
+    const d = clamp(new Date(y, m, Math.min(focused.getDate(), new Date(y, m + 1, 0).getDate())));
+    setFocused(d);
+    const n = nextView('month');
+    if (n) toView(n); else onChange?.(d);
+  };
+
+  const onDayKey = (e: KeyboardEvent<HTMLButtonElement>) => {
+    const dow = (focused.getDay() - weekStartsOn + 7) % 7;
     const map: Record<string, () => Date> = {
       ArrowLeft: () => addDays(focused, -1),
       ArrowRight: () => addDays(focused, 1),
       ArrowUp: () => addDays(focused, -7),
       ArrowDown: () => addDays(focused, 7),
-      Home: () => addDays(focused, -((focused.getDay() - weekStartsOn + 7) % 7)),
-      End: () => addDays(focused, 6 - ((focused.getDay() - weekStartsOn + 7) % 7)),
+      Home: () => addDays(focused, -dow),
+      End: () => addDays(focused, 6 - dow),
       PageUp: () => addMonths(focused, e.shiftKey ? -12 : -1),
       PageDown: () => addMonths(focused, e.shiftKey ? 12 : 1),
     };
     const next = map[e.key];
     if (next) { e.preventDefault(); go(next()); }
   };
+  const gridKey = (e: KeyboardEvent<HTMLButtonElement>, perRow: number, step: (n: number) => Date) => {
+    const map: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -perRow, ArrowDown: perRow };
+    const n = map[e.key];
+    if (n !== undefined) { e.preventDefault(); go(step(n)); }
+  };
+  const yearStep = (n: number) => addMonths(focused, n * 12);
+  const monthStep = (n: number) => addMonths(focused, n);
+
+  const monthLabel = month.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+  const canPrev = !monthDisabled(addMonths(month, -1).getFullYear(), addMonths(month, -1).getMonth());
+  const canNext = !monthDisabled(addMonths(month, 1).getFullYear(), addMonths(month, 1).getMonth());
+  const shiftMonth = (n: number) => { moveFocus.current = false; setFocused(clamp(addMonths(focused, n))); };
 
   return (
-    <div className={cx('rb-calendar', className)}>
+    <div className={cx('rb-calendar', `rb-calendar--${view}`, className)}>
       <div className="rb-calendar__header">
-        <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={previousLabel} onClick={() => { moveFocus.current = false; setFocused(addMonths(focused, -1)); }} />
-        <h2 id={titleId} className="rb-calendar__title" aria-live="polite">
-          {view.toLocaleDateString(locale, { month: 'long', year: 'numeric' })}
-        </h2>
-        <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={nextLabel} onClick={() => { moveFocus.current = false; setFocused(addMonths(focused, 1)); }} />
+        {switchTarget ? (
+          <button
+            type="button"
+            className="rb-calendar__switch"
+            aria-label={`${monthLabel}, ${switchViewLabel(switchTarget)}`}
+            aria-expanded={view !== 'day'}
+            onClick={() => toView(switchTarget)}
+          >
+            <span id={titleId} aria-live="polite">{monthLabel}</span>
+            <ChevronDown aria-hidden="true" className={cx('rb-calendar__switch-icon', view !== 'day' && 'is-open')} />
+          </button>
+        ) : (
+          <span id={titleId} className="rb-calendar__title" aria-live="polite">{monthLabel}</span>
+        )}
+        {view === 'day' && (
+          <div className="rb-calendar__arrows">
+            <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={previousLabel} disabled={!canPrev} onClick={() => shiftMonth(-1)} />
+            <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={nextLabel} disabled={!canNext} onClick={() => shiftMonth(1)} />
+          </div>
+        )}
       </div>
-      <table ref={grid} role="grid" aria-labelledby={titleId} className="rb-calendar__grid">
-        <thead>
-          <tr>{weekdays.map((w) => <th key={w.long} scope="col" abbr={w.long}>{w.short}</th>)}</tr>
-        </thead>
-        <tbody>
-          {weeks.map((week) => (
-            <tr key={key(week[0])}>
-              {week.map((d) => {
-                const selected = sameDay(d, value);
-                const outside = d.getMonth() !== view.getMonth();
-                const disabled = isDisabled(d);
-                return (
-                  <td key={key(d)} aria-selected={selected || undefined}>
-                    <button
-                      type="button"
-                      data-date={key(d)}
-                      tabIndex={sameDay(d, focused) ? 0 : -1}
-                      className={cx('rb-calendar__day', selected && 'is-selected', outside && 'is-outside', sameDay(d, today) && 'is-today')}
-                      aria-current={sameDay(d, today) ? 'date' : undefined}
-                      aria-label={d.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                      disabled={disabled}
-                      onKeyDown={onKey}
-                      onFocus={() => { if (!sameDay(d, focused)) setFocused(d); }}
-                      onClick={() => onChange?.(d)}
-                    >
-                      {d.getDate()}
-                    </button>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+
+      <div ref={body} className="rb-calendar__body">
+        {view === 'day' && (
+          <table role="grid" aria-labelledby={titleId} className="rb-calendar__grid">
+            <thead>
+              <tr>{weekdays.map((w) => <th key={w.long} scope="col"><span aria-hidden="true">{w.narrow}</span><span className="rb-visually-hidden">{w.long}</span></th>)}</tr>
+            </thead>
+            <tbody>
+              {weeks.map((week) => (
+                <tr key={key(week[0])}>
+                  {week.map((d) => {
+                    const outside = d.getMonth() !== month.getMonth();
+                    if (outside && !showDaysOutsideCurrentMonth) return <td key={key(d)} aria-hidden="true" />;
+                    const selected = sameDay(d, value);
+                    return (
+                      <td key={key(d)} aria-selected={selected || undefined}>
+                        <button
+                          type="button"
+                          data-date={key(d)}
+                          tabIndex={sameDay(d, focused) ? 0 : -1}
+                          className={cx('rb-calendar__day', selected && 'is-selected', outside && 'is-outside', sameDay(d, today) && 'is-today')}
+                          aria-current={sameDay(d, today) ? 'date' : undefined}
+                          aria-label={d.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                          disabled={isDisabled(d)}
+                          onKeyDown={onDayKey}
+                          onFocus={() => { if (!sameDay(d, focused)) setFocused(d); }}
+                          onClick={() => onChange?.(d)}
+                        >
+                          {d.getDate()}
+                        </button>
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        {view === 'month' && (
+          <div role="radiogroup" aria-label={switchViewLabel('month')} className="rb-calendar__cells rb-calendar__cells--3">
+            {Array.from({ length: 12 }, (_, m) => {
+              const y = focused.getFullYear();
+              const selected = !!value && value.getFullYear() === y && value.getMonth() === m;
+              const isCurrent = today.getFullYear() === y && today.getMonth() === m;
+              return (
+                <button
+                  key={m}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  aria-label={new Date(y, m, 1).toLocaleDateString(locale, { month: 'long', year: 'numeric' })}
+                  tabIndex={focused.getMonth() === m ? 0 : -1}
+                  className={cx('rb-calendar__cell', selected && 'is-selected', isCurrent && 'is-today')}
+                  disabled={monthDisabled(y, m)}
+                  onKeyDown={(e) => gridKey(e, 3, monthStep)}
+                  onClick={() => pickMonth(m)}
+                >
+                  {new Date(y, m, 1).toLocaleDateString(locale, { month: 'short' }).replace('.', '')}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {view === 'year' && (
+          <div role="radiogroup" aria-label={switchViewLabel('year')} className={cx('rb-calendar__cells', 'rb-calendar__cells--years', `rb-calendar__cells--${yearsPerRow}`)}>
+            {years.map((y) => {
+              const selected = value?.getFullYear() === y;
+              return (
+                <button
+                  key={y}
+                  type="button"
+                  role="radio"
+                  aria-checked={selected}
+                  tabIndex={focused.getFullYear() === y ? 0 : -1}
+                  className={cx('rb-calendar__cell', selected && 'is-selected', today.getFullYear() === y && 'is-today')}
+                  disabled={yearDisabled(y)}
+                  onKeyDown={(e) => gridKey(e, yearsPerRow, (n) => yearStep(yearsOrder === 'desc' ? -n : n))}
+                  onClick={() => pickYear(y)}
+                >
+                  {y}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -146,11 +292,13 @@ export interface DatePickerProps extends FieldBaseProps {
   placeholder?: string;
   /** Accessible name of the calendar button and popover. */
   calendarLabel?: string;
+  /** Extra Calendar options (views, openTo, disablePast, shouldDisableDate, …). */
+  calendarProps?: Omit<CalendarProps, 'value' | 'onChange' | 'min' | 'max' | 'autoFocus'>;
   className?: string;
 }
 
 /** Text input (dd-mm-jjjj) with a calendar popover. Typing always works; the calendar is an extra. */
-export function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onChange, min, max, disabled, name, id, placeholder = 'dd-mm-jjjj', calendarLabel = 'Kies een datum', className }: DatePickerProps) {
+export function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onChange, min, max, disabled, name, id, placeholder = 'dd-mm-jjjj', calendarLabel = 'Kies een datum', calendarProps, className }: DatePickerProps) {
   const [own, setOwn] = useState<Date | null>(defaultValue);
   const date = value !== undefined ? value : own;
   const [text, setText] = useState(date ? formatDate(date) : '');
@@ -206,7 +354,7 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
           </div>
           {open && (
             <div id={popId} role="dialog" aria-label={calendarLabel} className="rb-datepicker__popover" onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
-              <Calendar value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
+              <Calendar {...calendarProps} value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
             </div>
           )}
         </div>
