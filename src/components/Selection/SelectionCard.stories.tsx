@@ -4,7 +4,7 @@ import { FeaturedIcon } from '../Display/Display';
 import { SelectionCard, SelectionCardGroup } from './SelectionCard';
 
 const meta: Meta<typeof SelectionCard> = {
-  title: 'Components/Selection controls/Selection card',
+  title: 'Selection controls/Selection card',
   component: SelectionCard,
   args: { type: 'radio', title: 'Maandelijks betalen', description: 'Elke maand een vast bedrag, automatisch afgeschreven.', name: 'demo' },
   argTypes: { type: { control: 'inline-radio', options: ['radio', 'checkbox'] } },

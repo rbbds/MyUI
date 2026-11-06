@@ -3,7 +3,7 @@ import { Briefcase, Home, Plane } from 'lucide-react';
 import { Combobox } from './Combobox';
 
 const meta: Meta<typeof Combobox> = {
-  title: 'Components/Form inputs/Combobox',
+  title: 'Form inputs/Combobox',
   component: Combobox,
   args: {
     label: 'Situatie',

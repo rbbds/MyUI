@@ -15,7 +15,7 @@ const items: CommandItem[] = [
 ];
 
 const meta: Meta<typeof CommandMenu> = {
-  title: 'Components/Feedback & overlays/Command menu',
+  title: 'Overlays/Command menu',
   component: CommandMenu,
 };
 export default meta;

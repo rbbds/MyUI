@@ -4,7 +4,7 @@ import type React from 'react';
 import { Calendar, DatePicker, formatDate } from './DatePicker';
 
 const meta: Meta<typeof DatePicker> = {
-  title: 'Components/Form inputs/Date picker',
+  title: 'Form inputs/Date picker',
   component: DatePicker,
   args: { label: 'Ingangsdatum', hint: 'Bijvoorbeeld 01-01-2027.' },
   decorators: [(S) => <div style={{ maxWidth: 320, minHeight: 480 }}><S /></div>],

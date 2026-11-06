@@ -4,7 +4,7 @@ import { Flag, flagCodes } from './Flag';
 import { CountrySelect } from './CountrySelect';
 
 const meta: Meta<typeof CountrySelect> = {
-  title: 'Components/Form inputs/Country select',
+  title: 'Form inputs/Country select',
   component: CountrySelect,
   args: { label: 'Land', hint: 'Het land waar je woont.', preferred: ['NL', 'BE', 'DE'] },
   decorators: [(S) => <div style={{ maxWidth: 360, minHeight: 440 }}><S /></div>],

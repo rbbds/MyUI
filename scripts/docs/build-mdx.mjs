@@ -17,7 +17,7 @@ import * as Stories from '../../components/${stories.file}';
 import { ComponentDoc, DocHeader } from '../ComponentDoc';
 import doc from '../data/${id}.json';
 
-<Meta title="Documentatie/${d.page}/${d.name}" />
+<Meta of={Stories} name="Docs" />
 
 <DocHeader doc={doc} />
 
