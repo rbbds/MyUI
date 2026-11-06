@@ -1,0 +1,113 @@
+{
+  "name": "Modal",
+  "page": "Overlays",
+  "figma": {
+    "node": "16956:257",
+    "base": "_Modal"
+  },
+  "react": "Modal",
+  "summary": "Dialoog voor een gerichte taak of bevestiging. Blokkeert de rest van de pagina tot de gebruiker een keuze maakt. De inhoud zit in een native Figma-slot.",
+  "use": [
+    "Bevestigen van een onomkeerbare actie.",
+    "Korte taak zonder de context te verlaten."
+  ],
+  "avoid": [
+    "Lange formulieren of uitgebreide inhoud: gebruik een eigen pagina.",
+    "Meldingen zonder keuze: gebruik Alert of Toast."
+  ],
+  "anatomy": [
+    "Backdrop.",
+    "Paneel: featured icon (optioneel), titel, ondersteunende tekst, sluitknop.",
+    "Content (slot).",
+    "Footer met Secondary action en Primary action."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "Type",
+      "Default, Destructive",
+      "Destructive gebruikt een rode featured icon en Button destructive."
+    ],
+    [
+      "Title / Supporting text / Featured icon",
+      "via _Modal",
+      ""
+    ],
+    [
+      "Content",
+      "slot",
+      "Laat leeg als er geen extra inhoud is."
+    ]
+  ],
+  "reactProps": [
+    [
+      "open / onClose",
+      "boolean / () => void",
+      ""
+    ],
+    [
+      "title",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "description",
+      "ReactNode",
+      ""
+    ],
+    [
+      "icon",
+      "ReactNode",
+      "Featured icon."
+    ],
+    [
+      "footer",
+      "ReactNode",
+      "Knoppen."
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ],
+    [
+      "closeLabel",
+      "string",
+      "Standaard 'Sluiten'."
+    ]
+  ],
+  "behaviour": [
+    "Native <dialog> met showModal: focus gaat de dialoog in en blijft erin.",
+    "Escape, de sluitknop of klikken op de backdrop sluit de modal."
+  ],
+  "a11y": [
+    "aria-labelledby wijst naar de titel, aria-describedby naar de toelichting.",
+    "Na sluiten keert de focus terug naar het element dat de modal opende."
+  ],
+  "content": [
+    "Titel als vraag bij bevestigen: \"Project verwijderen?\".",
+    "Knoppen noemen de uitkomst: \"Verwijderen\" en \"Annuleren\", niet \"Ja\" en \"Nee\"."
+  ],
+  "do": [
+    "Primary rechts, Secondary links in de footer."
+  ],
+  "dont": [
+    "Een modal openen vanuit een modal.",
+    "Belangrijke inhoud alleen in een modal tonen."
+  ],
+  "tokens": [
+    "--modal-{surface|backdrop|padding|radius|gap}",
+    "--modal-foreground-*",
+    "--modal-footer-gap"
+  ],
+  "related": [
+    "Button destructive",
+    "Featured icon",
+    "Alert"
+  ],
+  "open": []
+}

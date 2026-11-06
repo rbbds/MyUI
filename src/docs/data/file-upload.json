@@ -1,0 +1,89 @@
+{
+  "name": "File upload",
+  "page": "Content",
+  "figma": {
+    "node": "16960:170",
+    "base": "_File upload"
+  },
+  "react": "FileUpload",
+  "summary": "Dropzone met een echt bestandsveld, plus File upload items die per bestand de voortgang en status tonen.",
+  "use": [
+    "Documenten of afbeeldingen toevoegen aan een formulier of project."
+  ],
+  "avoid": [
+    "Eén klein bestand in een compact formulier: een gewone knop met bestandsveld is genoeg."
+  ],
+  "anatomy": [
+    "Dropzone: featured icon, actielink, sleeptekst, hint.",
+    "File upload item: bestandsicoon, naam, grootte, voortgang, status, verwijderknop."
+  ],
+  "figmaProps": [
+    [
+      "File upload: State",
+      "Default, Hover, Drag over, Disabled",
+      ""
+    ],
+    [
+      "File upload: Hint",
+      "tekst",
+      "Toegestane typen en maximale grootte."
+    ],
+    [
+      "File upload item: State",
+      "Uploading, Complete, Error",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "FileUpload onFiles",
+      "(files: File[]) => void",
+      ""
+    ],
+    [
+      "FileUpload hint / actionLabel / dropLabel",
+      "",
+      ""
+    ],
+    [
+      "FileUpload accept / multiple / disabled",
+      "native",
+      ""
+    ],
+    [
+      "FileUploadItem name / size / progress / status / error / onRemove",
+      "",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Klikken opent de bestandskiezer. Slepen geeft de Drag over-status.",
+    "Elk bestand krijgt een eigen item met voortgang."
+  ],
+  "a11y": [
+    "Werkt volledig zonder slepen: de actielink opent het native bestandsveld.",
+    "File upload item meldt voortgang en fouten via aria-live=\"polite\".",
+    "Verwijderknop heeft een label met de bestandsnaam."
+  ],
+  "content": [
+    "Hint noemt bestandstypen en maximale grootte: \"PDF, JPG of PNG (max. 10 MB)\".",
+    "Foutmelding noemt de oorzaak: \"Het bestand is groter dan 10 MB.\""
+  ],
+  "do": [
+    "Controleer type en grootte vóór het uploaden."
+  ],
+  "dont": [
+    "Alleen slepen aanbieden."
+  ],
+  "tokens": [
+    "--file-upload-{surface|border|foreground}-*",
+    "--file-upload-padding*",
+    "--file-upload-radius",
+    "--file-item-*"
+  ],
+  "related": [
+    "Progress",
+    "Featured icon"
+  ],
+  "open": []
+}

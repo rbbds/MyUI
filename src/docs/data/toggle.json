@@ -1,0 +1,82 @@
+{
+  "name": "Toggle",
+  "page": "Selection controls",
+  "figma": {
+    "node": "16950:370",
+    "base": "_Toggle"
+  },
+  "react": "Toggle",
+  "summary": "Schakelaar voor een instelling die direct ingaat, zonder opslaan.",
+  "use": [
+    "Instellingen: meldingen aan, donkere modus aan."
+  ],
+  "avoid": [
+    "Keuzes in een formulier dat je nog verstuurt: gebruik Checkbox."
+  ],
+  "anatomy": [
+    "Track.",
+    "Knob.",
+    "Label en optionele hint."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md",
+      ""
+    ],
+    [
+      "Pressed",
+      "False, True",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled",
+      ""
+    ],
+    [
+      "Label / hint",
+      "via _Toggle",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label / hint / size",
+      "",
+      "Gelijk aan Checkbox."
+    ],
+    [
+      "checked / onChange",
+      "native",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Wisselt direct. Toon resultaat zonder extra bevestiging."
+  ],
+  "a11y": [
+    "Native checkbox met role=\"switch\". Screenreaders melden aan/uit.",
+    "Status niet alleen met kleur: de knob-positie verandert mee."
+  ],
+  "content": [
+    "Label noemt de instelling, niet de actie: \"Meldingen\", niet \"Zet meldingen aan\"."
+  ],
+  "do": [
+    "Plaats het label links en de toggle rechts in instellingenlijsten, of andersom, maar consequent."
+  ],
+  "dont": [
+    "Een toggle die pas na \"Opslaan\" werkt."
+  ],
+  "tokens": [
+    "--toggle-track-{on|off}[-hover]",
+    "--toggle-knob",
+    "--toggle-padding",
+    "--toggle-radius"
+  ],
+  "related": [
+    "Checkbox",
+    "Button group"
+  ],
+  "open": []
+}

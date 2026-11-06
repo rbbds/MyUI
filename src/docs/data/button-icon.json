@@ -1,0 +1,95 @@
+{
+  "name": "Button icon",
+  "page": "Buttons",
+  "figma": {
+    "node": "16947:1459",
+    "base": "_Button icon"
+  },
+  "react": "ButtonIcon",
+  "summary": "Vierkante knop met alleen een icoon, voor compacte acties als sluiten, bewerken of meer opties. Heeft geen Link-hiërarchie.",
+  "use": [
+    "In toolbars, tabelrijen en headers waar ruimte beperkt is.",
+    "Voor acties met een algemeen bekend icoon: sluiten, zoeken, menu, bewerken."
+  ],
+  "avoid": [
+    "Acties waarvan het icoon niet eenduidig is. Gebruik dan Button met label.",
+    "De belangrijkste actie van een pagina."
+  ],
+  "anatomy": [
+    "Container (vierkant, padding per size).",
+    "Icoon: via Icon (instance swap). De kleur volgt de hiërarchie."
+  ],
+  "figmaProps": [
+    [
+      "Hierarchy",
+      "Primary, Secondary, Tertiary",
+      "Standaard Secondary in code."
+    ],
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled, Loading",
+      ""
+    ],
+    [
+      "Icon",
+      "instance swap",
+      "Via _Button icon."
+    ]
+  ],
+  "reactProps": [
+    [
+      "icon",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "aria-label",
+      "string",
+      "Verplicht. Beschrijft de actie, niet het icoon."
+    ],
+    [
+      "hierarchy",
+      "'primary' | 'secondary' | 'tertiary'",
+      "Standaard 'secondary'."
+    ],
+    [
+      "size, loading, destructive",
+      "",
+      "Gelijk aan Button."
+    ]
+  ],
+  "behaviour": [
+    "Gelijk aan Button. Bij Loading vervangt de spinner het icoon."
+  ],
+  "a11y": [
+    "aria-label is verplicht in code. Zonder label weet een screenreader niet wat de knop doet.",
+    "Toon hetzelfde label in een Tooltip voor muisgebruikers.",
+    "Doelgrootte minimaal 24×24 px (WCAG 2.5.8). Size=sm voldoet, kleiner niet."
+  ],
+  "content": [
+    "aria-label beschrijft de actie: \"Sluiten\", \"Bewerk project\", niet \"Kruisje\"."
+  ],
+  "do": [
+    "Combineer met een Tooltip met dezelfde tekst als aria-label.",
+    "Gebruik Tertiary in rijen met veel herhaling, zodat de pagina rustig blijft."
+  ],
+  "dont": [
+    "Een icon button zonder aria-label.",
+    "Twee icon buttons met hetzelfde icoon maar een andere betekenis op één scherm."
+  ],
+  "tokens": [
+    "--button-icon-only-{size}-padding",
+    "kleuren gelijk aan Button"
+  ],
+  "related": [
+    "Button",
+    "Tooltip",
+    "Dropdown menu"
+  ],
+  "open": []
+}

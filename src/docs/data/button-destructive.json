@@ -1,0 +1,79 @@
+{
+  "name": "Button destructive",
+  "page": "Buttons",
+  "figma": {
+    "node": "16947:1323",
+    "base": "_Button"
+  },
+  "react": "Button",
+  "summary": "Rode variant van Button voor acties die gegevens verwijderen of niet ongedaan te maken zijn. Zelfde base, properties en states als Button. Alleen de kleurtokens verschillen.",
+  "use": [
+    "Verwijderen, intrekken, opzeggen of andere onomkeerbare acties.",
+    "De bevestigingsknop in een Modal met Type=Destructive."
+  ],
+  "avoid": [
+    "Annuleren of sluiten: dat is niet destructief. Gebruik Secondary.",
+    "Waarschuwingen zonder actie: gebruik Alert met Color=Warning."
+  ],
+  "anatomy": [
+    "Gelijk aan Button: container, optioneel leading icon, label, optioneel trailing icon."
+  ],
+  "figmaProps": [
+    [
+      "Hierarchy",
+      "Primary, Secondary, Tertiary, Link",
+      "Primary voor de bevestiging, Tertiary of Link voor een minder prominente verwijderactie."
+    ],
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled, Loading",
+      ""
+    ],
+    [
+      "Label, iconen",
+      "via _Button",
+      "Gelijk aan Button."
+    ]
+  ],
+  "reactProps": [
+    [
+      "destructive",
+      "boolean",
+      "Zet op true op Button of ButtonIcon. Alle andere props zijn gelijk aan Button."
+    ]
+  ],
+  "behaviour": [
+    "Gelijk aan Button.",
+    "Combineer met een bevestigingsstap (Modal) als de actie niet terug te draaien is."
+  ],
+  "a11y": [
+    "Kleur is niet de enige aanwijzing: het label noemt de actie (\"Project verwijderen\").",
+    "Focus ring gebruikt --focus-ring-error zodat hij zichtbaar blijft op rood."
+  ],
+  "content": [
+    "Noem wat er verdwijnt: \"Verwijder 3 bestanden\" in plaats van \"Verwijderen\".",
+    "Geen \"Weet je het zeker?\" op de knop zelf. Die vraag hoort in de Modal-titel."
+  ],
+  "do": [
+    "Plaats de destructive knop rechts in de Modal-footer, met \"Annuleren\" (Secondary) ernaast.",
+    "Gebruik Tertiary destructive voor een verwijderactie in een lijst of tabelrij."
+  ],
+  "dont": [
+    "Destructive gebruiken om aandacht te trekken.",
+    "Een destructive Primary direct uitvoeren zonder bevestiging."
+  ],
+  "tokens": [
+    "--button-{hierarchy}-destructive-{surface|foreground|border}-{state}"
+  ],
+  "related": [
+    "Button",
+    "Modal",
+    "Menu item (Type=Destructive)"
+  ],
+  "open": []
+}

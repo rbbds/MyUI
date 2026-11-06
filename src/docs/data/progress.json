@@ -1,0 +1,73 @@
+{
+  "name": "Progress",
+  "page": "Feedback",
+  "figma": {
+    "node": "16955:99",
+    "base": null
+  },
+  "react": "ProgressBar",
+  "summary": "Balk die voortgang toont als de totale omvang bekend is, met optioneel percentage rechts of onder de balk.",
+  "use": [
+    "Uploads, stappen in een proces, voltooiingsgraad van een profiel."
+  ],
+  "avoid": [
+    "Onbekende duur: gebruik Spinner."
+  ],
+  "anatomy": [
+    "Track.",
+    "Indicator.",
+    "Waarde (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Value",
+      "tekst",
+      "Bijvoorbeeld 40%. Pas de breedte van de Indicator-layer mee aan."
+    ],
+    [
+      "Label",
+      "None, Right, Bottom",
+      "Positie van de waarde."
+    ]
+  ],
+  "reactProps": [
+    [
+      "value / max",
+      "number",
+      ""
+    ],
+    [
+      "label",
+      "string",
+      "Verplicht, voor screenreaders."
+    ],
+    [
+      "valuePosition",
+      "'none' | 'right' | 'bottom'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "De indicator groeit mee met value."
+  ],
+  "a11y": [
+    "role=\"progressbar\" met aria-valuenow, aria-valuemin en aria-valuemax, plus een label."
+  ],
+  "content": [
+    "Toon het percentage als de gebruiker erop wacht."
+  ],
+  "do": [],
+  "dont": [
+    "Een balk die terugloopt."
+  ],
+  "tokens": [
+    "--progress-{track|indicator|foreground}",
+    "--progress-radius",
+    "--progress-gap"
+  ],
+  "related": [
+    "Spinner",
+    "File upload"
+  ],
+  "open": []
+}

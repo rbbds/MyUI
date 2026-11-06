@@ -1,0 +1,71 @@
+{
+  "name": "Pagination",
+  "page": "Navigation",
+  "figma": {
+    "node": "16957:193",
+    "base": "_Pagination item"
+  },
+  "react": "Pagination",
+  "summary": "Navigatie tussen pagina's van een lange lijst of tabel, met Vorige en Volgende.",
+  "use": [
+    "Tabellen en zoekresultaten met een vast aantal items per pagina."
+  ],
+  "avoid": [
+    "Feeds waar doorscrollen logischer is: overweeg \"Meer laden\"."
+  ],
+  "anatomy": [
+    "Vorige-knop.",
+    "Paginanummers met ellips.",
+    "Volgende-knop."
+  ],
+  "figmaProps": [
+    [
+      "Pagination item: State",
+      "Default, Hover, Focus, Current",
+      ""
+    ],
+    [
+      "Number",
+      "via _Pagination item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "page / pageCount",
+      "number",
+      ""
+    ],
+    [
+      "onPageChange",
+      "(page) => void",
+      ""
+    ],
+    [
+      "previousLabel / nextLabel",
+      "string",
+      "Standaard 'Vorige' en 'Volgende'."
+    ]
+  ],
+  "behaviour": [
+    "Vorige is uitgeschakeld op pagina 1, Volgende op de laatste pagina."
+  ],
+  "a11y": [
+    "<nav aria-label=\"Paginering\">. Huidige pagina met aria-current=\"page\".",
+    "Nummers hebben een label: \"Pagina 3\"."
+  ],
+  "content": [],
+  "do": [
+    "Toon het totaal aantal resultaten in de buurt."
+  ],
+  "dont": [
+    "Paginering bij minder dan twee pagina's."
+  ],
+  "tokens": [
+    "--pagination-{foreground|foreground-current|surface-current|surface-hover|gap|radius}"
+  ],
+  "related": [
+    "Table"
+  ],
+  "open": []
+}

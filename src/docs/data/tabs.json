@@ -1,0 +1,91 @@
+{
+  "name": "Tabs",
+  "page": "Navigation",
+  "figma": {
+    "node": "16957:161",
+    "base": "_Tab"
+  },
+  "react": "Tabs",
+  "summary": "Wissel tussen gerelateerde panelen op dezelfde pagina. Twee stijlen: Underline en Pill.",
+  "use": [
+    "Inhoud van gelijk niveau die de gebruiker niet tegelijk hoeft te zien."
+  ],
+  "avoid": [
+    "Stappen in een proces: gebruik een stappenindicator.",
+    "Filters op dezelfde inhoud: gebruik Button group.",
+    "Navigatie naar andere pagina's: gebruik links."
+  ],
+  "anatomy": [
+    "Tablijst met track.",
+    "Tab: optioneel icoon, label, optionele teller.",
+    "Actieve indicator (onderstreping of pill).",
+    "Paneel."
+  ],
+  "figmaProps": [
+    [
+      "Tabs: Type",
+      "Underline, Pill",
+      ""
+    ],
+    [
+      "Tab: Type",
+      "Underline, Pill",
+      ""
+    ],
+    [
+      "Tab: State",
+      "Default, Hover, Focus, Active",
+      ""
+    ],
+    [
+      "Tab: Label / Icon leading / Leading icon / Show count / Count",
+      "via _Tab",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "items",
+      "{ id, label, icon?, count?, content }[]",
+      ""
+    ],
+    [
+      "type",
+      "'underline' | 'pill'",
+      ""
+    ],
+    [
+      "value / defaultValue / onChange",
+      "string",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Pijl links/rechts wisselt tab en activeert hem direct. Home en End naar de eerste en laatste tab."
+  ],
+  "a11y": [
+    "role=\"tablist\", \"tab\" en \"tabpanel\" met aria-selected en aria-controls.",
+    "Alleen de actieve tab zit in de tab-volgorde."
+  ],
+  "content": [
+    "Eén of twee woorden per tab."
+  ],
+  "do": [
+    "Houd de volgorde vast; de eerste tab is de meest gebruikte."
+  ],
+  "dont": [
+    "Meer dan zes tabs.",
+    "Underline en Pill mengen op één pagina."
+  ],
+  "tokens": [
+    "--tab-{foreground|surface|indicator|track}-*",
+    "--tab-padding-*",
+    "--tab-radius",
+    "--tabs-gap"
+  ],
+  "related": [
+    "Button group",
+    "Nav item"
+  ],
+  "open": []
+}

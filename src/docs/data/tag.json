@@ -1,0 +1,83 @@
+{
+  "name": "Tag",
+  "page": "Badges & tags",
+  "figma": {
+    "node": "16951:219",
+    "base": "_Tag"
+  },
+  "react": "Tag",
+  "summary": "Interactief label voor gekozen filters of waarden, optioneel verwijderbaar met een sluitknop.",
+  "use": [
+    "Actieve filters boven een lijst.",
+    "Gekozen waarden in een multi-select."
+  ],
+  "avoid": [
+    "Alleen een status tonen: gebruik Badge."
+  ],
+  "anatomy": [
+    "Container.",
+    "Dot (optioneel).",
+    "Label.",
+    "Sluitknop (optioneel, Closable)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus",
+      ""
+    ],
+    [
+      "Label / Dot / Closable",
+      "via _Tag",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "onRemove",
+      "() => void",
+      "Toont de sluitknop."
+    ],
+    [
+      "removeLabel",
+      "string",
+      "Accessible name van de sluitknop."
+    ],
+    [
+      "size / dot",
+      "",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "De sluitknop verwijdert de tag. Zet de focus daarna op een logische plek (volgende tag of het filterveld)."
+  ],
+  "a11y": [
+    "Sluitknop is een <button> met een label als \"Verwijder filter Actief\"."
+  ],
+  "content": [
+    "Toon de waarde, niet de categorie: \"Amsterdam\", niet \"Locatie\"."
+  ],
+  "do": [
+    "Bied \"Alles wissen\" aan bij meer dan drie tags."
+  ],
+  "dont": [
+    "Tags zonder sluitknop als je ze kunt verwijderen."
+  ],
+  "tokens": [
+    "--tag-{surface|border|foreground}",
+    "--tag-surface-hover",
+    "--tag-{size}-padding-*",
+    "--tag-radius"
+  ],
+  "related": [
+    "Badge",
+    "Checkbox"
+  ],
+  "open": []
+}

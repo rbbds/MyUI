@@ -1,0 +1,84 @@
+{
+  "name": "Accordion",
+  "page": "Content",
+  "figma": {
+    "node": "16960:104",
+    "base": "_Accordion item"
+  },
+  "react": "Accordion",
+  "summary": "Lijst van uitklapbare secties. Het paneel is een native Figma-slot.",
+  "use": [
+    "Veelgestelde vragen.",
+    "Lange pagina's waar de gebruiker zoekt naar één onderdeel."
+  ],
+  "avoid": [
+    "Inhoud die iedereen moet lezen: toon die gewoon."
+  ],
+  "anatomy": [
+    "Header-knop met titel en chevron.",
+    "Paneel (slot)."
+  ],
+  "figmaProps": [
+    [
+      "Expanded",
+      "False, True",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus",
+      ""
+    ],
+    [
+      "Title / Panel",
+      "tekst / slot",
+      "via _Accordion item"
+    ]
+  ],
+  "reactProps": [
+    [
+      "items",
+      "{ id, title, content }[]",
+      ""
+    ],
+    [
+      "allowMultiple",
+      "boolean",
+      "Standaard true."
+    ],
+    [
+      "defaultOpen",
+      "string[]",
+      ""
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Standaard 3. Kies passend bij de pagina."
+    ]
+  ],
+  "behaviour": [
+    "Klik, Enter of Spatie op de header klapt het paneel open of dicht."
+  ],
+  "a11y": [
+    "Header is een <button> in een kop (h2 tot h4) met aria-expanded en aria-controls.",
+    "Paneel is een region met aria-labelledby."
+  ],
+  "content": [
+    "Titels als vraag of als duidelijk onderwerp."
+  ],
+  "do": [
+    "Kies het juiste headingLevel zodat de koppenstructuur klopt."
+  ],
+  "dont": [
+    "Accordions in accordions."
+  ],
+  "tokens": [
+    "--accordion-{border|surface-hover|gap|padding-vertical}",
+    "--accordion-foreground-*"
+  ],
+  "related": [
+    "Tabs"
+  ],
+  "open": []
+}

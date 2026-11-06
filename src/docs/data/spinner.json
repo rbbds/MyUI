@@ -1,0 +1,65 @@
+{
+  "name": "Spinner",
+  "page": "Utilities",
+  "figma": {
+    "node": "16954:91",
+    "base": null
+  },
+  "react": "Spinner",
+  "summary": "Draaiende indicator voor laden zonder bekende duur.",
+  "use": [
+    "Inhoud die laadt binnen een vlak of kaart.",
+    "In Button bij State=Loading (zit daar al in)."
+  ],
+  "avoid": [
+    "Als de voortgang bekend is: gebruik Progress.",
+    "Hele pagina's: overweeg skeleton-weergaven."
+  ],
+  "anatomy": [
+    "Track.",
+    "Indicator."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ],
+    [
+      "label",
+      "string",
+      "Standaard 'Bezig met laden'."
+    ]
+  ],
+  "behaviour": [
+    "Draait continu. Respecteer prefers-reduced-motion."
+  ],
+  "a11y": [
+    "role=\"status\" met een tekstlabel, zodat screenreaders het laden melden."
+  ],
+  "content": [
+    "Label beschrijft wat er laadt: \"Projecten laden\"."
+  ],
+  "do": [
+    "Toon de spinner pas na ongeveer 300 ms, zodat snelle acties niet flikkeren."
+  ],
+  "dont": [
+    "Meerdere spinners tegelijk op één scherm."
+  ],
+  "tokens": [
+    "--spinner-indicator",
+    "--spinner-track"
+  ],
+  "related": [
+    "Progress",
+    "Button"
+  ],
+  "open": []
+}

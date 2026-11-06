@@ -1,0 +1,101 @@
+{
+  "name": "Table",
+  "page": "Data display",
+  "figma": {
+    "node": "16958:112",
+    "base": "_Table header cell"
+  },
+  "react": "Table",
+  "summary": "Gegevens in rijen en kolommen, opgebouwd uit Table header cells en Table cells. Optioneel in een TableCard met titel.",
+  "use": [
+    "Gegevens die de gebruiker wil vergelijken, sorteren of scannen."
+  ],
+  "avoid": [
+    "Layout: gebruik grid of flex.",
+    "Weinig gegevens per item: overweeg een lijst of Cards."
+  ],
+  "anatomy": [
+    "TableCard: titel en badge (optioneel).",
+    "Header cells: label, sorteericoon, optioneel checkbox.",
+    "Body cells: tekst, tekst + ondersteunend, avatar, badge of acties."
+  ],
+  "figmaProps": [
+    [
+      "Table header cell: Sort",
+      "None, Ascending, Descending",
+      ""
+    ],
+    [
+      "Table header cell: Label / Checkbox",
+      "via _Table header cell",
+      ""
+    ],
+    [
+      "Table cell: Type",
+      "Text, Text + supporting, Avatar, Badge, Actions",
+      ""
+    ],
+    [
+      "Table cell: Checkbox",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "Table",
+      "native <table>-props",
+      ""
+    ],
+    [
+      "TableCard title / badge",
+      "ReactNode",
+      ""
+    ],
+    [
+      "TableHeader sort / onSort",
+      "'ascending' | 'descending' | 'none'",
+      "Maakt de kop sorteerbaar."
+    ],
+    [
+      "PersonCell avatar / name / secondary",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Rijen krijgen een hover-achtergrond.",
+    "Sorteerbare koppen zijn knoppen; klikken wisselt de richting."
+  ],
+  "a11y": [
+    "Native <table> met <th scope=\"col\">.",
+    "Sorteerbare koppen hebben aria-sort.",
+    "Checkboxes in rijen hebben een label met de rijnaam."
+  ],
+  "content": [
+    "Kolomkoppen kort. Getallen rechts uitlijnen, tekst links."
+  ],
+  "do": [
+    "Zet de belangrijkste kolom links.",
+    "Combineer met Pagination bij lange lijsten."
+  ],
+  "dont": [
+    "Tabellen in tabellen.",
+    "Acties alleen bij hover tonen: toetsenbord- en touchgebruikers missen ze."
+  ],
+  "tokens": [
+    "--table-{surface|surface-header|surface-hover|border|radius}",
+    "--table-foreground-*",
+    "--table-cell-padding-*",
+    "--table-cell-gap"
+  ],
+  "related": [
+    "Pagination",
+    "Checkbox",
+    "Badge",
+    "Avatar"
+  ],
+  "open": [
+    "Op kleine schermen scrollt de tabel horizontaal. Een gestapelde mobiele weergave is er nog niet."
+  ]
+}

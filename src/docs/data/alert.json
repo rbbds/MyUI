@@ -1,0 +1,99 @@
+{
+  "name": "Alert",
+  "page": "Feedback",
+  "figma": {
+    "node": "16955:172",
+    "base": "_Notification"
+  },
+  "react": "Alert",
+  "summary": "Melding in de pagina, gekoppeld aan de inhoud eromheen. Blijft staan tot de situatie verandert of de gebruiker hem sluit.",
+  "use": [
+    "Foutsamenvatting boven een formulier.",
+    "Waarschuwing of uitleg bij een sectie."
+  ],
+  "avoid": [
+    "Tijdelijke bevestiging na een actie: gebruik Toast.",
+    "Kritieke keuzes: gebruik Modal."
+  ],
+  "anatomy": [
+    "Statusicoon (Featured icon).",
+    "Titel.",
+    "Ondersteunende tekst.",
+    "Acties (optioneel).",
+    "Sluitknop (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Color",
+      "Gray, Brand, Error, Warning, Success, Info",
+      ""
+    ],
+    [
+      "Title / Supporting text / Show actions / Closable",
+      "via _Notification",
+      "Gedeeld met Toast."
+    ]
+  ],
+  "reactProps": [
+    [
+      "color",
+      "StatusColor",
+      "Standaard 'info'."
+    ],
+    [
+      "title",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Toelichting."
+    ],
+    [
+      "actions",
+      "ReactNode",
+      ""
+    ],
+    [
+      "onClose",
+      "() => void",
+      "Toont de sluitknop."
+    ],
+    [
+      "role",
+      "'alert' | 'status' | 'region'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Statisch in de pagina. Verschijnt hij dynamisch, dan meldt een screenreader hem via de role."
+  ],
+  "a11y": [
+    "role='alert' alleen voor fouten en waarschuwingen die dynamisch verschijnen. Anders 'status' of geen role.",
+    "Sluitknop heeft een label (\"Sluiten\")."
+  ],
+  "content": [
+    "Titel: wat er aan de hand is. Tekst: wat de gebruiker nu kan doen."
+  ],
+  "do": [
+    "Zet een foutsamenvatting bovenaan en link naar de velden."
+  ],
+  "dont": [
+    "Meerdere alerts van dezelfde kleur onder elkaar.",
+    "Een alert die je moet sluiten om verder te kunnen."
+  ],
+  "tokens": [
+    "--alert-{color}-{surface|border|icon}",
+    "--alert-foreground-*",
+    "--alert-padding",
+    "--alert-radius",
+    "--alert-gap"
+  ],
+  "related": [
+    "Toast",
+    "Modal",
+    "Featured icon"
+  ],
+  "open": []
+}

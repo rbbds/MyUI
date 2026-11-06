@@ -1,0 +1,87 @@
+{
+  "name": "Slider",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16961:214",
+    "base": null
+  },
+  "react": "Slider",
+  "summary": "Kies een getal binnen een bereik door te slepen. Handig als de precieze waarde minder belangrijk is dan het verkennen.",
+  "use": [
+    "Bedragen of percentages verkennen, zoals een maandbedrag in een rekenhulp."
+  ],
+  "avoid": [
+    "Precieze invoer: gebruik Input met type=\"number\", of combineer beide."
+  ],
+  "anatomy": [
+    "Label en huidige waarde.",
+    "Track met gevulde balk.",
+    "Handle (één bij Single, twee bij Range)."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Single, Range",
+      ""
+    ],
+    [
+      "State",
+      "Default, Focus, Disabled",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "min / max / step",
+      "number",
+      ""
+    ],
+    [
+      "value / defaultValue / onChange",
+      "number",
+      ""
+    ],
+    [
+      "formatValue",
+      "(v) => string",
+      "Bijvoorbeeld \"€ 650\". Wordt ook aria-valuetext."
+    ],
+    [
+      "showValue",
+      "boolean",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Pijltjestoetsen verplaatsen per step. Home en End springen naar min en max."
+  ],
+  "a11y": [
+    "Native <input type=\"range\">.",
+    "aria-valuetext geeft de opgemaakte waarde door, niet alleen het getal."
+  ],
+  "content": [
+    "Toon de eenheid in de waarde (\"€ 650 per maand\")."
+  ],
+  "do": [
+    "Laat de huidige waarde altijd zien."
+  ],
+  "dont": [
+    "Een slider zonder label of zonder zichtbare waarde."
+  ],
+  "tokens": [
+    "--slider-{track|fill|handle|handle-border|foreground}",
+    "--slider-fill-disabled"
+  ],
+  "related": [
+    "Input",
+    "Progress"
+  ],
+  "open": [
+    "Range (twee handles) bestaat in Figma, nog niet in React."
+  ]
+}

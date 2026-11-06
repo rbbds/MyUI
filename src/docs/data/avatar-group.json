@@ -1,0 +1,75 @@
+{
+  "name": "Avatar group",
+  "page": "Avatars",
+  "figma": {
+    "node": "16953:116",
+    "base": null
+  },
+  "react": "AvatarGroup",
+  "summary": "Overlappende stapel avatars met een teller voor de rest, om te tonen wie bij iets betrokken is.",
+  "use": [
+    "Teamleden van een project, deelnemers aan een gesprek."
+  ],
+  "avoid": [
+    "Als de gebruiker personen moet kunnen kiezen of vergelijken: gebruik een lijst."
+  ],
+  "anatomy": [
+    "Avatars met een ring in de achtergrondkleur.",
+    "Teller \"+n\" (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "xs, sm, md",
+      ""
+    ],
+    [
+      "Count",
+      "tekst",
+      "Bijvoorbeeld +5."
+    ],
+    [
+      "Show more",
+      "boolean",
+      "Toont de teller."
+    ]
+  ],
+  "reactProps": [
+    [
+      "max",
+      "number",
+      "Standaard 4. De rest gaat in de teller."
+    ],
+    [
+      "size",
+      "'xs' | 'sm' | 'md'",
+      ""
+    ],
+    [
+      "children",
+      "Avatar[]",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Statisch."
+  ],
+  "a11y": [
+    "Geef de groep een label met het totaal (\"6 teamleden\"), de teller alleen is niet genoeg."
+  ],
+  "content": [],
+  "do": [
+    "Toon maximaal 4 tot 5 avatars."
+  ],
+  "dont": [
+    "Verschillende sizes mengen in één groep."
+  ],
+  "tokens": [
+    "--avatar-group-ring",
+    "verder --avatar-*"
+  ],
+  "related": [
+    "Avatar"
+  ],
+  "open": []
+}

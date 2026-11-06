@@ -1,0 +1,96 @@
+{
+  "name": "Dropdown menu",
+  "page": "Overlays",
+  "figma": {
+    "node": "16956:72",
+    "base": "_Menu item"
+  },
+  "react": "DropdownMenu",
+  "summary": "Zwevend menu met acties, geopend vanuit een Button of Button icon. De items zitten in een native Figma-slot, zodat je ze per gebruik vult.",
+  "use": [
+    "Secundaire acties die niet allemaal zichtbaar hoeven te zijn (\"Meer opties\").",
+    "Acties per tabelrij."
+  ],
+  "avoid": [
+    "Een waarde kiezen voor een formulier: gebruik Select.",
+    "Navigatie tussen pagina's: gebruik links of Nav item."
+  ],
+  "anatomy": [
+    "Menucontainer met schaduw.",
+    "Items (slot): Menu item met icoon, label en sneltoets.",
+    "Scheidingslijnen tussen groepen."
+  ],
+  "figmaProps": [
+    [
+      "Items",
+      "slot",
+      "Plaats Menu item-instances."
+    ],
+    [
+      "Menu item: Type",
+      "Default, Destructive",
+      ""
+    ],
+    [
+      "Menu item: State",
+      "Default, Hover, Focus, Disabled",
+      ""
+    ],
+    [
+      "Menu item: Label / Icon leading / Leading icon / Show shortcut / Shortcut",
+      "via _Menu item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "trigger",
+      "ReactElement",
+      "Meestal een Button of ButtonIcon."
+    ],
+    [
+      "items",
+      "{ label, icon?, shortcut?, destructive?, disabled?, onSelect }[] | { type: 'separator' }",
+      ""
+    ],
+    [
+      "align",
+      "'start' | 'end'",
+      ""
+    ],
+    [
+      "label",
+      "string",
+      "Accessible name van het menu."
+    ]
+  ],
+  "behaviour": [
+    "Openen zet de focus op het eerste item. Pijl op/neer, Home en End verplaatsen de focus.",
+    "Escape of een keuze sluit het menu en zet de focus terug op de trigger."
+  ],
+  "a11y": [
+    "Trigger heeft aria-haspopup, aria-expanded en aria-controls.",
+    "Menu heeft role=\"menu\", items role=\"menuitem\"."
+  ],
+  "content": [
+    "Labels beginnen met een werkwoord. Destructieve acties onderaan, gescheiden door een lijn."
+  ],
+  "do": [
+    "Groepeer verwante acties met een separator."
+  ],
+  "dont": [
+    "Meer dan ongeveer 8 items.",
+    "Geneste submenu's."
+  ],
+  "tokens": [
+    "--menu-{surface|border|padding|radius}",
+    "--menu-item-{surface|foreground}-*",
+    "--menu-item-padding-*",
+    "--menu-item-gap"
+  ],
+  "related": [
+    "Button icon",
+    "Select"
+  ],
+  "open": []
+}

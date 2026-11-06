@@ -1,0 +1,78 @@
+{
+  "name": "Featured icon",
+  "page": "Utilities",
+  "figma": {
+    "node": "16954:81",
+    "base": "_Featured icon"
+  },
+  "react": "FeaturedIcon",
+  "summary": "Decoratief icoon in een getinte cirkel. Geeft Alerts, Modals en Empty states een visueel ankerpunt.",
+  "use": [
+    "Boven aan een Modal of Empty state.",
+    "In Alerts en Toasts als statusicoon."
+  ],
+  "avoid": [
+    "Als knop of los informatief icoon."
+  ],
+  "anatomy": [
+    "Getinte cirkel.",
+    "Icoon."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "Color",
+      "Gray, Brand, Error, Warning, Success, Info",
+      ""
+    ],
+    [
+      "Icon",
+      "instance swap",
+      "via _Featured icon"
+    ]
+  ],
+  "reactProps": [
+    [
+      "icon",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "color",
+      "StatusColor",
+      "Standaard 'brand'."
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Statisch."
+  ],
+  "a11y": [
+    "Decoratief: aria-hidden. De betekenis staat in de tekst ernaast."
+  ],
+  "content": [],
+  "do": [
+    "Laat de kleur aansluiten op de status van de inhoud."
+  ],
+  "dont": [
+    "Een featured icon zonder tekst ernaast."
+  ],
+  "tokens": [
+    "--featured-icon-{color}-{surface|foreground}",
+    "--featured-icon-radius"
+  ],
+  "related": [
+    "Alert",
+    "Modal",
+    "Empty state"
+  ],
+  "open": []
+}

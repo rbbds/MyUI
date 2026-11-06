@@ -1,0 +1,82 @@
+{
+  "name": "Empty state",
+  "page": "Content",
+  "figma": {
+    "node": "16960:105",
+    "base": null
+  },
+  "react": "EmptyState",
+  "summary": "Wordt getoond als een lijst, zoekopdracht of tabel geen inhoud heeft. Legt uit waarom en wat de gebruiker nu kan doen.",
+  "use": [
+    "Geen zoekresultaten.",
+    "Nog geen items aangemaakt."
+  ],
+  "avoid": [
+    "Fouten bij laden: gebruik Alert met Color=Error."
+  ],
+  "anatomy": [
+    "Featured icon.",
+    "Titel.",
+    "Ondersteunende tekst.",
+    "Acties (slot)."
+  ],
+  "figmaProps": [
+    [
+      "Title / Supporting text",
+      "tekst",
+      ""
+    ],
+    [
+      "Actions",
+      "slot",
+      "Plaats één of twee Buttons."
+    ]
+  ],
+  "reactProps": [
+    [
+      "title",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "description",
+      "ReactNode",
+      ""
+    ],
+    [
+      "icon",
+      "ReactNode",
+      "Meestal een FeaturedIcon."
+    ],
+    [
+      "actions",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Statisch."
+  ],
+  "a11y": [
+    "Titel als kop in de juiste structuur. Na een zoekactie: meld het resultaat via een live region."
+  ],
+  "content": [
+    "Titel: wat er aan de hand is. Tekst: waarom, en wat de gebruiker kan doen."
+  ],
+  "do": [
+    "Bied een uitweg: zoekopdracht wissen of iets nieuws aanmaken."
+  ],
+  "dont": [
+    "Alleen \"Geen gegevens\"."
+  ],
+  "tokens": [
+    "--empty-state-foreground-{title|text}",
+    "--empty-state-gap"
+  ],
+  "related": [
+    "Featured icon",
+    "Table",
+    "Button"
+  ],
+  "open": []
+}

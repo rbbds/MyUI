@@ -1,0 +1,82 @@
+{
+  "name": "Radio",
+  "page": "Selection controls",
+  "figma": {
+    "node": "16950:273",
+    "base": "_Radio"
+  },
+  "react": "Radio",
+  "summary": "Eén keuze uit een kleine set (2 tot 6) opties die allemaal zichtbaar zijn. Altijd in een groep.",
+  "use": [
+    "Wederzijds uitsluitende opties die de gebruiker moet vergelijken."
+  ],
+  "avoid": [
+    "Meer dan 6 opties: gebruik Select.",
+    "Meerdere keuzes: gebruik Checkbox."
+  ],
+  "anatomy": [
+    "Cirkel met indicator.",
+    "Label en optionele hint.",
+    "Groep met legend (RadioGroup)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md",
+      ""
+    ],
+    [
+      "Checked",
+      "False, True",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled",
+      ""
+    ],
+    [
+      "Label / hint",
+      "via _Radio",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "RadioGroup legend",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "Radio name / value / label / hint",
+      "",
+      "Dezelfde name binnen een groep."
+    ]
+  ],
+  "behaviour": [
+    "Pijltjestoetsen wisselen binnen de groep. Tab gaat naar de volgende groep."
+  ],
+  "a11y": [
+    "Native radios in <fieldset> met <legend>.",
+    "Eén tab-stop per groep."
+  ],
+  "content": [
+    "Parallelle, korte labels. Gebruik de hint voor gevolgen (\"Betaal elke maand een vast bedrag.\")."
+  ],
+  "do": [
+    "Selecteer een veilige standaardoptie als die bestaat."
+  ],
+  "dont": [
+    "Een losse radio zonder groep."
+  ],
+  "tokens": [
+    "--selection-*",
+    "--selection-radio-radius"
+  ],
+  "related": [
+    "Checkbox",
+    "Select",
+    "Button group"
+  ],
+  "open": []
+}

@@ -1,0 +1,88 @@
+{
+  "name": "Avatar",
+  "page": "Avatars",
+  "figma": {
+    "node": "16952:64",
+    "base": "_Avatar"
+  },
+  "react": "Avatar",
+  "summary": "Visuele weergave van een persoon: foto, initialen of een icoon, met optionele online-status.",
+  "use": [
+    "Naast namen in lijsten, tabellen, headers en reacties."
+  ],
+  "avoid": [
+    "Als enige aanduiding van een persoon zonder naam in de buurt."
+  ],
+  "anatomy": [
+    "Cirkel met foto, initialen of icoon.",
+    "Status-indicator (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "xs, sm, md, lg, xl, 2xl",
+      ""
+    ],
+    [
+      "Type",
+      "Initials, Icon",
+      "Foto: zet een image fill op de cirkel."
+    ],
+    [
+      "Initials / Status",
+      "via _Avatar",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "src",
+      "string",
+      "Valt terug op initialen als de foto niet laadt."
+    ],
+    [
+      "name",
+      "string",
+      "Wordt aria-label."
+    ],
+    [
+      "initials",
+      "string",
+      ""
+    ],
+    [
+      "status",
+      "'online' | 'offline'",
+      ""
+    ],
+    [
+      "size",
+      "AvatarSize",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Laadt een foto niet, dan toont de avatar initialen."
+  ],
+  "a11y": [
+    "role=\"img\" met de naam als label. Staat de naam er al naast, dan is de avatar decoratief."
+  ],
+  "content": [
+    "Maximaal twee initialen."
+  ],
+  "do": [
+    "Gebruik dezelfde size binnen één lijst."
+  ],
+  "dont": [
+    "Status alleen met kleur aangeven als het belangrijk is: zet het ook in tekst."
+  ],
+  "tokens": [
+    "--avatar-{surface|border|foreground|radius}",
+    "--avatar-status-{online|offline|ring}"
+  ],
+  "related": [
+    "Avatar group",
+    "Table"
+  ],
+  "open": []
+}

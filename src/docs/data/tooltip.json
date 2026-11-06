@@ -1,0 +1,90 @@
+{
+  "name": "Tooltip",
+  "page": "Feedback",
+  "figma": {
+    "node": "16955:87",
+    "base": null
+  },
+  "react": "Tooltip",
+  "summary": "Korte uitleg die verschijnt bij hover en toetsenbordfocus. Nooit voor essentiële of interactieve inhoud.",
+  "use": [
+    "Label voor een Button icon.",
+    "Korte toelichting bij een afkorting of icoon."
+  ],
+  "avoid": [
+    "Informatie die de gebruiker nodig heeft om verder te kunnen: zet die in de pagina.",
+    "Links of knoppen in de tooltip."
+  ],
+  "anatomy": [
+    "Bubbel met titel.",
+    "Ondersteunende tekst (optioneel).",
+    "Pijl (optioneel, vier richtingen)."
+  ],
+  "figmaProps": [
+    [
+      "Text",
+      "tekst",
+      ""
+    ],
+    [
+      "Arrow",
+      "None, Top, Bottom, Left, Right",
+      ""
+    ],
+    [
+      "Supporting text",
+      "False, True",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "title",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "text",
+      "ReactNode",
+      "Ondersteunende tekst."
+    ],
+    [
+      "placement",
+      "'top' | 'bottom' | 'left' | 'right'",
+      ""
+    ],
+    [
+      "children",
+      "ReactElement",
+      "De trigger."
+    ]
+  ],
+  "behaviour": [
+    "Verschijnt bij hover en focus, verdwijnt bij verlaten, blur en Escape."
+  ],
+  "a11y": [
+    "role=\"tooltip\", gekoppeld aan de trigger met aria-describedby.",
+    "Escape sluit de tooltip zonder de focus te verplaatsen (WCAG 1.4.13)."
+  ],
+  "content": [
+    "Maximaal één zin."
+  ],
+  "do": [
+    "Gebruik een tooltip bij elke Button icon."
+  ],
+  "dont": [
+    "Een tooltip op uitgeschakelde elementen: die krijgen geen focus."
+  ],
+  "tokens": [
+    "--tooltip-{surface|foreground|foreground-secondary}",
+    "--tooltip-padding-*",
+    "--tooltip-radius",
+    "--tooltip-gap"
+  ],
+  "related": [
+    "Button icon"
+  ],
+  "open": [
+    "Positie past zich nog niet aan bij de rand van het scherm (geen collision detection)."
+  ]
+}

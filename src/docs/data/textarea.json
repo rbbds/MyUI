@@ -1,0 +1,70 @@
+{
+  "name": "Textarea",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16949:451",
+    "base": "_Textarea"
+  },
+  "react": "Textarea",
+  "summary": "Tekstveld van meerdere regels voor toelichtingen en berichten. Standaard 128 px hoog en verticaal te vergroten.",
+  "use": [
+    "Vrije tekst langer dan één zin."
+  ],
+  "avoid": [
+    "Korte waarden: gebruik Input."
+  ],
+  "anatomy": [
+    "Label.",
+    "Veld met resize-hoek.",
+    "Hint of foutmelding."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Placeholder, Filled, Focus, Error, Disabled",
+      "Eén size."
+    ],
+    [
+      "Label, hint, error",
+      "via _Textarea",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label, hint, error, required",
+      "",
+      "Gelijk aan Input. Geen size-prop."
+    ],
+    [
+      "rows / maxLength",
+      "native",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "De gebruiker kan het veld verticaal vergroten."
+  ],
+  "a11y": [
+    "Gekoppeld zoals Input. Noem een tekenlimiet in de hint, niet alleen in maxLength."
+  ],
+  "content": [
+    "Hint met verwachting: \"Maximaal 500 tekens.\""
+  ],
+  "do": [
+    "Maak de standaardhoogte passend bij de verwachte lengte."
+  ],
+  "dont": [
+    "Horizontaal laten vergroten: dat breekt de layout."
+  ],
+  "tokens": [
+    "--textarea-height",
+    "verder --input-*"
+  ],
+  "related": [
+    "Input"
+  ],
+  "open": [
+    "Een tekenteller is nog niet aanwezig."
+  ]
+}

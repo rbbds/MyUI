@@ -1,0 +1,86 @@
+{
+  "name": "Select",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16949:420",
+    "base": "_Select"
+  },
+  "react": "Select",
+  "summary": "Keuze van één optie uit een lijst. In code een native <select>, zodat toetsenbord, mobiel en screenreaders standaard werken.",
+  "use": [
+    "Eén keuze uit 6 of meer opties.",
+    "Als ruimte beperkt is en de opties bekend zijn (land, maand)."
+  ],
+  "avoid": [
+    "2 tot 5 opties: gebruik Radio, dan zie je alles in één oogopslag.",
+    "Meerdere keuzes: gebruik Checkboxes.",
+    "Acties: gebruik Dropdown menu."
+  ],
+  "anatomy": [
+    "Label.",
+    "Trigger: optioneel leading icon, gekozen waarde of placeholder, chevron.",
+    "Hint of foutmelding."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Placeholder, Filled, Hover, Focus, Error, Disabled",
+      ""
+    ],
+    [
+      "Label, hint, error, icon",
+      "via _Select",
+      "Gelijk aan Input."
+    ]
+  ],
+  "reactProps": [
+    [
+      "options",
+      "{ value, label, disabled? }[]",
+      ""
+    ],
+    [
+      "placeholder",
+      "string",
+      "Eerste, niet-kiesbare optie."
+    ],
+    [
+      "label, hint, error, size, iconLeading",
+      "",
+      "Gelijk aan Input."
+    ]
+  ],
+  "behaviour": [
+    "Opent de systeemlijst van de browser. Placeholder heeft een lichtere kleur tot er een waarde is."
+  ],
+  "a11y": [
+    "Native <select>: pijltjestoetsen en typen om te zoeken werken standaard.",
+    "Label, hint en fout zijn gekoppeld zoals bij Input."
+  ],
+  "content": [
+    "Placeholder als instructie: \"Kies een land\".",
+    "Sorteer opties logisch: alfabetisch, of de meest gekozen bovenaan."
+  ],
+  "do": [
+    "Kies een zinvolle standaardwaarde als die er is."
+  ],
+  "dont": [
+    "Een Select met twee opties zoals Ja/Nee."
+  ],
+  "tokens": [
+    "gebruikt de --input-* tokens"
+  ],
+  "related": [
+    "Input",
+    "Radio",
+    "Dropdown menu"
+  ],
+  "open": [
+    "In Figma is de opengeklapte lijst nog niet als component uitgewerkt. In code toont de browser de native lijst."
+  ]
+}

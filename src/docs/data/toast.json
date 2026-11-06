@@ -1,0 +1,72 @@
+{
+  "name": "Toast",
+  "page": "Feedback",
+  "figma": {
+    "node": "16955:245",
+    "base": "_Notification"
+  },
+  "react": "Toast",
+  "summary": "Tijdelijke melding na een actie van de gebruiker, rechtsonder in beeld. Deelt de base met Alert.",
+  "use": [
+    "Bevestiging: \"Project opgeslagen\".",
+    "Fout bij een achtergrondactie met een herstelactie."
+  ],
+  "avoid": [
+    "Informatie die de gebruiker later nog nodig heeft: gebruik Alert."
+  ],
+  "anatomy": [
+    "Gelijk aan Alert, met schaduw en eigen rand."
+  ],
+  "figmaProps": [
+    [
+      "Color",
+      "Gray, Brand, Error, Warning, Success, Info",
+      ""
+    ],
+    [
+      "Base properties",
+      "via _Notification",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "Alle Alert-props behalve role",
+      "",
+      ""
+    ],
+    [
+      "ToastRegion label",
+      "string",
+      "Standaard 'Meldingen'. Live region waar toasts in komen."
+    ]
+  ],
+  "behaviour": [
+    "Verdwijnt vanzelf na een paar seconden, behalve bij fouten of als er een actie in staat.",
+    "Pauzeer de timer bij hover en focus."
+  ],
+  "a11y": [
+    "Plaats toasts in ToastRegion (aria-live=\"polite\").",
+    "Geef genoeg tijd om te lezen (WCAG 2.2.1)."
+  ],
+  "content": [
+    "Kort en in verleden tijd: \"Bestand geüpload\"."
+  ],
+  "do": [
+    "Maximaal drie toasts tegelijk, nieuwste onderaan."
+  ],
+  "dont": [
+    "Toasts voor fouten die de gebruiker moet oplossen in een formulier."
+  ],
+  "tokens": [
+    "--toast-surface",
+    "--toast-border",
+    "verder --alert-*"
+  ],
+  "related": [
+    "Alert"
+  ],
+  "open": [
+    "Auto-dismiss zit nog niet in ToastRegion; dat regelt de app nu zelf."
+  ]
+}

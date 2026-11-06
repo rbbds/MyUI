@@ -1,0 +1,95 @@
+{
+  "name": "Checkbox",
+  "page": "Selection controls",
+  "figma": {
+    "node": "16950:184",
+    "base": "_Checkbox"
+  },
+  "react": "Checkbox",
+  "summary": "Onafhankelijke aan/uit-keuze, of meerdere keuzes uit een lijst. Indeterminate toont dat een deel van de onderliggende items is gekozen.",
+  "use": [
+    "Akkoord geven, meerdere filters kiezen, rijen selecteren in een tabel."
+  ],
+  "avoid": [
+    "Eén keuze uit een groep: gebruik Radio.",
+    "Instelling met direct effect: gebruik Toggle."
+  ],
+  "anatomy": [
+    "Box (vinkje of streepje).",
+    "Label (optioneel in Figma, verplicht in code).",
+    "Hint (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md",
+      ""
+    ],
+    [
+      "Checked",
+      "False, True, Indeterminate",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled",
+      ""
+    ],
+    [
+      "Show text / Label / Show hint / Hint text",
+      "via _Checkbox",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label / hint",
+      "ReactNode",
+      ""
+    ],
+    [
+      "indeterminate",
+      "boolean",
+      "Zet aria-checked=\"mixed\"."
+    ],
+    [
+      "size",
+      "'sm' | 'md'",
+      ""
+    ],
+    [
+      "checked / onChange",
+      "native",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Klik op box of label wisselt de waarde. Spatie bij focus."
+  ],
+  "a11y": [
+    "Native <input type=\"checkbox\"> binnen een <label>.",
+    "Groepen in een <fieldset> met <legend>.",
+    "Zonder zichtbaar label: geef aria-label (bijvoorbeeld in een tabelrij: \"Selecteer Robert Trimp\")."
+  ],
+  "content": [
+    "Label als bewering: \"Stuur mij updates per e-mail.\""
+  ],
+  "do": [
+    "Zet opties onder elkaar, niet naast elkaar."
+  ],
+  "dont": [
+    "Een checkbox die direct een actie uitvoert.",
+    "Negatieve labels (\"Geen e-mails ontvangen\")."
+  ],
+  "tokens": [
+    "--selection-{surface|border|foreground}-*",
+    "--selection-checkbox-{size}-radius",
+    "--selection-{size}-gap"
+  ],
+  "related": [
+    "Radio",
+    "Toggle",
+    "Table"
+  ],
+  "open": []
+}

@@ -1,0 +1,65 @@
+{
+  "name": "Divider",
+  "page": "Utilities",
+  "figma": {
+    "node": "16954:26",
+    "base": null
+  },
+  "react": "Divider",
+  "summary": "Lijn die inhoud scheidt, optioneel met een label in het midden (\"of\").",
+  "use": [
+    "Tussen groepen die door spacing alleen niet duidelijk genoeg gescheiden zijn.",
+    "Tussen alternatieve opties, met label \"of\"."
+  ],
+  "avoid": [
+    "Als spacing al genoeg scheiding geeft. Probeer eerst ruimte."
+  ],
+  "anatomy": [
+    "Lijn.",
+    "Label (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Line, Label",
+      ""
+    ],
+    [
+      "Label",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "orientation",
+      "'horizontal' | 'vertical'",
+      ""
+    ],
+    [
+      "label",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Statisch."
+  ],
+  "a11y": [
+    "Zonder label: role=\"separator\". Puur decoratieve lijnen mogen aria-hidden."
+  ],
+  "content": [
+    "Label kort en klein: \"of\"."
+  ],
+  "do": [],
+  "dont": [
+    "Een divider onder elke regel van een lijst."
+  ],
+  "tokens": [
+    "--divider-color",
+    "--divider-foreground",
+    "--divider-gap"
+  ],
+  "related": [],
+  "open": []
+}

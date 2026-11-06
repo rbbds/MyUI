@@ -1,0 +1,94 @@
+{
+  "name": "Card",
+  "page": "Content",
+  "figma": {
+    "node": "16960:70",
+    "base": "_Card"
+  },
+  "react": "Card",
+  "summary": "Container voor één samenhangend stuk inhoud, zoals een artikel of project. Met een native Figma-slot voor eigen inhoud.",
+  "use": [
+    "Overzichten van gelijksoortige items in een grid."
+  ],
+  "avoid": [
+    "Eén lange tekst: gebruik gewone pagina-inhoud.",
+    "Gegevens om te vergelijken: gebruik Table."
+  ],
+  "anatomy": [
+    "Media (optioneel).",
+    "Meta (optioneel).",
+    "Titel.",
+    "Ondersteunende tekst.",
+    "Content (slot, optioneel).",
+    "Actie (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Default, Elevated",
+      "Elevated heeft schaduw."
+    ],
+    [
+      "Show media / Show meta / Meta / Title / Supporting text / Show action",
+      "via _Card",
+      ""
+    ],
+    [
+      "Content / Show content",
+      "slot / boolean",
+      "Standaard uit."
+    ]
+  ],
+  "reactProps": [
+    [
+      "title",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "href",
+      "string",
+      "Maakt de hele kaart klikbaar via de titel-link."
+    ],
+    [
+      "media / meta / description / action",
+      "ReactNode",
+      ""
+    ],
+    [
+      "elevated",
+      "boolean",
+      ""
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Extra inhoud."
+    ]
+  ],
+  "behaviour": [
+    "Met href is de hele kaart klikbaar. De link zit op de titel en wordt over de kaart uitgerekt. Een action wordt dan niet getoond."
+  ],
+  "a11y": [
+    "Eén link per klikbare kaart. Geen aparte \"Lees verder\"-link ernaast.",
+    "Media is decoratief tenzij het informatie bevat; geef dan alt-tekst."
+  ],
+  "content": [
+    "Titel maximaal twee regels. Tekst maximaal drie regels."
+  ],
+  "do": [
+    "Houd kaarten in een grid even hoog."
+  ],
+  "dont": [
+    "Meerdere klikbare elementen in een klikbare kaart."
+  ],
+  "tokens": [
+    "--card-{surface|border|radius|padding|gap|media}",
+    "--card-foreground-*"
+  ],
+  "related": [
+    "Table",
+    "Empty state"
+  ],
+  "open": []
+}

@@ -1,0 +1,129 @@
+{
+  "name": "Input",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16949:239",
+    "base": "_Input"
+  },
+  "react": "Input",
+  "summary": "Tekstveld van één regel met label, hulptekst en foutmelding. Label, hint en fout zitten in het component, zodat ze altijd goed gekoppeld zijn.",
+  "use": [
+    "Korte vrije invoer: naam, e-mailadres, bedrag, zoekterm."
+  ],
+  "avoid": [
+    "Lange tekst: gebruik Textarea.",
+    "Keuze uit een vaste lijst: gebruik Select of Radio."
+  ],
+  "anatomy": [
+    "Label (met optionele help-icon).",
+    "Veld: optioneel leading icon, waarde of placeholder.",
+    "Hint: extra uitleg onder het veld.",
+    "Foutmelding: vervangt de hint bij State=Error."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Placeholder, Filled, Hover, Focus, Error, Error focus, Disabled",
+      ""
+    ],
+    [
+      "Label / Show label",
+      "tekst / boolean",
+      "Verberg het label alleen visueel, nooit in code."
+    ],
+    [
+      "Hint text / Show hint",
+      "tekst / boolean",
+      ""
+    ],
+    [
+      "Error text",
+      "tekst",
+      "Zichtbaar bij Error."
+    ],
+    [
+      "Icon leading / Leading icon / Help icon",
+      "boolean / swap / boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label",
+      "ReactNode",
+      "Verplicht."
+    ],
+    [
+      "hideLabel",
+      "boolean",
+      "Visueel verborgen, blijft voor screenreaders."
+    ],
+    [
+      "hint",
+      "ReactNode",
+      ""
+    ],
+    [
+      "error",
+      "ReactNode",
+      "Zet aria-invalid en koppelt de melding."
+    ],
+    [
+      "required",
+      "boolean",
+      ""
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ],
+    [
+      "iconLeading",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Focus: rand in brandkleur plus focus ring.",
+    "Error: rode rand en foutmelding. Blijft staan tot de invoer klopt.",
+    "Disabled: niet bewerkbaar, lagere contrastkleuren."
+  ],
+  "a11y": [
+    "Label is gekoppeld via for/id. Hint en fout via aria-describedby.",
+    "Bij een fout: aria-invalid=\"true\".",
+    "Placeholder is geen label en verdwijnt bij typen.",
+    "Gebruik autocomplete voor persoonsgegevens (WCAG 1.3.5)."
+  ],
+  "content": [
+    "Label: kort zelfstandig naamwoord (\"E-mailadres\").",
+    "Foutmelding: zeg wat er mis is en hoe het goed moet. \"Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.nl.\"",
+    "Placeholder alleen als voorbeeld van het formaat."
+  ],
+  "do": [
+    "Valideer bij verlaten van het veld of bij versturen, niet bij elke toetsaanslag.",
+    "Markeer optionele velden als de meeste velden verplicht zijn (of andersom)."
+  ],
+  "dont": [
+    "Placeholder als enige label.",
+    "Foutmeldingen zonder oplossing (\"Ongeldige invoer\")."
+  ],
+  "tokens": [
+    "--input-{surface|border|foreground}-*",
+    "--input-{size}-padding-*",
+    "--input-radius",
+    "--input-gap",
+    "--input-field-gap"
+  ],
+  "related": [
+    "Select",
+    "Textarea",
+    "Field (React)"
+  ],
+  "open": []
+}

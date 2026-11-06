@@ -1,0 +1,86 @@
+{
+  "name": "Button group",
+  "page": "Buttons",
+  "figma": {
+    "node": "16961:126",
+    "base": "_Button group item"
+  },
+  "react": "ButtonGroup",
+  "summary": "Rij van aaneengesloten knoppen waarvan er één actief is, zoals een periodekeuze (Dag, Week, Maand). Gebouwd uit Button group items.",
+  "use": [
+    "Wisselen tussen 2 tot 5 weergaven of filters van dezelfde inhoud.",
+    "Als de keuze direct effect heeft, zonder opslaan."
+  ],
+  "avoid": [
+    "Losse acties naast elkaar: gebruik losse Buttons met ruimte ertussen.",
+    "Navigatie tussen secties met eigen inhoud: gebruik Tabs.",
+    "Meer dan 5 opties: gebruik Select."
+  ],
+  "anatomy": [
+    "Groepscontainer met gedeelde rand.",
+    "Items: label, optioneel leading icon. Het actieve item heeft een eigen achtergrond."
+  ],
+  "figmaProps": [
+    [
+      "Item: Position",
+      "First, Middle, Last",
+      "Bepaalt welke hoeken afgerond zijn."
+    ],
+    [
+      "Item: State",
+      "Default, Hover, Focus, Current",
+      "Current markeert de actieve optie."
+    ],
+    [
+      "Item: Label, Icon leading, Leading icon",
+      "via _Button group item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "options",
+      "{ value, label, icon? }[]",
+      ""
+    ],
+    [
+      "value",
+      "string",
+      "Actieve optie."
+    ],
+    [
+      "onChange",
+      "(value) => void",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Klik of Enter/Spatie activeert een item. Er is altijd precies één actief."
+  ],
+  "a11y": [
+    "role=\"group\" met een aria-label op de groep.",
+    "Items zijn buttons met aria-pressed. Het actieve item heeft aria-pressed=\"true\"."
+  ],
+  "content": [
+    "Korte, parallelle labels: \"Dag\", \"Week\", \"Maand\"."
+  ],
+  "do": [
+    "Houd de volgorde logisch (klein naar groot, chronologisch)."
+  ],
+  "dont": [
+    "Items met verschillende soorten acties mengen.",
+    "Een Button group zonder actieve standaardwaarde."
+  ],
+  "tokens": [
+    "--button-group-{surface|foreground|border}",
+    "--button-group-surface-current",
+    "--button-group-foreground-current",
+    "--button-group-surface-hover"
+  ],
+  "related": [
+    "Tabs",
+    "Button",
+    "Radio"
+  ],
+  "open": []
+}

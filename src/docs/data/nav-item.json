@@ -1,0 +1,85 @@
+{
+  "name": "Nav item",
+  "page": "Navigation",
+  "figma": {
+    "node": "16957:249",
+    "base": "_Nav item"
+  },
+  "react": "NavItem",
+  "summary": "Link in een zijbalknavigatie, met icoon, label en optionele teller.",
+  "use": [
+    "Hoofdnavigatie van een app of portaal."
+  ],
+  "avoid": [
+    "Acties: gebruik Button."
+  ],
+  "anatomy": [
+    "Icoon.",
+    "Label.",
+    "Teller (optioneel).",
+    "Actieve achtergrond."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Default, Hover, Focus, Active",
+      ""
+    ],
+    [
+      "Label / Icon / Show count / Count",
+      "via _Nav item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "href",
+      "string",
+      "Native <a>."
+    ],
+    [
+      "icon",
+      "ReactNode",
+      ""
+    ],
+    [
+      "active",
+      "boolean",
+      "Zet aria-current=\"page\"."
+    ],
+    [
+      "count",
+      "number",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Navigeert naar een pagina. De actieve pagina is gemarkeerd."
+  ],
+  "a11y": [
+    "Echte links in een <nav> met aria-label.",
+    "De teller heeft context nodig voor screenreaders, bijvoorbeeld \"10 nieuw\"."
+  ],
+  "content": [
+    "Zelfstandige naamwoorden: \"Projecten\", \"Instellingen\"."
+  ],
+  "do": [
+    "Maximaal ongeveer 7 items per groep."
+  ],
+  "dont": [
+    "Twee actieve items tegelijk."
+  ],
+  "tokens": [
+    "--nav-item-{foreground|surface}-*",
+    "--nav-item-padding-*",
+    "--nav-item-gap",
+    "--nav-item-radius"
+  ],
+  "related": [
+    "Tabs",
+    "Breadcrumbs"
+  ],
+  "open": [
+    "Een complete Sidebar (header, groepen, inklappen) bestaat nog niet."
+  ]
+}

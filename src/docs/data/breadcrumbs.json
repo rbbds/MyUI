@@ -1,0 +1,76 @@
+{
+  "name": "Breadcrumbs",
+  "page": "Navigation",
+  "figma": {
+    "node": "16957:169",
+    "base": "_Breadcrumb item"
+  },
+  "react": "Breadcrumbs",
+  "summary": "Kruimelpad dat laat zien waar de pagina in de structuur zit, met links naar de bovenliggende niveaus.",
+  "use": [
+    "Pagina's die drie of meer niveaus diep liggen."
+  ],
+  "avoid": [
+    "Platte sites met één of twee niveaus.",
+    "Als vervanging van de hoofdnavigatie."
+  ],
+  "anatomy": [
+    "Home-icoon (optioneel).",
+    "Items met scheidingsteken.",
+    "Huidige pagina (geen link)."
+  ],
+  "figmaProps": [
+    [
+      "Breadcrumb item: State",
+      "Default, Hover, Current",
+      ""
+    ],
+    [
+      "Label",
+      "via _Breadcrumb item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "items",
+      "{ label, href? }[]",
+      "Het laatste item is de huidige pagina."
+    ],
+    [
+      "homeHref",
+      "string",
+      "Toont het home-icoon."
+    ],
+    [
+      "aria-label",
+      "string",
+      "Standaard 'Kruimelpad'."
+    ]
+  ],
+  "behaviour": [
+    "Items zijn links. Het laatste item niet."
+  ],
+  "a11y": [
+    "<nav> met aria-label. Huidige pagina met aria-current=\"page\".",
+    "Scheidingstekens zijn aria-hidden."
+  ],
+  "content": [
+    "Gebruik de paginatitels, ingekort waar nodig."
+  ],
+  "do": [
+    "Kort lange paden in op mobiel tot het bovenliggende niveau."
+  ],
+  "dont": [
+    "De huidige pagina als link."
+  ],
+  "tokens": [
+    "--breadcrumb-{foreground|foreground-hover|foreground-current|separator|gap}"
+  ],
+  "related": [
+    "Nav item"
+  ],
+  "open": [
+    "Inkorten op kleine schermen is nog niet ingebouwd."
+  ]
+}
