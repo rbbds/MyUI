@@ -1,0 +1,92 @@
+{
+  "name": "Slideout",
+  "page": "Overlays",
+  "figma": {
+    "node": "16999:461",
+    "base": "_Slideout"
+  },
+  "react": "Slideout",
+  "summary": "Paneel dat vanaf de zijkant inschuift voor bijtaken: filters, details, mobiele navigatie. Content is een native Figma-slot.",
+  "use": [
+    "Filters of details naast een lijst die zichtbaar moet blijven.",
+    "Mobiele navigatie."
+  ],
+  "avoid": [
+    "Korte bevestigingen: gebruik Modal.",
+    "Hoofdtaken: geef die een eigen pagina."
+  ],
+  "anatomy": [
+    "Header: titel, toelichting, sluitknop.",
+    "Content (slot), scrolt.",
+    "Footer met acties (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm (360), md (480), lg (640)",
+      ""
+    ],
+    [
+      "Title / Supporting text / Show footer",
+      "via _Slideout",
+      ""
+    ],
+    [
+      "Content",
+      "slot",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "open / onClose",
+      "boolean / () => void",
+      ""
+    ],
+    [
+      "title / description",
+      "ReactNode",
+      ""
+    ],
+    [
+      "footer",
+      "ReactNode",
+      ""
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      "Op mobiel altijd volle breedte."
+    ],
+    [
+      "side",
+      "'right' | 'left'",
+      "Standaard 'right'."
+    ]
+  ],
+  "behaviour": [
+    "Schuift in vanaf de zijkant. Escape, de sluitknop of de backdrop sluit."
+  ],
+  "a11y": [
+    "Native <dialog> met showModal: focus gaat erin en blijft erin.",
+    "Na sluiten keert de focus terug naar de knop die hem opende."
+  ],
+  "content": [
+    "Titel noemt de taak: \"Filters\", \"Projectdetails\"."
+  ],
+  "do": [
+    "Primaire actie rechts in de footer."
+  ],
+  "dont": [
+    "Een Slideout openen vanuit een Slideout of Modal."
+  ],
+  "tokens": [
+    "--slideout-*",
+    "backdrop: --modal-backdrop"
+  ],
+  "related": [
+    "Modal",
+    "Header"
+  ],
+  "open": []
+}

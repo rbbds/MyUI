@@ -1,0 +1,105 @@
+{
+  "name": "Selection card",
+  "page": "Selection controls",
+  "figma": {
+    "node": "16994:1951",
+    "base": "_Selection card"
+  },
+  "react": "SelectionCard",
+  "summary": "Grote klikbare optie met titel en toelichting. De hele kaart is het label van een native radio of checkbox.",
+  "use": [
+    "Keuzes die uitleg nodig hebben, zoals een betaalvorm of abonnement.",
+    "2 tot 4 opties die de gebruiker moet vergelijken."
+  ],
+  "avoid": [
+    "Korte opties zonder uitleg: gebruik Radio of Checkbox.",
+    "Meer dan 5 opties: te veel ruimte."
+  ],
+  "anatomy": [
+    "Featured icon (optioneel).",
+    "Titel.",
+    "Toelichting.",
+    "Radio of checkbox rechtsboven."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Radio, Checkbox",
+      ""
+    ],
+    [
+      "Checked",
+      "False, True",
+      ""
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Disabled",
+      ""
+    ],
+    [
+      "Title / Description / Show icon",
+      "via _Selection card",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "type",
+      "'radio' | 'checkbox'",
+      "Standaard 'radio'."
+    ],
+    [
+      "title",
+      "ReactNode",
+      "Verplicht. Wordt het label van de input."
+    ],
+    [
+      "description",
+      "ReactNode",
+      "Wordt via aria-describedby voorgelezen."
+    ],
+    [
+      "icon",
+      "ReactNode",
+      "Meestal <FeaturedIcon size=\"sm\" color=\"gray\" />."
+    ],
+    [
+      "name / value / checked / onChange",
+      "native",
+      ""
+    ],
+    [
+      "SelectionCardGroup legend / columns",
+      "ReactNode / 1 | 2 | 3",
+      "Fieldset met legend. Op mobiel altijd 1 kolom."
+    ]
+  ],
+  "behaviour": [
+    "Klik op de hele kaart selecteert. Gekozen: brand-achtergrond en dikkere rand."
+  ],
+  "a11y": [
+    "Native input binnen een <label>. Titel als naam, toelichting als beschrijving.",
+    "Groep altijd in SelectionCardGroup (fieldset + legend).",
+    "Focus ring om de hele kaart."
+  ],
+  "content": [
+    "Titel: de keuze in één tot drie woorden. Toelichting: het gevolg van de keuze."
+  ],
+  "do": [
+    "Houd de toelichtingen even lang, zodat de kaarten even hoog zijn."
+  ],
+  "dont": [
+    "Links of knoppen in een kaart: die vangen de klik af."
+  ],
+  "tokens": [
+    "--selection-card-*",
+    "controls: --selection-*"
+  ],
+  "related": [
+    "Radio",
+    "Checkbox",
+    "Featured icon"
+  ],
+  "open": []
+}

@@ -1,0 +1,100 @@
+{
+  "name": "Sidebar",
+  "page": "Navigation",
+  "figma": {
+    "node": "16998:448",
+    "base": null
+  },
+  "react": "Sidebar",
+  "summary": "Zijbalk voor apps: logo, zoeken, hoofdnavigatie, secundaire navigatie en de ingelogde gebruiker. Navigation is een native Figma-slot met Nav items.",
+  "use": [
+    "Apps en portalen met meer dan 5 secties."
+  ],
+  "avoid": [
+    "Websites met weinig secties: gebruik Header."
+  ],
+  "anatomy": [
+    "Logo.",
+    "Search input (optioneel).",
+    "Navigatie (slot) met Nav items.",
+    "Footer-navigatie.",
+    "Divider en gebruiker met uitlogknop."
+  ],
+  "figmaProps": [
+    [
+      "Navigation",
+      "slot",
+      "Plaats Nav item-instances."
+    ],
+    [
+      "Show search / Show footer navigation",
+      "boolean",
+      ""
+    ],
+    [
+      "User name / User email",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "logo",
+      "ReactNode",
+      ""
+    ],
+    [
+      "search",
+      "ReactNode",
+      "Meestal een SearchInput (size sm) in <form role=\"search\">."
+    ],
+    [
+      "children",
+      "NavItem[]",
+      "Elk item komt in een <li>."
+    ],
+    [
+      "footer",
+      "NavItem[]",
+      ""
+    ],
+    [
+      "user",
+      "ReactNode",
+      "Meestal SidebarUser (avatar, name, email, action)."
+    ],
+    [
+      "navLabel / footerLabel",
+      "string",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Vaste breedte 280px. De inhoud scrolt als hij niet past."
+  ],
+  "a11y": [
+    "<aside> met twee <nav>-elementen met eigen labels.",
+    "Actieve pagina met aria-current=\"page\" (via NavItem active)."
+  ],
+  "content": [
+    "Groepeer secties logisch, belangrijkste bovenaan."
+  ],
+  "do": [
+    "Gebruik op mobiel dezelfde navigatie in een Slideout."
+  ],
+  "dont": [
+    "Meer dan ongeveer 9 items zonder groepering."
+  ],
+  "tokens": [
+    "--sidebar-*",
+    "items: --nav-item-*"
+  ],
+  "related": [
+    "Nav item",
+    "Header",
+    "Slideout"
+  ],
+  "open": [
+    "Inklapbare variant (alleen iconen) en groepskoppen zijn er nog niet."
+  ]
+}

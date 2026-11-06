@@ -1,0 +1,107 @@
+{
+  "name": "Search input",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16993:558",
+    "base": "_Search input"
+  },
+  "react": "SearchInput",
+  "summary": "Zoekveld met icoon, wisknop en optionele sneltoets-hint. Het label is standaard visueel verborgen, maar altijd aanwezig voor screenreaders.",
+  "use": [
+    "Zoeken in een lijst, tabel of de hele app.",
+    "Filteren terwijl de gebruiker typt."
+  ],
+  "avoid": [
+    "Gewone tekstinvoer in een formulier: gebruik Input.",
+    "Navigeren tussen pagina’s en acties: gebruik Command menu."
+  ],
+  "anatomy": [
+    "Zoekicoon.",
+    "Invoerveld (type=\"search\").",
+    "Wisknop (zichtbaar zodra er een waarde is).",
+    "Sneltoets-hint (Kbd, alleen bij een leeg veld)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "State",
+      "Placeholder, Filled, Focus, Disabled",
+      "Filled toont de wisknop en verbergt de sneltoets."
+    ],
+    [
+      "Value",
+      "tekst",
+      "Via _Search input."
+    ],
+    [
+      "Show clear / Show shortcut",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label",
+      "ReactNode",
+      "Verplicht. Visueel verborgen tenzij showLabel."
+    ],
+    [
+      "showLabel",
+      "boolean",
+      ""
+    ],
+    [
+      "value / defaultValue / onChange",
+      "string",
+      "onChange krijgt de string, niet het event."
+    ],
+    [
+      "shortcut",
+      "ReactNode",
+      "Alleen de hint. De sneltoets zelf regelt de app."
+    ],
+    [
+      "clearLabel",
+      "string",
+      "Standaard 'Zoekopdracht wissen'."
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Escape wist het veld als er een waarde is.",
+    "De wisknop zet de focus terug in het veld."
+  ],
+  "a11y": [
+    "Native <input type=\"search\"> met een label.",
+    "Plaats het veld in <form role=\"search\"> zodat het een zoek-landmark is.",
+    "Meld het aantal resultaten via een live region als de lijst live filtert."
+  ],
+  "content": [
+    "Placeholder benoemt wat je doorzoekt: \"Zoek in projecten\"."
+  ],
+  "do": [
+    "Toon resultaten direct, of na Enter, maar wees consequent."
+  ],
+  "dont": [
+    "Een zoekveld zonder label, ook niet als het icoon duidelijk lijkt."
+  ],
+  "tokens": [
+    "--search-foreground-icon",
+    "--kbd-*",
+    "verder --input-*"
+  ],
+  "related": [
+    "Input",
+    "Command menu",
+    "Kbd"
+  ],
+  "open": []
+}

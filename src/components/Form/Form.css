@@ -15,6 +15,7 @@
 .rb-control--disabled,.rb-control--disabled:hover{background:var(--input-surface-disabled);border-color:var(--input-border-disabled);box-shadow:none;cursor:not-allowed}
 .rb-control__icon{display:inline-flex;color:var(--input-foreground-icon);flex-shrink:0}
 .rb-control__icon svg{width:20px;height:20px}
+.rb-control__addon{flex-shrink:0;color:var(--input-addon-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);white-space:nowrap;user-select:none}
 .rb-control__status{display:inline-flex;color:var(--input-foreground-error)}
 .rb-control__status svg{width:16px;height:16px}
 .rb-control__input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:0;margin:0;color:inherit;font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height);font-weight:var(--text-body-paragraph-font-weight)}
@@ -54,3 +55,13 @@
 .rb-slider__input:disabled::-webkit-slider-runnable-track{background:linear-gradient(to right,var(--slider-fill-disabled) 0 var(--_pct),var(--slider-track) var(--_pct) 100%)}
 .rb-slider__input:disabled::-webkit-slider-thumb{border-color:var(--slider-handle-border-disabled);box-shadow:none}
 .rb-slider__value{min-width:3ch;text-align:right;color:var(--slider-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
+
+/* Search input */
+.rb-control--search .rb-control__icon{color:var(--search-foreground-icon)}
+.rb-control--search .rb-control__input::-webkit-search-cancel-button,.rb-control--search .rb-control__input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
+.rb-control__clear,.rb-control__trigger{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:2px;margin:-2px;border:0;background:transparent;border-radius:var(--border-radius-control-xs);color:var(--input-foreground-icon);cursor:pointer}
+.rb-control__clear svg{width:16px;height:16px}
+.rb-control__trigger svg{width:20px;height:20px}
+.rb-control__clear:hover,.rb-control__trigger:hover{background:var(--color-surface-hover)}
+.rb-control__clear:focus-visible,.rb-control__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-control__trigger:disabled{cursor:not-allowed;color:var(--input-foreground-disabled);background:transparent}

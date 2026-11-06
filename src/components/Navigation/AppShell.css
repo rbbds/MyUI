@@ -1,0 +1,25 @@
+.rb-header{display:flex;align-items:center;gap:var(--header-gap);padding:var(--header-padding-vertical) var(--header-padding-horizontal);border-bottom:1px solid var(--header-border);background:var(--header-surface)}
+.rb-header__logo{display:flex;align-items:center;flex-shrink:0}
+.rb-header__nav{flex:1;min-width:0}
+.rb-header__links{display:flex;align-items:center;gap:var(--header-nav-gap);margin:0;padding:0;list-style:none}
+.rb-header__link{display:inline-flex;padding:var(--header-nav-item-padding-vertical) var(--header-nav-item-padding-horizontal);border-radius:var(--header-nav-item-radius);color:var(--header-nav-item-foreground);text-decoration:none;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-header__link:hover{background:var(--header-nav-item-surface-hover)}
+.rb-header__link:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-header__link[aria-current="page"]{background:var(--header-nav-item-surface-current);color:var(--header-nav-item-foreground-current)}
+.rb-header__actions{display:flex;align-items:center;gap:var(--header-actions-gap);margin-left:auto}
+.rb-header__menu{display:none}
+@media (max-width:899px){
+  .rb-header{padding:var(--spacing-3) var(--spacing-4)}
+  .rb-header__nav{display:none}
+  .rb-header__menu{display:inline-flex}
+}
+
+.rb-sidebar{display:flex;flex-direction:column;justify-content:space-between;width:280px;height:100%;min-height:100%;box-sizing:border-box;border-right:1px solid var(--sidebar-border);background:var(--sidebar-surface);overflow:auto}
+.rb-sidebar__top{display:flex;flex-direction:column;gap:var(--sidebar-gap);padding:var(--sidebar-padding)}
+.rb-sidebar__logo{display:flex;align-items:center}
+.rb-sidebar__bottom{display:flex;flex-direction:column;gap:var(--spacing-4);padding:var(--sidebar-padding)}
+.rb-sidebar__list{display:flex;flex-direction:column;gap:var(--sidebar-group-gap);margin:0;padding:0;list-style:none}
+.rb-sidebar__user{display:flex;align-items:center;gap:var(--spacing-3)}
+.rb-sidebar__user-text{flex:1;min-width:0;display:flex;flex-direction:column}
+.rb-sidebar__user-name{color:var(--sidebar-foreground-name);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-sidebar__user-email{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--sidebar-foreground-email);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}

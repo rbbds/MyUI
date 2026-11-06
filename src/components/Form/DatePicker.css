@@ -1,0 +1,18 @@
+.rb-calendar{display:inline-flex;flex-direction:column;gap:var(--calendar-gap);padding:var(--calendar-padding);border:1px solid var(--calendar-border);border-radius:var(--calendar-radius);background:var(--calendar-surface);box-shadow:var(--shadow-lg)}
+.rb-calendar__header{display:flex;align-items:center;gap:var(--spacing-2)}
+.rb-calendar__title{flex:1;margin:0;text-align:center;color:var(--calendar-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-calendar__title::first-letter{text-transform:lowercase}
+.rb-calendar__grid{border-collapse:collapse}
+.rb-calendar__grid th{width:40px;height:32px;padding:0;color:var(--calendar-foreground-weekday);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
+.rb-calendar__grid td{padding:0;text-align:center}
+.rb-calendar__day{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:var(--calendar-day-radius);background:transparent;color:var(--calendar-day-foreground);cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
+.rb-calendar__day:hover{background:var(--calendar-day-surface-hover)}
+.rb-calendar__day:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-calendar__day.is-outside{color:var(--calendar-day-foreground-outside)}
+.rb-calendar__day.is-today{background:var(--calendar-day-surface-today);color:var(--calendar-day-foreground-today);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-calendar__day.is-selected,.rb-calendar__day.is-selected:hover{background:var(--calendar-day-surface-selected);color:var(--calendar-day-foreground-selected);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-calendar__day:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed;text-decoration:line-through}
+
+.rb-datepicker__anchor{position:relative}
+.rb-datepicker__popover{position:absolute;z-index:20;top:calc(100% + var(--spacing-2));left:0}
+@media (max-width:599px){.rb-datepicker__popover{left:50%;transform:translateX(-50%)}}

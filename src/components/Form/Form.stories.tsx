@@ -18,6 +18,7 @@ type Story = StoryObj<typeof Input>;
 export const Playground: Story = {};
 export const WithIcon: Story = { args: { iconLeading: <Mail /> } };
 export const WithError: Story = { args: { defaultValue: 'robert@', error: 'Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.nl.' } };
+export const PrefixSuffix: Story = { args: { label: 'Maandbedrag', type: 'text', inputMode: 'decimal', placeholder: '0,00', prefix: '€', suffix: 'per maand', hint: undefined, autoComplete: 'off' } };
 export const Disabled: Story = { args: { disabled: true } };
 export const Required: Story = { args: { required: true } };
 

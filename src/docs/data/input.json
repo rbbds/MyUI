@@ -50,6 +50,16 @@
       "Icon leading / Leading icon / Help icon",
       "boolean / swap / boolean",
       ""
+    ],
+    [
+      "Show prefix / Prefix",
+      "boolean / tekst",
+      "Vaste tekst vóór de waarde, bijvoorbeeld \"€\"."
+    ],
+    [
+      "Show suffix / Suffix",
+      "boolean / tekst",
+      "Vaste tekst na de waarde, bijvoorbeeld \"per maand\"."
     ]
   ],
   "reactProps": [
@@ -87,6 +97,11 @@
       "iconLeading",
       "ReactNode",
       ""
+    ],
+    [
+      "prefix / suffix",
+      "ReactNode",
+      "Vaste tekst voor of na de waarde. Wordt via aria-describedby voorgelezen."
     ]
   ],
   "behaviour": [
@@ -115,6 +130,7 @@
   ],
   "tokens": [
     "--input-{surface|border|foreground}-*",
+    "--input-addon-foreground",
     "--input-{size}-padding-*",
     "--input-radius",
     "--input-gap",

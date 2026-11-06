@@ -1,0 +1,93 @@
+{
+  "name": "Command menu",
+  "page": "Overlays",
+  "figma": {
+    "node": "16999:258",
+    "base": "_Command item"
+  },
+  "react": "CommandMenu",
+  "summary": "Zoeken over pagina’s en acties met het toetsenbord, geopend met ⌘K of Ctrl+K. Results is een native Figma-slot met Command items.",
+  "use": [
+    "Apps met veel pagina’s of acties, voor ervaren gebruikers."
+  ],
+  "avoid": [
+    "Als enige manier om iets te vinden: zorg altijd ook voor zichtbare navigatie."
+  ],
+  "anatomy": [
+    "Zoekveld met Esc-hint.",
+    "Resultaten (slot): groepskoppen en Command items.",
+    "Footer met toetsenbordhints."
+  ],
+  "figmaProps": [
+    [
+      "Query",
+      "tekst",
+      ""
+    ],
+    [
+      "Results",
+      "slot",
+      ""
+    ],
+    [
+      "Command item: State",
+      "Default, Active, Disabled",
+      "Active = gemarkeerd met pijltjestoetsen."
+    ],
+    [
+      "Command item: Icon / Label / Show shortcut",
+      "via _Command item",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "open / onClose",
+      "boolean / () => void",
+      ""
+    ],
+    [
+      "items",
+      "{ id, label, group?, icon?, shortcut?, keywords?, disabled?, onSelect }[]",
+      ""
+    ],
+    [
+      "placeholder / emptyText / label",
+      "string",
+      ""
+    ],
+    [
+      "useCommandShortcut(onOpen, key?)",
+      "hook",
+      "Koppelt ⌘K / Ctrl+K."
+    ]
+  ],
+  "behaviour": [
+    "Typen filtert op label en keywords.",
+    "Pijl op/neer markeert, Enter voert uit en sluit, Escape sluit."
+  ],
+  "a11y": [
+    "Combobox (input) met listbox; aria-activedescendant volgt de markering, dus de focus blijft in het zoekveld.",
+    "Lege resultaten worden gemeld via role=\"status\"."
+  ],
+  "content": [
+    "Labels als werkwoord voor acties (\"Nieuw project\"), als naam voor pagina’s."
+  ],
+  "do": [
+    "Voeg keywords toe voor synoniemen."
+  ],
+  "dont": [
+    "Destructieve acties zonder bevestiging."
+  ],
+  "tokens": [
+    "--command-*",
+    "--command-item-*",
+    "--kbd-*"
+  ],
+  "related": [
+    "Search input",
+    "Kbd",
+    "Dropdown menu"
+  ],
+  "open": []
+}
