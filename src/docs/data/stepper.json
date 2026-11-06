@@ -1,0 +1,85 @@
+{
+  "name": "Stepper",
+  "page": "Navigation",
+  "figma": {
+    "node": "16995:331",
+    "base": "_Step horizontal / _Step vertical"
+  },
+  "react": "Stepper",
+  "summary": "Laat zien waar de gebruiker is in een proces van meerdere stappen. Opgebouwd uit Step-varianten (Complete, Current, Upcoming).",
+  "use": [
+    "Aanvraagflows en formulieren van 3 tot 6 stappen."
+  ],
+  "avoid": [
+    "Inhoud van gelijk niveau: gebruik Tabs.",
+    "Meer dan 6 stappen: groepeer stappen."
+  ],
+  "anatomy": [
+    "Indicator: nummer of vinkje.",
+    "Verbindingslijn.",
+    "Titel en optionele toelichting."
+  ],
+  "figmaProps": [
+    [
+      "Stepper: Orientation",
+      "Horizontal, Vertical",
+      ""
+    ],
+    [
+      "Step: Orientation / Status",
+      "Horizontal, Vertical / Complete, Current, Upcoming",
+      "Twee bases, omdat de layoutrichting verschilt."
+    ],
+    [
+      "Step: Number / Title / Description / Show description / Show connector",
+      "via _Step",
+      "Zet Show connector uit bij de laatste stap."
+    ]
+  ],
+  "reactProps": [
+    [
+      "steps",
+      "{ title, description?, href? }[]",
+      "href alleen voor voltooide stappen."
+    ],
+    [
+      "current",
+      "number",
+      "Index (vanaf 0) van de huidige stap."
+    ],
+    [
+      "orientation",
+      "'horizontal' | 'vertical'",
+      "Horizontaal wordt verticaal onder 600px."
+    ],
+    [
+      "statusLabels",
+      "object",
+      "Screenreadertekst, standaard 'voltooid', 'huidige stap', 'nog te doen'."
+    ]
+  ],
+  "behaviour": [
+    "Voltooide stappen met href zijn links terug."
+  ],
+  "a11y": [
+    "<nav aria-label=\"Voortgang\"> met een <ol>.",
+    "Huidige stap heeft aria-current=\"step\"; elke stap meldt zijn status in tekst, niet alleen met kleur."
+  ],
+  "content": [
+    "Titels als zelfstandig naamwoord: \"Gegevens\", \"Controleren\"."
+  ],
+  "do": [
+    "Laat de gebruiker teruggaan naar voltooide stappen."
+  ],
+  "dont": [
+    "Vooruit springen naar stappen die nog niet klaar zijn."
+  ],
+  "tokens": [
+    "--stepper-*"
+  ],
+  "related": [
+    "Progress",
+    "Tabs"
+  ],
+  "open": []
+}

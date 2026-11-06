@@ -147,15 +147,15 @@ function doDont(parent, dos, donts) {
 // Placement: right of the existing component content, ignoring older docs/archive.
 const isDoc = (n) => n.name.startsWith('Docs / ') || n.name.startsWith('Archief');
 const content = page.children.filter((n) => !isDoc(n));
-let startX = Math.max(...content.map((n) => n.x + n.width)) + 200;
-const existing = page.children.filter((n) => n.name.startsWith('Docs / '));
+const existing = page.children.filter((n) => n.name.startsWith('Docs / ')).map((n) => ({ node: n, name: n.name, x: n.x, width: n.width }));
+let startX = Math.max(Math.max(...content.map((n) => n.x + n.width)) + 200, ...existing.map((n) => n.x + n.width + 80));
 
 const created = [];
 for (const d of DOCS) {
   const name = `Docs / ${d.name}`;
   const prev = existing.find((n) => n.name === name);
   const keepX = prev ? prev.x : null;
-  existing.filter((n) => n.name === name).forEach((n) => n.remove());
+  if (prev) prev.node.remove();
   const f = figma.createAutoLayout('VERTICAL', { name, itemSpacing: 32 });
   f.paddingLeft = f.paddingRight = 48;
   f.paddingTop = f.paddingBottom = 48;

@@ -1,0 +1,59 @@
+{
+  "name": "Kbd",
+  "page": "Utilities",
+  "figma": {
+    "node": "16992:44",
+    "base": null
+  },
+  "react": "Kbd",
+  "summary": "Klein label voor een toets of sneltoets, zoals ⌘K of Esc. Gebruikt in Search input en Command menu.",
+  "use": [
+    "Sneltoetsen tonen in zoekvelden, menu’s en hulpteksten."
+  ],
+  "avoid": [
+    "Als knop: Kbd is alleen een hint."
+  ],
+  "anatomy": [
+    "Container met rand.",
+    "Label."
+  ],
+  "figmaProps": [
+    [
+      "Label",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "children",
+      "ReactNode",
+      "De toets."
+    ]
+  ],
+  "behaviour": [
+    "Statisch."
+  ],
+  "a11y": [
+    "Native <kbd>. Puur decoratieve hints (naast een label dat de actie al noemt) mogen aria-hidden."
+  ],
+  "content": [
+    "Gebruik ⌘ op Mac en Ctrl op Windows als je het platform kent."
+  ],
+  "do": [],
+  "dont": [
+    "Sneltoetsen tonen die niet werken."
+  ],
+  "tokens": [
+    "--kbd-surface",
+    "--kbd-border",
+    "--kbd-foreground",
+    "--kbd-radius",
+    "--kbd-padding-*"
+  ],
+  "related": [
+    "Search input",
+    "Command menu"
+  ],
+  "open": []
+}

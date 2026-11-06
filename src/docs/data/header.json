@@ -1,0 +1,94 @@
+{
+  "name": "Header",
+  "page": "Navigation",
+  "figma": {
+    "node": "16998:447",
+    "base": "_Header"
+  },
+  "react": "Header",
+  "summary": "Bovenbalk met logo, hoofdnavigatie en acties. Onder 900px verhuizen de links naar een Slideout achter een menuknop. Logo en Navigation zijn native Figma-slots.",
+  "use": [
+    "Websites en apps met een handvol hoofdsecties."
+  ],
+  "avoid": [
+    "Apps met veel secties of diepe navigatie: gebruik Sidebar."
+  ],
+  "anatomy": [
+    "Logo (slot).",
+    "Navigatie (slot) met Header nav items.",
+    "Acties: meldingen, avatar, knoppen.",
+    "Menuknop (alleen mobiel)."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Desktop, Mobile",
+      ""
+    ],
+    [
+      "Logo / Navigation",
+      "slot",
+      ""
+    ],
+    [
+      "Show navigation / Show menu button",
+      "boolean",
+      "Via _Header."
+    ],
+    [
+      "Header nav item: State",
+      "Default, Hover, Focus, Current",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "logo",
+      "ReactNode",
+      "Meestal een link naar home."
+    ],
+    [
+      "links",
+      "{ label, href, current?, icon? }[]",
+      "icon wordt gebruikt in het mobiele menu."
+    ],
+    [
+      "actions",
+      "ReactNode",
+      ""
+    ],
+    [
+      "navLabel / menuLabel / menuTitle",
+      "string",
+      "Standaard 'Hoofdmenu', 'Menu openen', 'Menu'."
+    ]
+  ],
+  "behaviour": [
+    "Desktop: links in de balk. Mobiel: menuknop opent een Slideout met dezelfde links."
+  ],
+  "a11y": [
+    "<header> met <nav aria-label>; huidige pagina met aria-current=\"page\".",
+    "Menuknop heeft aria-expanded en aria-haspopup=\"dialog\"."
+  ],
+  "content": [
+    "Maximaal 5 tot 6 links, korte namen."
+  ],
+  "do": [
+    "Houd de volgorde gelijk op desktop en mobiel."
+  ],
+  "dont": [
+    "Acties en navigatie door elkaar in de linkrij."
+  ],
+  "tokens": [
+    "--header-*",
+    "--header-nav-item-*"
+  ],
+  "related": [
+    "Sidebar",
+    "Slideout",
+    "Nav item"
+  ],
+  "open": [
+    "Dropdowns onder hoofdlinks (mega menu) zijn er nog niet."
+  ]
+}
