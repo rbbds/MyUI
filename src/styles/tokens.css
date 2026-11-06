@@ -716,6 +716,8 @@
 --slider-handle:var(--color-surface-primary);
 --slider-handle-border:var(--color-border-brand);
 --slider-handle-border-disabled:var(--color-border-disabled);
+--slider-handle-size:24px;
+--slider-handle-size-pressed:32px;
 --slider-track:var(--color-surface-quaternary);
 --spinner-indicator:var(--color-foreground-brand);
 --spinner-track:var(--color-surface-tertiary);

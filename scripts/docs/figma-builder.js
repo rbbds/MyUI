@@ -153,6 +153,8 @@ const existing = page.children.filter((n) => n.name.startsWith('Docs / '));
 const created = [];
 for (const d of DOCS) {
   const name = `Docs / ${d.name}`;
+  const prev = existing.find((n) => n.name === name);
+  const keepX = prev ? prev.x : null;
   existing.filter((n) => n.name === name).forEach((n) => n.remove());
   const f = figma.createAutoLayout('VERTICAL', { name, itemSpacing: 32 });
   f.paddingLeft = f.paddingRight = 48;
@@ -190,9 +192,8 @@ for (const d of DOCS) {
   if (d.related.length) text(section(f, 'Gerelateerd'), d.related.join(', '));
   if (d.open.length) list(section(f, 'Open punten'), d.open);
 
-  f.x = startX;
+  if (keepX !== null) { f.x = keepX; } else { f.x = startX; startX += W + 80; }
   f.y = 0;
-  startX += W + 80;
   created.push({ id: f.id, name, h: Math.round(f.height) });
 }
 return { page: page.name, created };

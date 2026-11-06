@@ -26,8 +26,8 @@
     ],
     [
       "State",
-      "Default, Focus, Disabled",
-      ""
+      "Default, Focus, Pressed, Disabled",
+      "Pressed: handle groeit van 24 naar 32 px."
     ]
   ],
   "reactProps": [
@@ -58,6 +58,7 @@
     ]
   ],
   "behaviour": [
+    "Pressed: zolang de gebruiker de handle vasthoudt (muis of touch), groeit hij van 24 naar 32 px. Loslaten zet hem terug.",
     "Pijltjestoetsen verplaatsen per step. Home en End springen naar min en max."
   ],
   "a11y": [
@@ -75,7 +76,9 @@
   ],
   "tokens": [
     "--slider-{track|fill|handle|handle-border|foreground}",
-    "--slider-fill-disabled"
+    "--slider-fill-disabled",
+    "--slider-handle-size",
+    "--slider-handle-size-pressed"
   ],
   "related": [
     "Input",
