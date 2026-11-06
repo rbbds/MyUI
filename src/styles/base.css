@@ -1,0 +1,7 @@
+/* Minimal base. Scoped to rb- components; does not reset the host app. */
+.rb-root,[class^="rb-"],[class*=" rb-"]{box-sizing:border-box}
+[class^="rb-"] *,[class*=" rb-"] *{box-sizing:border-box}
+.rb-root{font-family:var(--font-font-family-body);color:var(--color-foreground-primary);background:var(--color-surface-primary);-webkit-font-smoothing:antialiased}
+.rb-visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes rb-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){[class^="rb-"],[class*=" rb-"]{animation-duration:0.01ms!important;transition-duration:0.01ms!important}}
