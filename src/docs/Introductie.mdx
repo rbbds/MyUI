@@ -15,49 +15,40 @@ White label componentenbibliotheek en design tokens, gebouwd vanuit de Figma-fil
 
 ## Rebranden per project
 
-Alles wat merk is, pas je aan met variabelen. Alles wat structuur is, blijft gelijk: spacing, padding, maten, de font-size-schaal en breakpoints. Zo breken layouts en componenten niet als je van merk wisselt. Probeer het met de **Brand**-knop in de toolbar (twee demomerken).
+Alles wat merk is, staat in één laag: de collectie **brand/wl** in Figma, `--wl-*` in CSS. Alles wat structuur is, blijft gelijk: spacing, padding, maten, de font-size-schaal en breakpoints. Zo breken layouts en componenten niet als je van merk wisselt.
 
-| Wat | Laag | Variabelen |
+Een merk is in Figma een **mode** van brand/wl (nu: White Label, en Forest en Berry als demo). In code wordt elke extra mode een blok `:root[data-brand="forest"]` in `tokens.css`. Probeer het met de **Brand**-knop in de toolbar.
+
+| Wat | Figma (brand/wl) | CSS |
 | --- | --- | --- |
-| Merkkleur | primitive | `--wl-color-brand-25` t/m `-950` (12 stappen; Light gebruikt vooral 500 tot 700, Dark 300 tot 500) |
-| Neutrale kleuren | primitive | `--wl-color-gray-*` |
-| Statuskleuren | primitive | `--wl-color-success-*`, `-warning-*`, `-error-*`, `-info-*` |
-| Schaduwkleur | primitive | `--wl-color-alpha-shadow-*` |
-| Lettertypen | primitive | `--wl-fonts-body`, `--wl-fonts-title` |
-| Letterdikte | semantic | `--font-font-weight-titles-*`, `--font-font-weight-paragraph-*` |
-| Hoekafronding | semantic | `--border-radius-control-*` (knoppen, velden), `--border-radius-containers-*` (cards), `--border-radius-overlays-*` (menu, modal) |
-| Randdikte | semantic | `--border-width-control-*`, `--border-width-containers-*`, `--border-width-overlays-*` |
+| Merkkleur | `WL/color/brand/25` t/m `950` | `--wl-color-brand-*` |
+| Neutrale en statuskleuren | `WL/color/gray`, `success`, `warning`, `error`, `info` | `--wl-color-gray-*` enz. |
+| Lettertypen | `WL/fonts/body`, `WL/fonts/title` | `--wl-fonts-body`, `--wl-fonts-title` |
+| Letterdikte | `WL/font-weight/titles/*`, `paragraph/*` | `--wl-font-weight-*` |
+| Hoekafronding | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--wl-radius-*` |
+| Randdikte | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--wl-border-width-*` |
 
-Voorbeeld, in je eigen CSS na de import van `@rbbds/ui/styles.css`:
+De theme-laag (Light en Dark) verwijst naar deze variabelen en de component-tokens verwijzen naar de theme-laag. Voor een merk pas je dus nooit iets anders aan dan `--wl-*`.
+
+**Een merk toevoegen**
+
+1. Figma: voeg een mode toe aan brand/wl en vul de waarden in.
+2. Code: exporteer de tokens met `scripts/figma-export-tokens.js`. De mode komt als `:root[data-brand="naam"]` in `tokens.css`.
+3. Zet `data-brand="naam"` op `<html>`. In een project met maar één merk kan het ook zonder mode: overschrijf de `--wl-*` waarden op `:root` in je eigen CSS, na de import van `@rbbds/ui/styles.css`.
 
 ```css
 :root {
-  /* kleur: geef de hele schaal, dan klopt Dark mode ook */
-  --wl-color-brand-50: #f0f9ff;
-  --wl-color-brand-500: #0ea5e9;
-  --wl-color-brand-600: #0284c7;
-  --wl-color-brand-700: #0369a1;
-  /* … overige stappen … */
-
-  /* typografie */
-  --wl-fonts-body: "Manrope", system-ui, sans-serif;
+  --wl-color-brand-600: #0284c7;   /* geef de hele schaal 25 t/m 950, dan klopt Dark ook */
   --wl-fonts-title: "Fraunces", Georgia, serif;
-  --font-font-weight-titles-semibold: 700;
-
-  /* vorm */
-  --border-radius-control-sm: 0px;
-  --border-radius-control-md: 0px;
-  --border-radius-containers-md: 4px;
-  --border-width-control-default: 2px;
+  --wl-radius-control-md: 0px;
+  --wl-border-width-control-default: 2px;
 }
 ```
 
-Alle semantische en component-tokens volgen automatisch.
-
 **Spelregels**
 
-- Pas hoekafronding en letterdikte aan op de semantische laag, niet in de primitive-schaal. `--radius-2` betekent 8px; als je die op 0 zet, klopt de naam niet meer en verandert alles wat 8px gebruikt.
-- Zet overrides op `:root` (of `html[data-brand="…"]`). De component-tokens worden op `:root` berekend; een override op een dieper element werkt daarom niet voor alle tokens.
-- Pas geen mapped tokens (`--button-*`, `--input-*` …) aan voor een merk. Dat zijn de afspraken met de componenten; een merk dat daar afwijkt is een fork.
+- Pas nooit de primitive-schalen aan (`--radius-2`, `--font-weight-600`). `--radius-2` betekent 8px; als je die op 0 zet, klopt de naam niet meer en verandert alles wat 8px gebruikt. Verwijs in brand/wl naar een andere stap.
+- Zet `data-brand` en overrides op `<html>` (`:root`). De tokens worden daar berekend; op een dieper element werkt een override niet voor alle tokens.
+- Pas geen theme- of mapped tokens (`--color-*`, `--button-*` …) aan voor een merk. Een merk dat daar afwijkt is een fork.
 - Laad zelf de webfont die je in `--wl-fonts-*` zet.
 - Controleer na een nieuwe merkkleur het contrast: tekst op `brand-600` (Light) en `brand-400` (Dark) moet minimaal 4,5:1 halen.

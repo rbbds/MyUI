@@ -1,7 +1,9 @@
 import type { Preview } from '@storybook/react-vite';
 import '@fontsource-variable/inter';
 import '../src/styles/index.css';
-import './brands.css';
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/600.css';
+import '@fontsource/source-serif-4/700.css';
 
 const preview: Preview = {
   globalTypes: {
@@ -18,14 +20,14 @@ const preview: Preview = {
       },
     },
     brand: {
-      description: 'Demo brand (only rebranding variables are overridden)',
+      description: 'Brand mode (Figma: brand/wl collection)',
       toolbar: {
         title: 'Brand',
         icon: 'paintbrush',
         items: [
           { value: 'wl', title: 'White label' },
-          { value: 'forest', title: 'Demo: Forest (hoekig, serif)' },
-          { value: 'berry', title: 'Demo: Berry (rond, zwaar)' },
+          { value: 'forest', title: 'Forest (demo)' },
+          { value: 'berry', title: 'Berry (demo)' },
         ],
         dynamicTitle: true,
       },
