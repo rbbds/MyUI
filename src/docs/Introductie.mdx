@@ -17,7 +17,19 @@ White label componentenbibliotheek en design tokens, gebouwd vanuit de Figma-fil
 
 Alles wat merk is, staat in één laag: de collectie **brand/wl** in Figma, `--wl-*` in CSS. Alles wat structuur is, blijft gelijk: spacing, padding, maten, de font-size-schaal en breakpoints. Zo breken layouts en componenten niet als je van merk wisselt.
 
-Een merk is in Figma een **mode** van brand/wl (nu: White Label, en Forest en Berry als demo). In code wordt elke extra mode een blok `:root[data-brand="forest"]` in `tokens.css`. Probeer het met de **Brand**-knop in de toolbar.
+### Kies een stijl
+
+MyUI heeft drie stijlen. Een stijl bepaalt de vorm: hoekafronding, randdikte en letterdikte.
+
+| Stijl | Vorm | Gebruik |
+| --- | --- | --- |
+| **Iris** (standaard) | Licht afgerond | Geen `data-brand` nodig |
+| **Forest** | Hoekig | `<html data-brand="forest">` |
+| **Berry** | Rond, zware titels, randen van 2 px | `<html data-brand="berry">` |
+
+Daarna pas je alleen nog kleur en lettertypen aan. Dat doe je het snelst met de **[Brand builder](?path=/story/brand-builder--builder)**: kies een stijl, vul je merkkleur, lettertypen en logo in, en download de CSS. De builder maakt van één kleur de hele schaal (25 t/m 950) en waarschuwt als het contrast te laag is.
+
+In Figma is elke stijl een **mode** van brand/wl. In code is elke stijl behalve Iris een blok `:root[data-brand="…"]` in `tokens.css`. Bekijk ze met de **Brand**-knop in de toolbar.
 
 | Wat | Figma (brand/wl) | CSS |
 | --- | --- | --- |
