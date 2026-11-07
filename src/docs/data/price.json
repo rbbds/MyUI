@@ -1,0 +1,93 @@
+{
+  "name": "Price",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17031:53",
+    "base": "_Price"
+  },
+  "react": "Price",
+  "summary": "Prijs met optionele van-prijs (sale) en toevoeging zoals \"per maand\". Bedragen worden geformatteerd met Intl (nl-NL, euro).",
+  "use": [
+    "Overal waar een bedrag van een product staat."
+  ],
+  "avoid": [
+    "Totalen in een overzicht: gebruik Cart summary."
+  ],
+  "anatomy": [
+    "Bedrag.",
+    "Van-prijs (doorgestreept, bij sale).",
+    "Toevoeging."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md, lg",
+      ""
+    ],
+    [
+      "Sale",
+      "False, True",
+      "True: bedrag in error-kleur, van-prijs zichtbaar."
+    ],
+    [
+      "Amount, Compare, Suffix",
+      "tekst",
+      ""
+    ],
+    [
+      "Show compare, Show suffix",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "amount",
+      "number",
+      "Verplicht."
+    ],
+    [
+      "compareAt",
+      "number",
+      "Alleen getoond als hoger dan amount."
+    ],
+    [
+      "currency, locale",
+      "string",
+      "Standaard 'EUR' en 'nl-NL'."
+    ],
+    [
+      "size",
+      "'sm' | 'md' | 'lg'",
+      ""
+    ],
+    [
+      "suffix",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "formatMoney(amount) is ook los te gebruiken."
+  ],
+  "a11y": [
+    "Schermlezers horen \"Oude prijs € 99,95 Nu € 79,95\"; doorstrepen alleen is niet genoeg."
+  ],
+  "content": [
+    "Toon \"incl. btw\" als je klanten particulieren zijn en het niet elders staat."
+  ],
+  "do": [
+    "Gebruik dezelfde grootte voor alle prijzen in een overzicht."
+  ],
+  "dont": [
+    "Een van-prijs die nooit gegolden heeft."
+  ],
+  "tokens": [
+    "--price-*"
+  ],
+  "related": [
+    "Product card",
+    "Cart item"
+  ],
+  "open": []
+}

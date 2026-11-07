@@ -17,3 +17,5 @@
 .rb-selection-card-group--2 .rb-selection-card-group__items{grid-template-columns:repeat(2,minmax(0,1fr))}
 .rb-selection-card-group--3 .rb-selection-card-group__items{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:599px){.rb-selection-card-group__items{grid-template-columns:1fr!important}}
+.rb-selection-card__aside{flex:none;align-self:center;color:var(--selection-card-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-selection-card__aside img,.rb-selection-card__aside svg{display:block;height:24px;width:auto}

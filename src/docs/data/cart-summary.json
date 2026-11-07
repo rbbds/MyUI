@@ -1,0 +1,98 @@
+{
+  "name": "Cart summary",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17035:829",
+    "base": "_Cart summary"
+  },
+  "react": "CartSummary",
+  "summary": "Totaalblok voor winkelwagen en checkout: subtotaal, verzending, korting, totaal, kortingscode en actie. In de checkout ook het besteloverzicht.",
+  "use": [
+    "Naast de winkelwagen (Type=Cart).",
+    "Naast de checkout-stappen (Type=Order)."
+  ],
+  "avoid": [],
+  "anatomy": [
+    "Titel.",
+    "Items (slot, alleen bij Order).",
+    "Regels; korting in success-kleur.",
+    "Totaal met \"Inclusief btw\".",
+    "Promo code (Cart).",
+    "Actie (Cart)."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Cart, Order",
+      ""
+    ],
+    [
+      "Items",
+      "slot",
+      "Read-only Cart items."
+    ],
+    [
+      "Title, Subtotal, Shipping, Discount, Total",
+      "tekst",
+      ""
+    ],
+    [
+      "Show items / discount / promo code / action",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "title",
+      "ReactNode",
+      ""
+    ],
+    [
+      "subtotal, total",
+      "number",
+      ""
+    ],
+    [
+      "lines",
+      "{ label, amount, note? }[]",
+      "Negatief bedrag = korting. note bijvoorbeeld \"Gratis\"."
+    ],
+    [
+      "totalNote",
+      "ReactNode",
+      ""
+    ],
+    [
+      "promo, action",
+      "ReactNode",
+      ""
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Items voor het besteloverzicht."
+    ]
+  ],
+  "behaviour": [
+    "Bedragen worden niet berekend door het component: geef ze mee."
+  ],
+  "a11y": [
+    "Section met kop; de regels zijn een description list (dt/dd)."
+  ],
+  "content": [
+    "\"Gratis\" in plaats van \"€ 0,00\" bij verzending."
+  ],
+  "do": [],
+  "dont": [
+    "Kosten pas op de laatste stap tonen."
+  ],
+  "tokens": [
+    "--cart-summary-*"
+  ],
+  "related": [
+    "Promo code",
+    "Cart item"
+  ],
+  "open": []
+}

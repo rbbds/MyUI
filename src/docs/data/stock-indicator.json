@@ -1,0 +1,63 @@
+{
+  "name": "Stock indicator",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17031:794",
+    "base": "_Stock indicator"
+  },
+  "react": "StockIndicator",
+  "summary": "Beschikbaarheid met een gekleurde stip. De tekst draagt de betekenis.",
+  "use": [
+    "Productpagina, Product card (bij laag of uitverkocht), Add to cart."
+  ],
+  "avoid": [
+    "Levertijd: zet die als losse regel (zie Add to cart)."
+  ],
+  "anatomy": [
+    "Stip.",
+    "Tekst."
+  ],
+  "figmaProps": [
+    [
+      "Status",
+      "In stock, Low, Out, Pre-order",
+      ""
+    ],
+    [
+      "Label",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "status",
+      "'in-stock' | 'low' | 'out' | 'preorder'",
+      ""
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Eigen tekst, bijvoorbeeld \"Nog 3 op voorraad\"."
+    ]
+  ],
+  "behaviour": [],
+  "a11y": [
+    "Kleur is nooit de enige drager: de tekst zegt de status."
+  ],
+  "content": [
+    "Concreet: \"Nog 3 op voorraad\" in plaats van \"Beperkt\"."
+  ],
+  "do": [],
+  "dont": [
+    "Alleen een gekleurde stip zonder tekst."
+  ],
+  "tokens": [
+    "--stock-*"
+  ],
+  "related": [
+    "Add to cart",
+    "Product card"
+  ],
+  "open": []
+}

@@ -1,0 +1,70 @@
+{
+  "name": "Active filters",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17037:1868",
+    "base": "_Active filters"
+  },
+  "react": "ActiveFilters",
+  "summary": "Aantal resultaten en gekozen filters als verwijderbare Tags, met \"Alles wissen\".",
+  "use": [
+    "Boven het productoverzicht."
+  ],
+  "avoid": [],
+  "anatomy": [
+    "Aantal resultaten.",
+    "Tags.",
+    "Link \"Alles wissen\"."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "With filters, No filters",
+      ""
+    ],
+    [
+      "Count",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "filters",
+      "{ id, label }[]",
+      ""
+    ],
+    [
+      "onRemove",
+      "(id) => void",
+      ""
+    ],
+    [
+      "onClear",
+      "() => void",
+      ""
+    ],
+    [
+      "resultCount",
+      "number",
+      ""
+    ]
+  ],
+  "behaviour": [],
+  "a11y": [
+    "Het aantal resultaten is een status en wordt gemeld bij elke wijziging.",
+    "Tag-knop: \"Verwijder filter {label}\"."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [],
+  "tokens": [
+    "--filter-*",
+    "--tag-*"
+  ],
+  "related": [
+    "Filter group",
+    "Product grid"
+  ],
+  "open": []
+}

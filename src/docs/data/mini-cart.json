@@ -1,0 +1,91 @@
+{
+  "name": "Mini cart",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17037:447",
+    "base": "_Mini cart"
+  },
+  "react": "MiniCart, CartButton",
+  "summary": "Winkelwagen in een Slideout, te openen via de Cart button in de header of na \"In winkelwagen\".",
+  "use": [
+    "Snel overzicht zonder de pagina te verlaten."
+  ],
+  "avoid": [
+    "Als vervanging van de winkelwagenpagina: link er altijd naartoe."
+  ],
+  "anatomy": [
+    "Slideout (sm) met titel en aantal.",
+    "Cart items (sm) in het Content-slot.",
+    "Notitie (bijv. gratis verzending), subtotaal.",
+    "Afrekenen en Bekijk winkelwagen.",
+    "Cart button: icoon met aantal."
+  ],
+  "figmaProps": [
+    [
+      "Mini cart: State",
+      "Filled, Empty",
+      "Empty: Empty state met \"Verder winkelen\"."
+    ],
+    [
+      "Cart button: Count",
+      "Some, None",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "open, onClose",
+      "",
+      ""
+    ],
+    [
+      "itemCount, subtotal, currency",
+      "",
+      ""
+    ],
+    [
+      "onCheckout, cartHref",
+      "",
+      ""
+    ],
+    [
+      "note",
+      "ReactNode",
+      ""
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Cart items."
+    ],
+    [
+      "CartButton: count, onClick, label",
+      "",
+      "Naam wordt \"Winkelwagen, 3 artikelen\"."
+    ]
+  ],
+  "behaviour": [
+    "Focus gaat naar het paneel en blijft erin; Escape sluit en zet focus terug (Slideout)."
+  ],
+  "a11y": [
+    "Het aantal hoort bij de naam van de Cart button, de badge zelf is aria-hidden."
+  ],
+  "content": [
+    "Titel met aantal: \"Winkelwagen (3)\"."
+  ],
+  "do": [],
+  "dont": [
+    "Automatisch sluiten na een paar seconden."
+  ],
+  "tokens": [
+    "--cart-button-*",
+    "--cart-summary-*",
+    "Slideout"
+  ],
+  "related": [
+    "Slideout",
+    "Cart item",
+    "Header"
+  ],
+  "open": []
+}

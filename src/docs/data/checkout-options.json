@@ -1,0 +1,67 @@
+{
+  "name": "Checkout options",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17037:802",
+    "base": "_Checkout options"
+  },
+  "react": "SelectionCard (aside)",
+  "summary": "Bezorg- en betaalopties als Selection cards met de prijs of een logo rechts (nieuwe prop aside).",
+  "use": [
+    "Checkout: bezorging, betaalmethode, verzekering."
+  ],
+  "avoid": [
+    "Opties zonder uitleg of prijs: dan is een gewone Radio genoeg."
+  ],
+  "anatomy": [
+    "Legend.",
+    "Selection cards (radio) met titel, beschrijving en aside."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Delivery, Payment",
+      ""
+    ],
+    [
+      "Selection card: Show aside, Aside",
+      "boolean, tekst",
+      "Nieuw in Selection card."
+    ]
+  ],
+  "reactProps": [
+    [
+      "SelectionCard aside",
+      "ReactNode",
+      "Prijs (\"Gratis\", \"€ 2,95\") of logo."
+    ],
+    [
+      "SelectionCardGroup legend",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Native radiogroep: pijltjestoetsen wisselen."
+  ],
+  "a11y": [
+    "De aside staat in het label, dus de prijs wordt voorgelezen."
+  ],
+  "content": [
+    "Concreet tijdvak: \"Morgen tussen 9:00 en 18:00\"."
+  ],
+  "do": [],
+  "dont": [
+    "Een betaalmethode vooraf aanvinken die extra kost."
+  ],
+  "tokens": [
+    "--selection-card-*"
+  ],
+  "related": [
+    "Selection card",
+    "Address fields"
+  ],
+  "open": [
+    "Betaallogo's (iDEAL, Visa) zitten nog niet in de bibliotheek."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "Promo code",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17035:443",
+    "base": "_Promo code"
+  },
+  "react": "PromoCode",
+  "summary": "Kortingscode invoeren. Na toepassen staat de code als verwijderbare Tag.",
+  "use": [
+    "In Cart summary."
+  ],
+  "avoid": [
+    "Bovenaan de checkout: het leidt af en laat mensen zoeken naar codes."
+  ],
+  "anatomy": [
+    "Input (sm) met knop \"Toepassen\".",
+    "Toegepast: label en Tag."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Empty, Filled, Error, Applied",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "onApply",
+      "(code) => string | void | Promise",
+      "Geef een foutmelding terug, of niets als het lukt."
+    ],
+    [
+      "applied",
+      "string | null",
+      ""
+    ],
+    [
+      "onRemove",
+      "() => void",
+      ""
+    ],
+    [
+      "label, buttonLabel",
+      "string",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Leeg veld: melding \"Vul een kortingscode in.\"",
+    "Tijdens controleren laadt de knop."
+  ],
+  "a11y": [
+    "Fout gekoppeld aan het veld; toegepaste code als status gemeld."
+  ],
+  "content": [
+    "Foutmelding met oplossing: \"Deze code kennen we niet. Controleer de spelling.\""
+  ],
+  "do": [],
+  "dont": [],
+  "tokens": [
+    "--input-*",
+    "--tag-*"
+  ],
+  "related": [
+    "Cart summary"
+  ],
+  "open": []
+}

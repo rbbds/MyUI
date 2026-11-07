@@ -1,0 +1,59 @@
+{
+  "name": "Product grid",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17033:767"
+  },
+  "react": "ProductGrid",
+  "summary": "Raster van Product cards dat meegroeit met de schermbreedte. Een lijst, zodat schermlezers het aantal producten horen.",
+  "use": [
+    "Productoverzicht en zoekresultaten."
+  ],
+  "avoid": [
+    "Gemengde inhoud (artikelen en producten door elkaar)."
+  ],
+  "anatomy": [
+    "Lijst (ul) met Product cards."
+  ],
+  "figmaProps": [
+    [
+      "Product grid",
+      "component",
+      "Voorbeeld met 6 Product cards; gap via product-grid/gap."
+    ]
+  ],
+  "reactProps": [
+    [
+      "minItemWidth",
+      "number",
+      "Minimale kaartbreedte, standaard 220."
+    ],
+    [
+      "aria-label",
+      "string",
+      "Naam van de lijst, bijvoorbeeld de categorie."
+    ]
+  ],
+  "behaviour": [
+    "Zo veel kolommen als passen (auto-fill), kaarten even hoog per rij."
+  ],
+  "a11y": [
+    "Gebruik een kop boven het raster en geef de lijst een naam."
+  ],
+  "content": [],
+  "do": [
+    "Combineer met Active filters en Pagination."
+  ],
+  "dont": [
+    "Oneindig scrollen zonder alternatief."
+  ],
+  "tokens": [
+    "--product-grid-gap"
+  ],
+  "related": [
+    "Product card",
+    "Active filters",
+    "Pagination"
+  ],
+  "open": []
+}

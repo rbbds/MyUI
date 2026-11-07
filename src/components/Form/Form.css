@@ -65,3 +65,14 @@
 .rb-control__clear:hover,.rb-control__trigger:hover{background:var(--color-surface-hover)}
 .rb-control__clear:focus-visible,.rb-control__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-control__trigger:disabled{cursor:not-allowed;color:var(--input-foreground-disabled);background:transparent}
+/* Range slider (two handles) */
+.rb-range__track{position:relative;height:24px}
+.rb-range__track::before{content:"";position:absolute;left:0;right:0;top:8px;height:8px;border-radius:var(--border-radius-full);background:linear-gradient(to right,var(--slider-track) 0 var(--_lo),var(--slider-fill) var(--_lo) var(--_hi),var(--slider-track) var(--_hi) 100%)}
+.rb-range--disabled .rb-range__track::before{background:linear-gradient(to right,var(--slider-track) 0 var(--_lo),var(--slider-fill-disabled) var(--_lo) var(--_hi),var(--slider-track) var(--_hi) 100%)}
+.rb-range__input{position:absolute;inset:0;width:100%;pointer-events:none}
+.rb-range__input::-webkit-slider-runnable-track{background:transparent!important}
+.rb-range__input::-moz-range-track{background:transparent}
+.rb-range__input::-moz-range-progress{background:transparent}
+.rb-range__input::-webkit-slider-thumb{pointer-events:auto;position:relative;z-index:1}
+.rb-range__input::-moz-range-thumb{pointer-events:auto}
+.rb-range__values{display:flex;justify-content:space-between;color:var(--slider-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
