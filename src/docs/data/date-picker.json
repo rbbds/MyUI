@@ -6,19 +6,21 @@
     "base": "_Date picker"
   },
   "react": "DatePicker",
-  "summary": "Datumveld (dd-mm-jjjj) met een kalender als extra. Typen werkt altijd; de kalender helpt bij datums dicht bij vandaag. Bestaat uit Calendar en Calendar day.",
+  "summary": "Datumveld (dd-mm-jjjj) met een kalender als extra. De kalender werkt zoals MUI DateCalendar: klik op \"november 2026 ▾\" om een jaar (en eventueel maand) te kiezen, pijlen rechts voor de vorige en volgende maand. Bestaat uit Calendar, Calendar day en Calendar cell.",
   "use": [
-    "Datums in de nabije toekomst of het recente verleden: afspraken, ingangsdatums."
+    "Datums in de nabije toekomst of het recente verleden: afspraken, ingangsdatums.",
+    "Geboortedatum: met views year, month, day en openTo year springt de gebruiker snel naar het juiste jaar."
   ],
   "avoid": [
-    "Geboortedatums en datums ver weg: drie losse velden of alleen typen is sneller.",
-    "Datumbereiken: nog niet ondersteund."
+    "Datumbereiken: nog niet ondersteund.",
+    "Als typen genoeg is en de kalender niets toevoegt (bijvoorbeeld een bekende vaste datum)."
   ],
   "anatomy": [
     "Label, hint en foutmelding (zoals Input).",
     "Kalenderknop.",
     "Tekstveld dd-mm-jjjj.",
-    "Popover met Calendar: maandnavigatie, weekdagen, dagenraster."
+    "Popover met Calendar: links de view switch (maand jaar ▾), rechts de pijlen, daaronder weekdagen (één letter) en het dagenraster.",
+    "Year view en Month view: raster van 3 kolommen met Calendar cells."
   ],
   "figmaProps": [
     [
@@ -27,19 +29,24 @@
       ""
     ],
     [
+      "Calendar: View",
+      "Day, Month, Year",
+      "Pijlen alleen zichtbaar in Day."
+    ],
+    [
       "Calendar: Month",
       "tekst",
       "Bijvoorbeeld \"november 2026\"."
     ],
     [
       "Calendar day: State",
-      "Default, Hover, Focus, Selected, Today, Disabled, Outside",
-      "Outside = dag van de vorige of volgende maand."
+      "Default, Hover, Focus, Selected, Today, Disabled, Outside, Empty",
+      "Empty = plek van een dag buiten de maand (standaard). Outside alleen bij showDaysOutsideCurrentMonth."
     ],
     [
-      "Calendar day: Day",
-      "tekst",
-      ""
+      "Calendar cell: State",
+      "Default, Hover, Focus, Selected, Current, Disabled",
+      "Maand of jaar. Current = huidige maand of jaar (ring)."
     ]
   ],
   "reactProps": [
@@ -61,46 +68,89 @@
     [
       "min / max",
       "Date",
-      "Dagen erbuiten zijn uitgeschakeld in de kalender."
+      "Dagen, maanden en jaren erbuiten zijn uitgeschakeld."
     ],
     [
-      "calendarLabel",
-      "string",
-      "Standaard 'Kies een datum'."
+      "calendarProps",
+      "CalendarProps",
+      "Alles hieronder doorgeven aan de kalender in de popover."
     ],
     [
-      "Calendar: value, onChange, locale, weekStartsOn",
-      "",
-      "Ook los te gebruiken."
+      "Calendar: views",
+      "('day' | 'month' | 'year')[]",
+      "Standaard ['year', 'day'], zoals MUI. Volgorde = volgorde van kiezen."
+    ],
+    [
+      "Calendar: openTo",
+      "'day' | 'month' | 'year'",
+      "Startview. Standaard day."
+    ],
+    [
+      "Calendar: disablePast / disableFuture",
+      "boolean",
+      ""
+    ],
+    [
+      "Calendar: shouldDisableDate",
+      "(date: Date) => boolean",
+      "Bijvoorbeeld weekenden uitschakelen."
+    ],
+    [
+      "Calendar: showDaysOutsideCurrentMonth",
+      "boolean",
+      "Standaard uit: alleen dagen van de maand."
+    ],
+    [
+      "Calendar: fixedWeekNumber",
+      "number",
+      "Altijd zoveel weken tonen, bijvoorbeeld 6."
+    ],
+    [
+      "Calendar: yearsPerRow / yearsOrder",
+      "3 | 4 / 'asc' | 'desc'",
+      "Standaard 3 en asc. Gebruik desc voor geboortedatums."
+    ],
+    [
+      "Calendar: locale, weekStartsOn",
+      "string / 0 | 1",
+      "Standaard 'nl-NL' en maandag."
     ]
   ],
   "behaviour": [
     "Typen: de waarde wordt gecontroleerd bij het verlaten van het veld.",
-    "Kalender: pijltjes per dag en week, Home/End naar begin/eind van de week, PageUp/PageDown per maand (met Shift per jaar).",
-    "Enter of klik kiest de datum, sluit de kalender en zet de focus terug op de knop. Escape en klikken buiten sluiten ook."
+    "View switch: klik op \"maand jaar ▾\" om naar de jaarlijst te gaan. Een jaar kiezen gaat naar de volgende view (Month of Day). De lijst scrollt naar het gekozen jaar.",
+    "Day view: pijlen per dag en week, Home/End naar begin/eind van de week, PageUp/PageDown per maand (met Shift per jaar).",
+    "Month en Year view: pijltjes bewegen door het raster, Enter of klik kiest.",
+    "Enter of klik op een dag kiest de datum, sluit de kalender en zet de focus terug op de knop. Escape en klikken buiten sluiten ook.",
+    "De hoogte van de kalender blijft gelijk tussen de views, zodat de popover niet springt."
   ],
   "a11y": [
-    "Kalender is een grid met aria-labelledby naar de maandtitel; de maand wordt via aria-live gemeld.",
-    "Elke dag heeft een volledig label (\"donderdag 12 november 2026\"); vandaag heeft aria-current=\"date\".",
-    "Dagen buiten de maand gebruiken tertiaire tekst (4,5:1); alleen uitgeschakelde dagen zijn lichter."
+    "Dagenraster is een grid met aria-labelledby naar de maandtitel; de maand wordt via aria-live gemeld.",
+    "Weekdagen tonen één letter, maar de volledige naam staat erbij voor schermlezers.",
+    "Elke dag heeft een volledig label (\"donderdag 12 november 2026\"); vandaag heeft aria-current=\"date\" en een ring, niet alleen kleur.",
+    "Year en Month view zijn een radiogroup met aria-checked; de view switch heeft aria-expanded."
   ],
   "content": [
     "Noem het formaat in de hint of placeholder: dd-mm-jjjj.",
     "Foutmelding met voorbeeld: \"Vul een datum in als dd-mm-jjjj, bijvoorbeeld 01-01-2027.\""
   ],
   "do": [
-    "Laat typen altijd toe, ook als de kalender er is."
+    "Laat typen altijd toe, ook als de kalender er is.",
+    "Gebruik views year, month, day voor datums ver weg."
   ],
   "dont": [
-    "De kalender als enige invoermanier."
+    "De kalender als enige invoermanier.",
+    "Dagen buiten de maand tonen zonder fixedWeekNumber: de hoogte springt dan per maand."
   ],
   "tokens": [
     "--calendar-*",
     "--calendar-day-*",
+    "--calendar-cell-*",
     "verder --input-*"
   ],
   "related": [
-    "Input"
+    "Input",
+    "Combobox"
   ],
   "open": [
     "Datumbereik (van/tot) bestaat nog niet.",

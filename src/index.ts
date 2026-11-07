@@ -18,6 +18,7 @@ export * from './components/Content/Content';
 export * from './components/Display/Feedback';
 export * from './components/Form/SearchInput';
 export * from './components/Form/DatePicker';
+export * from './components/Form/Combobox';
 export * from './components/Selection/SelectionCard';
 export * from './components/Navigation/Stepper';
 export * from './components/Navigation/AppShell';

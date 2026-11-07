@@ -16,13 +16,13 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(import.meta.dirname, 'src/index.ts'),
+      entry: { index: resolve(import.meta.dirname, 'src/index.ts'), flags: resolve(import.meta.dirname, 'src/flags/index.ts') },
       formats: ['es'],
-      fileName: () => 'index.js',
+      fileName: (_format, name) => `${name}.js`,
       cssFileName: 'styles',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react'],
+      external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react', /^country-flag-icons/],
     },
     sourcemap: true,
     emptyOutDir: true,

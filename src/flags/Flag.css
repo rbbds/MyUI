@@ -1,0 +1,9 @@
+.rb-flag{position:relative;display:inline-flex;flex:none;overflow:hidden;border-radius:var(--flag-radius);aspect-ratio:3/2;vertical-align:middle}
+.rb-flag::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--flag-border)}
+.rb-flag svg,.rb-flag__placeholder{display:block;width:100%;height:100%}
+.rb-flag__placeholder{background:var(--flag-surface-placeholder)}
+.rb-flag--sm{width:var(--flag-sm-width)}
+.rb-flag--md{width:var(--flag-md-width)}
+.rb-flag--lg{width:var(--flag-lg-width)}
+.rb-flag--xl{width:var(--flag-xl-width)}
+.rb-control__icon .rb-flag svg{width:100%;height:100%}

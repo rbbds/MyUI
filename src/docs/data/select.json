@@ -33,9 +33,14 @@
       ""
     ],
     [
-      "Label, hint, error, icon",
+      "Label, hint, error",
       "via _Select",
       "Gelijk aan Input."
+    ],
+    [
+      "Icon leading / Leading icon",
+      "boolean / instance swap",
+      "Standaard uit. Zet aan en wissel naar een Icon of een Flag/XX voor een landkeuze."
     ]
   ],
   "reactProps": [
@@ -50,9 +55,14 @@
       "Eerste, niet-kiesbare optie."
     ],
     [
-      "label, hint, error, size, iconLeading",
+      "label, hint, error, size",
       "",
       "Gelijk aan Input."
+    ],
+    [
+      "iconLeading",
+      "ReactNode",
+      "Icoon of <Flag code={value} /> (uit @rbbds/ui/flags). Toont alleen het gekozen land: een native select kan geen plaatjes in de opties tonen."
     ]
   ],
   "behaviour": [

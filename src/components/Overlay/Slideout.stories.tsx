@@ -6,7 +6,7 @@ import { Select } from '../Form/Select';
 import { Slideout } from './Slideout';
 
 const meta: Meta<typeof Slideout> = {
-  title: 'Components/Feedback & overlays/Slideout',
+  title: 'Overlays/Slideout',
   component: Slideout,
   args: { title: 'Filters', description: 'Verfijn de resultaten in de lijst.', size: 'md', side: 'right' },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] }, side: { control: 'inline-radio', options: ['right', 'left'] } },

@@ -15,15 +15,52 @@ White label componentenbibliotheek en design tokens, gebouwd vanuit de Figma-fil
 
 ## Rebranden per project
 
-Overschrijf alleen de primitives in je eigen CSS, na de import van `@rbbds/ui/styles.css`:
+Alles wat merk is, staat in één laag: de collectie **brand/wl** in Figma, `--wl-*` in CSS. Alles wat structuur is, blijft gelijk: spacing, padding, maten, de font-size-schaal en breakpoints. Zo breken layouts en componenten niet als je van merk wisselt.
+
+### Kies een stijl
+
+MyUI heeft drie stijlen. Een stijl bepaalt de vorm: hoekafronding, randdikte en letterdikte.
+
+| Stijl | Vorm | Gebruik |
+| --- | --- | --- |
+| **Iris** (standaard) | Licht afgerond | Geen `data-brand` nodig |
+| **Forest** | Hoekig | `<html data-brand="forest">` |
+| **Berry** | Rond, zware titels, randen van 2 px | `<html data-brand="berry">` |
+
+Daarna pas je alleen nog kleur en lettertypen aan. Dat doe je het snelst met de **[Brand builder](?path=/story/brand-builder--builder)**: kies een stijl, vul je merkkleur, lettertypen en logo in, en download de CSS. De builder maakt van één kleur de hele schaal (25 t/m 950) en waarschuwt als het contrast te laag is.
+
+In Figma is elke stijl een **mode** van brand/wl. In code is elke stijl behalve Iris een blok `:root[data-brand="…"]` in `tokens.css`. Bekijk ze met de **Brand**-knop in de toolbar.
+
+| Wat | Figma (brand/wl) | CSS |
+| --- | --- | --- |
+| Merkkleur | `WL/color/brand/25` t/m `950` | `--wl-color-brand-*` |
+| Neutrale en statuskleuren | `WL/color/gray`, `success`, `warning`, `error`, `info` | `--wl-color-gray-*` enz. |
+| Lettertypen | `WL/fonts/body`, `WL/fonts/title` | `--wl-fonts-body`, `--wl-fonts-title` |
+| Letterdikte | `WL/font-weight/titles/*`, `paragraph/*` | `--wl-font-weight-*` |
+| Hoekafronding | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--wl-radius-*` |
+| Randdikte | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--wl-border-width-*` |
+
+De theme-laag (Light en Dark) verwijst naar deze variabelen en de component-tokens verwijzen naar de theme-laag. Voor een merk pas je dus nooit iets anders aan dan `--wl-*`.
+
+**Een merk toevoegen**
+
+1. Figma: voeg een mode toe aan brand/wl en vul de waarden in.
+2. Code: exporteer de tokens met `scripts/figma-export-tokens.js`. De mode komt als `:root[data-brand="naam"]` in `tokens.css`.
+3. Zet `data-brand="naam"` op `<html>`. In een project met maar één merk kan het ook zonder mode: overschrijf de `--wl-*` waarden op `:root` in je eigen CSS, na de import van `@rbbds/ui/styles.css`.
 
 ```css
 :root {
-  --wl-color-brand-500: #0ea5e9;
-  --wl-color-brand-600: #0284c7;
-  --wl-color-brand-700: #0369a1;
-  --wl-fonts-body: "Manrope", system-ui, sans-serif;
+  --wl-color-brand-600: #0284c7;   /* geef de hele schaal 25 t/m 950, dan klopt Dark ook */
+  --wl-fonts-title: "Fraunces", Georgia, serif;
+  --wl-radius-control-md: 0px;
+  --wl-border-width-control-default: 2px;
 }
 ```
 
-Alle semantische en component-tokens volgen automatisch.
+**Spelregels**
+
+- Pas nooit de primitive-schalen aan (`--radius-2`, `--font-weight-600`). `--radius-2` betekent 8px; als je die op 0 zet, klopt de naam niet meer en verandert alles wat 8px gebruikt. Verwijs in brand/wl naar een andere stap.
+- Zet `data-brand` en overrides op `<html>` (`:root`). De tokens worden daar berekend; op een dieper element werkt een override niet voor alle tokens.
+- Pas geen theme- of mapped tokens (`--color-*`, `--button-*` …) aan voor een merk. Een merk dat daar afwijkt is een fork.
+- Laad zelf de webfont die je in `--wl-fonts-*` zet.
+- Controleer na een nieuwe merkkleur het contrast: tekst op `brand-600` (Light) en `brand-400` (Dark) moet minimaal 4,5:1 halen.

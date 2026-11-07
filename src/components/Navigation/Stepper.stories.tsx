@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Stepper } from './Stepper';
 
 const steps = [
-  { title: 'Gegevens', description: 'Persoonsgegevens ingevuld', href: '#' },
+  { title: 'Navigation/Stepper', description: 'Persoonsgegevens ingevuld', href: '#' },
   { title: 'Situatie', description: 'Werk en inkomen', href: '#' },
   { title: 'Keuzes', description: 'Kies je bedrag' },
   { title: 'Controleren', description: 'Bekijk en verstuur' },

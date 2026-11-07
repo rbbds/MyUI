@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { SearchInput } from './SearchInput';
 
 const meta: Meta<typeof SearchInput> = {
-  title: 'Components/Form inputs/Search input',
+  title: 'Form inputs/Search input',
   component: SearchInput,
   args: { label: 'Zoeken in projecten', placeholder: 'Zoeken', shortcut: '⌘K', size: 'md' },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },

@@ -32,11 +32,14 @@
 .rb-card__description{color:var(--card-foreground-text);font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 
 .rb-accordion{border-top:1px solid var(--accordion-border)}
-.rb-accordion__item{border-bottom:1px solid var(--accordion-border)}
+.rb-accordion__item{border-bottom:1px solid var(--accordion-border);border-radius:var(--border-radius-control-sm);transition:background-color .15s ease}
+/* Hover and focus cover the whole item (title + open panel), like Figma. Only the title is the button. */
+.rb-accordion__item:has(.rb-accordion__trigger:hover){background:var(--accordion-surface-hover)}
+.rb-accordion__item:has(.rb-accordion__trigger:focus-visible){box-shadow:var(--focus-ring)}
+@media (prefers-reduced-motion:reduce){.rb-accordion__item{transition:none}}
 .rb-accordion__heading{margin:0}
-.rb-accordion__trigger{display:flex;align-items:flex-start;gap:var(--spacing-4);width:100%;padding:var(--accordion-padding-vertical) var(--spacing-4);border:0;background:transparent;color:var(--accordion-foreground-title);text-align:left;cursor:pointer;border-radius:var(--border-radius-control-sm);font-family:var(--text-body-paragraph-medium-font-family);font-size:var(--text-body-paragraph-medium-font-size);line-height:var(--text-body-paragraph-medium-line-height);font-weight:var(--text-body-paragraph-medium-font-weight)}
-.rb-accordion__trigger:hover{background:var(--accordion-surface-hover)}
-.rb-accordion__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-accordion__trigger{display:flex;align-items:flex-start;gap:var(--spacing-4);width:100%;padding:var(--accordion-padding-vertical) var(--spacing-4);border:0;background:transparent;color:var(--accordion-foreground-title);text-align:left;cursor:pointer;font-family:var(--text-body-paragraph-medium-font-family);font-size:var(--text-body-paragraph-medium-font-size);line-height:var(--text-body-paragraph-medium-line-height);font-weight:var(--text-body-paragraph-medium-font-weight)}
+.rb-accordion__trigger:focus-visible{outline:none}
 .rb-accordion__trigger span{flex:1}
 .rb-accordion__trigger svg{width:20px;height:20px;color:var(--accordion-foreground-icon);flex-shrink:0;margin-top:2px}
 .rb-accordion__panel{padding:0 var(--spacing-4) var(--accordion-padding-vertical);margin-top:calc(var(--accordion-gap) - var(--accordion-padding-vertical));color:var(--accordion-foreground-text);font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}

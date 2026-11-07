@@ -1,17 +1,31 @@
-.rb-calendar{display:inline-flex;flex-direction:column;gap:var(--calendar-gap);padding:var(--calendar-padding);border:1px solid var(--calendar-border);border-radius:var(--calendar-radius);background:var(--calendar-surface);box-shadow:var(--shadow-lg)}
-.rb-calendar__header{display:flex;align-items:center;gap:var(--spacing-2)}
-.rb-calendar__title{flex:1;margin:0;text-align:center;color:var(--calendar-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-calendar__title::first-letter{text-transform:lowercase}
+.rb-calendar{display:inline-flex;flex-direction:column;gap:var(--calendar-gap);width:var(--calendar-width);padding:var(--calendar-padding);border:1px solid var(--calendar-border);border-radius:var(--calendar-radius);background:var(--calendar-surface);box-shadow:var(--shadow-lg);box-sizing:content-box}
+.rb-calendar__header{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-2);min-height:40px;padding-inline-start:var(--spacing-2)}
+.rb-calendar__title,.rb-calendar__switch{color:var(--calendar-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-calendar__switch{display:inline-flex;align-items:center;gap:var(--spacing-1);height:32px;margin-inline-start:calc(var(--spacing-2) * -1);padding:0 var(--spacing-2);border:0;border-radius:var(--calendar-switch-radius);background:transparent;cursor:pointer}
+.rb-calendar__switch:hover{background:var(--calendar-day-surface-hover)}
+.rb-calendar__switch:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-calendar__switch-icon{width:20px;height:20px;color:var(--calendar-foreground-switch-icon);transition:transform .2s ease}
+.rb-calendar__switch-icon.is-open{transform:rotate(180deg)}
+.rb-calendar__arrows{display:flex;gap:var(--spacing-1)}
+.rb-calendar__body{height:var(--calendar-body-height);overflow:hidden}
+.rb-calendar--year .rb-calendar__body{overflow-y:auto;overscroll-behavior:contain}
 .rb-calendar__grid{border-collapse:collapse}
 .rb-calendar__grid th{width:40px;height:32px;padding:0;color:var(--calendar-foreground-weekday);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
-.rb-calendar__grid td{padding:0;text-align:center}
-.rb-calendar__day{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:0;border-radius:var(--calendar-day-radius);background:transparent;color:var(--calendar-day-foreground);cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
-.rb-calendar__day:hover{background:var(--calendar-day-surface-hover)}
-.rb-calendar__day:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-calendar__grid td{width:40px;height:40px;padding:0;text-align:center}
+.rb-calendar__day,.rb-calendar__cell{display:inline-flex;align-items:center;justify-content:center;padding:0;border:var(--calendar-day-border-width) solid transparent;background:transparent;color:var(--calendar-day-foreground);cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
+.rb-calendar__day{width:36px;height:36px;border-radius:var(--calendar-day-radius)}
+.rb-calendar__cell{height:36px;border-radius:var(--calendar-cell-radius)}
+.rb-calendar__day:hover,.rb-calendar__cell:hover{background:var(--calendar-day-surface-hover)}
+.rb-calendar__day:focus-visible,.rb-calendar__cell:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-calendar__day.is-outside{color:var(--calendar-day-foreground-outside)}
-.rb-calendar__day.is-today{background:var(--calendar-day-surface-today);color:var(--calendar-day-foreground-today);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-calendar__day.is-selected,.rb-calendar__day.is-selected:hover{background:var(--calendar-day-surface-selected);color:var(--calendar-day-foreground-selected);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-calendar__day:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed;text-decoration:line-through}
+.rb-calendar__day.is-today,.rb-calendar__cell.is-today{border-color:var(--calendar-day-border-today)}
+.rb-calendar__day.is-selected,.rb-calendar__day.is-selected:hover,.rb-calendar__cell.is-selected,.rb-calendar__cell.is-selected:hover{border-color:transparent;background:var(--calendar-day-surface-selected);color:var(--calendar-day-foreground-selected);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-calendar__day:disabled,.rb-calendar__cell:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed}
+.rb-calendar__cells{display:grid;align-content:start;gap:var(--spacing-2) var(--spacing-1);padding:var(--spacing-1)}
+.rb-calendar__cells--3{grid-template-columns:repeat(3,1fr)}
+.rb-calendar__cells--4{grid-template-columns:repeat(4,1fr)}
+.rb-calendar--month .rb-calendar__cells{padding-block:var(--spacing-4)}
+@media (prefers-reduced-motion:reduce){.rb-calendar__switch-icon{transition:none}}
 
 .rb-datepicker__anchor{position:relative}
 .rb-datepicker__popover{position:absolute;z-index:20;top:calc(100% + var(--spacing-2));left:0}

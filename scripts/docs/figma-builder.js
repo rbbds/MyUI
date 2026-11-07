@@ -172,7 +172,7 @@ for (const d of DOCS) {
   text(head, d.page.toUpperCase(), { font: F.semi, size: 12, color: C.brand || C.text3 });
   text(head, d.name, { font: F.bold, size: 40, color: C.text, lh: 120 });
   text(head, d.summary, { size: 18, color: C.text2 });
-  const meta = [`Figma: ${d.figma.base ? 'base ' + d.figma.base : 'geen base (structureel verschillende varianten)'}`, `React: <${d.react}>`, `Storybook: Documentatie / ${d.page} / ${d.name}`];
+  const meta = [`Figma: ${d.figma.base ? 'base ' + d.figma.base : 'geen base (structureel verschillende varianten)'}`, `React: <${d.react}>`, `Storybook: ${d.page} / ${d.name} / Docs`];
   text(head, meta.join('   ·   '), { font: F.mono, size: 12, color: C.text3 });
 
   const s1 = section(f, 'Wanneer gebruiken');

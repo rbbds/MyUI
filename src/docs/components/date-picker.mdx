@@ -4,7 +4,7 @@ import * as Stories from '../../components/Form/DatePicker.stories';
 import { ComponentDoc, DocHeader } from '../ComponentDoc';
 import doc from '../data/date-picker.json';
 
-<Meta title="Documentatie/Form inputs/Date picker" />
+<Meta of={Stories} name="Docs" />
 
 <DocHeader doc={doc} />
 
@@ -19,5 +19,13 @@ import doc from '../data/date-picker.json';
 <Canvas of={Stories.WithError} />
 
 <Canvas of={Stories.CalendarOnly} />
+
+<Canvas of={Stories.YearMonthDay} />
+
+<Canvas of={Stories.BirthDate} />
+
+<Canvas of={Stories.OutsideDays} />
+
+<Canvas of={Stories.DisablePastAndWeekends} />
 
 <ComponentDoc doc={doc} />
