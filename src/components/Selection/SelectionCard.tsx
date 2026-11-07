@@ -11,11 +11,13 @@ export interface SelectionCardProps extends Omit<InputHTMLAttributes<HTMLInputEl
   description?: ReactNode;
   /** Optional visual, usually a FeaturedIcon (size sm, color gray). */
   icon?: ReactNode;
+  /** Right-aligned extra, e.g. a price ("Gratis", "€ 4,95") or a payment logo. */
+  aside?: ReactNode;
 }
 
 /** Large clickable option. The whole card is the label of a native radio or checkbox. */
 export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(function SelectionCard(
-  { type = 'radio', title, description, icon, disabled, className, ...rest },
+  { type = 'radio', title, description, icon, aside, disabled, className, ...rest },
   ref,
 ) {
   const id = useId();
@@ -26,6 +28,7 @@ export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(fu
         <span id={`${id}-t`} className="rb-selection-card__title">{title}</span>
         {description && <span id={`${id}-d`} className="rb-selection-card__description">{description}</span>}
       </span>
+      {aside && <span className="rb-selection-card__aside">{aside}</span>}
       <span className={cx('rb-check', 'rb-check--sm', type === 'radio' && 'rb-check--radio', disabled && 'rb-check--disabled')}>
         <span className="rb-check__control">
           <input
