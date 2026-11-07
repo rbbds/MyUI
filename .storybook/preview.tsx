@@ -38,9 +38,12 @@ const preview: Preview = {
     (Story, context) => {
       const theme = context.globals.theme ?? 'light';
       document.documentElement.setAttribute('data-theme', theme);
-      const brand = context.globals.brand ?? 'iris';
-      if (brand === 'iris') document.documentElement.removeAttribute('data-brand');
-      else document.documentElement.setAttribute('data-brand', brand);
+      // The Brand builder sets data-brand and the brand colors itself; the toolbar must not interfere.
+      if (!context.parameters.brandControlledByStory) {
+        const brand = context.globals.brand ?? 'iris';
+        if (brand === 'iris') document.documentElement.removeAttribute('data-brand');
+        else document.documentElement.setAttribute('data-brand', brand);
+      }
       return (
         <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', fontFamily: 'var(--wl-fonts-body)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
           <Story />
