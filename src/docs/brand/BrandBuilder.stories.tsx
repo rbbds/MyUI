@@ -4,7 +4,9 @@ import { BrandBuilder } from './BrandBuilder';
 const meta: Meta<typeof BrandBuilder> = {
   title: 'Brand builder',
   component: BrandBuilder,
-  parameters: { layout: 'padded', controls: { disable: true } },
+  parameters: { layout: 'padded', controls: { disable: true }, brandControlledByStory: true },
+  // Stijl kies je in de builder zelf; de Brand-knop in de toolbar staat hier vast.
+  globals: { brand: 'iris' },
 };
 export default meta;
 
