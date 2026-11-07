@@ -7,7 +7,7 @@ export const SelectError = S.SelectError;
 
 /* Flag in the leading slot: same as Figma (Select › Icon leading on, Leading icon swapped to Flag/XX).
    A native select cannot show images inside the options, so only the chosen country shows a flag.
-   Need a flag per option or search? Use Country select. */
+   Need a flag per option or search? Use CountrySelect (Combobox). */
 import { useState } from 'react';
 import type { StoryObj } from '@storybook/react-vite';
 import { Select } from './Select';

@@ -5,26 +5,29 @@
     "node": "17011:1731",
     "base": "_Combobox option"
   },
-  "react": "Combobox",
-  "summary": "Select met zoeken en een visual per optie (vlag, avatar of icoon). Typen filtert de lijst, pijltjes en Enter kiezen. Basis voor Country select.",
+  "react": "Combobox, CountrySelect",
+  "summary": "Select met zoeken en een visual per optie (vlag, avatar of icoon). Typen filtert de lijst, pijltjes en Enter kiezen. Country select is de Combobox met vlaggen en alle landen als kant-en-klare preset.",
   "use": [
     "Lange lijsten waarin de gebruiker wil zoeken, zoals landen of organisaties.",
-    "Opties die een visual nodig hebben om sneller te herkennen."
+    "Opties die een visual nodig hebben om sneller te herkennen.",
+    "Landkeuze: gebruik CountrySelect (woonland, nationaliteit, land van een adres)."
   ],
   "avoid": [
-    "Korte lijsten zonder visual: gebruik Select (native), dat werkt beter op mobiel.",
-    "Vrije invoer die niet in de lijst staat: dit component accepteert alleen opties uit de lijst."
+    "Korte lijsten zonder visual: gebruik Select (native), dat werkt beter op mobiel. Ook een Select kan een vlag tonen bij het gekozen land.",
+    "Vrije invoer die niet in de lijst staat: dit component accepteert alleen opties uit de lijst.",
+    "Taalkeuze alleen met vlaggen: een vlag is een land, geen taal. Zet altijd de taalnaam erbij."
   ],
   "anatomy": [
     "Label, hint en foutmelding (zoals Input).",
     "Veld met de visual van de gekozen optie, tekst en chevron.",
-    "Listbox met optionele groepskoppen en opties (visual, label, vinkje bij de gekozen optie)."
+    "Listbox met optionele groepskoppen en opties (visual, label, vinkje bij de gekozen optie).",
+    "Bij Country select: Flag (3:2) als visual, groep Veelgekozen en Alle landen (alfabetisch)."
   ],
   "figmaProps": [
     [
       "Combobox: State",
       "Closed, Open",
-      ""
+      "Het voorbeeld in Figma is een Country select."
     ],
     [
       "Combobox option: State",
@@ -34,7 +37,12 @@
     [
       "_Combobox option: Label / Leading / Show leading / Selected",
       "tekst / instance swap / boolean / boolean",
-      "Leading wisselt naar een Flag, Avatar of Icon."
+      "Leading wisselt naar een Flag/XX, Avatar of Icon. Vlaggen staan als voorkeur in de swap."
+    ],
+    [
+      "Flag/XX (Icons-pagina, sectie Flags)",
+      "component per land",
+      "40 vlaggen: EU27, GB, US, CA, AU, CH, NO, IS, TR, MA, SR, CW, AW en EU. In code ruim 250."
     ]
   ],
   "reactProps": [
@@ -62,26 +70,44 @@
       "placeholder / emptyText / toggleLabel",
       "string",
       "Teksten zijn aan te passen voor andere talen."
+    ],
+    [
+      "CountrySelect: countries / preferred",
+      "string[]",
+      "ISO-codes. preferred komt bovenaan, bijvoorbeeld ['NL', 'BE', 'DE']."
+    ],
+    [
+      "CountrySelect: locale / preferredLabel / allLabel / hideFlags",
+      "string / string / string / boolean",
+      "Standaard 'nl-NL', Veelgekozen, Alle landen."
+    ],
+    [
+      "Flag: code, size, title",
+      "string / 'sm' | 'md' | 'lg' | 'xl' / string",
+      "Zonder title is de vlag decoratief. Import uit @rbbds/ui/flags."
     ]
   ],
   "behaviour": [
     "Klik of pijl omlaag opent de lijst; de gekozen optie is dan gemarkeerd.",
-    "Typen filtert op label en keywords, zonder accenten (belgie vindt België).",
+    "Typen filtert op label en keywords, zonder accenten (belgie vindt België). Country select zoekt ook op Engelse naam en ISO-code.",
     "Enter kiest, Escape sluit zonder te kiezen, Tab kiest de gemarkeerde optie als er gezocht is.",
     "Bij het sluiten zonder keuze komt de vorige waarde terug in het veld."
   ],
   "a11y": [
     "APG-patroon combobox met listbox popup: role combobox, aria-expanded, aria-controls en aria-activedescendant.",
     "Groepen zijn role group met een label; de visual is decoratief (aria-hidden), het label draagt de naam.",
-    "De chevronknop zit niet in de tabvolgorde; het veld zelf opent de lijst."
+    "De chevronknop zit niet in de tabvolgorde; het veld zelf opent de lijst.",
+    "Vlaggen hebben een rand van 1 px, zodat lichte vlaggen zichtbaar blijven op wit."
   ],
   "content": [
     "Placeholder als actie: \"Kies een land\".",
-    "Groepskoppen kort: \"Veelgekozen\", \"Alle landen\"."
+    "Groepskoppen kort: \"Veelgekozen\", \"Alle landen\".",
+    "Landnamen komen uit Intl; schrijf geen eigen namen."
   ],
   "do": [
     "Zet de meest gekozen opties bovenaan in een eigen groep.",
-    "Voeg keywords toe voor andere namen of codes."
+    "Voeg keywords toe voor andere namen of codes.",
+    "Importeer vlaggen uit @rbbds/ui/flags, zodat ze alleen geladen worden waar nodig."
   ],
   "dont": [
     "Een visual als enige onderscheid tussen opties.",
@@ -89,17 +115,18 @@
   ],
   "tokens": [
     "--combobox-*",
+    "--flag-*",
     "--menu-*",
     "--menu-item-*",
     "verder --input-*"
   ],
   "related": [
     "Select",
-    "Country select",
     "Command menu"
   ],
   "open": [
     "Meervoudige keuze (multi select met tags) bestaat nog niet.",
-    "Asynchroon laden van opties bestaat nog niet."
+    "Asynchroon laden van opties bestaat nog niet.",
+    "Telefoonnummer met landcode (vlag + prefix) bestaat nog niet."
   ]
 }
