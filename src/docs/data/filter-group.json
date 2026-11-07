@@ -1,0 +1,103 @@
+{
+  "name": "Filter group",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17037:1747",
+    "base": "_Filter group"
+  },
+  "react": "FilterGroup, RangeSlider",
+  "summary": "Inklapbare filtersectie met checkboxes (met aantallen) of eigen inhoud zoals een prijsbereik. Meerdere onder elkaar vormen het filterpaneel.",
+  "use": [
+    "Filterpaneel naast of boven een productoverzicht."
+  ],
+  "avoid": [
+    "Eén filter met twee opties: gebruik een Toggle."
+  ],
+  "anatomy": [
+    "Knop met titel, aantal gekozen en chevron.",
+    "Paneel met checkboxes en \"Toon alle n\", of Range slider."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "List, Range",
+      "Range gebruikt Slider Type=Range."
+    ],
+    [
+      "State",
+      "Open, Closed",
+      ""
+    ],
+    [
+      "Title",
+      "tekst",
+      ""
+    ],
+    [
+      "Show selected count, Show more",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "title",
+      "string",
+      ""
+    ],
+    [
+      "options",
+      "{ value, label, count?, disabled? }[]",
+      ""
+    ],
+    [
+      "value, onChange",
+      "string[]",
+      ""
+    ],
+    [
+      "limit",
+      "number",
+      "Standaard 6."
+    ],
+    [
+      "defaultOpen",
+      "boolean",
+      ""
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Standaard 3, onder een h2 \"Filters\"."
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Bijvoorbeeld <RangeSlider>."
+    ]
+  ],
+  "behaviour": [
+    "Filters werken direct; toon het nieuwe aantal resultaten (Active filters)."
+  ],
+  "a11y": [
+    "Knop met aria-expanded en kop; checkboxes in een fieldset.",
+    "RangeSlider: twee native schuifregelaars met eigen naam (\"Minimumprijs\", \"Maximumprijs\")."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [
+    "Filters die pas werken na een knop \"Toepassen\", zonder dat te zeggen."
+  ],
+  "tokens": [
+    "--filter-*",
+    "--slider-*"
+  ],
+  "related": [
+    "Active filters",
+    "Product grid",
+    "Slider"
+  ],
+  "open": [
+    "Filterpaneel als Slideout op mobiel (patroon, nog geen component)."
+  ]
+}

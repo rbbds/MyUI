@@ -1,0 +1,69 @@
+{
+  "name": "Product gallery",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17034:154",
+    "base": "_Product gallery"
+  },
+  "react": "ProductGallery",
+  "summary": "Hoofdafbeelding met pijlen, teller en miniaturen.",
+  "use": [
+    "Productpagina met meerdere foto's."
+  ],
+  "avoid": [
+    "Eén afbeelding: toon dan alleen een img."
+  ],
+  "anatomy": [
+    "Stage met afbeelding, vorige/volgende-knoppen en teller.",
+    "Miniaturen (_Gallery thumb: Default, Hover, Current, Focus)."
+  ],
+  "figmaProps": [
+    [
+      "Thumbnails",
+      "Below, None",
+      ""
+    ],
+    [
+      "Show thumbnails, Show arrows",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "images",
+      "{ src, alt, thumb? }[]",
+      "Elke afbeelding een eigen alt."
+    ],
+    [
+      "label",
+      "string",
+      "Productnaam; de sectie heet \"Afbeeldingen {label}\"."
+    ]
+  ],
+  "behaviour": [
+    "Pijlen en miniaturen wisselen de afbeelding; de lijst loopt rond.",
+    "Op de miniaturen werken pijl links/rechts, Home en End."
+  ],
+  "a11y": [
+    "De teller wordt gemeld (aria-live); de huidige miniatuur heeft aria-current.",
+    "Eén tabstop voor de rij miniaturen (roving tabindex)."
+  ],
+  "content": [
+    "Alt beschrijft wat je ziet: \"Trui, achterkant\"."
+  ],
+  "do": [],
+  "dont": [
+    "Automatisch wisselen."
+  ],
+  "tokens": [
+    "--gallery-*"
+  ],
+  "related": [
+    "Variant picker",
+    "Add to cart"
+  ],
+  "open": [
+    "Inzoomen en vegen op touch bestaan nog niet."
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "Cart item",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17035:182",
+    "base": "_Cart item"
+  },
+  "react": "CartItem",
+  "summary": "Productregel in winkelwagen, Mini cart en besteloverzicht. Prijs is stukprijs × aantal.",
+  "use": [
+    "Winkelwagenpagina (md), Mini cart (sm), checkout-overzicht (sm, read-only)."
+  ],
+  "avoid": [],
+  "anatomy": [
+    "Afbeelding.",
+    "Titel (link), gekozen opties.",
+    "Quantity stepper en verwijderknop (of \"Aantal: 2\" bij read-only).",
+    "Regelprijs."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "md, sm",
+      ""
+    ],
+    [
+      "Mode",
+      "Editable, Read-only",
+      ""
+    ],
+    [
+      "Title, Options, Quantity text",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "title, href, image",
+      "",
+      ""
+    ],
+    [
+      "options",
+      "string[]",
+      "\"Kleur: blauw\", \"Maat: M\"."
+    ],
+    [
+      "price, compareAt, quantity, maxQuantity",
+      "number",
+      ""
+    ],
+    [
+      "onQuantityChange, onRemove",
+      "",
+      ""
+    ],
+    [
+      "readOnly",
+      "boolean",
+      ""
+    ],
+    [
+      "size",
+      "'sm' | 'md'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Aantal wijzigen werkt direct; verwijderen ook. Toon na verwijderen eventueel een Toast met \"Ongedaan maken\"."
+  ],
+  "a11y": [
+    "Verwijderknop: \"Verwijder {titel}\". Aantal-veld: \"Aantal {titel}\"."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [
+    "Verwijderen zonder zichtbare bevestiging of herstelmogelijkheid."
+  ],
+  "tokens": [
+    "--cart-item-*"
+  ],
+  "related": [
+    "Cart summary",
+    "Mini cart"
+  ],
+  "open": []
+}

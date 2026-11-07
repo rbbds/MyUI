@@ -1,0 +1,71 @@
+{
+  "name": "Address fields",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17037:1227",
+    "base": "_Address fields"
+  },
+  "react": "AddressFields",
+  "summary": "Nederlands adres: eerst postcode, huisnummer en toevoeging, dan straat en plaats. Met autocomplete-attributen en postcodecontrole.",
+  "use": [
+    "Bezorg- en factuuradres."
+  ],
+  "avoid": [
+    "Buitenlandse adressen: die hebben een ander formaat."
+  ],
+  "anatomy": [
+    "Rij: Postcode, Huisnummer, Toevoeging.",
+    "Straat.",
+    "Plaats."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Empty, Filled, Error",
+      "Error: postcodefout."
+    ]
+  ],
+  "reactProps": [
+    [
+      "value, onChange",
+      "Partial<Address>",
+      "{ postcode, houseNumber, addition, street, city }"
+    ],
+    [
+      "section",
+      "'shipping' | 'billing'",
+      "Voor autocomplete."
+    ],
+    [
+      "errors",
+      "Partial<Record<keyof Address, string>>",
+      "Bijvoorbeeld van de server."
+    ]
+  ],
+  "behaviour": [
+    "Postcode wordt in hoofdletters gezet en gecontroleerd bij verlaten (1234 AB).",
+    "Straat en plaats kun je met een postcode-API vooraf invullen; dat zit niet in het component."
+  ],
+  "a11y": [
+    "Alle velden met zichtbaar label en autocomplete, zodat browsers en wachtwoordmanagers kunnen invullen."
+  ],
+  "content": [
+    "Foutmelding met voorbeeld: \"Vul een postcode in als 1234 AB.\""
+  ],
+  "do": [
+    "Vraag alleen wat nodig is."
+  ],
+  "dont": [
+    "Huisnummer en toevoeging in één veld."
+  ],
+  "tokens": [
+    "--input-*"
+  ],
+  "related": [
+    "Input",
+    "Checkout options"
+  ],
+  "open": [
+    "Opzoeken van straat en plaats via een postcode-API."
+  ]
+}

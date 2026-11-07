@@ -1,0 +1,83 @@
+{
+  "name": "Range slider",
+  "page": "Form inputs",
+  "figma": {
+    "node": "16961:214",
+    "base": "Slider (Type=Range)"
+  },
+  "react": "RangeSlider",
+  "summary": "Slider met twee bolletjes voor een bereik, zoals een prijs van-tot. In Figma is dit Slider Type=Range.",
+  "use": [
+    "Prijsbereik, bereik van afmetingen of datums."
+  ],
+  "avoid": [
+    "Precieze waarden: geef dan ook twee invoervelden."
+  ],
+  "anatomy": [
+    "Label.",
+    "Track met gevuld bereik.",
+    "Twee bolletjes.",
+    "Waarden onder de track."
+  ],
+  "figmaProps": [
+    [
+      "Slider: Type",
+      "Single, Range",
+      ""
+    ],
+    [
+      "State",
+      "Default, Focus, Disabled, Pressed",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "label, hideLabel, hint",
+      "",
+      ""
+    ],
+    [
+      "min, max, step",
+      "number",
+      ""
+    ],
+    [
+      "value / defaultValue",
+      "[number, number]",
+      ""
+    ],
+    [
+      "onChange",
+      "([lo, hi]) => void",
+      ""
+    ],
+    [
+      "formatValue",
+      "(v) => string",
+      "Bijvoorbeeld formatMoney."
+    ],
+    [
+      "minLabel, maxLabel",
+      "string",
+      "Namen van de bolletjes."
+    ]
+  ],
+  "behaviour": [
+    "De bolletjes kunnen elkaar niet passeren."
+  ],
+  "a11y": [
+    "Twee native range-inputs met eigen naam en aria-valuetext."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [],
+  "tokens": [
+    "--slider-*"
+  ],
+  "related": [
+    "Slider",
+    "Filter group"
+  ],
+  "open": []
+}

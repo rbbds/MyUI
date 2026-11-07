@@ -7,15 +7,19 @@ import { FIGMA_PAGES } from '../../docs/figma-pages.mjs';
 const tpl = readFileSync(new URL('./figma-builder.js', import.meta.url), 'utf8').split('\n').filter(l => !l.trim().startsWith('//')).join('\n');
 mkdirSync('docs/figma-payload', { recursive: true });
 const only = process.argv.slice(2);
-for (const d of docs) {
-  if (only.length && !only.includes(d.id)) continue;
+// Docs are grouped into scripts of at most ~45k characters (use_figma limit is 50k).
+const pick = docs.filter((d) => !only.length || only.includes(d.id)).map((d) => {
   const pageId = FIGMA_PAGES[d.name];
-  if (!pageId) { console.warn('No Figma page for', d.name); continue; }
+  if (!pageId) { console.warn('No Figma page for', d.name); return null; }
   const { id: _i, stories: _s, ...slim } = d;
-  const src = tpl.replace('__PAGE_ID__', pageId).replace('__DOCS__', JSON.stringify([slim]));
-  // wrap so esbuild accepts top-level await/return, then unwrap
+  return { ...slim, _page: pageId, _id: d.id };
+}).filter(Boolean);
+const build = (list) => {
+  const src = tpl.replace('__DOCS__', JSON.stringify(list.map(({ _id, ...x }) => x)));
   const min = transformSync(`async function __m(){${src}}`, { minify: true, loader: 'js', charset: 'utf8' }).code.trim();
-  const out = min.slice(min.indexOf('{') + 1, min.lastIndexOf('}'));
-  writeFileSync(`docs/figma-payload/${d.id}.js`, out);
-  console.log(`docs/figma-payload/${d.id}.js`, out.length);
-}
+  return min.slice(min.indexOf('{') + 1, min.lastIndexOf('}'));
+};
+let chunk = [], n = 1;
+const flush = () => { if (!chunk.length) return; const out = build(chunk); writeFileSync(`docs/figma-payload/part-${n}.js`, out); console.log(`part-${n}.js`, out.length, chunk.map((c) => c._id).join(',')); n++; chunk = []; };
+for (const d of pick) { if (chunk.length && build([...chunk, d]).length > 45000) flush(); chunk.push(d); }
+flush();

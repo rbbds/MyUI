@@ -1,11 +1,8 @@
 // Runs inside Figma (use_figma). Placeholders replaced by build-figma-payload.mjs:
-// __PAGE_ID__, __DOCS__ (array of doc objects for this page)
-const PAGE_ID = '__PAGE_ID__';
+// __DOCS__ (array of doc objects; each has _page = the Figma page id of that component)
 const DOCS = __DOCS__;
 const W = 640;
 
-const page = await figma.getNodeByIdAsync(PAGE_ID);
-await figma.setCurrentPageAsync(page);
 
 const fonts = await figma.listAvailableFontsAsync();
 const has = (f, s) => fonts.some((x) => x.fontName.family === f && x.fontName.style === s);
@@ -144,14 +141,14 @@ function doDont(parent, dos, donts) {
   card("Don't", donts, C.errBorder, C.errSurface, C.err);
 }
 
-// Placement: right of the existing component content, ignoring older docs/archive.
+// Placement per page: right of the existing component content, ignoring older docs/archive.
 const isDoc = (n) => n.name.startsWith('Docs / ') || n.name.startsWith('Archief');
-const content = page.children.filter((n) => !isDoc(n));
-const existing = page.children.filter((n) => n.name.startsWith('Docs / ')).map((n) => ({ node: n, name: n.name, x: n.x, width: n.width }));
-let startX = Math.max(Math.max(...content.map((n) => n.x + n.width)) + 200, ...existing.map((n) => n.x + n.width + 80));
-
 const created = [];
 for (const d of DOCS) {
+  const page = await figma.getNodeByIdAsync(d._page);
+  const content = page.children.filter((n) => !isDoc(n));
+  const existing = page.children.filter((n) => n.name.startsWith('Docs / ')).map((n) => ({ node: n, name: n.name, x: n.x, width: n.width }));
+  let startX = Math.max(content.length ? Math.max(...content.map((n) => n.x + n.width)) + 200 : 0, ...existing.map((n) => n.x + n.width + 80));
   const name = `Docs / ${d.name}`;
   const prev = existing.find((n) => n.name === name);
   const keepX = prev ? prev.x : null;
@@ -194,6 +191,6 @@ for (const d of DOCS) {
 
   if (keepX !== null) { f.x = keepX; } else { f.x = startX; startX += W + 80; }
   f.y = 0;
-  created.push({ id: f.id, name, h: Math.round(f.height) });
+  created.push({ id: f.id, page: page.name, h: Math.round(f.height) });
 }
-return { page: page.name, created };
+return { created };

@@ -1,0 +1,91 @@
+{
+  "name": "Rating",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17031:662",
+    "base": "_Rating"
+  },
+  "react": "Rating",
+  "summary": "Sterrenbeoordeling, alleen lezen, in halve sterren, met optioneel het getal en het aantal beoordelingen.",
+  "use": [
+    "Product cards en productpagina."
+  ],
+  "avoid": [
+    "Een beoordeling geven: daarvoor is een apart invoercomponent nodig."
+  ],
+  "anatomy": [
+    "5 sterren (_Rating star: Full, Half, Empty).",
+    "Waarde (optioneel).",
+    "Aantal beoordelingen (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Size",
+      "sm, md",
+      "16 of 20 px sterren."
+    ],
+    [
+      "Stars",
+      "1 t/m 5 in halve stappen",
+      ""
+    ],
+    [
+      "Value, Count",
+      "tekst",
+      ""
+    ],
+    [
+      "Show value, Show count",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "value",
+      "number",
+      "Wordt afgerond op halven."
+    ],
+    [
+      "max",
+      "number",
+      "Standaard 5."
+    ],
+    [
+      "count",
+      "number",
+      ""
+    ],
+    [
+      "showValue",
+      "boolean",
+      ""
+    ],
+    [
+      "size",
+      "'sm' | 'md'",
+      ""
+    ]
+  ],
+  "behaviour": [],
+  "a11y": [
+    "Eén naam voor het geheel: \"4,5 van 5 sterren, 128 beoordelingen\" (role=img).",
+    "Lege sterren hebben weinig contrast, maar de betekenis staat in de naam en de cijfers."
+  ],
+  "content": [],
+  "do": [
+    "Toon het aantal beoordelingen, zodat een 5 van 1 beoordeling niet misleidt."
+  ],
+  "dont": [
+    "Sterren zonder aantal op een productpagina."
+  ],
+  "tokens": [
+    "--rating-*"
+  ],
+  "related": [
+    "Product card"
+  ],
+  "open": [
+    "Interactieve rating (beoordeling geven) bestaat nog niet."
+  ]
+}

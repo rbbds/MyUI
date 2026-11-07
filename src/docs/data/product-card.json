@@ -1,0 +1,133 @@
+{
+  "name": "Product card",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17033:766",
+    "base": "_Product card"
+  },
+  "react": "ProductCard",
+  "summary": "Producttegel voor overzichten en carrousels: beeld, merk, titel, beoordeling, kleuren, prijs en optioneel een knop. De hele kaart is klikbaar via de titel.",
+  "use": [
+    "Productoverzichten, zoekresultaten, \"Ook interessant\"."
+  ],
+  "avoid": [
+    "Lange beschrijvingen: dat hoort op de productpagina.",
+    "Meer dan één primaire actie per kaart."
+  ],
+  "anatomy": [
+    "Media (vierkant) met badge links en verlanglijst rechts.",
+    "Merk of categorie (meta).",
+    "Titel (link naar de productpagina).",
+    "Rating (sm).",
+    "Kleurstippen (maximaal 4 plus \"+n\").",
+    "Prijs en eventueel voorraadstatus.",
+    "Optioneel: knop \"In winkelwagen\"."
+  ],
+  "figmaProps": [
+    [
+      "Layout",
+      "Vertical, Horizontal",
+      "Horizontal voor lijsten en zoekresultaten."
+    ],
+    [
+      "State",
+      "Default, Hover, Focus, Sold out",
+      "Sold out: knop uit, beeld gedimd, voorraadstatus zichtbaar."
+    ],
+    [
+      "Title, Meta",
+      "tekst",
+      ""
+    ],
+    [
+      "Show badge / wishlist / rating / swatches / stock / button",
+      "boolean",
+      "Beeld vervangen via een image fill op Media."
+    ]
+  ],
+  "reactProps": [
+    [
+      "title, href",
+      "string",
+      "Verplicht. De titel is de link."
+    ],
+    [
+      "image",
+      "{ src, alt? }",
+      "Alt leeg laten als het beeld niets toevoegt aan de titel."
+    ],
+    [
+      "meta, badge",
+      "ReactNode",
+      "Badge bijvoorbeeld <Badge color=\"error\">Sale</Badge>."
+    ],
+    [
+      "price, compareAt, currency",
+      "number, number, string",
+      "compareAt hoger dan price = sale."
+    ],
+    [
+      "rating, reviewCount",
+      "number",
+      ""
+    ],
+    [
+      "swatches",
+      "string[]",
+      "CSS-kleuren. Het aantal wordt voorgelezen, de stippen niet."
+    ],
+    [
+      "stock",
+      "'in-stock' | 'low' | 'out' | 'preorder'",
+      ""
+    ],
+    [
+      "wishlisted, onToggleWishlist",
+      "boolean, () => void",
+      "Knop met aria-pressed."
+    ],
+    [
+      "onAddToCart, addToCartLabel",
+      "() => void, string",
+      "Toont de knop."
+    ],
+    [
+      "layout",
+      "'vertical' | 'horizontal'",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Klik op de kaart opent de productpagina; de verlanglijst- en winkelwagenknop liggen erboven en werken los.",
+    "Bij hover schaduw en onderstreepte titel; bij toetsenbordfocus een focus ring om de hele kaart."
+  ],
+  "a11y": [
+    "Eén tabstop voor de kaart (de titel), plus de knoppen.",
+    "Verlanglijstknop met naam \"Bewaar {titel} in verlanglijst\" en aria-pressed.",
+    "Prijs: \"Oude prijs … Nu …\" voor schermlezers."
+  ],
+  "content": [
+    "Titel kort en beschrijvend, zonder merknaam als die al in meta staat."
+  ],
+  "do": [
+    "Gebruik dezelfde beeldverhouding voor alle producten in een overzicht."
+  ],
+  "dont": [
+    "Een tweede link in de kaart naast de titel.",
+    "Alleen kleur gebruiken om \"sale\" aan te geven: gebruik ook de badge."
+  ],
+  "tokens": [
+    "--product-card-*",
+    "--price-*",
+    "--rating-*"
+  ],
+  "related": [
+    "Product grid",
+    "Price",
+    "Rating",
+    "Stock indicator"
+  ],
+  "open": [
+    "Carrousel-component voor rijen met producten bestaat nog niet."
+  ]
+}

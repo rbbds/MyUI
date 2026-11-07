@@ -41,6 +41,11 @@
       "Title / Description / Show icon",
       "via _Selection card",
       ""
+    ],
+    [
+      "Aside / Show aside",
+      "via _Selection card",
+      "Prijs of logo rechts, bijvoorbeeld bij bezorgopties."
     ]
   ],
   "reactProps": [
@@ -63,6 +68,11 @@
       "icon",
       "ReactNode",
       "Meestal <FeaturedIcon size=\"sm\" color=\"gray\" />."
+    ],
+    [
+      "aside",
+      "ReactNode",
+      "Prijs (\"Gratis\", \"€ 2,95\") of logo rechts. Staat in het label, dus wordt voorgelezen."
     ],
     [
       "name / value / checked / onChange",

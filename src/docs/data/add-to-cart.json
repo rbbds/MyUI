@@ -1,0 +1,100 @@
+{
+  "name": "Add to cart",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17034:679",
+    "base": "_Add to cart"
+  },
+  "react": "AddToCart",
+  "summary": "Koopblok op de productpagina: voorraad, aantal, knop \"In winkelwagen\" en levertijd.",
+  "use": [
+    "Productpagina, onder de Variant picker."
+  ],
+  "avoid": [
+    "Product cards: daar is één kleine knop genoeg."
+  ],
+  "anatomy": [
+    "Stock indicator.",
+    "Quantity stepper, primaire knop (vult de ruimte), optioneel verlanglijst.",
+    "Levertijd met vrachtwagen-icoon."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Default, Low stock, Out of stock",
+      "Out of stock: aantal en knop uit, levertijd verborgen."
+    ],
+    [
+      "Delivery",
+      "tekst",
+      ""
+    ],
+    [
+      "Show wishlist, Show delivery",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "onAdd",
+      "(quantity: number) => void",
+      ""
+    ],
+    [
+      "stock, stockText",
+      "",
+      ""
+    ],
+    [
+      "delivery",
+      "ReactNode",
+      ""
+    ],
+    [
+      "maxQuantity",
+      "number",
+      "Standaard 10."
+    ],
+    [
+      "label, productName",
+      "string",
+      ""
+    ],
+    [
+      "aside",
+      "ReactNode",
+      "Bijvoorbeeld een verlanglijstknop."
+    ],
+    [
+      "loading",
+      "boolean",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Na toevoegen opent meestal de Mini cart (zie Voorbeelden)."
+  ],
+  "a11y": [
+    "Meld het toevoegen (Mini cart of een statusmelding), niet alleen visueel."
+  ],
+  "content": [
+    "Knop: \"In winkelwagen\". Uitverkocht: \"Uitverkocht\"."
+  ],
+  "do": [],
+  "dont": [
+    "Een uitgeschakelde knop zonder uitleg waarom."
+  ],
+  "tokens": [
+    "--stock-*",
+    "Button",
+    "Quantity stepper"
+  ],
+  "related": [
+    "Mini cart",
+    "Variant picker"
+  ],
+  "open": [
+    "\"Mail me als het weer leverbaar is\" bestaat nog niet."
+  ]
+}

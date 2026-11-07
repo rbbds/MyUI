@@ -1,0 +1,103 @@
+{
+  "name": "Variant picker",
+  "page": "E-commerce",
+  "figma": {
+    "node": "17034:465",
+    "base": "_Variant picker"
+  },
+  "react": "VariantPicker",
+  "summary": "Kleurstalen of maten kiezen. Niet-beschikbare opties blijven zichtbaar, doorgestreept en niet te kiezen.",
+  "use": [
+    "Kleur, maat of andere varianten op de productpagina."
+  ],
+  "avoid": [
+    "Meer dan ongeveer 12 opties: gebruik Select of Combobox."
+  ],
+  "anatomy": [
+    "Legend met gekozen waarde (bij kleur).",
+    "Optioneel een link rechts, zoals \"Maattabel\".",
+    "Opties: _Swatch of _Size chip.",
+    "Foutmelding."
+  ],
+  "figmaProps": [
+    [
+      "Type",
+      "Color, Size",
+      ""
+    ],
+    [
+      "State",
+      "Default, Error",
+      ""
+    ],
+    [
+      "Label, Current value, Error text",
+      "tekst",
+      ""
+    ],
+    [
+      "Show aside",
+      "boolean",
+      ""
+    ],
+    [
+      "_Swatch / _Size chip: State",
+      "Default, (Hover), Selected, Focus, Unavailable",
+      "Kleur van een staal via de fill van Color."
+    ]
+  ],
+  "reactProps": [
+    [
+      "label",
+      "string",
+      ""
+    ],
+    [
+      "type",
+      "'color' | 'size'",
+      ""
+    ],
+    [
+      "options",
+      "{ value, label, color?, unavailable? }[]",
+      ""
+    ],
+    [
+      "value / defaultValue, onChange",
+      "",
+      ""
+    ],
+    [
+      "aside",
+      "ReactNode",
+      ""
+    ],
+    [
+      "error",
+      "string",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Pijltjestoetsen verplaatsen de keuze (native radio)."
+  ],
+  "a11y": [
+    "Fieldset met legend; elke staal heeft een tekstnaam.",
+    "Niet beschikbaar wordt voorgelezen (\"…, niet beschikbaar\")."
+  ],
+  "content": [
+    "Kleurnamen zoals klanten ze zeggen: \"Roestrood\", niet \"#B5473A\"."
+  ],
+  "do": [],
+  "dont": [
+    "Uitverkochte maten verbergen: dan zoekt de klant tevergeefs."
+  ],
+  "tokens": [
+    "--variant-*"
+  ],
+  "related": [
+    "Add to cart",
+    "Selection card"
+  ],
+  "open": []
+}
