@@ -15,15 +15,49 @@ White label componentenbibliotheek en design tokens, gebouwd vanuit de Figma-fil
 
 ## Rebranden per project
 
-Overschrijf alleen de primitives in je eigen CSS, na de import van `@rbbds/ui/styles.css`:
+Alles wat merk is, pas je aan met variabelen. Alles wat structuur is, blijft gelijk: spacing, padding, maten, de font-size-schaal en breakpoints. Zo breken layouts en componenten niet als je van merk wisselt. Probeer het met de **Brand**-knop in de toolbar (twee demomerken).
+
+| Wat | Laag | Variabelen |
+| --- | --- | --- |
+| Merkkleur | primitive | `--wl-color-brand-25` t/m `-950` (12 stappen; Light gebruikt vooral 500 tot 700, Dark 300 tot 500) |
+| Neutrale kleuren | primitive | `--wl-color-gray-*` |
+| Statuskleuren | primitive | `--wl-color-success-*`, `-warning-*`, `-error-*`, `-info-*` |
+| Schaduwkleur | primitive | `--wl-color-alpha-shadow-*` |
+| Lettertypen | primitive | `--wl-fonts-body`, `--wl-fonts-title` |
+| Letterdikte | semantic | `--font-font-weight-titles-*`, `--font-font-weight-paragraph-*` |
+| Hoekafronding | semantic | `--border-radius-control-*` (knoppen, velden), `--border-radius-containers-*` (cards), `--border-radius-overlays-*` (menu, modal) |
+| Randdikte | semantic | `--border-width-control-*`, `--border-width-containers-*`, `--border-width-overlays-*` |
+
+Voorbeeld, in je eigen CSS na de import van `@rbbds/ui/styles.css`:
 
 ```css
 :root {
+  /* kleur: geef de hele schaal, dan klopt Dark mode ook */
+  --wl-color-brand-50: #f0f9ff;
   --wl-color-brand-500: #0ea5e9;
   --wl-color-brand-600: #0284c7;
   --wl-color-brand-700: #0369a1;
+  /* … overige stappen … */
+
+  /* typografie */
   --wl-fonts-body: "Manrope", system-ui, sans-serif;
+  --wl-fonts-title: "Fraunces", Georgia, serif;
+  --font-font-weight-titles-semibold: 700;
+
+  /* vorm */
+  --border-radius-control-sm: 0px;
+  --border-radius-control-md: 0px;
+  --border-radius-containers-md: 4px;
+  --border-width-control-default: 2px;
 }
 ```
 
 Alle semantische en component-tokens volgen automatisch.
+
+**Spelregels**
+
+- Pas hoekafronding en letterdikte aan op de semantische laag, niet in de primitive-schaal. `--radius-2` betekent 8px; als je die op 0 zet, klopt de naam niet meer en verandert alles wat 8px gebruikt.
+- Zet overrides op `:root` (of `html[data-brand="…"]`). De component-tokens worden op `:root` berekend; een override op een dieper element werkt daarom niet voor alle tokens.
+- Pas geen mapped tokens (`--button-*`, `--input-*` …) aan voor een merk. Dat zijn de afspraken met de componenten; een merk dat daar afwijkt is een fork.
+- Laad zelf de webfont die je in `--wl-fonts-*` zet.
+- Controleer na een nieuwe merkkleur het contrast: tekst op `brand-600` (Light) en `brand-400` (Dark) moet minimaal 4,5:1 halen.

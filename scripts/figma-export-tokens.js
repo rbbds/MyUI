@@ -9,7 +9,7 @@
  * - component-tokens/x/y  -> --x-y
  * - typography-tokens/x/y -> --text-x-y
  * - everything else       -> --name-with-dashes (slashes, commas and spaces become "-")
- * - Light theme on :root,[data-theme="light"]; Dark diffs on [data-theme="dark"]
+ * - Theme tokens equal in Light and Dark on :root (brand-overridable); Light-only values on :root,[data-theme="light"]; Dark diffs on [data-theme="dark"]
  * - Mapped tokens on :root,[data-theme] so they re-resolve inside themed subtrees
  * - Screen-size modes become max-width media queries (1535 / 1199 / 899 / 599)
  */
@@ -32,7 +32,11 @@ const out = ['/* @rbbds/ui tokens. Generated from Figma. Do not edit by hand. */
 for (const n of ['↳ brand/wl', '∙ spacing', '∙ border', '∙ typography', '↳ screen-size-(alias)']) for (const v of inCol(n)) out.push(line(v, C[n].modes[0].modeId));
 out.push('}');
 const th = C['↳ theme-(alias)']; const [L, D] = th.modes;
-out.push(':root,[data-theme="light"]{color-scheme:light;'); for (const v of inCol(th.name)) out.push(line(v, L.modeId)); out.push('}');
+const same = (v) => JSON.stringify(v.valuesByMode[L.modeId]) === JSON.stringify(v.valuesByMode[D.modeId]);
+// Theme tokens that are equal in Light and Dark (radius, border width, font weight, spacing…) live on plain :root,
+// so a brand can override them on :root without [data-theme] subtrees resetting them.
+out.push(':root{'); for (const v of inCol(th.name)) if (same(v)) out.push(line(v, L.modeId)); out.push('}');
+out.push(':root,[data-theme="light"]{color-scheme:light;'); for (const v of inCol(th.name)) if (!same(v)) out.push(line(v, L.modeId)); out.push('}');
 out.push('[data-theme="dark"]{color-scheme:dark;'); for (const v of inCol(th.name)) if (JSON.stringify(v.valuesByMode[L.modeId]) !== JSON.stringify(v.valuesByMode[D.modeId])) out.push(line(v, D.modeId)); out.push('}');
 out.push(':root,[data-theme]{'); for (const v of inCol('↳ mapped')) out.push(line(v, C['↳ mapped'].modes[0].modeId)); out.push('}');
 const ss = C['↳ screen-size-(alias)']; const bps = [1535, 1199, 899, 599];

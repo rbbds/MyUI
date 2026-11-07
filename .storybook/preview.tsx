@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import '@fontsource-variable/inter';
 import '../src/styles/index.css';
+import './brands.css';
 
 const preview: Preview = {
   globalTypes: {
@@ -16,12 +17,28 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    brand: {
+      description: 'Demo brand (only rebranding variables are overridden)',
+      toolbar: {
+        title: 'Brand',
+        icon: 'paintbrush',
+        items: [
+          { value: 'wl', title: 'White label' },
+          { value: 'forest', title: 'Demo: Forest (hoekig, serif)' },
+          { value: 'berry', title: 'Demo: Berry (rond, zwaar)' },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
-  initialGlobals: { theme: 'light' },
+  initialGlobals: { theme: 'light', brand: 'wl' },
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme ?? 'light';
       document.documentElement.setAttribute('data-theme', theme);
+      const brand = context.globals.brand ?? 'wl';
+      if (brand === 'wl') document.documentElement.removeAttribute('data-brand');
+      else document.documentElement.setAttribute('data-brand', brand);
       return (
         <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
           <Story />

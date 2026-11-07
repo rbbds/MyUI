@@ -1,0 +1,30 @@
+/* Demo brands for the Storybook "Brand" toolbar. They only override the variables
+   that are meant for rebranding (see Introductie › Rebranden per project).
+   Set on <html> (= :root), so every semantic and mapped token picks them up. */
+
+/* Demo "Forest": green, square corners, serif titles */
+html[data-brand="forest"] {
+  --wl-color-brand-25: #f6fbf8; --wl-color-brand-50: #ecf7f0; --wl-color-brand-100: #d3eedd;
+  --wl-color-brand-200: #a9dcbd; --wl-color-brand-300: #74c394; --wl-color-brand-400: #43a76d;
+  --wl-color-brand-500: #238a52; --wl-color-brand-600: #176f42; --wl-color-brand-700: #135a37;
+  --wl-color-brand-800: #11482d; --wl-color-brand-900: #0e3b26; --wl-color-brand-950: #062114;
+  --wl-fonts-title: Georgia, "Times New Roman", serif;
+  --border-radius-control-xxs: 0px; --border-radius-control-xs: 0px; --border-radius-control-sm: 0px;
+  --border-radius-control-md: 0px; --border-radius-control-lg: 0px;
+  --border-radius-containers-xxs: 0px; --border-radius-containers-xs: 0px; --border-radius-containers-sm: 0px;
+  --border-radius-containers-md: 0px; --border-radius-containers-lg: 0px;
+  --border-radius-overlays-xs: 0px; --border-radius-overlays-sm: 0px; --border-radius-overlays-md: 0px; --border-radius-overlays-lg: 0px;
+}
+
+/* Demo "Berry": pink, extra round controls, heavier titles, thicker control borders */
+html[data-brand="berry"] {
+  --wl-color-brand-25: #fff6fb; --wl-color-brand-50: #ffedf6; --wl-color-brand-100: #ffd6ea;
+  --wl-color-brand-200: #ffb0d6; --wl-color-brand-300: #fb7fba; --wl-color-brand-400: #f2519c;
+  --wl-color-brand-500: #e0307f; --wl-color-brand-600: #c21d67; --wl-color-brand-700: #a01754;
+  --wl-color-brand-800: #831747; --wl-color-brand-900: #6d173d; --wl-color-brand-950: #42061f;
+  --border-radius-control-sm: 9999px; --border-radius-control-md: 9999px; --border-radius-control-lg: 9999px;
+  --border-radius-containers-sm: 16px; --border-radius-containers-md: 20px; --border-radius-containers-lg: 24px;
+  --border-radius-overlays-sm: 16px; --border-radius-overlays-md: 20px; --border-radius-overlays-lg: 24px;
+  --font-font-weight-titles-semibold: 800; --font-font-weight-titles-bold: 800;
+  --border-width-control-default: 2px;
+}
