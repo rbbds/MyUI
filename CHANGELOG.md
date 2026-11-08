@@ -11,6 +11,13 @@
 - Storybook-categorie E-commerce met voorbeeldpagina's: productoverzicht, productpagina, winkelwagen en checkout.
 - Figma: alle componenten op een eigen pagina onder ---- E-commerce ----, met Docs-frames.
 
+### Opgelost
+- Brand builder: de Brand-knop in de Storybook-toolbar staat op die pagina vast. Eerder wisselde alleen de vorm en bleven de kleuren van de builder staan.
+
+### Documentatie
+- `docs/PROJECT.md`: projectoverzicht met architectuur, conventies en open punten.
+- README: componentenlijst en rebranding (stijlen en Brand builder) bijgewerkt.
+
 ### Tokens
 - 74 nieuwe component-tokens: `--product-card-*`, `--product-grid-*`, `--price-*`, `--rating-*`, `--qty-*`, `--stock-*`, `--gallery-*`, `--variant-*`, `--cart-item-*`, `--cart-summary-*`, `--cart-button-*`, `--filter-*`.
 

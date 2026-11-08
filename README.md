@@ -52,7 +52,11 @@ Set `data-theme="dark"` on `<html>` (or on any element for a dark section). With
 
 ### Rebranding per project
 
-Override only the primitives after importing the styles. Semantic and component tokens follow automatically.
+1. Kies een stijl. Die bepaalt de vorm (hoeken, randen, letterdikte):
+   - **Iris** (standaard, licht afgerond): geen attribuut nodig.
+   - **Forest** (hoekig): `<html data-brand="forest">`.
+   - **Berry** (rond): `<html data-brand="berry">`.
+2. Zet je eigen kleuren en fonts. Gebruik de **Brand builder** in Storybook: die berekent de kleurschaal, checkt contrast en geeft de CSS.
 
 ```css
 :root {
@@ -62,6 +66,10 @@ Override only the primitives after importing the styles. Semantic and component 
   --wl-fonts-body: "Manrope", system-ui, sans-serif;
 }
 ```
+
+Alles wat een merk mag aanpassen begint met `--wl-`: kleuren, fonts, radius, randdikte en letterdikte. Spacing en maten blijven gelijk.
+
+Meer context (architectuur, conventies, open punten): [docs/PROJECT.md](docs/PROJECT.md).
 
 ## Token architecture
 
@@ -87,12 +95,14 @@ The CSS names match the **WEB code syntax** on each Figma variable, so Dev Mode 
 | Group | Components |
 |---|---|
 | Buttons | `Button`, `ButtonIcon`, `ButtonGroup` |
-| Form inputs | `Input`, `Select`, `Textarea`, `Slider`, `Field` |
-| Selection | `Checkbox`, `Radio`, `RadioGroup`, `Toggle` |
-| Display | `Badge`, `Tag`, `Avatar`, `AvatarGroup`, `Divider`, `FeaturedIcon`, `Spinner`, `ProgressBar`, `Tooltip` |
-| Feedback and overlays | `Alert`, `Toast`, `ToastRegion`, `Modal`, `DropdownMenu` |
-| Navigation | `Tabs`, `Breadcrumbs`, `Pagination`, `NavItem` |
+| Form inputs | `Input`, `Select`, `Textarea`, `Slider`, `RangeSlider`, `SearchInput`, `DatePicker`, `Calendar`, `Combobox`, `Field` |
+| Selection | `Checkbox`, `Radio`, `RadioGroup`, `Toggle`, `SelectionCard`, `SelectionCardGroup` |
+| Display | `Badge`, `Tag`, `Avatar`, `AvatarGroup`, `Divider`, `FeaturedIcon`, `Spinner`, `Skeleton`, `Kbd`, `ProgressBar`, `Tooltip` |
+| Feedback and overlays | `Alert`, `Toast`, `ToastRegion`, `Modal`, `Slideout`, `DropdownMenu`, `CommandMenu` |
+| Navigation | `Header`, `Sidebar`, `SidebarUser`, `Tabs`, `Breadcrumbs`, `Pagination`, `NavItem`, `Stepper` |
 | Content | `Card`, `Accordion`, `EmptyState`, `FileUpload`, `FileUploadItem`, `TableCard`, `Table`, `TableHeader`, `PersonCell` |
+| E-commerce | `ProductCard`, `ProductGrid`, `Price`, `Rating`, `QuantityStepper`, `StockIndicator`, `ProductGallery`, `VariantPicker`, `AddToCart`, `CartItem`, `CartSummary`, `PromoCode`, `CartButton`, `MiniCart`, `AddressFields`, `FilterGroup`, `ActiveFilters` |
+| Flags (`@rbbds/ui/flags`) | `Flag`, `CountrySelect` |
 
 ## Development
 
