@@ -12,6 +12,7 @@
 - Figma: alle componenten op een eigen pagina onder ---- E-commerce ----, met Docs-frames.
 
 ### Opgelost
+- QuantityStepper: rekte op tot de volle breedte in een flex-kolom (zoals de Storybook-voorbeelden). Hij is nu altijd zo breed als de inhoud, zoals in Figma.
 - Brand builder: de Brand-knop in de Storybook-toolbar staat op die pagina vast. Eerder wisselde alleen de vorm en bleven de kleuren van de builder staan.
 
 ### Documentatie

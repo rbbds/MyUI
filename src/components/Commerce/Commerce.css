@@ -22,7 +22,7 @@
 .rb-rating__value{color:var(--rating-foreground-value);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 
 /* ---------- Quantity stepper ---------- */
-.rb-qty{display:inline-flex;align-items:stretch;border:var(--border-width-control-default) solid var(--qty-border);border-radius:var(--qty-radius);background:var(--qty-surface);overflow:hidden}
+.rb-qty{display:inline-flex;width:fit-content;align-items:stretch;border:var(--border-width-control-default) solid var(--qty-border);border-radius:var(--qty-radius);background:var(--qty-surface);overflow:hidden}
 .rb-qty--md{height:44px}.rb-qty--sm{height:36px}
 .rb-qty:focus-within{box-shadow:var(--focus-ring)}
 .rb-qty__btn{display:inline-flex;align-items:center;justify-content:center;width:var(--_w);padding:0;border:0;background:transparent;color:var(--qty-foreground-icon);cursor:pointer}
