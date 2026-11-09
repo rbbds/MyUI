@@ -123,23 +123,31 @@ scripts/
   docs/figma-builder.js        bouwt de Docs-frames in Figma
 ```
 
-### Tokenarchitectuur
+### Token architecture
 
-| Laag | Figma | CSS |
+Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
+
+| Layer | Figma collection | CSS |
 | --- | --- | --- |
-| 1. Primitives | ruwe waarden | `:root` |
-| 2. Brand | collectie `brand/wl`, modes Iris, Forest, Berry | `--wl-*`; Forest en Berry in `:root[data-brand="forest"\|"berry"]` |
-| 3. Theme (alias) | modes Light, Dark | gelijk in beide thema's op `:root`; Light op `:root,[data-theme="light"]`; Dark-verschillen op `[data-theme="dark"]` |
-| 4. Mapped | `component-tokens/*` | `--component-onderdeel` (bv. `component-tokens/x/y` wordt `--x-y`) |
+| 1. Primitives | `∙ color`, `∙ spacing`, `∙ border`, `∙ typography`, ... (no modes) | `:root` |
+| 2. Brand | `↳ brand`, modes Iris, Forest, Berry | `--brand-*`; Forest and Berry on `:root[data-brand="forest"\|"berry"]` |
+| 3. Alias | `↳ theme` (Light, Dark: colors), `↳ style` (spacing, radius, border, font, icon size), `↳ screen-size`, `↳ size` (md, sm, lg, xs) | theme on `[data-theme]`, size on `[data-size]` |
+| 4. Mapped | `↳ mapped`: `component-tokens/*`, `typography-tokens/*`, `base-tokens/*`, `effect-tokens/*` | `--x-y`, `--text-*`, `--base-*`, `--effect-*` |
 
-**Wat een merk mag aanpassen (alles in brand/wl):**
-- `WL/color/*` (brandkleur, 12-staps schaal)
-- `WL/fonts/body`, `WL/fonts/title`
-- `WL/radius/control|containers|overlays/*`
-- `WL/border-width/*/default|strong`
-- `WL/font-weight/titles|paragraph/*`
+**Rules**
+- Components and frames only use mapped tokens. Never alias or primitives.
+- Mapped always points to an alias. Alias points to brand or primitives. Brand points to primitives.
+- Designers only edit the brand layer: primary and accent color, fonts, font weights, radius, border width.
+- Spacing is the same for all brands.
+- Only mapped is published. The other collections are hidden and have no scopes.
 
-Spacing en maten blijven gelijk voor alle merken. De theme-laag verwijst naar brand/wl.
+**What a brand can change (all in `↳ brand`):**
+- `brand/color/primary/*` and `brand/color/accent/*` (12-step scales)
+- `brand/font/body`, `brand/font/title`, `brand/font-weight/*`
+- `brand/radius/control|containers|overlays/*`
+- `brand/border-width/*`
+
+Breaking in 0.3.0: `--wl-*` is now `--brand-*` (`--wl-color-brand-*` is `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`). A compat block keeps the old names until 0.4.0.
 
 **Stijlen (presets):**
 - **Iris:** standaard, licht afgerond, indigo.
@@ -172,7 +180,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Op een pagina: links de sectie "Base components", midden de component sets, rechts het frame `Docs / <naam>`.
 - Wrapper-varianten: elke variant is een COMPONENT met verticale auto layout om een instance van `_X (base)` (exposed instance).
 - Tekst gekoppeld aan `typography-tokens/<groep>/<stijl>/{font-family,font-size,line-height,font-weight}`.
-- Iconen: Lucide-vectoren met naam "Icon", fill gekoppeld aan de icon-kleurvariabele.
+- Icons: one component set `Icon` (page Icons) with all Lucide icons as variants (property Icon). Width and height are bound to `component-tokens/icon/size`. Change the size with the `↳ size` mode on the parent frame (md 20, sm 16, lg 24, xs 12), not with scaling. Fill color is set on the instance and stays after a swap.
+- Build rules: only the component's own tokens (for example `sidebar/*`), never alias or primitives. No spacer frames or thin lines to fake space: use auto layout with SPACE_BETWEEN or gap. `control` radius only for single-line elements (Input, Select); Textarea and cards use their own radius token.
 - Responsive varianten: componenten met een property Breakpoint (Desktop, Mobile) hebben een string-variabele `breakpoint/<component>` in de collectie screen-size-(alias). Xs geeft Mobile, de rest Desktop. Koppel de property via Apply variable; dan wisselt de variant mee met de schermmaat-mode van het frame. Alleen voor Figma, niet in tokens.css.
 
 **Valkuilen bij bouwen via de Figma-API**
@@ -237,6 +246,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #7 | Dashboard- en portaalcomponenten, Table met kolommen-slot |
 | #8 | Portaal ronde 2 (prio 2 en 3) en breakpoint-variabelen |
 | #9 | Logo en cover in Storybook, Foundations in Figma bijgewerkt |
+| #10 | Token architecture 0.3.0 (brand, alias, mapped), Icon set, collapsible and two-level Sidebar, Berry radius fixes |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -259,7 +269,9 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 - Table: gestapelde mobiele weergave; variant Empty splitsen in "geen data" en "geen resultaten".
 
 **Tokens en Figma**
-- Ongeveer 1.613 directe koppelingen aan theme-variabelen omzetten naar mapped tokens (rebind-PR), plus effects en focus ring als mapped tokens.
+- `↳ icon-context` (603 icon fills) still breaks the layer rules. Decision Robert: split it or replace it by mapped foreground tokens.
+- Keep icon size xs (12) or not.
+- Test what a Starter plan user can do with a copy of the file.
 - Voorstel voor `on-warning` in Dark.
 - 43 oudere Docs-frames opnieuw genereren, zodat het Storybook-pad "Categorie / Component / Docs" klopt.
 - Brand builder: bij de standaardkleur precies de Forest- en Berry-tokens gebruiken (nu een iets andere tint).

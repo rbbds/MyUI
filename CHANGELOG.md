@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 0.3.0
+
+### Breaking: new token architecture
+- Four layers: primitives, brand, alias (theme, style, screen-size, size), mapped. Components only use mapped tokens. See `docs/TOKEN-ARCHITECTURE.md`.
+- `--wl-*` is renamed to `--brand-*`: `--wl-color-brand-*` is now `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`, `--wl-radius-*` is `--brand-radius-*`. The old names still work until 0.4.0.
+- New accent color per brand: `--brand-color-accent-*` (Iris teal, Forest orange, Berry violet).
+- New tokens: `--base-*` (page frames), `--effect-*`, `--size-icon` with `[data-size="sm|lg|xs"]`.
+- Figma: every binding goes through mapped (8,817 rebinds). One `Icon` component set with all icons as variants; icon size via the `↳ size` mode.
+
+### New
+- **Sidebar**: `collapsed` and `onCollapsedChange` with a collapse button (`aria-expanded`). Collapsed shows icons, a dot for counts and a tooltip on hover and focus. Focus stays on the button after a toggle.
+- **DualSidebar**: two-level sidebar with a rail of sections and a panel with the pages of one section.
+- **NavItem**: compact mode inside a collapsed sidebar, new prop `countLabel`.
+- Brand builder in English, with an accent color and its contrast check.
+
+### Fixed
+- Berry: Textarea, checklist item and accordion item no longer get the full (pill) radius.
+- Button and Featured icon: icon size follows the component size through tokens.
+- Sidebar stories are no longer cut off at the top.
+
 ### Nieuw: logo en cover
 - Storybook toont het MyUI-logo (met tagline "Eyes on every detail") in de zijbalk en als favicon.
 - De Introductie-pagina opent met een cover, hetzelfde ontwerp als de Cover-pagina in Figma: tagline "One system, many faces.", echte componenten en chips die de stijl wisselen. De cover volgt de Theme- en Brand-knop.

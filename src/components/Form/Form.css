@@ -35,7 +35,7 @@
 .rb-control__chevron svg{width:20px;height:20px}
 .rb-control__select:has(option[value=""]:checked){color:var(--input-foreground-placeholder)}
 
-.rb-control--textarea{align-items:stretch;padding:0}
+.rb-control--textarea{align-items:stretch;padding:0;border-radius:var(--textarea-radius)}
 .rb-control__textarea{min-height:var(--textarea-height);resize:vertical;padding:var(--input-md-padding-vertical) var(--input-md-padding-horizontal)}
 
 .rb-slider{display:flex;flex-direction:column;gap:var(--spacing-2);width:100%}

@@ -1,10 +1,10 @@
 import { Children, useId, useState, type HTMLAttributes, type ReactNode } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, PanelLeft } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { ButtonIcon } from '../Button/Button';
 import { Divider } from '../Display/Display';
 import { Slideout } from '../Overlay/Slideout';
-import { NavItem } from './Navigation';
+import { NavCompactContext, NavItem } from './Navigation';
 import './AppShell.css';
 
 /* ---------- Header ---------- */
@@ -68,16 +68,27 @@ export function Header({ logo, links = [], actions, navLabel = 'Hoofdmenu', menu
 /* ---------- Sidebar ---------- */
 export interface SidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
   logo: ReactNode;
+  /** Logo when collapsed, usually the logo mark only. Default: logo. */
+  logoCollapsed?: ReactNode;
   /** Usually a SearchInput (size sm). */
   search?: ReactNode;
+  /** Search when collapsed, usually a ButtonIcon that opens the CommandMenu. */
+  searchCollapsed?: ReactNode;
   /** Main navigation: NavItem elements. Each is wrapped in a list item. */
   children: ReactNode;
   /** Secondary navigation at the bottom: NavItem elements. */
   footer?: ReactNode;
   /** Usually SidebarUser. */
   user?: ReactNode;
+  /** User when collapsed, usually the Avatar only. */
+  userCollapsed?: ReactNode;
   navLabel?: string;
   footerLabel?: string;
+  /** Show only icons. Use with onCollapsedChange to show the collapse button. */
+  collapsed?: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
+  collapseLabel?: string;
+  expandLabel?: string;
 }
 
 const asList = (nodes: ReactNode) => (
@@ -86,28 +97,89 @@ const asList = (nodes: ReactNode) => (
   </ul>
 );
 
-/** App sidebar: logo, search, main navigation, footer navigation and user. */
-export function Sidebar({ logo, search, children, footer, user, navLabel = 'Hoofdmenu', footerLabel = 'Overig', className, ...rest }: SidebarProps) {
+/** App sidebar: logo, search, main navigation, footer navigation and user. Can collapse to icons only. */
+export function Sidebar({ logo, logoCollapsed, search, searchCollapsed, children, footer, user, userCollapsed, navLabel = 'Main menu', footerLabel = 'More', collapsed = false, onCollapsedChange, collapseLabel = 'Collapse sidebar', expandLabel = 'Expand sidebar', className, ...rest }: SidebarProps) {
+  const navId = useId();
+  const toggle = onCollapsedChange && (
+    <ButtonIcon hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={collapsed ? expandLabel : collapseLabel} aria-expanded={!collapsed} aria-controls={navId} onClick={() => onCollapsedChange(!collapsed)} className="rb-sidebar__toggle" />
+  );
   return (
-    <aside className={cx('rb-sidebar', className)} {...rest}>
-      <div className="rb-sidebar__top">
-        <div className="rb-sidebar__logo">{logo}</div>
-        {search}
-        <nav aria-label={navLabel}>{asList(children)}</nav>
-      </div>
-      {(footer || user) && (
-        <div className="rb-sidebar__bottom">
-          {footer && <nav aria-label={footerLabel}>{asList(footer)}</nav>}
-          {user && <Divider />}
-          {user}
+    <NavCompactContext.Provider value={collapsed}>
+      <aside id={navId} className={cx('rb-sidebar', collapsed && 'rb-sidebar--collapsed', className)} {...rest}>
+        <div className="rb-sidebar__top">
+          <div className="rb-sidebar__logo">{collapsed ? (logoCollapsed ?? logo) : logo}{toggle}</div>
+          {collapsed ? searchCollapsed : search}
+          <nav aria-label={navLabel}>{asList(children)}</nav>
         </div>
-      )}
+        {(footer || user) && (
+          <div className="rb-sidebar__bottom">
+            {footer && <nav aria-label={footerLabel}>{asList(footer)}</nav>}
+            {user && <Divider />}
+            {collapsed ? (userCollapsed ?? user) : user}
+          </div>
+        )}
+      </aside>
+    </NavCompactContext.Provider>
+  );
+}
+
+export interface DualSidebarProps extends Omit<HTMLAttributes<HTMLElement>, 'children' | 'title'> {
+  /** Small logo at the top of the rail. */
+  logo: ReactNode;
+  /** Main sections in the rail: NavItem elements with an icon. They show as icons only. */
+  rail: ReactNode;
+  /** Sections at the bottom of the rail, e.g. Settings and Help. */
+  railFooter?: ReactNode;
+  /** Usually an Avatar, at the bottom of the rail. */
+  avatar?: ReactNode;
+  /** Name of the chosen section, the title of the panel. */
+  title: ReactNode;
+  /** Pages of the chosen section: NavItem elements. */
+  children: ReactNode;
+  /** Bottom of the panel, usually SidebarUser without avatar. */
+  user?: ReactNode;
+  /** Hide the panel. The rail stays. */
+  collapsed?: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
+  railLabel?: string;
+  railFooterLabel?: string;
+  collapseLabel?: string;
+}
+
+/** Sidebar with two levels: a rail with the main sections and a panel with the pages of the chosen section. */
+export function DualSidebar({ logo, rail, railFooter, avatar, title, children, user, collapsed = false, onCollapsedChange, railLabel = 'Sections', railFooterLabel = 'More', collapseLabel = 'Collapse panel', className, ...rest }: DualSidebarProps) {
+  const titleId = useId();
+  const panelId = useId();
+  return (
+    <aside className={cx('rb-sidebar', 'rb-sidebar--dual', collapsed && 'rb-sidebar--collapsed', className)} {...rest}>
+      <NavCompactContext.Provider value>
+        <div className="rb-sidebar__rail">
+          <div className="rb-sidebar__top">
+            <div className="rb-sidebar__logo">{logo}</div>
+            <nav aria-label={railLabel}>{asList(rail)}</nav>
+          </div>
+          <div className="rb-sidebar__bottom">
+            {railFooter && <nav aria-label={railFooterLabel}>{asList(railFooter)}</nav>}
+            {avatar}
+          </div>
+        </div>
+      </NavCompactContext.Provider>
+      <div id={panelId} className="rb-sidebar__panel" hidden={collapsed}>
+        <div className="rb-sidebar__top">
+          <div className="rb-sidebar__panel-head">
+            <h2 id={titleId} className="rb-sidebar__panel-title">{title}</h2>
+            {onCollapsedChange && <ButtonIcon hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={collapseLabel} aria-expanded={!collapsed} aria-controls={panelId} onClick={() => onCollapsedChange(true)} />}
+          </div>
+          <nav aria-labelledby={titleId}>{asList(children)}</nav>
+        </div>
+        {user && <div className="rb-sidebar__bottom">{user}</div>}
+      </div>
     </aside>
   );
 }
 
 export interface SidebarUserProps {
-  avatar: ReactNode;
+  avatar?: ReactNode;
   name: ReactNode;
   email?: ReactNode;
   /** E.g. a ButtonIcon to log out. */

@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type AnchorHTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
+import { useContext, createContext, useId, useRef, useState, type AnchorHTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
 import { ArrowLeft, ArrowRight, ChevronRight, House } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Button } from '../Button/Button';
@@ -111,8 +111,28 @@ export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Vor
 }
 
 /* ---------- Nav item ---------- */
-export interface NavItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> { icon?: ReactNode; active?: boolean; count?: number }
-export function NavItem({ icon, active, count, className, children, ...rest }: NavItemProps) {
+/** Set by Sidebar (collapsed) and DualSidebar (rail): NavItems then show only their icon. */
+export const NavCompactContext = createContext(false);
+
+export interface NavItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+  icon?: ReactNode;
+  active?: boolean;
+  count?: number;
+  /** Text for screen readers after the label when there is a count, e.g. "new". Default "new". */
+  countLabel?: string;
+}
+export function NavItem({ icon, active, count, countLabel = 'new', className, children, ...rest }: NavItemProps) {
+  const compact = useContext(NavCompactContext);
+  if (compact) {
+    return (
+      <a className={cx('rb-nav-item', 'rb-nav-item--compact', className)} aria-current={active ? 'page' : undefined} {...rest}>
+        {icon}
+        <span className="rb-visually-hidden">{children}{count ? `, ${count} ${countLabel}` : ''}</span>
+        {!!count && <span className="rb-nav-item__dot" aria-hidden="true" />}
+        <span className="rb-nav-item__tip" aria-hidden="true">{children}</span>
+      </a>
+    );
+  }
   return (
     <a className={cx('rb-nav-item', className)} aria-current={active ? 'page' : undefined} {...rest}>
       {icon}
