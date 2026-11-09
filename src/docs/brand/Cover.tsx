@@ -10,13 +10,13 @@ import { LogoMark } from './Logo';
 import { useDocsGlobals } from './useDocsGlobals';
 import './Cover.css';
 
-/** Reads --wl-color-brand-600 per brand mode from tokens.css, so the chips never hold their own colors. */
+/** Reads --brand-color-primary-600 per brand mode from tokens.css, so the chips never hold their own colors. */
 function brandColor(brand: string): string | undefined {
   const selector = brand === 'iris' ? ':root{' : `:root[data-brand="${brand}"]{`;
   const start = tokensCss.indexOf(selector);
   if (start < 0) return undefined;
   const block = tokensCss.slice(start, tokensCss.indexOf('}', start));
-  return block.match(/--wl-color-brand-600:([^;]+);/)?.[1];
+  return block.match(/--brand-color-primary-600:([^;]+);/)?.[1];
 }
 
 const BRANDS = [

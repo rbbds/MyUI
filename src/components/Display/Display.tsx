@@ -113,7 +113,7 @@ export interface FeaturedIconProps extends HTMLAttributes<HTMLSpanElement> {
 }
 /** Decorative icon in a tinted circle. aria-hidden by default. */
 export function FeaturedIcon({ color = 'brand', size = 'md', icon, className, ...rest }: FeaturedIconProps) {
-  return <span className={cx('rb-featured-icon', `rb-featured-icon--${color}`, `rb-featured-icon--${size}`, className)} aria-hidden="true" {...rest}>{icon}</span>;
+  return <span data-size={size} className={cx('rb-featured-icon', `rb-featured-icon--${color}`, `rb-featured-icon--${size}`, className)} aria-hidden="true" {...rest}>{icon}</span>;
 }
 
 /* ---------- Spinner ---------- */

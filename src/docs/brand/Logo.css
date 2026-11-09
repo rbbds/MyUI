@@ -21,18 +21,18 @@
   fill: var(--color-surface-brand-solid);
   rx: var(--border-radius-control-sm);
 }
-.myui-logo__eye { fill: var(--wl-color-base-white); }
-.myui-logo__pupil { fill: var(--wl-color-base-black); }
+.myui-logo__eye { fill: var(--base-white); }
+.myui-logo__pupil { fill: var(--base-black); }
 .myui-logo__wordmark {
   color: var(--color-foreground-primary);
-  font-family: var(--wl-fonts-body);
+  font-family: var(--brand-font-body);
   font-size: var(--text-body-paragraph-semibold-font-size);
   font-weight: var(--font-weight-600);
   line-height: 1;
 }
 .myui-logo__tagline {
   color: var(--color-foreground-secondary);
-  font-family: var(--wl-fonts-body);
+  font-family: var(--brand-font-body);
   font-size: var(--text-body-description-font-size);
 }
 

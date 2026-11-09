@@ -12,20 +12,21 @@ import { Header } from '../../components/Navigation/AppShell';
 import { brandScale, contrast, STEPS } from './color';
 import './BrandBuilder.css';
 
-/* Styles = the brand modes in Figma (brand/wl) and the data-brand blocks in tokens.css. */
+/* Styles = the brand modes in Figma (↳ brand) and the data-brand blocks in tokens.css. */
 const STYLES = [
-  { id: 'iris', name: 'Iris', shape: 'Licht afgerond', text: 'Kleine afronding, rustige titels. De standaard.' },
-  { id: 'forest', name: 'Forest', shape: 'Hoekig', text: 'Rechte hoeken, strak en zakelijk.' },
-  { id: 'berry', name: 'Berry', shape: 'Rond', text: 'Ronde knoppen en velden, zware titels, randen van 2 px.' },
+  { id: 'iris', name: 'Iris', shape: 'Soft', text: 'Small rounded corners and calm titles. This is the default.' },
+  { id: 'forest', name: 'Forest', shape: 'Square', text: 'Straight corners. Clean and businesslike.' },
+  { id: 'berry', name: 'Berry', shape: 'Round', text: 'Round buttons and fields, heavy titles and 2 px borders.' },
 ] as const;
 type StyleId = (typeof STYLES)[number]['id'];
 const STYLE_COLOR: Record<StyleId, string> = { iris: '#4f46e0', forest: '#176f42', berry: '#c21d67' };
+const STYLE_ACCENT: Record<StyleId, string> = { iris: '#0d9488', forest: '#ea580c', berry: '#7c3aed' };
 
 /* Free Google Fonts; self-host them in a project with @fontsource. */
 const FONTS = ['Inter', 'DM Sans', 'Manrope', 'Work Sans', 'Nunito Sans', 'Source Sans 3', 'Open Sans', 'Lato', 'Roboto', 'Poppins', 'Montserrat', 'Plus Jakarta Sans', 'Figtree', 'Source Serif 4', 'Merriweather', 'Lora', 'Playfair Display', 'Fraunces'];
 const SERIF = new Set(['Source Serif 4', 'Merriweather', 'Lora', 'Playfair Display', 'Fraunces']);
 const stack = (f: string) => (SERIF.has(f) ? `"${f}", ui-serif, Georgia, serif` : `"${f}", ui-sans-serif, system-ui, sans-serif`);
-const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'mijn-merk';
+const slug = (s: string) => s.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'my-brand';
 
 function loadGoogleFont(family: string) {
   if (family === 'Inter') return; // already loaded in Storybook
@@ -39,10 +40,12 @@ function loadGoogleFont(family: string) {
 }
 
 export function BrandBuilder() {
-  const [name, setName] = useState('Mijn merk');
+  const [name, setName] = useState('My brand');
   const [style, setStyle] = useState<StyleId>('iris');
   const [color, setColor] = useState(STYLE_COLOR.iris);
   const [hexText, setHexText] = useState(STYLE_COLOR.iris);
+  const [accent, setAccent] = useState(STYLE_ACCENT.iris);
+  const [accentText, setAccentText] = useState(STYLE_ACCENT.iris);
   const [body, setBody] = useState('Inter');
   const [title, setTitle] = useState('Inter');
   const [logo, setLogo] = useState<string | null>(null);
@@ -51,14 +54,17 @@ export function BrandBuilder() {
 
   const result = useMemo(() => brandScale(color), [color]);
   const scale = result?.scale;
+  const accentResult = useMemo(() => brandScale(accent), [accent]);
+  const accentScale = accentResult?.scale;
 
   /* Apply to the whole preview: tokens are computed on <html>, so overrides must live there. */
   useEffect(() => {
     const root = document.documentElement;
     const prevBrand = root.getAttribute('data-brand');
     if (style === 'iris') root.removeAttribute('data-brand'); else root.setAttribute('data-brand', style);
-    const props: [string, string][] = [['--wl-fonts-body', stack(body)], ['--wl-fonts-title', stack(title)]];
-    if (scale) STEPS.forEach((s) => props.push([`--wl-color-brand-${s}`, scale[s]]));
+    const props: [string, string][] = [['--brand-font-body', stack(body)], ['--brand-font-title', stack(title)]];
+    if (scale) STEPS.forEach((s) => props.push([`--brand-color-primary-${s}`, scale[s]]));
+    if (accentScale) STEPS.forEach((s) => props.push([`--brand-color-accent-${s}`, accentScale[s]]));
     props.forEach(([k, v]) => root.style.setProperty(k, v));
     loadGoogleFont(body);
     loadGoogleFont(title);
@@ -66,19 +72,25 @@ export function BrandBuilder() {
       props.forEach(([k]) => root.style.removeProperty(k));
       if (prevBrand) root.setAttribute('data-brand', prevBrand); else root.removeAttribute('data-brand');
     };
-  }, [style, scale, body, title]);
+  }, [style, scale, accentScale, body, title]);
 
   useEffect(() => () => { if (logo) URL.revokeObjectURL(logo); }, [logo]);
 
   const pickStyle = (id: StyleId) => {
     // keep a color the user picked; only follow the style color while it is still a style default
     if (Object.values(STYLE_COLOR).includes(color)) { setColor(STYLE_COLOR[id]); setHexText(STYLE_COLOR[id]); }
+    if (Object.values(STYLE_ACCENT).includes(accent)) { setAccent(STYLE_ACCENT[id]); setAccentText(STYLE_ACCENT[id]); }
     setStyle(id);
   };
   const onHex = (v: string) => {
     setHexText(v);
     const h = v.startsWith('#') ? v : `#${v}`;
     if (/^#[0-9a-f]{6}$/i.test(h)) setColor(h.toLowerCase());
+  };
+  const onAccent = (v: string) => {
+    setAccentText(v);
+    const h = v.startsWith('#') ? v : `#${v}`;
+    if (/^#[0-9a-f]{6}$/i.test(h)) setAccent(h.toLowerCase());
   };
   const onLogo = (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
@@ -87,34 +99,36 @@ export function BrandBuilder() {
 
   /* Checks: button text on 600 (Light), links 600 on white, links 400 on dark surface. */
   const checks = scale ? [
-    { label: 'Witte tekst op knop (brand-600)', ratio: contrast('#ffffff', scale['600']) },
-    { label: 'Link op wit (brand-600)', ratio: contrast(scale['600'], '#ffffff') },
-    { label: 'Link in Dark (brand-400 op donker)', ratio: contrast(scale['400'], '#0b0f17') },
+    { label: 'White text on a button (primary 600)', ratio: contrast('#ffffff', scale['600']) },
+    { label: 'Link on white (primary 600)', ratio: contrast(scale['600'], '#ffffff') },
+    { label: 'Link in Dark (primary 400 on dark)', ratio: contrast(scale['400'], '#0b0f17') },
+    ...(accentScale ? [{ label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
   ] : [];
   const failing = checks.filter((c) => c.ratio < 4.5);
 
   const brandSlug = slug(name);
   const selector = style === 'iris' ? ':root' : `:root[data-brand="${style}"]`;
   const fontPkgs = [...new Set([body, title])].filter((f) => f !== 'Inter').map((f) => `@fontsource/${slug(f)}`);
-  const css = scale ? `/* ${name}: huisstijl op basis van stijl ${STYLES.find((s) => s.id === style)!.name} (${STYLES.find((s) => s.id === style)!.shape.toLowerCase()}).
-   1. Laad dit bestand na @rbbds/ui/styles.css.
-${style === 'iris' ? '   2. Geen data-brand nodig: Iris is de standaard.' : `   2. Zet data-brand="${style}" op <html>.`}
-${fontPkgs.length ? `   3. Fonts zelf hosten: npm i ${fontPkgs.join(' ')} en importeer de gewichten 400, 500, 600 en 700.` : '   3. Inter: npm i @fontsource-variable/inter'} */
+  const css = scale ? `/* ${name}: brand based on the style ${STYLES.find((s) => s.id === style)!.name} (${STYLES.find((s) => s.id === style)!.shape.toLowerCase()}).
+   1. Load this file after @rbbds/ui/styles.css.
+${style === 'iris' ? '   2. You do not need data-brand: Iris is the default.' : `   2. Put data-brand="${style}" on <html>.`}
+${fontPkgs.length ? `   3. Host the fonts yourself: npm i ${fontPkgs.join(' ')} and import the weights 400, 500, 600 and 700.` : '   3. Inter: npm i @fontsource-variable/inter'} */
 ${selector} {
-${STEPS.map((s) => `  --wl-color-brand-${s}: ${scale[s]};`).join('\n')}
-  --wl-fonts-body: ${stack(body)};
-  --wl-fonts-title: ${stack(title)};
+${STEPS.map((s) => `  --brand-color-primary-${s}: ${scale[s]};`).join('\n')}
+${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]};`).join('\n') : ''}
+  --brand-font-body: ${stack(body)};
+  --brand-font-title: ${stack(title)};
 }
 ` : '';
   const figma = scale ? JSON.stringify({
-    collection: 'brand/wl',
+    collection: '↳ brand',
     mode: name,
     basedOn: STYLES.find((s) => s.id === style)!.name,
-    values: { ...Object.fromEntries(STEPS.map((s) => [`WL/color/brand/${s}`, scale[s]])), 'WL/fonts/body': body, 'WL/fonts/title': title },
+    values: { ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, scale[s]])), ...(accentScale ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accentScale[s]])) : {}), 'brand/font/body': body, 'brand/font/title': title },
   }, null, 2) : '';
 
   const copy = async (what: string, text: string) => {
-    try { await navigator.clipboard.writeText(text); setCopied(what); setTimeout(() => setCopied(null), 2000); } catch { setCopied('fout'); }
+    try { await navigator.clipboard.writeText(text); setCopied(what); setTimeout(() => setCopied(null), 2000); } catch { setCopied('error'); }
   };
   const download = () => {
     const url = URL.createObjectURL(new Blob([css], { type: 'text/css' }));
@@ -126,26 +140,26 @@ ${STEPS.map((s) => `  --wl-color-brand-${s}: ${scale[s]};`).join('\n')}
   const preview = (mode: string) => (
     <div className="bb-preview__screen">
       <Header
-        navLabel={`Hoofdmenu voorbeeld ${mode}`}
+        navLabel={`Main menu example ${mode}`}
         logo={logo ? <img src={logo} alt={name} className="bb-logo" /> : <span className="bb-wordmark">{name}</span>}
-        links={[{ label: 'Overzicht', href: '#', current: true }, { label: 'Producten', href: '#' }]}
-        actions={<Button size="sm">Inloggen</Button>}
+        links={[{ label: 'Overview', href: '#', current: true }, { label: 'Products', href: '#' }]}
+        actions={<Button size="sm">Log in</Button>}
       />
       <div className="bb-preview__body">
         <div className="bb-preview__intro">
-          <Badge color="brand">Nieuw</Badge>
-          <h2 className="bb-h">Welkom bij {name}</h2>
-          <p className="bb-p">Zo ziet je huisstijl eruit in de componenten van MyUI.</p>
-          <div className="bb-row"><Button>Aan de slag</Button><Button hierarchy="secondary">Meer informatie</Button><Button hierarchy="link">Bekijk voorbeelden</Button></div>
+          <Badge color="brand">New</Badge>
+          <h2 className="bb-h">Welcome to {name}</h2>
+          <p className="bb-p">This is how your brand looks in the MyUI components.</p>
+          <div className="bb-row"><Button>Get started</Button><Button hierarchy="secondary">Learn more</Button><Button hierarchy="link">See examples</Button></div>
         </div>
         <div className="bb-grid">
           <div className="bb-stack">
-            <Input label="Zoeken" placeholder="Waar ben je naar op zoek?" iconLeading={<Search />} />
-            <Select label="Onderwerp" options={[{ value: 'a', label: 'Algemene vraag' }, { value: 'b', label: 'Klacht' }]} />
-            <Toggle label="Houd me op de hoogte" defaultChecked />
-            <Alert color="brand" title="Goed om te weten">Je kunt je keuze later nog aanpassen.</Alert>
+            <Input label="Search" placeholder="What are you looking for?" iconLeading={<Search />} />
+            <Select label="Topic" options={[{ value: 'a', label: 'General question' }, { value: 'b', label: 'Complaint' }]} />
+            <Toggle label="Keep me updated" defaultChecked />
+            <Alert color="brand" title="Good to know">You can change your choice later.</Alert>
           </div>
-          <Card meta="Nieuws · 3 min lezen" title="Een huisstijl die overal klopt" description="Kleuren, letters en vormen uit één bron." action={<Button hierarchy="link">Lees verder</Button>} />
+          <Card meta="News · 3 min read" title="A brand that fits everywhere" description="Colors, fonts and shapes from one source." action={<Button hierarchy="link">Read more</Button>} />
         </div>
       </div>
     </div>
@@ -155,27 +169,27 @@ ${STEPS.map((s) => `  --wl-color-brand-${s}: ${scale[s]};`).join('\n')}
     <div className="bb">
       <div className="bb-intro">
         <h1 className="bb-h1">Brand builder</h1>
-        <p className="bb-p">Kies een stijl, vul je huisstijl in en neem de CSS mee naar je project. De stijl bepaalt de vorm (hoeken, randen, letterdikte); jij bepaalt kleur, letters en logo.</p>
+        <p className="bb-p">Pick a style, fill in your brand and take the CSS to your project. The style sets the shape (corners, borders, font weight). You set the colors, fonts and logo.</p>
       </div>
 
       <div className="bb-layout">
-        <form className="bb-form" onSubmit={(e) => e.preventDefault()} aria-label="Huisstijl">
-          <Input label="Naam van het merk" value={name} onChange={(e) => setName(e.target.value)} hint={`Wordt brand-${brandSlug}.css en de mode-naam in Figma.`} />
+        <form className="bb-form" onSubmit={(e) => e.preventDefault()} aria-label="Brand">
+          <Input label="Brand name" value={name} onChange={(e) => setName(e.target.value)} hint={`Becomes brand-${brandSlug}.css and the mode name in Figma.`} />
 
-          <SelectionCardGroup legend="Stijl" columns={1}>
+          <SelectionCardGroup legend="Style" columns={1}>
             {STYLES.map((s) => (
               <SelectionCard key={s.id} name="bb-style" value={s.id} checked={style === s.id} onChange={() => pickStyle(s.id)} title={`${s.name}: ${s.shape.toLowerCase()}`} description={s.text} />
             ))}
           </SelectionCardGroup>
 
           <fieldset className="bb-fieldset">
-            <legend className="bb-legend">Merkkleur</legend>
+            <legend className="bb-legend">Primary color</legend>
             <div className="bb-color">
-              <input type="color" aria-label="Kies merkkleur" value={color} onChange={(e) => { setColor(e.target.value); setHexText(e.target.value); }} />
-              <Input label="Hex-code" hideLabel value={hexText} onChange={(e) => onHex(e.target.value)} error={hexText && !/^#?[0-9a-f]{6}$/i.test(hexText) ? 'Gebruik 6 tekens, bijvoorbeeld #0e7c66.' : undefined} />
+              <input type="color" aria-label="Pick the primary color" value={color} onChange={(e) => { setColor(e.target.value); setHexText(e.target.value); }} />
+              <Input label="Primary hex code" hideLabel value={hexText} onChange={(e) => onHex(e.target.value)} error={hexText && !/^#?[0-9a-f]{6}$/i.test(hexText) ? 'Use 6 characters, for example #0e7c66.' : undefined} />
             </div>
             {scale && (
-              <ol className="bb-scale" aria-label="Gegenereerde kleurschaal">
+              <ol className="bb-scale" aria-label="Generated primary scale">
                 {STEPS.map((s) => (
                   <li key={s} className={s === result!.anchor ? 'is-anchor' : undefined} title={`${s}: ${scale[s]}`}>
                     <span style={{ background: scale[s] }} />
@@ -184,28 +198,47 @@ ${STEPS.map((s) => `  --wl-color-brand-${s}: ${scale[s]};`).join('\n')}
                 ))}
               </ol>
             )}
-            <p className="bb-note">Jouw kleur staat op stap {result?.anchor}; de rest is berekend. Knoppen gebruiken 600, links in Dark 400.</p>
+            <p className="bb-note">Your color is step {result?.anchor}. The other steps are calculated. Buttons use 600. Links in Dark use 400.</p>
             {failing.length > 0 && (
-              <Alert color="warning" title="Contrast te laag">
-                {failing.map((f) => `${f.label}: ${f.ratio.toFixed(1)}:1 (minimaal 4,5:1)`).join('. ')}. Kies een donkerdere kleur, of laat dit oplossen in de token-mapping.
+              <Alert color="warning" title="Contrast too low">
+                {failing.map((f) => `${f.label}: ${f.ratio.toFixed(1)}:1 (at least 4.5:1)`).join('. ')}. Pick a darker color, or fix it in the token mapping.
               </Alert>
             )}
           </fieldset>
 
-          <Select label="Lettertype voor tekst" value={body} onChange={(e) => setBody(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
-          <Select label="Lettertype voor titels" value={title} onChange={(e) => setTitle(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
+          <fieldset className="bb-fieldset">
+            <legend className="bb-legend">Accent color</legend>
+            <div className="bb-color">
+              <input type="color" aria-label="Pick the accent color" value={accent} onChange={(e) => { setAccent(e.target.value); setAccentText(e.target.value); }} />
+              <Input label="Accent hex code" hideLabel value={accentText} onChange={(e) => onAccent(e.target.value)} error={accentText && !/^#?[0-9a-f]{6}$/i.test(accentText) ? 'Use 6 characters, for example #ea580c.' : undefined} />
+            </div>
+            {accentScale && (
+              <ol className="bb-scale" aria-label="Generated accent scale">
+                {STEPS.map((s) => (
+                  <li key={s} className={s === accentResult!.anchor ? 'is-anchor' : undefined} title={`${s}: ${accentScale[s]}`}>
+                    <span style={{ background: accentScale[s] }} />
+                    <small>{s}</small>
+                  </li>
+                ))}
+              </ol>
+            )}
+            <p className="bb-note">A second brand color for highlights, badges, tags and illustrations.</p>
+          </fieldset>
+
+          <Select label="Font for text" value={body} onChange={(e) => setBody(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
+          <Select label="Font for titles" value={title} onChange={(e) => setTitle(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
 
           <div className="bb-field">
-            <label htmlFor="bb-logo" className="bb-legend">Logo (optioneel)</label>
+            <label htmlFor="bb-logo" className="bb-legend">Logo (optional)</label>
             <input id="bb-logo" type="file" accept="image/svg+xml,image/png,image/webp" onChange={onLogo} />
-            <p className="bb-note">Alleen voor de preview. In je project geef je het logo mee aan Header en Sidebar.</p>
+            <p className="bb-note">Only for the preview. In your project, pass the logo to Header and Sidebar.</p>
           </div>
         </form>
 
-        <section className="bb-preview" aria-label="Voorbeeld">
+        <section className="bb-preview" aria-label="Preview">
           <div className="bb-preview__bar">
-            <h2 className="bb-h3">Voorbeeld</h2>
-            <Toggle label="Toon Dark" checked={showDark} onChange={(e) => setShowDark(e.target.checked)} />
+            <h2 className="bb-h3">Preview</h2>
+            <Toggle label="Show Dark" checked={showDark} onChange={(e) => setShowDark(e.target.checked)} />
           </div>
           <div className={showDark ? 'bb-preview__pair' : undefined}>
             <div data-theme="light" className="bb-preview__theme">{preview('Light')}</div>
@@ -214,23 +247,23 @@ ${STEPS.map((s) => `  --wl-color-brand-${s}: ${scale[s]};`).join('\n')}
 
           <div className="bb-output">
             <div className="bb-output__head">
-              <h2 className="bb-h3">CSS voor je project</h2>
+              <h2 className="bb-h3">CSS for your project</h2>
               <div className="bb-row">
-                <Button size="sm" hierarchy="secondary" iconLeading={<Copy />} onClick={() => copy('css', css)}>{copied === 'css' ? 'Gekopieerd' : 'Kopieer'}</Button>
+                <Button size="sm" hierarchy="secondary" iconLeading={<Copy />} onClick={() => copy('css', css)}>{copied === 'css' ? 'Copied' : 'Copy'}</Button>
                 <Button size="sm" iconLeading={<Download />} onClick={download}>brand-{brandSlug}.css</Button>
               </div>
             </div>
-            <pre className="bb-code" tabIndex={0} aria-label="CSS voor je project"><code>{css}</code></pre>
+            <pre className="bb-code" tabIndex={0} aria-label="CSS for your project"><code>{css}</code></pre>
           </div>
           <div className="bb-output">
             <div className="bb-output__head">
-              <h2 className="bb-h3">Waarden voor Figma</h2>
-              <Button size="sm" hierarchy="secondary" iconLeading={<Copy />} onClick={() => copy('figma', figma)}>{copied === 'figma' ? 'Gekopieerd' : 'Kopieer'}</Button>
+              <h2 className="bb-h3">Values for Figma</h2>
+              <Button size="sm" hierarchy="secondary" iconLeading={<Copy />} onClick={() => copy('figma', figma)}>{copied === 'figma' ? 'Copied' : 'Copy'}</Button>
             </div>
-            <p className="bb-note">Dupliceer in brand/wl de mode {STYLES.find((s) => s.id === style)!.name}, geef hem de naam "{name}" en vul deze waarden in. Of geef deze JSON aan Claude om de mode toe te voegen.</p>
-            <pre className="bb-code" tabIndex={0} aria-label="Waarden voor Figma"><code>{figma}</code></pre>
+            <p className="bb-note">In the ↳ brand collection, duplicate the mode {STYLES.find((s) => s.id === style)!.name}, name it "{name}" and fill in these values. Or give this JSON to Claude to add the mode for you.</p>
+            <pre className="bb-code" tabIndex={0} aria-label="Values for Figma"><code>{figma}</code></pre>
           </div>
-          <span className="rb-visually-hidden" role="status">{copied === 'fout' ? 'Kopiëren lukte niet' : copied ? 'Gekopieerd naar het klembord' : ''}</span>
+          <span className="rb-visually-hidden" role="status">{copied === 'error' ? 'Copy failed' : copied ? 'Copied to the clipboard' : ''}</span>
         </section>
       </div>
     </div>

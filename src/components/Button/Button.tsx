@@ -29,6 +29,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <button
       ref={ref}
       type={type}
+      data-size={size}
       className={cx('rb-button', `rb-button--${hierarchy}`, `rb-button--${size}`, destructive && 'rb-button--destructive', fullWidth && 'rb-button--full', className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
@@ -57,6 +58,7 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(functio
     <button
       ref={ref}
       type={type}
+      data-size={size}
       className={cx('rb-button', 'rb-button--icon-only', `rb-button--${hierarchy}`, `rb-button--${size}`, destructive && 'rb-button--destructive', className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}

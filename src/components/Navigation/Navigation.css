@@ -35,9 +35,16 @@
 @media (max-width:599px){.rb-pagination__pages{display:none}.rb-pagination__compact{display:block}}
 
 .rb-nav-item{display:flex;align-items:center;gap:var(--nav-item-gap);width:100%;padding:var(--nav-item-padding-vertical) var(--nav-item-padding-horizontal);border-radius:var(--nav-item-radius);color:var(--nav-item-foreground);text-decoration:none;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-nav-item svg{width:20px;height:20px;color:var(--nav-item-foreground-icon);flex-shrink:0}
+.rb-nav-item svg{width:var(--nav-item-leading-icon-size);height:var(--nav-item-leading-icon-size);color:var(--nav-item-foreground-icon);flex-shrink:0}
 .rb-nav-item:hover{background:var(--nav-item-surface-hover)}
 .rb-nav-item:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-nav-item[aria-current="page"]{background:var(--nav-item-surface-active);color:var(--nav-item-foreground-active)}
 .rb-nav-item__label{flex:1}
-.rb-nav-item__count{padding:2px 8px;border:1px solid var(--color-border-secondary);border-radius:var(--border-radius-full);background:var(--color-surface-tertiary);color:var(--color-foreground-secondary);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
+.rb-nav-item__count{padding:var(--nav-item-count-padding-vertical) var(--nav-item-count-padding-horizontal);border:1px solid var(--nav-item-count-border);border-radius:var(--nav-item-count-radius);background:var(--nav-item-count-surface);color:var(--nav-item-count-foreground);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
+
+/* Compact (collapsed sidebar, rail): icon only, name in a tooltip */
+.rb-nav-item--compact{position:relative;width:auto;padding:var(--nav-item-padding-vertical)}
+.rb-nav-item__dot{position:absolute;top:var(--spacing-1);right:var(--spacing-1);width:var(--spacing-2);height:var(--spacing-2);border-radius:var(--border-radius-full);background:var(--nav-item-indicator-surface);box-shadow:0 0 0 1.5px var(--nav-item-indicator-border)}
+.rb-nav-item__tip{position:absolute;left:calc(100% + var(--spacing-2));top:50%;z-index:50;transform:translateY(-50%);padding:var(--tooltip-padding-vertical) var(--tooltip-padding-horizontal);border-radius:var(--tooltip-radius);background:var(--tooltip-surface);color:var(--tooltip-foreground);font-family:var(--text-body-description-semibold-font-family);font-size:var(--text-body-description-semibold-font-size);font-weight:var(--text-body-description-semibold-font-weight);line-height:var(--text-body-description-semibold-line-height);white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .12s ease}
+.rb-nav-item--compact:hover .rb-nav-item__tip,.rb-nav-item--compact:focus-visible .rb-nav-item__tip{opacity:1;visibility:visible}
+@media (prefers-reduced-motion:reduce){.rb-nav-item__tip{transition:none}}

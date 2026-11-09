@@ -6,24 +6,30 @@
     "base": "_Nav item"
   },
   "react": "NavItem",
-  "summary": "Link in een zijbalknavigatie, met icoon, label en optionele teller.",
+  "summary": "Link in a side navigation, with icon, label and an optional count. In a collapsed sidebar it shows only the icon.",
   "use": [
-    "Hoofdnavigatie van een app of portaal."
+    "Main navigation of an app or portal."
   ],
   "avoid": [
-    "Acties: gebruik Button."
+    "Actions: use Button."
   ],
   "anatomy": [
-    "Icoon.",
+    "Icon.",
     "Label.",
-    "Teller (optioneel).",
-    "Actieve achtergrond."
+    "Count (optional).",
+    "Active background.",
+    "Collapsed: icon, dot for the count, tooltip with the label."
   ],
   "figmaProps": [
     [
       "State",
       "Default, Hover, Focus, Active",
       ""
+    ],
+    [
+      "Collapsed",
+      "boolean",
+      "Icon only."
     ],
     [
       "Label / Icon / Show count / Count",
@@ -45,41 +51,49 @@
     [
       "active",
       "boolean",
-      "Zet aria-current=\"page\"."
+      "Sets aria-current=\"page\"."
     ],
     [
       "count",
       "number",
       ""
+    ],
+    [
+      "countLabel",
+      "string",
+      "Word after the count for screen readers. Default \"new\"."
     ]
   ],
   "behaviour": [
-    "Navigeert naar een pagina. De actieve pagina is gemarkeerd."
+    "Goes to a page. The active page is highlighted.",
+    "Inside a collapsed Sidebar the item switches to compact mode by itself (NavCompactContext)."
   ],
   "a11y": [
-    "Echte links in een <nav> met aria-label.",
-    "De teller heeft context nodig voor screenreaders, bijvoorbeeld \"10 nieuw\"."
+    "Real links in a <nav> with aria-label.",
+    "The count gets context for screen readers, for example \"10 new\".",
+    "In compact mode the label stays in the link name. The tooltip is aria-hidden."
   ],
   "content": [
-    "Zelfstandige naamwoorden: \"Projecten\", \"Instellingen\"."
+    "Use nouns: \"Projects\", \"Settings\"."
   ],
   "do": [
-    "Maximaal ongeveer 7 items per groep."
+    "About 7 items per group at most."
   ],
   "dont": [
-    "Twee actieve items tegelijk."
+    "Two active items at the same time."
   ],
   "tokens": [
     "--nav-item-{foreground|surface}-*",
     "--nav-item-padding-*",
     "--nav-item-gap",
-    "--nav-item-radius"
+    "--nav-item-radius",
+    "--nav-item-leading-icon-size",
+    "--nav-item-count-*"
   ],
   "related": [
+    "Sidebar",
     "Tabs",
     "Breadcrumbs"
   ],
-  "open": [
-    "Een complete Sidebar (header, groepen, inklappen) bestaat nog niet."
-  ]
+  "open": []
 }

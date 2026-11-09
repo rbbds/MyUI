@@ -35,12 +35,12 @@ In Figma is elke stijl een **mode** van brand/wl. In code is elke stijl behalve 
 
 | Wat | Figma (brand/wl) | CSS |
 | --- | --- | --- |
-| Merkkleur | `WL/color/brand/25` t/m `950` | `--wl-color-brand-*` |
-| Neutrale en statuskleuren | `WL/color/gray`, `success`, `warning`, `error`, `info` | `--wl-color-gray-*` enz. |
-| Lettertypen | `WL/fonts/body`, `WL/fonts/title` | `--wl-fonts-body`, `--wl-fonts-title` |
-| Letterdikte | `WL/font-weight/titles/*`, `paragraph/*` | `--wl-font-weight-*` |
-| Hoekafronding | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--wl-radius-*` |
-| Randdikte | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--wl-border-width-*` |
+| Merkkleur | `WL/color/brand/25` t/m `950` | `--brand-color-primary-*` |
+| Neutrale en statuskleuren | `WL/color/gray`, `success`, `warning`, `error`, `info` | `--gray-*` enz. |
+| Lettertypen | `WL/fonts/body`, `WL/fonts/title` | `--brand-font-body`, `--brand-font-title` |
+| Letterdikte | `WL/font-weight/titles/*`, `paragraph/*` | `--brand-font-weight-*` |
+| Hoekafronding | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--brand-radius-*` |
+| Randdikte | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--brand-border-width-*` |
 
 De theme-laag (Light en Dark) verwijst naar deze variabelen en de component-tokens verwijzen naar de theme-laag. Voor een merk pas je dus nooit iets anders aan dan `--wl-*`.
 
@@ -52,10 +52,10 @@ De theme-laag (Light en Dark) verwijst naar deze variabelen en de component-toke
 
 ```css
 :root {
-  --wl-color-brand-600: #0284c7;   /* geef de hele schaal 25 t/m 950, dan klopt Dark ook */
-  --wl-fonts-title: "Fraunces", Georgia, serif;
-  --wl-radius-control-md: 0px;
-  --wl-border-width-control-default: 2px;
+  --brand-color-primary-600: #0284c7;   /* geef de hele schaal 25 t/m 950, dan klopt Dark ook */
+  --brand-font-title: "Fraunces", Georgia, serif;
+  --brand-radius-control-md: 0px;
+  --brand-border-width-control-default: 2px;
 }
 ```
 
@@ -64,7 +64,7 @@ De theme-laag (Light en Dark) verwijst naar deze variabelen en de component-toke
 - Pas nooit de primitive-schalen aan (`--radius-2`, `--font-weight-600`). `--radius-2` betekent 8px; als je die op 0 zet, klopt de naam niet meer en verandert alles wat 8px gebruikt. Verwijs in brand/wl naar een andere stap.
 - Zet `data-brand` en overrides op `<html>` (`:root`). De tokens worden daar berekend; op een dieper element werkt een override niet voor alle tokens.
 - Pas geen theme- of mapped tokens (`--color-*`, `--button-*` …) aan voor een merk. Een merk dat daar afwijkt is een fork.
-- Laad zelf de webfont die je in `--wl-fonts-*` zet.
+- Laad zelf de webfont die je in `--brand-font-*` zet.
 - Controleer na een nieuwe merkkleur het contrast: tekst op `brand-600` (Light) en `brand-400` (Dark) moet minimaal 4,5:1 halen.
 
 ## Logo

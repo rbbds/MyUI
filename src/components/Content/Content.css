@@ -32,7 +32,7 @@
 .rb-card__description{color:var(--card-foreground-text);font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 
 .rb-accordion{border-top:1px solid var(--accordion-border)}
-.rb-accordion__item{border-bottom:1px solid var(--accordion-border);border-radius:var(--border-radius-control-sm);transition:background-color .15s ease}
+.rb-accordion__item{border-bottom:1px solid var(--accordion-border);border-radius:var(--accordion-item-radius);transition:background-color .15s ease}
 /* Hover and focus cover the whole item (title + open panel), like Figma. Only the title is the button. */
 .rb-accordion__item:has(.rb-accordion__trigger:hover){background:var(--accordion-surface-hover)}
 .rb-accordion__item:has(.rb-accordion__trigger:focus-visible){box-shadow:var(--focus-ring)}

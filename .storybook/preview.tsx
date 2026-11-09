@@ -45,7 +45,7 @@ const preview: Preview = {
         else document.documentElement.setAttribute('data-brand', brand);
       }
       return (
-        <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', fontFamily: 'var(--wl-fonts-body)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
+        <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', fontFamily: 'var(--brand-font-body)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
           <Story />
         </div>
       );

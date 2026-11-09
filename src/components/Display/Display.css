@@ -40,7 +40,7 @@
 .rb-divider-label::before,.rb-divider-label::after{content:"";flex:1;height:1px;background:var(--divider-color)}
 
 .rb-featured-icon{--_d:40px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:var(--_d);height:var(--_d);border-radius:var(--featured-icon-radius);background:var(--_bg);color:var(--_fg)}
-.rb-featured-icon svg{width:50%;height:50%}
+.rb-featured-icon svg{width:var(--featured-icon-icon-size);height:var(--featured-icon-icon-size)}
 .rb-featured-icon--sm{--_d:32px}.rb-featured-icon--lg{--_d:48px}
 .rb-featured-icon--gray{--_bg:var(--featured-icon-gray-surface);--_fg:var(--featured-icon-gray-foreground)}
 .rb-featured-icon--brand{--_bg:var(--featured-icon-brand-surface);--_fg:var(--featured-icon-brand-foreground)}

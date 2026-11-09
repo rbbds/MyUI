@@ -2,88 +2,111 @@
   "name": "Sidebar",
   "page": "Navigation",
   "figma": {
-    "node": "16998:448",
+    "node": "17086:177",
     "base": null
   },
-  "react": "Sidebar",
-  "summary": "Zijbalk voor apps: logo, zoeken, hoofdnavigatie, secundaire navigatie en de ingelogde gebruiker. Navigation is een native Figma-slot met Nav items.",
+  "react": "Sidebar, DualSidebar",
+  "summary": "Side panel for apps: logo, search, main menu, secondary menu and the signed-in user. It can collapse to icons only. The two-level version has a rail with sections and a panel with the pages of one section.",
   "use": [
-    "Apps en portalen met meer dan 5 secties."
+    "Apps and portals with more than 5 sections.",
+    "Two-level: apps with many sections that each have their own pages."
   ],
   "avoid": [
-    "Websites met weinig secties: gebruik Header."
+    "Websites with few sections: use Header."
   ],
   "anatomy": [
-    "Logo.",
-    "Search input (optioneel).",
-    "Navigatie (slot) met Nav items.",
-    "Footer-navigatie.",
-    "Divider en gebruiker met uitlogknop."
+    "Logo with collapse button.",
+    "Search input (optional).",
+    "Navigation (slot) with Nav items.",
+    "Footer navigation.",
+    "Divider and user with sign-out button.",
+    "Two-level: rail (always icons only) and panel with title."
   ],
   "figmaProps": [
     [
+      "Type",
+      "Single, Dual",
+      "Dual adds the rail and the panel."
+    ],
+    [
+      "Collapsed",
+      "boolean",
+      "Icons only. Nav items switch to Collapsed=true."
+    ],
+    [
       "Navigation",
       "slot",
-      "Plaats Nav item-instances."
+      "Place Nav item instances."
     ],
     [
       "Show search / Show footer navigation",
       "boolean",
       ""
-    ],
-    [
-      "User name / User email",
-      "tekst",
-      ""
     ]
   ],
   "reactProps": [
     [
-      "logo",
+      "logo / logoCollapsed",
       "ReactNode",
-      ""
+      "logoCollapsed shows when the sidebar is collapsed."
     ],
     [
-      "search",
+      "search / searchCollapsed",
       "ReactNode",
-      "Meestal een SearchInput (size sm) in <form role=\"search\">."
+      "Usually a SearchInput (size sm) in <form role=\"search\">."
     ],
     [
-      "children",
+      "children / footer",
       "NavItem[]",
-      "Elk item komt in een <li>."
+      "Each item goes in an <li>."
     ],
     [
-      "footer",
-      "NavItem[]",
-      ""
-    ],
-    [
-      "user",
+      "user / userCollapsed",
       "ReactNode",
-      "Meestal SidebarUser (avatar, name, email, action)."
+      "Usually SidebarUser (avatar, name, email, action)."
+    ],
+    [
+      "collapsed / onCollapsedChange",
+      "boolean / (v) => void",
+      "Shows the collapse button when onCollapsedChange is set."
+    ],
+    [
+      "collapseLabel / expandLabel",
+      "string",
+      "Default \"Collapse sidebar\" and \"Expand sidebar\"."
     ],
     [
       "navLabel / footerLabel",
       "string",
-      ""
+      "Default \"Main menu\" and \"More\"."
+    ],
+    [
+      "DualSidebar: rail, railFooter, title, avatar",
+      "ReactNode",
+      "rail holds NavItems for sections. title is the panel heading."
     ]
   ],
   "behaviour": [
-    "Vaste breedte 280px. De inhoud scrolt als hij niet past."
+    "Fixed width 280px, collapsed 72px. Content scrolls when it does not fit.",
+    "Collapsed: labels are visually hidden and show as a tooltip on hover and focus. A count becomes a dot.",
+    "Focus stays on the collapse button after a toggle."
   ],
   "a11y": [
-    "<aside> met twee <nav>-elementen met eigen labels.",
-    "Actieve pagina met aria-current=\"page\" (via NavItem active)."
+    "<aside> with two <nav> elements, each with its own label.",
+    "The collapse button has aria-expanded and aria-controls.",
+    "Collapsed items keep their name for screen readers, for example \"Projects, 12 new\".",
+    "Active page with aria-current=\"page\" (via NavItem active)."
   ],
   "content": [
-    "Groepeer secties logisch, belangrijkste bovenaan."
+    "Group sections in a logical order, most important at the top."
   ],
   "do": [
-    "Gebruik op mobiel dezelfde navigatie in een Slideout."
+    "Use the same navigation in a Slideout on mobile.",
+    "Remember the collapsed state per user."
   ],
   "dont": [
-    "Meer dan ongeveer 9 items zonder groepering."
+    "More than about 9 items without grouping.",
+    "Collapse the sidebar without a way to expand it again."
   ],
   "tokens": [
     "--sidebar-*",
@@ -95,6 +118,6 @@
     "Slideout"
   ],
   "open": [
-    "Inklapbare variant (alleen iconen) en groepskoppen zijn er nog niet."
+    "Group headings are not there yet."
   ]
 }

@@ -4,9 +4,9 @@
 .rb-button--destructive:focus-visible{box-shadow:var(--focus-ring-error)}
 .rb-button:disabled,.rb-button[aria-disabled="true"]{background:var(--_bg-d);color:var(--_fg-d);border-color:var(--_bd-d);cursor:not-allowed}
 .rb-button[aria-busy="true"]{cursor:progress}
-.rb-button svg{width:20px;height:20px;flex-shrink:0}
+.rb-button svg{width:var(--button-icon-size);height:var(--button-icon-size);flex-shrink:0}
 .rb-button--sm{gap:var(--button-sm-gap);padding:var(--button-sm-padding-vertical) var(--button-sm-padding-horizontal)}
-.rb-button--sm svg{width:16px;height:16px}
+
 .rb-button--lg{gap:var(--button-lg-gap);padding:var(--button-lg-padding-vertical) var(--button-lg-padding-horizontal);font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
 .rb-button--link{padding:var(--button-link-padding)}
 .rb-button--link:hover:not(:disabled){text-decoration:underline}
@@ -14,7 +14,7 @@
 .rb-button--icon-only.rb-button--sm{padding:var(--button-icon-only-sm-padding)}
 .rb-button--icon-only.rb-button--md{padding:var(--button-icon-only-md-padding)}
 .rb-button--icon-only.rb-button--lg{padding:var(--button-icon-only-lg-padding)}
-.rb-button--icon-only svg{width:20px;height:20px}
+
 .rb-button__spinner{animation:rb-spin 1s linear infinite}
 .rb-button--primary{--_bg:var(--button-primary-surface-default);--_bg-h:var(--button-primary-surface-hover);--_bg-d:var(--button-primary-surface-disabled);--_fg:var(--button-primary-foreground-default);--_fg-h:var(--button-primary-foreground-hover);--_fg-d:var(--button-primary-foreground-disabled);--_bd:var(--button-primary-border-default);--_bd-h:var(--button-primary-border-hover);--_bd-d:var(--button-primary-border-disabled)}
 .rb-button--primary.rb-button--destructive{--_bg:var(--button-primary-destructive-surface-default);--_bg-h:var(--button-primary-destructive-surface-hover);--_bg-d:var(--button-primary-destructive-surface-disabled);--_fg:var(--button-primary-destructive-foreground-default);--_fg-h:var(--button-primary-destructive-foreground-hover);--_fg-d:var(--button-primary-destructive-foreground-disabled);--_bd:var(--button-primary-destructive-border-default);--_bd-h:var(--button-primary-destructive-border-hover);--_bd-d:var(--button-primary-destructive-border-disabled)}
