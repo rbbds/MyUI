@@ -131,7 +131,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 | --- | --- | --- |
 | 1. Primitives | `∙ color`, `∙ spacing`, `∙ border`, `∙ typography`, ... (no modes) | `:root` |
 | 2. Brand | `↳ brand`, modes Iris, Forest, Berry | `--brand-*`; Forest and Berry on `:root[data-brand="forest"\|"berry"]` |
-| 3. Alias | `↳ theme` (Light, Dark: colors), `↳ style` (spacing, radius, border, font, icon size), `↳ screen-size`, `↳ size` (md, sm, lg, xs) | theme on `[data-theme]`, size on `[data-size]` |
+| 3. Alias | `↳ theme` (Light, Dark: colors), `↳ style` (spacing, radius, border, font, icon size), `↳ screen-size`, `↳ size` (md, sm, lg) | theme on `[data-theme]`, size on `[data-size]` |
 | 4. Mapped | `↳ mapped`: `component-tokens/*`, `typography-tokens/*`, `base-tokens/*`, `effect-tokens/*` | `--x-y`, `--text-*`, `--base-*`, `--effect-*` |
 
 **Rules**
@@ -180,7 +180,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Op een pagina: links de sectie "Base components", midden de component sets, rechts het frame `Docs / <naam>`.
 - Wrapper-varianten: elke variant is een COMPONENT met verticale auto layout om een instance van `_X (base)` (exposed instance).
 - Tekst gekoppeld aan `typography-tokens/<groep>/<stijl>/{font-family,font-size,line-height,font-weight}`.
-- Icons: one component set `Icon` (page Icons) with all Lucide icons as variants (property Icon). Width and height are bound to `component-tokens/icon/size`. Change the size with the `↳ size` mode on the parent frame (md 20, sm 16, lg 24, xs 12), not with scaling. Fill color is set on the instance and stays after a swap.
+- Icons: one component set `Icon` (page Icons) with all Lucide icons as variants (property Icon). Width and height are bound to `component-tokens/icon/size`. Change the size with the `↳ size` mode on the parent frame (md 20, sm 16, lg 24), not with scaling. Rule: an icon next to text is as high as the line height of that text. Fill color: the foreground token of the component the icon sits in (the same token as the label). It is set on the instance and stays after a swap. There is no icon-context collection anymore.
 - Build rules: only the component's own tokens (for example `sidebar/*`), never alias or primitives. No spacer frames or thin lines to fake space: use auto layout with SPACE_BETWEEN or gap. `control` radius only for single-line elements (Input, Select); Textarea and cards use their own radius token.
 - Responsive varianten: componenten met een property Breakpoint (Desktop, Mobile) hebben een string-variabele `breakpoint/<component>` in de collectie screen-size-(alias). Xs geeft Mobile, de rest Desktop. Koppel de property via Apply variable; dan wisselt de variant mee met de schermmaat-mode van het frame. Alleen voor Figma, niet in tokens.css.
 
@@ -263,14 +263,11 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 
 **Dashboards en portalen**
 - Grafieken (lijn, staaf, donut, sparkline): on hold. Keuze tussen Recharts of eigen SVG, plus een token-reeks voor grafiekkleuren.
-- Status indicator: Brand-kleur botst in Forest met success (groen). Voorstel: Brand eruit, Info voor "bezig". Wacht op besluit Robert.
 - Notifications: tabs Alle/Ongelezen. Popover: pijltje naar de knop.
 - Date range picker: begin- en einddatum typen.
 - Table: gestapelde mobiele weergave; variant Empty splitsen in "geen data" en "geen resultaten".
 
 **Tokens en Figma**
-- `↳ icon-context` (603 icon fills) still breaks the layer rules. Decision Robert: split it or replace it by mapped foreground tokens.
-- Keep icon size xs (12) or not.
 - Test what a Starter plan user can do with a copy of the file.
 - Voorstel voor `on-warning` in Dark.
 - 43 oudere Docs-frames opnieuw genereren, zodat het Storybook-pad "Categorie / Component / Docs" klopt.

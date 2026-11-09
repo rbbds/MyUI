@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Changed
+- Figma: the `↳ icon-context` collection is removed. Every icon now uses the foreground token of its own component, the same token as its label. 2,331 icon fills are rebound.
+- Icon size mode xs (12px) is removed. Rule: an icon next to text is as high as the line height of that text. `[data-size="xs"]` is gone from `tokens.css`.
+- Table sort icon is now 16px (`--table-sort-icon-size` follows `--icon-size-sm`) and uses tokens instead of hardcoded 12px and 4px.
+- Checkbox check icon keeps 12px through `checkbox/indicator-icon-size`.
+
+### Breaking
+- **StatusIndicator**: `color="brand"` is removed, and so is `--status-indicator-brand-dot`. Use `info` for "in progress". A brand color can look like success or error (Forest is green).
+
 ## 0.3.0
 
 ### Breaking: new token architecture

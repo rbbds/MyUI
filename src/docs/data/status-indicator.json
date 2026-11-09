@@ -13,8 +13,8 @@
   "figmaProps": [
     [
       "Color",
-      "Gray, Brand, Success, Warning, Error, Info",
-      ""
+      "Gray, Success, Warning, Error, Info",
+      "No Brand: a brand color can look like success or error."
     ],
     [
       "Label",
@@ -45,7 +45,7 @@
     "Gebruik per product een vaste lijst statussen met vaste kleuren."
   ],
   "dont": [
-    "Brand voor een status als je merkkleur op success of error lijkt (bijvoorbeeld Forest groen): kies Info."
+    "Een merkkleur voor een status. Die kan op success of error lijken (bijvoorbeeld Forest groen). Gebruik Info voor \"bezig\"."
   ],
   "tokens": [
     "--status-indicator-*"
