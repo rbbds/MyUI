@@ -171,6 +171,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Wrapper-varianten: elke variant is een COMPONENT met verticale auto layout om een instance van `_X (base)` (exposed instance).
 - Tekst gekoppeld aan `typography-tokens/<groep>/<stijl>/{font-family,font-size,line-height,font-weight}`.
 - Iconen: Lucide-vectoren met naam "Icon", fill gekoppeld aan de icon-kleurvariabele.
+- Responsive varianten: componenten met een property Breakpoint (Desktop, Mobile) hebben een string-variabele `breakpoint/<component>` in de collectie screen-size-(alias). Xs geeft Mobile, de rest Desktop. Koppel de property via Apply variable; dan wisselt de variant mee met de schermmaat-mode van het frame. Alleen voor Figma, niet in tokens.css.
 
 **Valkuilen bij bouwen via de Figma-API**
 - Een script is atomair: één fout draait alles terug.
