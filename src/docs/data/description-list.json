@@ -1,0 +1,96 @@
+{
+  "name": "Description list",
+  "page": "Data display",
+  "figma": {
+    "node": "17046:437",
+    "base": "_Description list"
+  },
+  "react": "DescriptionList, DescriptionItem",
+  "summary": "Gegevens als label en waarde, zoals persoonsgegevens of contractdetails. In code een <dl> in een section met kop.",
+  "use": [
+    "\"Mijn gegevens\", contractdetails, samenvatting voor verzenden."
+  ],
+  "avoid": [
+    "Gegevens om te vergelijken over meerdere items: gebruik Table.",
+    "Invoer: gebruik een formulier."
+  ],
+  "anatomy": [
+    "Kop: titel, beschrijving en actie (optioneel).",
+    "Items (slot) met _Description item: label, waarde, actie (optioneel), scheidingslijn."
+  ],
+  "figmaProps": [
+    [
+      "Breakpoint",
+      "Desktop, Mobile",
+      "Op mobiel valt de waarde onder het label."
+    ],
+    [
+      "Title / Description",
+      "tekst",
+      ""
+    ],
+    [
+      "Show header / description / action",
+      "boolean",
+      ""
+    ],
+    [
+      "Items",
+      "slot",
+      "Zet hier Description items in."
+    ],
+    [
+      "_Description item: Label / Value / Show action / Show divider",
+      "",
+      "Divider uit bij het laatste item."
+    ]
+  ],
+  "reactProps": [
+    [
+      "title, description, action",
+      "ReactNode",
+      ""
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Standaard 2."
+    ],
+    [
+      "plain",
+      "boolean",
+      "Zonder kaartrand, bijvoorbeeld in een Modal."
+    ],
+    [
+      "DescriptionItem label, children, action",
+      "ReactNode",
+      "children is de waarde."
+    ]
+  ],
+  "behaviour": [
+    "Label 200 px breed; onder 600 px komt de waarde onder het label."
+  ],
+  "a11y": [
+    "<dl> met <dt> en <dd>.",
+    "Actie per regel: zet de naam van het veld erbij voor schermlezers (\"Wijzigen e-mailadres\")."
+  ],
+  "content": [
+    "Leeg veld: toon \"Niet ingevuld\" in plaats van niets.",
+    "Gevoelige gegevens gedeeltelijk tonen (•••• ••• 12)."
+  ],
+  "do": [
+    "Groepeer in blokken van 3 tot 7 regels met een duidelijke titel."
+  ],
+  "dont": [
+    "Eén \"Wijzigen\" per regel én in de kop: kies er één."
+  ],
+  "tokens": [
+    "--description-list-*"
+  ],
+  "related": [
+    "Table",
+    "Page header",
+    "Card"
+  ],
+  "open": []
+}

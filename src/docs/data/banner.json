@@ -1,0 +1,92 @@
+{
+  "name": "Banner",
+  "page": "Feedback",
+  "figma": {
+    "node": "17046:264",
+    "base": "_Banner"
+  },
+  "react": "Banner",
+  "summary": "Melding over de hele breedte van de pagina, boven de inhoud: onderhoud, onvolledige gegevens, een nieuwe functie.",
+  "use": [
+    "Iets wat voor de hele pagina of het hele portaal geldt."
+  ],
+  "avoid": [
+    "Meldingen bij een formulier of blok: gebruik Alert.",
+    "Bevestiging na een actie: gebruik Toast."
+  ],
+  "anatomy": [
+    "Icoon.",
+    "Titel (vet, optioneel) en tekst.",
+    "Actie (link, optioneel).",
+    "Sluitknop (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Color",
+      "Brand, Gray, Info, Warning, Error, Success",
+      ""
+    ],
+    [
+      "Breakpoint",
+      "Desktop, Mobile",
+      ""
+    ],
+    [
+      "Title / Text",
+      "tekst",
+      ""
+    ],
+    [
+      "Show title / Show action / Closable",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "color",
+      "StatusColor",
+      "Standaard brand."
+    ],
+    [
+      "title, children, icon, action",
+      "ReactNode",
+      ""
+    ],
+    [
+      "onClose, closeLabel",
+      "() => void, string",
+      "Toont de sluitknop."
+    ],
+    [
+      "role",
+      "'status' | 'alert' | 'region'",
+      "status bij een banner die na een actie verschijnt; weglaten als hij er bij laden al staat."
+    ]
+  ],
+  "behaviour": [
+    "Blijft staan tot de gebruiker hem sluit of het probleem is opgelost.",
+    "Op mobiel valt de actie onder de tekst."
+  ],
+  "a11y": [
+    "Kleur is niet de enige drager: icoon en tekst.",
+    "Sluitknop met naam \"Melding sluiten\"."
+  ],
+  "content": [
+    "Titel zegt wat er is, tekst wat je moet doen."
+  ],
+  "do": [
+    "Maximaal één banner tegelijk."
+  ],
+  "dont": [
+    "Een banner voor marketing: gebruik een Card."
+  ],
+  "tokens": [
+    "--banner-*"
+  ],
+  "related": [
+    "Alert",
+    "Toast"
+  ],
+  "open": []
+}

@@ -1,0 +1,106 @@
+{
+  "name": "Date range picker",
+  "page": "Form inputs",
+  "figma": {
+    "node": "17052:1468",
+    "base": "_Date range picker"
+  },
+  "react": "DateRangePicker",
+  "summary": "Periode kiezen: snelkeuzes links, twee maanden naast elkaar, bevestigen met Toepassen. Op mobiel één maand en de snelkeuzes als rij erboven.",
+  "use": [
+    "Filteren op periode in dashboards, rapportages en overzichten."
+  ],
+  "avoid": [
+    "Eén datum: gebruik Date picker.",
+    "Geboortedatum of andere bekende datum: gebruik Input met dd-mm-jjjj."
+  ],
+  "anatomy": [
+    "Veld met kalendericoon en de gekozen periode.",
+    "Paneel: snelkeuzes, twee Calendars (Calendar day: Range start, In range, Range end), voettekst met samenvatting, Annuleren en Toepassen."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Closed, Open",
+      ""
+    ],
+    [
+      "Summary",
+      "tekst",
+      ""
+    ],
+    [
+      "Show presets / Show footer",
+      "boolean",
+      ""
+    ],
+    [
+      "Calendar day: State",
+      "+ Range start, Range end, In range",
+      "Nieuw voor deze component."
+    ]
+  ],
+  "reactProps": [
+    [
+      "value / defaultValue",
+      "{ start: Date | null; end: Date | null }",
+      ""
+    ],
+    [
+      "onChange",
+      "(range) => void",
+      "Pas bij Toepassen."
+    ],
+    [
+      "presets",
+      "DateRangePreset[] | false",
+      "Standaard defaultDateRangePresets()."
+    ],
+    [
+      "min, max, disabled, locale",
+      "",
+      ""
+    ],
+    [
+      "label, hint, error, required",
+      "FieldBaseProps",
+      ""
+    ],
+    [
+      "Calendar: rangeStart, rangeEnd, onDayHover, month, onMonthChange, hidePrevious, hideNext",
+      "",
+      "Nieuwe Calendar-props voor bereik en gekoppelde maanden."
+    ]
+  ],
+  "behaviour": [
+    "Eerste klik = begin, tweede klik = einde. Klik je eerder dan het begin, dan wisselen ze om.",
+    "Tijdens kiezen zie je het bereik bij hover of focus.",
+    "Annuleren of Escape sluit zonder te wijzigen. Focus gaat terug naar het veld."
+  ],
+  "a11y": [
+    "Veld is een knop met aria-haspopup=\"dialog\"; het paneel is een dialog.",
+    "Kalender met pijltjestoetsen, PageUp en PageDown; dagen in het bereik hebben aria-selected.",
+    "Snelkeuzes zijn knoppen met aria-pressed. De samenvatting wordt voorgelezen (aria-live)."
+  ],
+  "content": [
+    "Samenvatting met aantal dagen: \"23 nov. – 4 dec. 2026 · 12 dagen\"."
+  ],
+  "do": [
+    "Kies snelkeuzes die bij de data passen."
+  ],
+  "dont": [
+    "Direct filteren bij de eerste klik: wacht op Toepassen."
+  ],
+  "tokens": [
+    "--date-range-*",
+    "--calendar-day-surface-range",
+    "--calendar-day-foreground-range"
+  ],
+  "related": [
+    "Date picker",
+    "Button group"
+  ],
+  "open": [
+    "Begin- en einddatum typen is nog niet mogelijk; alleen kiezen."
+  ]
+}

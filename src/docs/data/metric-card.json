@@ -1,0 +1,104 @@
+{
+  "name": "Metric card",
+  "page": "Data display",
+  "figma": {
+    "node": "17045:106",
+    "base": "_Metric card"
+  },
+  "react": "MetricCard",
+  "summary": "KPI-tegel voor dashboards: label, waarde en het verschil met de vorige periode. Optioneel een icoon, menu en link onderaan.",
+  "use": [
+    "Kerncijfers bovenaan een dashboard of overzicht, meestal 2 tot 4 naast elkaar."
+  ],
+  "avoid": [
+    "Een verloop door de tijd: gebruik een grafiek (komt later).",
+    "Lange tekst of lijsten."
+  ],
+  "anatomy": [
+    "Featured icon (optioneel).",
+    "Label.",
+    "Menu (optioneel).",
+    "Waarde.",
+    "Trend: pijl en verschil, met context (\"t.o.v. vorige maand\").",
+    "Footer met link (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Trend",
+      "Up, Down, Neutral",
+      "Kleur en pijl."
+    ],
+    [
+      "Label / Value / Delta / Meta",
+      "tekst",
+      "via _Metric card"
+    ],
+    [
+      "Show icon / menu / delta / footer",
+      "boolean",
+      "Footer standaard uit."
+    ]
+  ],
+  "reactProps": [
+    [
+      "label, value",
+      "ReactNode",
+      "Verplicht. Geef de waarde al geformatteerd mee."
+    ],
+    [
+      "delta",
+      "ReactNode",
+      "Met teken: \"+12,4%\" of \"−3\"."
+    ],
+    [
+      "trend",
+      "'up' | 'down' | 'neutral'",
+      "Kies op betekenis, niet op richting. Stijgende kosten zijn ook \"down\"-rood als dat slecht is."
+    ],
+    [
+      "meta",
+      "ReactNode",
+      "Context van het verschil."
+    ],
+    [
+      "icon / menu / footer",
+      "ReactNode",
+      ""
+    ],
+    [
+      "trendLabels",
+      "Record<trend, string>",
+      "Woorden voor schermlezers. Standaard Gestegen, Gedaald, Gelijk gebleven."
+    ]
+  ],
+  "behaviour": [
+    "Zet tegels in een raster met de class rb-metric-grid (auto-fill, minimaal 240 px)."
+  ],
+  "a11y": [
+    "Groep met het label als naam (role=\"group\").",
+    "De trend is niet alleen kleur: pijl, teken en verborgen tekst (\"Gestegen: +12,4%\").",
+    "Cijfers in tabular-nums, zodat ze netjes onder elkaar staan."
+  ],
+  "content": [
+    "Label kort, zonder eenheid als die al in de waarde staat.",
+    "Meta zegt waarmee je vergelijkt."
+  ],
+  "do": [
+    "Gebruik dezelfde periode in alle tegels."
+  ],
+  "dont": [
+    "Een verschil zonder context.",
+    "Meer dan 4 tegels op een rij."
+  ],
+  "tokens": [
+    "--metric-card-*"
+  ],
+  "related": [
+    "Featured icon",
+    "Page header",
+    "Button group"
+  ],
+  "open": [
+    "Kleine grafiek (sparkline) in de tegel: wacht op de keuze voor grafieken."
+  ]
+}

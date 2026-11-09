@@ -6,12 +6,23 @@ import { FeaturedIcon, ProgressBar } from '../Display/Display';
 import './Content.css';
 
 /* ---------- Table ---------- */
-export interface TableCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> { title?: ReactNode; badge?: ReactNode; children: ReactNode }
+export interface TableCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  title?: ReactNode;
+  badge?: ReactNode;
+  /** Primary action on the right, e.g. "Teamlid toevoegen". Leave out when the PageHeader already has it. */
+  actions?: ReactNode;
+  /** TableToolbar and TableBulkActions, shown between the header and the table. */
+  toolbar?: ReactNode;
+  headingLevel?: 2 | 3 | 4;
+  children: ReactNode;
+}
 /** Bordered container for a table with an optional header. Put a <Table> inside. */
-export function TableCard({ title, badge, className, children, ...rest }: TableCardProps) {
+export function TableCard({ title, badge, actions, toolbar, headingLevel = 3, className, children, ...rest }: TableCardProps) {
+  const H = `h${headingLevel}` as 'h3';
   return (
     <div className={cx('rb-table-wrap', className)} {...rest}>
-      {title && <div className="rb-table-wrap__header"><h3 className="rb-table-wrap__title">{title}</h3>{badge}</div>}
+      {(title || actions) && <div className="rb-table-wrap__header">{title && <H className="rb-table-wrap__title">{title}</H>}{badge}{actions && <div className="rb-table-wrap__actions">{actions}</div>}</div>}
+      {toolbar}
       <div className="rb-table-scroll">{children}</div>
     </div>
   );

@@ -73,3 +73,10 @@
 .rb-file__done svg{width:20px;height:20px}
 .rb-file .rb-progress__indicator{background:var(--file-item-progress)}
 .rb-file .rb-progress__track{background:var(--file-item-progress-track)}
+
+.rb-table-wrap__actions{margin-left:auto;display:flex;gap:var(--spacing-3)}
+.rb-table tbody tr[aria-selected="true"] td{background:var(--table-surface-selected)}
+.rb-table__empty td{padding:0}
+.rb-table__empty:hover td{background:transparent!important}
+.rb-table__skeleton:hover td{background:transparent!important}
+@media (max-width:599px){.rb-table-wrap__header{flex-wrap:wrap}.rb-table-wrap__actions{margin-left:0;width:100%}.rb-table-wrap__actions>*{flex:1}}
