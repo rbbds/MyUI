@@ -1,6 +1,6 @@
 # MyUI token architecture (plan)
 
-Status: phase 1 done in Figma (9 November 2026). Phase 2 next. Written in B1 English.
+Status: phases 1, 2 and 3 done (9 November 2026, PR #10, version 0.3.0). Phase 4 (English) is next. Written in B1 English.
 
 ## Progress
 
@@ -13,9 +13,9 @@ Status: phase 1 done in Figma (9 November 2026). Phase 2 next. Written in B1 Eng
   - Mapped now only points to alias collections. Size points to primitives.
   - Icon sizes in Button, Featured icon and the Icon component use Mapped tokens.
   - All collections except Mapped are hidden from publishing, with empty scopes.
-- **Still open from phase 1:**
-  - The old Theme variables for spacing, radius, border width, fonts and shadow geometry are kept as `deprecated/*`, because 783 nodes still bind to them. They are removed at the end of phase 2.
-  - **brand/dark/*** tuning is added with the Brand builder in phase 3.
+- **Phase 2 (done):** every binding in the file goes through Mapped (8,817 rebinds). The `deprecated/*` variables are deleted. Only exception: 603 icon fills still use icon-context (open point 1).
+- **Phase 3 (done):** export script with one CSS block per layer, `--wl-*` renamed to `--brand-*` (compat block until 0.4.0), Brand builder in English with accent color, Sidebar collapsed and two-level, Berry radius fixes. axe: 0 violations.
+- **Still open:** **brand/dark/*** tuning in the Brand builder.
 - **Test result:** in the Icon set, a color or size override on an icon stays when you swap to another icon through the Icon property. So a component can color its icons with its own Mapped foreground token, and icon-context is not needed for that.
 
 ## Goal
