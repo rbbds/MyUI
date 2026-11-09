@@ -22,7 +22,7 @@
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Op mobiel valt de waarde onder het label."
+      "Op mobiel valt de waarde onder het label. Koppel aan breakpoint/description-list (Apply variable) om mee te wisselen met de schermmaat."
     ],
     [
       "Title / Description",

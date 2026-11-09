@@ -1,0 +1,79 @@
+{
+  "use": [
+    "Instellingen- en voorkeurenpagina's."
+  ],
+  "avoid": [
+    "Formulieren die bij een taak horen: gebruik een gewoon formulier."
+  ],
+  "anatomy": [
+    "Intro: titel en uitleg.",
+    "Kaart met rijen (slot).",
+    "Setting row: label, uitleg, control (slot, standaard Toggle).",
+    "Acties (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Breakpoint",
+      "Desktop, Mobile",
+      "Koppel aan breakpoint/settings-section."
+    ],
+    [
+      "Title / Description / Show description / Show actions",
+      "",
+      ""
+    ],
+    [
+      "Rows",
+      "slot",
+      ""
+    ],
+    [
+      "Setting row: Label / Description / Show description / Control",
+      "",
+      "Control is een slot."
+    ]
+  ],
+  "reactProps": [
+    [
+      "SettingsSection title, description, actions, headingLevel",
+      "",
+      ""
+    ],
+    [
+      "SettingRow label, description, control",
+      "",
+      "control krijgt aria-labelledby en aria-describedby van de rij."
+    ]
+  ],
+  "behaviour": [
+    "Toggles slaan direct op; meld dat met een Toast. Velden die bij elkaar horen: Opslaan in actions."
+  ],
+  "a11y": [
+    "Label en uitleg van de rij worden de naam en beschrijving van de control."
+  ],
+  "content": [
+    "Label als wat het doet, uitleg als gevolg."
+  ],
+  "do": [
+    "Groepeer per onderwerp: Meldingen, Taal, Beveiliging."
+  ],
+  "dont": [
+    "Toggles en een Opslaan-knop door elkaar in één blok."
+  ],
+  "tokens": [
+    "--settings-*"
+  ],
+  "related": [
+    "Toggle",
+    "Description list"
+  ],
+  "open": [],
+  "name": "Settings section",
+  "page": "Content",
+  "figma": {
+    "node": "17074:541",
+    "base": "_Settings section"
+  },
+  "react": "SettingsSection, SettingRow",
+  "summary": "Blok op een instellingenpagina: titel en uitleg links, instellingen rechts in een kaart. Elke instelling met label, uitleg en een control."
+}

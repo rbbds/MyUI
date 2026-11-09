@@ -1,5 +1,6 @@
 // Figma page id per component (file gV7OuQywH2cOUVfQagW6nC). One page per component, grouped under "---- Category ----" header pages.
 export const FIGMA_PAGES = {
+  'Status indicator': '17071:94', 'Document list': '17071:96', 'Activity feed': '17071:95', 'Notifications': '17071:98', 'Popover': '17071:97', 'Settings section': '17071:100', 'Checklist': '17071:99', 'Verification code': '17071:93', 'Password input': '17071:92', 'Copy input': '17071:91',
   'Metric card': '17044:71', 'Description list': '17044:70', 'Page header': '17044:72', 'Banner': '17044:73',
   'Button': '17016:680', 'Button destructive': '17016:682', 'Button icon': '17016:683', 'Button group': '17016:685',
   'Input': '17017:1124', 'Select': '17017:1126', 'Textarea': '17017:1128', 'Slider': '17017:1130', 'Search input': '17017:1131', 'Date picker': '17017:1133', 'Combobox': '17017:1135', 'Date range picker': '17044:74',

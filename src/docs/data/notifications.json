@@ -1,0 +1,81 @@
+{
+  "use": [
+    "Portalen met gebeurtenissen die de gebruiker moet zien: nieuwe documenten, besluiten."
+  ],
+  "avoid": [
+    "Bevestiging van een actie: gebruik Toast."
+  ],
+  "anatomy": [
+    "Notification button: bel en aantal.",
+    "Panel: kop met \"Alles gelezen\", items (slot), voet met link.",
+    "Item: avatar of icoon, titel, tekst, tijd, ongelezen-stip."
+  ],
+  "figmaProps": [
+    [
+      "Notification button: Count",
+      "Some, None",
+      ""
+    ],
+    [
+      "Notification panel: State",
+      "Filled, Empty",
+      ""
+    ],
+    [
+      "Notification item: Unread / State",
+      "True, False / Default, Hover",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "NotificationMenu count, onMarkAllRead, footer, empty, children",
+      "",
+      "Knop plus paneel."
+    ],
+    [
+      "NotificationButton count, label, countLabel",
+      "",
+      "Naam: \"Meldingen, 3 ongelezen\"."
+    ],
+    [
+      "NotificationItem title, children, time, unread, avatar, href / onClick",
+      "",
+      "Markeer als gelezen in onClick."
+    ]
+  ],
+  "behaviour": [
+    "Klik op de bel opent het paneel; Escape of klikken buiten het paneel sluit en zet de focus terug.",
+    "Klik op een melding opent het onderwerp en markeert hem als gelezen."
+  ],
+  "a11y": [
+    "Het aantal zit in de naam van de knop; de badge is aria-hidden.",
+    "Ongelezen wordt voorgelezen (\"Ongelezen: …\")."
+  ],
+  "content": [
+    "Titel = wie of wat; tekst = wat er gebeurde."
+  ],
+  "do": [],
+  "dont": [
+    "Meldingen automatisch als gelezen markeren bij openen van het paneel."
+  ],
+  "tokens": [
+    "--notification-*"
+  ],
+  "related": [
+    "Header",
+    "Toast",
+    "Popover"
+  ],
+  "open": [
+    "Tabs Alle/Ongelezen in het paneel."
+  ],
+  "name": "Notifications",
+  "page": "Overlays",
+  "figma": {
+    "node": "17073:520",
+    "base": "_Notification panel"
+  },
+  "react": "NotificationMenu, NotificationButton, NotificationPanel, NotificationItem",
+  "summary": "Meldingen in de header: bel met aantal ongelezen, paneel met meldingen, \"Alles gelezen\" en een link naar alle meldingen."
+}

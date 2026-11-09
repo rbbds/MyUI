@@ -1,0 +1,64 @@
+{
+  "use": [
+    "Nummers die mensen ergens anders moeten invullen of noemen."
+  ],
+  "avoid": [
+    "Lange teksten of code: gebruik een codeblok."
+  ],
+  "anatomy": [
+    "Label.",
+    "Alleen-lezen veld.",
+    "Knop met icoon (Kopiëren / Gekopieerd)."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Default, Copied",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "value",
+      "string",
+      "Verplicht."
+    ],
+    [
+      "label, hint",
+      "",
+      ""
+    ],
+    [
+      "copyLabel, copiedLabel, copiedMessage",
+      "string",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Kopieert via het klembord; lukt dat niet, dan wordt de tekst geselecteerd."
+  ],
+  "a11y": [
+    "Na kopiëren een statusmelding voor schermlezers.",
+    "Het veld is alleen-lezen maar focusbaar en selecteert bij focus."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [],
+  "tokens": [
+    "--copy-input-foreground-copied",
+    "--input-*"
+  ],
+  "related": [
+    "Input",
+    "Button"
+  ],
+  "open": [],
+  "name": "Copy input",
+  "page": "Form inputs",
+  "figma": {
+    "node": "17075:734",
+    "base": "_Copy input"
+  },
+  "react": "CopyInput",
+  "summary": "Waarde om te kopiëren, zoals een klantnummer, dossiernummer of IBAN. Na kopiëren 2 seconden \"Gekopieerd\"."
+}

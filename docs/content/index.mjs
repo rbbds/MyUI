@@ -4,4 +4,5 @@ import c from './nav-content.mjs';
 import d from './batch-2.mjs';
 import { docs as e } from './ecommerce.mjs';
 import { docs as f } from './portal.mjs';
-export const docs = [...a, ...b, ...c, ...d, ...e, ...f];
+import { docs as g } from './portal2.mjs';
+export const docs = [...a, ...b, ...c, ...d, ...e, ...f, ...g];

@@ -1,0 +1,105 @@
+{
+  "use": [
+    "Laatste documenten op een overzichtspagina (3 tot 5, met \"Alle documenten\").",
+    "Een eigen documentenpagina, met Pagination of \"Meer laden\" eronder."
+  ],
+  "avoid": [
+    "Documenten met veel kolommen om te sorteren: gebruik Table."
+  ],
+  "anatomy": [
+    "Kop: titel en link (optioneel).",
+    "Items (slot) met Document items: icoon, titel, ongelezen-stip, meta, download."
+  ],
+  "figmaProps": [
+    [
+      "Breakpoint",
+      "Desktop, Mobile",
+      "Koppel aan breakpoint/document-list (Apply variable)."
+    ],
+    [
+      "Title / Show header / Show action",
+      "",
+      ""
+    ],
+    [
+      "Items",
+      "slot",
+      ""
+    ],
+    [
+      "Document item: Unread / State",
+      "False, True / Default, Hover",
+      ""
+    ],
+    [
+      "Document item: Title / Meta / Show icon / Show download",
+      "",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "DocumentList title, action, headingLevel",
+      "",
+      "headingLevel standaard 2."
+    ],
+    [
+      "DocumentItem title, href",
+      "string",
+      "Verplicht. De titel is de link."
+    ],
+    [
+      "meta",
+      "ReactNode",
+      "\"PDF · 240 kB · 12 okt. 2026\"."
+    ],
+    [
+      "unread",
+      "boolean",
+      ""
+    ],
+    [
+      "downloadHref, downloadLabel",
+      "string",
+      "Downloadlink naast de titel."
+    ],
+    [
+      "icon",
+      "ReactNode",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Bladeren hoort niet bij de lijst: zet Pagination of een knop \"Meer laden\" eronder."
+  ],
+  "a11y": [
+    "<ul> met per document een link; downloaden is een aparte link met naam \"Download {titel}\".",
+    "Ongelezen wordt voorgelezen (\", Nieuw\")."
+  ],
+  "content": [
+    "Titel zoals het document heet, zonder bestandsnaam of extensie."
+  ],
+  "do": [
+    "Nieuwste bovenaan."
+  ],
+  "dont": [
+    "Twee links met dezelfde naam per regel."
+  ],
+  "tokens": [
+    "--document-list-*"
+  ],
+  "related": [
+    "Pagination",
+    "Table",
+    "Description list"
+  ],
+  "open": [],
+  "name": "Document list",
+  "page": "Data display",
+  "figma": {
+    "node": "17072:349",
+    "base": "_Document list"
+  },
+  "react": "DocumentList, DocumentItem",
+  "summary": "Lijst met documenten zoals brieven en jaaropgaves: icoon, titel als link, type, grootte, datum en een downloadknop."
+}

@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Nieuw: portaal, ronde 2
+- **StatusIndicator**: stip en tekst in 6 kleuren.
+- **DocumentList** en **DocumentItem**: documenten met meta, ongelezen-stip en downloadlink.
+- **ActivityFeed** en **ActivityItem**: tijdlijn met icoon, avatar of stip.
+- **NotificationMenu**, **NotificationButton**, **NotificationPanel**, **NotificationItem**: meldingen met aantal ongelezen.
+- **Popover** (met `useDismiss`): paneel bij een knop met uitleg of een klein formulier.
+- **SettingsSection** en **SettingRow**: instellingenblok; de control krijgt label en uitleg van de rij.
+- **Checklist** en **ChecklistItem**: onboarding-voortgang.
+- **VerificationCode**: eenmalige code als vakjes, één input met `autocomplete="one-time-code"`.
+- **PasswordInput**: tonen/verbergen, optioneel sterktemeter en eisen.
+- **CopyInput**: alleen-lezen waarde met kopieerknop.
+- Storybook-voorbeelden: Documenten, Aanvraag volgen, Inloggen met code.
+- Figma: string-variabelen `breakpoint/<component>` in screen-size-(alias) om Breakpoint-varianten mee te laten wisselen; het export-script slaat ze over.
+
 ### Nieuw: dashboards en portalen
 - **MetricCard**: KPI-tegel met label, waarde, trend (up, down, neutral) en context. Raster met `rb-metric-grid`.
 - **PageHeader**: broodkruimel, h1, beschrijving, acties en optioneel tabs.
@@ -31,6 +45,7 @@
 - README: componentenlijst en rebranding (stijlen en Brand builder) bijgewerkt.
 
 ### Tokens
+- 90 nieuwe component-tokens voor ronde 2: `--status-indicator-*`, `--document-list-*`, `--activity-*`, `--notification-*`, `--popover-*`, `--settings-*`, `--checklist-*`, `--code-input-*`, `--password-strength-*`, `--copy-input-*`.
 - 69 nieuwe component-tokens voor dashboards en portalen: `--metric-card-*`, `--page-header-*`, `--description-list-*`, `--banner-*`, `--table-surface-selected`, `--table-toolbar-*`, `--table-bulk-*`, `--calendar-day-*-range`, `--date-range-*`, `--accordion-item-gap`.
 - 74 nieuwe component-tokens: `--product-card-*`, `--product-grid-*`, `--price-*`, `--rating-*`, `--qty-*`, `--stock-*`, `--gallery-*`, `--variant-*`, `--cart-item-*`, `--cart-summary-*`, `--cart-button-*`, `--filter-*`.
 
