@@ -30,3 +30,10 @@
 .rb-datepicker__anchor{position:relative}
 .rb-datepicker__popover{position:absolute;z-index:20;top:calc(100% + var(--spacing-2));left:0}
 @media (max-width:599px){.rb-datepicker__popover{left:50%;transform:translateX(-50%)}}
+
+/* range (DateRangePicker) */
+.rb-calendar__grid td.is-in-range{background:var(--calendar-day-surface-range)}
+.rb-calendar__grid td.is-in-range .rb-calendar__day{color:var(--calendar-day-foreground-range)}
+.rb-calendar__grid td.is-range-start{background:linear-gradient(to right,transparent 50%,var(--calendar-day-surface-range) 50%)}
+.rb-calendar__grid td.is-range-end{background:linear-gradient(to left,transparent 50%,var(--calendar-day-surface-range) 50%)}
+.rb-calendar--plain{padding:0;border:0;box-shadow:none;background:transparent}

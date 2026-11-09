@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 8 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 9 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -194,6 +194,13 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Utilities: Divider, Featured icon, Spinner, Skeleton, Kbd
 - Flags: 250+ vlaggen en CountrySelect (aparte entry)
 
+**Dashboards en portalen (PR #7)**
+- Metric card, Page header, Description list, Banner, Date range picker
+- Table: werkbalk (Table toolbar), selectiebalk (Table bulk actions), states Selected, Loading, Empty. In Figma kolommen via een slot en rijen via Rows (Table column)
+- Accordion-groep in Figma (10 items, toggles)
+- Voorbeeldpagina's: Dashboard, Mijn gegevens
+- Segmented control bestaat al als Button group
+
 **E-commerce (PR #3)**
 - Kern: Product card, Product grid, Price, Rating, Quantity stepper, Stock indicator
 - Productpagina: Product gallery, Variant picker, Add to cart
@@ -218,6 +225,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #3 | E-commerce componenten, docs en Figma Docs-frames |
 | #4 | Fix: Brand builder negeert de Brand-knop in de toolbar |
 | #5 | Projectoverzicht (`docs/PROJECT.md`) en README bijgewerkt |
+| #6 | Fix: QuantityStepper hugt zijn inhoud |
+| #7 | Dashboard- en portaalcomponenten, Table met kolommen-slot |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -232,11 +241,23 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 - "Mail me als het weer leverbaar is"
 - Inzoomen en vegen in Product gallery
 
+**Dashboards en portalen**
+- Grafieken (lijn, staaf, donut, sparkline): on hold. Keuze tussen Recharts of eigen SVG, plus een token-reeks voor grafiekkleuren.
+- Prioriteit 2: Document list, Activity feed, notificaties, Status indicator, instellingen-patroon, checklist, Popover.
+- Prioriteit 3: verificatiecode, wachtwoordveld met sterkte, kopieerveld.
+- Date range picker: begin- en einddatum typen.
+- Table: gestapelde mobiele weergave; variant Empty splitsen in "geen data" en "geen resultaten".
+
 **Tokens en Figma**
 - Ongeveer 1.613 directe koppelingen aan theme-variabelen omzetten naar mapped tokens (rebind-PR), plus effects en focus ring als mapped tokens.
 - Voorstel voor `on-warning` in Dark.
 - 43 oudere Docs-frames opnieuw genereren, zodat het Storybook-pad "Categorie / Component / Docs" klopt.
 - Brand builder: bij de standaardkleur precies de Forest- en Berry-tokens gebruiken (nu een iets andere tint).
+
+**Werkafspraken (vastgelegd in november 2026)**
+- Componenten met een andere opbouw krijgen een eigen base, ook als ze als varianten in één set staan.
+- Een tabel: werkbalk en selectiebalk tegelijk zichtbaar; zoeken of filteren wist de selectie. De toevoegen-knop staat in de kop van de tabel of in de Page header, nooit in de werkbalk.
+- Groepen in Figma: vaste maximale aantallen via toggles (Accordion) of vrij via een slot (Table, Description list).
 
 **Proces**
 - E-commerce is code-first gebouwd. Nog een design review in Figma doen en aanpassingen doorzetten naar code.

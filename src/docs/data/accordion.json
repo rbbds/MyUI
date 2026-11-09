@@ -20,6 +20,11 @@
   ],
   "figmaProps": [
     [
+      "Accordion: Show item 2 t/m 10",
+      "boolean",
+      "Groep met 10 items, 4 standaard aan. Titel en Expanded per item in het properties-paneel."
+    ],
+    [
       "Expanded",
       "False, True",
       ""
@@ -74,7 +79,7 @@
     "Accordions in accordions."
   ],
   "tokens": [
-    "--accordion-{border|surface-hover|gap|padding-vertical}",
+    "--accordion-{border|surface-hover|gap|padding-vertical|item-gap}",
     "--accordion-foreground-*"
   ],
   "related": [

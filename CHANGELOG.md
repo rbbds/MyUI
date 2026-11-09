@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Nieuw: dashboards en portalen
+- **MetricCard**: KPI-tegel met label, waarde, trend (up, down, neutral) en context. Raster met `rb-metric-grid`.
+- **PageHeader**: broodkruimel, h1, beschrijving, acties en optioneel tabs.
+- **DescriptionList** en **DescriptionItem**: gegevens als label en waarde (`<dl>`), voor "Mijn gegevens".
+- **Banner**: paginabrede melding in 6 kleuren, met actie en sluitknop.
+- **TableToolbar**, **TableBulkActions**, **TableSkeletonRows**, **TableEmptyRow**. **TableCard** krijgt `actions`, `toolbar` en `headingLevel`; `<tr aria-selected>` krijgt de selectiekleur.
+- **DateRangePicker**: snelkeuzes, twee maanden, Annuleren en Toepassen; op mobiel één maand.
+- **Calendar**: nieuwe props `rangeStart`, `rangeEnd`, `onDayHover`, `month`, `onMonthChange`, `hidePrevious`, `hideNext`.
+- Storybook: voorbeeldpagina's Portaal / Voorbeelden (Dashboard en Mijn gegevens).
+- Figma: Table opnieuw opgebouwd met Table column (kolommen via een slot, rijen via Rows), Table toolbar en Table bulk actions als losse componenten, Accordion-groep met 10 items, Calendar day met range-states.
+
 ### Nieuw: e-commerce
 - **Kern**: `ProductCard` (vertical, horizontal, sold out), `ProductGrid`, `Price` (met van-prijs en `formatMoney`), `Rating` (alleen lezen, halve sterren), `QuantityStepper`, `StockIndicator`.
 - **Productpagina**: `ProductGallery` (pijlen, teller, miniaturen met roving tabindex), `VariantPicker` (kleur en maat, niet-beschikbaar blijft zichtbaar), `AddToCart`.
@@ -20,6 +31,7 @@
 - README: componentenlijst en rebranding (stijlen en Brand builder) bijgewerkt.
 
 ### Tokens
+- 69 nieuwe component-tokens voor dashboards en portalen: `--metric-card-*`, `--page-header-*`, `--description-list-*`, `--banner-*`, `--table-surface-selected`, `--table-toolbar-*`, `--table-bulk-*`, `--calendar-day-*-range`, `--date-range-*`, `--accordion-item-gap`.
 - 74 nieuwe component-tokens: `--product-card-*`, `--product-grid-*`, `--price-*`, `--rating-*`, `--qty-*`, `--stock-*`, `--gallery-*`, `--variant-*`, `--cart-item-*`, `--cart-summary-*`, `--cart-button-*`, `--filter-*`.
 
 ## 0.2.0 (november 2026)

@@ -59,6 +59,16 @@ export interface CalendarProps {
   nextLabel?: string;
   /** Accessible label of the view switch button. Receives the view that opens on click. */
   switchViewLabel?: (next: CalendarView) => string;
+  /** Range mode (used by DateRangePicker): start and end of the selected range. */
+  rangeStart?: Date | null;
+  rangeEnd?: Date | null;
+  /** Called while hovering or focusing a day, to preview a range. */
+  onDayHover?: (date: Date | null) => void;
+  /** Controlled visible month (first day). Use with onMonthChange, e.g. for two calendars side by side. */
+  month?: Date;
+  onMonthChange?: (month: Date) => void;
+  hidePrevious?: boolean;
+  hideNext?: boolean;
   className?: string;
 }
 
@@ -70,7 +80,8 @@ export function Calendar({
   value, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
   views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
   yearsPerRow = 3, yearsOrder = 'asc', locale = 'nl-NL', weekStartsOn = 1, autoFocus,
-  previousLabel = 'Vorige maand', nextLabel = 'Volgende maand', switchViewLabel = switchDefault, className,
+  previousLabel = 'Vorige maand', nextLabel = 'Volgende maand', switchViewLabel = switchDefault,
+  rangeStart, rangeEnd, onDayHover, month: monthProp, onMonthChange, hidePrevious, hideNext, className,
 }: CalendarProps) {
   const today = startOfDay(new Date());
   const lo = startOfDay(new Date(Math.max((min ?? DEFAULT_MIN).getTime(), disablePast ? today.getTime() : -Infinity)));
@@ -78,7 +89,14 @@ export function Calendar({
   const clamp = (d: Date) => (d < lo ? lo : d > hi ? hi : d);
 
   const [view, setView] = useState<CalendarView>(() => (openTo && views.includes(openTo) ? openTo : views.includes('day') ? 'day' : views[0]));
-  const [focused, setFocused] = useState<Date>(() => clamp(startOfDay(value ?? defaultMonth ?? today)));
+  const [focusedRaw, setFocusedRaw] = useState<Date>(() => clamp(startOfDay(monthProp ?? value ?? rangeStart ?? defaultMonth ?? today)));
+  /* controlled month: keep the focused day inside the shown month */
+  const inShown = !monthProp || (focusedRaw.getFullYear() === monthProp.getFullYear() && focusedRaw.getMonth() === monthProp.getMonth());
+  const focused = inShown ? focusedRaw : clamp(new Date(monthProp!.getFullYear(), monthProp!.getMonth(), 1));
+  const setFocused = (d: Date) => {
+    setFocusedRaw(d);
+    if (monthProp && onMonthChange && (d.getFullYear() !== monthProp.getFullYear() || d.getMonth() !== monthProp.getMonth())) onMonthChange(new Date(d.getFullYear(), d.getMonth(), 1));
+  };
   const month = new Date(focused.getFullYear(), focused.getMonth(), 1);
   const body = useRef<HTMLDivElement>(null);
   const moveFocus = useRef(Boolean(autoFocus));
@@ -112,7 +130,7 @@ export function Calendar({
     if (!el) return;
     if (view === 'year') el.scrollIntoView?.({ block: 'center' });
     if (moveFocus.current) el.focus();
-  }, [focused, view]);
+  }, [focused.getTime(), view]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const go = (d: Date) => { moveFocus.current = true; setFocused(clamp(d)); };
   const nextView = (from: CalendarView) => views[views.indexOf(from) + 1] ?? null;
@@ -181,13 +199,13 @@ export function Calendar({
         )}
         {view === 'day' && (
           <div className="rb-calendar__arrows">
-            <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={previousLabel} disabled={!canPrev} onClick={() => shiftMonth(-1)} />
-            <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={nextLabel} disabled={!canNext} onClick={() => shiftMonth(1)} />
+            {!hidePrevious && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={previousLabel} disabled={!canPrev} onClick={() => shiftMonth(-1)} />}
+            {!hideNext && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={nextLabel} disabled={!canNext} onClick={() => shiftMonth(1)} />}
           </div>
         )}
       </div>
 
-      <div ref={body} className="rb-calendar__body">
+      <div ref={body} className="rb-calendar__body" onMouseLeave={() => onDayHover?.(null)}>
         {view === 'day' && (
           <table role="grid" aria-labelledby={titleId} className="rb-calendar__grid">
             <thead>
@@ -199,9 +217,14 @@ export function Calendar({
                   {week.map((d) => {
                     const outside = d.getMonth() !== month.getMonth();
                     if (outside && !showDaysOutsideCurrentMonth) return <td key={key(d)} aria-hidden="true" />;
-                    const selected = sameDay(d, value);
+                    const isStart = sameDay(d, rangeStart ?? null);
+                    const isEnd = sameDay(d, rangeEnd ?? null);
+                    const inRange = !!rangeStart && !!rangeEnd && d > rangeStart && d < rangeEnd;
+                    const selected = sameDay(d, value) || isStart || isEnd;
+                    const hasRange = !!rangeStart && !!rangeEnd && !sameDay(rangeStart, rangeEnd);
                     return (
-                      <td key={key(d)} aria-selected={selected || undefined}>
+                      <td key={key(d)} aria-selected={selected || inRange || undefined}
+                        className={cx(inRange && 'is-in-range', hasRange && isStart && 'is-range-start', hasRange && isEnd && 'is-range-end')}>
                         <button
                           type="button"
                           data-date={key(d)}
@@ -211,7 +234,8 @@ export function Calendar({
                           aria-label={d.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                           disabled={isDisabled(d)}
                           onKeyDown={onDayKey}
-                          onFocus={() => { if (!sameDay(d, focused)) setFocused(d); }}
+                          onFocus={() => { if (!sameDay(d, focused)) setFocused(d); onDayHover?.(d); }}
+                          onMouseEnter={() => onDayHover?.(d)}
                           onClick={() => onChange?.(d)}
                         >
                           {d.getDate()}
