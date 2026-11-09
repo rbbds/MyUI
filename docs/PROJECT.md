@@ -75,7 +75,7 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 | --- | --- |
 | Figma-bestand | WL Design System (rbbds), `gV7OuQywH2cOUVfQagW6nC`. Staat in een aparte map in het PGGM Figma-account (geen extra betaalde seat). |
 | Repo | https://github.com/rbbds/MyUI (GitHub-gebruiker `rbbds`) |
-| npm-pakket | `@rbbds/ui`, versie 0.2.0 in package.json, registry GitHub Packages (nog niet gepubliceerd als release) |
+| npm-pakket | `@rbbds/ui`, versie 0.3.0 in package.json, registry GitHub Packages (nog niet gepubliceerd als release) |
 | Storybook live | https://my-ui-two.vercel.app (main) |
 | Storybook previews | Per branch via Vercel, link staat in de PR |
 
@@ -231,7 +231,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - axe via Playwright op elke story in Light en Dark (wachttijd circa 1200 ms per story).
 - Screenshots in Iris, Forest en Berry.
 - `npm run typecheck` en `npm run build-storybook` moeten slagen.
-- Laatste stand: 0 axe-fouten op de e-commerce stories.
+- Laatste stand (PR #10): 0 axe-fouten op alle stories in Light en Dark.
 
 ### Geschiedenis
 
