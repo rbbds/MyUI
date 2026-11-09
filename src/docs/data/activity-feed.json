@@ -1,0 +1,81 @@
+{
+  "use": [
+    "Status en verloop van een aanvraag, wijzigingsgeschiedenis."
+  ],
+  "avoid": [
+    "Stappen die nog moeten komen: gebruik Stepper."
+  ],
+  "anatomy": [
+    "Marker (_Activity marker: Icon, Avatar, Dot).",
+    "Verbindingslijn.",
+    "Titel en tijd.",
+    "Tekst (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Activity item: Marker",
+      "Icon, Avatar, Dot",
+      ""
+    ],
+    [
+      "Title / Text / Time / Show text / Show connector",
+      "",
+      "Laatste item: Show connector uit."
+    ],
+    [
+      "Activity feed: Items",
+      "slot",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "ActivityItem title, time",
+      "ReactNode, string",
+      "Verplicht."
+    ],
+    [
+      "dateTime",
+      "string",
+      "Voor <time dateTime>."
+    ],
+    [
+      "icon / avatar",
+      "ReactNode",
+      "Zonder beide een stip."
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Tekst."
+    ]
+  ],
+  "behaviour": [],
+  "a11y": [
+    "Geordende lijst (<ol>); geef hem een naam met aria-label of een kop.",
+    "Tijd in een <time>-element."
+  ],
+  "content": [
+    "Titel in de verleden tijd: \"Aanvraag ontvangen\"."
+  ],
+  "do": [
+    "Kies één richting (nieuwste boven of onder) en houd die aan."
+  ],
+  "dont": [],
+  "tokens": [
+    "--activity-*"
+  ],
+  "related": [
+    "Stepper",
+    "Status indicator"
+  ],
+  "open": [],
+  "name": "Activity feed",
+  "page": "Data display",
+  "figma": {
+    "node": "17072:418",
+    "base": "_Activity item"
+  },
+  "react": "ActivityFeed, ActivityItem",
+  "summary": "Tijdlijn van gebeurtenissen, zoals het verloop van een aanvraag. Met een marker (icoon, avatar of stip), titel, tijd en tekst."
+}

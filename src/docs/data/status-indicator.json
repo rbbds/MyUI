@@ -1,0 +1,66 @@
+{
+  "use": [
+    "Status in een tabelkolom, lijst of kop: Actief, In behandeling, Afgewezen."
+  ],
+  "avoid": [
+    "Aantallen of labels: gebruik Badge.",
+    "Meldingen: gebruik Alert of Banner."
+  ],
+  "anatomy": [
+    "Stip.",
+    "Tekst."
+  ],
+  "figmaProps": [
+    [
+      "Color",
+      "Gray, Brand, Success, Warning, Error, Info",
+      ""
+    ],
+    [
+      "Label",
+      "tekst",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "color",
+      "StatusColor",
+      "Standaard gray."
+    ],
+    [
+      "children",
+      "ReactNode",
+      "De status in woorden."
+    ]
+  ],
+  "behaviour": [],
+  "a11y": [
+    "De tekst draagt de betekenis; de stip is aria-hidden."
+  ],
+  "content": [
+    "Eén tot drie woorden, vanuit de gebruiker: \"Wacht op jou\" in plaats van \"Actie vereist\"."
+  ],
+  "do": [
+    "Gebruik per product een vaste lijst statussen met vaste kleuren."
+  ],
+  "dont": [
+    "Brand voor een status als je merkkleur op success of error lijkt (bijvoorbeeld Forest groen): kies Info."
+  ],
+  "tokens": [
+    "--status-indicator-*"
+  ],
+  "related": [
+    "Badge",
+    "Table"
+  ],
+  "open": [],
+  "name": "Status indicator",
+  "page": "Badges & tags",
+  "figma": {
+    "node": "17072:30",
+    "base": "_Status indicator"
+  },
+  "react": "StatusIndicator",
+  "summary": "Status van een item met een gekleurde stip en tekst. Rustiger dan een Badge, voor tabellen en lijsten."
+}

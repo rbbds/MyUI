@@ -1,0 +1,84 @@
+{
+  "use": [
+    "Uitleg bij een begrip (vraagteken-icoon).",
+    "Kleine invoer zonder de pagina te verlaten."
+  ],
+  "avoid": [
+    "Alleen acties: gebruik Dropdown menu.",
+    "Eén zin bij hover: gebruik Tooltip.",
+    "Belangrijke keuzes: gebruik Modal."
+  ],
+  "anatomy": [
+    "Titel en sluitknop.",
+    "Tekst.",
+    "Inhoud (slot, optioneel).",
+    "Knoppen (optioneel)."
+  ],
+  "figmaProps": [
+    [
+      "Title / Text",
+      "tekst",
+      ""
+    ],
+    [
+      "Show title / Closable / Show text / Show content / Show actions",
+      "boolean",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "trigger",
+      "ReactElement",
+      "Krijgt aria-expanded, aria-controls en onClick."
+    ],
+    [
+      "title, children, actions",
+      "ReactNode",
+      ""
+    ],
+    [
+      "closable",
+      "boolean",
+      "Standaard true."
+    ],
+    [
+      "align",
+      "'start' | 'end'",
+      ""
+    ],
+    [
+      "open, onOpenChange",
+      "",
+      "Optioneel gecontroleerd."
+    ]
+  ],
+  "behaviour": [
+    "Focus gaat naar het paneel bij openen en terug naar de knop bij sluiten."
+  ],
+  "a11y": [
+    "Niet-modale dialog met de titel als naam."
+  ],
+  "content": [],
+  "do": [],
+  "dont": [],
+  "tokens": [
+    "--popover-*"
+  ],
+  "related": [
+    "Tooltip",
+    "Dropdown menu",
+    "Modal"
+  ],
+  "open": [
+    "Pijltje naar de knop."
+  ],
+  "name": "Popover",
+  "page": "Overlays",
+  "figma": {
+    "node": "17073:552",
+    "base": "Popover (geen varianten)"
+  },
+  "react": "Popover",
+  "summary": "Paneel naast een knop met uitleg of een klein formulier. Sluit met de sluitknop, Escape of klikken buiten."
+}

@@ -202,6 +202,11 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Voorbeeldpagina's: Dashboard, Mijn gegevens
 - Segmented control bestaat al als Button group
 
+**Portaal, ronde 2 (PR #8)**
+- Status indicator, Document list, Activity feed, Notifications (knop, paneel, item), Popover, Settings section, Checklist
+- Verification code, Password input, Copy input
+- Voorbeeldpagina's: Documenten, Aanvraag volgen, Inloggen met code
+
 **E-commerce (PR #3)**
 - Kern: Product card, Product grid, Price, Rating, Quantity stepper, Stock indicator
 - Productpagina: Product gallery, Variant picker, Add to cart
@@ -228,6 +233,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #5 | Projectoverzicht (`docs/PROJECT.md`) en README bijgewerkt |
 | #6 | Fix: QuantityStepper hugt zijn inhoud |
 | #7 | Dashboard- en portaalcomponenten, Table met kolommen-slot |
+| #8 | Portaal ronde 2 (prio 2 en 3) en breakpoint-variabelen |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -244,8 +250,8 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 
 **Dashboards en portalen**
 - Grafieken (lijn, staaf, donut, sparkline): on hold. Keuze tussen Recharts of eigen SVG, plus een token-reeks voor grafiekkleuren.
-- Prioriteit 2: Document list, Activity feed, notificaties, Status indicator, instellingen-patroon, checklist, Popover.
-- Prioriteit 3: verificatiecode, wachtwoordveld met sterkte, kopieerveld.
+- Status indicator: Brand-kleur botst in Forest met success (groen). Voorstel: Brand eruit, Info voor "bezig". Wacht op besluit Robert.
+- Notifications: tabs Alle/Ongelezen. Popover: pijltje naar de knop.
 - Date range picker: begin- en einddatum typen.
 - Table: gestapelde mobiele weergave; variant Empty splitsen in "geen data" en "geen resultaten".
 

@@ -1,0 +1,76 @@
+{
+  "use": [
+    "Inloggen met een code, e-mailadres of telefoonnummer bevestigen."
+  ],
+  "avoid": [
+    "Andere nummers (postcode, IBAN): gebruik Input."
+  ],
+  "anatomy": [
+    "Label.",
+    "Vakjes (Code digit: Empty, Filled, Focus, Error, Disabled).",
+    "Hint of foutmelding.",
+    "\"Nieuwe code sturen\"."
+  ],
+  "figmaProps": [
+    [
+      "State",
+      "Empty, Typing, Filled, Error, Disabled",
+      ""
+    ],
+    [
+      "Label / Hint / Show resend",
+      "",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "length",
+      "number",
+      "Standaard 6."
+    ],
+    [
+      "value / defaultValue, onChange",
+      "string",
+      "Alleen cijfers."
+    ],
+    [
+      "onComplete",
+      "(value) => void",
+      "Als alle vakjes gevuld zijn."
+    ],
+    [
+      "label, hint, error, disabled, autoFocus",
+      "",
+      ""
+    ]
+  ],
+  "behaviour": [
+    "Niet-cijfers worden genegeerd. Plakken van de hele code werkt."
+  ],
+  "a11y": [
+    "Eén input met autocomplete=\"one-time-code\" en inputmode=\"numeric\"; de vakjes zijn aria-hidden."
+  ],
+  "content": [
+    "Zeg waar de code naartoe is gestuurd en hoe lang hij geldig is."
+  ],
+  "do": [],
+  "dont": [
+    "Zes losse inputs: dat breekt plakken en schermlezers."
+  ],
+  "tokens": [
+    "--code-input-*"
+  ],
+  "related": [
+    "Input"
+  ],
+  "open": [],
+  "name": "Verification code",
+  "page": "Form inputs",
+  "figma": {
+    "node": "17075:246",
+    "base": "_Verification code"
+  },
+  "react": "VerificationCode",
+  "summary": "Eenmalige code (2FA, e-mailbevestiging) als vakjes. In code één invoerveld, zodat typen, plakken en sms-autofill werken."
+}
