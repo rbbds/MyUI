@@ -60,7 +60,7 @@ export function Cover() {
         <Toggle label="Meldingen ontvangen" hint="Ontvang een e-mail bij nieuwe berichten." defaultChecked />
         <MetricCard label="Totaal vermogen" value="€ 24.580" delta="+12,4%" trend="up" meta="t.o.v. vorige maand" icon={<FeaturedIcon size="sm" icon={<Star />} />} />
         <div className="myui-cover__row">
-          <StatusIndicator color="brand">In behandeling</StatusIndicator>
+          <StatusIndicator color="info">In behandeling</StatusIndicator>
           <StatusIndicator color="success">Actief</StatusIndicator>
           <StatusIndicator color="warning">Wacht op jou</StatusIndicator>
         </div>

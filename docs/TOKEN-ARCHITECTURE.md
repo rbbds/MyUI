@@ -13,9 +13,10 @@ Status: phases 1, 2 and 3 done (9 November 2026, PR #10, version 0.3.0). Phase 4
   - Mapped now only points to alias collections. Size points to primitives.
   - Icon sizes in Button, Featured icon and the Icon component use Mapped tokens.
   - All collections except Mapped are hidden from publishing, with empty scopes.
-- **Phase 2 (done):** every binding in the file goes through Mapped (8,817 rebinds). The `deprecated/*` variables are deleted. Only exception: 603 icon fills still use icon-context (open point 1).
+- **Phase 2 (done):** every binding in the file goes through Mapped (8,817 rebinds). The `deprecated/*` variables are deleted. 
 - **Phase 3 (done):** export script with one CSS block per layer, `--wl-*` renamed to `--brand-*` (compat block until 0.4.0), Brand builder in English with accent color, Sidebar collapsed and two-level, Berry radius fixes. axe: 0 violations.
 - **Still open:** **brand/dark/*** tuning in the Brand builder.
+- **After phase 3 (done):** icon-context is removed. 2,331 icon fills now use the foreground token of their own component (the same token as the label, for example `button/secondary/foreground-hover`). Size mode xs is removed.
 - **Test result:** in the Icon set, a color or size override on an icon stays when you swap to another icon through the Icon property. So a component can color its icons with its own Mapped foreground token, and icon-context is not needed for that.
 
 ## Goal
@@ -46,7 +47,7 @@ Primitives  ──┬─> Brand (Iris | Forest | Berry | …)
               ├────────┼─> Theme (Light | Dark)      colors only
               ├────────┼─> Style (Value)             shape, type, spacing, icon sizes
               ├─> Screen size (xl … xs)              responsive values
-              └─> Size (xs | sm | md | lg)           component sizes
+              └─> Size (sm | md | lg)                component sizes
                                    │
                                    ▼
                      Mapped (component, typography, effect, layout tokens)
@@ -91,7 +92,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | ↳ theme | Light, Dark | Only colors: color/surface, color/foreground, color/border, color/focus, color/overlay, shadow colors. Points to Brand and ∙ color. |
 | ↳ style | Value | border/radius/*, border/width/*, font/family/*, font/weight/*, spacing/*, effects/shadow geometry, icon-size/* |
 | ↳ screen-size | xl, lg, md, sm, xs | Responsive type, spacing, containers, breakpoint strings |
-| ↳ size | xs, sm, md, lg | icon/size and, later, control sizes |
+| ↳ size | sm, md, lg | icon/size (16, 20, 24) and, later, control sizes |
 
 ### 4. Mapped (↳ mapped, one mode, published)
 
@@ -107,7 +108,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | brand/wl (modes Iris, Forest, Berry), names start with WL/ | Rename to **brand**, names start with brand/. Add the **accent** scale and the **dark** tuning. |
 | theme-(alias) holds colors **and** spacing, radius, border width, fonts, shadows, icon sizes | Keep only colors in **theme**. Move the rest to the new **style**. |
 | size holds icon/size plus two component tokens | **size** keeps icon/size. Move button/icon-size and featured-icon/icon-size to Mapped. |
-| icon-context has 14 modes (icon color per context) | Decide: see open points. |
+| icon-context has 14 modes (icon color per context) | Removed. Icons use the foreground token of their component. |
 | Mapped points 6 times to ∙ sizing and 2 times to brand/wl | Point to alias collections only. |
 | Components bind directly to theme (border widths, effects and about 1,600 older bindings) and to size (Icon) | Rebind everything to Mapped. |
 | Collections are not hidden from publishing | Hide all except Mapped. Set empty scopes on primitives and aliases. |
@@ -132,9 +133,9 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 
 ## Open points
 
-1. **icon-context** has 14 modes. Figma Professional allows 10 modes per collection. Options:
-   - a. Split it into two collections.
-   - b. Remove it and color icons through Mapped tokens per component.
+1. **Icon color and size (decided 9 November 2026):**
+   - icon-context is removed. An icon uses the foreground token of the component it sits in, the same token as the label next to it.
+   - An icon next to text is as high as the line height of that text: 16 for 12px text, 20 for 14px text, 24 for 16px text. So there is no 12px size mode. Only icons inside a control, like the check in a Checkbox, can be 12px, through their own token (`checkbox/indicator-icon-size`).
 2. Accent colors for the example brands (chosen; amber is not used because it looks like warning):
    - Iris: indigo + teal
    - Forest: green + orange

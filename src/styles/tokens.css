@@ -535,9 +535,6 @@
 [data-size="lg"]{
 --size-icon:24px;
 }
-[data-size="xs"]{
---size-icon:12px;
-}
 :root,[data-theme],[data-brand],[data-size]{
 --calendar-body-height:var(--sizing-68);
 --calendar-width:var(--sizing-70);
@@ -1469,7 +1466,6 @@
 --slider-track-radius:var(--border-radius-control-xs);
 --spinner-indicator:var(--color-foreground-brand);
 --spinner-track:var(--color-surface-tertiary);
---status-indicator-brand-dot:var(--color-foreground-brand);
 --status-indicator-error-dot:var(--color-foreground-error);
 --status-indicator-foreground:var(--color-foreground-secondary);
 --status-indicator-gap:var(--spacing-1-5);
@@ -1550,7 +1546,7 @@
 --table-label-group-gap:var(--spacing-1);
 --table-radius:var(--border-radius-containers-md);
 --table-search-and-filter-controls-gap:var(--spacing-3);
---table-sort-icon-size:var(--icon-size-xs);
+--table-sort-icon-size:var(--icon-size-sm);
 --table-surface:var(--color-surface-primary);
 --table-surface-header:var(--color-surface-secondary);
 --table-surface-hover:var(--color-surface-hover);

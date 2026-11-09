@@ -26,7 +26,7 @@ export const StatusIndicators: Story = {
   render: () => (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24 }}>
       <StatusIndicator color="gray">Concept</StatusIndicator>
-      <StatusIndicator color="brand">In behandeling</StatusIndicator>
+      <StatusIndicator color="info">In behandeling</StatusIndicator>
       <StatusIndicator color="success">Actief</StatusIndicator>
       <StatusIndicator color="warning">Wacht op jou</StatusIndicator>
       <StatusIndicator color="error">Afgewezen</StatusIndicator>
@@ -187,7 +187,7 @@ export const Aanvraag: Story = {
   parameters: { layout: 'fullscreen' },
   render: () => (
     <main style={{ display: 'grid', gap: 32, padding: '32px clamp(16px,4vw,48px)', maxWidth: 960, margin: '0 auto' }}>
-      <PageHeader title="Waardeoverdracht" description={<>Status: <StatusIndicator color="brand">In behandeling</StatusIndicator></>} />
+      <PageHeader title="Waardeoverdracht" description={<>Status: <StatusIndicator color="info">In behandeling</StatusIndicator></>} />
       <section aria-labelledby="verloop"><h2 id="verloop" style={{ margin: '0 0 16px', fontSize: 'var(--text-headings-h4-font-size)', fontFamily: 'var(--text-headings-h4-font-family)' }}>Verloop</h2>
         <ActivityFeed>
           <ActivityItem title="Aanvraag ontvangen" time="12 okt., 09:14" icon={<Send />}>We hebben je aanvraag ontvangen.</ActivityItem>

@@ -4,7 +4,7 @@
 /* ---------- Status indicator ---------- */
 .rb-status{display:inline-flex;align-items:center;gap:var(--status-indicator-gap);color:var(--status-indicator-foreground);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-status__dot{width:8px;height:8px;border-radius:var(--border-radius-full);background:var(--_dot);flex:none}
-.rb-status--gray{--_dot:var(--status-indicator-gray-dot)}.rb-status--brand{--_dot:var(--status-indicator-brand-dot)}.rb-status--success{--_dot:var(--status-indicator-success-dot)}.rb-status--warning{--_dot:var(--status-indicator-warning-dot)}.rb-status--error{--_dot:var(--status-indicator-error-dot)}.rb-status--info{--_dot:var(--status-indicator-info-dot)}
+.rb-status--gray{--_dot:var(--status-indicator-gray-dot)}.rb-status--success{--_dot:var(--status-indicator-success-dot)}.rb-status--warning{--_dot:var(--status-indicator-warning-dot)}.rb-status--error{--_dot:var(--status-indicator-error-dot)}.rb-status--info{--_dot:var(--status-indicator-info-dot)}
 
 /* ---------- Document list ---------- */
 .rb-doclist{background:var(--document-list-surface);border:var(--border-width-containers-default) solid var(--document-list-border);border-radius:var(--document-list-radius);overflow:hidden}

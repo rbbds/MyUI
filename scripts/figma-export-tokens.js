@@ -26,7 +26,7 @@
  * - effect-tokens/x/y     -> --effect-x-y
  * - everything else       -> --name-with-dashes (slashes, commas and spaces become "-")
  *
- * Skipped: ∙ shadows, ∙ opacity, ∙ sizing (resolved to values), ↳ icon-context (Figma only),
+ * Skipped: ∙ shadows, ∙ opacity, ∙ sizing (resolved to values),
  * breakpoint/* strings (Figma only), shadow geometry (blur, position, spread) and booleans.
  */
 const PART = 0, SIZE = 45000;
@@ -35,7 +35,7 @@ const all = await figma.variables.getLocalVariablesAsync();
 const byId = Object.fromEntries(all.map(v => [v.id, v]));
 const colName = Object.fromEntries(cols.map(c => [c.id, c.name]));
 const C = Object.fromEntries(cols.map(c => [c.name, c]));
-const SKIP = new Set(['∙ shadows', '∙ opacity', '∙ sizing', '↳ icon-context']);
+const SKIP = new Set(['∙ shadows', '∙ opacity', '∙ sizing']);
 const cssName = n => {
   let s = n;
   if (s.startsWith('component-tokens/')) s = s.slice(17);
