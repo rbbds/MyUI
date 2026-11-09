@@ -14,6 +14,8 @@ export interface VerificationCodeProps extends Omit<FieldBaseProps, 'size'> {
   id?: string;
   name?: string;
   autoFocus?: boolean;
+  /** Show the boxes in two groups with a dash between them. Default: true when length is 6 (3 and 3). Visual only. */
+  grouped?: boolean;
   className?: string;
 }
 
@@ -21,10 +23,14 @@ export interface VerificationCodeProps extends Omit<FieldBaseProps, 'size'> {
  * One-time code (2FA, e-mail check). One real input with autocomplete="one-time-code",
  * shown as boxes. Typing, pasting and SMS autofill all work.
  */
-export function VerificationCode({ label, hideLabel, hint, error, required, length = 6, value, defaultValue = '', onChange, onComplete, disabled, id, name, autoFocus, className }: VerificationCodeProps) {
+export function VerificationCode({ label, hideLabel, hint, error, required, length = 6, value, defaultValue = '', onChange, onComplete, disabled, id, name, autoFocus, grouped, className }: VerificationCodeProps) {
   const [own, setOwn] = useState(defaultValue);
   const v = value ?? own;
   const [focused, setFocused] = useState(false);
+  const split = (grouped ?? length === 6) && length % 2 === 0 ? length / 2 : 0;
+  const box = (i: number) => (
+    <span key={i} aria-hidden="true" className={cx('rb-code__box', focused && i === Math.min(v.length, length - 1) && 'is-active')}>{v[i] ?? ''}</span>
+  );
   const change = (raw: string) => {
     const next = raw.replace(/\D/g, '').slice(0, length);
     if (value === undefined) setOwn(next);
@@ -41,9 +47,13 @@ export function VerificationCode({ label, hideLabel, hint, error, required, leng
             aria-invalid={invalid || undefined} aria-describedby={describedBy}
             onChange={(e) => change(e.target.value)} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
           />
-          {Array.from({ length }, (_, i) => (
-            <span key={i} aria-hidden="true" className={cx('rb-code__box', focused && i === Math.min(v.length, length - 1) && 'is-active')}>{v[i] ?? ''}</span>
-          ))}
+          {split ? (
+            <>
+              <span className="rb-code__group" aria-hidden="true">{Array.from({ length: split }, (_, i) => box(i))}</span>
+              <span className="rb-code__separator" aria-hidden="true">-</span>
+              <span className="rb-code__group" aria-hidden="true">{Array.from({ length: length - split }, (_, i) => box(split + i))}</span>
+            </>
+          ) : Array.from({ length }, (_, i) => box(i))}
         </div>
       )}
     </Field>

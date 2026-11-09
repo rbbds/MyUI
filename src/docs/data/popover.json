@@ -12,9 +12,15 @@
     "Titel en sluitknop.",
     "Tekst.",
     "Inhoud (slot, optioneel).",
-    "Knoppen (optioneel)."
+    "Knoppen (optioneel).",
+    "Pijltje naar de knop (optioneel)."
   ],
   "figmaProps": [
+    [
+      "Arrow",
+      "None, Top, Bottom, Left, Right",
+      "Kant waar het pijltje zit. Top: de popover staat onder de knop."
+    ],
     [
       "Title / Text",
       "tekst",
@@ -48,6 +54,11 @@
       ""
     ],
     [
+      "arrow",
+      "boolean",
+      "Pijltje naar de knop, bij de uitgelijnde kant. Standaard false."
+    ],
+    [
       "open, onOpenChange",
       "",
       "Optioneel gecontroleerd."
@@ -71,13 +82,13 @@
     "Modal"
   ],
   "open": [
-    "Pijltje naar de knop."
+    "In code opent de popover altijd onder de knop; Bottom, Left en Right zijn er alleen in Figma."
   ],
   "name": "Popover",
   "page": "Overlays",
   "figma": {
-    "node": "17073:552",
-    "base": "Popover (geen varianten)"
+    "node": "17130:16744",
+    "base": "_Popover (base)"
   },
   "react": "Popover",
   "summary": "Paneel naast een knop met uitleg of een klein formulier. Sluit met de sluitknop, Escape of klikken buiten."

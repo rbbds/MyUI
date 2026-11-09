@@ -26,6 +26,8 @@ export interface PopoverProps {
   closable?: boolean;
   closeLabel?: string;
   align?: 'start' | 'end';
+  /** Show an arrow that points to the middle of the trigger. The panel shifts so the arrow lines up. */
+  arrow?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
@@ -35,7 +37,7 @@ export interface PopoverProps {
  * Non-modal panel next to a button with an explanation or a small form.
  * For actions only use DropdownMenu; for one sentence use Tooltip.
  */
-export function Popover({ trigger, title, children, actions, closable = true, closeLabel = 'Sluiten', align = 'start', open: openProp, onOpenChange, className }: PopoverProps) {
+export function Popover({ trigger, title, children, actions, closable = true, closeLabel = 'Sluiten', align = 'start', arrow = false, open: openProp, onOpenChange, className }: PopoverProps) {
   const [own, setOwn] = useState(false);
   const open = openProp ?? own;
   const set = (o: boolean) => { if (openProp === undefined) setOwn(o); onOpenChange?.(o); };
@@ -50,7 +52,7 @@ export function Popover({ trigger, title, children, actions, closable = true, cl
     <span ref={root} className="rb-popover-anchor">
       {cloneElement(trigger, { 'aria-expanded': open, 'aria-controls': id, 'aria-haspopup': 'dialog', onClick: () => set(!open) })}
       {open && (
-        <div ref={panel} id={id} role="dialog" aria-labelledby={title ? titleId : undefined} tabIndex={-1} className={cx('rb-popover', `rb-popover--${align}`, className)}>
+        <div ref={panel} id={id} role="dialog" aria-labelledby={title ? titleId : undefined} tabIndex={-1} className={cx('rb-popover', `rb-popover--${align}`, arrow && 'rb-popover--arrow', className)}>
           {(title || closable) && (
             <div className="rb-popover__header">
               {title && <p id={titleId} className="rb-popover__title">{title}</p>}

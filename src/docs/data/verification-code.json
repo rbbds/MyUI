@@ -7,7 +7,7 @@
   ],
   "anatomy": [
     "Label.",
-    "Vakjes (Code digit: Empty, Filled, Focus, Error, Disabled).",
+    "Vakjes (Code digit: Empty, Filled, Focus, Error, Disabled), bij 6 tekens in twee groepjes van 3 met een streepje ertussen.",
     "Hint of foutmelding.",
     "\"Nieuwe code sturen\"."
   ],
@@ -38,6 +38,11 @@
       "onComplete",
       "(value) => void",
       "Als alle vakjes gevuld zijn."
+    ],
+    [
+      "grouped",
+      "boolean",
+      "Twee groepjes met een streepje. Standaard true bij length 6. Alleen visueel."
     ],
     [
       "label, hint, error, disabled, autoFocus",
