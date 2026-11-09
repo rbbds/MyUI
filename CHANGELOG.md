@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Nieuw: logo en cover
+- Storybook toont het MyUI-logo (met tagline "Eyes on every detail") in de zijbalk en als favicon.
+- De Introductie-pagina opent met een cover, hetzelfde ontwerp als de Cover-pagina in Figma: tagline "One system, many faces.", echte componenten en chips die de stijl wisselen. De cover volgt de Theme- en Brand-knop.
+- Sectie Logo op de Introductie-pagina. Het logo (`src/docs/brand/Logo.tsx`) volgt de merkkleur en hoekafronding van de actieve stijl en zit niet in de library-export.
+- Docs-pagina's zonder stories volgen nu de toolbar via `useDocsGlobals`.
+- Figma: Foundations bijgewerkt met de portaalcomponenten (Light, Dark en Brand preview); Metric card rekt mee met zijn container.
+
 ### Nieuw: portaal, ronde 2
 - **StatusIndicator**: stip en tekst in 6 kleuren.
 - **DocumentList** en **DocumentItem**: documenten met meta, ongelezen-stip en downloadlink.

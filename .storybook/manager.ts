@@ -5,6 +5,7 @@ addons.setConfig({
   theme: create({
     base: 'light',
     brandTitle: 'MyUI · @rbbds/ui',
+    brandImage: './myui-logo.svg',
     brandUrl: 'https://github.com/rbbds/MyUI',
     colorPrimary: '#4f46e0',
     colorSecondary: '#4f46e0',

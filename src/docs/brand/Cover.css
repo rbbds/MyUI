@@ -1,0 +1,94 @@
+/* Docs cover. Same design as the Cover page in Figma, built from tokens only. */
+.myui-cover {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: var(--spacings-12);
+  padding: var(--spacings-15) var(--spacings-12);
+  margin-block-end: var(--spacings-12);
+  border-radius: var(--border-radius-containers-lg);
+  background: var(--color-surface-brand-solid);
+  color: var(--color-foreground-on-solid);
+  font-family: var(--wl-fonts-body);
+}
+.myui-cover__circle {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  background: var(--color-foreground-on-solid);
+}
+.myui-cover__circle--1 { inline-size: 60%; aspect-ratio: 1; inset-block-start: -45%; inset-inline-end: -12%; opacity: 0.08; }
+.myui-cover__circle--2 { inline-size: 45%; aspect-ratio: 1; inset-block-end: -50%; inset-inline-end: -8%; opacity: 0.06; }
+
+.myui-cover__intro { display: flex; flex-direction: column; align-items: flex-start; gap: var(--spacings-6); }
+.myui-cover__logo {
+  display: inline-flex;
+  padding: var(--spacings-1-5);
+  border-radius: var(--border-radius-containers-lg);
+  background: var(--color-surface-primary);
+  --myui-logo-mark-size: var(--spacings-20);
+}
+.myui-cover__logo .myui-logo__mark { inline-size: var(--myui-logo-mark-size); block-size: var(--myui-logo-mark-size); }
+
+/* The docs theme styles h1 and p; reset them so the cover looks the same everywhere. */
+.myui-cover .myui-cover__title {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-family: var(--wl-fonts-title);
+  font-size: calc(var(--text-display-display-font-size) * 2.4);
+  font-weight: var(--wl-font-weight-titles-bold);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.myui-cover .myui-cover__tagline {
+  margin: var(--spacings-3) 0 0;
+  color: inherit;
+  font-size: calc(var(--text-headings-h2-font-size) * 1.33);
+  font-weight: var(--font-weight-500);
+  line-height: 1.2;
+}
+.myui-cover .myui-cover__sub {
+  margin: 0;
+  color: inherit;
+  font-size: var(--text-body-paragraph-font-size);
+}
+.myui-cover .myui-cover__brands { display: flex; flex-wrap: wrap; gap: var(--spacings-3); margin: 0; padding: 0; list-style: none; }
+.myui-cover .myui-cover__brands li { margin: 0; }
+.myui-cover .myui-cover__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacings-2);
+  padding: var(--spacings-2) var(--spacings-4) var(--spacings-2) var(--spacings-3);
+  border-radius: 999px;
+  background: var(--color-surface-primary);
+  color: var(--color-foreground-primary);
+  font-size: var(--text-body-sub-text-semibold-font-size);
+  font-weight: var(--font-weight-600);
+  text-decoration: none;
+}
+.myui-cover .myui-cover__chip[aria-current] { box-shadow: 0 0 0 2px var(--color-surface-brand-solid), 0 0 0 4px var(--color-foreground-on-solid); }
+.myui-cover .myui-cover__chip:hover { background: var(--color-surface-secondary); }
+.myui-cover .myui-cover__chip:focus-visible { outline: 2px solid var(--color-foreground-on-solid); outline-offset: 2px; }
+.myui-cover__dot { inline-size: var(--spacings-4); block-size: var(--spacings-4); border-radius: 50%; }
+
+.myui-cover__showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacings-6);
+  padding: var(--spacings-10);
+  border-radius: var(--border-radius-overlays-lg);
+  background: var(--color-surface-primary);
+  color: var(--color-foreground-primary);
+  box-shadow: var(--shadow-2xl);
+}
+.myui-cover__row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacings-4); }
+.myui-cover__bell { margin-inline-start: auto; }
+
+@media (max-width: 900px) {
+  .myui-cover { grid-template-columns: 1fr; padding: var(--spacings-10) var(--spacings-6); }
+}

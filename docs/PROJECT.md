@@ -156,6 +156,8 @@ Spacing en maten blijven gelijk voor alle merken. De theme-laag verwijst naar br
 - MDX: `<Meta of={Stories} name="Docs" />`.
 - Een storynaam mag niet gelijk zijn aan de componenttitel (vandaar `ProgressBars`).
 - Toolbar: Theme (Light, Dark) en Brand (Iris, Forest, Berry). Op de Brand builder-pagina staat de Brand-knop vast (`brandControlledByStory`).
+- MDX-pagina's zonder stories draaien de decorator niet. Wil zo'n pagina de toolbar volgen, gebruik dan `useDocsGlobals()` uit `src/docs/brand/useDocsGlobals.ts` (zoals de cover doet).
+- Huisstijl van MyUI zelf: logo (`src/docs/brand/Logo.tsx`, Figma: _Logo op pagina Logo) en cover (`src/docs/brand/Cover.tsx`, Figma: pagina _Cover). Zijbalklogo en favicon staan als statische SVG in `.storybook/public` (Iris-kleuren, de manager kan geen tokens lezen). Tagline logo: "Eyes on every detail"; tagline cover: "One system, many faces."
 
 ### Brand builder
 
@@ -234,6 +236,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #6 | Fix: QuantityStepper hugt zijn inhoud |
 | #7 | Dashboard- en portaalcomponenten, Table met kolommen-slot |
 | #8 | Portaal ronde 2 (prio 2 en 3) en breakpoint-variabelen |
+| #9 | Logo en cover in Storybook, Foundations in Figma bijgewerkt |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 

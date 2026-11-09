@@ -1,0 +1,50 @@
+/* MyUI logo. Same structure and tokens as _Logo in Figma (Logo page). */
+.myui-logo {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacings-1);
+  --myui-logo-mark-size: var(--spacings-8);
+}
+.myui-logo__row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacings-2);
+}
+.myui-logo__mark {
+  inline-size: var(--myui-logo-mark-size);
+  block-size: var(--myui-logo-mark-size);
+  flex: none;
+  /* The radius is in viewBox units (32), so it scales with the mark like in Figma. */
+  overflow: visible;
+}
+.myui-logo__bg {
+  fill: var(--color-surface-brand-solid);
+  rx: var(--border-radius-control-sm);
+}
+.myui-logo__eye { fill: var(--wl-color-base-white); }
+.myui-logo__pupil { fill: var(--wl-color-base-black); }
+.myui-logo__wordmark {
+  color: var(--color-foreground-primary);
+  font-family: var(--wl-fonts-body);
+  font-size: var(--text-body-paragraph-semibold-font-size);
+  font-weight: var(--font-weight-600);
+  line-height: 1;
+}
+.myui-logo__tagline {
+  color: var(--color-foreground-secondary);
+  font-family: var(--wl-fonts-body);
+  font-size: var(--text-body-description-font-size);
+}
+
+/* Docs demo: a surface so the logo follows Light and Dark on the docs page. */
+.myui-logo-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacings-12);
+  margin-block: var(--spacings-6);
+  padding: var(--spacings-8);
+  border: var(--border-width-containers-default) solid var(--color-border-secondary);
+  border-radius: var(--border-radius-containers-md);
+  background: var(--color-surface-primary);
+}
