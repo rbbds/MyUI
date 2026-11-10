@@ -6,17 +6,17 @@
     "base": "_Quantity stepper"
   },
   "react": "QuantityStepper",
-  "summary": "Aantal kiezen met − en +. Typen kan ook; de waarde blijft binnen min en max.",
+  "summary": "Choose an amount with − and +. You can also type. The value stays between min and max.",
   "use": [
-    "Aantal in winkelwagen en op de productpagina."
+    "Amount in the cart and on the product page."
   ],
   "avoid": [
-    "Grote getallen of bedragen: gebruik Input met type number."
+    "Large numbers or money amounts: use Input with type number."
   ],
   "anatomy": [
-    "Min-knop.",
-    "Getal (native number-veld).",
-    "Plus-knop."
+    "Minus button.",
+    "Number (native number field).",
+    "Plus button."
   ],
   "figmaProps": [
     [
@@ -27,11 +27,11 @@
     [
       "State",
       "Default, Hover, Focus, Disabled, At minimum",
-      "At minimum: − uitgeschakeld."
+      "At minimum: − is disabled."
     ],
     [
       "Value",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -49,12 +49,12 @@
     [
       "min, max",
       "number",
-      "Standaard 1 en 99."
+      "Default 1 and 99."
     ],
     [
       "label",
       "string",
-      "Toegankelijke naam, bijvoorbeeld \"Aantal Wollen trui\"."
+      "Accessible name, for example \"Quantity Wool sweater\"."
     ],
     [
       "decreaseLabel, increaseLabel",
@@ -68,19 +68,19 @@
     ]
   ],
   "behaviour": [
-    "Getypte waarde wordt gecontroleerd bij Enter of verlaten van het veld.",
-    "− is uit op het minimum, + op het maximum."
+    "A typed value is checked on Enter or when you leave the field.",
+    "− is off at the minimum, + at the maximum."
   ],
   "a11y": [
-    "Native number-veld: pijl omhoog en omlaag werken.",
-    "Knoppen hebben een eigen naam en verwijzen naar het veld (aria-controls)."
+    "Native number field: arrow up and down work.",
+    "The buttons have their own names and point to the field (aria-controls)."
   ],
   "content": [],
   "do": [
-    "Geef een label met de productnaam als er meerdere op een pagina staan."
+    "Give a label with the product name when there are several on one page."
   ],
   "dont": [
-    "Een 0 toestaan als middel om te verwijderen: gebruik een verwijderknop."
+    "Allow 0 as a way to remove an item: use a remove button."
   ],
   "tokens": [
     "--qty-*"

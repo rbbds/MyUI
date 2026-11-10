@@ -6,20 +6,20 @@
     "base": "_Table"
   },
   "react": "Table",
-  "summary": "Gegevens in rijen en kolommen in een TableCard met kop, Table toolbar en Table bulk actions. In Figma voeg je kolommen toe via een slot en kies je het aantal rijen met Rows.",
+  "summary": "Data in rows and columns in a TableCard with a header, Table toolbar and Table bulk actions. In Figma you add columns through a slot and choose the number of rows with Rows.",
   "use": [
-    "Gegevens die de gebruiker wil vergelijken, sorteren of scannen."
+    "Data the user wants to compare, sort or scan."
   ],
   "avoid": [
-    "Layout: gebruik grid of flex.",
-    "Weinig gegevens per item: overweeg een lijst of Cards."
+    "Layout: use grid or flex.",
+    "Little data per item: think about a list or Cards."
   ],
   "anatomy": [
-    "TableCard: titel, badge en primaire actie (optioneel).",
-    "Table toolbar: zoeken, filters, kolommen, export.",
-    "Table bulk actions: aantal geselecteerd en acties, alleen bij een selectie.",
-    "Header cells: label, sorteericoon, optioneel checkbox.",
-    "Body cells: tekst, tekst + ondersteunend, avatar, badge of acties."
+    "TableCard: title, badge and primary action (optional).",
+    "Table toolbar: search, filters, columns, export.",
+    "Table bulk actions: number selected and actions, only when there is a selection.",
+    "Header cells: label, sort icon, optional checkbox.",
+    "Body cells: text, text + supporting text, avatar, badge or actions."
   ],
   "figmaProps": [
     [
@@ -35,7 +35,7 @@
     [
       "Table: Columns",
       "slot",
-      "Kolom toevoegen: dupliceer een Table column (Cmd+D) of sleep er een in."
+      "Add a column: duplicate a Table column (Cmd+D) or drag one in."
     ],
     [
       "Table column: Type",
@@ -44,8 +44,8 @@
     ],
     [
       "Table column: Rows",
-      "0 t/m 10",
-      "Selecteer alle kolommen en kies Rows in één keer."
+      "0 to 10",
+      "Select all columns and choose Rows in one go."
     ],
     [
       "Table toolbar: Show search / filters / columns / export",
@@ -81,53 +81,53 @@
   "reactProps": [
     [
       "Table",
-      "native <table>-props",
+      "native <table> props",
       ""
     ],
     [
       "TableCard title / badge / actions",
       "ReactNode",
-      "actions: primaire actie rechts, bijvoorbeeld \"Teamlid toevoegen\"."
+      "actions: primary action on the right, for example \"Add team member\"."
     ],
     [
       "TableCard toolbar",
       "ReactNode",
-      "TableToolbar en TableBulkActions."
+      "TableToolbar and TableBulkActions."
     ],
     [
       "TableCard headingLevel",
       "2 | 3 | 4",
-      "Standaard 3."
+      "Default 3."
     ],
     [
       "TableToolbar children / end",
       "ReactNode",
-      "Links zoeken en filters, rechts kolommen en export."
+      "Search and filters on the left, columns and export on the right."
     ],
     [
       "TableBulkActions count / onClear / actions",
       "number, () => void, ReactNode",
-      "Verborgen bij 0."
+      "Hidden at 0."
     ],
     [
       "TableSkeletonRows rows / columns",
       "number",
-      "Zet aria-busy op de table."
+      "Sets aria-busy on the table."
     ],
     [
       "TableEmptyRow colSpan / children",
       "number, ReactNode",
-      "Voor een EmptyState in de tabel."
+      "For an EmptyState inside the table."
     ],
     [
       "<tr aria-selected>",
       "boolean",
-      "Geselecteerde rij krijgt --table-surface-selected."
+      "A selected row gets --table-surface-selected."
     ],
     [
       "TableHeader sort / onSort",
       "'ascending' | 'descending' | 'none'",
-      "Maakt de kop sorteerbaar."
+      "Makes the header sortable."
     ],
     [
       "PersonCell avatar / name / secondary",
@@ -136,27 +136,27 @@
     ]
   ],
   "behaviour": [
-    "Rijen krijgen een hover-achtergrond.",
-    "Sorteerbare koppen zijn knoppen; klikken wisselt de richting.",
-    "Werkbalk en selectiebalk staan tegelijk in beeld. Wijzigen van zoeken of filters wist de selectie.",
-    "Twee lege toestanden: nog geen gegevens (uitleg en toevoegen-knop, kop zonder knop) en geen zoekresultaten (Zoekopdracht wissen)."
+    "Rows get a hover background.",
+    "Sortable headers are buttons. Clicking switches the direction.",
+    "The toolbar and the selection bar are on screen at the same time. Changing the search or filters clears the selection.",
+    "Two empty states: no data yet (explanation and an add button, header without a button) and no search results (Clear search)."
   ],
   "a11y": [
-    "Native <table> met <th scope=\"col\">.",
-    "Sorteerbare koppen hebben aria-sort.",
-    "Checkboxes in rijen hebben een label met de rijnaam."
+    "Native <table> with <th scope=\"col\">.",
+    "Sortable headers have aria-sort.",
+    "Checkboxes in rows have a label with the row name."
   ],
   "content": [
-    "Kolomkoppen kort. Getallen rechts uitlijnen, tekst links."
+    "Short column headers. Align numbers right and text left."
   ],
   "do": [
-    "Zet de belangrijkste kolom links.",
-    "Combineer met Pagination bij lange lijsten."
+    "Put the most important column on the left.",
+    "Combine with Pagination for long lists."
   ],
   "dont": [
-    "De toevoegen-knop in de werkbalk: die hoort in de kop van de tabel of in de Page header.",
-    "Tabellen in tabellen.",
-    "Acties alleen bij hover tonen: toetsenbord- en touchgebruikers missen ze."
+    "The add button in the toolbar: it belongs in the table header or in the Page header.",
+    "Tables inside tables.",
+    "Actions that only show on hover: keyboard and touch users miss them."
   ],
   "tokens": [
     "--table-{surface|surface-header|surface-hover|surface-selected|border|radius}",
@@ -164,7 +164,8 @@
     "--table-bulk-*",
     "--table-foreground-*",
     "--table-cell-padding-*",
-    "--table-cell-gap"
+    "--table-cell-gap",
+    "--table-sort-icon-size"
   ],
   "related": [
     "Pagination",
@@ -173,6 +174,6 @@
     "Avatar"
   ],
   "open": [
-    "Op kleine schermen scrollt de tabel horizontaal. Een gestapelde mobiele weergave is er nog niet."
+    "On small screens the table scrolls sideways. There is no stacked mobile view yet."
   ]
 }

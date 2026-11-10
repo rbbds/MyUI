@@ -6,18 +6,18 @@
     "base": "_Step horizontal / _Step vertical"
   },
   "react": "Stepper",
-  "summary": "Laat zien waar de gebruiker is in een proces van meerdere stappen. Opgebouwd uit Step-varianten (Complete, Current, Upcoming).",
+  "summary": "Shows where the user is in a process with several steps. Built from Step variants (Complete, Current, Upcoming).",
   "use": [
-    "Aanvraagflows en formulieren van 3 tot 6 stappen."
+    "Application flows and forms with 3 to 6 steps."
   ],
   "avoid": [
-    "Inhoud van gelijk niveau: gebruik Tabs.",
-    "Meer dan 6 stappen: groepeer stappen."
+    "Content of the same level: use Tabs.",
+    "More than 6 steps: group the steps."
   ],
   "anatomy": [
-    "Indicator: nummer of vinkje.",
-    "Verbindingslijn.",
-    "Titel en optionele toelichting."
+    "Indicator: number or check mark.",
+    "Connecting line.",
+    "Title and optional explanation."
   ],
   "figmaProps": [
     [
@@ -28,51 +28,51 @@
     [
       "Step: Orientation / Status",
       "Horizontal, Vertical / Complete, Current, Upcoming",
-      "Twee bases, omdat de layoutrichting verschilt."
+      "Two bases, because the layout direction is different."
     ],
     [
       "Step: Number / Title / Description / Show description / Show connector",
       "via _Step",
-      "Zet Show connector uit bij de laatste stap."
+      "Turn Show connector off on the last step."
     ]
   ],
   "reactProps": [
     [
       "steps",
       "{ title, description?, href? }[]",
-      "href alleen voor voltooide stappen."
+      "href only for completed steps."
     ],
     [
       "current",
       "number",
-      "Index (vanaf 0) van de huidige stap."
+      "Index (from 0) of the current step."
     ],
     [
       "orientation",
       "'horizontal' | 'vertical'",
-      "Horizontaal wordt verticaal onder 600px."
+      "Horizontal becomes vertical below 600px."
     ],
     [
       "statusLabels",
       "object",
-      "Screenreadertekst, standaard 'voltooid', 'huidige stap', 'nog te doen'."
+      "Screen reader text, default 'voltooid', 'huidige stap', 'nog te doen'."
     ]
   ],
   "behaviour": [
-    "Voltooide stappen met href zijn links terug."
+    "Completed steps with an href are links back."
   ],
   "a11y": [
-    "<nav aria-label=\"Voortgang\"> met een <ol>.",
-    "Huidige stap heeft aria-current=\"step\"; elke stap meldt zijn status in tekst, niet alleen met kleur."
+    "<nav> with an aria-label and an <ol>.",
+    "The current step has aria-current=\"step\". Each step says its status in text, not only with color."
   ],
   "content": [
-    "Titels als zelfstandig naamwoord: \"Gegevens\", \"Controleren\"."
+    "Titles as nouns: \"Details\", \"Review\"."
   ],
   "do": [
-    "Laat de gebruiker teruggaan naar voltooide stappen."
+    "Let the user go back to completed steps."
   ],
   "dont": [
-    "Vooruit springen naar stappen die nog niet klaar zijn."
+    "Jump ahead to steps that are not ready yet."
   ],
   "tokens": [
     "--stepper-*"

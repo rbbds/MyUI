@@ -6,17 +6,17 @@
     "base": "_Pagination item"
   },
   "react": "Pagination",
-  "summary": "Navigatie tussen pagina's van een lange lijst of tabel, met Vorige en Volgende.",
+  "summary": "Navigation between the pages of a long list or table, with Previous and Next.",
   "use": [
-    "Tabellen en zoekresultaten met een vast aantal items per pagina."
+    "Tables and search results with a fixed number of items per page."
   ],
   "avoid": [
-    "Feeds waar doorscrollen logischer is: overweeg \"Meer laden\"."
+    "Feeds where scrolling on makes more sense: think about \"Load more\"."
   ],
   "anatomy": [
-    "Vorige-knop.",
-    "Paginanummers met ellips.",
-    "Volgende-knop."
+    "Previous button.",
+    "Page numbers with an ellipsis.",
+    "Next button."
   ],
   "figmaProps": [
     [
@@ -44,22 +44,22 @@
     [
       "previousLabel / nextLabel",
       "string",
-      "Standaard 'Vorige' en 'Volgende'."
+      "Default 'Vorige' and 'Volgende'."
     ]
   ],
   "behaviour": [
-    "Vorige is uitgeschakeld op pagina 1, Volgende op de laatste pagina."
+    "Previous is disabled on page 1, Next on the last page."
   ],
   "a11y": [
-    "<nav aria-label=\"Paginering\">. Huidige pagina met aria-current=\"page\".",
-    "Nummers hebben een label: \"Pagina 3\"."
+    "<nav> with an aria-label. Current page with aria-current=\"page\".",
+    "Numbers have a label: \"Page 3\"."
   ],
   "content": [],
   "do": [
-    "Toon het totaal aantal resultaten in de buurt."
+    "Show the total number of results nearby."
   ],
   "dont": [
-    "Paginering bij minder dan twee pagina's."
+    "Pagination with fewer than two pages."
   ],
   "tokens": [
     "--pagination-{foreground|foreground-current|surface-current|surface-hover|gap|radius}"

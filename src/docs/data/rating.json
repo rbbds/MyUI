@@ -6,32 +6,32 @@
     "base": "_Rating"
   },
   "react": "Rating",
-  "summary": "Sterrenbeoordeling, alleen lezen, in halve sterren, met optioneel het getal en het aantal beoordelingen.",
+  "summary": "Star rating, read only, in half stars, with the number and the number of reviews as options.",
   "use": [
-    "Product cards en productpagina."
+    "Product cards and the product page."
   ],
   "avoid": [
-    "Een beoordeling geven: daarvoor is een apart invoercomponent nodig."
+    "Giving a rating: that needs a separate input component."
   ],
   "anatomy": [
-    "5 sterren (_Rating star: Full, Half, Empty).",
-    "Waarde (optioneel).",
-    "Aantal beoordelingen (optioneel)."
+    "5 stars (_Rating star: Full, Half, Empty).",
+    "Value (optional).",
+    "Number of reviews (optional)."
   ],
   "figmaProps": [
     [
       "Size",
       "sm, md",
-      "16 of 20 px sterren."
+      "16 or 20 px stars."
     ],
     [
       "Stars",
-      "1 t/m 5 in halve stappen",
+      "1 to 5 in half steps",
       ""
     ],
     [
       "Value, Count",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -44,12 +44,12 @@
     [
       "value",
       "number",
-      "Wordt afgerond op halven."
+      "Rounded to halves."
     ],
     [
       "max",
       "number",
-      "Standaard 5."
+      "Default 5."
     ],
     [
       "count",
@@ -69,15 +69,15 @@
   ],
   "behaviour": [],
   "a11y": [
-    "Eén naam voor het geheel: \"4,5 van 5 sterren, 128 beoordelingen\" (role=img).",
-    "Lege sterren hebben weinig contrast, maar de betekenis staat in de naam en de cijfers."
+    "One name for the whole thing: \"4.5 out of 5 stars, 128 reviews\" (role=img).",
+    "Empty stars have low contrast, but the meaning is in the name and the numbers."
   ],
   "content": [],
   "do": [
-    "Toon het aantal beoordelingen, zodat een 5 van 1 beoordeling niet misleidt."
+    "Show the number of reviews, so a 5 from 1 review does not mislead."
   ],
   "dont": [
-    "Sterren zonder aantal op een productpagina."
+    "Stars without a count on a product page."
   ],
   "tokens": [
     "--rating-*"
@@ -86,6 +86,6 @@
     "Product card"
   ],
   "open": [
-    "Interactieve rating (beoordeling geven) bestaat nog niet."
+    "An interactive rating (giving a rating) does not exist yet."
   ]
 }

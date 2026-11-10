@@ -6,18 +6,18 @@
     "base": "_Header"
   },
   "react": "Header",
-  "summary": "Bovenbalk met logo, hoofdnavigatie en acties. Onder 900px verhuizen de links naar een Slideout achter een menuknop. Logo en Navigation zijn native Figma-slots.",
+  "summary": "Top bar with logo, main navigation and actions. Below 900px the links move into a Slideout behind a menu button. Logo and Navigation are native Figma slots.",
   "use": [
-    "Websites en apps met een handvol hoofdsecties."
+    "Websites and apps with a few main sections."
   ],
   "avoid": [
-    "Apps met veel secties of diepe navigatie: gebruik Sidebar."
+    "Apps with many sections or deep navigation: use Sidebar."
   ],
   "anatomy": [
-    "Logo (slot).",
-    "Navigatie (slot) met Header nav items.",
-    "Acties: meldingen, avatar, knoppen.",
-    "Menuknop (alleen mobiel)."
+    "Logo (slot, _Logo by default).",
+    "Navigation (slot) with Header nav items.",
+    "Actions: notifications, avatar, buttons.",
+    "Menu button (mobile only)."
   ],
   "figmaProps": [
     [
@@ -28,7 +28,7 @@
     [
       "Logo / Navigation",
       "slot",
-      ""
+      "Logo holds a _Logo instance (Size=Large, tagline off). Select it in the slot to turn the tagline on or to swap in your own logo."
     ],
     [
       "Show navigation / Show menu button",
@@ -45,12 +45,12 @@
     [
       "logo",
       "ReactNode",
-      "Meestal een link naar home."
+      "Usually a link to home."
     ],
     [
       "links",
       "{ label, href, current?, icon? }[]",
-      "icon wordt gebruikt in het mobiele menu."
+      "icon is used in the mobile menu."
     ],
     [
       "actions",
@@ -60,24 +60,24 @@
     [
       "navLabel / menuLabel / menuTitle",
       "string",
-      "Standaard 'Hoofdmenu', 'Menu openen', 'Menu'."
+      "Default 'Hoofdmenu', 'Menu openen', 'Menu'."
     ]
   ],
   "behaviour": [
-    "Desktop: links in de balk. Mobiel: menuknop opent een Slideout met dezelfde links."
+    "Desktop: links in the bar. Mobile: the menu button opens a Slideout with the same links."
   ],
   "a11y": [
-    "<header> met <nav aria-label>; huidige pagina met aria-current=\"page\".",
-    "Menuknop heeft aria-expanded en aria-haspopup=\"dialog\"."
+    "<header> with a <nav aria-label>. Current page with aria-current=\"page\".",
+    "The menu button has aria-expanded and aria-haspopup=\"dialog\"."
   ],
   "content": [
-    "Maximaal 5 tot 6 links, korte namen."
+    "5 to 6 links at most, with short names."
   ],
   "do": [
-    "Houd de volgorde gelijk op desktop en mobiel."
+    "Keep the same order on desktop and mobile."
   ],
   "dont": [
-    "Acties en navigatie door elkaar in de linkrij."
+    "Mix actions and navigation in the row of links."
   ],
   "tokens": [
     "--header-*",
@@ -89,6 +89,6 @@
     "Nav item"
   ],
   "open": [
-    "Dropdowns onder hoofdlinks (mega menu) zijn er nog niet."
+    "Dropdowns under main links (mega menu) are not there yet."
   ]
 }

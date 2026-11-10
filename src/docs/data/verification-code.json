@@ -1,15 +1,15 @@
 {
   "use": [
-    "Inloggen met een code, e-mailadres of telefoonnummer bevestigen."
+    "Sign in with a code, confirm an email address or phone number."
   ],
   "avoid": [
-    "Andere nummers (postcode, IBAN): gebruik Input."
+    "Other numbers (postcode, IBAN): use Input."
   ],
   "anatomy": [
     "Label.",
-    "Vakjes (Code digit: Empty, Filled, Focus, Error, Disabled), bij 6 tekens in twee groepjes van 3 met een streepje ertussen.",
-    "Hint of foutmelding.",
-    "\"Nieuwe code sturen\"."
+    "Boxes (Code digit: Empty, Filled, Focus, Error, Disabled). With 6 characters: two groups of 3 with a dash between them.",
+    "Hint or error message.",
+    "\"Send a new code\"."
   ],
   "figmaProps": [
     [
@@ -27,22 +27,22 @@
     [
       "length",
       "number",
-      "Standaard 6."
+      "Default 6."
     ],
     [
       "value / defaultValue, onChange",
       "string",
-      "Alleen cijfers."
+      "Digits only."
     ],
     [
       "onComplete",
       "(value) => void",
-      "Als alle vakjes gevuld zijn."
+      "When all boxes are filled."
     ],
     [
       "grouped",
       "boolean",
-      "Twee groepjes met een streepje. Standaard true bij length 6. Alleen visueel."
+      "Two groups with a dash. Default true for length 6. Visual only."
     ],
     [
       "label, hint, error, disabled, autoFocus",
@@ -51,17 +51,17 @@
     ]
   ],
   "behaviour": [
-    "Niet-cijfers worden genegeerd. Plakken van de hele code werkt."
+    "Anything that is not a digit is ignored. Pasting the whole code works."
   ],
   "a11y": [
-    "Eén input met autocomplete=\"one-time-code\" en inputmode=\"numeric\"; de vakjes zijn aria-hidden."
+    "One input with autocomplete=\"one-time-code\" and inputmode=\"numeric\". The boxes are aria-hidden."
   ],
   "content": [
-    "Zeg waar de code naartoe is gestuurd en hoe lang hij geldig is."
+    "Say where the code was sent and how long it is valid."
   ],
   "do": [],
   "dont": [
-    "Zes losse inputs: dat breekt plakken en schermlezers."
+    "Six separate inputs: that breaks pasting and screen readers."
   ],
   "tokens": [
     "--code-input-*"
@@ -77,5 +77,5 @@
     "base": "_Verification code"
   },
   "react": "VerificationCode",
-  "summary": "Eenmalige code (2FA, e-mailbevestiging) als vakjes. In code één invoerveld, zodat typen, plakken en sms-autofill werken."
+  "summary": "One-time code (2FA, email check) shown as boxes. In code it is one input, so typing, pasting and SMS autofill all work."
 }

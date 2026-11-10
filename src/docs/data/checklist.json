@@ -1,13 +1,13 @@
 {
   "use": [
-    "Account compleet maken, eerste stappen in een portaal."
+    "Complete your account, first steps in a portal."
   ],
   "avoid": [
-    "Een proces in vaste volgorde op één pagina: gebruik Stepper."
+    "A process in a fixed order on one page: use Stepper."
   ],
   "anatomy": [
-    "Titel en voortgang.",
-    "Stappen (slot) met Checklist item: icoon, titel, uitleg en actie."
+    "Title and progress.",
+    "Steps (slot) with Checklist item: icon, title, explanation and action."
   ],
   "figmaProps": [
     [
@@ -17,7 +17,7 @@
     ],
     [
       "Title / Progress text",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -40,11 +40,11 @@
   ],
   "behaviour": [],
   "a11y": [
-    "Geordende lijst; huidige stap heeft aria-current=\"step\"; gedaan wordt voorgelezen."
+    "Ordered list. The current step has aria-current=\"step\". Done is read out."
   ],
   "content": [],
   "do": [
-    "Verberg de checklist als alles gedaan is."
+    "Hide the checklist when everything is done."
   ],
   "dont": [],
   "tokens": [
@@ -62,5 +62,5 @@
     "base": "_Checklist item"
   },
   "react": "Checklist, ChecklistItem",
-  "summary": "Onboarding-voortgang: titel, voortgangsbalk en stappen (gedaan, huidige, open). De huidige stap toont uitleg en actie."
+  "summary": "Onboarding progress: title, progress bar and steps (done, current, open). The current step shows an explanation and an action."
 }

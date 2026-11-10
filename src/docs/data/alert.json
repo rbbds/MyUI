@@ -6,21 +6,21 @@
     "base": "_Notification"
   },
   "react": "Alert",
-  "summary": "Melding in de pagina, gekoppeld aan de inhoud eromheen. Blijft staan tot de situatie verandert of de gebruiker hem sluit.",
+  "summary": "Message on the page, linked to the content around it. Stays until the situation changes or the user closes it.",
   "use": [
-    "Foutsamenvatting boven een formulier.",
-    "Waarschuwing of uitleg bij een sectie."
+    "Error summary above a form.",
+    "Warning or explanation for a section."
   ],
   "avoid": [
-    "Tijdelijke bevestiging na een actie: gebruik Toast.",
-    "Kritieke keuzes: gebruik Modal."
+    "Short confirmation after an action: use Toast.",
+    "Critical choices: use Modal."
   ],
   "anatomy": [
-    "Statusicoon (Featured icon).",
-    "Titel.",
-    "Ondersteunende tekst.",
-    "Acties (optioneel).",
-    "Sluitknop (optioneel)."
+    "Status icon (Featured icon).",
+    "Title.",
+    "Supporting text.",
+    "Actions (optional).",
+    "Close button (optional)."
   ],
   "figmaProps": [
     [
@@ -31,24 +31,24 @@
     [
       "Title / Supporting text / Show actions / Closable",
       "via _Notification",
-      "Gedeeld met Toast."
+      "Shared with Toast."
     ]
   ],
   "reactProps": [
     [
       "color",
       "StatusColor",
-      "Standaard 'info'."
+      "Default 'info'."
     ],
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "children",
       "ReactNode",
-      "Toelichting."
+      "Explanation."
     ],
     [
       "actions",
@@ -58,7 +58,7 @@
     [
       "onClose",
       "() => void",
-      "Toont de sluitknop."
+      "Shows the close button."
     ],
     [
       "role",
@@ -67,21 +67,21 @@
     ]
   ],
   "behaviour": [
-    "Statisch in de pagina. Verschijnt hij dynamisch, dan meldt een screenreader hem via de role."
+    "Static on the page. If it shows up while you work, a screen reader announces it through the role."
   ],
   "a11y": [
-    "role='alert' alleen voor fouten en waarschuwingen die dynamisch verschijnen. Anders 'status' of geen role.",
-    "Sluitknop heeft een label (\"Sluiten\")."
+    "role='alert' only for errors and warnings that show up while you work. Otherwise 'status' or no role.",
+    "The close button has a label (\"Close\")."
   ],
   "content": [
-    "Titel: wat er aan de hand is. Tekst: wat de gebruiker nu kan doen."
+    "Title: what is going on. Text: what the user can do now."
   ],
   "do": [
-    "Zet een foutsamenvatting bovenaan en link naar de velden."
+    "Put an error summary at the top and link to the fields."
   ],
   "dont": [
-    "Meerdere alerts van dezelfde kleur onder elkaar.",
-    "Een alert die je moet sluiten om verder te kunnen."
+    "Several alerts of the same color under each other.",
+    "An alert you must close before you can continue."
   ],
   "tokens": [
     "--alert-{color}-{surface|border|icon}",

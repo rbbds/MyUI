@@ -6,16 +6,16 @@
     "base": "_Product gallery"
   },
   "react": "ProductGallery",
-  "summary": "Hoofdafbeelding met pijlen, teller en miniaturen.",
+  "summary": "Main image with arrows, a counter and thumbnails.",
   "use": [
-    "Productpagina met meerdere foto's."
+    "Product page with several photos."
   ],
   "avoid": [
-    "Eén afbeelding: toon dan alleen een img."
+    "One image: just show an img."
   ],
   "anatomy": [
-    "Stage met afbeelding, vorige/volgende-knoppen en teller.",
-    "Miniaturen (_Gallery thumb: Default, Hover, Current, Focus)."
+    "Stage with the image, previous/next buttons and a counter.",
+    "Thumbnails (_Gallery thumb: Default, Hover, Current, Focus)."
   ],
   "figmaProps": [
     [
@@ -33,28 +33,28 @@
     [
       "images",
       "{ src, alt, thumb? }[]",
-      "Elke afbeelding een eigen alt."
+      "Each image has its own alt."
     ],
     [
       "label",
       "string",
-      "Productnaam; de sectie heet \"Afbeeldingen {label}\"."
+      "Product name. The section is called \"Images {label}\"."
     ]
   ],
   "behaviour": [
-    "Pijlen en miniaturen wisselen de afbeelding; de lijst loopt rond.",
-    "Op de miniaturen werken pijl links/rechts, Home en End."
+    "Arrows and thumbnails change the image. The list loops around.",
+    "On the thumbnails arrow left/right, Home and End work."
   ],
   "a11y": [
-    "De teller wordt gemeld (aria-live); de huidige miniatuur heeft aria-current.",
-    "Eén tabstop voor de rij miniaturen (roving tabindex)."
+    "The counter is announced (aria-live). The current thumbnail has aria-current.",
+    "One tab stop for the row of thumbnails (roving tabindex)."
   ],
   "content": [
-    "Alt beschrijft wat je ziet: \"Trui, achterkant\"."
+    "Alt describes what you see: \"Sweater, back\"."
   ],
   "do": [],
   "dont": [
-    "Automatisch wisselen."
+    "Change images automatically."
   ],
   "tokens": [
     "--gallery-*"
@@ -64,6 +64,6 @@
     "Add to cart"
   ],
   "open": [
-    "Inzoomen en vegen op touch bestaan nog niet."
+    "Zoom and swipe on touch do not exist yet."
   ]
 }

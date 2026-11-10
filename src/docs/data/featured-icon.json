@@ -6,17 +6,17 @@
     "base": "_Featured icon"
   },
   "react": "FeaturedIcon",
-  "summary": "Decoratief icoon in een getinte cirkel. Geeft Alerts, Modals en Empty states een visueel ankerpunt.",
+  "summary": "Decorative icon in a tinted circle. Gives Alerts, Modals and Empty states a visual anchor.",
   "use": [
-    "Boven aan een Modal of Empty state.",
-    "In Alerts en Toasts als statusicoon."
+    "At the top of a Modal or Empty state.",
+    "In Alerts and Toasts as a status icon."
   ],
   "avoid": [
-    "Als knop of los informatief icoon."
+    "As a button or as a separate informative icon."
   ],
   "anatomy": [
-    "Getinte cirkel.",
-    "Icoon."
+    "Tinted circle.",
+    "Icon."
   ],
   "figmaProps": [
     [
@@ -39,12 +39,12 @@
     [
       "icon",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "color",
       "StatusColor",
-      "Standaard 'brand'."
+      "Default 'brand'."
     ],
     [
       "size",
@@ -53,17 +53,17 @@
     ]
   ],
   "behaviour": [
-    "Statisch."
+    "Static."
   ],
   "a11y": [
-    "Decoratief: aria-hidden. De betekenis staat in de tekst ernaast."
+    "Decorative: aria-hidden. The meaning is in the text next to it."
   ],
   "content": [],
   "do": [
-    "Laat de kleur aansluiten op de status van de inhoud."
+    "Match the color to the status of the content."
   ],
   "dont": [
-    "Een featured icon zonder tekst ernaast."
+    "A featured icon with no text next to it."
   ],
   "tokens": [
     "--featured-icon-{color}-{surface|foreground}",

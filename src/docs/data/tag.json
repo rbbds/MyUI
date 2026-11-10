@@ -6,19 +6,19 @@
     "base": "_Tag"
   },
   "react": "Tag",
-  "summary": "Interactief label voor gekozen filters of waarden, optioneel verwijderbaar met een sluitknop.",
+  "summary": "Interactive label for chosen filters or values. Optionally removable with a close button.",
   "use": [
-    "Actieve filters boven een lijst.",
-    "Gekozen waarden in een multi-select."
+    "Active filters above a list.",
+    "Chosen values in a multi-select."
   ],
   "avoid": [
-    "Alleen een status tonen: gebruik Badge."
+    "Only showing a status: use Badge."
   ],
   "anatomy": [
     "Container.",
-    "Dot (optioneel).",
+    "Dot (optional).",
     "Label.",
-    "Sluitknop (optioneel, Closable)."
+    "Close button (optional, Closable)."
   ],
   "figmaProps": [
     [
@@ -41,12 +41,12 @@
     [
       "onRemove",
       "() => void",
-      "Toont de sluitknop."
+      "Shows the close button."
     ],
     [
       "removeLabel",
       "string",
-      "Accessible name van de sluitknop."
+      "Accessible name of the close button."
     ],
     [
       "size / dot",
@@ -55,19 +55,19 @@
     ]
   ],
   "behaviour": [
-    "De sluitknop verwijdert de tag. Zet de focus daarna op een logische plek (volgende tag of het filterveld)."
+    "The close button removes the tag. Then move focus to a logical place (the next tag or the filter field)."
   ],
   "a11y": [
-    "Sluitknop is een <button> met een label als \"Verwijder filter Actief\"."
+    "The close button is a <button> with a label like \"Remove filter Active\"."
   ],
   "content": [
-    "Toon de waarde, niet de categorie: \"Amsterdam\", niet \"Locatie\"."
+    "Show the value, not the category: \"Amsterdam\", not \"Location\"."
   ],
   "do": [
-    "Bied \"Alles wissen\" aan bij meer dan drie tags."
+    "Offer \"Clear all\" when there are more than three tags."
   ],
   "dont": [
-    "Tags zonder sluitknop als je ze kunt verwijderen."
+    "Tags without a close button when you can remove them."
   ],
   "tokens": [
     "--tag-{surface|border|foreground}",

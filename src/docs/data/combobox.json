@@ -6,43 +6,43 @@
     "base": "_Combobox option"
   },
   "react": "Combobox, CountrySelect",
-  "summary": "Select met zoeken en een visual per optie (vlag, avatar of icoon). Typen filtert de lijst, pijltjes en Enter kiezen. Country select is de Combobox met vlaggen en alle landen als kant-en-klare preset.",
+  "summary": "Select with search and a visual per option (flag, avatar or icon). Typing filters the list, arrows and Enter choose. Country select is the Combobox with flags and all countries as a ready-made preset.",
   "use": [
-    "Lange lijsten waarin de gebruiker wil zoeken, zoals landen of organisaties.",
-    "Opties die een visual nodig hebben om sneller te herkennen.",
-    "Landkeuze: gebruik CountrySelect (woonland, nationaliteit, land van een adres)."
+    "Long lists the user wants to search in, like countries or organisations.",
+    "Options that need a visual to recognise them faster.",
+    "Country choice: use CountrySelect (country of residence, nationality, country of an address)."
   ],
   "avoid": [
-    "Korte lijsten zonder visual: gebruik Select (native), dat werkt beter op mobiel. Ook een Select kan een vlag tonen bij het gekozen land.",
-    "Vrije invoer die niet in de lijst staat: dit component accepteert alleen opties uit de lijst.",
-    "Taalkeuze alleen met vlaggen: een vlag is een land, geen taal. Zet altijd de taalnaam erbij."
+    "Short lists without a visual: use Select (native), it works better on mobile. A Select can also show a flag for the chosen country.",
+    "Free input that is not in the list: this component only accepts options from the list.",
+    "Choosing a language with flags only: a flag is a country, not a language. Always add the language name."
   ],
   "anatomy": [
-    "Label, hint en foutmelding (zoals Input).",
-    "Veld met de visual van de gekozen optie, tekst en chevron.",
-    "Listbox met optionele groepskoppen en opties (visual, label, vinkje bij de gekozen optie).",
-    "Bij Country select: Flag (3:2) als visual, groep Veelgekozen en Alle landen (alfabetisch)."
+    "Label, hint and error message (like Input).",
+    "Field with the visual of the chosen option, text and a chevron.",
+    "Listbox with optional group headings and options (visual, label, check mark on the chosen option).",
+    "Country select: Flag (3:2) as the visual, group Popular and All countries (alphabetical)."
   ],
   "figmaProps": [
     [
       "Combobox: State",
       "Closed, Open",
-      "Het voorbeeld in Figma is een Country select."
+      "The example in Figma is a Country select."
     ],
     [
       "Combobox option: State",
       "Default, Active, Disabled",
-      "Active = gemarkeerd met toetsenbord of muis."
+      "Active = highlighted with keyboard or mouse."
     ],
     [
       "_Combobox option: Label / Leading / Show leading / Selected",
-      "tekst / instance swap / boolean / boolean",
-      "Leading wisselt naar een Flag/XX, Avatar of Icon. Vlaggen staan als voorkeur in de swap."
+      "text / instance swap / boolean / boolean",
+      "Leading swaps to a Flag/XX, Avatar or Icon. Flags are preferred values in the swap."
     ],
     [
-      "Flag/XX (Icons-pagina, sectie Flags)",
-      "component per land",
-      "40 vlaggen: EU27, GB, US, CA, AU, CH, NO, IS, TR, MA, SR, CW, AW en EU. In code ruim 250."
+      "Flag/XX (Icons page, section Flags)",
+      "one component per country",
+      "40 flags: EU27, GB, US, CA, AU, CH, NO, IS, TR, MA, SR, CW, AW and EU. More than 250 in code."
     ]
   ],
   "reactProps": [
@@ -64,69 +64,69 @@
     [
       "label, hint, error, required, size, disabled, name",
       "",
-      "Gelijk aan Input. name zet een hidden input voor formulieren."
+      "Same as Input. name adds a hidden input for forms."
     ],
     [
       "placeholder / emptyText / toggleLabel",
       "string",
-      "Teksten zijn aan te passen voor andere talen."
+      "You can change the texts for other languages."
     ],
     [
       "CountrySelect: countries / preferred",
       "string[]",
-      "ISO-codes. preferred komt bovenaan, bijvoorbeeld ['NL', 'BE', 'DE']."
+      "ISO codes. preferred goes at the top, for example ['NL', 'BE', 'DE']."
     ],
     [
       "CountrySelect: locale / preferredLabel / allLabel / hideFlags",
       "string / string / string / boolean",
-      "Standaard 'nl-NL', Veelgekozen, Alle landen."
+      "Default 'nl-NL', Veelgekozen, Alle landen."
     ],
     [
       "Flag: code, size, title",
       "string / 'sm' | 'md' | 'lg' | 'xl' / string",
-      "Zonder title is de vlag decoratief. Import uit @rbbds/ui/flags."
+      "Without a title the flag is decorative. Import from @rbbds/ui/flags."
     ]
   ],
   "behaviour": [
-    "Klik of pijl omlaag opent de lijst; de gekozen optie is dan gemarkeerd.",
-    "Typen filtert op label en keywords, zonder accenten (belgie vindt België). Country select zoekt ook op Engelse naam en ISO-code.",
-    "Enter kiest, Escape sluit zonder te kiezen, Tab kiest de gemarkeerde optie als er gezocht is.",
-    "Bij het sluiten zonder keuze komt de vorige waarde terug in het veld."
+    "Click or arrow down opens the list. The chosen option is highlighted.",
+    "Typing filters by label and keywords, without accents (belgie finds België). Country select also searches by English name and ISO code.",
+    "Enter chooses, Escape closes without choosing, Tab chooses the highlighted option after a search.",
+    "If you close without a choice, the previous value comes back in the field."
   ],
   "a11y": [
-    "APG-patroon combobox met listbox popup: role combobox, aria-expanded, aria-controls en aria-activedescendant.",
-    "Groepen zijn role group met een label; de visual is decoratief (aria-hidden), het label draagt de naam.",
-    "De chevronknop zit niet in de tabvolgorde; het veld zelf opent de lijst.",
-    "Vlaggen hebben een rand van 1 px, zodat lichte vlaggen zichtbaar blijven op wit."
+    "APG combobox pattern with a listbox popup: role combobox, aria-expanded, aria-controls and aria-activedescendant.",
+    "Groups are role group with a label. The visual is decorative (aria-hidden), the label carries the name.",
+    "The chevron button is not in the tab order. The field itself opens the list.",
+    "Flags have a 1 px border, so light flags stay visible on white."
   ],
   "content": [
-    "Placeholder als actie: \"Kies een land\".",
-    "Groepskoppen kort: \"Veelgekozen\", \"Alle landen\".",
-    "Landnamen komen uit Intl; schrijf geen eigen namen."
+    "Placeholder as an action: \"Choose a country\".",
+    "Short group headings: \"Popular\", \"All countries\".",
+    "Country names come from Intl. Do not write your own names."
   ],
   "do": [
-    "Zet de meest gekozen opties bovenaan in een eigen groep.",
-    "Voeg keywords toe voor andere namen of codes.",
-    "Importeer vlaggen uit @rbbds/ui/flags, zodat ze alleen geladen worden waar nodig."
+    "Put the most chosen options at the top in their own group.",
+    "Add keywords for other names or codes.",
+    "Import flags from @rbbds/ui/flags, so they only load where you need them."
   ],
   "dont": [
-    "Een visual als enige onderscheid tussen opties.",
-    "Gebruiken voor 3 tot 5 opties: kies dan Radio of Select."
+    "A visual as the only difference between options.",
+    "Use it for 3 to 5 options: choose Radio or Select instead."
   ],
   "tokens": [
     "--combobox-*",
     "--flag-*",
     "--menu-*",
     "--menu-item-*",
-    "verder --input-*"
+    "and --input-*"
   ],
   "related": [
     "Select",
     "Command menu"
   ],
   "open": [
-    "Meervoudige keuze (multi select met tags) bestaat nog niet.",
-    "Asynchroon laden van opties bestaat nog niet.",
-    "Telefoonnummer met landcode (vlag + prefix) bestaat nog niet."
+    "Multiple choice (multi select with tags) does not exist yet.",
+    "Loading options asynchronously does not exist yet.",
+    "Phone number with a country code (flag + prefix) does not exist yet."
   ]
 }

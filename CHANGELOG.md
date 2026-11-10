@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Documentation
+- All component documentation is now in B1 English: `docs/content/*.mjs`, the Storybook Docs pages and the 77 `Docs / <name>` frames in Figma.
+- Section titles in Storybook and Figma are English too (When to use, Anatomy, Accessibility, and so on).
+- Figma Docs frames now use the mapped `base-tokens` instead of the theme layer.
+- `docs/README.md` in English, with a short writing guide.
+
 ### New
 - **VerificationCode**: a 6-digit code shows as two groups of 3 with a dash between them (`grouped`, default true for length 6). It is still one input; the groups are visual only.
 - **Popover**: new prop `arrow` for an arrow that points to the middle of the trigger. New tokens `--popover-arrow-width`, `--popover-arrow-height`, `--popover-arrow-offset`, `--popover-arrow-overlap`.

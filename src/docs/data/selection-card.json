@@ -6,20 +6,20 @@
     "base": "_Selection card"
   },
   "react": "SelectionCard",
-  "summary": "Grote klikbare optie met titel en toelichting. De hele kaart is het label van een native radio of checkbox.",
+  "summary": "Large clickable option with a title and an explanation. The whole card is the label of a native radio or checkbox.",
   "use": [
-    "Keuzes die uitleg nodig hebben, zoals een betaalvorm of abonnement.",
-    "2 tot 4 opties die de gebruiker moet vergelijken."
+    "Choices that need an explanation, like a payment method or a plan.",
+    "2 to 4 options the user must compare."
   ],
   "avoid": [
-    "Korte opties zonder uitleg: gebruik Radio of Checkbox.",
-    "Meer dan 5 opties: te veel ruimte."
+    "Short options without an explanation: use Radio or Checkbox.",
+    "More than 5 options: it takes too much space."
   ],
   "anatomy": [
-    "Featured icon (optioneel).",
-    "Titel.",
-    "Toelichting.",
-    "Radio of checkbox rechtsboven."
+    "Featured icon (optional).",
+    "Title.",
+    "Explanation.",
+    "Radio or checkbox at the top right."
   ],
   "figmaProps": [
     [
@@ -45,34 +45,34 @@
     [
       "Aside / Show aside",
       "via _Selection card",
-      "Prijs of logo rechts, bijvoorbeeld bij bezorgopties."
+      "Price or logo on the right, for example for delivery options."
     ]
   ],
   "reactProps": [
     [
       "type",
       "'radio' | 'checkbox'",
-      "Standaard 'radio'."
+      "Default 'radio'."
     ],
     [
       "title",
       "ReactNode",
-      "Verplicht. Wordt het label van de input."
+      "Required. Becomes the label of the input."
     ],
     [
       "description",
       "ReactNode",
-      "Wordt via aria-describedby voorgelezen."
+      "Read out through aria-describedby."
     ],
     [
       "icon",
       "ReactNode",
-      "Meestal <FeaturedIcon size=\"sm\" color=\"gray\" />."
+      "Usually <FeaturedIcon size=\"sm\" color=\"gray\" />."
     ],
     [
       "aside",
       "ReactNode",
-      "Prijs (\"Gratis\", \"€ 2,95\") of logo rechts. Staat in het label, dus wordt voorgelezen."
+      "Price (\"Free\", \"€ 2.95\") or logo on the right. It is part of the label, so it is read out."
     ],
     [
       "name / value / checked / onChange",
@@ -82,25 +82,25 @@
     [
       "SelectionCardGroup legend / columns",
       "ReactNode / 1 | 2 | 3",
-      "Fieldset met legend. Op mobiel altijd 1 kolom."
+      "Fieldset with a legend. Always 1 column on mobile."
     ]
   ],
   "behaviour": [
-    "Klik op de hele kaart selecteert. Gekozen: brand-achtergrond en dikkere rand."
+    "Clicking anywhere on the card selects it. Chosen: brand background and a thicker border."
   ],
   "a11y": [
-    "Native input binnen een <label>. Titel als naam, toelichting als beschrijving.",
-    "Groep altijd in SelectionCardGroup (fieldset + legend).",
-    "Focus ring om de hele kaart."
+    "Native input inside a <label>. Title as the name, explanation as the description.",
+    "Always put the group in SelectionCardGroup (fieldset + legend).",
+    "Focus ring around the whole card."
   ],
   "content": [
-    "Titel: de keuze in één tot drie woorden. Toelichting: het gevolg van de keuze."
+    "Title: the choice in one to three words. Explanation: what happens when you choose it."
   ],
   "do": [
-    "Houd de toelichtingen even lang, zodat de kaarten even hoog zijn."
+    "Keep the explanations about the same length, so the cards have the same height."
   ],
   "dont": [
-    "Links of knoppen in een kaart: die vangen de klik af."
+    "Links or buttons inside a card: they catch the click."
   ],
   "tokens": [
     "--selection-card-*",

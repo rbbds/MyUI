@@ -6,18 +6,18 @@
     "base": "_Variant picker"
   },
   "react": "VariantPicker",
-  "summary": "Kleurstalen of maten kiezen. Niet-beschikbare opties blijven zichtbaar, doorgestreept en niet te kiezen.",
+  "summary": "Choose color swatches or sizes. Options that are not available stay visible, struck through, and you cannot choose them.",
   "use": [
-    "Kleur, maat of andere varianten op de productpagina."
+    "Color, size or other variants on the product page."
   ],
   "avoid": [
-    "Meer dan ongeveer 12 opties: gebruik Select of Combobox."
+    "More than about 12 options: use Select or Combobox."
   ],
   "anatomy": [
-    "Legend met gekozen waarde (bij kleur).",
-    "Optioneel een link rechts, zoals \"Maattabel\".",
-    "Opties: _Swatch of _Size chip.",
-    "Foutmelding."
+    "Legend with the chosen value (for color).",
+    "Optional link on the right, like \"Size guide\".",
+    "Options: _Swatch or _Size chip.",
+    "Error message."
   ],
   "figmaProps": [
     [
@@ -32,7 +32,7 @@
     ],
     [
       "Label, Current value, Error text",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -43,7 +43,7 @@
     [
       "_Swatch / _Size chip: State",
       "Default, (Hover), Selected, Focus, Unavailable",
-      "Kleur van een staal via de fill van Color."
+      "Color of a swatch via the fill of Color."
     ]
   ],
   "reactProps": [
@@ -79,18 +79,18 @@
     ]
   ],
   "behaviour": [
-    "Pijltjestoetsen verplaatsen de keuze (native radio)."
+    "Arrow keys move the choice (native radio)."
   ],
   "a11y": [
-    "Fieldset met legend; elke staal heeft een tekstnaam.",
-    "Niet beschikbaar wordt voorgelezen (\"…, niet beschikbaar\")."
+    "Fieldset with a legend. Each swatch has a text name.",
+    "Not available is read out (\"…, not available\")."
   ],
   "content": [
-    "Kleurnamen zoals klanten ze zeggen: \"Roestrood\", niet \"#B5473A\"."
+    "Color names the way customers say them: \"Rust red\", not \"#B5473A\"."
   ],
   "do": [],
   "dont": [
-    "Uitverkochte maten verbergen: dan zoekt de klant tevergeefs."
+    "Hide sizes that are sold out: then customers keep looking for nothing."
   ],
   "tokens": [
     "--variant-*"

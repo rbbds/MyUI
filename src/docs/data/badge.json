@@ -6,20 +6,20 @@
     "base": "_Badge"
   },
   "react": "Badge",
-  "summary": "Klein, niet-interactief label voor een status of categorie. De kleur draagt betekenis: Success, Warning, Error, Info, Brand of neutraal Gray.",
+  "summary": "Small, non-interactive label for a status or category. The color carries meaning: Success, Warning, Error, Info, Brand or neutral Gray.",
   "use": [
-    "Status in tabellen en lijsten (\"Actief\", \"Concept\").",
-    "Aantallen of categorieën naast een titel."
+    "Status in tables and lists (\"Active\", \"Draft\").",
+    "Counts or categories next to a title."
   ],
   "avoid": [
-    "Klikbare filters of verwijderbare waarden: gebruik Tag.",
-    "Lange teksten of zinnen."
+    "Clickable filters or values you can remove: use Tag.",
+    "Long text or sentences."
   ],
   "anatomy": [
     "Container (pill).",
-    "Dot of leading icon (optioneel).",
+    "Dot or leading icon (optional).",
     "Label.",
-    "Trailing icon (optioneel)."
+    "Trailing icon (optional)."
   ],
   "figmaProps": [
     [
@@ -42,7 +42,7 @@
     [
       "color",
       "'gray' | 'brand' | 'error' | 'warning' | 'success' | 'info'",
-      "Standaard 'gray'."
+      "Default 'gray'."
     ],
     [
       "size",
@@ -61,22 +61,22 @@
     ]
   ],
   "behaviour": [
-    "Statisch. Geen hover of focus."
+    "Static. No hover or focus."
   ],
   "a11y": [
-    "Kleur is nooit de enige drager van betekenis: het label zegt de status.",
-    "Dot en iconen zijn aria-hidden."
+    "Color is never the only signal: the label says the status.",
+    "Dot and icons are aria-hidden."
   ],
   "content": [
-    "Eén of twee woorden, zinshoofdletter.",
-    "Gebruik vaste termen per status in het hele product."
+    "One or two words, sentence case.",
+    "Use the same words for a status across the whole product."
   ],
   "do": [
-    "Koppel elke status aan één vaste kleur."
+    "Link each status to one fixed color."
   ],
   "dont": [
-    "Badges als knop gebruiken.",
-    "Rood gebruiken voor iets dat geen fout of risico is."
+    "Use badges as buttons.",
+    "Use red for something that is not an error or a risk."
   ],
   "tokens": [
     "--badge-{color}-{surface|border|foreground|dot}",

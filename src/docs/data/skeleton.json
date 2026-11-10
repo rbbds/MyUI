@@ -6,24 +6,24 @@
     "base": "_Skeleton"
   },
   "react": "Skeleton",
-  "summary": "Grijze vormen met een subtiele glans op de plek waar inhoud komt. Geeft de layout alvast weer, zodat de pagina niet verspringt.",
+  "summary": "Gray shapes with a soft shine where content will appear. Shows the layout early, so the page does not jump.",
   "use": [
-    "Lijsten, kaarten en tabellen die langer dan ongeveer een halve seconde laden."
+    "Lists, cards and tables that take longer than about half a second to load."
   ],
   "avoid": [
-    "Korte acties binnen een knop: gebruik Loading van Button.",
-    "Onbekende layout: gebruik Spinner."
+    "Short actions inside a button: use Loading on Button.",
+    "Unknown layout: use Spinner."
   ],
   "anatomy": [
-    "Text: regel tekst (laatste regel korter).",
+    "Text: a line of text (the last line is shorter).",
     "Circle: avatar.",
-    "Rectangle: afbeelding of blok."
+    "Rectangle: image or block."
   ],
   "figmaProps": [
     [
       "Type",
       "Text, Circle, Rectangle",
-      "Pas de breedte en hoogte per gebruik aan."
+      "Change the width and height for each use."
     ]
   ],
   "reactProps": [
@@ -35,27 +35,27 @@
     [
       "lines",
       "number",
-      "Aantal tekstregels."
+      "Number of text lines."
     ],
     [
       "width / height",
-      "CSS-maat",
+      "CSS size",
       ""
     ]
   ],
   "behaviour": [
-    "Glans beweegt van links naar rechts. Bij \"minder beweging\" staat hij stil."
+    "The shine moves from left to right. With \"reduce motion\" it stands still."
   ],
   "a11y": [
-    "Vormen zijn aria-hidden.",
-    "Zet aria-busy=\"true\" op de container en meld \"… laden\" in een status-region."
+    "Shapes are aria-hidden.",
+    "Set aria-busy=\"true\" on the container and announce \"Loading …\" in a status region."
   ],
   "content": [],
   "do": [
-    "Volg de echte layout zo goed mogelijk."
+    "Follow the real layout as closely as you can."
   ],
   "dont": [
-    "Skeletons langer dan een paar seconden tonen zonder uitleg."
+    "Show skeletons for more than a few seconds without an explanation."
   ],
   "tokens": [
     "--skeleton-surface",

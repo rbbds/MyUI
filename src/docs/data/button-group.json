@@ -6,30 +6,30 @@
     "base": "_Button group item"
   },
   "react": "ButtonGroup",
-  "summary": "Rij van aaneengesloten knoppen waarvan er één actief is, zoals een periodekeuze (Dag, Week, Maand). Gebouwd uit Button group items.",
+  "summary": "Row of joined buttons where one is active, like a period choice (Day, Week, Month). Built from Button group items.",
   "use": [
-    "Wisselen tussen 2 tot 5 weergaven of filters van dezelfde inhoud.",
-    "Als de keuze direct effect heeft, zonder opslaan."
+    "Switch between 2 to 5 views or filters of the same content.",
+    "When the choice works straight away, without saving."
   ],
   "avoid": [
-    "Losse acties naast elkaar: gebruik losse Buttons met ruimte ertussen.",
-    "Navigatie tussen secties met eigen inhoud: gebruik Tabs.",
-    "Meer dan 5 opties: gebruik Select."
+    "Separate actions next to each other: use separate Buttons with space between them.",
+    "Navigation between sections with their own content: use Tabs.",
+    "More than 5 options: use Select."
   ],
   "anatomy": [
-    "Groepscontainer met gedeelde rand.",
-    "Items: label, optioneel leading icon. Het actieve item heeft een eigen achtergrond."
+    "Group container with a shared border.",
+    "Items: label, optional leading icon. The active item has its own background."
   ],
   "figmaProps": [
     [
       "Item: Position",
       "First, Middle, Last",
-      "Bepaalt welke hoeken afgerond zijn."
+      "Sets which corners are rounded."
     ],
     [
       "Item: State",
       "Default, Hover, Focus, Current",
-      "Current markeert de actieve optie."
+      "Current marks the active option."
     ],
     [
       "Item: Label, Icon leading, Leading icon",
@@ -46,7 +46,7 @@
     [
       "value",
       "string",
-      "Actieve optie."
+      "Active option."
     ],
     [
       "onChange",
@@ -55,21 +55,21 @@
     ]
   ],
   "behaviour": [
-    "Klik of Enter/Spatie activeert een item. Er is altijd precies één actief."
+    "Click or Enter/Space makes an item active. There is always exactly one active item."
   ],
   "a11y": [
-    "role=\"group\" met een aria-label op de groep.",
-    "Items zijn buttons met aria-pressed. Het actieve item heeft aria-pressed=\"true\"."
+    "role=\"group\" with an aria-label on the group.",
+    "Items are buttons with aria-pressed. The active item has aria-pressed=\"true\"."
   ],
   "content": [
-    "Korte, parallelle labels: \"Dag\", \"Week\", \"Maand\"."
+    "Short labels of the same kind: \"Day\", \"Week\", \"Month\"."
   ],
   "do": [
-    "Houd de volgorde logisch (klein naar groot, chronologisch)."
+    "Keep the order logical (small to large, in time order)."
   ],
   "dont": [
-    "Items met verschillende soorten acties mengen.",
-    "Een Button group zonder actieve standaardwaarde."
+    "Mix items with different kinds of actions.",
+    "A Button group without an active default value."
   ],
   "tokens": [
     "--button-group-{surface|foreground|border}",

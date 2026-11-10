@@ -6,17 +6,17 @@
     "base": null
   },
   "react": "Slider",
-  "summary": "Kies een getal binnen een bereik door te slepen. Handig als de precieze waarde minder belangrijk is dan het verkennen.",
+  "summary": "Choose a number in a range by dragging. Useful when exploring matters more than the exact value.",
   "use": [
-    "Bedragen of percentages verkennen, zoals een maandbedrag in een rekenhulp."
+    "Explore amounts or percentages, like a monthly amount in a calculator."
   ],
   "avoid": [
-    "Precieze invoer: gebruik Input met type=\"number\", of combineer beide."
+    "Exact input: use Input with type=\"number\", or combine both."
   ],
   "anatomy": [
-    "Label en huidige waarde.",
-    "Track met gevulde balk.",
-    "Handle (één bij Single, twee bij Range)."
+    "Label and current value.",
+    "Track with a filled bar.",
+    "Handle (one for Single, two for Range)."
   ],
   "figmaProps": [
     [
@@ -27,14 +27,14 @@
     [
       "State",
       "Default, Focus, Pressed, Disabled",
-      "Pressed: handle groeit van 24 naar 32 px."
+      "Pressed: the handle grows from 24 to 32 px."
     ]
   ],
   "reactProps": [
     [
       "label",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "min / max / step",
@@ -49,7 +49,7 @@
     [
       "formatValue",
       "(v) => string",
-      "Bijvoorbeeld \"€ 650\". Wordt ook aria-valuetext."
+      "For example \"€ 650\". Also becomes the aria-valuetext."
     ],
     [
       "showValue",
@@ -58,21 +58,21 @@
     ]
   ],
   "behaviour": [
-    "Pressed: zolang de gebruiker de handle vasthoudt (muis of touch), groeit hij van 24 naar 32 px. Loslaten zet hem terug.",
-    "Pijltjestoetsen verplaatsen per step. Home en End springen naar min en max."
+    "Pressed: while the user holds the handle (mouse or touch), it grows from 24 to 32 px. Letting go makes it small again.",
+    "Arrow keys move one step. Home and End jump to min and max."
   ],
   "a11y": [
     "Native <input type=\"range\">.",
-    "aria-valuetext geeft de opgemaakte waarde door, niet alleen het getal."
+    "aria-valuetext gives the formatted value, not only the number."
   ],
   "content": [
-    "Toon de eenheid in de waarde (\"€ 650 per maand\")."
+    "Show the unit in the value (\"€ 650 per month\")."
   ],
   "do": [
-    "Laat de huidige waarde altijd zien."
+    "Always show the current value."
   ],
   "dont": [
-    "Een slider zonder label of zonder zichtbare waarde."
+    "A slider without a label or without a visible value."
   ],
   "tokens": [
     "--slider-{track|fill|handle|handle-border|foreground}",
@@ -85,6 +85,6 @@
     "Progress"
   ],
   "open": [
-    "Range (twee handles) bestaat in Figma, nog niet in React."
+    "Range (two handles) exists in Figma. In React use Range slider."
   ]
 }

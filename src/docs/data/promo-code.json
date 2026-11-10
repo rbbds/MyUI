@@ -6,16 +6,16 @@
     "base": "_Promo code"
   },
   "react": "PromoCode",
-  "summary": "Kortingscode invoeren. Na toepassen staat de code als verwijderbare Tag.",
+  "summary": "Enter a discount code. After applying, the code shows as a Tag you can remove.",
   "use": [
     "In Cart summary."
   ],
   "avoid": [
-    "Bovenaan de checkout: het leidt af en laat mensen zoeken naar codes."
+    "At the top of the checkout: it distracts and makes people go looking for codes."
   ],
   "anatomy": [
-    "Input (sm) met knop \"Toepassen\".",
-    "Toegepast: label en Tag."
+    "Input (sm) with an \"Apply\" button.",
+    "Applied: label and Tag."
   ],
   "figmaProps": [
     [
@@ -28,7 +28,7 @@
     [
       "onApply",
       "(code) => string | void | Promise",
-      "Geef een foutmelding terug, of niets als het lukt."
+      "Return an error message, or nothing when it works."
     ],
     [
       "applied",
@@ -47,14 +47,14 @@
     ]
   ],
   "behaviour": [
-    "Leeg veld: melding \"Vul een kortingscode in.\"",
-    "Tijdens controleren laadt de knop."
+    "Empty field: the message \"Enter a discount code.\"",
+    "While checking, the button shows it is loading."
   ],
   "a11y": [
-    "Fout gekoppeld aan het veld; toegepaste code als status gemeld."
+    "The error is linked to the field. An applied code is announced as a status."
   ],
   "content": [
-    "Foutmelding met oplossing: \"Deze code kennen we niet. Controleer de spelling.\""
+    "Error message with a solution: \"We do not know this code. Check the spelling.\""
   ],
   "do": [],
   "dont": [],

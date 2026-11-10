@@ -6,21 +6,21 @@
     "base": null
   },
   "react": "Kbd",
-  "summary": "Klein label voor een toets of sneltoets, zoals ⌘K of Esc. Gebruikt in Search input en Command menu.",
+  "summary": "Small label for a key or shortcut, like ⌘K or Esc. Used in Search input and Command menu.",
   "use": [
-    "Sneltoetsen tonen in zoekvelden, menu’s en hulpteksten."
+    "Show shortcuts in search fields, menus and help text."
   ],
   "avoid": [
-    "Als knop: Kbd is alleen een hint."
+    "As a button: Kbd is only a hint."
   ],
   "anatomy": [
-    "Container met rand.",
+    "Container with a border.",
     "Label."
   ],
   "figmaProps": [
     [
       "Label",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -28,21 +28,21 @@
     [
       "children",
       "ReactNode",
-      "De toets."
+      "The key."
     ]
   ],
   "behaviour": [
-    "Statisch."
+    "Static."
   ],
   "a11y": [
-    "Native <kbd>. Puur decoratieve hints (naast een label dat de actie al noemt) mogen aria-hidden."
+    "Native <kbd>. Purely decorative hints (next to a label that already names the action) can be aria-hidden."
   ],
   "content": [
-    "Gebruik ⌘ op Mac en Ctrl op Windows als je het platform kent."
+    "Use ⌘ on Mac and Ctrl on Windows if you know the platform."
   ],
   "do": [],
   "dont": [
-    "Sneltoetsen tonen die niet werken."
+    "Show shortcuts that do not work."
   ],
   "tokens": [
     "--kbd-surface",

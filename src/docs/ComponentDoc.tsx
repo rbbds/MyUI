@@ -84,34 +84,34 @@ export function DocHeader({ doc }: { doc: DocData }) {
 export function ComponentDoc({ doc }: { doc: DocData }) {
   return (
     <>
-      <h2>Wanneer gebruiken</h2>
+      <h2>When to use</h2>
       <List items={doc.use} />
-      <h3>Niet gebruiken voor</h3>
+      <h3>Do not use for</h3>
       <List items={doc.avoid} />
 
-      <h2>Anatomie</h2>
+      <h2>Anatomy</h2>
       <List items={doc.anatomy} ordered />
 
       <h2>Props</h2>
       <h3>React</h3>
-      <Table head={['Prop', 'Type', 'Toelichting']} rows={doc.reactProps} codeCols={[0, 1]} />
+      <Table head={['Prop', 'Type', 'Notes']} rows={doc.reactProps} codeCols={[0, 1]} />
       <h3>Figma</h3>
-      <Table head={['Property', 'Waarden', 'Toelichting']} rows={doc.figmaProps} />
+      <Table head={['Property', 'Values', 'Notes']} rows={doc.figmaProps} />
 
-      <h2>Gedrag en states</h2>
+      <h2>Behaviour and states</h2>
       <List items={doc.behaviour} />
 
-      <h2>Toegankelijkheid</h2>
+      <h2>Accessibility</h2>
       <List items={doc.a11y} />
 
       {doc.content.length > 0 && (
         <>
-          <h2>Tekst en content</h2>
+          <h2>Text and content</h2>
           <List items={doc.content} />
         </>
       )}
 
-      <h2>Do&apos;s en don&apos;ts</h2>
+      <h2>Do&apos;s and don&apos;ts</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
         <div style={box('var(--color-border-success)', 'var(--color-surface-success-subtle)')}>
           <strong>Do</strong>
@@ -128,14 +128,14 @@ export function ComponentDoc({ doc }: { doc: DocData }) {
 
       {doc.related.length > 0 && (
         <>
-          <h2>Gerelateerd</h2>
+          <h2>Related</h2>
           <p>{doc.related.join(', ')}</p>
         </>
       )}
 
       {doc.open.length > 0 && (
         <>
-          <h2>Open punten</h2>
+          <h2>Open points</h2>
           <List items={doc.open} />
         </>
       )}

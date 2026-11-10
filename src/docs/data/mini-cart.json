@@ -6,25 +6,25 @@
     "base": "_Mini cart"
   },
   "react": "MiniCart, CartButton",
-  "summary": "Winkelwagen in een Slideout, te openen via de Cart button in de header of na \"In winkelwagen\".",
+  "summary": "Cart in a Slideout. Opens from the Cart button in the header or after \"Add to cart\".",
   "use": [
-    "Snel overzicht zonder de pagina te verlaten."
+    "A quick overview without leaving the page."
   ],
   "avoid": [
-    "Als vervanging van de winkelwagenpagina: link er altijd naartoe."
+    "As a replacement for the cart page: always link to it."
   ],
   "anatomy": [
-    "Slideout (sm) met titel en aantal.",
-    "Cart items (sm) in het Content-slot.",
-    "Notitie (bijv. gratis verzending), subtotaal.",
-    "Afrekenen en Bekijk winkelwagen.",
-    "Cart button: icoon met aantal."
+    "Slideout (sm) with a title and the number of items.",
+    "Cart items (sm) in the Content slot.",
+    "Note (for example free shipping), subtotal.",
+    "Checkout and View cart.",
+    "Cart button: icon with a count."
   ],
   "figmaProps": [
     [
       "Mini cart: State",
       "Filled, Empty",
-      "Empty: Empty state met \"Verder winkelen\"."
+      "Empty: Empty state with \"Continue shopping\"."
     ],
     [
       "Cart button: Count",
@@ -61,21 +61,21 @@
     [
       "CartButton: count, onClick, label",
       "",
-      "Naam wordt \"Winkelwagen, 3 artikelen\"."
+      "The name becomes \"Cart, 3 items\"."
     ]
   ],
   "behaviour": [
-    "Focus gaat naar het paneel en blijft erin; Escape sluit en zet focus terug (Slideout)."
+    "Focus goes to the panel and stays there. Escape closes it and moves focus back (Slideout)."
   ],
   "a11y": [
-    "Het aantal hoort bij de naam van de Cart button, de badge zelf is aria-hidden."
+    "The count is part of the name of the Cart button. The badge itself is aria-hidden."
   ],
   "content": [
-    "Titel met aantal: \"Winkelwagen (3)\"."
+    "Title with the count: \"Cart (3)\"."
   ],
   "do": [],
   "dont": [
-    "Automatisch sluiten na een paar seconden."
+    "Close automatically after a few seconds."
   ],
   "tokens": [
     "--cart-button-*",

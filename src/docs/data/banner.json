@@ -6,19 +6,19 @@
     "base": "_Banner"
   },
   "react": "Banner",
-  "summary": "Melding over de hele breedte van de pagina, boven de inhoud: onderhoud, onvolledige gegevens, een nieuwe functie.",
+  "summary": "Message across the full width of the page, above the content: maintenance, missing details, a new feature.",
   "use": [
-    "Iets wat voor de hele pagina of het hele portaal geldt."
+    "Something that applies to the whole page or the whole portal."
   ],
   "avoid": [
-    "Meldingen bij een formulier of blok: gebruik Alert.",
-    "Bevestiging na een actie: gebruik Toast."
+    "Messages for a form or a block: use Alert.",
+    "Confirmation after an action: use Toast."
   ],
   "anatomy": [
-    "Icoon.",
-    "Titel (vet, optioneel) en tekst.",
-    "Actie (link, optioneel).",
-    "Sluitknop (optioneel)."
+    "Icon.",
+    "Title (bold, optional) and text.",
+    "Action (link, optional).",
+    "Close button (optional)."
   ],
   "figmaProps": [
     [
@@ -29,11 +29,11 @@
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Koppel aan breakpoint/banner (Apply variable)."
+      "Bind to breakpoint/banner (Apply variable)."
     ],
     [
       "Title / Text",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -46,7 +46,7 @@
     [
       "color",
       "StatusColor",
-      "Standaard brand."
+      "Default brand."
     ],
     [
       "title, children, icon, action",
@@ -56,30 +56,30 @@
     [
       "onClose, closeLabel",
       "() => void, string",
-      "Toont de sluitknop."
+      "Shows the close button."
     ],
     [
       "role",
       "'status' | 'alert' | 'region'",
-      "status bij een banner die na een actie verschijnt; weglaten als hij er bij laden al staat."
+      "status for a banner that shows up after an action. Leave it out if the banner is there when the page loads."
     ]
   ],
   "behaviour": [
-    "Blijft staan tot de gebruiker hem sluit of het probleem is opgelost.",
-    "Op mobiel valt de actie onder de tekst."
+    "Stays until the user closes it or the problem is solved.",
+    "On mobile the action goes below the text."
   ],
   "a11y": [
-    "Kleur is niet de enige drager: icoon en tekst.",
-    "Sluitknop met naam \"Melding sluiten\"."
+    "Color is not the only signal: icon and text too.",
+    "Close button with a clear name, like \"Close message\"."
   ],
   "content": [
-    "Titel zegt wat er is, tekst wat je moet doen."
+    "The title says what is going on, the text says what to do."
   ],
   "do": [
-    "Maximaal één banner tegelijk."
+    "At most one banner at a time."
   ],
   "dont": [
-    "Een banner voor marketing: gebruik een Card."
+    "A banner for marketing: use a Card."
   ],
   "tokens": [
     "--banner-*"

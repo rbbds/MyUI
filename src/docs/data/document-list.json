@@ -1,20 +1,20 @@
 {
   "use": [
-    "Laatste documenten op een overzichtspagina (3 tot 5, met \"Alle documenten\").",
-    "Een eigen documentenpagina, met Pagination of \"Meer laden\" eronder."
+    "Latest documents on an overview page (3 to 5, with \"All documents\").",
+    "A separate documents page, with Pagination or \"Load more\" below it."
   ],
   "avoid": [
-    "Documenten met veel kolommen om te sorteren: gebruik Table."
+    "Documents with many columns to sort: use Table."
   ],
   "anatomy": [
-    "Kop: titel en link (optioneel).",
-    "Items (slot) met Document items: icoon, titel, ongelezen-stip, meta, download."
+    "Header: title and link (optional).",
+    "Items (slot) with Document items: icon, title, unread dot, meta, download."
   ],
   "figmaProps": [
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Koppel aan breakpoint/document-list (Apply variable)."
+      "Bind to breakpoint/document-list (Apply variable)."
     ],
     [
       "Title / Show header / Show action",
@@ -41,17 +41,17 @@
     [
       "DocumentList title, action, headingLevel",
       "",
-      "headingLevel standaard 2."
+      "headingLevel default 2."
     ],
     [
       "DocumentItem title, href",
       "string",
-      "Verplicht. De titel is de link."
+      "Required. The title is the link."
     ],
     [
       "meta",
       "ReactNode",
-      "\"PDF · 240 kB · 12 okt. 2026\"."
+      "\"PDF · 240 kB · 12 Oct 2026\"."
     ],
     [
       "unread",
@@ -61,7 +61,7 @@
     [
       "downloadHref, downloadLabel",
       "string",
-      "Downloadlink naast de titel."
+      "Download link next to the title."
     ],
     [
       "icon",
@@ -70,20 +70,20 @@
     ]
   ],
   "behaviour": [
-    "Bladeren hoort niet bij de lijst: zet Pagination of een knop \"Meer laden\" eronder."
+    "Paging is not part of the list: put Pagination or a \"Load more\" button below it."
   ],
   "a11y": [
-    "<ul> met per document een link; downloaden is een aparte link met naam \"Download {titel}\".",
-    "Ongelezen wordt voorgelezen (\", Nieuw\")."
+    "<ul> with one link per document. Download is a separate link named \"Download {title}\".",
+    "Unread is read out (\", New\")."
   ],
   "content": [
-    "Titel zoals het document heet, zonder bestandsnaam of extensie."
+    "Use the name of the document, without the file name or extension."
   ],
   "do": [
-    "Nieuwste bovenaan."
+    "Newest at the top."
   ],
   "dont": [
-    "Twee links met dezelfde naam per regel."
+    "Two links with the same name on one row."
   ],
   "tokens": [
     "--document-list-*"
@@ -101,5 +101,5 @@
     "base": "_Document list"
   },
   "react": "DocumentList, DocumentItem",
-  "summary": "Lijst met documenten zoals brieven en jaaropgaves: icoon, titel als link, type, grootte, datum en een downloadknop."
+  "summary": "List of documents like letters and annual statements: icon, title as a link, type, size, date and a download button."
 }

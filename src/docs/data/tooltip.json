@@ -6,24 +6,24 @@
     "base": null
   },
   "react": "Tooltip",
-  "summary": "Korte uitleg die verschijnt bij hover en toetsenbordfocus. Nooit voor essentiële of interactieve inhoud.",
+  "summary": "Short explanation that shows on hover and keyboard focus. Never for essential or interactive content.",
   "use": [
-    "Label voor een Button icon.",
-    "Korte toelichting bij een afkorting of icoon."
+    "Label for a Button icon.",
+    "Short explanation of an abbreviation or icon."
   ],
   "avoid": [
-    "Informatie die de gebruiker nodig heeft om verder te kunnen: zet die in de pagina.",
-    "Links of knoppen in de tooltip."
+    "Information the user needs to continue: put it on the page.",
+    "Links or buttons in the tooltip."
   ],
   "anatomy": [
-    "Bubbel met titel.",
-    "Ondersteunende tekst (optioneel).",
-    "Pijl (optioneel, vier richtingen)."
+    "Bubble with a title.",
+    "Supporting text (optional).",
+    "Arrow (optional, four directions)."
   ],
   "figmaProps": [
     [
       "Text",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -41,12 +41,12 @@
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "text",
       "ReactNode",
-      "Ondersteunende tekst."
+      "Supporting text."
     ],
     [
       "placement",
@@ -56,24 +56,24 @@
     [
       "children",
       "ReactElement",
-      "De trigger."
+      "The trigger."
     ]
   ],
   "behaviour": [
-    "Verschijnt bij hover en focus, verdwijnt bij verlaten, blur en Escape."
+    "Shows on hover and focus. Hides on leave, blur and Escape."
   ],
   "a11y": [
-    "role=\"tooltip\", gekoppeld aan de trigger met aria-describedby.",
-    "Escape sluit de tooltip zonder de focus te verplaatsen (WCAG 1.4.13)."
+    "role=\"tooltip\", linked to the trigger with aria-describedby.",
+    "Escape closes the tooltip without moving focus (WCAG 1.4.13)."
   ],
   "content": [
-    "Maximaal één zin."
+    "One sentence at most."
   ],
   "do": [
-    "Gebruik een tooltip bij elke Button icon."
+    "Add a tooltip to every Button icon."
   ],
   "dont": [
-    "Een tooltip op uitgeschakelde elementen: die krijgen geen focus."
+    "A tooltip on disabled elements: they do not get focus."
   ],
   "tokens": [
     "--tooltip-{surface|foreground|foreground-secondary}",
@@ -85,6 +85,6 @@
     "Button icon"
   ],
   "open": [
-    "Positie past zich nog niet aan bij de rand van het scherm (geen collision detection)."
+    "The position does not adjust at the edge of the screen yet (no collision detection)."
   ]
 }

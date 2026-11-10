@@ -6,59 +6,59 @@
     "base": "_Metric card"
   },
   "react": "MetricCard",
-  "summary": "KPI-tegel voor dashboards: label, waarde en het verschil met de vorige periode. Optioneel een icoon, menu en link onderaan.",
+  "summary": "KPI tile for dashboards: label, value and the change since the last period. Optional icon, menu and a link at the bottom.",
   "use": [
-    "Kerncijfers bovenaan een dashboard of overzicht, meestal 2 tot 4 naast elkaar."
+    "Key numbers at the top of a dashboard or overview, usually 2 to 4 side by side."
   ],
   "avoid": [
-    "Een verloop door de tijd: gebruik een grafiek (komt later).",
-    "Lange tekst of lijsten."
+    "A trend over time: use a chart (coming later).",
+    "Long text or lists."
   ],
   "anatomy": [
-    "Featured icon (optioneel).",
+    "Featured icon (optional).",
     "Label.",
-    "Menu (optioneel).",
-    "Waarde.",
-    "Trend: pijl en verschil, met context (\"t.o.v. vorige maand\").",
-    "Footer met link (optioneel)."
+    "Menu (optional).",
+    "Value.",
+    "Trend: arrow and change, with context (\"vs last month\").",
+    "Footer with a link (optional)."
   ],
   "figmaProps": [
     [
       "Trend",
       "Up, Down, Neutral",
-      "Kleur en pijl."
+      "Color and arrow."
     ],
     [
       "Label / Value / Delta / Meta",
-      "tekst",
+      "text",
       "via _Metric card"
     ],
     [
       "Show icon / menu / delta / footer",
       "boolean",
-      "Footer standaard uit."
+      "Footer is off by default."
     ]
   ],
   "reactProps": [
     [
       "label, value",
       "ReactNode",
-      "Verplicht. Geef de waarde al geformatteerd mee."
+      "Required. Pass the value already formatted."
     ],
     [
       "delta",
       "ReactNode",
-      "Met teken: \"+12,4%\" of \"−3\"."
+      "With a sign: \"+12.4%\" or \"−3\"."
     ],
     [
       "trend",
       "'up' | 'down' | 'neutral'",
-      "Kies op betekenis, niet op richting. Stijgende kosten zijn ook \"down\"-rood als dat slecht is."
+      "Choose by meaning, not by direction. Rising costs are \"down\" (red) if that is bad."
     ],
     [
       "meta",
       "ReactNode",
-      "Context van het verschil."
+      "Context for the change."
     ],
     [
       "icon / menu / footer",
@@ -68,27 +68,27 @@
     [
       "trendLabels",
       "Record<trend, string>",
-      "Woorden voor schermlezers. Standaard Gestegen, Gedaald, Gelijk gebleven."
+      "Words for screen readers. Default Gestegen, Gedaald, Gelijk gebleven."
     ]
   ],
   "behaviour": [
-    "Zet tegels in een raster met de class rb-metric-grid (auto-fill, minimaal 240 px)."
+    "Put tiles in a grid with the class rb-metric-grid (auto-fill, at least 240 px)."
   ],
   "a11y": [
-    "Groep met het label als naam (role=\"group\").",
-    "De trend is niet alleen kleur: pijl, teken en verborgen tekst (\"Gestegen: +12,4%\").",
-    "Cijfers in tabular-nums, zodat ze netjes onder elkaar staan."
+    "Group with the label as its name (role=\"group\").",
+    "The trend is not only color: arrow, sign and hidden text (\"Gestegen: +12.4%\").",
+    "Numbers use tabular-nums, so they line up."
   ],
   "content": [
-    "Label kort, zonder eenheid als die al in de waarde staat.",
-    "Meta zegt waarmee je vergelijkt."
+    "Keep the label short, without the unit if the value already has it.",
+    "Meta says what you compare with."
   ],
   "do": [
-    "Gebruik dezelfde periode in alle tegels."
+    "Use the same period in all tiles."
   ],
   "dont": [
-    "Een verschil zonder context.",
-    "Meer dan 4 tegels op een rij."
+    "A change without context.",
+    "More than 4 tiles in a row."
   ],
   "tokens": [
     "--metric-card-*"
@@ -99,6 +99,6 @@
     "Button group"
   ],
   "open": [
-    "Kleine grafiek (sparkline) in de tegel: wacht op de keuze voor grafieken."
+    "Small chart (sparkline) in the tile: waits for the choice of a chart solution."
   ]
 }

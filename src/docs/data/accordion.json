@@ -6,23 +6,23 @@
     "base": "_Accordion item"
   },
   "react": "Accordion",
-  "summary": "Lijst van uitklapbare secties. Het paneel is een native Figma-slot.",
+  "summary": "List of sections you can open and close. The panel is a native Figma slot.",
   "use": [
-    "Veelgestelde vragen.",
-    "Lange pagina's waar de gebruiker zoekt naar één onderdeel."
+    "Frequently asked questions.",
+    "Long pages where the user looks for one part."
   ],
   "avoid": [
-    "Inhoud die iedereen moet lezen: toon die gewoon."
+    "Content everyone must read: just show it."
   ],
   "anatomy": [
-    "Header-knop met titel en chevron.",
-    "Paneel (slot)."
+    "Header button with a title and a chevron.",
+    "Panel (slot)."
   ],
   "figmaProps": [
     [
-      "Accordion: Show item 2 t/m 10",
+      "Accordion: Show item 2 to 10",
       "boolean",
-      "Groep met 10 items, 4 standaard aan. Titel en Expanded per item in het properties-paneel."
+      "Group with 10 items, 4 on by default. Title and Expanded per item in the properties panel."
     ],
     [
       "Expanded",
@@ -36,7 +36,7 @@
     ],
     [
       "Title / Panel",
-      "tekst / slot",
+      "text / slot",
       "via _Accordion item"
     ]
   ],
@@ -49,7 +49,7 @@
     [
       "allowMultiple",
       "boolean",
-      "Standaard true."
+      "Default true."
     ],
     [
       "defaultOpen",
@@ -59,27 +59,27 @@
     [
       "headingLevel",
       "2 | 3 | 4",
-      "Standaard 3. Kies passend bij de pagina."
+      "Default 3. Choose what fits the page."
     ]
   ],
   "behaviour": [
-    "Klik, Enter of Spatie op de header klapt het paneel open of dicht."
+    "Click, Enter or Space on the header opens or closes the panel."
   ],
   "a11y": [
-    "Header is een <button> in een kop (h2 tot h4) met aria-expanded en aria-controls.",
-    "Paneel is een region met aria-labelledby."
+    "The header is a <button> inside a heading (h2 to h4) with aria-expanded and aria-controls.",
+    "The panel is a region with aria-labelledby."
   ],
   "content": [
-    "Titels als vraag of als duidelijk onderwerp."
+    "Titles as a question or a clear topic."
   ],
   "do": [
-    "Kies het juiste headingLevel zodat de koppenstructuur klopt."
+    "Choose the right headingLevel so the heading structure is correct."
   ],
   "dont": [
-    "Accordions in accordions."
+    "Accordions inside accordions."
   ],
   "tokens": [
-    "--accordion-{border|surface-hover|gap|padding-vertical|item-gap}",
+    "--accordion-{border|surface-hover|gap|padding-vertical|item-gap|item-radius}",
     "--accordion-foreground-*"
   ],
   "related": [

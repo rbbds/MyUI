@@ -6,16 +6,16 @@
     "base": "_Avatar"
   },
   "react": "Avatar",
-  "summary": "Visuele weergave van een persoon: foto, initialen of een icoon, met optionele online-status.",
+  "summary": "Picture of a person: photo, initials or an icon, with an optional online status.",
   "use": [
-    "Naast namen in lijsten, tabellen, headers en reacties."
+    "Next to names in lists, tables, headers and comments."
   ],
   "avoid": [
-    "Als enige aanduiding van een persoon zonder naam in de buurt."
+    "As the only way to show a person, with no name nearby."
   ],
   "anatomy": [
-    "Cirkel met foto, initialen of icoon.",
-    "Status-indicator (optioneel)."
+    "Circle with a photo, initials or an icon.",
+    "Status indicator (optional)."
   ],
   "figmaProps": [
     [
@@ -26,7 +26,7 @@
     [
       "Type",
       "Initials, Icon",
-      "Foto: zet een image fill op de cirkel."
+      "Photo: put an image fill on the circle."
     ],
     [
       "Initials / Status",
@@ -38,12 +38,12 @@
     [
       "src",
       "string",
-      "Valt terug op initialen als de foto niet laadt."
+      "Falls back to initials if the photo does not load."
     ],
     [
       "name",
       "string",
-      "Wordt aria-label."
+      "Becomes the aria-label."
     ],
     [
       "initials",
@@ -62,19 +62,19 @@
     ]
   ],
   "behaviour": [
-    "Laadt een foto niet, dan toont de avatar initialen."
+    "If a photo does not load, the avatar shows initials."
   ],
   "a11y": [
-    "role=\"img\" met de naam als label. Staat de naam er al naast, dan is de avatar decoratief."
+    "role=\"img\" with the name as its label. If the name is already next to it, the avatar is decorative."
   ],
   "content": [
-    "Maximaal twee initialen."
+    "Two initials at most."
   ],
   "do": [
-    "Gebruik dezelfde size binnen één lijst."
+    "Use the same size within one list."
   ],
   "dont": [
-    "Status alleen met kleur aangeven als het belangrijk is: zet het ook in tekst."
+    "Show an important status with color only: also put it in text."
   ],
   "tokens": [
     "--avatar-{surface|border|foreground|radius}",

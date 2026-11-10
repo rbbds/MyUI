@@ -6,20 +6,20 @@
     "base": "_Tab"
   },
   "react": "Tabs",
-  "summary": "Wissel tussen gerelateerde panelen op dezelfde pagina. Twee stijlen: Underline en Pill.",
+  "summary": "Switch between related panels on the same page. Two styles: Underline and Pill.",
   "use": [
-    "Inhoud van gelijk niveau die de gebruiker niet tegelijk hoeft te zien."
+    "Content of the same level that the user does not need to see at the same time."
   ],
   "avoid": [
-    "Stappen in een proces: gebruik een stappenindicator.",
-    "Filters op dezelfde inhoud: gebruik Button group.",
-    "Navigatie naar andere pagina's: gebruik links."
+    "Steps in a process: use Stepper.",
+    "Filters on the same content: use Button group.",
+    "Navigation to other pages: use links."
   ],
   "anatomy": [
-    "Tablijst met track.",
-    "Tab: optioneel icoon, label, optionele teller.",
-    "Actieve indicator (onderstreping of pill).",
-    "Paneel."
+    "Tab list with a track.",
+    "Tab: optional icon, label, optional count.",
+    "Active indicator (underline or pill).",
+    "Panel."
   ],
   "figmaProps": [
     [
@@ -61,21 +61,21 @@
     ]
   ],
   "behaviour": [
-    "Pijl links/rechts wisselt tab en activeert hem direct. Home en End naar de eerste en laatste tab."
+    "Arrow left/right switches the tab and makes it active straight away. Home and End go to the first and last tab."
   ],
   "a11y": [
-    "role=\"tablist\", \"tab\" en \"tabpanel\" met aria-selected en aria-controls.",
-    "Alleen de actieve tab zit in de tab-volgorde."
+    "role=\"tablist\", \"tab\" and \"tabpanel\" with aria-selected and aria-controls.",
+    "Only the active tab is in the tab order."
   ],
   "content": [
-    "Eén of twee woorden per tab."
+    "One or two words per tab."
   ],
   "do": [
-    "Houd de volgorde vast; de eerste tab is de meest gebruikte."
+    "Keep the order fixed. The first tab is the one people use most."
   ],
   "dont": [
-    "Meer dan zes tabs.",
-    "Underline en Pill mengen op één pagina."
+    "More than six tabs.",
+    "Mix Underline and Pill on one page."
   ],
   "tokens": [
     "--tab-{foreground|surface|indicator|track}-*",

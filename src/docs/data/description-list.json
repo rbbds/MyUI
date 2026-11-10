@@ -6,27 +6,27 @@
     "base": "_Description list"
   },
   "react": "DescriptionList, DescriptionItem",
-  "summary": "Gegevens als label en waarde, zoals persoonsgegevens of contractdetails. In code een <dl> in een section met kop.",
+  "summary": "Data as label and value, like personal details or contract details. In code a <dl> in a section with a heading.",
   "use": [
-    "\"Mijn gegevens\", contractdetails, samenvatting voor verzenden."
+    "\"My details\", contract details, a summary before you submit."
   ],
   "avoid": [
-    "Gegevens om te vergelijken over meerdere items: gebruik Table.",
-    "Invoer: gebruik een formulier."
+    "Data to compare across many items: use Table.",
+    "Input: use a form."
   ],
   "anatomy": [
-    "Kop: titel, beschrijving en actie (optioneel).",
-    "Items (slot) met _Description item: label, waarde, actie (optioneel), scheidingslijn."
+    "Header: title, description and action (optional).",
+    "Items (slot) with _Description item: label, value, action (optional), divider."
   ],
   "figmaProps": [
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Op mobiel valt de waarde onder het label. Koppel aan breakpoint/description-list (Apply variable) om mee te wisselen met de schermmaat."
+      "On mobile the value goes below the label. Bind to breakpoint/description-list (Apply variable) to follow the screen size."
     ],
     [
       "Title / Description",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -37,12 +37,12 @@
     [
       "Items",
       "slot",
-      "Zet hier Description items in."
+      "Put Description items here."
     ],
     [
       "_Description item: Label / Value / Show action / Show divider",
       "",
-      "Divider uit bij het laatste item."
+      "Turn the divider off on the last item."
     ]
   ],
   "reactProps": [
@@ -54,35 +54,35 @@
     [
       "headingLevel",
       "2 | 3 | 4",
-      "Standaard 2."
+      "Default 2."
     ],
     [
       "plain",
       "boolean",
-      "Zonder kaartrand, bijvoorbeeld in een Modal."
+      "Without the card border, for example in a Modal."
     ],
     [
       "DescriptionItem label, children, action",
       "ReactNode",
-      "children is de waarde."
+      "children is the value."
     ]
   ],
   "behaviour": [
-    "Label 200 px breed; onder 600 px komt de waarde onder het label."
+    "Label is 200 px wide. Below 600 px the value goes below the label."
   ],
   "a11y": [
-    "<dl> met <dt> en <dd>.",
-    "Actie per regel: zet de naam van het veld erbij voor schermlezers (\"Wijzigen e-mailadres\")."
+    "<dl> with <dt> and <dd>.",
+    "Action per row: add the field name for screen readers (\"Change email address\")."
   ],
   "content": [
-    "Leeg veld: toon \"Niet ingevuld\" in plaats van niets.",
-    "Gevoelige gegevens gedeeltelijk tonen (•••• ••• 12)."
+    "Empty field: show \"Not filled in\" instead of nothing.",
+    "Show sensitive data only in part (•••• ••• 12)."
   ],
   "do": [
-    "Groepeer in blokken van 3 tot 7 regels met een duidelijke titel."
+    "Group in blocks of 3 to 7 rows with a clear title."
   ],
   "dont": [
-    "Eén \"Wijzigen\" per regel én in de kop: kies er één."
+    "A \"Change\" on every row and also in the header: pick one."
   ],
   "tokens": [
     "--description-list-*"

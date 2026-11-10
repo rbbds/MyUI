@@ -6,14 +6,14 @@
     "base": null
   },
   "react": "Spinner",
-  "summary": "Draaiende indicator voor laden zonder bekende duur.",
+  "summary": "Spinning indicator for loading when you do not know how long it takes.",
   "use": [
-    "Inhoud die laadt binnen een vlak of kaart.",
-    "In Button bij State=Loading (zit daar al in)."
+    "Content that loads inside an area or card.",
+    "In Button with State=Loading (already built in)."
   ],
   "avoid": [
-    "Als de voortgang bekend is: gebruik Progress.",
-    "Hele pagina's: overweeg skeleton-weergaven."
+    "When the progress is known: use Progress.",
+    "Whole pages: think about skeleton views."
   ],
   "anatomy": [
     "Track.",
@@ -35,23 +35,23 @@
     [
       "label",
       "string",
-      "Standaard 'Bezig met laden'."
+      "Default 'Bezig met laden'."
     ]
   ],
   "behaviour": [
-    "Draait continu. Respecteer prefers-reduced-motion."
+    "Spins all the time. Respects prefers-reduced-motion."
   ],
   "a11y": [
-    "role=\"status\" met een tekstlabel, zodat screenreaders het laden melden."
+    "role=\"status\" with a text label, so screen readers announce the loading."
   ],
   "content": [
-    "Label beschrijft wat er laadt: \"Projecten laden\"."
+    "The label says what is loading: \"Loading projects\"."
   ],
   "do": [
-    "Toon de spinner pas na ongeveer 300 ms, zodat snelle acties niet flikkeren."
+    "Show the spinner only after about 300 ms, so fast actions do not flicker."
   ],
   "dont": [
-    "Meerdere spinners tegelijk op één scherm."
+    "Several spinners on one screen at the same time."
   ],
   "tokens": [
     "--spinner-indicator",

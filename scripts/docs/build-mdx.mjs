@@ -21,7 +21,7 @@ import doc from '../data/${id}.json';
 
 <DocHeader doc={doc} />
 
-## Voorbeelden
+## Examples
 
 ${examples}
 
