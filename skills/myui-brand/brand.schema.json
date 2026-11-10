@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/rbbds/MyUI/skills/myui-brand/brand.schema.json",
+  "title": "MyUI brand input",
+  "description": "The brand choices that the myui-brand skill takes from a brand guide or moodboard. build-brand.mjs turns this into color scales, CSS and Figma values.",
+  "type": "object",
+  "required": ["name", "style", "colors", "fonts"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "type": "string", "minLength": 1, "description": "Brand name. Becomes the file name brand-<slug>.css and the mode name in Figma." },
+    "style": {
+      "enum": ["iris", "forest", "berry"],
+      "description": "Base style. Sets the shape: iris = soft corners, forest = square corners, berry = round (pill) corners, heavier titles and 2 px borders."
+    },
+    "colors": {
+      "type": "object",
+      "required": ["primary"],
+      "additionalProperties": false,
+      "properties": {
+        "primary": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Main brand color: buttons, links, focus, active states." },
+        "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional second brand color: highlights, badges, tags, illustrations." }
+      }
+    },
+    "fonts": {
+      "type": "object",
+      "required": ["body", "title"],
+      "additionalProperties": false,
+      "properties": {
+        "body": { "type": "string", "description": "Font family for text, for example \"Inter\"." },
+        "title": { "type": "string", "description": "Font family for titles." },
+        "serif": { "type": "array", "items": { "type": "string" }, "description": "Names of the fonts above that are serif fonts. Used for the fallback stack." }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "description": "Where each choice comes from, so the user can check it.",
+      "items": {
+        "type": "object",
+        "required": ["field", "from", "confidence"],
+        "additionalProperties": false,
+        "properties": {
+          "field": { "type": "string", "description": "For example colors.primary or style." },
+          "from": { "type": "string", "description": "For example \"Brand guide p. 12\" or \"Screenshot 2, buttons\"." },
+          "confidence": { "enum": ["stated", "measured", "estimated"], "description": "stated = written in the guide, measured = sampled from an image, estimated = your interpretation." }
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" }, "description": "Warnings for the user, for example a font that needs a license." }
+  }
+}

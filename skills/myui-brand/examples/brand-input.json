@@ -1,0 +1,14 @@
+{
+  "$schema": "../brand.schema.json",
+  "name": "Harbor Coffee",
+  "style": "forest",
+  "colors": { "primary": "#0e5e6f", "accent": "#e07a2f" },
+  "fonts": { "body": "Work Sans", "title": "Fraunces", "serif": ["Fraunces"] },
+  "sources": [
+    { "field": "colors.primary", "from": "Brand guide p. 4, 'Harbor Teal'", "confidence": "stated" },
+    { "field": "colors.accent", "from": "Brand guide p. 4, 'Roast Orange'", "confidence": "stated" },
+    { "field": "fonts.title", "from": "Brand guide p. 7", "confidence": "stated" },
+    { "field": "style", "from": "Moodboard: square photo crops and straight buttons", "confidence": "estimated" }
+  ],
+  "notes": []
+}

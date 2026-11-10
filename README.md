@@ -57,6 +57,7 @@ Set `data-theme="dark"` on `<html>` (or on any element for a dark section). With
    - **Forest** (hoekig): `<html data-brand="forest">`.
    - **Berry** (rond): `<html data-brand="berry">`.
 2. Zet je eigen kleuren en fonts. Gebruik de **Brand builder** in Storybook: die berekent de kleurschaal, checkt contrast en geeft de CSS.
+   Or let your AI tool do it: the **myui-brand skill** (`skills/myui-brand`, also in the npm package) reads a brand guide PDF or moodboard and gives you `brand.json`, the CSS and the Figma values. See `skills/myui-brand/README.md`.
 
 ```css
 :root {

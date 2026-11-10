@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### New
+- **myui-brand skill** (`skills/myui-brand`): an AI skill that reads a brand guide (PDF) or moodboard and turns it into MyUI brand tokens. It proposes primary color, accent color, fonts and base style, asks the user to confirm, and then builds `brand.json`, `brand-<name>.css` and `figma-brand.json`. Includes `brand.schema.json`, an example, `PROMPT.md` for tools without skills, and `scripts/build-brand.mjs` (Node, no dependencies, same color math as the Brand builder).
+- The skill is part of the npm package (`node_modules/@rbbds/ui/skills/myui-brand`).
+- **Brand builder**: "Import brand.json" to paste or pick a file from the skill. Fonts outside the list are added to the font choice.
+- Brand builder: the Figma tip now says to overwrite the values of the matching mode, which also works on plans with few modes.
+
 ### Fixed
 - Storybook "Show code" now shows the JSX of the example, for example `<ButtonIcon hierarchy="primary" … />`. Before, it often showed only `S.IconOnly`, because the thin `*.stories.tsx` files pass on stories from `*.cases.tsx`.
 - The Storybook build keeps component names, so the code shows `<Logo />` instead of a short name like `<W />`.

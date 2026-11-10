@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
-import { Copy, Download, Search } from 'lucide-react';
+import { Copy, Download, Search, Upload } from 'lucide-react';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Form/Input';
+import { Textarea } from '../../components/Form/Textarea';
 import { Select } from '../../components/Form/Select';
 import { SelectionCard, SelectionCardGroup } from '../../components/Selection/SelectionCard';
 import { Toggle } from '../../components/Selection/Checkbox';
@@ -51,6 +52,11 @@ export function BrandBuilder() {
   const [logo, setLogo] = useState<string | null>(null);
   const [showDark, setShowDark] = useState(true);
   const [copied, setCopied] = useState<string | null>(null);
+  const [extraFonts, setExtraFonts] = useState<string[]>([]);
+  const [importText, setImportText] = useState('');
+  const [importError, setImportError] = useState<string | undefined>();
+  const [imported, setImported] = useState<string | null>(null);
+  const fontOptions = [...FONTS, ...extraFonts.filter((f) => !FONTS.includes(f))].map((f) => ({ value: f, label: f }));
 
   const result = useMemo(() => brandScale(color), [color]);
   const scale = result?.scale;
@@ -92,6 +98,37 @@ export function BrandBuilder() {
     const h = v.startsWith('#') ? v : `#${v}`;
     if (/^#[0-9a-f]{6}$/i.test(h)) setAccent(h.toLowerCase());
   };
+  /* brand.json from the myui-brand skill: the input file or the full output (both have name, style, colors and fonts). */
+  const applyBrandJson = (text: string) => {
+    let data: { name?: unknown; style?: unknown; colors?: { primary?: unknown; accent?: unknown }; fonts?: { body?: unknown; title?: unknown } };
+    try { data = JSON.parse(text); } catch { setImportError('This is not valid JSON. Paste the whole brand.json or brand-input.json.'); return; }
+    const hex = (v: unknown) => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
+    const styleId = STYLES.find((st) => st.id === data.style)?.id;
+    if (!styleId || !hex(data.colors?.primary) || typeof data.fonts?.body !== 'string' || typeof data.fonts?.title !== 'string') {
+      setImportError('Some values are missing. You need style (iris, forest or berry), colors.primary as a hex code, and fonts.body and fonts.title.');
+      return;
+    }
+    const primary = (data.colors!.primary as string).toLowerCase();
+    const acc = hex(data.colors!.accent) ? (data.colors!.accent as string).toLowerCase() : null;
+    const fb = data.fonts!.body as string, ft = data.fonts!.title as string;
+    setExtraFonts((prev) => [...new Set([...prev, fb, ft])]);
+    if (typeof data.name === 'string' && data.name.trim()) setName(data.name);
+    setStyle(styleId);
+    setColor(primary); setHexText(primary);
+    if (acc) { setAccent(acc); setAccentText(acc); }
+    setBody(fb); setTitle(ft);
+    setImportError(undefined);
+    setImported(typeof data.name === 'string' ? data.name : 'brand');
+  };
+  const onImportFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    const text = await f.text();
+    setImportText(text);
+    applyBrandJson(text);
+    e.target.value = '';
+  };
+
   const onLogo = (e: ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (f) setLogo(URL.createObjectURL(f));
@@ -174,6 +211,21 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
 
       <div className="bb-layout">
         <form className="bb-form" onSubmit={(e) => e.preventDefault()} aria-label="Brand">
+          <details className="bb-import">
+            <summary className="bb-legend">Import brand.json</summary>
+            <p className="bb-note">From the myui-brand skill: paste brand-input.json or brand.json, or pick the file. The fields below are filled in for you.</p>
+            <Textarea label="brand.json" value={importText} onChange={(e) => setImportText(e.target.value)} error={importError} rows={6} />
+            <div className="bb-row">
+              <Button size="sm" onClick={() => applyBrandJson(importText)} disabled={!importText.trim()}>Apply</Button>
+              <label className="bb-file">
+                <Upload aria-hidden="true" />
+                <span>Choose file</span>
+                <input type="file" accept="application/json,.json" onChange={onImportFile} className="rb-visually-hidden" />
+              </label>
+            </div>
+            {imported && !importError && <Alert color="success" title={`Imported ${imported}`}>Check the colors and fonts, then copy the CSS or the Figma values below.</Alert>}
+          </details>
+
           <Input label="Brand name" value={name} onChange={(e) => setName(e.target.value)} hint={`Becomes brand-${brandSlug}.css and the mode name in Figma.`} />
 
           <SelectionCardGroup legend="Style" columns={1}>
@@ -225,8 +277,8 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
             <p className="bb-note">A second brand color for highlights, badges, tags and illustrations.</p>
           </fieldset>
 
-          <Select label="Font for text" value={body} onChange={(e) => setBody(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
-          <Select label="Font for titles" value={title} onChange={(e) => setTitle(e.target.value)} options={FONTS.map((f) => ({ value: f, label: f }))} />
+          <Select label="Font for text" value={body} onChange={(e) => setBody(e.target.value)} options={fontOptions} />
+          <Select label="Font for titles" value={title} onChange={(e) => setTitle(e.target.value)} options={fontOptions} />
 
           <div className="bb-field">
             <label htmlFor="bb-logo" className="bb-legend">Logo (optional)</label>
@@ -260,7 +312,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
               <h2 className="bb-h3">Values for Figma</h2>
               <Button size="sm" hierarchy="secondary" iconLeading={<Copy />} onClick={() => copy('figma', figma)}>{copied === 'figma' ? 'Copied' : 'Copy'}</Button>
             </div>
-            <p className="bb-note">In the ↳ brand collection, duplicate the mode {STYLES.find((s) => s.id === style)!.name}, name it "{name}" and fill in these values. Or give this JSON to Claude to add the mode for you.</p>
+            <p className="bb-note">In the ↳ brand collection, overwrite the values of the mode {STYLES.find((s) => s.id === style)!.name} with these. This also works on Figma plans with few modes. If your plan allows more modes, you can duplicate the mode and name it "{name}" instead.</p>
             <pre className="bb-code" tabIndex={0} aria-label="Values for Figma"><code>{figma}</code></pre>
           </div>
           <span className="rb-visually-hidden" role="status">{copied === 'error' ? 'Copy failed' : copied ? 'Copied to the clipboard' : ''}</span>
