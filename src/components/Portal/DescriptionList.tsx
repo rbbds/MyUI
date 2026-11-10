@@ -5,7 +5,7 @@ import './Portal.css';
 export interface DescriptionListProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title?: ReactNode;
   description?: ReactNode;
-  /** Button in the header, e.g. "Wijzigen". */
+  /** Button in the header, e.g. "Change". */
   action?: ReactNode;
   /** 2 by default (below the page h1). */
   headingLevel?: 2 | 3 | 4;
@@ -37,9 +37,9 @@ export function DescriptionList({ title, description, action, headingLevel = 2, 
 
 export interface DescriptionItemProps {
   label: ReactNode;
-  /** The value. Use line breaks (<br />) for addresses. Empty: show "Niet ingevuld" rather than nothing. */
+  /** The value. Use line breaks (<br />) for addresses. Empty: show "Not filled in" rather than nothing. */
   children: ReactNode;
-  /** Action per row, e.g. <Button hierarchy="link" size="sm">Wijzigen<span className="rb-visually-hidden"> e-mailadres</span></Button>. */
+  /** Action per row, e.g. <Button hierarchy="link" size="sm">Change<span className="rb-visually-hidden"> email address</span></Button>. */
   action?: ReactNode;
 }
 

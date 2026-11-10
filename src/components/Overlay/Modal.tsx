@@ -18,7 +18,7 @@ export interface ModalProps {
 }
 
 /** Built on the native <dialog>: focus trap, Escape and backdrop handling come from the browser. */
-export function Modal({ open, onClose, title, description, icon, children, footer, size = 'md', closeLabel = 'Sluiten' }: ModalProps) {
+export function Modal({ open, onClose, title, description, icon, children, footer, size = 'md', closeLabel = 'Close' }: ModalProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descId = useId();

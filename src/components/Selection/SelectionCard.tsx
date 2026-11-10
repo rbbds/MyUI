@@ -11,7 +11,7 @@ export interface SelectionCardProps extends Omit<InputHTMLAttributes<HTMLInputEl
   description?: ReactNode;
   /** Optional visual, usually a FeaturedIcon (size sm, color gray). */
   icon?: ReactNode;
-  /** Right-aligned extra, e.g. a price ("Gratis", "€ 4,95") or a payment logo. */
+  /** Right-aligned extra, e.g. a price ("Free", "€4.95") or a payment logo. */
   aside?: ReactNode;
 }
 

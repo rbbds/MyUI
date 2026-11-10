@@ -24,7 +24,7 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
 }
 
 /** Inline message tied to page content. Do not auto-dismiss. */
-export function Alert({ color = 'info', title, children, icon, actions, onClose, closeLabel = 'Sluiten', className, role, ...rest }: AlertProps) {
+export function Alert({ color = 'info', title, children, icon, actions, onClose, closeLabel = 'Close', className, role, ...rest }: AlertProps) {
   return (
     <div className={cx('rb-alert', `rb-alert--${color}`, className)} role={role} {...rest}>
       <span className="rb-alert__icon" aria-hidden="true">{icon ?? ICONS[color]}</span>
@@ -47,6 +47,6 @@ export function Toast({ className, ...props }: ToastProps) {
   return <Alert {...props} role="status" className={cx('rb-alert--toast', className)} />;
 }
 
-export function ToastRegion({ children, label = 'Meldingen' }: { children: ReactNode; label?: string }) {
+export function ToastRegion({ children, label = 'Notifications' }: { children: ReactNode; label?: string }) {
   return <section className="rb-toast-region" aria-label={label} aria-live="polite">{children}</section>;
 }

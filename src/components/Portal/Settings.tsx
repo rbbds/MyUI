@@ -5,7 +5,7 @@ import './Portal2.css';
 export interface SettingsSectionProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title: ReactNode;
   description?: ReactNode;
-  /** Opslaan/Annuleren for a group of fields. Toggles save immediately and need no actions. */
+  /** Save/Cancel for a group of fields. Toggles save immediately and need no actions. */
   actions?: ReactNode;
   headingLevel?: 2 | 3;
   /** SettingRow elements or form fields. */

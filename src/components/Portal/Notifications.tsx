@@ -13,9 +13,9 @@ export interface NotificationButtonProps extends ButtonHTMLAttributes<HTMLButton
   countLabel?: (n: number) => string;
 }
 
-/** Bell button for the header. Accessible name includes the count: "Meldingen, 3 ongelezen". */
+/** Bell button for the header. Accessible name includes the count: "Notifications, 3 unread". */
 export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButtonProps>(function NotificationButton(
-  { count = 0, label = 'Meldingen', countLabel = (n) => `${n} ongelezen`, className, ...rest }, ref,
+  { count = 0, label = 'Notifications', countLabel = (n) => `${n} unread`, className, ...rest }, ref,
 ) {
   return (
     <button ref={ref} type="button" className={cx('rb-notif-button', className)} aria-label={count > 0 ? `${label}, ${countLabel(count)}` : label} {...rest}>
@@ -39,7 +39,7 @@ export interface NotificationItemProps {
   unreadLabel?: string;
 }
 
-export function NotificationItem({ title, children, time, dateTime, unread, avatar, href, onClick, unreadLabel = 'Ongelezen' }: NotificationItemProps) {
+export function NotificationItem({ title, children, time, dateTime, unread, avatar, href, onClick, unreadLabel = 'Unread' }: NotificationItemProps) {
   const inner = (
     <>
       {avatar}
@@ -62,7 +62,7 @@ export interface NotificationPanelProps {
   title?: ReactNode;
   onMarkAllRead?: () => void;
   markAllLabel?: string;
-  /** Footer link or button, e.g. "Alle meldingen bekijken". */
+  /** Footer link or button, e.g. "View all notifications". */
   footer?: ReactNode;
   /** Shown when there are no NotificationItems. */
   empty?: ReactNode;
@@ -72,7 +72,7 @@ export interface NotificationPanelProps {
 }
 
 /** Panel with notifications. Use it in NotificationMenu or on its own page. */
-export function NotificationPanel({ title = 'Meldingen', onMarkAllRead, markAllLabel = 'Alles gelezen', footer, empty, children, id, className }: NotificationPanelProps) {
+export function NotificationPanel({ title = 'Notifications', onMarkAllRead, markAllLabel = 'Mark all as read', footer, empty, children, id, className }: NotificationPanelProps) {
   const titleId = useId();
   const has = Array.isArray(children) ? children.length > 0 : Boolean(children);
   return (
@@ -81,7 +81,7 @@ export function NotificationPanel({ title = 'Meldingen', onMarkAllRead, markAllL
         <h2 id={titleId} className="rb-notif-panel__title">{title}</h2>
         {onMarkAllRead && has && <Button hierarchy="link" size="sm" onClick={onMarkAllRead}>{markAllLabel}</Button>}
       </div>
-      {has ? <ul className="rb-notif-panel__items">{children}</ul> : <div className="rb-notif-panel__empty">{empty ?? <><p className="rb-notif-panel__empty-title">Geen nieuwe meldingen</p><p>Je bent helemaal bij.</p></>}</div>}
+      {has ? <ul className="rb-notif-panel__items">{children}</ul> : <div className="rb-notif-panel__empty">{empty ?? <><p className="rb-notif-panel__empty-title">No new notifications</p><p>You are all caught up.</p></>}</div>}
       {footer && <div className="rb-notif-panel__footer">{footer}</div>}
     </section>
   );

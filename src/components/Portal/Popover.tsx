@@ -37,7 +37,7 @@ export interface PopoverProps {
  * Non-modal panel next to a button with an explanation or a small form.
  * For actions only use DropdownMenu; for one sentence use Tooltip.
  */
-export function Popover({ trigger, title, children, actions, closable = true, closeLabel = 'Sluiten', align = 'start', arrow = false, open: openProp, onOpenChange, className }: PopoverProps) {
+export function Popover({ trigger, title, children, actions, closable = true, closeLabel = 'Close', align = 'start', arrow = false, open: openProp, onOpenChange, className }: PopoverProps) {
   const [own, setOwn] = useState(false);
   const open = openProp ?? own;
   const set = (o: boolean) => { if (openProp === undefined) setOwn(o); onOpenChange?.(o); };

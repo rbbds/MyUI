@@ -14,7 +14,7 @@ export interface CartItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   title: string;
   href?: string;
   image?: { src: string; alt?: string };
-  /** Chosen options, e.g. ["Kleur: blauw", "Maat: M"]. */
+  /** Chosen options, e.g. ["Color: blue", "Size: M"]. */
   options?: string[];
   /** Price per piece. The line shows price × quantity. */
   price: number;
@@ -42,8 +42,8 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
         </div>
         {!readOnly && (
           <div className="rb-cart-item__actions">
-            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onChange={onQuantityChange} label={`Aantal ${title}`} />
-            {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={`Verwijder ${title}`} onClick={onRemove} />}
+            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onChange={onQuantityChange} label={`Quantity ${title}`} />
+            {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={`Remove ${title}`} onClick={onRemove} />}
           </div>
         )}
       </div>
@@ -53,7 +53,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
 }
 
 /* ---------- Cart summary ---------- */
-export interface SummaryLine { label: ReactNode; amount: number; /** Shown instead of the amount, e.g. "Gratis". */ note?: string }
+export interface SummaryLine { label: ReactNode; amount: number; /** Shown instead of the amount, e.g. "Free". */ note?: string }
 export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title?: ReactNode;
   subtotal: number;
@@ -64,7 +64,7 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   totalNote?: ReactNode;
   /** Slot for PromoCode. */
   promo?: ReactNode;
-  /** Primary action, e.g. <Button fullWidth>Afrekenen</Button>. */
+  /** Primary action, e.g. <Button fullWidth>Checkout</Button>. */
   action?: ReactNode;
   /** Slot above the rows, e.g. read-only CartItems in checkout (order summary). */
   children?: ReactNode;
@@ -72,21 +72,21 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
 }
 
 /** Totals block for cart and checkout. Use children for the order summary in checkout. */
-export function CartSummary({ title = 'Overzicht', subtotal, lines = [], total, totalNote = 'Inclusief btw', promo, action, children, currency = 'EUR', className, ...rest }: CartSummaryProps) {
+export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, action, children, currency = 'EUR', className, ...rest }: CartSummaryProps) {
   const id = useId();
   return (
     <section className={cx('rb-cart-summary', className)} aria-labelledby={id} {...rest}>
       <h2 id={id} className="rb-cart-summary__title">{title}</h2>
       {children && <div className="rb-cart-summary__items">{children}</div>}
       <dl className="rb-cart-summary__rows">
-        <div className="rb-cart-summary__row"><dt>Subtotaal</dt><dd>{formatMoney(subtotal, currency)}</dd></div>
+        <div className="rb-cart-summary__row"><dt>Subtotal</dt><dd>{formatMoney(subtotal, currency)}</dd></div>
         {lines.map((l, i) => (
           <div key={i} className={cx('rb-cart-summary__row', l.amount < 0 && 'is-discount')}>
             <dt>{l.label}</dt>
             <dd>{l.note ?? (l.amount < 0 ? `− ${formatMoney(-l.amount, currency)}` : formatMoney(l.amount, currency))}</dd>
           </div>
         ))}
-        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>Totaal</dt><dd>{formatMoney(total, currency)}</dd></div>
+        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>Total</dt><dd>{formatMoney(total, currency)}</dd></div>
       </dl>
       {totalNote && <p className="rb-cart-summary__note">{totalNote}</p>}
       {promo}
@@ -107,13 +107,13 @@ export interface PromoCodeProps {
 }
 
 /** Discount code field. After applying, the code is shown as a removable Tag. */
-export function PromoCode({ onApply, applied, onRemove, label = 'Kortingscode', buttonLabel = 'Toepassen', className }: PromoCodeProps) {
+export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel = 'Apply', className }: PromoCodeProps) {
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!code.trim()) { setError('Vul een kortingscode in.'); return; }
+    if (!code.trim()) { setError('Enter a discount code.'); return; }
     setBusy(true);
     const res = await onApply(code.trim());
     setBusy(false);
@@ -124,7 +124,7 @@ export function PromoCode({ onApply, applied, onRemove, label = 'Kortingscode', 
       {applied ? (
         <div className="rb-promo__applied" role="status">
           <span>{label}:</span>
-          <Tag onRemove={onRemove} removeLabel={`Verwijder kortingscode ${applied}`}>{applied}</Tag>
+          <Tag onRemove={onRemove} removeLabel={`Remove discount code ${applied}`}>{applied}</Tag>
         </div>
       ) : (
         <form className="rb-promo__form" onSubmit={submit} noValidate>
@@ -139,7 +139,7 @@ export function PromoCode({ onApply, applied, onRemove, label = 'Kortingscode', 
 /* ---------- Cart button (header) ---------- */
 export interface CartButtonProps { count: number; onClick?: () => void; label?: string; className?: string }
 /** Header button with item count. The count is part of the accessible name. */
-export function CartButton({ count, onClick, label = 'Winkelwagen', className }: CartButtonProps) {
+export function CartButton({ count, onClick, label = 'Cart', className }: CartButtonProps) {
   return (
     <span className={cx('rb-cart-button', className)}>
       <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${count} ${count === 1 ? 'artikel' : 'artikelen'}`} onClick={onClick} />
@@ -159,7 +159,7 @@ export interface MiniCartProps {
   currency?: string;
   onCheckout?: () => void;
   cartHref?: string;
-  /** Extra line in the footer, e.g. "Nog € 12,05 tot gratis verzending". */
+  /** Extra line in the footer, e.g. "€12.05 to go for free shipping". */
   note?: ReactNode;
 }
 
@@ -175,14 +175,14 @@ export function MiniCart({ open, onClose, children, itemCount, subtotal, currenc
       footer={empty ? undefined : (
         <div className="rb-mini-cart__footer">
           {note && <p className="rb-mini-cart__note">{note}</p>}
-          <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>Subtotaal</span><span>{formatMoney(subtotal, currency)}</span></div>
-          <Button fullWidth onClick={onCheckout}>Afrekenen</Button>
-          <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>Bekijk winkelwagen</Button>
+          <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>Subtotal</span><span>{formatMoney(subtotal, currency)}</span></div>
+          <Button fullWidth onClick={onCheckout}>Checkout</Button>
+          <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>View cart</Button>
         </div>
       )}
     >
       {empty ? (
-        <EmptyState icon={<ShoppingBag />} title="Je winkelwagen is leeg" description="Bekijk het aanbod en voeg iets toe." actions={<Button hierarchy="secondary" onClick={onClose}>Verder winkelen</Button>} />
+        <EmptyState icon={<ShoppingBag />} title="Your cart is empty" description="Browse the shop and add something." actions={<Button hierarchy="secondary" onClick={onClose}>Continue shopping</Button>} />
       ) : (
         <div className="rb-mini-cart__items">{children}</div>
       )}

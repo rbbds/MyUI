@@ -29,7 +29,7 @@ export function Badge({ color = 'gray', size = 'md', dot, iconLeading, iconTrail
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   size?: 'sm' | 'md' | 'lg';
   dot?: boolean;
-  /** Renders a close button. Its accessible name is "Verwijder {label}" unless removeLabel is set. */
+  /** Renders a close button. Its accessible name is "Remove {label}" unless removeLabel is set. */
   onRemove?: () => void;
   removeLabel?: string;
 }
@@ -39,7 +39,7 @@ export function Tag({ size = 'md', dot, onRemove, removeLabel, className, childr
       {dot && <span className="rb-tag__dot" aria-hidden="true" />}
       {children}
       {onRemove && (
-        <button type="button" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? `Verwijder ${typeof children === 'string' ? children : ''}`.trim()}>
+        <button type="button" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? `Remove ${typeof children === 'string' ? children : ''}`.trim()}>
           <X aria-hidden="true" />
         </button>
       )}
@@ -122,7 +122,7 @@ export interface SpinnerProps extends HTMLAttributes<HTMLSpanElement> {
   /** Visually hidden status text. */
   label?: string;
 }
-export function Spinner({ size = 'md', label = 'Bezig met laden', className, ...rest }: SpinnerProps) {
+export function Spinner({ size = 'md', label = 'Loading', className, ...rest }: SpinnerProps) {
   return (
     <span role="status" className={className} {...rest}>
       <span className={cx('rb-spinner', `rb-spinner--${size}`)} aria-hidden="true" />

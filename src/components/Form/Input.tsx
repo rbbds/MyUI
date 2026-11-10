@@ -8,7 +8,7 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   iconLeading?: ReactNode;
   /** Fixed text before the value, e.g. "€" or "https://". Not part of the value. */
   prefix?: ReactNode;
-  /** Fixed text after the value, e.g. "per maand" or "%". */
+  /** Fixed text after the value, e.g. "per month" or "%". */
   suffix?: ReactNode;
 }
 

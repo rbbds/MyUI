@@ -15,19 +15,19 @@ const same = (a?: Date | null, b?: Date | null) => !!a && !!b && day(a).getTime(
 
 /** Default quick picks, relative to today. */
 export const defaultDateRangePresets = (today = day(new Date())): DateRangePreset[] => [
-  { label: 'Vandaag', range: () => ({ start: today, end: today }) },
-  { label: 'Gisteren', range: () => ({ start: plus(today, -1), end: plus(today, -1) }) },
-  { label: 'Afgelopen 7 dagen', range: () => ({ start: plus(today, -6), end: today }) },
-  { label: 'Afgelopen 30 dagen', range: () => ({ start: plus(today, -29), end: today }) },
-  { label: 'Deze maand', range: () => ({ start: new Date(today.getFullYear(), today.getMonth(), 1), end: new Date(today.getFullYear(), today.getMonth() + 1, 0) }) },
-  { label: 'Vorige maand', range: () => ({ start: new Date(today.getFullYear(), today.getMonth() - 1, 1), end: new Date(today.getFullYear(), today.getMonth(), 0) }) },
-  { label: 'Dit jaar', range: () => ({ start: new Date(today.getFullYear(), 0, 1), end: new Date(today.getFullYear(), 11, 31) }) },
+  { label: 'Today', range: () => ({ start: today, end: today }) },
+  { label: 'Yesterday', range: () => ({ start: plus(today, -1), end: plus(today, -1) }) },
+  { label: 'Last 7 days', range: () => ({ start: plus(today, -6), end: today }) },
+  { label: 'Last 30 days', range: () => ({ start: plus(today, -29), end: today }) },
+  { label: 'This month', range: () => ({ start: new Date(today.getFullYear(), today.getMonth(), 1), end: new Date(today.getFullYear(), today.getMonth() + 1, 0) }) },
+  { label: 'Last month', range: () => ({ start: new Date(today.getFullYear(), today.getMonth() - 1, 1), end: new Date(today.getFullYear(), today.getMonth(), 0) }) },
+  { label: 'This year', range: () => ({ start: new Date(today.getFullYear(), 0, 1), end: new Date(today.getFullYear(), 11, 31) }) },
 ];
 
 export interface DateRangePickerProps extends FieldBaseProps {
   value?: DateRange;
   defaultValue?: DateRange;
-  /** Called on Toepassen with the chosen range. */
+  /** Called on Apply with the chosen range. */
   onChange?: (range: DateRange) => void;
   presets?: DateRangePreset[] | false;
   min?: Date;
@@ -43,11 +43,11 @@ export interface DateRangePickerProps extends FieldBaseProps {
 const fmtShort = (d: Date, locale: string, withYear: boolean) => d.toLocaleDateString(locale, { day: 'numeric', month: 'short', ...(withYear ? { year: 'numeric' } : {}) });
 const days = (r: DateRange) => (r.start && r.end ? Math.round((day(r.end).getTime() - day(r.start).getTime()) / 864e5) + 1 : 0);
 
-/** Pick a period: quick picks, two months side by side, confirm with Toepassen. */
+/** Pick a period: quick picks, two months side by side, confirm with Apply. */
 export function DateRangePicker({
   label, hideLabel, hint, error, required, size = 'md', value, defaultValue = { start: null, end: null }, onChange,
-  presets = defaultDateRangePresets(), min, max, disabled, id, placeholder = 'Kies een periode', locale = 'nl-NL',
-  dialogLabel = 'Kies een periode', className,
+  presets = defaultDateRangePresets(), min, max, disabled, id, placeholder = 'Choose a period', locale = 'en-US',
+  dialogLabel = 'Choose a period', className,
 }: DateRangePickerProps) {
   const [own, setOwn] = useState<DateRange>(defaultValue);
   const range = value ?? own;
@@ -97,10 +97,10 @@ export function DateRangePicker({
   const activePreset = presetList.find((p) => { const r = p.range(); return same(r.start, draft.start) && same(r.end, draft.end); });
   const choosePreset = (p: DateRangePreset) => { const r = p.range(); setDraft(r); setMonth(new Date(r.start.getFullYear(), r.start.getMonth(), 1)); };
 
-  const text = range.start && range.end ? `${formatDate(range.start)} – ${formatDate(range.end)}` : '';
+  const text = range.start && range.end ? `${formatDate(range.start, locale)} – ${formatDate(range.end, locale)}` : '';
   const summary = draft.start && draft.end
-    ? `${fmtShort(draft.start, locale, !(draft.start.getFullYear() === draft.end.getFullYear()))} – ${fmtShort(draft.end, locale, true)} · ${days(draft)} ${days(draft) === 1 ? 'dag' : 'dagen'}`
-    : draft.start ? 'Kies een einddatum' : 'Kies een begindatum';
+    ? `${fmtShort(draft.start, locale, !(draft.start.getFullYear() === draft.end.getFullYear()))} – ${fmtShort(draft.end, locale, true)} · ${days(draft)} ${days(draft) === 1 ? 'day' : 'days'}`
+    : draft.start ? 'Choose an end date' : 'Choose a start date';
   const next = new Date(month.getFullYear(), month.getMonth() + 1, 1);
   const common = { rangeStart: shown.start, rangeEnd: shown.end, onChange: pick, onDayHover: setHover, min, max, locale, className: 'rb-calendar--plain', views: ['day' as const] };
 
@@ -129,11 +129,11 @@ export function DateRangePicker({
             <div id={dialogId} role="dialog" aria-label={dialogLabel} className="rb-daterange__panel"
               onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
               {presetList.length > 0 && (
-                <div className="rb-daterange__presets" role="group" aria-label="Snelkeuze">
+                <div className="rb-daterange__presets" role="group" aria-label="Quick picks">
                   {presetList.map((p) => (
                     <button key={p.label} type="button" className="rb-daterange__preset" aria-pressed={activePreset === p} onClick={() => choosePreset(p)}>{p.label}</button>
                   ))}
-                  <span className={cx('rb-daterange__preset', 'is-static', !activePreset && draft.start && 'is-current')} aria-hidden="true">Aangepast</span>
+                  <span className={cx('rb-daterange__preset', 'is-static', !activePreset && draft.start && 'is-current')} aria-hidden="true">Custom</span>
                 </div>
               )}
               <div className="rb-daterange__main">
@@ -143,8 +143,8 @@ export function DateRangePicker({
                 </div>
                 <div className="rb-daterange__footer">
                   <p className="rb-daterange__summary" aria-live="polite">{summary}</p>
-                  <Button hierarchy="secondary" size="sm" onClick={close}>Annuleren</Button>
-                  <Button size="sm" onClick={apply} disabled={!draft.start || !draft.end}>Toepassen</Button>
+                  <Button hierarchy="secondary" size="sm" onClick={close}>Cancel</Button>
+                  <Button size="sm" onClick={apply} disabled={!draft.start || !draft.end}>Apply</Button>
                 </div>
               </div>
             </div>

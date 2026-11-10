@@ -30,13 +30,13 @@ export function ProductGallery({ images, label, className }: ProductGalleryProps
   };
   if (!n) return null;
   return (
-    <section className={cx('rb-gallery', className)} aria-label={`Afbeeldingen ${label}`} aria-roledescription="carrousel">
+    <section className={cx('rb-gallery', className)} aria-label={`Images ${label}`} aria-roledescription="carousel">
       <div className="rb-gallery__stage">
         <img src={images[i].src} alt={images[i].alt} />
         {n > 1 && (
           <>
-            <ButtonIcon className="rb-gallery__nav rb-gallery__nav--prev" hierarchy="secondary" size="sm" icon={<ChevronLeft />} aria-label="Vorige afbeelding" onClick={() => go(i - 1)} />
-            <ButtonIcon className="rb-gallery__nav rb-gallery__nav--next" hierarchy="secondary" size="sm" icon={<ChevronRight />} aria-label="Volgende afbeelding" onClick={() => go(i + 1)} />
+            <ButtonIcon className="rb-gallery__nav rb-gallery__nav--prev" hierarchy="secondary" size="sm" icon={<ChevronLeft />} aria-label="Previous image" onClick={() => go(i - 1)} />
+            <ButtonIcon className="rb-gallery__nav rb-gallery__nav--next" hierarchy="secondary" size="sm" icon={<ChevronRight />} aria-label="Next image" onClick={() => go(i + 1)} />
             <p className="rb-gallery__counter" aria-live="polite">{i + 1} / {n}</p>
           </>
         )}
@@ -44,7 +44,7 @@ export function ProductGallery({ images, label, className }: ProductGalleryProps
       {n > 1 && (
         <div ref={thumbs} className="rb-gallery__thumbs" onKeyDown={onKey}>
           {images.map((img, k) => (
-            <button key={k} type="button" className="rb-gallery__thumb" aria-current={k === i || undefined} aria-label={`Afbeelding ${k + 1} van ${n}: ${img.alt}`} tabIndex={k === i ? 0 : -1} onClick={() => go(k)}>
+            <button key={k} type="button" className="rb-gallery__thumb" aria-current={k === i || undefined} aria-label={`Image ${k + 1} of ${n}: ${img.alt}`} tabIndex={k === i ? 0 : -1} onClick={() => go(k)}>
               <img src={img.thumb ?? img.src} alt="" />
             </button>
           ))}
@@ -64,7 +64,7 @@ export interface VariantOption {
   unavailable?: boolean;
 }
 export interface VariantPickerProps {
-  /** Group label, e.g. "Kleur" or "Maat". */
+  /** Group label, e.g. "Color" or "Size". */
   label: string;
   type?: 'color' | 'size';
   options: VariantOption[];
@@ -72,7 +72,7 @@ export interface VariantPickerProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   name?: string;
-  /** Link or button next to the label, e.g. "Maattabel". */
+  /** Link or button next to the label, e.g. "Size guide". */
   aside?: ReactNode;
   error?: string;
   className?: string;
@@ -106,10 +106,10 @@ export function VariantPicker({ label, type = 'size', options, value, defaultVal
             />
             {type === 'color' ? (
               <span className="rb-variant__swatch" style={{ ['--_c' as string]: o.color }}>
-                <span className="rb-visually-hidden">{o.label}{o.unavailable ? ', niet beschikbaar' : ''}</span>
+                <span className="rb-visually-hidden">{o.label}{o.unavailable ? ', not available' : ''}</span>
               </span>
             ) : (
-              <span className="rb-variant__chip">{o.label}{o.unavailable && <span className="rb-visually-hidden">, niet beschikbaar</span>}</span>
+              <span className="rb-variant__chip">{o.label}{o.unavailable && <span className="rb-visually-hidden">, not available</span>}</span>
             )}
           </label>
         ))}
@@ -123,9 +123,9 @@ export function VariantPicker({ label, type = 'size', options, value, defaultVal
 export interface AddToCartProps {
   onAdd: (quantity: number) => void;
   stock?: StockStatus;
-  /** Override for the stock text, e.g. "Nog 3 op voorraad". */
+  /** Override for the stock text, e.g. "Only 3 left". */
   stockText?: ReactNode;
-  /** Delivery promise, e.g. "Voor 22:00 besteld, morgen in huis". */
+  /** Delivery promise, e.g. "Order before 22:00, delivered tomorrow". */
   delivery?: ReactNode;
   maxQuantity?: number;
   label?: string;
@@ -137,14 +137,14 @@ export interface AddToCartProps {
 }
 
 /** Purchase block on the product page: stock, quantity, add-to-cart button and delivery promise. */
-export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label = 'In winkelwagen', productName, aside, loading, className }: AddToCartProps) {
+export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label = 'Add to cart', productName, aside, loading, className }: AddToCartProps) {
   const [q, setQ] = useState(1);
   const out = stock === 'out';
   return (
     <div className={cx('rb-add-to-cart', className)}>
       <StockIndicator status={stock}>{stockText}</StockIndicator>
       <div className="rb-add-to-cart__row">
-        <QuantityStepper value={q} onChange={setQ} max={maxQuantity} disabled={out} label={productName ? `Aantal ${productName}` : 'Aantal'} />
+        <QuantityStepper value={q} onChange={setQ} max={maxQuantity} disabled={out} label={productName ? `Quantity ${productName}` : 'Quantity'} />
         <Button className="rb-add-to-cart__button" iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
           {out ? 'Uitverkocht' : label}
         </Button>

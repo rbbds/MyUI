@@ -22,7 +22,7 @@ export interface StepperProps {
   className?: string;
 }
 
-const DEFAULT_LABELS = { complete: 'voltooid', current: 'huidige stap', upcoming: 'nog te doen' };
+const DEFAULT_LABELS = { complete: 'completed', current: 'current step', upcoming: 'to do' };
 
 /** Progress through a multi-step flow. Renders <nav> with an ordered list. */
 export function Stepper({ steps, current, orientation = 'horizontal', statusLabels = DEFAULT_LABELS, className, ...rest }: StepperProps) {

@@ -14,10 +14,10 @@ const SHAPES = {
 export const img = (shape: keyof typeof SHAPES, bg = '#eef0f4', fg = '#4f46e0') => svg(bg, fg, SHAPES[shape]);
 
 export const products = [
-  { id: 'trui', title: 'Wollen trui met ronde hals', meta: 'Noorderlicht', price: 79.95, compareAt: 99.95, rating: 4.5, reviewCount: 128, image: img('sweater', '#eef2f7', '#3b5b8c'), swatches: ['#3b5b8c', '#b5473a', '#e6dccb', '#2f2f2f', '#6b8f71'], badge: 'Sale' },
-  { id: 'mok', title: 'Stenen mok, 350 ml', meta: 'Atelier Klei', price: 14.5, rating: 4.8, reviewCount: 64, image: img('mug', '#f6efe6', '#c9774c'), swatches: ['#c9774c', '#e8e2d6', '#2f4858'] },
-  { id: 'tas', title: 'Canvas shopper', meta: 'Draagwerk', price: 34.95, rating: 4.2, reviewCount: 23, image: img('bag', '#eef4ef', '#5c7d5f'), badge: 'Nieuw' },
-  { id: 'lamp', title: 'Bureaulamp van messing', meta: 'Licht & Co', price: 129, rating: 4.6, reviewCount: 41, image: img('lamp', '#f7f3e8', '#b8902f'), stock: 'low' as const },
-  { id: 'plant', title: 'Plantenpot met schotel', meta: 'Groenhuis', price: 24.95, compareAt: 29.95, rating: 3.9, reviewCount: 12, image: img('plant', '#f2efe9', '#d6c3a5') },
-  { id: 'schoen', title: 'Leren sneaker', meta: 'Stapwijs', price: 119.95, rating: 4.4, reviewCount: 210, image: img('shoe', '#eef0f4', '#2f2f2f'), stock: 'out' as const },
+  { id: 'trui', title: 'Wool crew neck sweater', meta: 'Northlight', price: 79.95, compareAt: 99.95, rating: 4.5, reviewCount: 128, image: img('sweater', '#eef2f7', '#3b5b8c'), swatches: ['#3b5b8c', '#b5473a', '#e6dccb', '#2f2f2f', '#6b8f71'], badge: 'Sale' },
+  { id: 'mok', title: 'Stoneware mug, 350 ml', meta: 'Clay Studio', price: 14.5, rating: 4.8, reviewCount: 64, image: img('mug', '#f6efe6', '#c9774c'), swatches: ['#c9774c', '#e8e2d6', '#2f4858'] },
+  { id: 'tas', title: 'Canvas shopper', meta: 'Carry Co', price: 34.95, rating: 4.2, reviewCount: 23, image: img('bag', '#eef4ef', '#5c7d5f'), badge: 'New' },
+  { id: 'lamp', title: 'Brass desk lamp', meta: 'Light & Co', price: 129, rating: 4.6, reviewCount: 41, image: img('lamp', '#f7f3e8', '#b8902f'), stock: 'low' as const },
+  { id: 'plant', title: 'Plant pot with saucer', meta: 'Greenhouse', price: 24.95, compareAt: 29.95, rating: 3.9, reviewCount: 12, image: img('plant', '#f2efe9', '#d6c3a5') },
+  { id: 'schoen', title: 'Leather sneaker', meta: 'Stride', price: 119.95, rating: 4.4, reviewCount: 210, image: img('shoe', '#eef0f4', '#2f2f2f'), stock: 'out' as const },
 ];

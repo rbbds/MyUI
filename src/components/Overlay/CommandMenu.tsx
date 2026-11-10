@@ -35,7 +35,7 @@ export interface CommandMenuProps {
  * Keyboard-first search over pages and actions. Combobox (input) + listbox (results);
  * arrow keys move aria-activedescendant, Enter runs the item, Escape closes.
  */
-export function CommandMenu({ open, onClose, items, label = 'Commando’s', placeholder = 'Zoek of typ een commando…', emptyText = 'Geen resultaten gevonden.', showHints = true, hintLabels = { navigate: 'navigeren', select: 'openen', close: 'sluiten' } }: CommandMenuProps) {
+export function CommandMenu({ open, onClose, items, label = 'Commands', placeholder = 'Search or type a command…', emptyText = 'No results found.', showHints = true, hintLabels = { navigate: 'navigate', select: 'open', close: 'close' } }: CommandMenuProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const list = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');

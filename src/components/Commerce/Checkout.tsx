@@ -20,17 +20,17 @@ const PC = /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/;
 export function AddressFields({ value = {}, onChange, section = 'shipping', errors = {}, className }: AddressFieldsProps) {
   const [touched, setTouched] = useState<Partial<Record<keyof Address, boolean>>>({});
   const set = (k: keyof Address, v: string) => onChange?.({ ...value, [k]: v });
-  const pcError = errors.postcode ?? (touched.postcode && value.postcode && !PC.test(value.postcode) ? 'Vul een postcode in als 1234 AB.' : undefined);
+  const pcError = errors.postcode ?? (touched.postcode && value.postcode && !PC.test(value.postcode) ? 'Enter a postcode like 1234 AB.' : undefined);
   const ac = (t: string) => `${section} ${t}`;
   return (
     <div className={cx('rb-address', className)}>
       <div className="rb-address__row rb-address__row--pc">
         <Input label="Postcode" required value={value.postcode ?? ''} onChange={(e) => set('postcode', e.target.value.toUpperCase())} onBlur={() => setTouched({ ...touched, postcode: true })} autoComplete={ac('postal-code')} error={pcError} maxLength={7} />
-        <Input label="Huisnummer" required inputMode="numeric" value={value.houseNumber ?? ''} onChange={(e) => set('houseNumber', e.target.value)} autoComplete={ac('address-line2')} error={errors.houseNumber} />
-        <Input label="Toevoeging" value={value.addition ?? ''} onChange={(e) => set('addition', e.target.value)} hint="Bijv. A of 2-hoog" error={errors.addition} />
+        <Input label="House number" required inputMode="numeric" value={value.houseNumber ?? ''} onChange={(e) => set('houseNumber', e.target.value)} autoComplete={ac('address-line2')} error={errors.houseNumber} />
+        <Input label="Addition" value={value.addition ?? ''} onChange={(e) => set('addition', e.target.value)} hint="For example A or 2nd floor" error={errors.addition} />
       </div>
-      <Input label="Straat" required value={value.street ?? ''} onChange={(e) => set('street', e.target.value)} autoComplete={ac('address-line1')} error={errors.street} />
-      <Input label="Plaats" required value={value.city ?? ''} onChange={(e) => set('city', e.target.value)} autoComplete={ac('address-level2')} error={errors.city} />
+      <Input label="Street" required value={value.street ?? ''} onChange={(e) => set('street', e.target.value)} autoComplete={ac('address-line1')} error={errors.street} />
+      <Input label="City" required value={value.city ?? ''} onChange={(e) => set('city', e.target.value)} autoComplete={ac('address-level2')} error={errors.city} />
     </div>
   );
 }

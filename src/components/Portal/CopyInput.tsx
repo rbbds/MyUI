@@ -15,8 +15,8 @@ export interface CopyInputProps extends FieldBaseProps {
   className?: string;
 }
 
-/** Read-only value with a copy button, e.g. a customer number or IBAN. */
-export function CopyInput({ label, hideLabel, hint, error, size = 'md', value, copyLabel = 'Kopiëren', copiedLabel = 'Gekopieerd', copiedMessage = 'Gekopieerd naar het klembord.', id, className }: CopyInputProps) {
+/** Read-only value with a copy button, e.g. an account ID or an API key. */
+export function CopyInput({ label, hideLabel, hint, error, size = 'md', value, copyLabel = 'Copy', copiedLabel = 'Copied', copiedMessage = 'Copied to the clipboard.', id, className }: CopyInputProps) {
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   const input = useRef<HTMLInputElement>(null);
