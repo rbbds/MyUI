@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### New
+- **VerificationCode**: a 6-digit code shows as two groups of 3 with a dash between them (`grouped`, default true for length 6). It is still one input; the groups are visual only.
+- **Popover**: new prop `arrow` for an arrow that points to the middle of the trigger. New tokens `--popover-arrow-width`, `--popover-arrow-height`, `--popover-arrow-offset`, `--popover-arrow-overlap`.
+- Figma: Popover is now a component set with property Arrow (None, Top, Bottom, Left, Right), built on `_Popover (base)` and `_Popover arrow`.
+- Figma: the Header uses the `_Logo` instance (Size=Large, tagline off) instead of a placeholder.
+- New tokens `--code-input-group-gap` and `--code-input-separator-foreground`.
+
+### Fixed
+- Popover border width uses `--popover-border-width`.
+
+
 ### Changed
 - Figma: the `↳ icon-context` collection is removed. Every icon now uses the foreground token of its own component, the same token as its label. 2,331 icon fills are rebound.
 - Icon size mode xs (12px) is removed. Rule: an icon next to text is as high as the line height of that text. `[data-size="xs"]` is gone from `tokens.css`.

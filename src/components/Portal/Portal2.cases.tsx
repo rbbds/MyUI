@@ -94,7 +94,7 @@ export const Popovers: Story = {
       <p style={{ display: 'flex', alignItems: 'center', gap: 8, margin: 0 }}>
         Waardeoverdracht
         <Popover title="Wat is waardeoverdracht?" trigger={<button type="button" className="rb-popover-help" aria-label="Uitleg waardeoverdracht" style={{ display: 'inline-flex', padding: 4, border: 0, background: 'none', color: 'var(--color-foreground-tertiary)', cursor: 'pointer' }}><Info size={16} aria-hidden /></button>}
-          actions={<Button size="sm">Lees meer</Button>}>
+          arrow actions={<Button size="sm">Lees meer</Button>}>
           Je neemt het pensioen dat je bij een vorige werkgever hebt opgebouwd mee naar je nieuwe pensioenfonds.
         </Popover>
       </p>

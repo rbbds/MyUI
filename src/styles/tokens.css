@@ -81,6 +81,7 @@
 --warning-950:#451a03;
 --spacings-0:0px;
 --spacings-0-25:1px;
+--spacings--0-25:-1px;
 --spacings-0-5:2px;
 --spacings-1:4px;
 --spacings-1-5:6px;
@@ -265,6 +266,7 @@
 --sizing-80:320px;
 --spacing-0:var(--spacings-0);
 --spacing-0-25:var(--spacings-0-25);
+--spacing--0-25:var(--spacings--0-25);
 --spacing-0-5:var(--spacings-0-5);
 --spacing-1:var(--spacings-1);
 --spacing-1-5:var(--spacings-1-5);
@@ -908,6 +910,8 @@
 --code-input-foreground:var(--color-foreground-primary);
 --code-input-foreground-placeholder:var(--color-foreground-quaternary);
 --code-input-gap:var(--spacing-2);
+--code-input-group-gap:var(--spacing-3);
+--code-input-separator-foreground:var(--color-foreground-quaternary);
 --code-input-hint-foreground:var(--color-foreground-tertiary);
 --code-input-label-foreground:var(--color-foreground-secondary);
 --code-input-radius:var(--border-radius-containers-sm);
@@ -1308,6 +1312,10 @@
 --popover-gap:var(--spacing-3);
 --popover-header-gap:var(--spacing-2);
 --popover-padding:var(--spacing-4);
+--popover-arrow-width:var(--sizing-4);
+--popover-arrow-height:var(--spacing-2);
+--popover-arrow-offset:var(--spacing-4);
+--popover-arrow-overlap:var(--spacing--0-25);
 --popover-radius:var(--border-radius-overlays-md);
 --popover-surface:var(--color-surface-primary);
 --price-foreground:var(--color-foreground-primary);
