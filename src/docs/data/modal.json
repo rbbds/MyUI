@@ -77,7 +77,7 @@
     [
       "closeLabel",
       "string",
-      "Default 'Sluiten'."
+      "Default 'Close'."
     ]
   ],
   "behaviour": [

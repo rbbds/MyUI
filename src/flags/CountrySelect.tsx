@@ -7,7 +7,7 @@ export interface CountrySelectProps extends Omit<ComboboxProps, 'options'> {
   countries?: string[];
   /** Codes shown first, in their own group, e.g. ['NL', 'BE', 'DE']. */
   preferred?: string[];
-  /** Locale for country names (Intl.DisplayNames). Default nl-NL. */
+  /** Locale for country names (Intl.DisplayNames). Default en-US. */
   locale?: string;
   preferredLabel?: string;
   allLabel?: string;
@@ -16,7 +16,7 @@ export interface CountrySelectProps extends Omit<ComboboxProps, 'options'> {
 }
 
 /** Country picker with flags and search. Names come from the browser (Intl), so no data files are needed. */
-export function CountrySelect({ countries, preferred = [], locale = 'nl-NL', preferredLabel = 'Veelgekozen', allLabel = 'Alle landen', hideFlags, placeholder = 'Kies een land', ...rest }: CountrySelectProps) {
+export function CountrySelect({ countries, preferred = [], locale = 'en-US', preferredLabel = 'Popular', allLabel = 'All countries', hideFlags, placeholder = 'Choose a country', ...rest }: CountrySelectProps) {
   const options = useMemo(() => {
     const names = new Intl.DisplayNames([locale], { type: 'region' });
     const en = new Intl.DisplayNames(['en'], { type: 'region' });

@@ -14,7 +14,7 @@ export function ActivityFeed({ className, children, ...rest }: ActivityFeedProps
 
 export interface ActivityItemProps {
   title: ReactNode;
-  /** Shown time, e.g. "12 okt., 09:14". */
+  /** Shown time, e.g. "Oct 12, 9:14 AM". */
   time: string;
   /** Machine-readable time for <time dateTime>. */
   dateTime?: string;

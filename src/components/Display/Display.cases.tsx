@@ -10,7 +10,7 @@ const row = { display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' a
 const meta: Meta<typeof Badge> = {
   title: 'Components/Display/Badge',
   component: Badge,
-  args: { children: 'Actief', color: 'success', size: 'md', dot: true },
+  args: { children: 'Active', color: 'success', size: 'md', dot: true },
   argTypes: { color: { control: 'select', options: colors }, size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] } },
 };
 export default meta;
@@ -30,7 +30,7 @@ export const Avatars: StoryObj<typeof Avatar> = {
   render: () => (
     <div style={{ display: 'grid', gap: 16 }}>
       <div style={row}>{(['xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const).map((s) => <Avatar key={s} size={s} name="Robert Trimp" status="online" />)}</div>
-      <div style={row}><Avatar name="Onbekend" initials="" /><Avatar name="Anne de Vries" status="offline" /></div>
+      <div style={row}><Avatar name="Unknown" initials="" /><Avatar name="Anne de Vries" status="offline" /></div>
       <AvatarGroup size="md" max={4}>
         {['Robert Trimp', 'Anne de Vries', 'Jan Bakker', 'Mila Kok', 'Sam Jansen', 'Eva Smit'].map((n) => <Avatar key={n} name={n} />)}
       </AvatarGroup>
@@ -60,15 +60,15 @@ export const FeaturedIcons: StoryObj<typeof FeaturedIcon> = {
 export const Spinners: StoryObj<typeof Spinner> = { render: () => <div style={row}><Spinner size="sm" /><Spinner /><Spinner size="lg" /></div> };
 
 export const Progress: StoryObj<typeof ProgressBar> = {
-  render: () => <div style={{ display: 'grid', gap: 24, maxWidth: 360 }}><ProgressBar label="Voortgang" value={40} valuePosition="none" /><ProgressBar label="Voortgang" value={40} /><ProgressBar label="Voortgang" value={40} valuePosition="bottom" /></div>,
+  render: () => <div style={{ display: 'grid', gap: 24, maxWidth: 360 }}><ProgressBar label="Progress" value={40} valuePosition="none" /><ProgressBar label="Progress" value={40} /><ProgressBar label="Progress" value={40} valuePosition="bottom" /></div>,
 };
 
 export const Tooltips: StoryObj<typeof Tooltip> = {
   render: () => (
     <div style={{ ...row, gap: 48, padding: 64 }}>
       {(['top', 'bottom', 'left', 'right'] as const).map((p) => (
-        <Tooltip key={p} placement={p} title="Bewerken" text={p === 'top' ? 'Pas de gegevens van dit project aan.' : undefined}>
-          <ButtonIcon icon={<Pencil aria-hidden />} aria-label="Bewerken" />
+        <Tooltip key={p} placement={p} title="Edit" text={p === 'top' ? 'Change the details of this project.' : undefined}>
+          <ButtonIcon icon={<Pencil aria-hidden />} aria-label="Edit" />
         </Tooltip>
       ))}
     </div>

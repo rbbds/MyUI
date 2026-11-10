@@ -33,7 +33,7 @@
     [
       "SelectionCard aside",
       "ReactNode",
-      "Price (\"Free\", \"€ 2.95\") or logo."
+      "Price (\"Free\", \"€2.95\") or logo."
     ],
     [
       "SelectionCardGroup legend",

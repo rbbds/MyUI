@@ -68,7 +68,7 @@
     [
       "trendLabels",
       "Record<trend, string>",
-      "Words for screen readers. Default Gestegen, Gedaald, Gelijk gebleven."
+      "Words for screen readers. Default Up, Down, No change."
     ]
   ],
   "behaviour": [
@@ -76,7 +76,7 @@
   ],
   "a11y": [
     "Group with the label as its name (role=\"group\").",
-    "The trend is not only color: arrow, sign and hidden text (\"Gestegen: +12.4%\").",
+    "The trend is not only color: arrow, sign and hidden text (\"Up: +12.4%\").",
     "Numbers use tabular-nums, so they line up."
   ],
   "content": [

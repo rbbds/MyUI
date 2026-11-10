@@ -9,7 +9,7 @@ import './Content.css';
 export interface TableCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   title?: ReactNode;
   badge?: ReactNode;
-  /** Primary action on the right, e.g. "Teamlid toevoegen". Leave out when the PageHeader already has it. */
+  /** Primary action on the right, e.g. "Add team member". Leave out when the PageHeader already has it. */
   actions?: ReactNode;
   /** TableToolbar and TableBulkActions, shown between the header and the table. */
   toolbar?: ReactNode;
@@ -131,7 +131,7 @@ export interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputEleme
   dropLabel?: string;
 }
 /** Drop zone backed by a real file input: click, keyboard and drag-and-drop. */
-export function FileUpload({ onFiles, hint, actionLabel = 'Klik om te uploaden', dropLabel = 'of sleep een bestand hierheen', disabled, className, ...rest }: FileUploadProps) {
+export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dropLabel = 'or drag a file here', disabled, className, ...rest }: FileUploadProps) {
   const [active, setActive] = useState(false);
   const hintId = useId();
   const onDrop = (e: DragEvent) => { e.preventDefault(); setActive(false); if (!disabled) onFiles(Array.from(e.dataTransfer.files)); };
@@ -158,10 +158,10 @@ export function FileUploadItem({ name, size, progress = 0, status = 'uploading',
       <FeaturedIcon color={isErr ? 'error' : 'brand'} size="md" icon={isErr ? <CircleAlert /> : <FileIcon />} />
       <div className="rb-file__content">
         <p className="rb-file__name">{name}</p>
-        <p className="rb-file__meta">{isErr ? error ?? 'Uploaden mislukt. Probeer het opnieuw.' : size}</p>
+        <p className="rb-file__meta">{isErr ? error ?? 'Upload failed. Try again.' : size}</p>
         {!isErr && <ProgressBar label={`Upload ${name}`} value={status === 'complete' ? 100 : progress} />}
       </div>
-      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label="Geüpload"><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Verwijder ${name}`} onClick={onRemove} />}
+      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label="Uploaded"><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Verwijder ${name}`} onClick={onRemove} />}
     </div>
   );
 }

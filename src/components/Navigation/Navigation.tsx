@@ -66,7 +66,7 @@ export interface BreadcrumbsProps { items: Crumb[]; homeHref?: string; 'aria-lab
 export function Breadcrumbs({ items, homeHref, ...rest }: BreadcrumbsProps) {
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
-    <nav className="rb-breadcrumbs" aria-label={rest['aria-label'] ?? 'Kruimelpad'}>
+    <nav className="rb-breadcrumbs" aria-label={rest['aria-label'] ?? 'Breadcrumb'}>
       <ol>
         {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label="Home"><House aria-hidden="true" /></a></li>}
         {items.map((c, i) => {
@@ -91,20 +91,20 @@ function range(page: number, count: number): Array<number | '…'> {
   if (page >= count - 3) return [1, '…', count - 4, count - 3, count - 2, count - 1, count];
   return [1, '…', page - 1, page, page + 1, '…', count];
 }
-export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Vorige', nextLabel = 'Volgende' }: PaginationProps) {
+export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next' }: PaginationProps) {
   return (
-    <nav className="rb-pagination" aria-label="Paginering">
+    <nav className="rb-pagination" aria-label="Pagination">
       <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{previousLabel}</Button>
       <ul className="rb-pagination__pages">
         {range(page, pageCount).map((p, i) => (
           <li key={i}>
             {p === '…' ? <span className="rb-pagination__ellipsis" aria-hidden="true">…</span> : (
-              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={`Pagina ${p}`} onClick={() => onPageChange(p)}>{p}</button>
+              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={`Page ${p}`} onClick={() => onPageChange(p)}>{p}</button>
             )}
           </li>
         ))}
       </ul>
-      <span className="rb-pagination__compact">Pagina {page} van {pageCount}</span>
+      <span className="rb-pagination__compact">Page {page} of {pageCount}</span>
       <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>{nextLabel}</Button>
     </nav>
   );

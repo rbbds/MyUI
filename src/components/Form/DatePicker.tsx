@@ -16,14 +16,39 @@ const addMonths = (d: Date, n: number) => {
 const sameDay = (a?: Date | null, b?: Date | null) => !!a && !!b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 const key = (d: Date) => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 const pad2 = (n: number) => String(n).padStart(2, '0');
-/** Formats as dd-mm-jjjj. */
-export const formatDate = (d: Date) => `${pad2(d.getDate())}-${pad2(d.getMonth() + 1)}-${d.getFullYear()}`;
-/** Parses dd-mm-jjjj (also with / or .). Returns null when the date does not exist. */
-export const parseDate = (s: string): Date | null => {
-  const m = s.trim().match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+type DatePart = 'd' | 'm' | 'y';
+const orderCache = new Map<string, { order: DatePart[]; sep: string }>();
+/** Order of day, month and year and the separator for a locale, e.g. en-US gives m/d/y. */
+export const dateOrder = (locale = 'en-US') => {
+  let o = orderCache.get(locale);
+  if (!o) {
+    const parts = new Intl.DateTimeFormat(locale, { day: '2-digit', month: '2-digit', year: 'numeric' }).formatToParts(new Date(2001, 10, 22));
+    const order = parts.filter((p) => p.type === 'day' || p.type === 'month' || p.type === 'year').map((p) => p.type[0] as DatePart);
+    o = { order: order.length === 3 ? order : ['m', 'd', 'y'], sep: parts.find((p) => p.type === 'literal')?.value.trim() || '/' };
+    orderCache.set(locale, o);
+  }
+  return o;
+};
+/** Placeholder that matches the locale, e.g. "mm/dd/yyyy" for en-US or "dd-mm-yyyy" for nl-NL. */
+export const datePlaceholder = (locale = 'en-US') => {
+  const { order, sep } = dateOrder(locale);
+  return order.map((p) => (p === 'd' ? 'dd' : p === 'm' ? 'mm' : 'yyyy')).join(sep);
+};
+/** Formats a date as numbers in the order of the locale. Default en-US: mm/dd/yyyy. */
+export const formatDate = (d: Date, locale = 'en-US') => {
+  const { order, sep } = dateOrder(locale);
+  return order.map((p) => (p === 'd' ? pad2(d.getDate()) : p === 'm' ? pad2(d.getMonth() + 1) : String(d.getFullYear()))).join(sep);
+};
+/** Parses a typed date in the order of the locale (separator -, / or .). Returns null when the date does not exist. */
+export const parseDate = (s: string, locale = 'en-US'): Date | null => {
+  const m = s.trim().match(/^(\d{1,4})[-/.](\d{1,2})[-/.](\d{1,4})$/);
   if (!m) return null;
-  const d = new Date(+m[3], +m[2] - 1, +m[1]);
-  return d.getDate() === +m[1] && d.getMonth() === +m[2] - 1 ? d : null;
+  const { order } = dateOrder(locale);
+  const v: Record<DatePart, number> = { d: 0, m: 0, y: 0 };
+  order.forEach((p, i) => { v[p] = +m[i + 1]; });
+  if (v.y < 1000) return null;
+  const d = new Date(v.y, v.m - 1, v.d);
+  return d.getDate() === v.d && d.getMonth() === v.m - 1 ? d : null;
 };
 
 /* ---------- Calendar ---------- */
@@ -74,13 +99,13 @@ export interface CalendarProps {
 
 const DEFAULT_MIN = new Date(1900, 0, 1);
 const DEFAULT_MAX = new Date(2099, 11, 31);
-const switchDefault = (v: CalendarView) => (v === 'year' ? 'Kies een jaar' : v === 'month' ? 'Kies een maand' : 'Terug naar dagen');
+const switchDefault = (v: CalendarView) => (v === 'year' ? 'Choose a year' : v === 'month' ? 'Choose a month' : 'Back to days');
 
 export function Calendar({
   value, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
   views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
-  yearsPerRow = 3, yearsOrder = 'asc', locale = 'nl-NL', weekStartsOn = 1, autoFocus,
-  previousLabel = 'Vorige maand', nextLabel = 'Volgende maand', switchViewLabel = switchDefault,
+  yearsPerRow = 3, yearsOrder = 'asc', locale = 'en-US', weekStartsOn = 1, autoFocus,
+  previousLabel = 'Previous month', nextLabel = 'Next month', switchViewLabel = switchDefault,
   rangeStart, rangeEnd, onDayHover, month: monthProp, onMonthChange, hidePrevious, hideNext, className,
 }: CalendarProps) {
   const today = startOfDay(new Date());
@@ -313,7 +338,10 @@ export interface DatePickerProps extends FieldBaseProps {
   disabled?: boolean;
   name?: string;
   id?: string;
+  /** Placeholder. Default: the date pattern of the locale, e.g. mm/dd/yyyy. */
   placeholder?: string;
+  /** Locale for the typed date order, month and day names. Default en-US. Use e.g. nl-NL for dd-mm-yyyy. */
+  locale?: string;
   /** Accessible name of the calendar button and popover. */
   calendarLabel?: string;
   /** Extra Calendar options (views, openTo, disablePast, shouldDisableDate, …). */
@@ -321,17 +349,17 @@ export interface DatePickerProps extends FieldBaseProps {
   className?: string;
 }
 
-/** Text input (dd-mm-jjjj) with a calendar popover. Typing always works; the calendar is an extra. */
-export function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onChange, min, max, disabled, name, id, placeholder = 'dd-mm-jjjj', calendarLabel = 'Kies een datum', calendarProps, className }: DatePickerProps) {
+/** Text input (date in the order of the locale) with a calendar popover. Typing always works; the calendar is an extra. */
+export function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, calendarLabel = 'Choose a date', calendarProps, className }: DatePickerProps) {
   const [own, setOwn] = useState<Date | null>(defaultValue);
   const date = value !== undefined ? value : own;
-  const [text, setText] = useState(date ? formatDate(date) : '');
+  const [text, setText] = useState(date ? formatDate(date, locale) : '');
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const popId = useId();
 
-  useEffect(() => { setText(date ? formatDate(date) : ''); }, [date?.getTime()]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { setText(date ? formatDate(date, locale) : ''); }, [date?.getTime()]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false); };
@@ -366,19 +394,19 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
               className="rb-control__input"
               inputMode="numeric"
               autoComplete="off"
-              placeholder={placeholder}
+              placeholder={placeholder ?? datePlaceholder(locale)}
               value={text}
               disabled={disabled}
               required={required}
               aria-invalid={invalid || undefined}
               aria-describedby={describedBy}
               onChange={(e) => setText(e.target.value)}
-              onBlur={() => { const d = text ? parseDate(text) : null; if (!sameDay(d, date) && !(d === null && date === null)) commit(d); }}
+              onBlur={() => { const d = text ? parseDate(text, locale) : null; if (!sameDay(d, date) && !(d === null && date === null)) commit(d); }}
             />
           </div>
           {open && (
             <div id={popId} role="dialog" aria-label={calendarLabel} className="rb-datepicker__popover" onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
-              <Calendar {...calendarProps} value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
+              <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
             </div>
           )}
         </div>

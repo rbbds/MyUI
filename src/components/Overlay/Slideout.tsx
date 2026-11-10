@@ -9,7 +9,7 @@ export interface SlideoutProps {
   title: ReactNode;
   description?: ReactNode;
   children?: ReactNode;
-  /** Buttons, e.g. Annuleren + Toepassen. */
+  /** Buttons, e.g. Cancel + Apply. */
   footer?: ReactNode;
   size?: 'sm' | 'md' | 'lg';
   side?: 'right' | 'left';
@@ -20,7 +20,7 @@ export interface SlideoutProps {
  * Side panel on a native <dialog> (showModal): focus moves in and stays in,
  * Escape and the backdrop close it, and focus returns to the trigger.
  */
-export function Slideout({ open, onClose, title, description, children, footer, size = 'md', side = 'right', closeLabel = 'Sluiten' }: SlideoutProps) {
+export function Slideout({ open, onClose, title, description, children, footer, size = 'md', side = 'right', closeLabel = 'Close' }: SlideoutProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descId = useId();

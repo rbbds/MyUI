@@ -28,7 +28,7 @@ export interface HeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'children
 }
 
 /** Top bar. Below 900px the links move into a Slideout behind a menu button. */
-export function Header({ logo, links = [], actions, navLabel = 'Hoofdmenu', menuLabel = 'Menu openen', menuTitle = 'Menu', className, ...rest }: HeaderProps) {
+export function Header({ logo, links = [], actions, navLabel = 'Main menu', menuLabel = 'Open menu', menuTitle = 'Menu', className, ...rest }: HeaderProps) {
   const [open, setOpen] = useState(false);
   return (
     <header className={cx('rb-header', className)} {...rest}>

@@ -12,7 +12,7 @@
   ],
   "avoid": [
     "One date: use Date picker.",
-    "Date of birth or another known date: use Input with dd-mm-yyyy."
+    "Date of birth or another known date: use Date picker with openTo year, or Input."
   ],
   "anatomy": [
     "Field with a calendar icon and the chosen period.",
@@ -83,7 +83,7 @@
     "Presets are buttons with aria-pressed. The summary is read out (aria-live)."
   ],
   "content": [
-    "Summary with the number of days: \"23 Nov – 4 Dec 2026 · 12 days\"."
+    "Summary with the number of days: \"Nov 23 – Dec 4, 2026 · 12 days\"."
   ],
   "do": [
     "Choose presets that fit the data."

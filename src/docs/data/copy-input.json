@@ -60,5 +60,5 @@
     "base": "_Copy input"
   },
   "react": "CopyInput",
-  "summary": "Value to copy, like a customer number, case number or IBAN. After copying it shows \"Copied\" for 2 seconds."
+  "summary": "Value to copy, like an account ID, reference number or API key. After copying it shows \"Copied\" for 2 seconds."
 }

@@ -8,7 +8,7 @@ export type StatusIndicatorColor = Exclude<StatusColor, 'brand'>;
 export interface StatusIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
   /** Status color. There is no brand color: a brand color can look like success or error (for example Forest green). Use info for "in progress". */
   color?: StatusIndicatorColor;
-  /** The status in words, e.g. "In behandeling". The text carries the meaning; the dot supports it. */
+  /** The status in words, e.g. "In progress". The text carries the meaning; the dot supports it. */
   children: ReactNode;
 }
 

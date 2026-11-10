@@ -24,9 +24,9 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
 }
 
 /** Page-wide message above the content (maintenance, incomplete data, new feature). Inside content, use Alert. */
-export function Banner({ color = 'brand', title, children, icon, action, onClose, closeLabel = 'Melding sluiten', className, role, ...rest }: BannerProps) {
+export function Banner({ color = 'brand', title, children, icon, action, onClose, closeLabel = 'Close message', className, role, ...rest }: BannerProps) {
   return (
-    <div className={cx('rb-banner', `rb-banner--${color}`, className)} role={role} aria-label={role === 'region' ? 'Melding' : undefined} {...rest}>
+    <div className={cx('rb-banner', `rb-banner--${color}`, className)} role={role} aria-label={role === 'region' ? 'Message' : undefined} {...rest}>
       <span className="rb-banner__icon" aria-hidden="true">{icon ?? ICONS[color]}</span>
       <div className="rb-banner__body">
         <p className="rb-banner__text">

@@ -51,7 +51,7 @@
     [
       "meta",
       "ReactNode",
-      "\"PDF · 240 kB · 12 Oct 2026\"."
+      "\"PDF · 240 kB · Oct 12, 2026\"."
     ],
     [
       "unread",
@@ -101,5 +101,5 @@
     "base": "_Document list"
   },
   "react": "DocumentList, DocumentItem",
-  "summary": "List of documents like letters and annual statements: icon, title as a link, type, size, date and a download button."
+  "summary": "List of documents like invoices, contracts and reports: icon, title as a link, type, size, date and a download button."
 }

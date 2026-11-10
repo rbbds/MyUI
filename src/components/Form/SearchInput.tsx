@@ -20,7 +20,7 @@ export interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElem
 
 /** Search field with clear button. Wrap it in <form role="search"> or a region with role="search". */
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(function SearchInput(
-  { label, showLabel = false, size = 'md', value, defaultValue = '', onChange, shortcut, clearLabel = 'Zoekopdracht wissen', placeholder = 'Zoeken', disabled, className, id, onKeyDown, ...rest },
+  { label, showLabel = false, size = 'md', value, defaultValue = '', onChange, shortcut, clearLabel = 'Clear search', placeholder = 'Search', disabled, className, id, onKeyDown, ...rest },
   ref,
 ) {
   const inner = useRef<HTMLInputElement>(null);

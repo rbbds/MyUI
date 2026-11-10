@@ -22,12 +22,12 @@ export interface StepperProps {
   className?: string;
 }
 
-const DEFAULT_LABELS = { complete: 'voltooid', current: 'huidige stap', upcoming: 'nog te doen' };
+const DEFAULT_LABELS = { complete: 'completed', current: 'current step', upcoming: 'to do' };
 
 /** Progress through a multi-step flow. Renders <nav> with an ordered list. */
 export function Stepper({ steps, current, orientation = 'horizontal', statusLabels = DEFAULT_LABELS, className, ...rest }: StepperProps) {
   return (
-    <nav aria-label={rest['aria-label'] ?? 'Voortgang'} className={className}>
+    <nav aria-label={rest['aria-label'] ?? 'Progress'} className={className}>
       <ol className={cx('rb-stepper', `rb-stepper--${orientation}`)}>
         {steps.map((s, i) => {
           const status = i < current ? 'complete' : i === current ? 'current' : 'upcoming';

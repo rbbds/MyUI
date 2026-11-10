@@ -12,7 +12,7 @@ export interface ButtonGroupProps {
   options: ButtonGroupOption[];
   value: string;
   onChange: (value: string) => void;
-  /** Accessible name for the group, e.g. "Periode". */
+  /** Accessible name for the group, e.g. "Period". */
   'aria-label': string;
   className?: string;
 }

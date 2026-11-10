@@ -79,7 +79,7 @@
     [
       "CountrySelect: locale / preferredLabel / allLabel / hideFlags",
       "string / string / string / boolean",
-      "Default 'nl-NL', Veelgekozen, Alle landen."
+      "Default 'en-US', Popular, All countries."
     ],
     [
       "Flag: code, size, title",

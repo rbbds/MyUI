@@ -7,9 +7,9 @@ import './Portal2.css';
 export interface PasswordRequirement { label: string; test: (value: string) => boolean }
 
 export const defaultPasswordRequirements: PasswordRequirement[] = [
-  { label: 'Minimaal 12 tekens', test: (v) => v.length >= 12 },
-  { label: 'Een hoofdletter en een kleine letter', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
-  { label: 'Een cijfer of leesteken', test: (v) => /[\d\W_]/.test(v) },
+  { label: 'At least 12 characters', test: (v) => v.length >= 12 },
+  { label: 'An upper and a lower case letter', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
+  { label: 'A digit or a symbol', test: (v) => /[\d\W_]/.test(v) },
 ];
 
 export interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'value' | 'defaultValue' | 'onChange'>, FieldBaseProps {
@@ -23,12 +23,12 @@ export interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputEl
   hideLabelText?: string;
 }
 
-const LEVELS = ['Kies een sterk wachtwoord', 'Sterkte: zwak', 'Sterkte: redelijk', 'Sterkte: goed', 'Sterkte: sterk'];
+const LEVELS = ['Choose a strong password', 'Strength: weak', 'Strength: fair', 'Strength: good', 'Strength: strong'];
 const KEYS = ['empty', 'weak', 'fair', 'good', 'strong'];
 
 /** Password field with show/hide. With showStrength: strength meter and requirement list for a new password. */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(function PasswordInput(
-  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onChange, showStrength, requirements = defaultPasswordRequirements, showLabel = 'Wachtwoord tonen', hideLabelText = 'Wachtwoord verbergen', disabled, id, className, autoComplete, ...rest },
+  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onChange, showStrength, requirements = defaultPasswordRequirements, showLabel = 'Show password', hideLabelText = 'Hide password', disabled, id, className, autoComplete, ...rest },
   ref,
 ) {
   const [own, setOwn] = useState(defaultValue);
@@ -58,7 +58,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(fu
                 {requirements.map((r, i) => (
                   <li key={r.label} className={cx(met[i] && 'is-met')}>
                     {met[i] ? <Check aria-hidden="true" /> : <Circle aria-hidden="true" />}
-                    {r.label}<span className="rb-visually-hidden">{met[i] ? ', voldaan' : ', nog niet voldaan'}</span>
+                    {r.label}<span className="rb-visually-hidden">{met[i] ? ', met' : ', not met yet'}</span>
                   </li>
                 ))}
               </ul>

@@ -39,11 +39,11 @@ export function Cover() {
           <h1 id="myui-cover-title" className="myui-cover__title">MyUI</h1>
           <p className="myui-cover__tagline">One system, many faces.</p>
         </div>
-        <p className="myui-cover__sub">White label design system voor Figma, React en Storybook</p>
-        <ul className="myui-cover__brands" aria-label="Stijlen">
+        <p className="myui-cover__sub">White label design system for Figma, React and Storybook</p>
+        <ul className="myui-cover__brands" aria-label="Styles">
           {BRANDS.map((b) => (
             <li key={b.id}>
-              <a className="myui-cover__chip" href={`./?path=/docs/introductie--docs&globals=brand:${b.id}`} target="_top" aria-current={active === b.id ? 'true' : undefined}>
+              <a className="myui-cover__chip" href={`./?path=/docs/introduction--docs&globals=brand:${b.id}`} target="_top" aria-current={active === b.id ? 'true' : undefined}>
                 <span className="myui-cover__dot" style={{ background: brandColor(b.id) }} aria-hidden="true" />
                 {b.name}
               </a>
@@ -51,18 +51,18 @@ export function Cover() {
           ))}
         </ul>
       </div>
-      <div className="myui-cover__showcase" role="group" aria-label="Voorbeeld van MyUI-componenten">
+      <div className="myui-cover__showcase" role="group" aria-label="Example of MyUI components">
         <div className="myui-cover__row">
-          <Button>Opslaan</Button>
-          <Button hierarchy="secondary">Annuleren</Button>
+          <Button>Save</Button>
+          <Button hierarchy="secondary">Cancel</Button>
           <NotificationButton count={3} className="myui-cover__bell" />
         </div>
-        <Toggle label="Meldingen ontvangen" hint="Ontvang een e-mail bij nieuwe berichten." defaultChecked />
-        <MetricCard label="Totaal vermogen" value="€ 24.580" delta="+12,4%" trend="up" meta="t.o.v. vorige maand" icon={<FeaturedIcon size="sm" icon={<Star />} />} />
+        <Toggle label="Get notifications" hint="Get an email when there are new messages." defaultChecked />
+        <MetricCard label="Total revenue" value="€24,580" delta="+12.4%" trend="up" meta="vs last month" icon={<FeaturedIcon size="sm" icon={<Star />} />} />
         <div className="myui-cover__row">
-          <StatusIndicator color="info">In behandeling</StatusIndicator>
-          <StatusIndicator color="success">Actief</StatusIndicator>
-          <StatusIndicator color="warning">Wacht op jou</StatusIndicator>
+          <StatusIndicator color="info">In progress</StatusIndicator>
+          <StatusIndicator color="success">Active</StatusIndicator>
+          <StatusIndicator color="warning">Waiting for you</StatusIndicator>
         </div>
       </div>
     </section>

@@ -25,7 +25,7 @@ export interface TableBulkActionsProps extends HTMLAttributes<HTMLDivElement> {
   /** Number of selected rows. The bar is hidden at 0. */
   count: number;
   onClear: () => void;
-  /** Actions for the selection, e.g. Exporteren and a destructive Verwijderen. */
+  /** Actions for the selection, e.g. Export and a destructive Delete. */
   actions?: ReactNode;
   countLabel?: (count: number) => string;
   clearLabel?: string;
@@ -35,7 +35,7 @@ export interface TableBulkActionsProps extends HTMLAttributes<HTMLDivElement> {
  * Selection bar below the TableToolbar. Clear the selection when search or filters change,
  * so no one acts on rows they cannot see.
  */
-export function TableBulkActions({ count, onClear, actions, countLabel = (n) => `${n} geselecteerd`, clearLabel = 'Selectie wissen', className, ...rest }: TableBulkActionsProps) {
+export function TableBulkActions({ count, onClear, actions, countLabel = (n) => `${n} selected`, clearLabel = 'Clear selection', className, ...rest }: TableBulkActionsProps) {
   if (count < 1) return null;
   return (
     <div className={cx('rb-table-bulk', className)} {...rest}>

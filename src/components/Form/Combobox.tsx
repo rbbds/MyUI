@@ -37,7 +37,7 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
  * Select with search and a visual per option (APG "combobox with listbox popup").
  * Use it when a native select is not enough: long lists that need filtering, or options that need a flag or avatar.
  */
-export function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onChange, placeholder = 'Kies of typ om te zoeken', disabled, name, id, emptyText = 'Geen resultaten', toggleLabel = 'Toon opties', className }: ComboboxProps) {
+export function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel = 'Show options', className }: ComboboxProps) {
   const [own, setOwn] = useState<string | null>(defaultValue);
   const selectedValue = value !== undefined ? value : own;
   const selected = options.find((o) => o.value === selectedValue) ?? null;

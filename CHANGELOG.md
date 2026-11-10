@@ -1,6 +1,19 @@
 # Changelog
 
-## Unreleased
+## Unreleased (0.4.0)
+
+### Breaking
+- **English defaults.** All built-in labels, screen reader names and messages are now English, for example `Close`, `Loading`, `Breadcrumb`, `Previous` / `Next`, `Add to cart`, `Clear search`, `Show password`. Every label is still a prop: pass your own text for another language.
+- **en-US by default.** `Price`, `Rating`, `formatMoney`, `Calendar`, `DatePicker`, `DateRangePicker` and `CountrySelect` use `locale = 'en-US'`. Amounts show as `€79.95`, dates as `11/06/2026`. Pass `locale="nl-NL"` for the old output.
+- **DatePicker** has a new `locale` prop. The typed date follows the order of the locale (mm/dd/yyyy for en-US, dd-mm-yyyy for nl-NL). `formatDate(date, locale)` and `parseDate(text, locale)` take the locale as a second argument, and the new `datePlaceholder(locale)` gives the matching placeholder. The default placeholder is no longer `dd-mm-jjjj`.
+- Storybook: "Introductie" is now "Introduction", "Voorbeelden" is now "Examples", and the "Portaal" examples are under "Account/Examples". Links to the old story ids no longer work.
+
+### Changed
+- All stories, examples and the Introduction page are in English, with neutral example content (projects, team, plan, invoices) instead of pension terms.
+- Figma: all example texts are in English, with the same neutral content and en-US notation.
+- Figma: `icon-size/xs|sm|md|lg` moved from `↳ style` to `↳ screen-size`, so icon sizes can differ per breakpoint. `↳ size` now only picks the size per component (Button, Button destructive, Button icon, Featured icon) and points to `icon-size/*`. The variable modes are set only on the variants (183) instead of 956 nodes. CSS names stay the same (`--icon-size-*`).
+
+### Earlier in this release
 
 ### New
 - **myui-brand skill** (`skills/myui-brand`): an AI skill that reads a brand guide (PDF) or moodboard and turns it into MyUI brand tokens. It proposes primary color, accent color, fonts and base style, asks the user to confirm, and then builds `brand.json`, `brand-<name>.css` and `figma-brand.json`. Includes `brand.schema.json`, an example, `PROMPT.md` for tools without skills, and `scripts/build-brand.mjs` (Node, no dependencies, same color math as the Brand builder).

@@ -6,14 +6,14 @@ import './Portal2.css';
 
 export interface DocumentListProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title?: ReactNode;
-  /** E.g. <Button hierarchy="link" size="sm">Alle documenten</Button>. */
+  /** E.g. <Button hierarchy="link" size="sm">All documents</Button>. */
   action?: ReactNode;
   headingLevel?: 2 | 3 | 4;
-  /** DocumentItem elements. Paging is not part of the list: put Pagination or a "Meer laden" button below it. */
+  /** DocumentItem elements. Paging is not part of the list: put Pagination or a "Load more" button below it. */
   children: ReactNode;
 }
 
-/** List of documents such as letters and annual statements. */
+/** List of documents such as invoices, contracts and reports. */
 export function DocumentList({ title, action, headingLevel = 2, className, children, ...rest }: DocumentListProps) {
   const id = useId();
   const H = `h${headingLevel}` as 'h2';
@@ -29,7 +29,7 @@ export interface DocumentItemProps {
   title: string;
   /** Opens the document (e.g. a PDF in a new tab or a detail page). */
   href: string;
-  /** Type, size and date, e.g. "PDF · 240 kB · 12 okt. 2026". */
+  /** Type, size and date, e.g. "PDF · 240 kB · Oct 12, 2026". */
   meta?: ReactNode;
   /** New document: dot and bold title. */
   unread?: boolean;
@@ -40,7 +40,7 @@ export interface DocumentItemProps {
   unreadLabel?: string;
 }
 
-export function DocumentItem({ title, href, meta, unread, icon, downloadHref, downloadLabel = `Download ${title}`, unreadLabel = 'Nieuw' }: DocumentItemProps) {
+export function DocumentItem({ title, href, meta, unread, icon, downloadHref, downloadLabel = `Download ${title}`, unreadLabel = 'New' }: DocumentItemProps) {
   return (
     <li className={cx('rb-doc', unread && 'rb-doc--unread')}>
       {icon ?? <FeaturedIcon size="sm" color="gray" icon={<FileText />} />}

@@ -3,7 +3,7 @@
     "Sign in with a code, confirm an email address or phone number."
   ],
   "avoid": [
-    "Other numbers (postcode, IBAN): use Input."
+    "Other numbers (postcode, card number): use Input."
   ],
   "anatomy": [
     "Label.",

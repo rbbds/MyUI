@@ -8,7 +8,7 @@ import { Slideout } from './Slideout';
 const meta: Meta<typeof Slideout> = {
   title: 'Overlays/Slideout',
   component: Slideout,
-  args: { title: 'Filters', description: 'Verfijn de resultaten in de lijst.', size: 'md', side: 'right' },
+  args: { title: 'Filters', description: 'Narrow down the results in the list.', size: 'md', side: 'right' },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] }, side: { control: 'inline-radio', options: ['right', 'left'] } },
 };
 export default meta;
@@ -19,10 +19,10 @@ export const Playground: Story = {
     return (
       <>
         <Button hierarchy="secondary" onClick={() => setOpen(true)}>Filters</Button>
-        <Slideout {...args} open={open} onClose={() => setOpen(false)} footer={<><Button hierarchy="secondary" onClick={() => setOpen(false)}>Annuleren</Button><Button onClick={() => setOpen(false)}>Toepassen</Button></>}>
-          <Select label="Status" placeholder="Alle statussen" options={[{ value: 'actief', label: 'Actief' }, { value: 'concept', label: 'Concept' }]} />
-          <Checkbox label="Alleen mijn projecten" />
-          <Checkbox label="Gearchiveerde projecten tonen" />
+        <Slideout {...args} open={open} onClose={() => setOpen(false)} footer={<><Button hierarchy="secondary" onClick={() => setOpen(false)}>Cancel</Button><Button onClick={() => setOpen(false)}>Apply</Button></>}>
+          <Select label="Status" placeholder="All statuses" options={[{ value: 'active', label: 'Active' }, { value: 'draft', label: 'Draft' }]} />
+          <Checkbox label="Only my projects" />
+          <Checkbox label="Show archived projects" />
         </Slideout>
       </>
     );

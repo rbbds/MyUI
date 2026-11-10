@@ -55,7 +55,7 @@
     [
       "statusLabels",
       "object",
-      "Screen reader text, default 'voltooid', 'huidige stap', 'nog te doen'."
+      "Screen reader text, default 'completed', 'current step', 'to do'."
     ]
   ],
   "behaviour": [

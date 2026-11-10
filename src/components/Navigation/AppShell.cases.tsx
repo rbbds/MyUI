@@ -21,12 +21,12 @@ const meta: Meta<typeof Header> = {
   args: {
     logo: <Logo />,
     links: [
-      { label: 'Overzicht', href: '#', current: true, icon: <House /> },
-      { label: 'Projecten', href: '#', icon: <Layers /> },
+      { label: 'Overview', href: '#', current: true, icon: <House /> },
+      { label: 'Projects', href: '#', icon: <Layers /> },
       { label: 'Team', href: '#', icon: <Users /> },
-      { label: 'Rapportages', href: '#', icon: <ChartColumn /> },
+      { label: 'Reports', href: '#', icon: <ChartColumn /> },
     ],
-    actions: <><ButtonIcon hierarchy="tertiary" icon={<Bell />} aria-label="Meldingen" /><Avatar size="sm" name="Sanne de Vries" initials="SV" /></>,
+    actions: <><ButtonIcon hierarchy="tertiary" icon={<Bell />} aria-label="Notifications" /><Avatar size="sm" name="Sanne de Vries" initials="SV" /></>,
   },
   decorators: [(S) => <div style={{ margin: -24 }}><S /></div>],
 };
@@ -40,14 +40,14 @@ export const AppSidebar: StoryObj<typeof Sidebar> = {
     <div style={{ height: 760, display: 'flex' }}>
       <Sidebar
         logo={<Logo />}
-        search={<form role="search" onSubmit={(e) => e.preventDefault()}><SearchInput label="Zoeken" size="sm" shortcut="⌘K" /></form>}
-        footer={<><NavItem href="#" icon={<Settings />}>Instellingen</NavItem><NavItem href="#" icon={<CircleHelp />}>Help</NavItem></>}
-        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@voorbeeld.nl" action={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Uitloggen" />} />}
+        search={<form role="search" onSubmit={(e) => e.preventDefault()}><SearchInput label="Search" size="sm" shortcut="⌘K" /></form>}
+        footer={<><NavItem href="#" icon={<Settings />}>Settings</NavItem><NavItem href="#" icon={<CircleHelp />}>Help</NavItem></>}
+        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" action={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Log out" />} />}
       >
         <NavItem href="#" icon={<House />} active>Dashboard</NavItem>
-        <NavItem href="#" icon={<Layers />} count={12}>Projecten</NavItem>
+        <NavItem href="#" icon={<Layers />} count={12}>Projects</NavItem>
         <NavItem href="#" icon={<Inbox />}>Taken</NavItem>
-        <NavItem href="#" icon={<ChartColumn />}>Rapportages</NavItem>
+        <NavItem href="#" icon={<ChartColumn />}>Reports</NavItem>
         <NavItem href="#" icon={<Users />}>Team</NavItem>
       </Sidebar>
     </div>

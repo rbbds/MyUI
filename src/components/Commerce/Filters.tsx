@@ -14,7 +14,7 @@ export interface FilterGroupProps {
   /** Selected values (checkbox list). */
   value?: string[];
   onChange?: (value: string[]) => void;
-  /** Show this many options; the rest behind "Toon meer". */
+  /** Show this many options; the rest behind "Show more". */
   limit?: number;
   defaultOpen?: boolean;
   /** Heading level of the title. Default 3 (under an h2 such as "Filters"). */
@@ -54,7 +54,7 @@ export function FilterGroup({ title, options = [], value = [], onChange, limit =
               />
             ))}
             {options.length > limit && (
-              <Button hierarchy="link" size="sm" onClick={() => setAll(!all)}>{all ? 'Toon minder' : `Toon alle ${options.length}`}</Button>
+              <Button hierarchy="link" size="sm" onClick={() => setAll(!all)}>{all ? 'Show less' : `Show all ${options.length}`}</Button>
             )}
           </fieldset>
         )}
@@ -74,15 +74,15 @@ export interface ActiveFiltersProps {
   className?: string;
 }
 
-/** Chosen filters as removable Tags, with "Alles wissen" and the number of results. */
+/** Chosen filters as removable Tags, with "Clear all" and the number of results. */
 export function ActiveFilters({ filters, onRemove, onClear, resultCount, className }: ActiveFiltersProps) {
   return (
     <div className={cx('rb-active-filters', className)}>
-      {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{resultCount} {resultCount === 1 ? 'product' : 'producten'}</p>}
+      {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{resultCount} {resultCount === 1 ? 'product' : 'products'}</p>}
       {filters.length > 0 && (
-        <ul className="rb-active-filters__list" aria-label="Gekozen filters">
-          {filters.map((f) => <li key={f.id}><Tag onRemove={() => onRemove(f.id)} removeLabel={`Verwijder filter ${f.label}`}>{f.label}</Tag></li>)}
-          {onClear && <li><Button hierarchy="link" size="sm" onClick={onClear}>Alles wissen</Button></li>}
+        <ul className="rb-active-filters__list" aria-label="Active filters">
+          {filters.map((f) => <li key={f.id}><Tag onRemove={() => onRemove(f.id)} removeLabel={`Remove filter ${f.label}`}>{f.label}</Tag></li>)}
+          {onClear && <li><Button hierarchy="link" size="sm" onClick={onClear}>Clear all</Button></li>}
         </ul>
       )}
     </div>

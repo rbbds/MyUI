@@ -17,7 +17,7 @@ export interface ProductCardProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   currency?: string;
   rating?: number;
   reviewCount?: number;
-  /** Top-left label, usually a Badge ("Sale", "Nieuw"). */
+  /** Top-left label, usually a Badge ("Sale", "New"). */
   badge?: ReactNode;
   /** Available colors as CSS colors; shown as dots (decorative, the count is announced). */
   swatches?: string[];
@@ -32,7 +32,7 @@ export interface ProductCardProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
 /** Product tile for grids and carousels. */
 export function ProductCard({
   title, href, image, meta, price, compareAt, currency, rating, reviewCount, badge, swatches, stock,
-  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel = 'In winkelwagen', layout = 'vertical', className, ...rest
+  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel = 'Add to cart', layout = 'vertical', className, ...rest
 }: ProductCardProps) {
   const shown = swatches?.slice(0, 4) ?? [];
   return (
@@ -46,7 +46,7 @@ export function ProductCard({
             hierarchy="secondary"
             size="sm"
             icon={<Heart fill={wishlisted ? 'currentColor' : 'none'} />}
-            aria-label={`Bewaar ${title} in verlanglijst`}
+            aria-label={`Save ${title} to wishlist`}
             aria-pressed={!!wishlisted}
             onClick={onToggleWishlist}
           />
@@ -60,7 +60,7 @@ export function ProductCard({
           <p className="rb-product-card__swatches">
             {shown.map((c) => <span key={c} className="rb-product-card__swatch" style={{ background: c }} aria-hidden="true" />)}
             {swatches!.length > shown.length && <span aria-hidden="true">+{swatches!.length - shown.length}</span>}
-            <span className="rb-visually-hidden">{swatches!.length} kleuren</span>
+            <span className="rb-visually-hidden">{swatches!.length} colors</span>
           </p>
         )}
         <div className="rb-product-card__footer">

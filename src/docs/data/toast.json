@@ -38,7 +38,7 @@
     [
       "ToastRegion label",
       "string",
-      "Default 'Meldingen'. Live region that holds the toasts."
+      "Default 'Notifications'. Live region that holds the toasts."
     ]
   ],
   "behaviour": [

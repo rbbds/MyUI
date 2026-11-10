@@ -6,7 +6,7 @@ import './Portal2.css';
 
 export interface ChecklistProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title: ReactNode;
-  /** Number of done steps and total, for the progress bar and "2 van 5 stappen gedaan". */
+  /** Number of done steps and total, for the progress bar and "2 of 5 steps done". */
   done: number;
   total: number;
   progressLabel?: (done: number, total: number) => string;
@@ -15,7 +15,7 @@ export interface ChecklistProps extends Omit<HTMLAttributes<HTMLElement>, 'title
 }
 
 /** Onboarding progress: title, progress and steps. Hide it when everything is done. */
-export function Checklist({ title, done, total, progressLabel = (d, t) => `${d} van ${t} stappen gedaan`, headingLevel = 2, className, children, ...rest }: ChecklistProps) {
+export function Checklist({ title, done, total, progressLabel = (d, t) => `${d} of ${t} steps done`, headingLevel = 2, className, children, ...rest }: ChecklistProps) {
   const id = useId();
   const H = `h${headingLevel}` as 'h2';
   return (
@@ -35,12 +35,12 @@ export interface ChecklistItemProps {
   status: 'done' | 'current' | 'open';
   /** Shown for the current step. */
   description?: ReactNode;
-  /** Shown for the current step, e.g. <Button hierarchy="link" size="sm">Nu controleren</Button>. */
+  /** Shown for the current step, e.g. <Button hierarchy="link" size="sm">Check now</Button>. */
   action?: ReactNode;
   doneLabel?: string;
 }
 
-export function ChecklistItem({ title, status, description, action, doneLabel = 'Gedaan' }: ChecklistItemProps) {
+export function ChecklistItem({ title, status, description, action, doneLabel = 'Done' }: ChecklistItemProps) {
   return (
     <li className={cx('rb-checklist__item', `rb-checklist__item--${status}`)} aria-current={status === 'current' ? 'step' : undefined}>
       {status === 'done' ? <CircleCheck aria-hidden="true" className="rb-checklist__icon" /> : <Circle aria-hidden="true" className="rb-checklist__icon" />}

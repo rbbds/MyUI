@@ -72,7 +72,7 @@
     [
       "aside",
       "ReactNode",
-      "Price (\"Free\", \"€ 2.95\") or logo on the right. It is part of the label, so it is read out."
+      "Price (\"Free\", \"€2.95\") or logo on the right. It is part of the label, so it is read out."
     ],
     [
       "name / value / checked / onChange",

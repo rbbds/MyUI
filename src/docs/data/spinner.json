@@ -35,7 +35,7 @@
     [
       "label",
       "string",
-      "Default 'Bezig met laden'."
+      "Default 'Loading'."
     ]
   ],
   "behaviour": [
