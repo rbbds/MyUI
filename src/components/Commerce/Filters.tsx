@@ -78,7 +78,7 @@ export interface ActiveFiltersProps {
 export function ActiveFilters({ filters, onRemove, onClear, resultCount, className }: ActiveFiltersProps) {
   return (
     <div className={cx('rb-active-filters', className)}>
-      {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{resultCount} {resultCount === 1 ? 'product' : 'producten'}</p>}
+      {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{resultCount} {resultCount === 1 ? 'product' : 'products'}</p>}
       {filters.length > 0 && (
         <ul className="rb-active-filters__list" aria-label="Active filters">
           {filters.map((f) => <li key={f.id}><Tag onRemove={() => onRemove(f.id)} removeLabel={`Remove filter ${f.label}`}>{f.label}</Tag></li>)}

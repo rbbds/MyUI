@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import { Cover } from './brand/Cover';
+import { Logo } from './brand/Logo';
+
+<Meta title="Introduction" />
+
+<Cover />
+
+**@rbbds/ui** is a white label component library with design tokens, built from the Figma file **WL Design System (rbbds)**. The chips in the cover switch the style. Use the **Theme** button in the toolbar to see the cover in Dark.
+
+## Principles
+
+- **Token-first.** Components only use CSS custom properties. No hardcoded colors or spacing.
+- **4 layers**, the same as in Figma: primitives (`--wl-*`, `--spacings-*`), theme (`--color-*`, with Light and Dark), screen-size (responsive through media queries) and mapped (`--button-*`, `--input-*` …).
+- **Light and Dark** through `data-theme="dark"` on `<html>` or on any element.
+- **Accessible from the start.** Native elements where possible (`<button>`, `<input>`, `<select>`, `<dialog>`), visible focus rings and a toolbar toggle for Light and Dark. The a11y addon checks every story.
+- **English and en-US by default.** All built-in labels are English and dates and amounts use en-US. Every label is a prop, and components with dates or amounts have a `locale` prop.
+
+## Rebrand per project
+
+Everything that is brand lives in one layer: the collection **brand/wl** in Figma, `--wl-*` in CSS. Everything that is structure stays the same: spacing, padding, sizes, the font size scale and breakpoints. That way layouts and components do not break when you switch brands.
+
+### Choose a style
+
+MyUI has three styles. A style sets the shape: corner radius, border width and font weight.
+
+| Style | Shape | Use |
+| --- | --- | --- |
+| **Iris** (default) | Soft corners | No `data-brand` needed |
+| **Forest** | Square | `<html data-brand="forest">` |
+| **Berry** | Round, heavy titles, 2 px borders | `<html data-brand="berry">` |
+
+After that you only change color and fonts. The fastest way is the **[Brand builder](?path=/story/brand-builder--builder)**: choose a style, fill in your brand color, fonts and logo, and download the CSS. The builder turns one color into the whole scale (25 to 950) and warns you when the contrast is too low. Do you work with an AI assistant? The **myui-brand** skill in this package reads a brand guide or moodboard and makes the same files.
+
+In Figma every style is a **mode** of brand/wl. In code every style except Iris is a `:root[data-brand="…"]` block in `tokens.css`. See them with the **Brand** button in the toolbar.
+
+| What | Figma (brand/wl) | CSS |
+| --- | --- | --- |
+| Brand color | `WL/color/brand/25` to `950` | `--brand-color-primary-*` |
+| Neutral and status colors | `WL/color/gray`, `success`, `warning`, `error`, `info` | `--gray-*` etc. |
+| Fonts | `WL/fonts/body`, `WL/fonts/title` | `--brand-font-body`, `--brand-font-title` |
+| Font weight | `WL/font-weight/titles/*`, `paragraph/*` | `--brand-font-weight-*` |
+| Corner radius | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--brand-radius-*` |
+| Border width | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--brand-border-width-*` |
+
+The theme layer (Light and Dark) points to these variables and the component tokens point to the theme layer. So for a brand you never change anything other than `--wl-*`.
+
+**Add a brand**
+
+1. Figma: add a mode to brand/wl and fill in the values.
+2. Code: export the tokens with `scripts/figma-export-tokens.js`. The mode becomes `:root[data-brand="name"]` in `tokens.css`.
+3. Set `data-brand="name"` on `<html>`. In a project with only one brand you can skip the mode: override the `--wl-*` values on `:root` in your own CSS, after the import of `@rbbds/ui/styles.css`.
+
+```css
+:root {
+  --brand-color-primary-600: #0284c7;   /* give the whole scale 25 to 950, so Dark works too */
+  --brand-font-title: "Fraunces", Georgia, serif;
+  --brand-radius-control-md: 0px;
+  --brand-border-width-control-default: 2px;
+}
+```
+
+**Rules**
+
+- Never change the primitive scales (`--radius-2`, `--font-weight-600`). `--radius-2` means 8px. If you set it to 0, the name is wrong and everything that uses 8px changes. Point to another step in brand/wl instead.
+- Set `data-brand` and overrides on `<html>` (`:root`). The tokens are calculated there. On a deeper element an override does not work for all tokens.
+- Do not change theme or mapped tokens (`--color-*`, `--button-*` …) for a brand. A brand that differs there is a fork.
+- Load the web font you set in `--brand-font-*` yourself.
+- Check the contrast after a new brand color: text on `brand-600` (Light) and `brand-400` (Dark) must reach at least 4.5:1.
+
+## Logo
+
+The logo of MyUI itself. It follows the active style: the color comes from `--color-surface-brand-solid`, the corner radius from `--border-radius-control-sm`. In Figma this is the **_Logo** component on the Logo page.
+
+<div className="myui-logo-demo sb-unstyled">
+  <Logo />
+  <Logo size="small" />
+</div>
+
+The logo belongs to MyUI and is not part of the library export. In client projects, use the logo of the client.

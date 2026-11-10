@@ -7,7 +7,7 @@ import './CommandMenu.css';
 export interface CommandItem {
   id: string;
   label: string;
-  /** Heading the item is grouped under, e.g. "Pagina's" or "Acties". */
+  /** Heading the item is grouped under, e.g. "Pages" or "Actions". */
   group?: string;
   icon?: ReactNode;
   /** Shortcut hint, e.g. "⌘N". Display only. */

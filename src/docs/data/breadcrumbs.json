@@ -45,7 +45,7 @@
     [
       "aria-label",
       "string",
-      "Default 'Kruimelpad'."
+      "Default 'Breadcrumb'."
     ]
   ],
   "behaviour": [

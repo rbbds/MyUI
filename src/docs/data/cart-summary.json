@@ -81,7 +81,7 @@
     "Section with a heading. The rows are a description list (dt/dd)."
   ],
   "content": [
-    "\"Free\" instead of \"€ 0.00\" for shipping."
+    "\"Free\" instead of \"€0.00\" for shipping."
   ],
   "do": [],
   "dont": [

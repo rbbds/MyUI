@@ -44,7 +44,7 @@
     [
       "previousLabel / nextLabel",
       "string",
-      "Default 'Vorige' and 'Volgende'."
+      "Default 'Previous' and 'Next'."
     ]
   ],
   "behaviour": [

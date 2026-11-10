@@ -60,7 +60,7 @@ export function ProductCard({
           <p className="rb-product-card__swatches">
             {shown.map((c) => <span key={c} className="rb-product-card__swatch" style={{ background: c }} aria-hidden="true" />)}
             {swatches!.length > shown.length && <span aria-hidden="true">+{swatches!.length - shown.length}</span>}
-            <span className="rb-visually-hidden">{swatches!.length} kleuren</span>
+            <span className="rb-visually-hidden">{swatches!.length} colors</span>
           </p>
         )}
         <div className="rb-product-card__footer">

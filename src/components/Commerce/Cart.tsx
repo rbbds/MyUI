@@ -38,7 +38,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
         <div className="rb-cart-item__text">
           <p className="rb-cart-item__title">{href ? <a href={href}>{title}</a> : title}</p>
           {options && options.length > 0 && <p className="rb-cart-item__options">{options.join(' · ')}</p>}
-          {readOnly && <p className="rb-cart-item__options">Aantal: {quantity}</p>}
+          {readOnly && <p className="rb-cart-item__options">Quantity: {quantity}</p>}
         </div>
         {!readOnly && (
           <div className="rb-cart-item__actions">
@@ -60,7 +60,7 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   /** Shipping, payment fee, … Negative amounts are discounts. */
   lines?: SummaryLine[];
   total: number;
-  /** Small text under the total, e.g. "Inclusief btw". */
+  /** Small text under the total, e.g. "Including VAT". */
   totalNote?: ReactNode;
   /** Slot for PromoCode. */
   promo?: ReactNode;
@@ -142,7 +142,7 @@ export interface CartButtonProps { count: number; onClick?: () => void; label?: 
 export function CartButton({ count, onClick, label = 'Cart', className }: CartButtonProps) {
   return (
     <span className={cx('rb-cart-button', className)}>
-      <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${count} ${count === 1 ? 'artikel' : 'artikelen'}`} onClick={onClick} />
+      <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${count} ${count === 1 ? 'item' : 'items'}`} onClick={onClick} />
       {count > 0 && <span className="rb-cart-button__count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}
     </span>
   );
@@ -163,7 +163,7 @@ export interface MiniCartProps {
   note?: ReactNode;
 }
 
-/** Cart in a Slideout: opens from the header after "In winkelwagen" or a click on the CartButton. */
+/** Cart in a Slideout: opens from the header after "Add to cart" or a click on the CartButton. */
 export function MiniCart({ open, onClose, children, itemCount, subtotal, currency = 'EUR', onCheckout, cartHref = '#', note }: MiniCartProps) {
   const empty = itemCount === 0;
   return (
@@ -171,7 +171,7 @@ export function MiniCart({ open, onClose, children, itemCount, subtotal, currenc
       open={open}
       onClose={onClose}
       size="sm"
-      title={`Winkelwagen (${itemCount})`}
+      title={`Cart (${itemCount})`}
       footer={empty ? undefined : (
         <div className="rb-mini-cart__footer">
           {note && <p className="rb-mini-cart__note">{note}</p>}

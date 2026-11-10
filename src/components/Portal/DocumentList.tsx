@@ -29,7 +29,7 @@ export interface DocumentItemProps {
   title: string;
   /** Opens the document (e.g. a PDF in a new tab or a detail page). */
   href: string;
-  /** Type, size and date, e.g. "PDF · 240 kB · 12 okt. 2026". */
+  /** Type, size and date, e.g. "PDF · 240 kB · Oct 12, 2026". */
   meta?: ReactNode;
   /** New document: dot and bold title. */
   unread?: boolean;

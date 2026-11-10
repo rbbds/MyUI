@@ -6,7 +6,7 @@
     "base": "_Price"
   },
   "react": "Price",
-  "summary": "Price with an optional old price (sale) and an extra like \"per month\". Amounts are formatted with Intl (nl-NL, euro).",
+  "summary": "Price with an optional old price (sale) and an extra like \"per month\". Amounts are formatted with Intl (en-US, euro).",
   "use": [
     "Everywhere a product amount is shown."
   ],
@@ -54,7 +54,7 @@
     [
       "currency, locale",
       "string",
-      "Default 'EUR' and 'nl-NL'."
+      "Default 'EUR' and 'en-US'."
     ],
     [
       "size",
@@ -71,7 +71,7 @@
     "You can also use formatMoney(amount) on its own."
   ],
   "a11y": [
-    "Screen readers hear \"Old price € 99.95 Now € 79.95\". A strike-through alone is not enough."
+    "Screen readers hear \"Was €99.95 Now €79.95\". A strike-through alone is not enough."
   ],
   "content": [
     "Show \"incl. VAT\" if your customers are consumers and it is not mentioned anywhere else."

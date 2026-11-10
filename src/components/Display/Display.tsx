@@ -88,7 +88,7 @@ export function AvatarGroup({ size = 'sm', max = 4, className, children, ...rest
   return (
     <div className={cx('rb-avatar-group', `rb-avatar-group--${size}`, className)} {...rest}>
       {shown.map((el, i) => cloneElement(el, { key: i, size }))}
-      {extra > 0 && <Avatar size={size} initials={`+${extra}`} name={`${extra} anderen`} />}
+      {extra > 0 && <Avatar size={size} initials={`+${extra}`} name={`${extra} others`} />}
     </div>
   );
 }
@@ -135,7 +135,7 @@ export function Spinner({ size = 'md', label = 'Loading', className, ...rest }: 
 export interface ProgressBarProps extends HTMLAttributes<HTMLDivElement> {
   value: number;
   max?: number;
-  /** Accessible name, e.g. "Uploadvoortgang". */
+  /** Accessible name, e.g. "Upload progress". */
   label: string;
   valuePosition?: 'none' | 'right' | 'bottom';
 }

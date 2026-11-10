@@ -14,7 +14,7 @@ export const Playground: Story = {};
 export const CardLoading: Story = {
   render: () => (
     <div aria-busy="true" style={{ display: 'grid', gap: 16, padding: 24, border: '1px solid var(--card-border)', borderRadius: 12 }}>
-      <span className="rb-visually-hidden" role="status">Projecten laden</span>
+      <span className="rb-visually-hidden" role="status">Loading projects</span>
       <Skeleton variant="rect" />
       <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
         <Skeleton variant="circle" />
@@ -24,5 +24,5 @@ export const CardLoading: Story = {
   ),
 };
 export const Shortcuts: StoryObj<typeof Kbd> = {
-  render: () => <p style={{ display: 'flex', gap: 8, alignItems: 'center', margin: 0 }}>Open zoeken met <Kbd>⌘K</Kbd> of <Kbd>Ctrl</Kbd><Kbd>K</Kbd></p>,
+  render: () => <p style={{ display: 'flex', gap: 8, alignItems: 'center', margin: 0 }}>Open search with <Kbd>⌘K</Kbd> of <Kbd>Ctrl</Kbd><Kbd>K</Kbd></p>,
 };

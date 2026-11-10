@@ -8,7 +8,7 @@ import { Slider } from './Slider';
 const meta: Meta<typeof Input> = {
   title: 'Components/Form inputs/Input',
   component: Input,
-  args: { label: 'E-mailadres', placeholder: 'naam@voorbeeld.nl', hint: 'We delen je e-mailadres nooit.', size: 'md', type: 'email', autoComplete: 'email' },
+  args: { label: 'Email address', placeholder: 'name@example.com', hint: 'We never share your email address.', size: 'md', type: 'email', autoComplete: 'email' },
   argTypes: { size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] }, iconLeading: { control: false } },
   decorators: [(S) => <div style={{ maxWidth: 360 }}><S /></div>],
 };
@@ -17,22 +17,22 @@ type Story = StoryObj<typeof Input>;
 
 export const Playground: Story = {};
 export const WithIcon: Story = { args: { iconLeading: <Mail /> } };
-export const WithError: Story = { args: { defaultValue: 'robert@', error: 'Vul een geldig e-mailadres in, bijvoorbeeld naam@voorbeeld.nl.' } };
-export const PrefixSuffix: Story = { args: { label: 'Maandbedrag', type: 'text', inputMode: 'decimal', placeholder: '0,00', prefix: '€', suffix: 'per maand', hint: undefined, autoComplete: 'off' } };
+export const WithError: Story = { args: { defaultValue: 'robert@', error: 'Enter a valid email address, for example name@example.com.' } };
+export const PrefixSuffix: Story = { args: { label: 'Monthly amount', type: 'text', inputMode: 'decimal', placeholder: '0,00', prefix: '€', suffix: 'per month', hint: undefined, autoComplete: 'off' } };
 export const Disabled: Story = { args: { disabled: true } };
 export const Required: Story = { args: { required: true } };
 
 export const SelectField: StoryObj<typeof Select> = {
   render: () => (
-    <Select label="Land" placeholder="Kies een land" hint="Waar woon je?" iconLeading={<User />} options={[{ value: 'nl', label: 'Nederland' }, { value: 'be', label: 'België' }, { value: 'de', label: 'Duitsland' }]} />
+    <Select label="Country" placeholder="Choose a country" hint="Where do you live?" iconLeading={<User />} options={[{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }]} />
   ),
 };
 export const SelectError: StoryObj<typeof Select> = {
-  render: () => <Select label="Land" placeholder="Kies een land" error="Kies een land." options={[{ value: 'nl', label: 'Nederland' }]} />,
+  render: () => <Select label="Country" placeholder="Choose a country" error="Choose a country." options={[{ value: 'nl', label: 'Netherlands' }]} />,
 };
 export const TextareaField: StoryObj<typeof Textarea> = {
-  render: () => <Textarea label="Toelichting" placeholder="Schrijf hier je toelichting…" hint="Maximaal 500 tekens." />,
+  render: () => <Textarea label="Explanation" placeholder="Write your explanation here…" hint="Up to 500 characters." />,
 };
 export const SliderField: StoryObj<typeof Slider> = {
-  render: () => <Slider label="Maandbedrag" min={0} max={1000} step={50} defaultValue={650} formatValue={(v) => `€ ${v}`} />,
+  render: () => <Slider label="Monthly amount" min={0} max={1000} step={50} defaultValue={650} formatValue={(v) => `€ ${v}`} />,
 };

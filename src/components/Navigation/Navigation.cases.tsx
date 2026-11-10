@@ -7,13 +7,13 @@ const meta: Meta<typeof Tabs> = {
   title: 'Components/Navigation/Tabs',
   component: Tabs,
   args: {
-    'aria-label': 'Projectonderdelen',
+    'aria-label': 'Project sections',
     type: 'underline',
     items: [
-      { id: 'overzicht', label: 'Overzicht', content: 'Inhoud van Overzicht' },
-      { id: 'details', label: 'Details', content: 'Inhoud van Details' },
-      { id: 'documenten', label: 'Documenten', count: 3, content: 'Inhoud van Documenten' },
-      { id: 'instellingen', label: 'Instellingen', content: 'Inhoud van Instellingen' },
+      { id: 'overview', label: 'Overview', content: 'Overview content' },
+      { id: 'details', label: 'Details', content: 'Details content' },
+      { id: 'documents', label: 'Documents', count: 3, content: 'Documents content' },
+      { id: 'settings', label: 'Settings', content: 'Settings content' },
     ],
   },
   argTypes: { type: { control: 'inline-radio', options: ['underline', 'pill'] } },
@@ -24,20 +24,20 @@ export const Underline: Story = {};
 export const Pill: Story = { args: { type: 'pill' } };
 
 export const Breadcrumb: StoryObj<typeof Breadcrumbs> = {
-  render: () => <Breadcrumbs homeHref="#" items={[{ label: 'Projecten', href: '#' }, { label: 'Klant A', href: '#' }, { label: 'Design system' }]} />,
+  render: () => <Breadcrumbs homeHref="#" items={[{ label: 'Projects', href: '#' }, { label: 'Client A', href: '#' }, { label: 'Design system' }]} />,
 };
 export const PaginationExample: StoryObj<typeof Pagination> = {
   render: () => { const [p, setP] = useState(1); return <Pagination page={p} pageCount={10} onPageChange={setP} />; },
 };
 export const Sidebar: StoryObj<typeof NavItem> = {
   render: () => (
-    <nav aria-label="Hoofdmenu" style={{ width: 272, display: 'grid', gap: 4 }}>
+    <nav aria-label="Main menu" style={{ width: 272, display: 'grid', gap: 4 }}>
       <NavItem href="#" icon={<House aria-hidden />} active>Dashboard</NavItem>
-      <NavItem href="#" icon={<Layers aria-hidden />}>Projecten</NavItem>
+      <NavItem href="#" icon={<Layers aria-hidden />}>Projects</NavItem>
       <NavItem href="#" icon={<Inbox aria-hidden />} count={10}>Inbox</NavItem>
-      <NavItem href="#" icon={<ChartColumn aria-hidden />}>Rapportages</NavItem>
+      <NavItem href="#" icon={<ChartColumn aria-hidden />}>Reports</NavItem>
       <NavItem href="#" icon={<Users aria-hidden />}>Team</NavItem>
-      <NavItem href="#" icon={<Settings aria-hidden />}>Instellingen</NavItem>
+      <NavItem href="#" icon={<Settings aria-hidden />}>Settings</NavItem>
     </nav>
   ),
 };

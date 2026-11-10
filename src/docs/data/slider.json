@@ -49,7 +49,7 @@
     [
       "formatValue",
       "(v) => string",
-      "For example \"€ 650\". Also becomes the aria-valuetext."
+      "For example \"€650\". Also becomes the aria-valuetext."
     ],
     [
       "showValue",
@@ -66,7 +66,7 @@
     "aria-valuetext gives the formatted value, not only the number."
   ],
   "content": [
-    "Show the unit in the value (\"€ 650 per month\")."
+    "Show the unit in the value (\"€650 per month\")."
   ],
   "do": [
     "Always show the current value."

@@ -5,10 +5,10 @@ const meta: Meta<typeof BrandBuilder> = {
   title: 'Brand builder',
   component: BrandBuilder,
   parameters: { layout: 'padded', controls: { disable: true }, brandControlledByStory: true },
-  // Stijl kies je in de builder zelf; de Brand-knop in de toolbar staat hier vast.
+  // You choose the style in the builder itself; the Brand button in the toolbar is fixed here.
   globals: { brand: 'iris' },
 };
 export default meta;
 
-/** Kies een stijl, vul huisstijlkleur, lettertypes en logo in, en kopieer de CSS en de Figma-waarden. */
+/** Choose a style, fill in the brand color, fonts and logo, and copy the CSS and the Figma values. */
 export const Builder: StoryObj<typeof BrandBuilder> = { name: 'Brand builder' };

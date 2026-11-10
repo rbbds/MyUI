@@ -10,7 +10,7 @@ export interface MetricCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 't
   label: ReactNode;
   /** The number, already formatted, e.g. "€ 24.580". */
   value: ReactNode;
-  /** Change versus the previous period, including the sign, e.g. "+12,4%". */
+  /** Change versus the previous period, including the sign, e.g. "+12.4%". */
   delta?: ReactNode;
   /** Colour and arrow of the delta. Up is not always good (costs): pick what the change means. */
   trend?: MetricTrend;

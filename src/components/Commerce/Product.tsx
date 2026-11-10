@@ -146,7 +146,7 @@ export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQ
       <div className="rb-add-to-cart__row">
         <QuantityStepper value={q} onChange={setQ} max={maxQuantity} disabled={out} label={productName ? `Quantity ${productName}` : 'Quantity'} />
         <Button className="rb-add-to-cart__button" iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
-          {out ? 'Uitverkocht' : label}
+          {out ? 'Sold out' : label}
         </Button>
         {aside}
       </div>

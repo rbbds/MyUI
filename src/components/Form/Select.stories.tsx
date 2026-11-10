@@ -13,10 +13,10 @@ import type { StoryObj } from '@storybook/react-vite';
 import { Select } from './Select';
 import { Flag } from '../../flags';
 
-const countries = [{ value: 'NL', label: 'Nederland' }, { value: 'BE', label: 'België' }, { value: 'DE', label: 'Duitsland' }, { value: 'FR', label: 'Frankrijk' }, { value: 'GB', label: 'Verenigd Koninkrijk' }];
+const countries = [{ value: 'NL', label: 'Netherlands' }, { value: 'BE', label: 'Belgium' }, { value: 'DE', label: 'Germany' }, { value: 'FR', label: 'France' }, { value: 'GB', label: 'United Kingdom' }];
 export const WithFlag: StoryObj<typeof Select> = {
   render: () => {
     const [code, setCode] = useState('NL');
-    return <Select label="Land" hint="Het land waar je woont." value={code} onChange={(e) => setCode(e.target.value)} iconLeading={<Flag code={code} />} options={countries} />;
+    return <Select label="Country" hint="The country you live in." value={code} onChange={(e) => setCode(e.target.value)} iconLeading={<Flag code={code} />} options={countries} />;
   },
 };

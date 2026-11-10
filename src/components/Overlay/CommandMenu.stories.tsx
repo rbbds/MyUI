@@ -6,12 +6,12 @@ import { Kbd } from '../Display/Feedback';
 import { CommandMenu, useCommandShortcut, type CommandItem } from './CommandMenu';
 
 const items: CommandItem[] = [
-  { id: 'dashboard', group: "Pagina's", label: 'Dashboard', icon: <House />, onSelect: () => {} },
-  { id: 'projecten', group: "Pagina's", label: 'Projecten', icon: <Layers />, keywords: ['werk'], onSelect: () => {} },
-  { id: 'instellingen', group: "Pagina's", label: 'Instellingen', icon: <Settings />, keywords: ['profiel', 'account'], onSelect: () => {} },
-  { id: 'nieuw', group: 'Acties', label: 'Nieuw project', icon: <Plus />, shortcut: '⌘N', onSelect: () => {} },
-  { id: 'uitnodigen', group: 'Acties', label: 'Teamlid uitnodigen', icon: <UserPlus />, onSelect: () => {} },
-  { id: 'uitloggen', group: 'Acties', label: 'Uitloggen', icon: <LogOut />, disabled: true, onSelect: () => {} },
+  { id: 'dashboard', group: "Pages", label: 'Dashboard', icon: <House />, onSelect: () => {} },
+  { id: 'projects', group: "Pages", label: 'Projects', icon: <Layers />, keywords: ['work'], onSelect: () => {} },
+  { id: 'settings', group: "Pages", label: 'Settings', icon: <Settings />, keywords: ['profile', 'account'], onSelect: () => {} },
+  { id: 'new', group: 'Actions', label: 'New project', icon: <Plus />, shortcut: '⌘N', onSelect: () => {} },
+  { id: 'invite', group: 'Actions', label: 'Invite team member', icon: <UserPlus />, onSelect: () => {} },
+  { id: 'log out', group: 'Actions', label: 'Log out', icon: <LogOut />, disabled: true, onSelect: () => {} },
 ];
 
 const meta: Meta<typeof CommandMenu> = {
@@ -28,8 +28,8 @@ export const Playground: StoryObj<typeof CommandMenu> = {
     const withLog = items.map((i) => ({ ...i, onSelect: () => setLast(i.label) }));
     return (
       <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}>
-        <Button hierarchy="secondary" onClick={openMenu}>Zoeken <Kbd>⌘K</Kbd></Button>
-        <span className="rb-text-md">Laatst gekozen: {last}</span>
+        <Button hierarchy="secondary" onClick={openMenu}>Search <Kbd>⌘K</Kbd></Button>
+        <span className="rb-text-md">Last chosen: {last}</span>
         <CommandMenu open={open} onClose={() => setOpen(false)} items={withLog} />
       </div>
     );

@@ -60,7 +60,7 @@
     [
       "navLabel / menuLabel / menuTitle",
       "string",
-      "Default 'Hoofdmenu', 'Menu openen', 'Menu'."
+      "Default 'Main menu', 'Open menu', 'Menu'."
     ]
   ],
   "behaviour": [

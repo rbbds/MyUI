@@ -20,7 +20,7 @@ export interface PopoverProps {
   trigger: ReactElement<Record<string, unknown>>;
   title?: ReactNode;
   children?: ReactNode;
-  /** Buttons at the bottom, e.g. Sluiten and Lees meer. */
+  /** Buttons at the bottom, e.g. Close and Read more. */
   actions?: ReactNode;
   /** Show the close button. Escape and clicking outside always close. */
   closable?: boolean;

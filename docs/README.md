@@ -11,7 +11,7 @@ So always change text in `docs/content`, then run both scripts.
 ## Writing style
 
 - B1 English: short sentences, common words, active voice.
-- Default labels that come from code (like `'Sluiten'`) stay as they are in the code. Quote them, do not translate them.
+- Default labels that come from code (like `'Close'`) must match the code exactly. Quote them.
 
 ## Structure
 

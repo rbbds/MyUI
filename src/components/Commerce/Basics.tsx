@@ -84,7 +84,7 @@ export interface QuantityStepperProps extends Omit<InputHTMLAttributes<HTMLInput
   min?: number;
   max?: number;
   size?: 'sm' | 'md';
-  /** Accessible name, e.g. "Aantal Wollen trui". */
+  /** Accessible name, e.g. "Quantity Wool sweater". */
   label?: string;
   decreaseLabel?: string;
   increaseLabel?: string;

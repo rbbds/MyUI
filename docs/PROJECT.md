@@ -111,7 +111,7 @@ src/
     Overlay/     Alert, Toast, Tooltip, Progress, Dropdown menu, Modal, Slideout, Command menu
     Commerce/    e-commerce (zie hieronder)
   flags/         Flag, CountrySelect
-  docs/          Introductie.mdx, brand/ (Brand builder), components/*.mdx, data/*.json
+  docs/          Introduction.mdx, brand/ (Brand builder), components/*.mdx, data/*.json
   styles/        tokens.css (gegenereerd uit Figma), index.css
 docs/
   content/*.mjs       bron van alle componentdocumentatie
@@ -159,7 +159,7 @@ Breaking in 0.3.0: `--wl-*` is now `--brand-*` (`--wl-color-brand-*` is `--brand
 ### Storybook-conventies
 
 - Sidebar: `Categorie / Component / Docs` plus stories. Volgorde staat in `storySort` in `.storybook/preview.tsx`.
-- Categorieën: Introductie, Brand builder, Foundations, Buttons, Form inputs, Selection controls, Badges & tags, Avatars, Feedback, Overlays, Navigation, Data display, Content, E-commerce, Utilities.
+- Categorieën: Introduction, Brand builder, Foundations, Buttons, Form inputs, Selection controls, Badges & tags, Avatars, Feedback, Overlays, Navigation, Data display, Content, E-commerce, Utilities.
 - Stories voor meerdere componenten staan in `*.cases.tsx`. Per component een dun `*.stories.tsx`: `export default { ...meta, title: 'Cat/Comp' } as typeof meta;`
 - MDX: `<Meta of={Stories} name="Docs" />`.
 - Een storynaam mag niet gelijk zijn aan de componenttitel (vandaar `ProgressBars`).
@@ -283,3 +283,9 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 - Templates per stijl uitdenken (uitgesteld).
 - Release v0.2.0 of v0.3.0 publiceren wanneer Robert dat vraagt.
 - Figma-naar-code workflow voor token- en componentwijzigingen vastleggen.
+
+**Fase 4: Engels (PR volgt)**
+- Standaardlabels in code Engels, standaard locale en-US (bedragen, datums, landnamen). DatePicker kreeg een `locale`-prop; de getypte datum volgt de volgorde van de locale.
+- Stories, voorbeelden en Introduction in het Engels, met neutrale voorbeeldcontent (geen pensioentermen).
+- Storybook: "Portaal" heet nu "Account/Examples", "Voorbeelden" heet "Examples".
+- Figma: voorbeeldteksten Engels en en-US; `icon-size/*` staat in `↳ screen-size`, `↳ size` kiest alleen de maat per component (modes op 183 varianten).
