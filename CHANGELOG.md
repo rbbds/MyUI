@@ -11,6 +11,7 @@
 
 ### Fixed
 - Popover border width uses `--popover-border-width`.
+- Storybook: Stepper sat alone under "Components". It is now under Navigation. The first example step has a real title again.
 
 
 ### Changed
