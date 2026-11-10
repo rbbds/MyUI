@@ -44,3 +44,10 @@
 .bb-output__head{display:flex;justify-content:space-between;align-items:center;gap:var(--spacing-3);flex-wrap:wrap}
 .bb-code{margin:0;padding:var(--spacing-4);overflow:auto;max-height:360px;border:1px solid var(--color-border-secondary);border-radius:var(--border-radius-containers-sm);background:var(--color-surface-secondary);color:var(--color-foreground-primary);font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace}
 .bb-code:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+
+.bb-import{display:flex;flex-direction:column;gap:var(--spacing-3);padding:var(--spacing-4);border:var(--border-width-containers-default) solid var(--color-border-secondary);border-radius:var(--border-radius-containers-sm)}
+.bb-import summary{cursor:pointer}
+.bb-import[open] summary{margin-bottom:var(--spacing-1)}
+.bb-file{position:relative;display:inline-flex;align-items:center;gap:var(--spacing-2);padding:var(--spacing-1-5) var(--spacing-3);border:var(--border-width-control-default) solid var(--color-border-primary);border-radius:var(--border-radius-control-sm);color:var(--color-foreground-secondary);font-size:var(--text-body-sub-text-font-size);cursor:pointer}
+.bb-file svg{width:var(--icon-size-sm);height:var(--icon-size-sm)}
+.bb-file:focus-within{box-shadow:var(--focus-ring)}

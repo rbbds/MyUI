@@ -13,7 +13,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "files": [
-    "dist"
+    "dist",
+    "skills"
   ],
   "sideEffects": [
     "**/*.css"
