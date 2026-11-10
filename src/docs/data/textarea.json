@@ -6,23 +6,23 @@
     "base": "_Textarea"
   },
   "react": "Textarea",
-  "summary": "Tekstveld van meerdere regels voor toelichtingen en berichten. Standaard 128 px hoog en verticaal te vergroten.",
+  "summary": "Multi-line text field for explanations and messages. 128 px high by default, and you can make it taller.",
   "use": [
-    "Vrije tekst langer dan één zin."
+    "Free text longer than one sentence."
   ],
   "avoid": [
-    "Korte waarden: gebruik Input."
+    "Short values: use Input."
   ],
   "anatomy": [
     "Label.",
-    "Veld met resize-hoek.",
-    "Hint of foutmelding."
+    "Field with a resize corner.",
+    "Hint or error message."
   ],
   "figmaProps": [
     [
       "State",
       "Placeholder, Filled, Focus, Error, Disabled",
-      "Eén size."
+      "One size."
     ],
     [
       "Label, hint, error",
@@ -34,7 +34,7 @@
     [
       "label, hint, error, required",
       "",
-      "Gelijk aan Input. Geen size-prop."
+      "Same as Input. No size prop."
     ],
     [
       "rows / maxLength",
@@ -43,28 +43,29 @@
     ]
   ],
   "behaviour": [
-    "De gebruiker kan het veld verticaal vergroten."
+    "The user can make the field taller."
   ],
   "a11y": [
-    "Gekoppeld zoals Input. Noem een tekenlimiet in de hint, niet alleen in maxLength."
+    "Linked like Input. Mention a character limit in the hint, not only in maxLength."
   ],
   "content": [
-    "Hint met verwachting: \"Maximaal 500 tekens.\""
+    "Hint with what to expect: \"500 characters at most.\""
   ],
   "do": [
-    "Maak de standaardhoogte passend bij de verwachte lengte."
+    "Match the default height to the expected length."
   ],
   "dont": [
-    "Horizontaal laten vergroten: dat breekt de layout."
+    "Let users resize it sideways: that breaks the layout."
   ],
   "tokens": [
     "--textarea-height",
-    "verder --input-*"
+    "--textarea-radius",
+    "and --input-*"
   ],
   "related": [
     "Input"
   ],
   "open": [
-    "Een tekenteller is nog niet aanwezig."
+    "There is no character counter yet."
   ]
 }

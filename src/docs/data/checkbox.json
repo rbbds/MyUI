@@ -6,18 +6,18 @@
     "base": "_Checkbox"
   },
   "react": "Checkbox",
-  "summary": "Onafhankelijke aan/uit-keuze, of meerdere keuzes uit een lijst. Indeterminate toont dat een deel van de onderliggende items is gekozen.",
+  "summary": "Separate on/off choice, or several choices from a list. Indeterminate shows that only some of the items below it are chosen.",
   "use": [
-    "Akkoord geven, meerdere filters kiezen, rijen selecteren in een tabel."
+    "Agree to terms, pick several filters, select rows in a table."
   ],
   "avoid": [
-    "Eén keuze uit een groep: gebruik Radio.",
-    "Instelling met direct effect: gebruik Toggle."
+    "One choice from a group: use Radio.",
+    "A setting that works straight away: use Toggle."
   ],
   "anatomy": [
-    "Box (vinkje of streepje).",
-    "Label (optioneel in Figma, verplicht in code).",
-    "Hint (optioneel)."
+    "Box (check mark or dash).",
+    "Label (optional in Figma, required in code).",
+    "Hint (optional)."
   ],
   "figmaProps": [
     [
@@ -50,7 +50,7 @@
     [
       "indeterminate",
       "boolean",
-      "Zet aria-checked=\"mixed\"."
+      "Sets aria-checked=\"mixed\"."
     ],
     [
       "size",
@@ -64,22 +64,22 @@
     ]
   ],
   "behaviour": [
-    "Klik op box of label wisselt de waarde. Spatie bij focus."
+    "Clicking the box or the label switches the value. Space when it has focus."
   ],
   "a11y": [
-    "Native <input type=\"checkbox\"> binnen een <label>.",
-    "Groepen in een <fieldset> met <legend>.",
-    "Zonder zichtbaar label: geef aria-label (bijvoorbeeld in een tabelrij: \"Selecteer Robert Trimp\")."
+    "Native <input type=\"checkbox\"> inside a <label>.",
+    "Groups in a <fieldset> with a <legend>.",
+    "Without a visible label: add an aria-label (for example in a table row: \"Select Robert Trimp\")."
   ],
   "content": [
-    "Label als bewering: \"Stuur mij updates per e-mail.\""
+    "Label as a statement: \"Send me updates by email.\""
   ],
   "do": [
-    "Zet opties onder elkaar, niet naast elkaar."
+    "Put options below each other, not next to each other."
   ],
   "dont": [
-    "Een checkbox die direct een actie uitvoert.",
-    "Negatieve labels (\"Geen e-mails ontvangen\")."
+    "A checkbox that runs an action straight away.",
+    "Negative labels (\"Do not receive emails\")."
   ],
   "tokens": [
     "--selection-{surface|border|foreground}-*",

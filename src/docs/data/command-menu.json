@@ -6,22 +6,22 @@
     "base": "_Command item"
   },
   "react": "CommandMenu",
-  "summary": "Zoeken over pagina’s en acties met het toetsenbord, geopend met ⌘K of Ctrl+K. Results is een native Figma-slot met Command items.",
+  "summary": "Search across pages and actions with the keyboard, opened with ⌘K or Ctrl+K. Results is a native Figma slot with Command items.",
   "use": [
-    "Apps met veel pagina’s of acties, voor ervaren gebruikers."
+    "Apps with many pages or actions, for experienced users."
   ],
   "avoid": [
-    "Als enige manier om iets te vinden: zorg altijd ook voor zichtbare navigatie."
+    "As the only way to find something: always add visible navigation too."
   ],
   "anatomy": [
-    "Zoekveld met Esc-hint.",
-    "Resultaten (slot): groepskoppen en Command items.",
-    "Footer met toetsenbordhints."
+    "Search field with an Esc hint.",
+    "Results (slot): group headings and Command items.",
+    "Footer with keyboard hints."
   ],
   "figmaProps": [
     [
       "Query",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -32,7 +32,7 @@
     [
       "Command item: State",
       "Default, Active, Disabled",
-      "Active = gemarkeerd met pijltjestoetsen."
+      "Active = highlighted with the arrow keys."
     ],
     [
       "Command item: Icon / Label / Show shortcut",
@@ -59,25 +59,25 @@
     [
       "useCommandShortcut(onOpen, key?)",
       "hook",
-      "Koppelt ⌘K / Ctrl+K."
+      "Links ⌘K / Ctrl+K."
     ]
   ],
   "behaviour": [
-    "Typen filtert op label en keywords.",
-    "Pijl op/neer markeert, Enter voert uit en sluit, Escape sluit."
+    "Typing filters by label and keywords.",
+    "Arrow up/down highlights, Enter runs the item and closes, Escape closes."
   ],
   "a11y": [
-    "Combobox (input) met listbox; aria-activedescendant volgt de markering, dus de focus blijft in het zoekveld.",
-    "Lege resultaten worden gemeld via role=\"status\"."
+    "Combobox (input) with a listbox. aria-activedescendant follows the highlight, so focus stays in the search field.",
+    "Empty results are announced with role=\"status\"."
   ],
   "content": [
-    "Labels als werkwoord voor acties (\"Nieuw project\"), als naam voor pagina’s."
+    "Labels as a verb for actions (\"New project\"), as a name for pages."
   ],
   "do": [
-    "Voeg keywords toe voor synoniemen."
+    "Add keywords for words with the same meaning."
   ],
   "dont": [
-    "Destructieve acties zonder bevestiging."
+    "Destructive actions without a confirmation."
   ],
   "tokens": [
     "--command-*",

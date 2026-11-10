@@ -6,16 +6,16 @@
     "base": "_Checkout options"
   },
   "react": "SelectionCard (aside)",
-  "summary": "Bezorg- en betaalopties als Selection cards met de prijs of een logo rechts (nieuwe prop aside).",
+  "summary": "Delivery and payment options as Selection cards with the price or a logo on the right (prop aside).",
   "use": [
-    "Checkout: bezorging, betaalmethode, verzekering."
+    "Checkout: delivery, payment method, insurance."
   ],
   "avoid": [
-    "Opties zonder uitleg of prijs: dan is een gewone Radio genoeg."
+    "Options without an explanation or price: a normal Radio is enough."
   ],
   "anatomy": [
     "Legend.",
-    "Selection cards (radio) met titel, beschrijving en aside."
+    "Selection cards (radio) with title, description and aside."
   ],
   "figmaProps": [
     [
@@ -25,15 +25,15 @@
     ],
     [
       "Selection card: Show aside, Aside",
-      "boolean, tekst",
-      "Nieuw in Selection card."
+      "boolean, text",
+      "Part of Selection card."
     ]
   ],
   "reactProps": [
     [
       "SelectionCard aside",
       "ReactNode",
-      "Prijs (\"Gratis\", \"€ 2,95\") of logo."
+      "Price (\"Free\", \"€ 2.95\") or logo."
     ],
     [
       "SelectionCardGroup legend",
@@ -42,17 +42,17 @@
     ]
   ],
   "behaviour": [
-    "Native radiogroep: pijltjestoetsen wisselen."
+    "Native radio group: arrow keys switch."
   ],
   "a11y": [
-    "De aside staat in het label, dus de prijs wordt voorgelezen."
+    "The aside is part of the label, so the price is read out."
   ],
   "content": [
-    "Concreet tijdvak: \"Morgen tussen 9:00 en 18:00\"."
+    "A concrete time slot: \"Tomorrow between 9:00 and 18:00\"."
   ],
   "do": [],
   "dont": [
-    "Een betaalmethode vooraf aanvinken die extra kost."
+    "Pre-select a payment method that costs extra."
   ],
   "tokens": [
     "--selection-card-*"
@@ -62,6 +62,6 @@
     "Address fields"
   ],
   "open": [
-    "Betaallogo's (iDEAL, Visa) zitten nog niet in de bibliotheek."
+    "Payment logos (iDEAL, Visa) are not in the library yet."
   ]
 }

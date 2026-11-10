@@ -6,17 +6,17 @@
     "base": "_Date range picker"
   },
   "react": "DateRangePicker",
-  "summary": "Periode kiezen: snelkeuzes links, twee maanden naast elkaar, bevestigen met Toepassen. Op mobiel één maand en de snelkeuzes als rij erboven.",
+  "summary": "Pick a period: presets on the left, two months side by side, confirm with Apply. On mobile one month, with the presets as a row on top.",
   "use": [
-    "Filteren op periode in dashboards, rapportages en overzichten."
+    "Filter by period in dashboards, reports and overviews."
   ],
   "avoid": [
-    "Eén datum: gebruik Date picker.",
-    "Geboortedatum of andere bekende datum: gebruik Input met dd-mm-jjjj."
+    "One date: use Date picker.",
+    "Date of birth or another known date: use Input with dd-mm-yyyy."
   ],
   "anatomy": [
-    "Veld met kalendericoon en de gekozen periode.",
-    "Paneel: snelkeuzes, twee Calendars (Calendar day: Range start, In range, Range end), voettekst met samenvatting, Annuleren en Toepassen."
+    "Field with a calendar icon and the chosen period.",
+    "Panel: presets, two Calendars (Calendar day: Range start, In range, Range end), footer with a summary, Cancel and Apply."
   ],
   "figmaProps": [
     [
@@ -26,7 +26,7 @@
     ],
     [
       "Summary",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -37,7 +37,7 @@
     [
       "Calendar day: State",
       "+ Range start, Range end, In range",
-      "Nieuw voor deze component."
+      "New for this component."
     ]
   ],
   "reactProps": [
@@ -49,12 +49,12 @@
     [
       "onChange",
       "(range) => void",
-      "Pas bij Toepassen."
+      "Only on Apply."
     ],
     [
       "presets",
       "DateRangePreset[] | false",
-      "Standaard defaultDateRangePresets()."
+      "Default defaultDateRangePresets()."
     ],
     [
       "min, max, disabled, locale",
@@ -69,27 +69,27 @@
     [
       "Calendar: rangeStart, rangeEnd, onDayHover, month, onMonthChange, hidePrevious, hideNext",
       "",
-      "Nieuwe Calendar-props voor bereik en gekoppelde maanden."
+      "New Calendar props for ranges and linked months."
     ]
   ],
   "behaviour": [
-    "Eerste klik = begin, tweede klik = einde. Klik je eerder dan het begin, dan wisselen ze om.",
-    "Tijdens kiezen zie je het bereik bij hover of focus.",
-    "Annuleren of Escape sluit zonder te wijzigen. Focus gaat terug naar het veld."
+    "First click = start, second click = end. If you click before the start, they swap.",
+    "While you pick, you see the range on hover or focus.",
+    "Cancel or Escape closes without a change. Focus goes back to the field."
   ],
   "a11y": [
-    "Veld is een knop met aria-haspopup=\"dialog\"; het paneel is een dialog.",
-    "Kalender met pijltjestoetsen, PageUp en PageDown; dagen in het bereik hebben aria-selected.",
-    "Snelkeuzes zijn knoppen met aria-pressed. De samenvatting wordt voorgelezen (aria-live)."
+    "The field is a button with aria-haspopup=\"dialog\". The panel is a dialog.",
+    "Calendar works with arrow keys, PageUp and PageDown. Days in the range have aria-selected.",
+    "Presets are buttons with aria-pressed. The summary is read out (aria-live)."
   ],
   "content": [
-    "Samenvatting met aantal dagen: \"23 nov. – 4 dec. 2026 · 12 dagen\"."
+    "Summary with the number of days: \"23 Nov – 4 Dec 2026 · 12 days\"."
   ],
   "do": [
-    "Kies snelkeuzes die bij de data passen."
+    "Choose presets that fit the data."
   ],
   "dont": [
-    "Direct filteren bij de eerste klik: wacht op Toepassen."
+    "Filter straight away on the first click: wait for Apply."
   ],
   "tokens": [
     "--date-range-*",
@@ -101,6 +101,6 @@
     "Button group"
   ],
   "open": [
-    "Begin- en einddatum typen is nog niet mogelijk; alleen kiezen."
+    "You cannot type the start and end date yet, only pick them."
   ]
 }

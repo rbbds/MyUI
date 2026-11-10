@@ -6,16 +6,16 @@
     "base": "_Notification"
   },
   "react": "Toast",
-  "summary": "Tijdelijke melding na een actie van de gebruiker, rechtsonder in beeld. Deelt de base met Alert.",
+  "summary": "Short-lived message after a user action, at the bottom right of the screen. Shares its base with Alert.",
   "use": [
-    "Bevestiging: \"Project opgeslagen\".",
-    "Fout bij een achtergrondactie met een herstelactie."
+    "Confirmation: \"Project saved\".",
+    "Error in a background action, with a way to fix it."
   ],
   "avoid": [
-    "Informatie die de gebruiker later nog nodig heeft: gebruik Alert."
+    "Information the user needs later: use Alert."
   ],
   "anatomy": [
-    "Gelijk aan Alert, met schaduw en eigen rand."
+    "Same as Alert, with a shadow and its own border."
   ],
   "figmaProps": [
     [
@@ -31,42 +31,42 @@
   ],
   "reactProps": [
     [
-      "Alle Alert-props behalve role",
+      "All Alert props except role",
       "",
       ""
     ],
     [
       "ToastRegion label",
       "string",
-      "Standaard 'Meldingen'. Live region waar toasts in komen."
+      "Default 'Meldingen'. Live region that holds the toasts."
     ]
   ],
   "behaviour": [
-    "Verdwijnt vanzelf na een paar seconden, behalve bij fouten of als er een actie in staat.",
-    "Pauzeer de timer bij hover en focus."
+    "Disappears by itself after a few seconds, except for errors or when it has an action.",
+    "Pause the timer on hover and focus."
   ],
   "a11y": [
-    "Plaats toasts in ToastRegion (aria-live=\"polite\").",
-    "Geef genoeg tijd om te lezen (WCAG 2.2.1)."
+    "Put toasts in a ToastRegion (aria-live=\"polite\").",
+    "Give people enough time to read (WCAG 2.2.1)."
   ],
   "content": [
-    "Kort en in verleden tijd: \"Bestand geüpload\"."
+    "Short and in the past tense: \"File uploaded\"."
   ],
   "do": [
-    "Maximaal drie toasts tegelijk, nieuwste onderaan."
+    "Three toasts at the same time at most, newest at the bottom."
   ],
   "dont": [
-    "Toasts voor fouten die de gebruiker moet oplossen in een formulier."
+    "Toasts for errors the user must fix in a form."
   ],
   "tokens": [
     "--toast-surface",
     "--toast-border",
-    "verder --alert-*"
+    "and --alert-*"
   ],
   "related": [
     "Alert"
   ],
   "open": [
-    "Auto-dismiss zit nog niet in ToastRegion; dat regelt de app nu zelf."
+    "ToastRegion does not dismiss toasts by itself yet. The app does that for now."
   ]
 }

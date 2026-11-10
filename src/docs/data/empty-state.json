@@ -6,37 +6,37 @@
     "base": null
   },
   "react": "EmptyState",
-  "summary": "Wordt getoond als een lijst, zoekopdracht of tabel geen inhoud heeft. Legt uit waarom en wat de gebruiker nu kan doen.",
+  "summary": "Shown when a list, search or table has no content. Explains why and what the user can do now.",
   "use": [
-    "Geen zoekresultaten.",
-    "Nog geen items aangemaakt."
+    "No search results.",
+    "No items created yet."
   ],
   "avoid": [
-    "Fouten bij laden: gebruik Alert met Color=Error."
+    "Errors while loading: use Alert with Color=Error."
   ],
   "anatomy": [
     "Featured icon.",
-    "Titel.",
-    "Ondersteunende tekst.",
-    "Acties (slot)."
+    "Title.",
+    "Supporting text.",
+    "Actions (slot)."
   ],
   "figmaProps": [
     [
       "Title / Supporting text",
-      "tekst",
+      "text",
       ""
     ],
     [
       "Actions",
       "slot",
-      "Plaats één of twee Buttons."
+      "Put one or two Buttons here."
     ]
   ],
   "reactProps": [
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "description",
@@ -46,7 +46,7 @@
     [
       "icon",
       "ReactNode",
-      "Meestal een FeaturedIcon."
+      "Usually a FeaturedIcon."
     ],
     [
       "actions",
@@ -55,19 +55,19 @@
     ]
   ],
   "behaviour": [
-    "Statisch."
+    "Static."
   ],
   "a11y": [
-    "Titel als kop in de juiste structuur. Na een zoekactie: meld het resultaat via een live region."
+    "Title as a heading in the right structure. After a search: announce the result in a live region."
   ],
   "content": [
-    "Titel: wat er aan de hand is. Tekst: waarom, en wat de gebruiker kan doen."
+    "Title: what is going on. Text: why, and what the user can do."
   ],
   "do": [
-    "Bied een uitweg: zoekopdracht wissen of iets nieuws aanmaken."
+    "Offer a way out: clear the search or create something new."
   ],
   "dont": [
-    "Alleen \"Geen gegevens\"."
+    "Only \"No data\"."
   ],
   "tokens": [
     "--empty-state-foreground-{title|text}",

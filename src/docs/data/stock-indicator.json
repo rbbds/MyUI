@@ -6,16 +6,16 @@
     "base": "_Stock indicator"
   },
   "react": "StockIndicator",
-  "summary": "Beschikbaarheid met een gekleurde stip. De tekst draagt de betekenis.",
+  "summary": "Availability with a colored dot. The text carries the meaning.",
   "use": [
-    "Productpagina, Product card (bij laag of uitverkocht), Add to cart."
+    "Product page, Product card (when low or sold out), Add to cart."
   ],
   "avoid": [
-    "Levertijd: zet die als losse regel (zie Add to cart)."
+    "Delivery time: put it on its own line (see Add to cart)."
   ],
   "anatomy": [
-    "Stip.",
-    "Tekst."
+    "Dot.",
+    "Text."
   ],
   "figmaProps": [
     [
@@ -25,7 +25,7 @@
     ],
     [
       "Label",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -38,19 +38,19 @@
     [
       "children",
       "ReactNode",
-      "Eigen tekst, bijvoorbeeld \"Nog 3 op voorraad\"."
+      "Your own text, for example \"Only 3 left\"."
     ]
   ],
   "behaviour": [],
   "a11y": [
-    "Kleur is nooit de enige drager: de tekst zegt de status."
+    "Color is never the only signal: the text says the status."
   ],
   "content": [
-    "Concreet: \"Nog 3 op voorraad\" in plaats van \"Beperkt\"."
+    "Be concrete: \"Only 3 left\" instead of \"Limited\"."
   ],
   "do": [],
   "dont": [
-    "Alleen een gekleurde stip zonder tekst."
+    "Only a colored dot without text."
   ],
   "tokens": [
     "--stock-*"

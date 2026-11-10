@@ -6,16 +6,16 @@
     "base": null
   },
   "react": "AvatarGroup",
-  "summary": "Overlappende stapel avatars met een teller voor de rest, om te tonen wie bij iets betrokken is.",
+  "summary": "Overlapping stack of avatars with a counter for the rest, to show who is involved in something.",
   "use": [
-    "Teamleden van een project, deelnemers aan een gesprek."
+    "Team members of a project, people in a conversation."
   ],
   "avoid": [
-    "Als de gebruiker personen moet kunnen kiezen of vergelijken: gebruik een lijst."
+    "When the user needs to choose or compare people: use a list."
   ],
   "anatomy": [
-    "Avatars met een ring in de achtergrondkleur.",
-    "Teller \"+n\" (optioneel)."
+    "Avatars with a ring in the background color.",
+    "Counter \"+n\" (optional)."
   ],
   "figmaProps": [
     [
@@ -25,20 +25,20 @@
     ],
     [
       "Count",
-      "tekst",
-      "Bijvoorbeeld +5."
+      "text",
+      "For example +5."
     ],
     [
       "Show more",
       "boolean",
-      "Toont de teller."
+      "Shows the counter."
     ]
   ],
   "reactProps": [
     [
       "max",
       "number",
-      "Standaard 4. De rest gaat in de teller."
+      "Default 4. The rest goes into the counter."
     ],
     [
       "size",
@@ -52,21 +52,21 @@
     ]
   ],
   "behaviour": [
-    "Statisch."
+    "Static."
   ],
   "a11y": [
-    "Geef de groep een label met het totaal (\"6 teamleden\"), de teller alleen is niet genoeg."
+    "Give the group a label with the total (\"6 team members\"). The counter alone is not enough."
   ],
   "content": [],
   "do": [
-    "Toon maximaal 4 tot 5 avatars."
+    "Show 4 to 5 avatars at most."
   ],
   "dont": [
-    "Verschillende sizes mengen in één groep."
+    "Mix sizes in one group."
   ],
   "tokens": [
     "--avatar-group-ring",
-    "verder --avatar-*"
+    "and --avatar-*"
   ],
   "related": [
     "Avatar"

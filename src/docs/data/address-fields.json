@@ -6,23 +6,23 @@
     "base": "_Address fields"
   },
   "react": "AddressFields",
-  "summary": "Nederlands adres: eerst postcode, huisnummer en toevoeging, dan straat en plaats. Met autocomplete-attributen en postcodecontrole.",
+  "summary": "Dutch address: first postcode, house number and addition, then street and city. With autocomplete attributes and a postcode check.",
   "use": [
-    "Bezorg- en factuuradres."
+    "Delivery and billing address."
   ],
   "avoid": [
-    "Buitenlandse adressen: die hebben een ander formaat."
+    "Addresses in other countries: they use a different format."
   ],
   "anatomy": [
-    "Rij: Postcode, Huisnummer, Toevoeging.",
-    "Straat.",
-    "Plaats."
+    "Row: Postcode, House number, Addition.",
+    "Street.",
+    "City."
   ],
   "figmaProps": [
     [
       "State",
       "Empty, Filled, Error",
-      "Error: postcodefout."
+      "Error: postcode error."
     ]
   ],
   "reactProps": [
@@ -34,29 +34,29 @@
     [
       "section",
       "'shipping' | 'billing'",
-      "Voor autocomplete."
+      "For autocomplete."
     ],
     [
       "errors",
       "Partial<Record<keyof Address, string>>",
-      "Bijvoorbeeld van de server."
+      "For example from the server."
     ]
   ],
   "behaviour": [
-    "Postcode wordt in hoofdletters gezet en gecontroleerd bij verlaten (1234 AB).",
-    "Straat en plaats kun je met een postcode-API vooraf invullen; dat zit niet in het component."
+    "The postcode is put in capitals and checked when you leave the field (1234 AB).",
+    "You can fill in street and city in advance with a postcode API. That is not part of the component."
   ],
   "a11y": [
-    "Alle velden met zichtbaar label en autocomplete, zodat browsers en wachtwoordmanagers kunnen invullen."
+    "All fields have a visible label and autocomplete, so browsers and password managers can fill them in."
   ],
   "content": [
-    "Foutmelding met voorbeeld: \"Vul een postcode in als 1234 AB.\""
+    "Error message with an example: \"Enter a postcode like 1234 AB.\""
   ],
   "do": [
-    "Vraag alleen wat nodig is."
+    "Only ask for what you need."
   ],
   "dont": [
-    "Huisnummer en toevoeging in één veld."
+    "House number and addition in one field."
   ],
   "tokens": [
     "--input-*"
@@ -66,6 +66,6 @@
     "Checkout options"
   ],
   "open": [
-    "Opzoeken van straat en plaats via een postcode-API."
+    "Look up street and city with a postcode API."
   ]
 }

@@ -6,24 +6,24 @@
     "base": "_Button icon"
   },
   "react": "ButtonIcon",
-  "summary": "Vierkante knop met alleen een icoon, voor compacte acties als sluiten, bewerken of meer opties. Heeft geen Link-hiërarchie.",
+  "summary": "Square button with only an icon, for compact actions like close, edit or more options. Has no Link hierarchy.",
   "use": [
-    "In toolbars, tabelrijen en headers waar ruimte beperkt is.",
-    "Voor acties met een algemeen bekend icoon: sluiten, zoeken, menu, bewerken."
+    "In toolbars, table rows and headers where space is tight.",
+    "For actions with a well-known icon: close, search, menu, edit."
   ],
   "avoid": [
-    "Acties waarvan het icoon niet eenduidig is. Gebruik dan Button met label.",
-    "De belangrijkste actie van een pagina."
+    "Actions where the icon is not clear. Use Button with a label instead.",
+    "The main action of a page."
   ],
   "anatomy": [
-    "Container (vierkant, padding per size).",
-    "Icoon: via Icon (instance swap). De kleur volgt de hiërarchie."
+    "Container (square, padding per size).",
+    "Icon: via Icon (instance swap). The color follows the hierarchy."
   ],
   "figmaProps": [
     [
       "Hierarchy",
       "Primary, Secondary, Tertiary",
-      "Standaard Secondary in code."
+      "Secondary by default in code."
     ],
     [
       "Size",
@@ -45,46 +45,46 @@
     [
       "icon",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "aria-label",
       "string",
-      "Verplicht. Beschrijft de actie, niet het icoon."
+      "Required. Describes the action, not the icon."
     ],
     [
       "hierarchy",
       "'primary' | 'secondary' | 'tertiary'",
-      "Standaard 'secondary'."
+      "Default 'secondary'."
     ],
     [
       "size, loading, destructive",
       "",
-      "Gelijk aan Button."
+      "Same as Button."
     ]
   ],
   "behaviour": [
-    "Gelijk aan Button. Bij Loading vervangt de spinner het icoon."
+    "Same as Button. When Loading, the spinner replaces the icon."
   ],
   "a11y": [
-    "aria-label is verplicht in code. Zonder label weet een screenreader niet wat de knop doet.",
-    "Toon hetzelfde label in een Tooltip voor muisgebruikers.",
-    "Doelgrootte minimaal 24×24 px (WCAG 2.5.8). Size=sm voldoet, kleiner niet."
+    "aria-label is required in code. Without it a screen reader does not know what the button does.",
+    "Show the same label in a Tooltip for mouse users.",
+    "Target size at least 24×24 px (WCAG 2.5.8). Size=sm meets this; smaller does not."
   ],
   "content": [
-    "aria-label beschrijft de actie: \"Sluiten\", \"Bewerk project\", niet \"Kruisje\"."
+    "aria-label describes the action: \"Close\", \"Edit project\", not \"Cross\"."
   ],
   "do": [
-    "Combineer met een Tooltip met dezelfde tekst als aria-label.",
-    "Gebruik Tertiary in rijen met veel herhaling, zodat de pagina rustig blijft."
+    "Combine with a Tooltip with the same text as the aria-label.",
+    "Use Tertiary in rows that repeat a lot, so the page stays calm."
   ],
   "dont": [
-    "Een icon button zonder aria-label.",
-    "Twee icon buttons met hetzelfde icoon maar een andere betekenis op één scherm."
+    "An icon button without an aria-label.",
+    "Two icon buttons with the same icon but a different meaning on one screen."
   ],
   "tokens": [
     "--button-icon-only-{size}-padding",
-    "kleuren gelijk aan Button"
+    "colors are the same as Button"
   ],
   "related": [
     "Button",

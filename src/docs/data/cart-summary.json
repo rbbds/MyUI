@@ -6,19 +6,19 @@
     "base": "_Cart summary"
   },
   "react": "CartSummary",
-  "summary": "Totaalblok voor winkelwagen en checkout: subtotaal, verzending, korting, totaal, kortingscode en actie. In de checkout ook het besteloverzicht.",
+  "summary": "Total block for the cart and checkout: subtotal, shipping, discount, total, promo code and an action. In checkout also the order summary.",
   "use": [
-    "Naast de winkelwagen (Type=Cart).",
-    "Naast de checkout-stappen (Type=Order)."
+    "Next to the cart (Type=Cart).",
+    "Next to the checkout steps (Type=Order)."
   ],
   "avoid": [],
   "anatomy": [
-    "Titel.",
-    "Items (slot, alleen bij Order).",
-    "Regels; korting in success-kleur.",
-    "Totaal met \"Inclusief btw\".",
+    "Title.",
+    "Items (slot, only for Order).",
+    "Rows. Discount in the success color.",
+    "Total with \"Including VAT\".",
     "Promo code (Cart).",
-    "Actie (Cart)."
+    "Action (Cart)."
   ],
   "figmaProps": [
     [
@@ -33,7 +33,7 @@
     ],
     [
       "Title, Subtotal, Shipping, Discount, Total",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -56,7 +56,7 @@
     [
       "lines",
       "{ label, amount, note? }[]",
-      "Negatief bedrag = korting. note bijvoorbeeld \"Gratis\"."
+      "A negative amount = discount. note for example \"Free\"."
     ],
     [
       "totalNote",
@@ -71,21 +71,21 @@
     [
       "children",
       "ReactNode",
-      "Items voor het besteloverzicht."
+      "Items for the order summary."
     ]
   ],
   "behaviour": [
-    "Bedragen worden niet berekend door het component: geef ze mee."
+    "The component does not calculate amounts: pass them in."
   ],
   "a11y": [
-    "Section met kop; de regels zijn een description list (dt/dd)."
+    "Section with a heading. The rows are a description list (dt/dd)."
   ],
   "content": [
-    "\"Gratis\" in plaats van \"€ 0,00\" bij verzending."
+    "\"Free\" instead of \"€ 0.00\" for shipping."
   ],
   "do": [],
   "dont": [
-    "Kosten pas op de laatste stap tonen."
+    "Show costs only on the last step."
   ],
   "tokens": [
     "--cart-summary-*"

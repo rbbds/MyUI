@@ -6,17 +6,17 @@
     "base": "_Toggle"
   },
   "react": "Toggle",
-  "summary": "Schakelaar voor een instelling die direct ingaat, zonder opslaan.",
+  "summary": "Switch for a setting that works straight away, without saving.",
   "use": [
-    "Instellingen: meldingen aan, donkere modus aan."
+    "Settings: notifications on, dark mode on."
   ],
   "avoid": [
-    "Keuzes in een formulier dat je nog verstuurt: gebruik Checkbox."
+    "Choices in a form you still have to submit: use Checkbox."
   ],
   "anatomy": [
     "Track.",
     "Knob.",
-    "Label en optionele hint."
+    "Label and optional hint."
   ],
   "figmaProps": [
     [
@@ -44,7 +44,7 @@
     [
       "label / hint / size",
       "",
-      "Gelijk aan Checkbox."
+      "Same as Checkbox."
     ],
     [
       "checked / onChange",
@@ -53,20 +53,20 @@
     ]
   ],
   "behaviour": [
-    "Wisselt direct. Toon resultaat zonder extra bevestiging."
+    "Switches straight away. Show the result without an extra confirmation."
   ],
   "a11y": [
-    "Native checkbox met role=\"switch\". Screenreaders melden aan/uit.",
-    "Status niet alleen met kleur: de knob-positie verandert mee."
+    "Native checkbox with role=\"switch\". Screen readers announce on/off.",
+    "Status is not only color: the knob moves too."
   ],
   "content": [
-    "Label noemt de instelling, niet de actie: \"Meldingen\", niet \"Zet meldingen aan\"."
+    "The label names the setting, not the action: \"Notifications\", not \"Turn on notifications\"."
   ],
   "do": [
-    "Plaats het label links en de toggle rechts in instellingenlijsten, of andersom, maar consequent."
+    "In settings lists, put the label on the left and the toggle on the right, or the other way round, but always the same."
   ],
   "dont": [
-    "Een toggle die pas na \"Opslaan\" werkt."
+    "A toggle that only works after \"Save\"."
   ],
   "tokens": [
     "--toggle-track-{on|off}[-hover]",

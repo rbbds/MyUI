@@ -6,16 +6,16 @@
     "base": "_Cart item"
   },
   "react": "CartItem",
-  "summary": "Productregel in winkelwagen, Mini cart en besteloverzicht. Prijs is stukprijs × aantal.",
+  "summary": "Product row in the cart, the Mini cart and the order summary. The price is unit price × quantity.",
   "use": [
-    "Winkelwagenpagina (md), Mini cart (sm), checkout-overzicht (sm, read-only)."
+    "Cart page (md), Mini cart (sm), checkout summary (sm, read-only)."
   ],
   "avoid": [],
   "anatomy": [
-    "Afbeelding.",
-    "Titel (link), gekozen opties.",
-    "Quantity stepper en verwijderknop (of \"Aantal: 2\" bij read-only).",
-    "Regelprijs."
+    "Image.",
+    "Title (link), chosen options.",
+    "Quantity stepper and remove button (or \"Quantity: 2\" when read-only).",
+    "Row price."
   ],
   "figmaProps": [
     [
@@ -30,7 +30,7 @@
     ],
     [
       "Title, Options, Quantity text",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -43,7 +43,7 @@
     [
       "options",
       "string[]",
-      "\"Kleur: blauw\", \"Maat: M\"."
+      "\"Color: blue\", \"Size: M\"."
     ],
     [
       "price, compareAt, quantity, maxQuantity",
@@ -67,15 +67,15 @@
     ]
   ],
   "behaviour": [
-    "Aantal wijzigen werkt direct; verwijderen ook. Toon na verwijderen eventueel een Toast met \"Ongedaan maken\"."
+    "Changing the quantity works straight away, and so does removing. After removing you can show a Toast with \"Undo\"."
   ],
   "a11y": [
-    "Verwijderknop: \"Verwijder {titel}\". Aantal-veld: \"Aantal {titel}\"."
+    "Remove button: \"Remove {title}\". Quantity field: \"Quantity {title}\"."
   ],
   "content": [],
   "do": [],
   "dont": [
-    "Verwijderen zonder zichtbare bevestiging of herstelmogelijkheid."
+    "Remove without a visible confirmation or a way to undo."
   ],
   "tokens": [
     "--cart-item-*"

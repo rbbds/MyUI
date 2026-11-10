@@ -16,11 +16,12 @@ const F = {
 };
 for (const f of Object.values(F)) await figma.loadFontAsync(f);
 
-const theme = (await figma.variables.getLocalVariableCollectionsAsync()).find((c) => /theme/i.test(c.name));
+// Docs frames are not components, so they use the mapped base-tokens (never alias or primitives).
+const mapped = (await figma.variables.getLocalVariableCollectionsAsync()).find((c) => /mapped/i.test(c.name));
 const V = {};
-for (const id of theme.variableIds) {
+for (const id of mapped.variableIds) {
   const v = await figma.variables.getVariableByIdAsync(id);
-  V[v.name] = v;
+  if (v.name.startsWith('base-tokens/')) V[v.name.slice('base-tokens/'.length)] = v;
 }
 const pick = (...names) => names.map((n) => V[n]).find(Boolean);
 const C = {
@@ -169,25 +170,25 @@ for (const d of DOCS) {
   text(head, d.page.toUpperCase(), { font: F.semi, size: 12, color: C.brand || C.text3 });
   text(head, d.name, { font: F.bold, size: 40, color: C.text, lh: 120 });
   text(head, d.summary, { size: 18, color: C.text2 });
-  const meta = [`Figma: ${d.figma.base ? 'base ' + d.figma.base : 'geen base (structureel verschillende varianten)'}`, `React: <${d.react}>`, `Storybook: ${d.page} / ${d.name} / Docs`];
+  const meta = [`Figma: ${d.figma.base ? 'base ' + d.figma.base : 'no base (variants have a different structure)'}`, `React: <${d.react}>`, `Storybook: ${d.page} / ${d.name} / Docs`];
   text(head, meta.join('   ·   '), { font: F.mono, size: 12, color: C.text3 });
 
-  const s1 = section(f, 'Wanneer gebruiken');
+  const s1 = section(f, 'When to use');
   list(s1, d.use);
-  text(s1, 'Niet gebruiken voor', { font: F.semi, size: 15, color: C.text });
+  text(s1, 'Do not use for', { font: F.semi, size: 15, color: C.text });
   list(s1, d.avoid);
 
-  list(section(f, 'Anatomie'), d.anatomy, true);
-  table(section(f, 'Figma-properties'), ['Property', 'Waarden', 'Toelichting'], d.figmaProps, [0]);
-  table(section(f, 'React-props'), ['Prop', 'Type', 'Toelichting'], d.reactProps, [0, 1]);
-  list(section(f, 'Gedrag en states'), d.behaviour);
-  list(section(f, 'Toegankelijkheid'), d.a11y);
-  if (d.content.length) list(section(f, 'Tekst en content'), d.content);
-  doDont(section(f, "Do's en don'ts"), d.do, d.dont);
+  list(section(f, 'Anatomy'), d.anatomy, true);
+  table(section(f, 'Figma properties'), ['Property', 'Values', 'Notes'], d.figmaProps, [0]);
+  table(section(f, 'React props'), ['Prop', 'Type', 'Notes'], d.reactProps, [0, 1]);
+  list(section(f, 'Behaviour and states'), d.behaviour);
+  list(section(f, 'Accessibility'), d.a11y);
+  if (d.content.length) list(section(f, 'Text and content'), d.content);
+  doDont(section(f, "Do's and don'ts"), d.do, d.dont);
   const tk = section(f, 'Tokens');
   d.tokens.forEach((t) => text(tk, t, { font: F.mono, size: 13, color: C.text }));
-  if (d.related.length) text(section(f, 'Gerelateerd'), d.related.join(', '));
-  if (d.open.length) list(section(f, 'Open punten'), d.open);
+  if (d.related.length) text(section(f, 'Related'), d.related.join(', '));
+  if (d.open.length) list(section(f, 'Open points'), d.open);
 
   if (keepX !== null) { f.x = keepX; } else { f.x = startX; startX += W + 80; }
   f.y = 0;

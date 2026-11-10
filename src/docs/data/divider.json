@@ -6,17 +6,17 @@
     "base": null
   },
   "react": "Divider",
-  "summary": "Lijn die inhoud scheidt, optioneel met een label in het midden (\"of\").",
+  "summary": "Line that separates content, optionally with a label in the middle (\"or\").",
   "use": [
-    "Tussen groepen die door spacing alleen niet duidelijk genoeg gescheiden zijn.",
-    "Tussen alternatieve opties, met label \"of\"."
+    "Between groups that spacing alone does not separate clearly enough.",
+    "Between alternative options, with the label \"or\"."
   ],
   "avoid": [
-    "Als spacing al genoeg scheiding geeft. Probeer eerst ruimte."
+    "When spacing already separates enough. Try space first."
   ],
   "anatomy": [
-    "Lijn.",
-    "Label (optioneel)."
+    "Line.",
+    "Label (optional)."
   ],
   "figmaProps": [
     [
@@ -26,7 +26,7 @@
     ],
     [
       "Label",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -43,17 +43,17 @@
     ]
   ],
   "behaviour": [
-    "Statisch."
+    "Static."
   ],
   "a11y": [
-    "Zonder label: role=\"separator\". Puur decoratieve lijnen mogen aria-hidden."
+    "Without a label: role=\"separator\". Purely decorative lines can be aria-hidden."
   ],
   "content": [
-    "Label kort en klein: \"of\"."
+    "Short, small label: \"or\"."
   ],
   "do": [],
   "dont": [
-    "Een divider onder elke regel van een lijst."
+    "A divider under every row of a list."
   ],
   "tokens": [
     "--divider-color",

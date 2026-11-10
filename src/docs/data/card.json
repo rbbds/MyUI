@@ -6,27 +6,27 @@
     "base": "_Card"
   },
   "react": "Card",
-  "summary": "Container voor één samenhangend stuk inhoud, zoals een artikel of project. Met een native Figma-slot voor eigen inhoud.",
+  "summary": "Container for one connected piece of content, like an article or a project. With a native Figma slot for your own content.",
   "use": [
-    "Overzichten van gelijksoortige items in een grid."
+    "Overviews of similar items in a grid."
   ],
   "avoid": [
-    "Eén lange tekst: gebruik gewone pagina-inhoud.",
-    "Gegevens om te vergelijken: gebruik Table."
+    "One long text: use normal page content.",
+    "Data to compare: use Table."
   ],
   "anatomy": [
-    "Media (optioneel).",
-    "Meta (optioneel).",
-    "Titel.",
-    "Ondersteunende tekst.",
-    "Content (slot, optioneel).",
-    "Actie (optioneel)."
+    "Media (optional).",
+    "Meta (optional).",
+    "Title.",
+    "Supporting text.",
+    "Content (slot, optional).",
+    "Action (optional)."
   ],
   "figmaProps": [
     [
       "Type",
       "Default, Elevated",
-      "Elevated heeft schaduw."
+      "Elevated has a shadow."
     ],
     [
       "Show media / Show meta / Meta / Title / Supporting text / Show action",
@@ -36,19 +36,19 @@
     [
       "Content / Show content",
       "slot / boolean",
-      "Standaard uit."
+      "Off by default."
     ]
   ],
   "reactProps": [
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "href",
       "string",
-      "Maakt de hele kaart klikbaar via de titel-link."
+      "Makes the whole card clickable through the title link."
     ],
     [
       "media / meta / description / action",
@@ -63,24 +63,24 @@
     [
       "children",
       "ReactNode",
-      "Extra inhoud."
+      "Extra content."
     ]
   ],
   "behaviour": [
-    "Met href is de hele kaart klikbaar. De link zit op de titel en wordt over de kaart uitgerekt. Een action wordt dan niet getoond."
+    "With href the whole card is clickable. The link sits on the title and is stretched over the card. An action is then not shown."
   ],
   "a11y": [
-    "Eén link per klikbare kaart. Geen aparte \"Lees verder\"-link ernaast.",
-    "Media is decoratief tenzij het informatie bevat; geef dan alt-tekst."
+    "One link per clickable card. No separate \"Read more\" link next to it.",
+    "Media is decorative unless it holds information. Then give it alt text."
   ],
   "content": [
-    "Titel maximaal twee regels. Tekst maximaal drie regels."
+    "Title two lines at most. Text three lines at most."
   ],
   "do": [
-    "Houd kaarten in een grid even hoog."
+    "Keep cards in a grid the same height."
   ],
   "dont": [
-    "Meerdere klikbare elementen in een klikbare kaart."
+    "Several clickable elements inside a clickable card."
   ],
   "tokens": [
     "--card-{surface|border|radius|padding|gap|media}",

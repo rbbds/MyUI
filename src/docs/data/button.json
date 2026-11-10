@@ -6,118 +6,118 @@
     "base": "_Button"
   },
   "react": "Button",
-  "summary": "Start een actie: een formulier versturen, een keuze bevestigen of naar de volgende stap gaan. Alle varianten komen uit één base component (_Button). Pas je spacing, radius of typografie daar aan, dan volgen alle 60 varianten.",
+  "summary": "Starts an action: send a form, confirm a choice or go to the next step. All variants come from one base component (_Button). Change spacing, radius or typography there, and all 60 variants follow.",
   "use": [
-    "Voor acties die iets doen op de huidige pagina of in het systeem.",
-    "Kies Hierarchy op basis van belang, Size op basis van ruimte en dichtheid."
+    "For actions that do something on the current page or in the system.",
+    "Choose Hierarchy by importance, and Size by space and density."
   ],
   "avoid": [
-    "Navigeren naar een andere pagina: gebruik een link (<a>). Hierarchy=Link is een button die eruitziet als een link, geen echte link.",
-    "Onomkeerbare acties zoals verwijderen: gebruik Button destructive.",
-    "Aan/uit-instellingen die blijven staan: gebruik Toggle."
+    "Going to another page: use a link (<a>). Hierarchy=Link is a button that looks like a link, not a real link.",
+    "Actions you cannot undo, like delete: use Button destructive.",
+    "On/off settings that stay on: use Toggle."
   ],
   "anatomy": [
-    "Container: achtergrond, rand en focus ring.",
-    "Leading icon (optioneel): vóór het label. Wordt vervangen door de spinner bij Loading.",
-    "Label: verplicht, altijd zichtbaar.",
-    "Trailing icon (optioneel): na het label, bijvoorbeeld een pijl voor \"volgende\"."
+    "Container: background, border and focus ring.",
+    "Leading icon (optional): before the label. The spinner replaces it when Loading.",
+    "Label: required, always visible.",
+    "Trailing icon (optional): after the label, for example an arrow for \"next\"."
   ],
   "figmaProps": [
     [
       "Hierarchy",
       "Primary, Secondary, Tertiary, Link",
-      "Visueel gewicht."
+      "Visual weight."
     ],
     [
       "Size",
       "sm, md, lg",
-      "Footprint. md is de standaard."
+      "Footprint. md is the default."
     ],
     [
       "State",
       "Default, Hover, Focus, Disabled, Loading",
-      "Interactiestatus."
+      "Interaction state."
     ],
     [
       "Label",
-      "tekst",
+      "text",
       "Via _Button."
     ],
     [
       "Icon leading / Icon trailing",
       "boolean",
-      "Toont het icoon."
+      "Shows the icon."
     ],
     [
       "Leading icon / Trailing icon",
       "instance swap",
-      "Kies een Lucide-icoon. De kleur volgt het label."
+      "Pick a Lucide icon. The color follows the label."
     ]
   ],
   "reactProps": [
     [
       "hierarchy",
       "'primary' | 'secondary' | 'tertiary' | 'link'",
-      "Standaard 'primary'."
+      "Default 'primary'."
     ],
     [
       "size",
       "'sm' | 'md' | 'lg'",
-      "Standaard 'md'."
+      "Default 'md'."
     ],
     [
       "iconLeading / iconTrailing",
       "ReactNode",
-      "Bijvoorbeeld <Plus aria-hidden />."
+      "For example <Plus aria-hidden />."
     ],
     [
       "loading",
       "boolean",
-      "Toont spinner, zet aria-busy en blokkeert de knop."
+      "Shows a spinner, sets aria-busy and blocks the button."
     ],
     [
       "destructive",
       "boolean",
-      "Destructive kleuren. Zie Button destructive."
+      "Destructive colors. See Button destructive."
     ],
     [
       "fullWidth",
       "boolean",
-      "Neemt de volle breedte van de container."
+      "Takes the full width of the container."
     ],
     [
       "type",
       "'button' | 'submit' | 'reset'",
-      "Standaard 'button'. Zet 'submit' in formulieren."
+      "Default 'button'. Use 'submit' in forms."
     ]
   ],
   "behaviour": [
-    "Hover: kleur verschuift één stap. Link krijgt een onderstreping.",
-    "Focus: zichtbare focus ring bij toetsenbordnavigatie (:focus-visible).",
-    "Disabled: lagere contrastkleuren, geen hover, cursor not-allowed.",
-    "Loading: spinner vervangt het leading icon, het label blijft staan. De knop is tijdelijk niet klikbaar."
+    "Hover: the color moves one step. Link gets an underline.",
+    "Focus: a visible focus ring with keyboard navigation (:focus-visible).",
+    "Disabled: lower contrast colors, no hover, cursor not-allowed.",
+    "Loading: the spinner replaces the leading icon and the label stays. You cannot click the button for a moment."
   ],
   "a11y": [
-    "Native <button> met Enter en Spatie. Geen div met onClick.",
-    "Native disabled haalt de knop uit de tab-volgorde. Wil je dat de knop focusbaar blijft om uit te leggen waarom hij niet werkt, gebruik dan aria-disabled=\"true\" en blokkeer de actie zelf.",
-    "Loading zet aria-busy=\"true\". Meld het resultaat (gelukt of mislukt) via een Toast of Alert met een live region.",
-    "Iconen naast een label zijn decoratief: aria-hidden.",
-    "Contrast van label en achtergrond voldoet aan WCAG 1.4.3 in Light en Dark."
+    "Native <button> that works with Enter and Space. No div with onClick.",
+    "Native disabled takes the button out of the tab order. If the button must keep focus so you can explain why it does not work, use aria-disabled=\"true\" and block the action yourself.",
+    "Loading sets aria-busy=\"true\". Announce the result (success or failure) with a Toast or Alert in a live region.",
+    "Icons next to a label are decorative: aria-hidden.",
+    "Contrast of label and background meets WCAG 1.4.3 in Light and Dark."
   ],
   "content": [
-    "Begin met een werkwoord: \"Opslaan\", \"Project aanmaken\".",
-    "Maximaal drie woorden. Zinshoofdletter, geen punt.",
-    "Wees specifiek: \"Verstuur aanvraag\" in plaats van \"OK\"."
+    "Start with a verb: \"Save\", \"Create project\".",
+    "Three words at most. Sentence case, no full stop.",
+    "Be specific: \"Send application\" instead of \"OK\"."
   ],
   "do": [
-    "Eén Primary per view of per dialoog. Ondersteunende acties krijgen Secondary of Tertiary.",
-    "Gebruik Loading bij acties met merkbare vertraging, zoals een netwerkverzoek.",
-    "Zet bij een disabled knop een zichtbare uitleg in de buurt."
+    "One Primary per view or per dialog. Supporting actions get Secondary or Tertiary.",
+    "Use Loading for actions with a noticeable delay, like a network request.",
+    "Put a visible explanation near a disabled button."
   ],
   "dont": [
-    "Meerdere Primary-knoppen naast elkaar.",
-    "Size gebruiken om belang aan te geven. Daar is Hierarchy voor.",
-    "Vage labels als \"Klik hier\" of \"OK\"."
+    "Several Primary buttons next to each other.",
+    "Use Size to show importance. That is what Hierarchy is for.",
+    "Vague labels like \"Click here\" or \"OK\"."
   ],
   "tokens": [
     "--button-{hierarchy}-{surface|foreground|border}-{state}",
@@ -132,6 +132,6 @@
     "Toggle"
   ],
   "open": [
-    "Loading gebruikt nu native disabled, waardoor de focus van de knop verdwijnt. Overweeg aria-disabled tijdens Loading zodat de focus blijft staan."
+    "Loading now uses native disabled, so the button loses focus. Think about aria-disabled during Loading, so focus stays."
   ]
 }

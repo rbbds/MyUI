@@ -6,30 +6,30 @@
     "base": "_Page header"
   },
   "react": "PageHeader",
-  "summary": "Kop van een pagina in een portaal of dashboard: broodkruimel, titel (h1), beschrijving, acties en optioneel tabs.",
+  "summary": "Top of a page in a portal or dashboard: breadcrumbs, title (h1), description, actions and optional tabs.",
   "use": [
-    "Bovenaan elke pagina binnen een portaal."
+    "At the top of every page in a portal."
   ],
   "avoid": [
-    "Kop van een blok binnen een pagina: gebruik de titel van Card, Table of Description list."
+    "The heading of a block inside a page: use the title of Card, Table or Description list."
   ],
   "anatomy": [
-    "Breadcrumbs (optioneel).",
-    "Titel (h1).",
-    "Beschrijving (optioneel).",
-    "Acties rechts (optioneel).",
-    "Tabs (optioneel).",
-    "Scheidingslijn."
+    "Breadcrumbs (optional).",
+    "Title (h1).",
+    "Description (optional).",
+    "Actions on the right (optional).",
+    "Tabs (optional).",
+    "Divider."
   ],
   "figmaProps": [
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Op mobiel vallen de acties onder de titel. Koppel aan breakpoint/page-header (Apply variable)."
+      "On mobile the actions go below the title. Bind to breakpoint/page-header (Apply variable)."
     ],
     [
       "Title / Description",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -42,7 +42,7 @@
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "description, breadcrumbs, actions, tabs",
@@ -52,30 +52,30 @@
     [
       "divider",
       "boolean",
-      "Standaard aan, uit als er tabs zijn."
+      "On by default, off when there are tabs."
     ],
     [
       "headingLevel",
       "1 | 2",
-      "Standaard 1."
+      "Default 1."
     ]
   ],
   "behaviour": [
-    "Acties lopen door naar een nieuwe regel als er geen ruimte is."
+    "Actions wrap to a new line when there is no room."
   ],
   "a11y": [
-    "Eén h1 per pagina.",
-    "Breadcrumbs in een nav met aria-label \"Kruimelpad\"."
+    "One h1 per page.",
+    "Breadcrumbs in a nav with an aria-label."
   ],
   "content": [
-    "Titel = waar je bent, gelijk aan het menu-item.",
-    "Beschrijving in één zin: wat kun je hier doen."
+    "Title = where you are, the same as the menu item.",
+    "Description in one sentence: what you can do here."
   ],
   "do": [
-    "Eén primaire actie. Staat die al in de kop, zet hem dan niet ook in de tabel."
+    "One primary action. If it is in the header, do not also put it in the table."
   ],
   "dont": [
-    "Meer dan 3 acties: zet de rest in een DropdownMenu."
+    "More than 3 actions: put the rest in a DropdownMenu."
   ],
   "tokens": [
     "--page-header-*"

@@ -6,22 +6,22 @@
     "base": "_Filter group"
   },
   "react": "FilterGroup, RangeSlider",
-  "summary": "Inklapbare filtersectie met checkboxes (met aantallen) of eigen inhoud zoals een prijsbereik. Meerdere onder elkaar vormen het filterpaneel.",
+  "summary": "Filter section you can open and close, with checkboxes (with counts) or your own content like a price range. Several below each other form the filter panel.",
   "use": [
-    "Filterpaneel naast of boven een productoverzicht."
+    "Filter panel next to or above a product overview."
   ],
   "avoid": [
-    "Eén filter met twee opties: gebruik een Toggle."
+    "One filter with two options: use a Toggle."
   ],
   "anatomy": [
-    "Knop met titel, aantal gekozen en chevron.",
-    "Paneel met checkboxes en \"Toon alle n\", of Range slider."
+    "Button with the title, the number chosen and a chevron.",
+    "Panel with checkboxes and \"Show all n\", or a Range slider."
   ],
   "figmaProps": [
     [
       "Type",
       "List, Range",
-      "Range gebruikt Slider Type=Range."
+      "Range uses Slider Type=Range."
     ],
     [
       "State",
@@ -30,7 +30,7 @@
     ],
     [
       "Title",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -58,7 +58,7 @@
     [
       "limit",
       "number",
-      "Standaard 6."
+      "Default 6."
     ],
     [
       "defaultOpen",
@@ -68,25 +68,25 @@
     [
       "headingLevel",
       "2 | 3 | 4",
-      "Standaard 3, onder een h2 \"Filters\"."
+      "Default 3, below an h2 \"Filters\"."
     ],
     [
       "children",
       "ReactNode",
-      "Bijvoorbeeld <RangeSlider>."
+      "For example <RangeSlider>."
     ]
   ],
   "behaviour": [
-    "Filters werken direct; toon het nieuwe aantal resultaten (Active filters)."
+    "Filters work straight away. Show the new number of results (Active filters)."
   ],
   "a11y": [
-    "Knop met aria-expanded en kop; checkboxes in een fieldset.",
-    "RangeSlider: twee native schuifregelaars met eigen naam (\"Minimumprijs\", \"Maximumprijs\")."
+    "Button with aria-expanded inside a heading. Checkboxes in a fieldset.",
+    "RangeSlider: two native sliders with their own names (\"Minimum price\", \"Maximum price\")."
   ],
   "content": [],
   "do": [],
   "dont": [
-    "Filters die pas werken na een knop \"Toepassen\", zonder dat te zeggen."
+    "Filters that only work after an \"Apply\" button, without saying so."
   ],
   "tokens": [
     "--filter-*",
@@ -98,6 +98,6 @@
     "Slider"
   ],
   "open": [
-    "Filterpaneel als Slideout op mobiel (patroon, nog geen component)."
+    "Filter panel as a Slideout on mobile (a pattern, not a component yet)."
   ]
 }

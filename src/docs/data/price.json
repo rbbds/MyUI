@@ -6,17 +6,17 @@
     "base": "_Price"
   },
   "react": "Price",
-  "summary": "Prijs met optionele van-prijs (sale) en toevoeging zoals \"per maand\". Bedragen worden geformatteerd met Intl (nl-NL, euro).",
+  "summary": "Price with an optional old price (sale) and an extra like \"per month\". Amounts are formatted with Intl (nl-NL, euro).",
   "use": [
-    "Overal waar een bedrag van een product staat."
+    "Everywhere a product amount is shown."
   ],
   "avoid": [
-    "Totalen in een overzicht: gebruik Cart summary."
+    "Totals in an overview: use Cart summary."
   ],
   "anatomy": [
-    "Bedrag.",
-    "Van-prijs (doorgestreept, bij sale).",
-    "Toevoeging."
+    "Amount.",
+    "Old price (struck through, for a sale).",
+    "Extra text."
   ],
   "figmaProps": [
     [
@@ -27,11 +27,11 @@
     [
       "Sale",
       "False, True",
-      "True: bedrag in error-kleur, van-prijs zichtbaar."
+      "True: amount in the error color, old price visible."
     ],
     [
       "Amount, Compare, Suffix",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -44,17 +44,17 @@
     [
       "amount",
       "number",
-      "Verplicht."
+      "Required."
     ],
     [
       "compareAt",
       "number",
-      "Alleen getoond als hoger dan amount."
+      "Only shown when it is higher than amount."
     ],
     [
       "currency, locale",
       "string",
-      "Standaard 'EUR' en 'nl-NL'."
+      "Default 'EUR' and 'nl-NL'."
     ],
     [
       "size",
@@ -68,19 +68,19 @@
     ]
   ],
   "behaviour": [
-    "formatMoney(amount) is ook los te gebruiken."
+    "You can also use formatMoney(amount) on its own."
   ],
   "a11y": [
-    "Schermlezers horen \"Oude prijs € 99,95 Nu € 79,95\"; doorstrepen alleen is niet genoeg."
+    "Screen readers hear \"Old price € 99.95 Now € 79.95\". A strike-through alone is not enough."
   ],
   "content": [
-    "Toon \"incl. btw\" als je klanten particulieren zijn en het niet elders staat."
+    "Show \"incl. VAT\" if your customers are consumers and it is not mentioned anywhere else."
   ],
   "do": [
-    "Gebruik dezelfde grootte voor alle prijzen in een overzicht."
+    "Use the same size for all prices in an overview."
   ],
   "dont": [
-    "Een van-prijs die nooit gegolden heeft."
+    "An old price that was never real."
   ],
   "tokens": [
     "--price-*"

@@ -1,29 +1,29 @@
 {
   "use": [
-    "Uitleg bij een begrip (vraagteken-icoon).",
-    "Kleine invoer zonder de pagina te verlaten."
+    "Explain a term (question mark icon).",
+    "Small input without leaving the page."
   ],
   "avoid": [
-    "Alleen acties: gebruik Dropdown menu.",
-    "Eén zin bij hover: gebruik Tooltip.",
-    "Belangrijke keuzes: gebruik Modal."
+    "Actions only: use Dropdown menu.",
+    "One sentence on hover: use Tooltip.",
+    "Important choices: use Modal."
   ],
   "anatomy": [
-    "Titel en sluitknop.",
-    "Tekst.",
-    "Inhoud (slot, optioneel).",
-    "Knoppen (optioneel).",
-    "Pijltje naar de knop (optioneel)."
+    "Title and close button.",
+    "Text.",
+    "Content (slot, optional).",
+    "Buttons (optional).",
+    "Arrow to the button (optional)."
   ],
   "figmaProps": [
     [
       "Arrow",
       "None, Top, Bottom, Left, Right",
-      "Kant waar het pijltje zit. Top: de popover staat onder de knop."
+      "Side of the arrow. Top: the popover sits below the button."
     ],
     [
       "Title / Text",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -36,7 +36,7 @@
     [
       "trigger",
       "ReactElement",
-      "Krijgt aria-expanded, aria-controls en onClick."
+      "Gets aria-expanded, aria-controls and onClick."
     ],
     [
       "title, children, actions",
@@ -46,7 +46,7 @@
     [
       "closable",
       "boolean",
-      "Standaard true."
+      "Default true."
     ],
     [
       "align",
@@ -56,19 +56,19 @@
     [
       "arrow",
       "boolean",
-      "Pijltje naar de knop, bij de uitgelijnde kant. Standaard false."
+      "Arrow that points to the middle of the button. Default false."
     ],
     [
       "open, onOpenChange",
       "",
-      "Optioneel gecontroleerd."
+      "Optional, for controlled use."
     ]
   ],
   "behaviour": [
-    "Focus gaat naar het paneel bij openen en terug naar de knop bij sluiten."
+    "Focus moves to the panel when it opens and back to the button when it closes."
   ],
   "a11y": [
-    "Niet-modale dialog met de titel als naam."
+    "Non-modal dialog with the title as its name."
   ],
   "content": [],
   "do": [],
@@ -82,7 +82,7 @@
     "Modal"
   ],
   "open": [
-    "In code opent de popover altijd onder de knop; Bottom, Left en Right zijn er alleen in Figma."
+    "In code the popover always opens below the button. Bottom, Left and Right only exist in Figma."
   ],
   "name": "Popover",
   "page": "Overlays",
@@ -91,5 +91,5 @@
     "base": "_Popover (base)"
   },
   "react": "Popover",
-  "summary": "Paneel naast een knop met uitleg of een klein formulier. Sluit met de sluitknop, Escape of klikken buiten."
+  "summary": "Panel next to a button with an explanation or a small form. Closes with the close button, Escape or a click outside."
 }

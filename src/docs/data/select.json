@@ -6,20 +6,20 @@
     "base": "_Select"
   },
   "react": "Select",
-  "summary": "Keuze van één optie uit een lijst. In code een native <select>, zodat toetsenbord, mobiel en screenreaders standaard werken.",
+  "summary": "Choose one option from a list. In code a native <select>, so keyboard, mobile and screen readers work out of the box.",
   "use": [
-    "Eén keuze uit 6 of meer opties.",
-    "Als ruimte beperkt is en de opties bekend zijn (land, maand)."
+    "One choice from 6 or more options.",
+    "When space is tight and the options are known (country, month)."
   ],
   "avoid": [
-    "2 tot 5 opties: gebruik Radio, dan zie je alles in één oogopslag.",
-    "Meerdere keuzes: gebruik Checkboxes.",
-    "Acties: gebruik Dropdown menu."
+    "2 to 5 options: use Radio, so you see everything at once.",
+    "Several choices: use Checkboxes.",
+    "Actions: use Dropdown menu."
   ],
   "anatomy": [
     "Label.",
-    "Trigger: optioneel leading icon, gekozen waarde of placeholder, chevron.",
-    "Hint of foutmelding."
+    "Trigger: optional leading icon, chosen value or placeholder, chevron.",
+    "Hint or error message."
   ],
   "figmaProps": [
     [
@@ -35,12 +35,12 @@
     [
       "Label, hint, error",
       "via _Select",
-      "Gelijk aan Input."
+      "Same as Input."
     ],
     [
       "Icon leading / Leading icon",
       "boolean / instance swap",
-      "Standaard uit. Zet aan en wissel naar een Icon of een Flag/XX voor een landkeuze."
+      "Off by default. Turn it on and swap to an Icon or a Flag/XX for a country choice."
     ]
   ],
   "reactProps": [
@@ -52,38 +52,38 @@
     [
       "placeholder",
       "string",
-      "Eerste, niet-kiesbare optie."
+      "First option, you cannot choose it."
     ],
     [
       "label, hint, error, size",
       "",
-      "Gelijk aan Input."
+      "Same as Input."
     ],
     [
       "iconLeading",
       "ReactNode",
-      "Icoon of <Flag code={value} /> (uit @rbbds/ui/flags). Toont alleen het gekozen land: een native select kan geen plaatjes in de opties tonen."
+      "Icon or <Flag code={value} /> (from @rbbds/ui/flags). Only shows the chosen country: a native select cannot show images in its options."
     ]
   ],
   "behaviour": [
-    "Opent de systeemlijst van de browser. Placeholder heeft een lichtere kleur tot er een waarde is."
+    "Opens the browser's own list. The placeholder has a lighter color until there is a value."
   ],
   "a11y": [
-    "Native <select>: pijltjestoetsen en typen om te zoeken werken standaard.",
-    "Label, hint en fout zijn gekoppeld zoals bij Input."
+    "Native <select>: arrow keys and typing to search work out of the box.",
+    "Label, hint and error are linked like in Input."
   ],
   "content": [
-    "Placeholder als instructie: \"Kies een land\".",
-    "Sorteer opties logisch: alfabetisch, of de meest gekozen bovenaan."
+    "Placeholder as an instruction: \"Choose a country\".",
+    "Sort options in a logical way: alphabetical, or the most chosen at the top."
   ],
   "do": [
-    "Kies een zinvolle standaardwaarde als die er is."
+    "Choose a sensible default value if there is one."
   ],
   "dont": [
-    "Een Select met twee opties zoals Ja/Nee."
+    "A Select with two options like Yes/No."
   ],
   "tokens": [
-    "gebruikt de --input-* tokens"
+    "uses the --input-* tokens"
   ],
   "related": [
     "Input",
@@ -91,6 +91,6 @@
     "Dropdown menu"
   ],
   "open": [
-    "In Figma is de opengeklapte lijst nog niet als component uitgewerkt. In code toont de browser de native lijst."
+    "In Figma the open list is not a component yet. In code the browser shows its native list."
   ]
 }

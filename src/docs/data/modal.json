@@ -6,20 +6,20 @@
     "base": "_Modal"
   },
   "react": "Modal",
-  "summary": "Dialoog voor een gerichte taak of bevestiging. Blokkeert de rest van de pagina tot de gebruiker een keuze maakt. De inhoud zit in een native Figma-slot.",
+  "summary": "Dialog for a focused task or a confirmation. Blocks the rest of the page until the user makes a choice. The content sits in a native Figma slot.",
   "use": [
-    "Bevestigen van een onomkeerbare actie.",
-    "Korte taak zonder de context te verlaten."
+    "Confirm an action you cannot undo.",
+    "A short task without leaving the context."
   ],
   "avoid": [
-    "Lange formulieren of uitgebreide inhoud: gebruik een eigen pagina.",
-    "Meldingen zonder keuze: gebruik Alert of Toast."
+    "Long forms or a lot of content: use a separate page.",
+    "Messages without a choice: use Alert or Toast."
   ],
   "anatomy": [
     "Backdrop.",
-    "Paneel: featured icon (optioneel), titel, ondersteunende tekst, sluitknop.",
+    "Panel: featured icon (optional), title, supporting text, close button.",
     "Content (slot).",
-    "Footer met Secondary action en Primary action."
+    "Footer with a Secondary action and a Primary action."
   ],
   "figmaProps": [
     [
@@ -30,7 +30,7 @@
     [
       "Type",
       "Default, Destructive",
-      "Destructive gebruikt een rode featured icon en Button destructive."
+      "Destructive uses a red featured icon and Button destructive."
     ],
     [
       "Title / Supporting text / Featured icon",
@@ -40,7 +40,7 @@
     [
       "Content",
       "slot",
-      "Laat leeg als er geen extra inhoud is."
+      "Leave it empty if there is no extra content."
     ]
   ],
   "reactProps": [
@@ -52,7 +52,7 @@
     [
       "title",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "description",
@@ -67,7 +67,7 @@
     [
       "footer",
       "ReactNode",
-      "Knoppen."
+      "Buttons."
     ],
     [
       "size",
@@ -77,27 +77,27 @@
     [
       "closeLabel",
       "string",
-      "Standaard 'Sluiten'."
+      "Default 'Sluiten'."
     ]
   ],
   "behaviour": [
-    "Native <dialog> met showModal: focus gaat de dialoog in en blijft erin.",
-    "Escape, de sluitknop of klikken op de backdrop sluit de modal."
+    "Native <dialog> with showModal: focus goes into the dialog and stays there.",
+    "Escape, the close button or a click on the backdrop closes the modal."
   ],
   "a11y": [
-    "aria-labelledby wijst naar de titel, aria-describedby naar de toelichting.",
-    "Na sluiten keert de focus terug naar het element dat de modal opende."
+    "aria-labelledby points to the title, aria-describedby to the explanation.",
+    "After closing, focus goes back to the element that opened the modal."
   ],
   "content": [
-    "Titel als vraag bij bevestigen: \"Project verwijderen?\".",
-    "Knoppen noemen de uitkomst: \"Verwijderen\" en \"Annuleren\", niet \"Ja\" en \"Nee\"."
+    "Title as a question when you confirm: \"Delete project?\".",
+    "Buttons name the result: \"Delete\" and \"Cancel\", not \"Yes\" and \"No\"."
   ],
   "do": [
-    "Primary rechts, Secondary links in de footer."
+    "Primary on the right, Secondary on the left in the footer."
   ],
   "dont": [
-    "Een modal openen vanuit een modal.",
-    "Belangrijke inhoud alleen in een modal tonen."
+    "Open a modal from a modal.",
+    "Show important content only in a modal."
   ],
   "tokens": [
     "--modal-{surface|backdrop|padding|radius|gap}",

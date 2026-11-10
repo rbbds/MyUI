@@ -6,19 +6,19 @@
     "base": "_Slideout"
   },
   "react": "Slideout",
-  "summary": "Paneel dat vanaf de zijkant inschuift voor bijtaken: filters, details, mobiele navigatie. Content is een native Figma-slot.",
+  "summary": "Panel that slides in from the side for side tasks: filters, details, mobile navigation. Content is a native Figma slot.",
   "use": [
-    "Filters of details naast een lijst die zichtbaar moet blijven.",
-    "Mobiele navigatie."
+    "Filters or details next to a list that must stay visible.",
+    "Mobile navigation."
   ],
   "avoid": [
-    "Korte bevestigingen: gebruik Modal.",
-    "Hoofdtaken: geef die een eigen pagina."
+    "Short confirmations: use Modal.",
+    "Main tasks: give them their own page."
   ],
   "anatomy": [
-    "Header: titel, toelichting, sluitknop.",
-    "Content (slot), scrolt.",
-    "Footer met acties (optioneel)."
+    "Header: title, explanation, close button.",
+    "Content (slot), scrolls.",
+    "Footer with actions (optional)."
   ],
   "figmaProps": [
     [
@@ -56,29 +56,29 @@
     [
       "size",
       "'sm' | 'md' | 'lg'",
-      "Op mobiel altijd volle breedte."
+      "Always full width on mobile."
     ],
     [
       "side",
       "'right' | 'left'",
-      "Standaard 'right'."
+      "Default 'right'."
     ]
   ],
   "behaviour": [
-    "Schuift in vanaf de zijkant. Escape, de sluitknop of de backdrop sluit."
+    "Slides in from the side. Escape, the close button or the backdrop closes it."
   ],
   "a11y": [
-    "Native <dialog> met showModal: focus gaat erin en blijft erin.",
-    "Na sluiten keert de focus terug naar de knop die hem opende."
+    "Native <dialog> with showModal: focus goes in and stays in.",
+    "After closing, focus goes back to the button that opened it."
   ],
   "content": [
-    "Titel noemt de taak: \"Filters\", \"Projectdetails\"."
+    "The title names the task: \"Filters\", \"Project details\"."
   ],
   "do": [
-    "Primaire actie rechts in de footer."
+    "Primary action on the right in the footer."
   ],
   "dont": [
-    "Een Slideout openen vanuit een Slideout of Modal."
+    "Open a Slideout from a Slideout or a Modal."
   ],
   "tokens": [
     "--slideout-*",

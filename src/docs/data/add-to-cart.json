@@ -6,27 +6,27 @@
     "base": "_Add to cart"
   },
   "react": "AddToCart",
-  "summary": "Koopblok op de productpagina: voorraad, aantal, knop \"In winkelwagen\" en levertijd.",
+  "summary": "Buy block on the product page: stock, quantity, \"Add to cart\" button and delivery time.",
   "use": [
-    "Productpagina, onder de Variant picker."
+    "Product page, below the Variant picker."
   ],
   "avoid": [
-    "Product cards: daar is één kleine knop genoeg."
+    "Product cards: one small button is enough there."
   ],
   "anatomy": [
     "Stock indicator.",
-    "Quantity stepper, primaire knop (vult de ruimte), optioneel verlanglijst.",
-    "Levertijd met vrachtwagen-icoon."
+    "Quantity stepper, primary button (fills the space), optional wishlist.",
+    "Delivery time with a truck icon."
   ],
   "figmaProps": [
     [
       "State",
       "Default, Low stock, Out of stock",
-      "Out of stock: aantal en knop uit, levertijd verborgen."
+      "Out of stock: quantity and button off, delivery time hidden."
     ],
     [
       "Delivery",
-      "tekst",
+      "text",
       ""
     ],
     [
@@ -54,7 +54,7 @@
     [
       "maxQuantity",
       "number",
-      "Standaard 10."
+      "Default 10."
     ],
     [
       "label, productName",
@@ -64,7 +64,7 @@
     [
       "aside",
       "ReactNode",
-      "Bijvoorbeeld een verlanglijstknop."
+      "For example a wishlist button."
     ],
     [
       "loading",
@@ -73,17 +73,17 @@
     ]
   ],
   "behaviour": [
-    "Na toevoegen opent meestal de Mini cart (zie Voorbeelden)."
+    "After adding, the Mini cart usually opens (see Examples)."
   ],
   "a11y": [
-    "Meld het toevoegen (Mini cart of een statusmelding), niet alleen visueel."
+    "Announce that the item was added (Mini cart or a status message), not only visually."
   ],
   "content": [
-    "Knop: \"In winkelwagen\". Uitverkocht: \"Uitverkocht\"."
+    "Button: \"Add to cart\". Sold out: \"Sold out\"."
   ],
   "do": [],
   "dont": [
-    "Een uitgeschakelde knop zonder uitleg waarom."
+    "A disabled button with no explanation why."
   ],
   "tokens": [
     "--stock-*",
@@ -95,6 +95,6 @@
     "Variant picker"
   ],
   "open": [
-    "\"Mail me als het weer leverbaar is\" bestaat nog niet."
+    "\"Email me when it is back in stock\" does not exist yet."
   ]
 }

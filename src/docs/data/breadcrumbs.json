@@ -6,18 +6,18 @@
     "base": "_Breadcrumb item"
   },
   "react": "Breadcrumbs",
-  "summary": "Kruimelpad dat laat zien waar de pagina in de structuur zit, met links naar de bovenliggende niveaus.",
+  "summary": "Trail that shows where the page sits in the structure, with links to the levels above it.",
   "use": [
-    "Pagina's die drie of meer niveaus diep liggen."
+    "Pages that are three or more levels deep."
   ],
   "avoid": [
-    "Platte sites met één of twee niveaus.",
-    "Als vervanging van de hoofdnavigatie."
+    "Flat sites with one or two levels.",
+    "As a replacement for the main navigation."
   ],
   "anatomy": [
-    "Home-icoon (optioneel).",
-    "Items met scheidingsteken.",
-    "Huidige pagina (geen link)."
+    "Home icon (optional).",
+    "Items with a separator.",
+    "Current page (not a link)."
   ],
   "figmaProps": [
     [
@@ -35,34 +35,34 @@
     [
       "items",
       "{ label, href? }[]",
-      "Het laatste item is de huidige pagina."
+      "The last item is the current page."
     ],
     [
       "homeHref",
       "string",
-      "Toont het home-icoon."
+      "Shows the home icon."
     ],
     [
       "aria-label",
       "string",
-      "Standaard 'Kruimelpad'."
+      "Default 'Kruimelpad'."
     ]
   ],
   "behaviour": [
-    "Items zijn links. Het laatste item niet."
+    "Items are links. The last item is not."
   ],
   "a11y": [
-    "<nav> met aria-label. Huidige pagina met aria-current=\"page\".",
-    "Scheidingstekens zijn aria-hidden."
+    "<nav> with an aria-label. Current page with aria-current=\"page\".",
+    "Separators are aria-hidden."
   ],
   "content": [
-    "Gebruik de paginatitels, ingekort waar nodig."
+    "Use the page titles, made shorter where needed."
   ],
   "do": [
-    "Kort lange paden in op mobiel tot het bovenliggende niveau."
+    "On mobile, shorten long paths to the level above."
   ],
   "dont": [
-    "De huidige pagina als link."
+    "The current page as a link."
   ],
   "tokens": [
     "--breadcrumb-{foreground|foreground-hover|foreground-current|separator|gap}"
@@ -71,6 +71,6 @@
     "Nav item"
   ],
   "open": [
-    "Inkorten op kleine schermen is nog niet ingebouwd."
+    "Shortening on small screens is not built in yet."
   ]
 }

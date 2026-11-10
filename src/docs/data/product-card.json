@@ -6,65 +6,65 @@
     "base": "_Product card"
   },
   "react": "ProductCard",
-  "summary": "Producttegel voor overzichten en carrousels: beeld, merk, titel, beoordeling, kleuren, prijs en optioneel een knop. De hele kaart is klikbaar via de titel.",
+  "summary": "Product tile for overviews and carousels: image, brand, title, rating, colors, price and an optional button. The whole card is clickable through the title.",
   "use": [
-    "Productoverzichten, zoekresultaten, \"Ook interessant\"."
+    "Product overviews, search results, \"You may also like\"."
   ],
   "avoid": [
-    "Lange beschrijvingen: dat hoort op de productpagina.",
-    "Meer dan één primaire actie per kaart."
+    "Long descriptions: they belong on the product page.",
+    "More than one primary action per card."
   ],
   "anatomy": [
-    "Media (vierkant) met badge links en verlanglijst rechts.",
-    "Merk of categorie (meta).",
-    "Titel (link naar de productpagina).",
+    "Media (square) with a badge on the left and a wishlist button on the right.",
+    "Brand or category (meta).",
+    "Title (link to the product page).",
     "Rating (sm).",
-    "Kleurstippen (maximaal 4 plus \"+n\").",
-    "Prijs en eventueel voorraadstatus.",
-    "Optioneel: knop \"In winkelwagen\"."
+    "Color dots (4 at most plus \"+n\").",
+    "Price and an optional stock status.",
+    "Optional: \"Add to cart\" button."
   ],
   "figmaProps": [
     [
       "Layout",
       "Vertical, Horizontal",
-      "Horizontal voor lijsten en zoekresultaten."
+      "Horizontal for lists and search results."
     ],
     [
       "State",
       "Default, Hover, Focus, Sold out",
-      "Sold out: knop uit, beeld gedimd, voorraadstatus zichtbaar."
+      "Sold out: button off, image dimmed, stock status visible."
     ],
     [
       "Title, Meta",
-      "tekst",
+      "text",
       ""
     ],
     [
       "Show badge / wishlist / rating / swatches / stock / button",
       "boolean",
-      "Beeld vervangen via een image fill op Media."
+      "Replace the image with an image fill on Media."
     ]
   ],
   "reactProps": [
     [
       "title, href",
       "string",
-      "Verplicht. De titel is de link."
+      "Required. The title is the link."
     ],
     [
       "image",
       "{ src, alt? }",
-      "Alt leeg laten als het beeld niets toevoegt aan de titel."
+      "Leave alt empty if the image adds nothing to the title."
     ],
     [
       "meta, badge",
       "ReactNode",
-      "Badge bijvoorbeeld <Badge color=\"error\">Sale</Badge>."
+      "Badge for example <Badge color=\"error\">Sale</Badge>."
     ],
     [
       "price, compareAt, currency",
       "number, number, string",
-      "compareAt hoger dan price = sale."
+      "compareAt higher than price = sale."
     ],
     [
       "rating, reviewCount",
@@ -74,7 +74,7 @@
     [
       "swatches",
       "string[]",
-      "CSS-kleuren. Het aantal wordt voorgelezen, de stippen niet."
+      "CSS colors. The number is read out, the dots are not."
     ],
     [
       "stock",
@@ -84,12 +84,12 @@
     [
       "wishlisted, onToggleWishlist",
       "boolean, () => void",
-      "Knop met aria-pressed."
+      "Button with aria-pressed."
     ],
     [
       "onAddToCart, addToCartLabel",
       "() => void, string",
-      "Toont de knop."
+      "Shows the button."
     ],
     [
       "layout",
@@ -98,23 +98,23 @@
     ]
   ],
   "behaviour": [
-    "Klik op de kaart opent de productpagina; de verlanglijst- en winkelwagenknop liggen erboven en werken los.",
-    "Bij hover schaduw en onderstreepte titel; bij toetsenbordfocus een focus ring om de hele kaart."
+    "A click on the card opens the product page. The wishlist and cart buttons sit on top and work on their own.",
+    "On hover: a shadow and an underlined title. On keyboard focus: a focus ring around the whole card."
   ],
   "a11y": [
-    "Eén tabstop voor de kaart (de titel), plus de knoppen.",
-    "Verlanglijstknop met naam \"Bewaar {titel} in verlanglijst\" en aria-pressed.",
-    "Prijs: \"Oude prijs … Nu …\" voor schermlezers."
+    "One tab stop for the card (the title), plus the buttons.",
+    "Wishlist button named \"Save {title} to wishlist\" with aria-pressed.",
+    "Price: \"Old price … Now …\" for screen readers."
   ],
   "content": [
-    "Titel kort en beschrijvend, zonder merknaam als die al in meta staat."
+    "Short, clear title, without the brand name if it is already in meta."
   ],
   "do": [
-    "Gebruik dezelfde beeldverhouding voor alle producten in een overzicht."
+    "Use the same image ratio for all products in an overview."
   ],
   "dont": [
-    "Een tweede link in de kaart naast de titel.",
-    "Alleen kleur gebruiken om \"sale\" aan te geven: gebruik ook de badge."
+    "A second link in the card next to the title.",
+    "Use only color to show \"sale\": also use the badge."
   ],
   "tokens": [
     "--product-card-*",
@@ -128,6 +128,6 @@
     "Stock indicator"
   ],
   "open": [
-    "Carrousel-component voor rijen met producten bestaat nog niet."
+    "A carousel component for rows of products does not exist yet."
   ]
 }

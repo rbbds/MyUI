@@ -6,18 +6,18 @@
     "base": "_Radio"
   },
   "react": "Radio",
-  "summary": "Eén keuze uit een kleine set (2 tot 6) opties die allemaal zichtbaar zijn. Altijd in een groep.",
+  "summary": "One choice from a small set (2 to 6) of options that are all visible. Always in a group.",
   "use": [
-    "Wederzijds uitsluitende opties die de gebruiker moet vergelijken."
+    "Options that exclude each other and that the user must compare."
   ],
   "avoid": [
-    "Meer dan 6 opties: gebruik Select.",
-    "Meerdere keuzes: gebruik Checkbox."
+    "More than 6 options: use Select.",
+    "Several choices: use Checkbox."
   ],
   "anatomy": [
-    "Cirkel met indicator.",
-    "Label en optionele hint.",
-    "Groep met legend (RadioGroup)."
+    "Circle with an indicator.",
+    "Label and optional hint.",
+    "Group with a legend (RadioGroup)."
   ],
   "figmaProps": [
     [
@@ -45,29 +45,29 @@
     [
       "RadioGroup legend",
       "ReactNode",
-      "Verplicht."
+      "Required."
     ],
     [
       "Radio name / value / label / hint",
       "",
-      "Dezelfde name binnen een groep."
+      "Use the same name within a group."
     ]
   ],
   "behaviour": [
-    "Pijltjestoetsen wisselen binnen de groep. Tab gaat naar de volgende groep."
+    "Arrow keys move within the group. Tab goes to the next group."
   ],
   "a11y": [
-    "Native radios in <fieldset> met <legend>.",
-    "Eén tab-stop per groep."
+    "Native radios in a <fieldset> with a <legend>.",
+    "One tab stop per group."
   ],
   "content": [
-    "Parallelle, korte labels. Gebruik de hint voor gevolgen (\"Betaal elke maand een vast bedrag.\")."
+    "Short labels of the same kind. Use the hint for what happens (\"Pay a fixed amount every month.\")."
   ],
   "do": [
-    "Selecteer een veilige standaardoptie als die bestaat."
+    "Select a safe default option if there is one."
   ],
   "dont": [
-    "Een losse radio zonder groep."
+    "A single radio without a group."
   ],
   "tokens": [
     "--selection-*",

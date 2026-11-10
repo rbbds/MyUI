@@ -6,20 +6,20 @@
     "base": "_Search input"
   },
   "react": "SearchInput",
-  "summary": "Zoekveld met icoon, wisknop en optionele sneltoets-hint. Het label is standaard visueel verborgen, maar altijd aanwezig voor screenreaders.",
+  "summary": "Search field with an icon, a clear button and an optional shortcut hint. The label is visually hidden by default, but always there for screen readers.",
   "use": [
-    "Zoeken in een lijst, tabel of de hele app.",
-    "Filteren terwijl de gebruiker typt."
+    "Search in a list, a table or the whole app.",
+    "Filter while the user types."
   ],
   "avoid": [
-    "Gewone tekstinvoer in een formulier: gebruik Input.",
-    "Navigeren tussen pagina’s en acties: gebruik Command menu."
+    "Normal text input in a form: use Input.",
+    "Moving between pages and actions: use Command menu."
   ],
   "anatomy": [
-    "Zoekicoon.",
-    "Invoerveld (type=\"search\").",
-    "Wisknop (zichtbaar zodra er een waarde is).",
-    "Sneltoets-hint (Kbd, alleen bij een leeg veld)."
+    "Search icon.",
+    "Input field (type=\"search\").",
+    "Clear button (shows as soon as there is a value).",
+    "Shortcut hint (Kbd, only when the field is empty)."
   ],
   "figmaProps": [
     [
@@ -30,11 +30,11 @@
     [
       "State",
       "Placeholder, Filled, Focus, Disabled",
-      "Filled toont de wisknop en verbergt de sneltoets."
+      "Filled shows the clear button and hides the shortcut."
     ],
     [
       "Value",
-      "tekst",
+      "text",
       "Via _Search input."
     ],
     [
@@ -47,7 +47,7 @@
     [
       "label",
       "ReactNode",
-      "Verplicht. Visueel verborgen tenzij showLabel."
+      "Required. Visually hidden unless showLabel."
     ],
     [
       "showLabel",
@@ -57,17 +57,17 @@
     [
       "value / defaultValue / onChange",
       "string",
-      "onChange krijgt de string, niet het event."
+      "onChange gets the string, not the event."
     ],
     [
       "shortcut",
       "ReactNode",
-      "Alleen de hint. De sneltoets zelf regelt de app."
+      "Only the hint. The app handles the shortcut itself."
     ],
     [
       "clearLabel",
       "string",
-      "Standaard 'Zoekopdracht wissen'."
+      "Default 'Zoekopdracht wissen'."
     ],
     [
       "size",
@@ -76,27 +76,27 @@
     ]
   ],
   "behaviour": [
-    "Escape wist het veld als er een waarde is.",
-    "De wisknop zet de focus terug in het veld."
+    "Escape clears the field when it has a value.",
+    "The clear button moves focus back into the field."
   ],
   "a11y": [
-    "Native <input type=\"search\"> met een label.",
-    "Plaats het veld in <form role=\"search\"> zodat het een zoek-landmark is.",
-    "Meld het aantal resultaten via een live region als de lijst live filtert."
+    "Native <input type=\"search\"> with a label.",
+    "Put the field in <form role=\"search\"> so it is a search landmark.",
+    "Announce the number of results in a live region when the list filters as you type."
   ],
   "content": [
-    "Placeholder benoemt wat je doorzoekt: \"Zoek in projecten\"."
+    "The placeholder says what you search in: \"Search projects\"."
   ],
   "do": [
-    "Toon resultaten direct, of na Enter, maar wees consequent."
+    "Show results straight away, or after Enter, but always the same way."
   ],
   "dont": [
-    "Een zoekveld zonder label, ook niet als het icoon duidelijk lijkt."
+    "A search field without a label, even if the icon seems clear."
   ],
   "tokens": [
     "--search-foreground-icon",
     "--kbd-*",
-    "verder --input-*"
+    "and --input-*"
   ],
   "related": [
     "Input",

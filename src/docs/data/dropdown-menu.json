@@ -6,25 +6,25 @@
     "base": "_Menu item"
   },
   "react": "DropdownMenu",
-  "summary": "Zwevend menu met acties, geopend vanuit een Button of Button icon. De items zitten in een native Figma-slot, zodat je ze per gebruik vult.",
+  "summary": "Floating menu with actions, opened from a Button or Button icon. The items sit in a native Figma slot, so you fill them per use.",
   "use": [
-    "Secundaire acties die niet allemaal zichtbaar hoeven te zijn (\"Meer opties\").",
-    "Acties per tabelrij."
+    "Secondary actions that do not all need to be visible (\"More options\").",
+    "Actions per table row."
   ],
   "avoid": [
-    "Een waarde kiezen voor een formulier: gebruik Select.",
-    "Navigatie tussen pagina's: gebruik links of Nav item."
+    "Choosing a value for a form: use Select.",
+    "Navigation between pages: use links or Nav item."
   ],
   "anatomy": [
-    "Menucontainer met schaduw.",
-    "Items (slot): Menu item met icoon, label en sneltoets.",
-    "Scheidingslijnen tussen groepen."
+    "Menu container with a shadow.",
+    "Items (slot): Menu item with icon, label and shortcut.",
+    "Dividers between groups."
   ],
   "figmaProps": [
     [
       "Items",
       "slot",
-      "Plaats Menu item-instances."
+      "Put Menu item instances here."
     ],
     [
       "Menu item: Type",
@@ -46,7 +46,7 @@
     [
       "trigger",
       "ReactElement",
-      "Meestal een Button of ButtonIcon."
+      "Usually a Button or ButtonIcon."
     ],
     [
       "items",
@@ -61,26 +61,26 @@
     [
       "label",
       "string",
-      "Accessible name van het menu."
+      "Accessible name of the menu."
     ]
   ],
   "behaviour": [
-    "Openen zet de focus op het eerste item. Pijl op/neer, Home en End verplaatsen de focus.",
-    "Escape of een keuze sluit het menu en zet de focus terug op de trigger."
+    "Opening moves focus to the first item. Arrow up/down, Home and End move the focus.",
+    "Escape or a choice closes the menu and moves focus back to the trigger."
   ],
   "a11y": [
-    "Trigger heeft aria-haspopup, aria-expanded en aria-controls.",
-    "Menu heeft role=\"menu\", items role=\"menuitem\"."
+    "The trigger has aria-haspopup, aria-expanded and aria-controls.",
+    "The menu has role=\"menu\", items have role=\"menuitem\"."
   ],
   "content": [
-    "Labels beginnen met een werkwoord. Destructieve acties onderaan, gescheiden door een lijn."
+    "Labels start with a verb. Destructive actions go at the bottom, after a divider."
   ],
   "do": [
-    "Groepeer verwante acties met een separator."
+    "Group related actions with a separator."
   ],
   "dont": [
-    "Meer dan ongeveer 8 items.",
-    "Geneste submenu's."
+    "More than about 8 items.",
+    "Nested submenus."
   ],
   "tokens": [
     "--menu-{surface|border|padding|radius}",

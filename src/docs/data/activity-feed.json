@@ -1,15 +1,15 @@
 {
   "use": [
-    "Status en verloop van een aanvraag, wijzigingsgeschiedenis."
+    "Status and progress of an application, change history."
   ],
   "avoid": [
-    "Stappen die nog moeten komen: gebruik Stepper."
+    "Steps that are still to come: use Stepper."
   ],
   "anatomy": [
     "Marker (_Activity marker: Icon, Avatar, Dot).",
-    "Verbindingslijn.",
-    "Titel en tijd.",
-    "Tekst (optioneel)."
+    "Connecting line.",
+    "Title and time.",
+    "Text (optional)."
   ],
   "figmaProps": [
     [
@@ -20,7 +20,7 @@
     [
       "Title / Text / Time / Show text / Show connector",
       "",
-      "Laatste item: Show connector uit."
+      "Last item: turn Show connector off."
     ],
     [
       "Activity feed: Items",
@@ -32,34 +32,34 @@
     [
       "ActivityItem title, time",
       "ReactNode, string",
-      "Verplicht."
+      "Required."
     ],
     [
       "dateTime",
       "string",
-      "Voor <time dateTime>."
+      "For <time dateTime>."
     ],
     [
       "icon / avatar",
       "ReactNode",
-      "Zonder beide een stip."
+      "Without both you get a dot."
     ],
     [
       "children",
       "ReactNode",
-      "Tekst."
+      "Text."
     ]
   ],
   "behaviour": [],
   "a11y": [
-    "Geordende lijst (<ol>); geef hem een naam met aria-label of een kop.",
-    "Tijd in een <time>-element."
+    "Ordered list (<ol>). Give it a name with aria-label or a heading.",
+    "Time in a <time> element."
   ],
   "content": [
-    "Titel in de verleden tijd: \"Aanvraag ontvangen\"."
+    "Title in the past tense: \"Application received\"."
   ],
   "do": [
-    "Kies één richting (nieuwste boven of onder) en houd die aan."
+    "Pick one direction (newest at the top or at the bottom) and keep it."
   ],
   "dont": [],
   "tokens": [
@@ -77,5 +77,5 @@
     "base": "_Activity item"
   },
   "react": "ActivityFeed, ActivityItem",
-  "summary": "Tijdlijn van gebeurtenissen, zoals het verloop van een aanvraag. Met een marker (icoon, avatar of stip), titel, tijd en tekst."
+  "summary": "Timeline of events, like the progress of an application. With a marker (icon, avatar or dot), title, time and text."
 }

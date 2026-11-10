@@ -1,14 +1,14 @@
 {
   "use": [
-    "Status in een tabelkolom, lijst of kop: Actief, In behandeling, Afgewezen."
+    "Status in a table column, list or header: Active, In progress, Rejected."
   ],
   "avoid": [
-    "Aantallen of labels: gebruik Badge.",
-    "Meldingen: gebruik Alert of Banner."
+    "Counts or labels: use Badge.",
+    "Messages: use Alert or Banner."
   ],
   "anatomy": [
-    "Stip.",
-    "Tekst."
+    "Dot.",
+    "Text."
   ],
   "figmaProps": [
     [
@@ -18,7 +18,7 @@
     ],
     [
       "Label",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -26,26 +26,26 @@
     [
       "color",
       "StatusColor",
-      "Standaard gray."
+      "Default gray."
     ],
     [
       "children",
       "ReactNode",
-      "De status in woorden."
+      "The status in words."
     ]
   ],
   "behaviour": [],
   "a11y": [
-    "De tekst draagt de betekenis; de stip is aria-hidden."
+    "The text carries the meaning. The dot is aria-hidden."
   ],
   "content": [
-    "Eén tot drie woorden, vanuit de gebruiker: \"Wacht op jou\" in plaats van \"Actie vereist\"."
+    "One to three words, from the user's point of view: \"Waiting for you\" instead of \"Action required\"."
   ],
   "do": [
-    "Gebruik per product een vaste lijst statussen met vaste kleuren."
+    "Use one fixed list of statuses with fixed colors per product."
   ],
   "dont": [
-    "Een merkkleur voor een status. Die kan op success of error lijken (bijvoorbeeld Forest groen). Gebruik Info voor \"bezig\"."
+    "A brand color for a status. It can look like success or error (Forest is green, for example). Use Info for \"in progress\"."
   ],
   "tokens": [
     "--status-indicator-*"
@@ -62,5 +62,5 @@
     "base": "_Status indicator"
   },
   "react": "StatusIndicator",
-  "summary": "Status van een item met een gekleurde stip en tekst. Rustiger dan een Badge, voor tabellen en lijsten."
+  "summary": "Status of an item with a colored dot and text. Calmer than a Badge, for tables and lists."
 }

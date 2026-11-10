@@ -6,15 +6,15 @@
     "base": "_Active filters"
   },
   "react": "ActiveFilters",
-  "summary": "Aantal resultaten en gekozen filters als verwijderbare Tags, met \"Alles wissen\".",
+  "summary": "Number of results and the chosen filters as Tags you can remove, with \"Clear all\".",
   "use": [
-    "Boven het productoverzicht."
+    "Above the product overview."
   ],
   "avoid": [],
   "anatomy": [
-    "Aantal resultaten.",
+    "Number of results.",
     "Tags.",
-    "Link \"Alles wissen\"."
+    "Link \"Clear all\"."
   ],
   "figmaProps": [
     [
@@ -24,7 +24,7 @@
     ],
     [
       "Count",
-      "tekst",
+      "text",
       ""
     ]
   ],
@@ -52,8 +52,8 @@
   ],
   "behaviour": [],
   "a11y": [
-    "Het aantal resultaten is een status en wordt gemeld bij elke wijziging.",
-    "Tag-knop: \"Verwijder filter {label}\"."
+    "The number of results is a status and is announced on every change.",
+    "Tag button: \"Remove filter {label}\"."
   ],
   "content": [],
   "do": [],

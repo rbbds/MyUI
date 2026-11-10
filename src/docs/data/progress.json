@@ -6,28 +6,28 @@
     "base": null
   },
   "react": "ProgressBar",
-  "summary": "Balk die voortgang toont als de totale omvang bekend is, met optioneel percentage rechts of onder de balk.",
+  "summary": "Bar that shows progress when the total is known, with an optional percentage to the right or below the bar.",
   "use": [
-    "Uploads, stappen in een proces, voltooiingsgraad van een profiel."
+    "Uploads, steps in a process, how complete a profile is."
   ],
   "avoid": [
-    "Onbekende duur: gebruik Spinner."
+    "Unknown duration: use Spinner."
   ],
   "anatomy": [
     "Track.",
     "Indicator.",
-    "Waarde (optioneel)."
+    "Value (optional)."
   ],
   "figmaProps": [
     [
       "Value",
-      "tekst",
-      "Bijvoorbeeld 40%. Pas de breedte van de Indicator-layer mee aan."
+      "text",
+      "For example 40%. Change the width of the Indicator layer to match."
     ],
     [
       "Label",
       "None, Right, Bottom",
-      "Positie van de waarde."
+      "Position of the value."
     ]
   ],
   "reactProps": [
@@ -39,7 +39,7 @@
     [
       "label",
       "string",
-      "Verplicht, voor screenreaders."
+      "Required, for screen readers."
     ],
     [
       "valuePosition",
@@ -48,17 +48,17 @@
     ]
   ],
   "behaviour": [
-    "De indicator groeit mee met value."
+    "The indicator grows with value."
   ],
   "a11y": [
-    "role=\"progressbar\" met aria-valuenow, aria-valuemin en aria-valuemax, plus een label."
+    "role=\"progressbar\" with aria-valuenow, aria-valuemin and aria-valuemax, plus a label."
   ],
   "content": [
-    "Toon het percentage als de gebruiker erop wacht."
+    "Show the percentage when the user is waiting for it."
   ],
   "do": [],
   "dont": [
-    "Een balk die terugloopt."
+    "A bar that goes backwards."
   ],
   "tokens": [
     "--progress-{track|indicator|foreground}",

@@ -1,21 +1,21 @@
 {
   "use": [
-    "Instellingen- en voorkeurenpagina's."
+    "Settings and preferences pages."
   ],
   "avoid": [
-    "Formulieren die bij een taak horen: gebruik een gewoon formulier."
+    "Forms that belong to a task: use a normal form."
   ],
   "anatomy": [
-    "Intro: titel en uitleg.",
-    "Kaart met rijen (slot).",
-    "Setting row: label, uitleg, control (slot, standaard Toggle).",
-    "Acties (optioneel)."
+    "Intro: title and explanation.",
+    "Card with rows (slot).",
+    "Setting row: label, explanation, control (slot, Toggle by default).",
+    "Actions (optional)."
   ],
   "figmaProps": [
     [
       "Breakpoint",
       "Desktop, Mobile",
-      "Koppel aan breakpoint/settings-section."
+      "Bind to breakpoint/settings-section."
     ],
     [
       "Title / Description / Show description / Show actions",
@@ -30,7 +30,7 @@
     [
       "Setting row: Label / Description / Show description / Control",
       "",
-      "Control is een slot."
+      "Control is a slot."
     ]
   ],
   "reactProps": [
@@ -42,23 +42,23 @@
     [
       "SettingRow label, description, control",
       "",
-      "control krijgt aria-labelledby en aria-describedby van de rij."
+      "control gets aria-labelledby and aria-describedby from the row."
     ]
   ],
   "behaviour": [
-    "Toggles slaan direct op; meld dat met een Toast. Velden die bij elkaar horen: Opslaan in actions."
+    "Toggles save straight away: confirm that with a Toast. Fields that belong together: Save in actions."
   ],
   "a11y": [
-    "Label en uitleg van de rij worden de naam en beschrijving van de control."
+    "The label and explanation of the row become the name and description of the control."
   ],
   "content": [
-    "Label als wat het doet, uitleg als gevolg."
+    "Label says what it does, the explanation says what happens."
   ],
   "do": [
-    "Groepeer per onderwerp: Meldingen, Taal, Beveiliging."
+    "Group by topic: Notifications, Language, Security."
   ],
   "dont": [
-    "Toggles en een Opslaan-knop door elkaar in één blok."
+    "Mix toggles and a Save button in one block."
   ],
   "tokens": [
     "--settings-*"
@@ -75,5 +75,5 @@
     "base": "_Settings section"
   },
   "react": "SettingsSection, SettingRow",
-  "summary": "Blok op een instellingenpagina: titel en uitleg links, instellingen rechts in een kaart. Elke instelling met label, uitleg en een control."
+  "summary": "Block on a settings page: title and explanation on the left, settings on the right in a card. Each setting has a label, an explanation and a control."
 }

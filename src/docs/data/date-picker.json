@@ -6,21 +6,21 @@
     "base": "_Date picker"
   },
   "react": "DatePicker",
-  "summary": "Datumveld (dd-mm-jjjj) met een kalender als extra. De kalender werkt zoals MUI DateCalendar: klik op \"november 2026 ▾\" om een jaar (en eventueel maand) te kiezen, pijlen rechts voor de vorige en volgende maand. Bestaat uit Calendar, Calendar day en Calendar cell.",
+  "summary": "Date field (dd-mm-yyyy) with a calendar as an extra. The calendar works like MUI DateCalendar: click \"November 2026 ▾\" to pick a year (and month if you want), arrows on the right for the previous and next month. Built from Calendar, Calendar day and Calendar cell.",
   "use": [
-    "Datums in de nabije toekomst of het recente verleden: afspraken, ingangsdatums.",
-    "Geboortedatum: met views year, month, day en openTo year springt de gebruiker snel naar het juiste jaar."
+    "Dates in the near future or the recent past: appointments, start dates.",
+    "Date of birth: with views year, month, day and openTo year the user jumps to the right year quickly."
   ],
   "avoid": [
-    "Datumbereiken: nog niet ondersteund.",
-    "Als typen genoeg is en de kalender niets toevoegt (bijvoorbeeld een bekende vaste datum)."
+    "Date ranges: use Date range picker.",
+    "When typing is enough and the calendar adds nothing (for example a known fixed date)."
   ],
   "anatomy": [
-    "Label, hint en foutmelding (zoals Input).",
-    "Kalenderknop.",
-    "Tekstveld dd-mm-jjjj.",
-    "Popover met Calendar: links de view switch (maand jaar ▾), rechts de pijlen, daaronder weekdagen (één letter) en het dagenraster.",
-    "Year view en Month view: raster van 3 kolommen met Calendar cells."
+    "Label, hint and error message (like Input).",
+    "Calendar button.",
+    "Text field dd-mm-yyyy.",
+    "Popover with Calendar: the view switch (month year ▾) on the left, the arrows on the right, below them the weekdays (one letter) and the grid of days.",
+    "Year view and Month view: grid of 3 columns with Calendar cells."
   ],
   "figmaProps": [
     [
@@ -31,29 +31,29 @@
     [
       "Calendar: View",
       "Day, Month, Year",
-      "Pijlen alleen zichtbaar in Day."
+      "Arrows only show in Day."
     ],
     [
       "Calendar: Month",
-      "tekst",
-      "Bijvoorbeeld \"november 2026\"."
+      "text",
+      "For example \"November 2026\"."
     ],
     [
       "Calendar day: State",
       "Default, Hover, Focus, Selected, Today, Disabled, Outside, Empty",
-      "Empty = plek van een dag buiten de maand (standaard). Outside alleen bij showDaysOutsideCurrentMonth."
+      "Empty = place of a day outside the month (default). Outside only with showDaysOutsideCurrentMonth."
     ],
     [
       "Calendar cell: State",
       "Default, Hover, Focus, Selected, Current, Disabled",
-      "Maand of jaar. Current = huidige maand of jaar (ring)."
+      "Month or year. Current = this month or year (ring)."
     ]
   ],
   "reactProps": [
     [
       "label, hint, error, required, size",
       "",
-      "Gelijk aan Input."
+      "Same as Input."
     ],
     [
       "value / defaultValue",
@@ -63,27 +63,27 @@
     [
       "onChange",
       "(date: Date | null) => void",
-      "null als het veld leeg of ongeldig is."
+      "null when the field is empty or not valid."
     ],
     [
       "min / max",
       "Date",
-      "Dagen, maanden en jaren erbuiten zijn uitgeschakeld."
+      "Days, months and years outside the range are disabled."
     ],
     [
       "calendarProps",
       "CalendarProps",
-      "Alles hieronder doorgeven aan de kalender in de popover."
+      "Everything below is passed to the calendar in the popover."
     ],
     [
       "Calendar: views",
       "('day' | 'month' | 'year')[]",
-      "Standaard ['year', 'day'], zoals MUI. Volgorde = volgorde van kiezen."
+      "Default ['year', 'day'], like MUI. The order is the order of choosing."
     ],
     [
       "Calendar: openTo",
       "'day' | 'month' | 'year'",
-      "Startview. Standaard day."
+      "Start view. Default day."
     ],
     [
       "Calendar: disablePast / disableFuture",
@@ -93,67 +93,67 @@
     [
       "Calendar: shouldDisableDate",
       "(date: Date) => boolean",
-      "Bijvoorbeeld weekenden uitschakelen."
+      "For example to disable weekends."
     ],
     [
       "Calendar: showDaysOutsideCurrentMonth",
       "boolean",
-      "Standaard uit: alleen dagen van de maand."
+      "Off by default: only days of the month."
     ],
     [
       "Calendar: fixedWeekNumber",
       "number",
-      "Altijd zoveel weken tonen, bijvoorbeeld 6."
+      "Always show this many weeks, for example 6."
     ],
     [
       "Calendar: yearsPerRow / yearsOrder",
       "3 | 4 / 'asc' | 'desc'",
-      "Standaard 3 en asc. Gebruik desc voor geboortedatums."
+      "Default 3 and asc. Use desc for dates of birth."
     ],
     [
       "Calendar: locale, weekStartsOn",
       "string / 0 | 1",
-      "Standaard 'nl-NL' en maandag."
+      "Default 'nl-NL' and Monday."
     ]
   ],
   "behaviour": [
-    "Typen: de waarde wordt gecontroleerd bij het verlaten van het veld.",
-    "View switch: klik op \"maand jaar ▾\" om naar de jaarlijst te gaan. Een jaar kiezen gaat naar de volgende view (Month of Day). De lijst scrollt naar het gekozen jaar.",
-    "Day view: pijlen per dag en week, Home/End naar begin/eind van de week, PageUp/PageDown per maand (met Shift per jaar).",
-    "Month en Year view: pijltjes bewegen door het raster, Enter of klik kiest.",
-    "Enter of klik op een dag kiest de datum, sluit de kalender en zet de focus terug op de knop. Escape en klikken buiten sluiten ook.",
-    "De hoogte van de kalender blijft gelijk tussen de views, zodat de popover niet springt."
+    "Typing: the value is checked when you leave the field.",
+    "View switch: click \"month year ▾\" to go to the list of years. Choosing a year goes to the next view (Month or Day). The list scrolls to the chosen year.",
+    "Day view: arrows move by day and week, Home/End go to the start/end of the week, PageUp/PageDown move by month (with Shift by year).",
+    "Month and Year view: arrows move through the grid, Enter or a click chooses.",
+    "Enter or a click on a day chooses the date, closes the calendar and moves focus back to the button. Escape and a click outside also close it.",
+    "The calendar keeps the same height in every view, so the popover does not jump."
   ],
   "a11y": [
-    "Dagenraster is een grid met aria-labelledby naar de maandtitel; de maand wordt via aria-live gemeld.",
-    "Weekdagen tonen één letter, maar de volledige naam staat erbij voor schermlezers.",
-    "Elke dag heeft een volledig label (\"donderdag 12 november 2026\"); vandaag heeft aria-current=\"date\" en een ring, niet alleen kleur.",
-    "Year en Month view zijn een radiogroup met aria-checked; de view switch heeft aria-expanded."
+    "The grid of days is a grid with aria-labelledby pointing to the month title. The month is announced with aria-live.",
+    "Weekdays show one letter, but the full name is there for screen readers.",
+    "Every day has a full label (\"Thursday 12 November 2026\"). Today has aria-current=\"date\" and a ring, not only color.",
+    "Year and Month view are a radiogroup with aria-checked. The view switch has aria-expanded."
   ],
   "content": [
-    "Noem het formaat in de hint of placeholder: dd-mm-jjjj.",
-    "Foutmelding met voorbeeld: \"Vul een datum in als dd-mm-jjjj, bijvoorbeeld 01-01-2027.\""
+    "Name the format in the hint or placeholder: dd-mm-yyyy.",
+    "Error message with an example: \"Enter a date as dd-mm-yyyy, for example 01-01-2027.\""
   ],
   "do": [
-    "Laat typen altijd toe, ook als de kalender er is.",
-    "Gebruik views year, month, day voor datums ver weg."
+    "Always allow typing, also when the calendar is there.",
+    "Use views year, month, day for dates far away."
   ],
   "dont": [
-    "De kalender als enige invoermanier.",
-    "Dagen buiten de maand tonen zonder fixedWeekNumber: de hoogte springt dan per maand."
+    "The calendar as the only way to enter a date.",
+    "Show days outside the month without fixedWeekNumber: the height then jumps per month."
   ],
   "tokens": [
     "--calendar-*",
     "--calendar-day-*",
     "--calendar-cell-*",
-    "verder --input-*"
+    "and --input-*"
   ],
   "related": [
     "Input",
+    "Date range picker",
     "Combobox"
   ],
   "open": [
-    "Datumbereik (van/tot) bestaat nog niet.",
-    "De popover past zich nog niet aan bij te weinig ruimte onder het veld."
+    "The popover does not adjust yet when there is not enough room below the field."
   ]
 }

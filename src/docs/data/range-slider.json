@@ -6,18 +6,18 @@
     "base": "Slider (Type=Range)"
   },
   "react": "RangeSlider",
-  "summary": "Slider met twee bolletjes voor een bereik, zoals een prijs van-tot. In Figma is dit Slider Type=Range.",
+  "summary": "Slider with two handles for a range, like a price from-to. In Figma this is Slider Type=Range.",
   "use": [
-    "Prijsbereik, bereik van afmetingen of datums."
+    "Price range, range of sizes or dates."
   ],
   "avoid": [
-    "Precieze waarden: geef dan ook twee invoervelden."
+    "Exact values: also offer two input fields."
   ],
   "anatomy": [
     "Label.",
-    "Track met gevuld bereik.",
-    "Twee bolletjes.",
-    "Waarden onder de track."
+    "Track with the filled range.",
+    "Two handles.",
+    "Values below the track."
   ],
   "figmaProps": [
     [
@@ -55,19 +55,19 @@
     [
       "formatValue",
       "(v) => string",
-      "Bijvoorbeeld formatMoney."
+      "For example formatMoney."
     ],
     [
       "minLabel, maxLabel",
       "string",
-      "Namen van de bolletjes."
+      "Names of the handles."
     ]
   ],
   "behaviour": [
-    "De bolletjes kunnen elkaar niet passeren."
+    "The handles cannot pass each other."
   ],
   "a11y": [
-    "Twee native range-inputs met eigen naam en aria-valuetext."
+    "Two native range inputs with their own names and aria-valuetext."
   ],
   "content": [],
   "do": [],

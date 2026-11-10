@@ -6,16 +6,16 @@
     "base": "_File upload"
   },
   "react": "FileUpload",
-  "summary": "Dropzone met een echt bestandsveld, plus File upload items die per bestand de voortgang en status tonen.",
+  "summary": "Drop zone with a real file input, plus File upload items that show the progress and status of each file.",
   "use": [
-    "Documenten of afbeeldingen toevoegen aan een formulier of project."
+    "Add documents or images to a form or project."
   ],
   "avoid": [
-    "Eén klein bestand in een compact formulier: een gewone knop met bestandsveld is genoeg."
+    "One small file in a compact form: a normal button with a file input is enough."
   ],
   "anatomy": [
-    "Dropzone: featured icon, actielink, sleeptekst, hint.",
-    "File upload item: bestandsicoon, naam, grootte, voortgang, status, verwijderknop."
+    "Drop zone: featured icon, action link, drag text, hint.",
+    "File upload item: file icon, name, size, progress, status, remove button."
   ],
   "figmaProps": [
     [
@@ -25,8 +25,8 @@
     ],
     [
       "File upload: Hint",
-      "tekst",
-      "Toegestane typen en maximale grootte."
+      "text",
+      "Allowed types and maximum size."
     ],
     [
       "File upload item: State",
@@ -57,23 +57,23 @@
     ]
   ],
   "behaviour": [
-    "Klikken opent de bestandskiezer. Slepen geeft de Drag over-status.",
-    "Elk bestand krijgt een eigen item met voortgang."
+    "Clicking opens the file picker. Dragging shows the Drag over state.",
+    "Each file gets its own item with progress."
   ],
   "a11y": [
-    "Werkt volledig zonder slepen: de actielink opent het native bestandsveld.",
-    "File upload item meldt voortgang en fouten via aria-live=\"polite\".",
-    "Verwijderknop heeft een label met de bestandsnaam."
+    "Works fully without dragging: the action link opens the native file input.",
+    "File upload item announces progress and errors with aria-live=\"polite\".",
+    "The remove button has a label with the file name."
   ],
   "content": [
-    "Hint noemt bestandstypen en maximale grootte: \"PDF, JPG of PNG (max. 10 MB)\".",
-    "Foutmelding noemt de oorzaak: \"Het bestand is groter dan 10 MB.\""
+    "The hint names the file types and maximum size: \"PDF, JPG or PNG (max. 10 MB)\".",
+    "The error message names the cause: \"The file is larger than 10 MB.\""
   ],
   "do": [
-    "Controleer type en grootte vóór het uploaden."
+    "Check the type and size before uploading."
   ],
   "dont": [
-    "Alleen slepen aanbieden."
+    "Offer drag and drop only."
   ],
   "tokens": [
     "--file-upload-{surface|border|foreground}-*",
