@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+- Storybook "Show code" now shows the JSX of the example, for example `<ButtonIcon hierarchy="primary" … />`. Before, it often showed only `S.IconOnly`, because the thin `*.stories.tsx` files pass on stories from `*.cases.tsx`.
+- The Storybook build keeps component names, so the code shows `<Logo />` instead of a short name like `<W />`.
+
 ### Documentation
 - All component documentation is now in B1 English: `docs/content/*.mjs`, the Storybook Docs pages and the 77 `Docs / <name>` frames in Figma.
 - Section titles in Storybook and Figma are English too (When to use, Anatomy, Accessibility, and so on).
