@@ -27,21 +27,40 @@ export function BottomNavItem({ icon, children, active, badge, badgeLabel = 'new
   );
 }
 
+export interface BottomNavAction {
+  icon: ReactNode;
+  /** Screen reader name, for example "New project". */
+  label: string;
+  onClick?: () => void;
+  /** Renders a link instead of a button. */
+  href?: string;
+}
+
 export interface BottomNavigationProps {
-  /** 3 to 5 BottomNavItem elements. */
+  /** 3 to 5 BottomNavItem elements. With an action, use 4. */
   children: ReactNode;
+  /** Raised round button in the middle for the main action. Off by default. */
+  action?: BottomNavAction;
   'aria-label'?: string;
   className?: string;
 }
 
-/** App navigation at the bottom of the screen on mobile. Replaces the Sidebar below 600px. */
-export function BottomNavigation({ children, className, ...rest }: BottomNavigationProps) {
-  const items = Array.isArray(children) ? children : [children];
+/** App navigation at the bottom of the screen on mobile. Replaces the Sidebar below 900px. */
+export function BottomNavigation({ children, action, className, ...rest }: BottomNavigationProps) {
+  const items = (Array.isArray(children) ? children : [children]).map((c, i) => <li key={i}>{c}</li>);
+  if (action) {
+    const inner = <span className="rb-bottom-nav__action-icon" aria-hidden="true">{action.icon}</span>;
+    items.splice(Math.ceil(items.length / 2), 0, (
+      <li key="action" className="rb-bottom-nav__action-slot">
+        {action.href
+          ? <a className="rb-bottom-nav__action" href={action.href} aria-label={action.label} onClick={action.onClick}>{inner}</a>
+          : <button type="button" className="rb-bottom-nav__action" aria-label={action.label} onClick={action.onClick}>{inner}</button>}
+      </li>
+    ));
+  }
   return (
     <nav className={cx('rb-bottom-nav', className)} aria-label={rest['aria-label'] ?? 'Main menu'}>
-      <ul className="rb-bottom-nav__list">
-        {items.map((c, i) => <li key={i}>{c}</li>)}
-      </ul>
+      <ul className="rb-bottom-nav__list">{items}</ul>
     </nav>
   );
 }

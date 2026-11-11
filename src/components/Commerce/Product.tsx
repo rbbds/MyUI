@@ -133,11 +133,13 @@ export interface AddToCartProps {
   /** Extra actions next to the button, e.g. a wishlist ButtonIcon. */
   aside?: ReactNode;
   loading?: boolean;
+  /** Button style. Accent (default) makes the buy action stand out from the brand color. */
+  hierarchy?: 'accent' | 'primary';
   className?: string;
 }
 
 /** Purchase block on the product page: stock, quantity, add-to-cart button and delivery promise. */
-export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label = 'Add to cart', productName, aside, loading, className }: AddToCartProps) {
+export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label = 'Add to cart', productName, aside, loading, hierarchy = 'accent', className }: AddToCartProps) {
   const [q, setQ] = useState(1);
   const out = stock === 'out';
   return (
@@ -145,7 +147,7 @@ export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQ
       <StockIndicator status={stock}>{stockText}</StockIndicator>
       <div className="rb-add-to-cart__row">
         <QuantityStepper value={q} onChange={setQ} max={maxQuantity} disabled={out} label={productName ? `Quantity ${productName}` : 'Quantity'} />
-        <Button className="rb-add-to-cart__button" iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
+        <Button className="rb-add-to-cart__button" hierarchy={hierarchy} iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
           {out ? 'Sold out' : label}
         </Button>
         {aside}

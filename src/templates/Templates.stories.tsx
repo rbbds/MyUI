@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Bell, Briefcase, ChartColumn, CircleHelp, FileText, FolderKanban, House, ListChecks, ListFilter, Settings, Users, Wallet } from 'lucide-react';
 import { Logo as BrandLogo } from '../docs/brand/Logo';
 import { Button, ButtonIcon } from '../components/Button/Button';
@@ -29,7 +29,7 @@ const meta: Meta = {
   title: 'Templates',
   parameters: {
     layout: 'fullscreen',
-    docs: { description: { component: 'Page templates, the same as the Templates page in Figma. Every spacing and width comes from the layout tokens (`--layout-*`), so the pages follow the breakpoints. Resize the viewport to see them adapt.' } },
+    docs: { description: { component: 'Page templates, the same as the Templates page in Figma. Every spacing and width comes from the layout tokens (`--layout-*`), so the pages follow the breakpoints. Resize the viewport to see them adapt: below 900px the Sidebar makes way for a header and Bottom navigation, and the Shop filters move into a Slideout.' } },
   },
 };
 export default meta;
@@ -41,24 +41,9 @@ const Logo = () => (
   </a>
 );
 
-/** True while the media query matches. */
-function useMedia(query: string) {
-  const get = () => typeof window !== 'undefined' && window.matchMedia(query).matches;
-  const [match, setMatch] = useState(get);
-  useEffect(() => {
-    const m = window.matchMedia(query);
-    const on = () => setMatch(m.matches);
-    on();
-    m.addEventListener('change', on);
-    return () => m.removeEventListener('change', on);
-  }, [query]);
-  return match;
-}
-
 /* ---------- Dashboard ---------- */
 export const Dashboard: Story = {
   render: () => {
-    const collapsed = useMedia('(max-width:899px)');
     return (
       <div className="rb-template rb-template--app">
         <div className="rb-template__mobile-header">
@@ -68,10 +53,8 @@ export const Dashboard: Story = {
           <div className="rb-template__sidebar">
             <Sidebar
               logo={<Logo />}
-              collapsed={collapsed}
               footer={<><NavItem href="#" icon={<Settings />}>Settings</NavItem><NavItem href="#" icon={<CircleHelp />}>Help</NavItem></>}
               user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" />}
-              userCollapsed={<Avatar name="Sanne de Vries" initials="SV" />}
             >
               <NavItem href="#" icon={<House />} active>Home</NavItem>
               <NavItem href="#" icon={<FolderKanban />} count={12}>Projects</NavItem>

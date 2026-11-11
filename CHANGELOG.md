@@ -11,6 +11,13 @@
 - **Stepper**: `orientation="horizontal"` now becomes compact below 600px (short titles above a bar) instead of vertical. Use `orientation="vertical"` if you want the old mobile layout.
 
 ### New
+- **Button** `hierarchy="accent"`: the brand accent color for the action that sells (Add to cart, Buy now). Tokens `--button-accent-*`, and in the theme layer `--color-surface-accent-solid`, `--color-surface-accent-solid-hover`, `--color-foreground-on-accent`, `--color-foreground-accent` and `--color-border-accent`. Hover uses accent 700 in Light and Dark, because white text on accent 500 is below 4.5:1 for Iris and Berry. ButtonIcon has no accent.
+- **AddToCart** `hierarchy` prop, default `'accent'`. Product cards keep the secondary button.
+- **BottomNavigation** `action` prop: a raised round button in the middle for the main action (`{ icon, label, onClick?, href? }`). Tokens `--bottom-nav-action-*`.
+- 10 more base tokens for designers: `--base-color-surface-accent-solid`, `-brand-subtle`, `-warning-subtle`, `-info-subtle`, `--base-color-foreground-accent`, `-warning`, `-info`, `--base-color-border-primary`, `-brand`, `-warning`.
+- Figma: Slider has Position=Start, Middle, End, and separate text properties Value, Min value and Max value.
+- Figma: Bottom navigation has Show center action (off by default) and Action icon.
+- Figma: every component page has an `Example / <name>` frame with instances to try the properties, so nobody needs to touch the base or the variants.
 - **BottomNavigation** and **BottomNavItem**: app navigation at the bottom of the screen on phones, with icon, label, active state (`aria-current="page"`) and an optional badge dot. Figma page `🧩 Bottom navigation`, tokens `--bottom-nav-*` and `--bottom-nav-item-*`.
 - **Stepper** `orientation="compact"`: number and short title above a bar per step. Figma: Orientation=Compact with `_Step compact (base)`. Tokens `--stepper-compact-bar-height`, `--stepper-compact-gap`, `--stepper-foreground-complete`.
 - **Breadcrumbs** `back` prop for a back link before the trail, and `homeLabel` for the screen reader name of the home link.
@@ -23,6 +30,10 @@
 - Figma: a properties pass over all component pages: 60 text properties, 199 exposed nested instances and Show booleans for repeated items (Show page N, Show row N, Show option N and so on).
 
 ### Changed
+- Templates: Bottom navigation and the mobile header now show below 900px (was 600px), and the Sidebar is hidden there. Figma: `responsive-components/bottom-nav/show`, `app-header/show` and `sidebar/show` follow this at sm.
+- Figma: building blocks that are only used inside another component start with `_` and are hidden in the library: Button group item, Calendar day, Calendar cell, Combobox option, Code digit, Notification item, Header nav item, Tab, Breadcrumb item, Pagination item, Step, Bottom nav item, Document item, Accordion item, File upload item. Items that go into a slot (Nav item, Menu item, Command item, Activity item, Checklist item, Table column) stay visible.
+- Figma: only the base tokens show up in the variable picker. All other variables have no scope, because the components already use them.
+- Figma: every page has ↳ brand = Iris and ↳ theme = Light set.
 - **ProductGrid**: `minItemWidth` has no fixed default anymore. Without it the grid uses `--product-grid-card-min-width` (200px).
 - Breadcrumbs use their tokens for padding, radius and icon sizes instead of fixed values.
 - Figma: Header, Banner, Page header, Description list, Document list, Product card, Stepper, Step, Selection card and Active filters scale with their container (fixed root width, base fills). Active filters wrap.

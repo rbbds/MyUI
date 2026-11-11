@@ -6,9 +6,10 @@
     "base": "_Bottom nav item (base)"
   },
   "react": "BottomNavigation, BottomNavItem",
-  "summary": "App navigation at the bottom of the screen on phones. It replaces the Sidebar below 600px, so the main sections stay one tap away.",
+  "summary": "App navigation at the bottom of the screen on phones and portrait tablets. It replaces the Sidebar below 900px, so the main sections stay one tap away. An optional raised button in the middle holds the main action.",
   "use": [
-    "Apps with 3 to 5 main sections, on screens below 600px."
+    "Apps with 3 to 5 main sections, on screens below 900px.",
+    "Center action: one main action that users take often, for example \"New project\"."
   ],
   "avoid": [
     "More than 5 sections: use a Header with a menu.",
@@ -18,7 +19,8 @@
   "anatomy": [
     "Bar with a top border.",
     "Items: icon in an indicator, label below.",
-    "Badge: dot on the icon (optional)."
+    "Badge: dot on the icon (optional).",
+    "Center action (optional): round button that sits above the bar."
   ],
   "figmaProps": [
     [
@@ -27,7 +29,7 @@
       "Five items. Turn items off or swap their icons and labels in the properties panel."
     ],
     [
-      "Bottom nav item: State",
+      "_Bottom nav item: State",
       "Default, Active, Focus",
       ""
     ],
@@ -35,6 +37,16 @@
       "Label / Icon / Show badge",
       "text / instance swap / boolean",
       "Via _Bottom nav item (base)."
+    ],
+    [
+      "Show center action",
+      "boolean",
+      "Off by default. Turn off one item (Show item 4) so 4 items and the action remain."
+    ],
+    [
+      "Action icon",
+      "instance swap",
+      "Plus by default."
     ]
   ],
   "reactProps": [
@@ -42,6 +54,11 @@
       "BottomNavigation: children",
       "BottomNavItem[]",
       "3 to 5 items. Each goes in an <li>."
+    ],
+    [
+      "BottomNavigation: action",
+      "{ icon, label, onClick?, href? }",
+      "Center action. label is the screen reader name."
     ],
     [
       "BottomNavigation: aria-label",
@@ -72,10 +89,12 @@
   "behaviour": [
     "Items share the width equally.",
     "Padding at the bottom follows the safe area of the phone.",
-    "Hide it from 600px and show the Sidebar instead (see the Dashboard template)."
+    "Hide it from 900px and show the Sidebar instead (see the Dashboard template).",
+    "The center action goes in the middle of the items."
   ],
   "a11y": [
     "<nav> with an aria-label and a list.",
+    "The center action is a <button> (or a link with href) with an aria-label, because it shows only an icon.",
     "Current page with aria-current=\"page\", not only color: the indicator also changes.",
     "The badge has text for screen readers.",
     "Focus ring on the whole item."
@@ -89,18 +108,18 @@
   ],
   "dont": [
     "Fewer than 3 or more than 5 items.",
-    "Labels that wrap to two lines."
+    "Labels that wrap to two lines.",
+    "A center action for navigation: it is for an action."
   ],
   "tokens": [
     "--bottom-nav-*",
-    "--bottom-nav-item-*"
+    "--bottom-nav-item-*",
+    "--bottom-nav-action-*"
   ],
   "related": [
     "Sidebar",
     "Nav item",
     "Header"
   ],
-  "open": [
-    "A variant with a raised center action is not there yet."
-  ]
+  "open": []
 }

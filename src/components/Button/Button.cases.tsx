@@ -9,7 +9,7 @@ const meta: Meta<typeof Button> = {
   component: Button,
   args: { children: 'Button', hierarchy: 'primary', size: 'md', destructive: false, loading: false, disabled: false },
   argTypes: {
-    hierarchy: { control: 'inline-radio', options: ['primary', 'secondary', 'tertiary', 'link'] },
+    hierarchy: { control: 'inline-radio', options: ['primary', 'accent', 'secondary', 'tertiary', 'link'] },
     size: { control: 'inline-radio', options: ['sm', 'md', 'lg'] },
     iconLeading: { control: false },
     iconTrailing: { control: false },
@@ -26,6 +26,7 @@ export const Hierarchies: Story = {
       {(['sm', 'md', 'lg'] as const).map((size) => (
         <div key={size} style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
           <Button {...args} size={size} hierarchy="primary">Primary</Button>
+          <Button {...args} size={size} hierarchy="accent">Accent</Button>
           <Button {...args} size={size} hierarchy="secondary">Secondary</Button>
           <Button {...args} size={size} hierarchy="tertiary">Tertiary</Button>
           <Button {...args} size={size} hierarchy="link">Link</Button>

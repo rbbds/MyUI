@@ -101,7 +101,7 @@
     "Group sections in a logical order, most important at the top."
   ],
   "do": [
-    "Collapse the sidebar on tablets and replace it with Bottom navigation on phones (below 600px). In Figma this follows responsive-components/sidebar/collapsed and sidebar/show.",
+    "Below 900px (portrait tablets and phones), replace the Sidebar with a header and Bottom navigation. In Figma this follows responsive-components/sidebar/show and bottom-nav/show.",
     "Remember the collapsed state per user."
   ],
   "dont": [

@@ -6,7 +6,7 @@
     "base": "_Button"
   },
   "react": "Button",
-  "summary": "Starts an action: send a form, confirm a choice or go to the next step. All variants come from one base component (_Button). Change spacing, radius or typography there, and all 60 variants follow.",
+  "summary": "Starts an action: send a form, confirm a choice or go to the next step. All variants come from one base component (_Button). Change spacing, radius or typography there, and all 75 variants follow.",
   "use": [
     "For actions that do something on the current page or in the system.",
     "Choose Hierarchy by importance, and Size by space and density."
@@ -25,8 +25,8 @@
   "figmaProps": [
     [
       "Hierarchy",
-      "Primary, Secondary, Tertiary, Link",
-      "Visual weight."
+      "Primary, Accent, Secondary, Tertiary, Link",
+      "Visual weight. Accent uses the accent color of the brand, for the action that sells (Add to cart, Buy now). Use it once per screen."
     ],
     [
       "Size",
@@ -57,8 +57,8 @@
   "reactProps": [
     [
       "hierarchy",
-      "'primary' | 'secondary' | 'tertiary' | 'link'",
-      "Default 'primary'."
+      "'primary' | 'accent' | 'secondary' | 'tertiary' | 'link'",
+      "Default 'primary'. ButtonIcon has no accent."
     ],
     [
       "size",

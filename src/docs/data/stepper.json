@@ -27,12 +27,12 @@
       "In templates, Orientation is bound to layout-tokens/breakpoint/stepper: Compact at Mobile (xs)."
     ],
     [
-      "Step: Orientation / Status",
+      "_Step: Orientation / Status",
       "Horizontal, Vertical, Compact / Complete, Current, Upcoming",
       "Three bases, because the layout is different."
     ],
     [
-      "Step: Number / Title / Description / Show description / Show connector",
+      "_Step: Number / Title / Description / Show description / Show connector",
       "via _Step",
       "Turn Show connector off on the last step."
     ]

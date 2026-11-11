@@ -15,7 +15,7 @@
   ],
   "anatomy": [
     "Stock indicator.",
-    "Quantity stepper, primary button (fills the space), optional wishlist.",
+    "Quantity stepper, Accent button (fills the space), optional wishlist.",
     "Delivery time with a truck icon."
   ],
   "figmaProps": [
@@ -70,6 +70,11 @@
       "loading",
       "boolean",
       ""
+    ],
+    [
+      "hierarchy",
+      "'accent' | 'primary'",
+      "Default 'accent', so the buy action stands out from the brand color."
     ]
   ],
   "behaviour": [
@@ -87,10 +92,11 @@
   ],
   "tokens": [
     "--stock-*",
-    "Button",
+    "--button-accent-*",
     "Quantity stepper"
   ],
   "related": [
+    "Button",
     "Mini cart",
     "Variant picker"
   ],

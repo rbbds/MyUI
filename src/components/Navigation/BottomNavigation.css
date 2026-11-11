@@ -9,3 +9,9 @@
 .rb-bottom-nav__item[aria-current="page"]{color:var(--bottom-nav-item-foreground-active);font-family:var(--text-body-description-semibold-font-family);font-weight:var(--text-body-description-semibold-font-weight)}
 .rb-bottom-nav__item[aria-current="page"] .rb-bottom-nav__indicator{background:var(--bottom-nav-item-indicator-surface-active)}
 .rb-bottom-nav__badge{position:absolute;top:0;right:var(--bottom-nav-item-indicator-padding-horizontal);width:var(--bottom-nav-item-badge-size);height:var(--bottom-nav-item-badge-size);border:var(--bottom-nav-item-badge-border-width) solid var(--bottom-nav-item-badge-border);border-radius:var(--bottom-nav-item-radius);background:var(--bottom-nav-item-badge-surface)}
+.rb-bottom-nav__action-slot{justify-content:center}
+.rb-bottom-nav__action{display:inline-flex;align-items:center;justify-content:center;width:var(--bottom-nav-action-size);height:var(--bottom-nav-action-size);margin-top:calc(-1 * var(--bottom-nav-action-offset));padding:0;border:0;border-radius:var(--bottom-nav-action-radius);background:var(--bottom-nav-action-surface);color:var(--bottom-nav-action-foreground);box-shadow:var(--shadow-md);cursor:pointer}
+.rb-bottom-nav__action:hover{background:var(--bottom-nav-action-surface-hover)}
+.rb-bottom-nav__action:focus-visible{outline:none;box-shadow:var(--shadow-md),var(--focus-ring)}
+.rb-bottom-nav__action-icon{display:inline-flex}
+.rb-bottom-nav__action-icon svg{width:var(--bottom-nav-action-icon-size);height:var(--bottom-nav-action-icon-size)}

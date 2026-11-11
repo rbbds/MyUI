@@ -29,6 +29,16 @@
       "State",
       "Default, Focus, Disabled, Pressed",
       ""
+    ],
+    [
+      "Position",
+      "Start, Middle, End",
+      "Where the handles sit: 10 to 50, 30 to 70 or 50 to 90%."
+    ],
+    [
+      "Min value / Max value",
+      "text",
+      "The values below the handles."
     ]
   ],
   "reactProps": [

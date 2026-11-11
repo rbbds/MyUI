@@ -29,7 +29,7 @@
       "Allowed types and maximum size."
     ],
     [
-      "File upload item: State",
+      "_File upload item: State",
       "Uploading, Complete, Error",
       ""
     ]
