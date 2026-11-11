@@ -10,6 +10,10 @@
 - **The old `--wl-*` names are removed**, as announced in 0.3.0. Use `--brand-*`: `--wl-color-brand-*` is `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`. README and Introduction show the new names.
 - **Stepper**: `orientation="horizontal"` now becomes compact below 600px (short titles above a bar) instead of vertical. Use `orientation="vertical"` if you want the old mobile layout.
 
+### Changed (accent)
+- **The accent color is bright yellow for every style** (Iris, Forest and Berry): `--brand-color-accent-*` is a yellow scale from #fefdf0 to #422006. The Accent button is accent 400 with dark text (`--color-foreground-on-accent` is now gray 900), hover is accent 500. Accent text is accent 700 in Light and 300 in Dark. Contrast: dark text on accent 400 is 11.6:1, on 500 9.3:1.
+- Brand builder and the myui-brand skill use #facc15 as the default accent and check dark text on accent 400.
+
 ### New
 - **Button** `hierarchy="accent"`: the brand accent color for the action that sells (Add to cart, Buy now). Tokens `--button-accent-*`, and in the theme layer `--color-surface-accent-solid`, `--color-surface-accent-solid-hover`, `--color-foreground-on-accent`, `--color-foreground-accent` and `--color-border-accent`. Hover uses accent 700 in Light and Dark, because white text on accent 500 is below 4.5:1 for Iris and Berry. ButtonIcon has no accent.
 - **AddToCart** `hierarchy` prop, default `'accent'`. Product cards keep the secondary button.

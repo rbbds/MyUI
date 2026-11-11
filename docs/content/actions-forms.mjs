@@ -27,7 +27,7 @@ export default [
       'Trailing icon (optional): after the label, for example an arrow for "next".',
     ],
     figmaProps: [
-      ['Hierarchy', 'Primary, Accent, Secondary, Tertiary, Link', 'Visual weight. Accent uses the accent color of the brand, for the action that sells (Add to cart, Buy now). Use it once per screen.'],
+      ['Hierarchy', 'Primary, Accent, Secondary, Tertiary, Link', 'Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. Use it once per screen.'],
       ['Size', 'sm, md, lg', 'Footprint. md is the default.'],
       ['State', 'Default, Hover, Focus, Disabled, Loading', 'Interaction state.'],
       ['Label', 'text', 'Via _Button.'],

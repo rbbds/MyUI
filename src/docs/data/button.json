@@ -26,7 +26,7 @@
     [
       "Hierarchy",
       "Primary, Accent, Secondary, Tertiary, Link",
-      "Visual weight. Accent uses the accent color of the brand, for the action that sells (Add to cart, Buy now). Use it once per screen."
+      "Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. Use it once per screen."
     ],
     [
       "Size",

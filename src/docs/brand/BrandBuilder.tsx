@@ -21,7 +21,8 @@ const STYLES = [
 ] as const;
 type StyleId = (typeof STYLES)[number]['id'];
 const STYLE_COLOR: Record<StyleId, string> = { iris: '#4f46e0', forest: '#176f42', berry: '#c21d67' };
-const STYLE_ACCENT: Record<StyleId, string> = { iris: '#0d9488', forest: '#ea580c', berry: '#7c3aed' };
+/* Accent: one bright yellow for every style. Buttons use accent 400 with dark text (gray 900). */
+const STYLE_ACCENT: Record<StyleId, string> = { iris: '#facc15', forest: '#facc15', berry: '#facc15' };
 
 /* Free Google Fonts; self-host them in a project with @fontsource. */
 const FONTS = ['Inter', 'DM Sans', 'Manrope', 'Work Sans', 'Nunito Sans', 'Source Sans 3', 'Open Sans', 'Lato', 'Roboto', 'Poppins', 'Montserrat', 'Plus Jakarta Sans', 'Figtree', 'Source Serif 4', 'Merriweather', 'Lora', 'Playfair Display', 'Fraunces'];
@@ -139,7 +140,7 @@ export function BrandBuilder() {
     { label: 'White text on a button (primary 600)', ratio: contrast('#ffffff', scale['600']) },
     { label: 'Link on white (primary 600)', ratio: contrast(scale['600'], '#ffffff') },
     { label: 'Link in Dark (primary 400 on dark)', ratio: contrast(scale['400'], '#0b0f17') },
-    ...(accentScale ? [{ label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
+    ...(accentScale ? [{ label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accentScale['400']) }, { label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
   ] : [];
   const failing = checks.filter((c) => c.ratio < 4.5);
 
