@@ -79,15 +79,15 @@ export function ProductCard({
 
 /* ---------- Product grid ---------- */
 export interface ProductGridProps extends HTMLAttributes<HTMLDivElement> {
-  /** Minimum card width; the grid fills the row with as many columns as fit. */
+  /** Minimum card width in px; the grid fills the row with as many columns as fit. Default: the token --product-grid-card-min-width (200px). */
   minItemWidth?: number;
   children: ReactNode;
 }
 /** Responsive list of ProductCards. Renders a list, so screen readers announce the number of products. */
-export function ProductGrid({ minItemWidth = 220, className, children, style, ...rest }: ProductGridProps) {
+export function ProductGrid({ minItemWidth, className, children, style, ...rest }: ProductGridProps) {
   const items = Array.isArray(children) ? children : [children];
   return (
-    <div className={cx('rb-product-grid', className)} style={{ ['--_min' as string]: `${minItemWidth}px`, ...style }} {...rest}>
+    <div className={cx('rb-product-grid', className)} style={minItemWidth ? { ['--_min' as string]: `${minItemWidth}px`, ...style } : style} {...rest}>
       <ul className="rb-product-grid__list">{items.map((c, i) => <li key={i}>{c}</li>)}</ul>
     </div>
   );

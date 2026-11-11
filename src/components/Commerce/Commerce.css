@@ -71,7 +71,7 @@
 @media (prefers-reduced-motion:reduce){.rb-product-card{transition:none}}
 
 /* ---------- Product grid ---------- */
-.rb-product-grid__list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(var(--_min),100%),1fr));gap:var(--product-grid-gap);margin:0;padding:0;list-style:none}
+.rb-product-grid__list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(var(--_min,var(--product-grid-card-min-width)),100%),1fr));gap:var(--product-grid-gap);margin:0;padding:0;list-style:none}
 .rb-product-grid__list>li{display:flex}
 .rb-product-grid__list>li>*{flex:1}
 

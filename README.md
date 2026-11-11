@@ -42,7 +42,7 @@ The package is published to **GitHub Packages** (private, free). Consumers need 
    }
    ```
 
-   Load the Inter font yourself (e.g. `@fontsource-variable/inter`), or set `--wl-fonts-body` to another font.
+   Load the Inter font yourself (e.g. `@fontsource-variable/inter`), or set `--brand-font-body` to another font.
 
 On Vercel or in CI, add `GITHUB_TOKEN` (with `read:packages`) as an environment variable so the install works.
 
@@ -61,14 +61,14 @@ Set `data-theme="dark"` on `<html>` (or on any element for a dark section). With
 
 ```css
 :root {
-  --wl-color-brand-500: #0ea5e9;
-  --wl-color-brand-600: #0284c7;
-  --wl-color-brand-700: #0369a1;
-  --wl-fonts-body: "Manrope", system-ui, sans-serif;
+  --brand-color-primary-500: #0ea5e9;
+  --brand-color-primary-600: #0284c7;
+  --brand-color-primary-700: #0369a1;
+  --brand-font-body: "Manrope", system-ui, sans-serif;
 }
 ```
 
-Alles wat een merk mag aanpassen begint met `--wl-`: kleuren, fonts, radius, randdikte en letterdikte. Spacing en maten blijven gelijk.
+Alles wat een merk mag aanpassen begint met `--brand-`: kleuren, fonts, radius, randdikte en letterdikte. Spacing en maten blijven gelijk.
 
 Meer context (architectuur, conventies, open punten): [docs/PROJECT.md](docs/PROJECT.md).
 
@@ -78,7 +78,7 @@ Same four layers as in Figma:
 
 | Layer | Figma collection | CSS prefix | Example |
 |---|---|---|---|
-| Primitives | `brand/wl`, `spacing`, `border`, `typography` | `--wl-*`, `--spacings-*`, `--radius-*`, `--font-*` | `--wl-color-brand-600` |
+| Primitives + brand | `brand`, `spacing`, `border`, `typography` | `--brand-*`, `--spacings-*`, `--radius-*`, `--font-*` | `--brand-color-primary-600` |
 | Theme alias (Light/Dark) | `theme-(alias)` | `--color-*`, `--spacing-*`, `--border-*` | `--color-surface-primary` |
 | Screen size alias | `screen-size-(alias)` | `--typography-*`, `--responsive-*` | `--typography-titles-h1` |
 | Mapped (component) | `mapped` | `--{component}-*`, `--text-*` | `--button-primary-surface-default` |

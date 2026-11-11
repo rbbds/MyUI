@@ -15,19 +15,30 @@
     "As a replacement for the main navigation."
   ],
   "anatomy": [
+    "Back link (optional).",
     "Home icon (optional).",
     "Items with a separator.",
     "Current page (not a link)."
   ],
   "figmaProps": [
     [
-      "Breadcrumb item: State",
-      "Default, Hover, Current",
+      "Back button / Show home",
+      "boolean",
       ""
     ],
     [
-      "Label",
-      "via _Breadcrumb item",
+      "1st, 2nd, 3rd, 4th",
+      "boolean",
+      "Turns a level on or off, including its separator."
+    ],
+    [
+      "Items",
+      "exposed",
+      "Change the labels of the levels in the properties panel."
+    ],
+    [
+      "Breadcrumb item: State",
+      "Default, Hover, Current",
       ""
     ]
   ],
@@ -41,6 +52,16 @@
       "homeHref",
       "string",
       "Shows the home icon."
+    ],
+    [
+      "homeLabel",
+      "string",
+      "Screen reader name of the home link. Default 'Home'."
+    ],
+    [
+      "back",
+      "{ href, label? }",
+      "Back link before the trail. Default label 'Back'."
     ],
     [
       "aria-label",

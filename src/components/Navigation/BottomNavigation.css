@@ -1,0 +1,11 @@
+.rb-bottom-nav{padding:var(--bottom-nav-padding-vertical) var(--bottom-nav-padding-horizontal) calc(var(--bottom-nav-padding-vertical) + env(safe-area-inset-bottom,0px));border-top:var(--bottom-nav-border-width) solid var(--bottom-nav-border);background:var(--bottom-nav-surface)}
+.rb-bottom-nav__list{display:flex;gap:var(--bottom-nav-gap);margin:0;padding:0;list-style:none}
+.rb-bottom-nav__list>li{flex:1;min-width:0;display:flex}
+.rb-bottom-nav__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--bottom-nav-item-gap);min-width:0;padding:var(--bottom-nav-item-padding-vertical) 0;border-radius:var(--bottom-nav-item-radius);color:var(--bottom-nav-item-foreground);text-decoration:none;font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
+.rb-bottom-nav__item:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-bottom-nav__indicator{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:var(--bottom-nav-item-indicator-padding-vertical) var(--bottom-nav-item-indicator-padding-horizontal);border-radius:var(--bottom-nav-item-radius)}
+.rb-bottom-nav__indicator svg{width:var(--bottom-nav-item-icon-size);height:var(--bottom-nav-item-icon-size)}
+.rb-bottom-nav__label{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rb-bottom-nav__item[aria-current="page"]{color:var(--bottom-nav-item-foreground-active);font-family:var(--text-body-description-semibold-font-family);font-weight:var(--text-body-description-semibold-font-weight)}
+.rb-bottom-nav__item[aria-current="page"] .rb-bottom-nav__indicator{background:var(--bottom-nav-item-indicator-surface-active)}
+.rb-bottom-nav__badge{position:absolute;top:0;right:var(--bottom-nav-item-indicator-padding-horizontal);width:var(--bottom-nav-item-badge-size);height:var(--bottom-nav-item-badge-size);border:var(--bottom-nav-item-badge-border-width) solid var(--bottom-nav-item-badge-border);border-radius:var(--bottom-nav-item-radius);background:var(--bottom-nav-item-badge-surface)}

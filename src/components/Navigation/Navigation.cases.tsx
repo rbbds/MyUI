@@ -26,6 +26,9 @@ export const Pill: Story = { args: { type: 'pill' } };
 export const Breadcrumb: StoryObj<typeof Breadcrumbs> = {
   render: () => <Breadcrumbs homeHref="#" items={[{ label: 'Projects', href: '#' }, { label: 'Client A', href: '#' }, { label: 'Design system' }]} />,
 };
+export const BreadcrumbWithBack: StoryObj<typeof Breadcrumbs> = {
+  render: () => <Breadcrumbs back={{ href: '#', label: 'Back' }} items={[{ label: 'Workspace', href: '#' }, { label: 'Projects', href: '#' }, { label: 'Design system' }]} />,
+};
 export const PaginationExample: StoryObj<typeof Pagination> = {
   render: () => { const [p, setP] = useState(1); return <Pagination page={p} pageCount={10} onPageChange={setP} />; },
 };

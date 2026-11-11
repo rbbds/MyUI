@@ -14,8 +14,11 @@ export interface StepperProps {
   steps: StepItem[];
   /** Index (0-based) of the current step. Steps before it are complete. */
   current: number;
-  /** Horizontal switches to vertical below 600px. */
-  orientation?: 'horizontal' | 'vertical';
+  /**
+   * Horizontal switches to compact below 600px.
+   * Compact shows short titles above a bar per step. Keep titles to one or two words.
+   */
+  orientation?: 'horizontal' | 'vertical' | 'compact';
   'aria-label'?: string;
   /** Screen reader text per status. */
   statusLabels?: { complete: string; current: string; upcoming: string };
@@ -39,7 +42,7 @@ export function Stepper({ steps, current, orientation = 'horizontal', statusLabe
                 <span className="rb-step__connector" />
               </span>
               <span className="rb-step__text">
-                <span className="rb-step__title">{title}<span className="rb-visually-hidden">, {statusLabels[status]}</span></span>
+                <span className="rb-step__title"><span className="rb-step__number" aria-hidden="true">{i + 1}. </span>{title}<span className="rb-visually-hidden">, {statusLabels[status]}</span></span>
                 {s.description && <span className="rb-step__description">{s.description}</span>}
               </span>
             </li>
