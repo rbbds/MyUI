@@ -1,6 +1,20 @@
 # Changelog
 
-## Unreleased (0.4.0)
+## 1.0.0 (unreleased)
+
+First public release. It includes everything below, from 0.4.0 on.
+
+### Breaking
+- The package moves from GitHub Packages to **npmjs.com**. Remove the `@rbbds:registry` line from your `.npmrc` and install with `npm install @rbbds/ui`.
+- License: the React package is now **MIT**. The Figma file has its own license.
+
+### New
+- **Getting started** in Storybook: guides for designers and developers, and the versioning policy (semver for the package and the Figma file, with the same number). Source: `docs/content/guides.mjs`, built by `npm run docs:build`.
+- Figma: page **📖 How to use** with the same guides and the version of the file, and a file thumbnail.
+- `publish.yml` publishes to npmjs.com with provenance and checks that the tag matches `package.json`.
+- README in English, with install, styles, brand and release steps.
+
+## 0.4.0 (part of 1.0.0)
 
 ### Breaking
 - **English defaults.** All built-in labels, screen reader names and messages are now English, for example `Close`, `Loading`, `Breadcrumb`, `Previous` / `Next`, `Add to cart`, `Clear search`, `Show password`. Every label is still a prop: pass your own text for another language.

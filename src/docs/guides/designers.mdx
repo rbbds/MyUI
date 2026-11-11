@@ -1,0 +1,57 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting started/For designers" />
+
+{/* Generated from docs/content/guides.mjs by scripts/docs/build-guides.mjs. Do not edit. */}
+
+# For designers
+
+MyUI in Figma: one library with three styles (Iris, Forest, Berry), Light and Dark, components and page templates. This guide takes you from the first file to your own brand.
+
+## 1. Add the library to your files
+
+1. Put the MyUI file in your own Figma team, for example by importing the .fig file.
+2. Publish it as a library: Assets panel \> Libraries \> Publish.
+3. In your project file, turn the library on: Assets panel \> Libraries \> MyUI.
+
+> What you can publish depends on your Figma plan. Check the plan details on figma.com.
+
+## 2. Pick a style and a theme
+
+Select a page or a frame. In the right panel, under Layer, set the modes: `↳ brand` (Iris, Forest or Berry, or your own brand) and `↳ theme` (Light or Dark).
+
+Components inside that page or frame follow these modes. A mode on a frame wins over the mode on the page.
+
+## 3. Use the components
+
+- Insert components from the Assets panel. Change them with the properties in the right panel: variants, text, booleans and icons.
+- Each component page has an Example frame. Try the properties there, not in the components themselves.
+- Do not edit the base components or the variants. Layers that start with _ are building blocks. They are hidden in the library on purpose.
+- Some components have a slot, for example Sidebar, Dropdown menu and Table. Put the matching items in the slot: Nav item, Menu item or Table column.
+
+## 4. Colors and text
+
+- The variable picker shows only the base tokens: a short list of surface, text and border colors. Use these for your own shapes and frames.
+- All other tokens are already inside the components. You do not need to pick them.
+- Use the text styles for text. They follow the style and the screen size.
+
+## 5. Templates and screen sizes
+
+The Templates page has a dashboard, an account page, a shop and a form. Set the mode `↳ screen-size` on a template frame to see it at another breakpoint: Desktop (xl), Desktop (lg), Tablet landscape (md), Tablet portrait (sm) or Mobile (xs).
+
+Screen-size is only for templates and full pages. Leave it on the default for single components.
+
+## 6. Your own brand
+
+1. Make your brand values with the Brand builder in Storybook, or let your AI tool read your brand guide with the myui-brand skill.
+2. Both give you a primary color, an accent color (bright yellow by default) and fonts, with a contrast check.
+3. Open the variables, go to the collection `↳ brand` and add a mode with your brand name. Copy the values from `figma-brand.json` into that mode.
+4. Set that mode on your pages. All components follow.
+
+## 7. Updates
+
+Each update comes with a version number and a changelog. Read the changelog first: it says what changed and if you need to do something.
+
+Put the new file in your team and publish it. In your project files, use Swap library in the Libraries panel to move to the new file. Then accept the updates in the Assets panel.
+
+See Versioning for what a major, minor or patch update means.

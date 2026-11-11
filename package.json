@@ -1,20 +1,25 @@
 {
   "name": "@rbbds/ui",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "White label React component library and design tokens (rbbds), built from the WL Design System in Figma.",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "private": false,
   "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/rbbds/MyUI.git"
   },
+  "homepage": "https://my-ui-two.vercel.app",
+  "bugs": "https://github.com/rbbds/MyUI/issues",
+  "keywords": ["react", "design-system", "design-tokens", "components", "white-label", "figma", "accessibility"],
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   },
   "files": [
     "dist",
-    "skills"
+    "skills",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "sideEffects": [
     "**/*.css"
@@ -40,7 +45,7 @@
     "build-storybook": "storybook build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "npm run build",
-    "docs:build": "node scripts/docs/build-mdx.mjs",
+    "docs:build": "node scripts/docs/build-mdx.mjs && node scripts/docs/build-guides.mjs",
     "docs:figma": "node scripts/docs/build-figma-payload.mjs"
   },
   "peerDependencies": {

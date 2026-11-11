@@ -75,7 +75,7 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 | --- | --- |
 | Figma-bestand | WL Design System (rbbds), `gV7OuQywH2cOUVfQagW6nC`. Staat in een aparte map in het PGGM Figma-account (geen extra betaalde seat). |
 | Repo | https://github.com/rbbds/MyUI (GitHub-gebruiker `rbbds`) |
-| npm-pakket | `@rbbds/ui`, versie 0.3.0 in package.json, registry GitHub Packages (nog niet gepubliceerd als release) |
+| npm-pakket | `@rbbds/ui`, versie 1.0.0 in package.json, MIT, publiceert naar npmjs.com via `publish.yml` bij een GitHub Release (secret `NPM_TOKEN` nodig) |
 | Storybook live | https://my-ui-two.vercel.app (main) |
 | Storybook previews | Per branch via Vercel, link staat in de PR |
 
