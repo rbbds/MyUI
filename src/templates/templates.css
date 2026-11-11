@@ -8,12 +8,12 @@
 .rb-template__fields{display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-component-spacings-xl)}
 .rb-template__actions{display:flex;justify-content:space-between;gap:var(--layout-responsive-spacings-component-spacings-s)}
 
-/* Dashboard: sidebar + main; below 600px a header on top and a bottom navigation */
+/* Dashboard: sidebar + main; below 900px a header on top and a bottom navigation */
 .rb-template--app{height:100dvh;min-height:0}
 .rb-template__body{flex:1;display:flex;min-height:0}
 .rb-template__main{flex:1;display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-template-spacings-gap);min-width:0;padding:var(--layout-responsive-spacings-component-paddings-padding);overflow:auto}
 .rb-template__mobile-header,.rb-template__bottom-nav{display:none}
-@media (max-width:599px){
+@media (max-width:899px){
   .rb-template__sidebar{display:none}
   .rb-template__mobile-header,.rb-template__bottom-nav{display:block}
 }

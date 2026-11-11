@@ -3,7 +3,8 @@ import { LoaderCircle } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import './Button.css';
 
-export type ButtonHierarchy = 'primary' | 'secondary' | 'tertiary' | 'link';
+/** accent: the action that sells, for example Add to cart or Buy now. Use it once per screen. */
+export type ButtonHierarchy = 'primary' | 'accent' | 'secondary' | 'tertiary' | 'link';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -43,7 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 });
 
 export interface ButtonIconProps extends Omit<ButtonProps, 'iconLeading' | 'iconTrailing' | 'children' | 'hierarchy'> {
-  hierarchy?: Exclude<ButtonHierarchy, 'link'>;
+  hierarchy?: Exclude<ButtonHierarchy, 'link' | 'accent'>;
   /** The icon to render, e.g. `<Plus />`. */
   icon: ReactNode;
   /** Required accessible name. Also show it in a Tooltip. */

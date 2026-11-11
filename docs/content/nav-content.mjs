@@ -82,9 +82,9 @@ export default [
     anatomy: ['Tab list with a track.', 'Tab: optional icon, label, optional count.', 'Active indicator (underline or pill).', 'Panel.'],
     figmaProps: [
       ['Tabs: Type', 'Underline, Pill', ''],
-      ['Tab: Type', 'Underline, Pill', ''],
-      ['Tab: State', 'Default, Hover, Focus, Active', ''],
-      ['Tab: Label / Icon leading / Leading icon / Show count / Count', 'via _Tab', ''],
+      ['_Tab: Type', 'Underline, Pill', ''],
+      ['_Tab: State', 'Default, Hover, Focus, Active', ''],
+      ['_Tab: Label / Icon leading / Leading icon / Show count / Count', 'via _Tab', ''],
     ],
     reactProps: [['items', '{ id, label, icon?, count?, content }[]', ''], ['type', "'underline' | 'pill'", ''], ['value / defaultValue / onChange', 'string', '']],
     behaviour: ['Arrow left/right switches the tab and makes it active straight away. Home and End go to the first and last tab.'],
@@ -111,7 +111,7 @@ export default [
       ['Back button / Show home', 'boolean', ''],
       ['1st, 2nd, 3rd, 4th', 'boolean', 'Turns a level on or off, including its separator.'],
       ['Items', 'exposed', 'Change the labels of the levels in the properties panel.'],
-      ['Breadcrumb item: State', 'Default, Hover, Current', ''],
+      ['_Breadcrumb item: State', 'Default, Hover, Current', ''],
     ],
     reactProps: [
       ['items', '{ label, href? }[]', 'The last item is the current page.'],
@@ -144,7 +144,7 @@ export default [
       ['Breakpoint', 'Desktop, Mobile', 'Mobile shows "Page 1 of 10" instead of the numbers. In templates bound to layout-tokens/breakpoint/pagination.'],
       ['Page status', 'text', 'The text of the Mobile variant.'],
       ['Show page 3 to 7', 'boolean', 'For short lists.'],
-      ['Pagination item: State', 'Default, Hover, Focus, Current', ''],
+      ['_Pagination item: State', 'Default, Hover, Focus, Current', ''],
       ['Number', 'via _Pagination item', ''],
     ],
     reactProps: [
@@ -315,7 +315,7 @@ export default [
     figmaProps: [
       ['File upload: State', 'Default, Hover, Drag over, Disabled', ''],
       ['File upload: Hint', 'text', 'Allowed types and maximum size.'],
-      ['File upload item: State', 'Uploading, Complete, Error', ''],
+      ['_File upload item: State', 'Uploading, Complete, Error', ''],
     ],
     reactProps: [
       ['FileUpload onFiles', '(files: File[]) => void', ''],

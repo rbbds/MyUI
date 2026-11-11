@@ -28,6 +28,16 @@
       "State",
       "Default, Focus, Pressed, Disabled",
       "Pressed: the handle grows from 24 to 32 px."
+    ],
+    [
+      "Position",
+      "Start, Middle, End",
+      "Where the handle sits: 20, 50 or 80%."
+    ],
+    [
+      "Value",
+      "text",
+      "The value below the handle."
     ]
   ],
   "reactProps": [

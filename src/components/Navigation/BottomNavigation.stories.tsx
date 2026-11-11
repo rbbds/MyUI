@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ChartColumn, FolderKanban, House, ListChecks, Users } from 'lucide-react';
+import { ChartColumn, FolderKanban, House, ListChecks, Plus, Users } from 'lucide-react';
 import { BottomNavigation, BottomNavItem } from './BottomNavigation';
 
 const meta: Meta<typeof BottomNavigation> = {
@@ -30,5 +30,18 @@ export const ThreeItems: Story = {
       <BottomNavItem href="#" icon={<FolderKanban />} active>Projects</BottomNavItem>
       <BottomNavItem href="#" icon={<Users />}>Team</BottomNavItem>
     </BottomNavigation>
+  ),
+};
+
+export const WithAction: Story = {
+  render: () => (
+    <div style={{ paddingTop: 24 }}>
+      <BottomNavigation action={{ icon: <Plus />, label: 'New project', onClick: () => undefined }}>
+        <BottomNavItem href="#" icon={<House />} active>Home</BottomNavItem>
+        <BottomNavItem href="#" icon={<FolderKanban />}>Projects</BottomNavItem>
+        <BottomNavItem href="#" icon={<ListChecks />}>Tasks</BottomNavItem>
+        <BottomNavItem href="#" icon={<ChartColumn />}>Reports</BottomNavItem>
+      </BottomNavigation>
+    </div>
   ),
 };

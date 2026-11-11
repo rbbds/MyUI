@@ -10,7 +10,7 @@ export default [
     react: 'Button',
     stories: { file: 'Button/Button.stories', items: ['Playground', 'Hierarchies', 'WithIcons', 'Loading', 'Disabled'] },
     summary:
-      'Starts an action: send a form, confirm a choice or go to the next step. All variants come from one base component (_Button). Change spacing, radius or typography there, and all 60 variants follow.',
+      'Starts an action: send a form, confirm a choice or go to the next step. All variants come from one base component (_Button). Change spacing, radius or typography there, and all 75 variants follow.',
     use: [
       'For actions that do something on the current page or in the system.',
       'Choose Hierarchy by importance, and Size by space and density.',
@@ -27,7 +27,7 @@ export default [
       'Trailing icon (optional): after the label, for example an arrow for "next".',
     ],
     figmaProps: [
-      ['Hierarchy', 'Primary, Secondary, Tertiary, Link', 'Visual weight.'],
+      ['Hierarchy', 'Primary, Accent, Secondary, Tertiary, Link', 'Visual weight. Accent uses the accent color of the brand, for the action that sells (Add to cart, Buy now). Use it once per screen.'],
       ['Size', 'sm, md, lg', 'Footprint. md is the default.'],
       ['State', 'Default, Hover, Focus, Disabled, Loading', 'Interaction state.'],
       ['Label', 'text', 'Via _Button.'],
@@ -35,7 +35,7 @@ export default [
       ['Leading icon / Trailing icon', 'instance swap', 'Pick a Lucide icon. The color follows the label.'],
     ],
     reactProps: [
-      ['hierarchy', "'primary' | 'secondary' | 'tertiary' | 'link'", "Default 'primary'."],
+      ['hierarchy', "'primary' | 'accent' | 'secondary' | 'tertiary' | 'link'", "Default 'primary'. ButtonIcon has no accent."],
       ['size', "'sm' | 'md' | 'lg'", "Default 'md'."],
       ['iconLeading / iconTrailing', 'ReactNode', 'For example <Plus aria-hidden />.'],
       ['loading', 'boolean', 'Shows a spinner, sets aria-busy and blocks the button.'],
@@ -288,7 +288,7 @@ export default [
     use: ['Explore amounts or percentages, like a monthly amount in a calculator.'],
     avoid: ['Exact input: use Input with type="number", or combine both.'],
     anatomy: ['Label and current value.', 'Track with a filled bar.', 'Handle (one for Single, two for Range).'],
-    figmaProps: [['Type', 'Single, Range', ''], ['State', 'Default, Focus, Pressed, Disabled', 'Pressed: the handle grows from 24 to 32 px.']],
+    figmaProps: [['Type', 'Single, Range', ''], ['State', 'Default, Focus, Pressed, Disabled', 'Pressed: the handle grows from 24 to 32 px.'], ['Position', 'Start, Middle, End', 'Where the handle sits: 20, 50 or 80%.'], ['Value', 'text', 'The value below the handle.']],
     reactProps: [
       ['label', 'ReactNode', 'Required.'],
       ['min / max / step', 'number', ''],

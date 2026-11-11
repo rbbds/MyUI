@@ -28,17 +28,17 @@
       ""
     ],
     [
-      "Tab: Type",
+      "_Tab: Type",
       "Underline, Pill",
       ""
     ],
     [
-      "Tab: State",
+      "_Tab: State",
       "Default, Hover, Focus, Active",
       ""
     ],
     [
-      "Tab: Label / Icon leading / Leading icon / Show count / Count",
+      "_Tab: Label / Icon leading / Leading icon / Show count / Count",
       "via _Tab",
       ""
     ]

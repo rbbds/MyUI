@@ -39,12 +39,12 @@
       "For example \"November 2026\"."
     ],
     [
-      "Calendar day: State",
+      "_Calendar day: State",
       "Default, Hover, Focus, Selected, Today, Disabled, Outside, Empty",
       "Empty = place of a day outside the month (default). Outside only with showDaysOutsideCurrentMonth."
     ],
     [
-      "Calendar cell: State",
+      "_Calendar cell: State",
       "Default, Hover, Focus, Selected, Current, Disabled",
       "Month or year. Current = this month or year (ring)."
     ]
