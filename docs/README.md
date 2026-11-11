@@ -6,6 +6,8 @@ One source for the documentation in Figma and Storybook.
 - **Storybook:** `npm run docs:build` creates `src/docs/data/*.json` and `src/docs/components/*.mdx` (sidebar: per category and component, with Docs at the top).
 - **Figma:** `npm run docs:figma` creates scripts in `docs/figma-payload/` (not in git). Each script builds the frames `Docs / <name>` to the right of the components in the WL file, and replaces frames with the same name.
 
+- **Guides:** `docs/content/guides.mjs` holds Getting started (designers, developers, versioning) and the Figma changelog. `npm run docs:build` also writes `src/docs/guides/*.mdx` and `docs/figma-payload/guides.js` (builds the Figma pages How to use and Changelog).
+
 So always change text in `docs/content`, then run both scripts.
 
 ## Writing style
