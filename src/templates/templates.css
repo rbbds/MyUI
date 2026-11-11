@@ -1,0 +1,30 @@
+/* Page templates. Layout only: every value comes from the layout tokens (Figma: mapped/layout-tokens). */
+.rb-template{display:flex;flex-direction:column;min-height:100dvh;background:var(--base-color-surface-secondary)}
+.rb-template__page{flex:1;padding:var(--layout-responsive-spacings-template-spacings-margin-top-bottom) var(--layout-responsive-spacings-template-spacings-margin-left-right)}
+.rb-template__content{display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-template-spacings-gap);width:100%;max-width:var(--layout-screen-size-container-size-website-container-max-width);margin:0 auto}
+.rb-template__content--form{max-width:var(--layout-screen-size-container-size-form-container-max-width)}
+.rb-template__row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(var(--layout-screen-size-container-size-card-min-width),100%),1fr));gap:var(--layout-responsive-spacings-template-spacings-gutter);align-items:start}
+.rb-template__row>*{min-width:0}
+.rb-template__fields{display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-component-spacings-xl)}
+.rb-template__actions{display:flex;justify-content:space-between;gap:var(--layout-responsive-spacings-component-spacings-s)}
+
+/* Dashboard: sidebar + main; below 600px a header on top and a bottom navigation */
+.rb-template--app{height:100dvh;min-height:0}
+.rb-template__body{flex:1;display:flex;min-height:0}
+.rb-template__main{flex:1;display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-template-spacings-gap);min-width:0;padding:var(--layout-responsive-spacings-component-paddings-padding);overflow:auto}
+.rb-template__mobile-header,.rb-template__bottom-nav{display:none}
+@media (max-width:599px){
+  .rb-template__sidebar{display:none}
+  .rb-template__mobile-header,.rb-template__bottom-nav{display:block}
+}
+
+/* Shop: filters next to the products; below 900px the filters move into a slideout */
+.rb-template__shop{display:flex;gap:var(--layout-responsive-spacings-template-spacings-gutter);align-items:flex-start}
+.rb-template__filters{flex:0 0 var(--layout-screen-size-container-size-card-min-width)}
+.rb-template__results{flex:1;display:flex;flex-direction:column;gap:var(--layout-responsive-spacings-component-spacings-xl);min-width:0}
+.rb-template__toolbar{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--layout-responsive-spacings-component-spacings-s)}
+.rb-template__filter-button{display:none}
+@media (max-width:899px){
+  .rb-template__filters{display:none}
+  .rb-template__filter-button{display:inline-flex}
+}

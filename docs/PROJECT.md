@@ -147,7 +147,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 - `brand/radius/control|containers|overlays/*`
 - `brand/border-width/*`
 
-Breaking in 0.3.0: `--wl-*` is now `--brand-*` (`--wl-color-brand-*` is `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`). A compat block keeps the old names until 0.4.0.
+Breaking in 0.3.0: `--wl-*` is now `--brand-*` (`--wl-color-brand-*` is `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`). The compat block with the old names is removed in 0.4.0.
 
 **Stijlen (presets):**
 - **Iris:** standaard, licht afgerond, indigo.

@@ -1,0 +1,106 @@
+{
+  "name": "Bottom navigation",
+  "page": "Bottom navigation",
+  "figma": {
+    "node": "17167:53",
+    "base": "_Bottom nav item (base)"
+  },
+  "react": "BottomNavigation, BottomNavItem",
+  "summary": "App navigation at the bottom of the screen on phones. It replaces the Sidebar below 600px, so the main sections stay one tap away.",
+  "use": [
+    "Apps with 3 to 5 main sections, on screens below 600px."
+  ],
+  "avoid": [
+    "More than 5 sections: use a Header with a menu.",
+    "Actions such as \"New project\": use a Button.",
+    "Tablets and desktop: use Sidebar."
+  ],
+  "anatomy": [
+    "Bar with a top border.",
+    "Items: icon in an indicator, label below.",
+    "Badge: dot on the icon (optional)."
+  ],
+  "figmaProps": [
+    [
+      "Bottom navigation",
+      "component",
+      "Five items. Turn items off or swap their icons and labels in the properties panel."
+    ],
+    [
+      "Bottom nav item: State",
+      "Default, Active, Focus",
+      ""
+    ],
+    [
+      "Label / Icon / Show badge",
+      "text / instance swap / boolean",
+      "Via _Bottom nav item (base)."
+    ]
+  ],
+  "reactProps": [
+    [
+      "BottomNavigation: children",
+      "BottomNavItem[]",
+      "3 to 5 items. Each goes in an <li>."
+    ],
+    [
+      "BottomNavigation: aria-label",
+      "string",
+      "Default 'Main menu'."
+    ],
+    [
+      "BottomNavItem: icon / children",
+      "ReactNode",
+      "children is the label."
+    ],
+    [
+      "BottomNavItem: active",
+      "boolean",
+      "Current page."
+    ],
+    [
+      "BottomNavItem: badge / badgeLabel",
+      "boolean / string",
+      "Dot on the icon. badgeLabel is read out, default 'new'."
+    ],
+    [
+      "BottomNavItem: other props",
+      "anchor attributes",
+      "href, onClick and so on."
+    ]
+  ],
+  "behaviour": [
+    "Items share the width equally.",
+    "Padding at the bottom follows the safe area of the phone.",
+    "Hide it from 600px and show the Sidebar instead (see the Dashboard template)."
+  ],
+  "a11y": [
+    "<nav> with an aria-label and a list.",
+    "Current page with aria-current=\"page\", not only color: the indicator also changes.",
+    "The badge has text for screen readers.",
+    "Focus ring on the whole item."
+  ],
+  "content": [
+    "Labels of one word. Always show the label, not only the icon.",
+    "Use the same names and order as in the Sidebar."
+  ],
+  "do": [
+    "Put the most used section first."
+  ],
+  "dont": [
+    "Fewer than 3 or more than 5 items.",
+    "Labels that wrap to two lines."
+  ],
+  "tokens": [
+    "--bottom-nav-*",
+    "--bottom-nav-item-*"
+  ],
+  "related": [
+    "Sidebar",
+    "Nav item",
+    "Header"
+  ],
+  "open": [
+    "A variant with a raised center action is not there yet."
+  ]
+}

@@ -9,7 +9,7 @@ export const FIGMA_PAGES = {
   'Avatar': '17017:1934', 'Avatar group': '17017:1936',
   'Alert': '17017:2071', 'Toast': '17017:2073', 'Tooltip': '17017:2074', 'Progress': '17017:2075',
   'Dropdown menu': '17017:2434', 'Modal': '17017:2436', 'Slideout': '17017:2438', 'Command menu': '17017:2440',
-  'Header': '17017:2855', 'Sidebar': '17017:2857', 'Nav item': '17017:2858', 'Tabs': '17017:2860', 'Breadcrumbs': '17017:2862', 'Pagination': '17017:2864', 'Stepper': '17017:2866',
+  'Header': '17017:2855', 'Sidebar': '17017:2857', 'Bottom navigation': '17167:19', 'Nav item': '17017:2858', 'Tabs': '17017:2860', 'Breadcrumbs': '17017:2862', 'Pagination': '17017:2864', 'Stepper': '17017:2866',
   'Table': '17017:3047',
   'Card': '17017:3242', 'Accordion': '17017:3244', 'Empty state': '17017:3246', 'File upload': '17017:3247',
   'Divider': '17017:3307', 'Featured icon': '17017:3308', 'Spinner': '17017:3310', 'Skeleton': '17017:3311', 'Kbd': '17017:3313',

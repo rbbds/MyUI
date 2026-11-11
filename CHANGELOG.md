@@ -7,8 +7,27 @@
 - **en-US by default.** `Price`, `Rating`, `formatMoney`, `Calendar`, `DatePicker`, `DateRangePicker` and `CountrySelect` use `locale = 'en-US'`. Amounts show as `€79.95`, dates as `11/06/2026`. Pass `locale="nl-NL"` for the old output.
 - **DatePicker** has a new `locale` prop. The typed date follows the order of the locale (mm/dd/yyyy for en-US, dd-mm-yyyy for nl-NL). `formatDate(date, locale)` and `parseDate(text, locale)` take the locale as a second argument, and the new `datePlaceholder(locale)` gives the matching placeholder. The default placeholder is no longer `dd-mm-jjjj`.
 - Storybook: "Introductie" is now "Introduction", "Voorbeelden" is now "Examples", and the "Portaal" examples are under "Account/Examples". Links to the old story ids no longer work.
+- **The old `--wl-*` names are removed**, as announced in 0.3.0. Use `--brand-*`: `--wl-color-brand-*` is `--brand-color-primary-*`, `--wl-fonts-*` is `--brand-font-*`. README and Introduction show the new names.
+- **Stepper**: `orientation="horizontal"` now becomes compact below 600px (short titles above a bar) instead of vertical. Use `orientation="vertical"` if you want the old mobile layout.
+
+### New
+- **BottomNavigation** and **BottomNavItem**: app navigation at the bottom of the screen on phones, with icon, label, active state (`aria-current="page"`) and an optional badge dot. Figma page `🧩 Bottom navigation`, tokens `--bottom-nav-*` and `--bottom-nav-item-*`.
+- **Stepper** `orientation="compact"`: number and short title above a bar per step. Figma: Orientation=Compact with `_Step compact (base)`. Tokens `--stepper-compact-bar-height`, `--stepper-compact-gap`, `--stepper-foreground-complete`.
+- **Breadcrumbs** `back` prop for a back link before the trail, and `homeLabel` for the screen reader name of the home link.
+- **Pagination** `pageStatus` and `pageLabel` props, so the mobile text ("Page 1 of 10") and the page names can be translated.
+- **Templates** in Storybook: Dashboard, Account, Shop and Form, the same as the Templates page in Figma. They use the new layout tokens and follow the breakpoints: the Sidebar collapses below 900px and makes way for Bottom navigation below 600px, Shop filters move into a Slideout below 900px.
+- **Layout tokens** `--layout-*` (Figma: `mapped/layout-tokens`), a mapped copy of the screen-size tokens for templates: template spacings, component spacings, container sizes, `--layout-screen-size-min-height` and `--layout-screen-size-min-width`.
+- New tokens `--screen-size-min-height`, `--screen-size-container-size-card-min-width`, `--responsive-components-product-grid-card-min-width` and `--product-grid-card-min-width`.
+- Figma: Pagination is a component set with Breakpoint=Desktop, Mobile, a Page status text and Show page 3 to 7 booleans.
+- Figma: Breadcrumbs has booleans Back button, Show home, 1st to 4th level, and the items are exposed in the properties panel. Page header uses this Breadcrumbs.
+- Figma: a properties pass over all component pages: 60 text properties, 199 exposed nested instances and Show booleans for repeated items (Show page N, Show row N, Show option N and so on).
 
 ### Changed
+- **ProductGrid**: `minItemWidth` has no fixed default anymore. Without it the grid uses `--product-grid-card-min-width` (200px).
+- Breadcrumbs use their tokens for padding, radius and icon sizes instead of fixed values.
+- Figma: Header, Banner, Page header, Description list, Document list, Product card, Stepper, Step, Selection card and Active filters scale with their container (fixed root width, base fills). Active filters wrap.
+- Figma: templates bind width and min height to `layout-tokens/screen-size/*` and their variants to `layout-tokens/breakpoint/*` and `responsive-components/*`, so they follow the screen-size mode.
+- Token export (`scripts/figma-export-tokens.js`): `layout-tokens/*` becomes `--layout-*`, `layout-tokens/breakpoint/*` is skipped, and the compatibility block is gone.
 - All stories, examples and the Introduction page are in English, with neutral example content (projects, team, plan, invoices) instead of pension terms.
 - Figma: all example texts are in English, with the same neutral content and en-US notation.
 - Figma: `icon-size/xs|sm|md|lg` moved from `↳ style` to `↳ screen-size`, so icon sizes can differ per breakpoint. `↳ size` now only picks the size per component (Button, Button destructive, Button icon, Featured icon) and points to `icon-size/*`. The variable modes are set only on the variants (183) instead of 956 nodes. CSS names stay the same (`--icon-size-*`).

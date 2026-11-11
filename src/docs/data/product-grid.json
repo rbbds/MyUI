@@ -19,14 +19,14 @@
     [
       "Product grid",
       "component",
-      "Example with 6 Product cards. Gap via product-grid/gap."
+      "Example with 6 Product cards. Gap via product-grid/gap. Cards fill the row and wrap at product-grid/card-min-width."
     ]
   ],
   "reactProps": [
     [
       "minItemWidth",
       "number",
-      "Minimum card width, default 220."
+      "Minimum card width in px. Default: --product-grid-card-min-width (200)."
     ],
     [
       "aria-label",
@@ -48,7 +48,8 @@
     "Endless scrolling without an alternative."
   ],
   "tokens": [
-    "--product-grid-gap"
+    "--product-grid-gap",
+    "--product-grid-card-min-width"
   ],
   "related": [
     "Product card",

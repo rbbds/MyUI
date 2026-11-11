@@ -14,12 +14,15 @@
 .rb-tabs__panel{padding-top:var(--spacing-6)}
 .rb-tabs__panel:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--border-radius-control-sm)}
 
+.rb-breadcrumbs{display:flex;align-items:center;flex-wrap:wrap;gap:var(--breadcrumb-gap)}
+.rb-breadcrumbs__back{gap:var(--spacing-1)}
+.rb-breadcrumbs__link.rb-breadcrumbs__back svg{width:var(--breadcrumb-separator-icon-size);height:var(--breadcrumb-separator-icon-size)}
 .rb-breadcrumbs ol{display:flex;align-items:center;flex-wrap:wrap;gap:var(--breadcrumb-gap);margin:0;padding:0;list-style:none}
 .rb-breadcrumbs li{display:inline-flex;align-items:center;gap:var(--breadcrumb-gap)}
 .rb-breadcrumbs__sep{display:inline-flex;color:var(--breadcrumb-separator)}
-.rb-breadcrumbs__sep svg{width:16px;height:16px}
-.rb-breadcrumbs__link{display:inline-flex;align-items:center;padding:2px 4px;border-radius:var(--border-radius-control-xs);color:var(--breadcrumb-foreground);text-decoration:none;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-breadcrumbs__link svg{width:20px;height:20px}
+.rb-breadcrumbs__sep svg{width:var(--breadcrumb-separator-icon-size);height:var(--breadcrumb-separator-icon-size)}
+.rb-breadcrumbs__link{display:inline-flex;align-items:center;padding:var(--breadcrumb-padding-vertical) var(--breadcrumb-padding-horizontal);border-radius:var(--breadcrumb-radius);color:var(--breadcrumb-foreground);text-decoration:none;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-breadcrumbs__link svg{width:var(--breadcrumb-home-icon-size);height:var(--breadcrumb-home-icon-size)}
 .rb-breadcrumbs__link:hover{color:var(--breadcrumb-foreground-hover)}
 .rb-breadcrumbs__link:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-breadcrumbs__link[aria-current="page"]{color:var(--breadcrumb-foreground-current)}

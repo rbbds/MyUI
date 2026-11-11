@@ -121,7 +121,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
   - theme in `[data-theme="dark"]`
   - size in size classes
   - mapped in `:root`
-- CSS names follow Figma names: `--wl-*` becomes `--brand-*`. This is a breaking change. Version 0.3.0 keeps the old names as aliases for one version.
+- CSS names follow Figma names: `--wl-*` becomes `--brand-*`. This is a breaking change. Version 0.3.0 kept the old names as aliases; 0.4.0 removes them.
 - Brand builder also creates the accent scale and the dark tuning, and outputs Figma values and CSS from one source.
 
 ## Plan (each phase ends with a review)

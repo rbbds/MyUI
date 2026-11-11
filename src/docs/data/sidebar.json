@@ -101,7 +101,7 @@
     "Group sections in a logical order, most important at the top."
   ],
   "do": [
-    "Use the same navigation in a Slideout on mobile.",
+    "Collapse the sidebar on tablets and replace it with Bottom navigation on phones (below 600px). In Figma this follows responsive-components/sidebar/collapsed and sidebar/show.",
     "Remember the collapsed state per user."
   ],
   "dont": [
@@ -115,6 +115,7 @@
   "related": [
     "Nav item",
     "Header",
+    "Bottom navigation",
     "Slideout"
   ],
   "open": [

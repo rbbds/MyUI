@@ -27,10 +27,28 @@
 .rb-stepper--vertical .rb-step__connector{width:2px;min-height:24px}
 .rb-stepper--vertical .rb-step__text{padding:var(--spacing-1) 0 var(--spacing-6)}
 
+.rb-step__number{display:none}
+
+/* Compact: short title on top, a bar per step below. Used on small screens. */
+.rb-stepper--compact{gap:var(--stepper-compact-gap)}
+.rb-stepper--compact .rb-step{flex:1;flex-direction:column-reverse;gap:var(--stepper-compact-gap)}
+.rb-stepper--compact .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--border-radius-full);background:var(--stepper-connector)}
+.rb-stepper--compact .rb-step--complete .rb-step__track,.rb-stepper--compact .rb-step--current .rb-step__track{background:var(--stepper-connector-complete)}
+.rb-stepper--compact .rb-step__indicator,.rb-stepper--compact .rb-step__connector,.rb-stepper--compact .rb-step__description{display:none}
+.rb-stepper--compact .rb-step__number{display:inline}
+.rb-stepper--compact .rb-step__title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rb-stepper--compact .rb-step--complete .rb-step__title{color:var(--stepper-foreground-complete)}
+.rb-stepper--compact .rb-step--upcoming .rb-step__title{color:var(--stepper-foreground-upcoming)}
+
 @media (max-width:599px){
-  .rb-stepper--horizontal{flex-direction:column}
-  .rb-stepper--horizontal .rb-step{flex-direction:row}
-  .rb-stepper--horizontal .rb-step__track{flex-direction:column;gap:var(--spacing-1);align-self:stretch}
-  .rb-stepper--horizontal .rb-step__connector{width:2px;height:auto;min-height:24px;margin:0}
-  .rb-stepper--horizontal .rb-step__text{padding:var(--spacing-1) 0 var(--spacing-6)}
+  .rb-stepper--horizontal{gap:var(--stepper-compact-gap)}
+  .rb-stepper--horizontal .rb-step{flex-direction:column-reverse;gap:var(--stepper-compact-gap)}
+  .rb-stepper--horizontal .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--border-radius-full);background:var(--stepper-connector)}
+  .rb-stepper--horizontal .rb-step--complete .rb-step__track,.rb-stepper--horizontal .rb-step--current .rb-step__track{background:var(--stepper-connector-complete)}
+  .rb-stepper--horizontal .rb-step__indicator,.rb-stepper--horizontal .rb-step__connector,.rb-stepper--horizontal .rb-step__description{display:none}
+  .rb-stepper--horizontal .rb-step__number{display:inline}
+  .rb-stepper--horizontal .rb-step__text{padding-right:0}
+  .rb-stepper--horizontal .rb-step__title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rb-stepper--horizontal .rb-step--complete .rb-step__title{color:var(--stepper-foreground-complete)}
+  .rb-stepper--horizontal .rb-step--upcoming .rb-step__title{color:var(--stepper-foreground-upcoming)}
 }

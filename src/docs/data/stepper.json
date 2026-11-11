@@ -3,10 +3,10 @@
   "page": "Navigation",
   "figma": {
     "node": "16995:331",
-    "base": "_Step horizontal / _Step vertical"
+    "base": "_Step horizontal / _Step vertical / _Step compact"
   },
   "react": "Stepper",
-  "summary": "Shows where the user is in a process with several steps. Built from Step variants (Complete, Current, Upcoming).",
+  "summary": "Shows where the user is in a process with several steps. Built from Step variants (Complete, Current, Upcoming). Compact is the mobile version: a short title above a bar per step.",
   "use": [
     "Application flows and forms with 3 to 6 steps."
   ],
@@ -17,18 +17,19 @@
   "anatomy": [
     "Indicator: number or check mark.",
     "Connecting line.",
-    "Title and optional explanation."
+    "Title and optional explanation.",
+    "Compact: number and title above a bar. No description."
   ],
   "figmaProps": [
     [
       "Stepper: Orientation",
-      "Horizontal, Vertical",
-      ""
+      "Horizontal, Vertical, Compact",
+      "In templates, Orientation is bound to layout-tokens/breakpoint/stepper: Compact at Mobile (xs)."
     ],
     [
       "Step: Orientation / Status",
-      "Horizontal, Vertical / Complete, Current, Upcoming",
-      "Two bases, because the layout direction is different."
+      "Horizontal, Vertical, Compact / Complete, Current, Upcoming",
+      "Three bases, because the layout is different."
     ],
     [
       "Step: Number / Title / Description / Show description / Show connector",
@@ -49,8 +50,8 @@
     ],
     [
       "orientation",
-      "'horizontal' | 'vertical'",
-      "Horizontal becomes vertical below 600px."
+      "'horizontal' | 'vertical' | 'compact'",
+      "Horizontal becomes compact below 600px."
     ],
     [
       "statusLabels",
@@ -66,7 +67,8 @@
     "The current step has aria-current=\"step\". Each step says its status in text, not only with color."
   ],
   "content": [
-    "Titles as nouns: \"Details\", \"Review\"."
+    "Titles as nouns: \"Details\", \"Review\".",
+    "Keep titles to one or two words, so they fit in the compact version on a 320px screen."
   ],
   "do": [
     "Let the user go back to completed steps."
@@ -75,7 +77,9 @@
     "Jump ahead to steps that are not ready yet."
   ],
   "tokens": [
-    "--stepper-*"
+    "--stepper-*",
+    "--stepper-compact-{bar-height|gap}",
+    "--stepper-foreground-complete"
   ],
   "related": [
     "Progress",

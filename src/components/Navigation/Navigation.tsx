@@ -62,13 +62,22 @@ export function Tabs({ items, type = 'underline', defaultValue, value, onChange,
 
 /* ---------- Breadcrumbs ---------- */
 export interface Crumb { label: string; href?: string }
-export interface BreadcrumbsProps { items: Crumb[]; homeHref?: string; 'aria-label'?: string }
-export function Breadcrumbs({ items, homeHref, ...rest }: BreadcrumbsProps) {
+export interface BreadcrumbsProps {
+  items: Crumb[];
+  homeHref?: string;
+  /** Back link before the trail, for example to the previous overview. */
+  back?: { href: string; label?: string };
+  /** Screen reader name for the home link. */
+  homeLabel?: string;
+  'aria-label'?: string;
+}
+export function Breadcrumbs({ items, homeHref, back, homeLabel = 'Home', ...rest }: BreadcrumbsProps) {
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
     <nav className="rb-breadcrumbs" aria-label={rest['aria-label'] ?? 'Breadcrumb'}>
+      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? 'Back'}</a>}
       <ol>
-        {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label="Home"><House aria-hidden="true" /></a></li>}
+        {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label={homeLabel}><House aria-hidden="true" /></a></li>}
         {items.map((c, i) => {
           const last = i === items.length - 1;
           return (
@@ -84,14 +93,24 @@ export function Breadcrumbs({ items, homeHref, ...rest }: BreadcrumbsProps) {
 }
 
 /* ---------- Pagination ---------- */
-export interface PaginationProps { page: number; pageCount: number; onPageChange: (page: number) => void; previousLabel?: string; nextLabel?: string }
+export interface PaginationProps {
+  page: number;
+  pageCount: number;
+  onPageChange: (page: number) => void;
+  previousLabel?: string;
+  nextLabel?: string;
+  /** Text on small screens, where the page numbers are hidden. */
+  pageStatus?: (page: number, pageCount: number) => string;
+  /** Screen reader name per page button. */
+  pageLabel?: (page: number) => string;
+}
 function range(page: number, count: number): Array<number | '…'> {
   if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
   if (page <= 4) return [1, 2, 3, 4, 5, '…', count];
   if (page >= count - 3) return [1, '…', count - 4, count - 3, count - 2, count - 1, count];
   return [1, '…', page - 1, page, page + 1, '…', count];
 }
-export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next' }: PaginationProps) {
+export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next', pageStatus = (p, c) => `Page ${p} of ${c}`, pageLabel = (p) => `Page ${p}` }: PaginationProps) {
   return (
     <nav className="rb-pagination" aria-label="Pagination">
       <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{previousLabel}</Button>
@@ -99,12 +118,12 @@ export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Pre
         {range(page, pageCount).map((p, i) => (
           <li key={i}>
             {p === '…' ? <span className="rb-pagination__ellipsis" aria-hidden="true">…</span> : (
-              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={`Page ${p}`} onClick={() => onPageChange(p)}>{p}</button>
+              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={pageLabel(p)} onClick={() => onPageChange(p)}>{p}</button>
             )}
           </li>
         ))}
       </ul>
-      <span className="rb-pagination__compact">Page {page} of {pageCount}</span>
+      <span className="rb-pagination__compact">{pageStatus(page, pageCount)}</span>
       <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>{nextLabel}</Button>
     </nav>
   );

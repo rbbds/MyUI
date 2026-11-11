@@ -20,6 +20,21 @@
   ],
   "figmaProps": [
     [
+      "Breakpoint",
+      "Desktop, Mobile",
+      "Mobile shows \"Page 1 of 10\" instead of the numbers. In templates bound to layout-tokens/breakpoint/pagination."
+    ],
+    [
+      "Page status",
+      "text",
+      "The text of the Mobile variant."
+    ],
+    [
+      "Show page 3 to 7",
+      "boolean",
+      "For short lists."
+    ],
+    [
       "Pagination item: State",
       "Default, Hover, Focus, Current",
       ""
@@ -45,10 +60,21 @@
       "previousLabel / nextLabel",
       "string",
       "Default 'Previous' and 'Next'."
+    ],
+    [
+      "pageStatus",
+      "(page, pageCount) => string",
+      "Text below 600px. Default 'Page 3 of 10'."
+    ],
+    [
+      "pageLabel",
+      "(page) => string",
+      "Screen reader name per number. Default 'Page 3'."
     ]
   ],
   "behaviour": [
-    "Previous is disabled on page 1, Next on the last page."
+    "Previous is disabled on page 1, Next on the last page.",
+    "Below 600px the numbers make way for the page status."
   ],
   "a11y": [
     "<nav> with an aria-label. Current page with aria-current=\"page\".",

@@ -11,14 +11,14 @@ import { Logo } from './brand/Logo';
 ## Principles
 
 - **Token-first.** Components only use CSS custom properties. No hardcoded colors or spacing.
-- **4 layers**, the same as in Figma: primitives (`--wl-*`, `--spacings-*`), theme (`--color-*`, with Light and Dark), screen-size (responsive through media queries) and mapped (`--button-*`, `--input-*` …).
+- **4 layers**, the same as in Figma: primitives and brand (`--brand-*`, `--spacings-*`), theme (`--color-*`, with Light and Dark), screen-size (responsive through media queries) and mapped (`--button-*`, `--input-*` …).
 - **Light and Dark** through `data-theme="dark"` on `<html>` or on any element.
 - **Accessible from the start.** Native elements where possible (`<button>`, `<input>`, `<select>`, `<dialog>`), visible focus rings and a toolbar toggle for Light and Dark. The a11y addon checks every story.
 - **English and en-US by default.** All built-in labels are English and dates and amounts use en-US. Every label is a prop, and components with dates or amounts have a `locale` prop.
 
 ## Rebrand per project
 
-Everything that is brand lives in one layer: the collection **brand/wl** in Figma, `--wl-*` in CSS. Everything that is structure stays the same: spacing, padding, sizes, the font size scale and breakpoints. That way layouts and components do not break when you switch brands.
+Everything that is brand lives in one layer: the collection **↳ brand** in Figma, `--brand-*` in CSS. Everything that is structure stays the same: spacing, padding, sizes, the font size scale and breakpoints. That way layouts and components do not break when you switch brands.
 
 ### Choose a style
 
@@ -43,13 +43,13 @@ In Figma every style is a **mode** of brand/wl. In code every style except Iris 
 | Corner radius | `WL/radius/control/*`, `containers/*`, `overlays/*` | `--brand-radius-*` |
 | Border width | `WL/border-width/control/*`, `containers/*`, `overlays/*` | `--brand-border-width-*` |
 
-The theme layer (Light and Dark) points to these variables and the component tokens point to the theme layer. So for a brand you never change anything other than `--wl-*`.
+The theme layer (Light and Dark) points to these variables and the component tokens point to the theme layer. So for a brand you never change anything other than `--brand-*`.
 
 **Add a brand**
 
 1. Figma: add a mode to brand/wl and fill in the values.
 2. Code: export the tokens with `scripts/figma-export-tokens.js`. The mode becomes `:root[data-brand="name"]` in `tokens.css`.
-3. Set `data-brand="name"` on `<html>`. In a project with only one brand you can skip the mode: override the `--wl-*` values on `:root` in your own CSS, after the import of `@rbbds/ui/styles.css`.
+3. Set `data-brand="name"` on `<html>`. In a project with only one brand you can skip the mode: override the `--brand-*` values on `:root` in your own CSS, after the import of `@rbbds/ui/styles.css`.
 
 ```css
 :root {

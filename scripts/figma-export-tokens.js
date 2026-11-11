@@ -17,17 +17,17 @@
  * - ↳ size, mode md                                      -> :root, other modes -> [data-size="<mode>"]
  * - ↳ mapped                                             -> :root,[data-theme],[data-brand],[data-size]
  *   (so mapped values re-resolve inside a themed, branded or sized subtree)
- * - a compatibility block keeps the old --wl-* names for one version (0.3.x)
  *
  * Names:
  * - component-tokens/x/y  -> --x-y
  * - typography-tokens/x/y -> --text-x-y
  * - base-tokens/x/y       -> --base-x-y
  * - effect-tokens/x/y     -> --effect-x-y
+ * - layout-tokens/x/y     -> --layout-x-y
  * - everything else       -> --name-with-dashes (slashes, commas and spaces become "-")
  *
  * Skipped: ∙ shadows, ∙ opacity, ∙ sizing (resolved to values),
- * breakpoint/* strings (Figma only), shadow geometry (blur, position, spread) and booleans.
+ * breakpoint/* strings, also layout-tokens/breakpoint/* (Figma only), shadow geometry (blur, position, spread) and booleans.
  */
 const PART = 0, SIZE = 45000;
 const cols = await figma.variables.getLocalVariableCollectionsAsync();
@@ -42,9 +42,10 @@ const cssName = n => {
   else if (s.startsWith('typography-tokens/')) s = 'text/' + s.slice(18);
   else if (s.startsWith('base-tokens/')) s = 'base/' + s.slice(12);
   else if (s.startsWith('effect-tokens/')) s = 'effect/' + s.slice(14);
+  else if (s.startsWith('layout-tokens/')) s = 'layout/' + s.slice(14);
   return s.toLowerCase().replace(/[\/, ]+/g, '-');
 };
-const keep = v => !SKIP.has(colName[v.variableCollectionId]) && !v.name.startsWith('breakpoint/') && !/^effects\/shadows\/(blur-amount|position|spread)/.test(v.name) && v.resolvedType !== 'BOOLEAN';
+const keep = v => !SKIP.has(colName[v.variableCollectionId]) && !/(^|\/)breakpoint\//.test(v.name) && !/^effects\/shadows\/(blur-amount|position|spread)/.test(v.name) && v.resolvedType !== 'BOOLEAN';
 const hex = c => { const h = x => Math.round(x * 255).toString(16).padStart(2, '0'); return (c.a === undefined || c.a >= 1) ? '#' + h(c.r) + h(c.g) + h(c.b) : `rgba(${Math.round(c.r * 255)},${Math.round(c.g * 255)},${Math.round(c.b * 255)},${Math.round(c.a * 100) / 100})`; };
 const unitless = v => /font-weight/.test(v.name) || v.name === 'layout-columns' || v.scopes.includes('FONT_WEIGHT');
 const fmt = (v, val) => {
@@ -90,15 +91,6 @@ out.push(':root,[data-theme],[data-brand],[data-size]{'); for (const v of inCol(
 const bps = [1535, 1199, 899, 599];
 for (let i = 1; i < ss.modes.length; i++) { const ls = inCol(ss.name).filter(v => diff(v, ss.modes[i - 1].modeId, ss.modes[i].modeId)).map(v => line(v, ss.modes[i].modeId)); if (ls.length) out.push(`@media (max-width:${bps[i - 1]}px){:root{\n${ls.join('\n')}\n}}`); }
 
-// 7. Compatibility: old --wl-* names (removed in 0.4.0)
-const compat = [];
-for (const v of inCol(brand.name)) {
-  const n = cssName(v.name);
-  const old = n.replace(/^brand-color-primary-/, 'wl-color-brand-').replace(/^brand-color-accent-/, 'wl-color-accent-').replace(/^brand-font-/, 'wl-fonts-').replace(/^brand-/, 'wl-');
-  compat.push(`--${old}:var(--${n});`);
-}
-for (const v of inCol('∙ color')) compat.push(`--wl-color-${cssName(v.name)}:var(--${cssName(v.name)});`);
-out.push(`/* Deprecated: old --wl-* names. Use the new names. Removed in 0.4.0. */\n:root,[data-brand]{\n${compat.join('\n')}\n}`);
 
 const css = out.join('\n');
 return { total: css.length, parts: Math.ceil(css.length / SIZE), chunk: css.slice(PART * SIZE, (PART + 1) * SIZE) };
