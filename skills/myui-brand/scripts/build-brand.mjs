@@ -101,7 +101,7 @@ function checksFor(primary, accent) {
     { id: 'link-light', label: 'Link on white (primary 600)', ratio: contrast(primary['600'], '#ffffff') },
     { id: 'link-dark', label: 'Link in Dark (primary 400 on dark)', ratio: contrast(primary['400'], DARK_SURFACE) },
   ];
-  if (accent) list.push({ id: 'accent-text', label: 'Accent text on white (accent 700)', ratio: contrast(accent['700'], '#ffffff') });
+  if (accent) list.push({ id: 'accent-button', label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accent['400']) }, { id: 'accent-text', label: 'Accent text on white (accent 700)', ratio: contrast(accent['700'], '#ffffff') });
   return list.map((c) => ({ ...c, ratio: Math.round(c.ratio * 100) / 100, pass: c.ratio >= 4.5 }));
 }
 
@@ -128,12 +128,15 @@ export function buildBrand(input) {
   const checks = checksFor(primary.scale, accent?.scale);
   const warnings = [];
   const failing = checks.filter((c) => !c.pass);
-  if (failing.some((c) => c.id !== 'accent-text')) {
+  const primaryFails = failing.filter((c) => !c.id.startsWith('accent-'));
+  if (primaryFails.length) {
     const s = suggestPrimary(input.colors.primary);
-    warnings.push(`Contrast too low: ${failing.map((f) => `${f.label} ${f.ratio}:1`).join(', ')}. Need 4.5:1.${s ? ` A close color that passes: ${s}.` : ''}`);
-  } else if (failing.length) {
-    warnings.push(`Accent text on white is ${failing[0].ratio}:1. Use the accent for shapes and backgrounds, not for small text, or pick a darker accent.`);
+    warnings.push(`Contrast too low: ${primaryFails.map((f) => `${f.label} ${f.ratio}:1`).join(', ')}. Need 4.5:1.${s ? ` A close color that passes: ${s}.` : ''}`);
   }
+  const accentButton = failing.find((c) => c.id === 'accent-button');
+  if (accentButton) warnings.push(`Dark text on the accent button is ${accentButton.ratio}:1. Pick a lighter, brighter accent, or leave it out to keep the default yellow (#facc15).`);
+  const accentText = failing.find((c) => c.id === 'accent-text');
+  if (accentText) warnings.push(`Accent text on white is ${accentText.ratio}:1. Use the accent for shapes and backgrounds, not for small text.`);
   const brandSlug = slug(input.name);
   const name = STYLES[input.style];
   const selector = input.style === 'iris' ? ':root' : `:root[data-brand="${input.style}"]`;

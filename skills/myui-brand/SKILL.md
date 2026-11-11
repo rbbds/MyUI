@@ -30,7 +30,7 @@ Work through these in order. For each choice, write down where it came from and 
 **Primary color.** The color used for the main actions: buttons, links, the logo color. Prefer a hex code written in the guide. If the guide gives RGB or CMYK only, convert to hex and say so. If you sample from an image, say it is measured and may be off because of compression and lighting.
 - Do not pick black, white, a gray or a pure status color (red for errors, green for success) as primary, unless the guide clearly makes it the brand color.
 
-**Accent color (optional).** A second brand color with a clearly different hue, used for highlights. Leave it out if the brand has only one color. Do not use an accent that looks like a warning (amber) or an error (red), and say why if you skip one.
+**Accent color (optional).** The color of the action that sells, like Add to cart (Button hierarchy Accent). MyUI uses bright yellow (#facc15) by default. The accent button is accent 400 with dark text (gray 900), so the accent must be a light, bright color: dark text on accent 400 needs at least 4.5:1. Only use a brand color here if the guide gives a light, bright second color with a clearly different hue from the primary. Do not use an accent that looks like an error (red) or like orange warning colors, and say why if you skip one. Leave it out to keep the yellow.
 
 **Fonts.** Use the font names from the guide. If a font is commercial (for example a paid typeface), keep the name, and add a note: the user needs a web license, and can use a free look-alike from Google Fonts until then (name one). Never claim a font is free unless you know it is.
 
