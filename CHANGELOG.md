@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### New
+- Docs: guide **Building components** with the build rules for Figma: variant and base, padding on the element you click, containers and groups, indent and alignment, the 4 px grid (half steps allowed), focus and tokens.
+
 ## 1.0.1
 
 ### Fixed
