@@ -3,10 +3,21 @@
 ## Unreleased
 
 ### New
+- `@rbbds/ui/tokens.json`: all tokens in the Design Tokens (DTCG) format, with value, type, CSS name and values per brand, theme and screen size. Built with every release.
+- `llms.txt` in the package: how MyUI is built and the rules for AI assistants (layers, naming, sizes, accessibility).
+- Tokens `--qty-size-md` (40 px) and `--qty-size-sm` (36 px).
 - Docs: guide **Building components** with the build rules for Figma: variant and base, padding on the element you click, containers and groups, indent and alignment, the 4 px grid (half steps allowed), focus and tokens.
 - Tokens `--notification-empty-padding-vertical`, `--notification-empty-gap` and `--mini-cart-totals-padding-top`.
 
 ### Changed
+- **Control heights follow the 4 px grid: 36 (sm), 40 (md), 48 (lg).** The border is now inside the height, in Figma and in CSS (`calc(padding - border width)`). Most controls get 2 px lower; Button lg gets 2 px higher (46 to 48).
+  - Button: 36 / 40 / 48. `--button-lg-padding-vertical` is 12 px (was 10). Icon-only buttons are square: 36 / 40 / 48, with icons of 16 / 20 / 24 px.
+  - Input, Select, Search input: 36 / 40 / 48. `--input-lg-padding-vertical` is 12 px (was 10).
+  - Button group: 40. Quantity stepper: 40 (md, was 44) and 36 (sm).
+  - Tag and Badge: 20 / 24 / 28 (were 22 / 26 / 30). Kbd: 20. Link buttons have no border, so they are as high as their text.
+- Tag: the close button has a click area of 24 × 24 px (WCAG 2.5.8). It looks the same.
+- Figma: borders do not count in the layout in any component. Tab is 36 px: the indicator lies over the bottom edge, like in CSS.
+- Guide Building components: control heights and the border rule.
 - `Kbd`: vertical padding is 2 px (was 1 px), so it fits the 4 px grid with half steps. The key is 2 px higher.
 - Notification panel: the empty state uses its own tokens. It looks the same.
 - Variant swatch: the focus ring uses `--focus-ring`, like all other components.

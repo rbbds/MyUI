@@ -23,10 +23,10 @@
 
 /* ---------- Quantity stepper ---------- */
 .rb-qty{display:inline-flex;width:fit-content;align-items:stretch;border:var(--border-width-control-default) solid var(--qty-border);border-radius:var(--qty-radius);background:var(--qty-surface);overflow:hidden}
-.rb-qty--md{height:44px}.rb-qty--sm{height:36px}
+.rb-qty--md{height:var(--qty-size-md)}.rb-qty--sm{height:var(--qty-size-sm)}
 .rb-qty:focus-within{box-shadow:var(--focus-ring)}
 .rb-qty__btn{display:inline-flex;align-items:center;justify-content:center;width:var(--_w);padding:0;border:0;background:transparent;color:var(--qty-foreground-icon);cursor:pointer}
-.rb-qty--md{--_w:44px}.rb-qty--sm{--_w:36px}
+.rb-qty--md{--_w:var(--qty-size-md)}.rb-qty--sm{--_w:var(--qty-size-sm)}
 .rb-qty__btn svg{width:16px;height:16px}
 .rb-qty__btn:hover:not(:disabled){background:var(--qty-surface-hover);color:var(--qty-foreground)}
 .rb-qty__btn:disabled{color:var(--qty-foreground-disabled);cursor:not-allowed}
