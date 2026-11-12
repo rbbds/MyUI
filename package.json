@@ -1,6 +1,6 @@
 {
   "name": "@rbbds/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "White label React component library and design tokens (rbbds), built from the WL Design System in Figma.",
   "license": "MIT",
   "private": false,

@@ -1,6 +1,12 @@
 # Changelog
 
-## 1.0.0 (unreleased)
+## 1.0.1
+
+### Fixed
+- `package.json`: the repository URL uses the format npm expects (`git+https://…`). No change in code.
+- First release through GitHub Actions and npm trusted publishing (no token), with provenance.
+
+## 1.0.0 (12 November 2026)
 
 First public release. It includes everything below, from 0.4.0 on.
 
