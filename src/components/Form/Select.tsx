@@ -14,7 +14,7 @@ export interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement
 
 /** Native select, styled. Native keeps mobile pickers and full keyboard/screen reader support. */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  { label, hideLabel, hint, error, required, size = 'md', options, placeholder, iconLeading, disabled, className, id, value, defaultValue, ...rest },
+  { label, hideLabel, hint, error, required, size = 'md', options, placeholder, iconLeading, disabled, className, id, value, defaultValue, 'aria-describedby': describedByProp, ...rest },
   ref,
 ) {
   return (
@@ -29,7 +29,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
             disabled={disabled}
             required={required}
             aria-invalid={invalid || undefined}
-            aria-describedby={describedBy}
+            aria-describedby={[describedBy, describedByProp].filter(Boolean).join(' ') || undefined}
             value={value}
             defaultValue={value === undefined ? (defaultValue ?? (placeholder !== undefined ? '' : undefined)) : undefined}
             {...rest}

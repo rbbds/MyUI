@@ -50,7 +50,7 @@
     [
       "indeterminate",
       "boolean",
-      "Sets aria-checked=\"mixed\"."
+      "Partly selected. Uses the native indeterminate state."
     ],
     [
       "size",

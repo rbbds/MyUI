@@ -4,3 +4,5 @@ storybook-static
 *.log
 .DS_Store
 docs/figma-payload/
+test-results
+playwright-report

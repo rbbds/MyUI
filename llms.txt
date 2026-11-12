@@ -7,10 +7,10 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 ## Use the package
 
 - Install: `npm install @rbbds/ui lucide-react`
-- Load once: `import '@rbbds/ui/styles.css'` (tokens + component styles). Load fonts yourself (Inter; Berry also uses Source Serif 4).
+- Load once: `import '@rbbds/ui/styles.css'` (tokens + component styles). Load fonts yourself (Inter; Forest also uses Source Serif 4 for titles).
 - Import components: `import { Button, Input } from '@rbbds/ui'`. Icons come from lucide-react and are passed as props, for example `iconLeading={<Plus aria-hidden />}`.
 - Style: `data-brand="forest"` or `data-brand="berry"` on `<html>` (Iris is the default). Theme: `data-theme="dark"` on `<html>` or on a section.
-- All labels are props in English. Dates and amounts have a `locale` prop.
+- Built-in labels are English. Most are props. Some texts are still fixed: Date range picker, File upload item, Password strength, Pagination, Avatar status and the e-commerce components. Dates and amounts have a `locale` prop.
 
 ## Rules for generated code
 
@@ -27,15 +27,15 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
   - primitive: raw values (`--gray-900`, `--spacings-3` = 12px, `--radius-1-5` = 6px). Do not use directly.
   - brand: per style (`--brand-color-primary-500`, `--brand-font-body`). Override for your brand.
   - semantic: meaning, follows the theme (`--color-surface-primary`, `--color-foreground-secondary`, `--color-border-focus`, `--spacing-4`, `--border-radius-control-sm`).
-  - component: `<component>-<part>-<property>-<state>` (`--button-primary-surface-hover`, `--mobile-nav-item-sub-padding-horizontal`).
+  - component: `<component>-<part>-<property>-<state>` (`--button-primary-surface-hover`, `--menu-item-padding-horizontal`).
 - Naming: the Figma variable path with `/` becomes `-`. A decimal comma becomes `-`: Figma `spacing/1,5` is `--spacing-1-5`. The state is always last: `-hover`, `-disabled`, `-checked-hover`.
 - Scale: steps of 4px, half steps (2px) allowed: `--spacing-3` = 12px, `--spacing-2-5` = 10px.
-- Focus: one ring for every component, `box-shadow: var(--focus-ring)` (`--focus-ring-error` for destructive actions).
+- Focus: one ring for every component, `box-shadow: var(--focus-ring)` (`--focus-ring-error` for destructive actions, `--focus-ring-inset` inside a scroll area). These and `--shadow-*` are in `styles.css`, not yet in `tokens.css` or `tokens.json`.
 
 ## Sizes
 
-- Controls (Button, Input, Select, Search input, Button group, Quantity stepper) are 36 (sm), 40 (md) or 48 (lg) px high. Borders are inside that height.
-- Tag and Badge: 20, 24, 28 px. Rows for touch (Mobile nav, Bottom navigation): 48 px.
+- Controls (Button, Input, Select, Search input) are 36 (sm), 40 (md) or 48 (lg) px high. Button group is 40 px. Quantity stepper is 36 (sm) or 40 (md) px. Borders are inside that height.
+- Tag and Badge: 20, 24, 28 px. Rows for touch (Bottom navigation): 48 px. Menu items, nav items, Command items and Combobox options: 36 px.
 - Text styles: 12/16, 14/20, 16/24, 18/28, 20/32, 24/36, 40/60 (font size / line height).
 
 ## Docs

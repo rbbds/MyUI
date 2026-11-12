@@ -60,7 +60,7 @@
 .rb-notif:last-child{border-bottom:0}
 .rb-notif__link{display:flex;gap:var(--notification-item-gap);width:100%;padding:var(--notification-item-padding);border:0;background:transparent;color:inherit;text-align:left;text-decoration:none;font:inherit;cursor:pointer;box-sizing:border-box}
 .rb-notif__link:hover{background:var(--notification-surface-hover)}
-.rb-notif__link:focus-visible{outline:none;box-shadow:inset var(--focus-ring)}
+.rb-notif__link:focus-visible{outline:none;box-shadow:var(--focus-ring-inset)}
 .rb-notif__content{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .rb-notif__title{color:var(--notification-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-notif__text{color:var(--notification-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}

@@ -17,7 +17,7 @@ interface FieldProps extends FieldBaseProps {
   id?: string;
   disabled?: boolean;
   className?: string;
-  children: (ids: { id: string; describedBy?: string; invalid: boolean }) => ReactNode;
+  children: (ids: { id: string; labelId: string; describedBy?: string; invalid: boolean }) => ReactNode;
 }
 
 export function Field({ id: idProp, label, hideLabel, hint, error, required, disabled, className, children }: FieldProps) {
@@ -27,11 +27,11 @@ export function Field({ id: idProp, label, hideLabel, hint, error, required, dis
   const errorId = error ? `${id}-error` : undefined;
   return (
     <div className={cx('rb-field', disabled && 'rb-field--disabled', className)}>
-      <label htmlFor={id} className={cx('rb-field__label', hideLabel && 'rb-visually-hidden')}>
+      <label id={`${id}-label`} htmlFor={id} className={cx('rb-field__label', hideLabel && 'rb-visually-hidden')}>
         {label}
         {required && <span className="rb-field__required" aria-hidden="true">*</span>}
       </label>
-      {children({ id, describedBy: errorId ?? hintId, invalid: Boolean(error) })}
+      {children({ id, labelId: `${id}-label`, describedBy: errorId ?? hintId, invalid: Boolean(error) })}
       {error ? (
         <p id={errorId} className="rb-field__error">{error}</p>
       ) : hint ? (

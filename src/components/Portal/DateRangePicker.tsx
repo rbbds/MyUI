@@ -106,7 +106,7 @@ export function DateRangePicker({
 
   return (
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-daterange', className)}>
-      {({ id: fieldId, describedBy, invalid }) => (
+      {({ id: fieldId, labelId, describedBy, invalid }) => (
         <div ref={root} className="rb-daterange__anchor">
           <div className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
             <CalendarIcon aria-hidden="true" className="rb-daterange__icon" />
@@ -118,6 +118,8 @@ export function DateRangePicker({
               aria-haspopup="dialog"
               aria-expanded={open}
               aria-controls={open ? dialogId : undefined}
+              /* Label and value: a label alone would hide the chosen period from screen readers. */
+              aria-labelledby={`${labelId} ${fieldId}`}
               aria-describedby={describedBy}
               disabled={disabled}
               onClick={() => (open ? setOpen(false) : openPanel())}

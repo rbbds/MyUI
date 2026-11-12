@@ -30,7 +30,8 @@ for (const m of css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(re)) {
     if (!name.startsWith('--')) continue;
     const key = name.slice(2);
     const value = d.slice(i + 1).trim();
-    (values[key] ??= {})[mode === 'theme:light' ? 'default' : mode] ??= value;
+    // The last declaration wins, like in CSS.
+    (values[key] ??= {})[mode === 'theme:light' ? 'default' : mode] = value;
   }
 }
 
