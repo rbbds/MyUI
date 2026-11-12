@@ -52,7 +52,8 @@
 .rb-notif-panel__header{display:flex;align-items:center;gap:var(--spacing-3);padding:var(--notification-item-padding);border-bottom:var(--border-width-containers-default) solid var(--notification-divider)}
 .rb-notif-panel__title{flex:1;margin:0;color:var(--notification-foreground-title);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-notif-panel__items{list-style:none;margin:0;padding:0;max-height:min(480px,60vh);overflow:auto}
-.rb-notif-panel__empty{padding:var(--spacing-8) var(--notification-item-padding);text-align:center;color:var(--notification-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-notif-panel__empty{display:flex;flex-direction:column;gap:var(--notification-empty-gap);padding:var(--notification-empty-padding-vertical) var(--notification-item-padding);text-align:center;color:var(--notification-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-notif-panel__empty p{margin:0}
 .rb-notif-panel__empty-title{color:var(--notification-foreground-title);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-notif-panel__footer{display:flex;justify-content:center;padding:var(--spacing-3) var(--notification-item-padding);border-top:var(--border-width-containers-default) solid var(--notification-divider)}
 .rb-notif{border-bottom:var(--border-width-containers-default) solid var(--notification-divider)}
