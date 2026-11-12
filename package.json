@@ -7,7 +7,7 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rbbds/MyUI.git"
+    "url": "git+https://github.com/rbbds/MyUI.git"
   },
   "homepage": "https://my-ui-two.vercel.app",
   "bugs": "https://github.com/rbbds/MyUI/issues",
