@@ -93,10 +93,10 @@ npm run build-storybook  # static Storybook to storybook-static/
 MyUI follows semantic versioning (see Getting started / Versioning in Storybook).
 
 1. Update `CHANGELOG.md` and bump `version` in `package.json`. Merge to `main`.
-2. Create a GitHub Release with tag `vX.Y.Z` (the same number). The workflow `publish.yml` checks the tag and publishes to npmjs.com with provenance.
+2. Create a GitHub Release with tag `vX.Y.Z` (the same number). The workflow `publish.yml` checks the tag and publishes to npmjs.com through npm trusted publishing, with provenance. No token is needed.
 3. Give the Figma file the same version number on the How to use page and publish the library.
 
-The workflow needs the repository secret `NPM_TOKEN`: an npm token that can publish to the `@rbbds` scope.
+Trusted publishing is set up once on npmjs.com (package settings > Trusted publisher: GitHub Actions, `rbbds/MyUI`, `publish.yml`). Version 1.0.0 was published by hand, because npm can only add a trusted publisher to a package that exists.
 
 ## License
 

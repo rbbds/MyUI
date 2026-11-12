@@ -1,12 +1,16 @@
 name: Publish package
 # Publishes @rbbds/ui to npmjs.com when you publish a GitHub Release (tag vX.Y.Z).
-# Needs the repository secret NPM_TOKEN (an npm "Automation" or granular token with publish rights on @rbbds).
+# Uses npm trusted publishing (OIDC): no NPM_TOKEN secret. Set it up once on
+# npmjs.com > @rbbds/ui > Settings > Trusted publisher: GitHub Actions,
+# owner rbbds, repository MyUI, workflow publish.yml.
+# The very first version (1.0.0) is published by hand, because a trusted
+# publisher can only be added to a package that exists.
 on:
   release:
     types: [published]
 permissions:
   contents: read
-  id-token: write # for npm provenance
+  id-token: write # OIDC for trusted publishing and provenance
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -17,6 +21,8 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
           cache: npm
+      - name: npm 11.5.1 or newer (needed for trusted publishing)
+        run: npm install -g npm@latest
       - run: npm ci
       - name: Check that the tag matches package.json
         run: |
@@ -24,6 +30,4 @@ jobs:
           VERSION="$(node -p "require('./package.json').version")"
           if [ "$TAG" != "$VERSION" ]; then echo "Tag v$TAG does not match package.json $VERSION"; exit 1; fi
       - run: npm run build
-      - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish --access public
