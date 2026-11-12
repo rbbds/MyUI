@@ -1,19 +1,22 @@
-.rb-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--button-md-gap);padding:var(--button-md-padding-vertical) var(--button-md-padding-horizontal);border:var(--button-border-width) solid var(--_bd);border-radius:var(--button-radius);background:var(--_bg);color:var(--_fg);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
+.rb-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--button-md-gap);padding:calc(var(--button-md-padding-vertical) - var(--button-border-width)) calc(var(--button-md-padding-horizontal) - var(--button-border-width));border:var(--button-border-width) solid var(--_bd);border-radius:var(--button-radius);background:var(--_bg);color:var(--_fg);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .15s,color .15s,border-color .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent}
 .rb-button:hover:not(:disabled):not([aria-disabled="true"]){background:var(--_bg-h);color:var(--_fg-h);border-color:var(--_bd-h)}
 .rb-button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-button--destructive:focus-visible{box-shadow:var(--focus-ring-error)}
 .rb-button:disabled,.rb-button[aria-disabled="true"]{background:var(--_bg-d);color:var(--_fg-d);border-color:var(--_bd-d);cursor:not-allowed}
 .rb-button[aria-busy="true"]{cursor:progress}
 .rb-button svg{width:var(--button-icon-size);height:var(--button-icon-size);flex-shrink:0}
-.rb-button--sm{gap:var(--button-sm-gap);padding:var(--button-sm-padding-vertical) var(--button-sm-padding-horizontal)}
+.rb-button--sm{gap:var(--button-sm-gap);padding:calc(var(--button-sm-padding-vertical) - var(--button-border-width)) calc(var(--button-sm-padding-horizontal) - var(--button-border-width))}
 
-.rb-button--lg{gap:var(--button-lg-gap);padding:var(--button-lg-padding-vertical) var(--button-lg-padding-horizontal);font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
-.rb-button--link{padding:var(--button-link-padding)}
+.rb-button--lg{gap:var(--button-lg-gap);padding:calc(var(--button-lg-padding-vertical) - var(--button-border-width)) calc(var(--button-lg-padding-horizontal) - var(--button-border-width));font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
+.rb-button--link{padding:var(--button-link-padding);border-width:0}
 .rb-button--link:hover:not(:disabled){text-decoration:underline}
 .rb-button--full{width:100%}
-.rb-button--icon-only.rb-button--sm{padding:var(--button-icon-only-sm-padding)}
-.rb-button--icon-only.rb-button--md{padding:var(--button-icon-only-md-padding)}
-.rb-button--icon-only.rb-button--lg{padding:var(--button-icon-only-lg-padding)}
+.rb-button--icon-only.rb-button--sm{padding:calc(var(--button-icon-only-sm-padding) - var(--button-border-width))}
+.rb-button--icon-only.rb-button--sm svg{width:var(--icon-size-sm);height:var(--icon-size-sm)}
+.rb-button--icon-only.rb-button--md{padding:calc(var(--button-icon-only-md-padding) - var(--button-border-width))}
+.rb-button--icon-only.rb-button--md svg{width:var(--icon-size-md);height:var(--icon-size-md)}
+.rb-button--icon-only.rb-button--lg{padding:calc(var(--button-icon-only-lg-padding) - var(--button-border-width))}
+.rb-button--icon-only.rb-button--lg svg{width:var(--icon-size-lg);height:var(--icon-size-lg)}
 
 .rb-button__spinner{animation:rb-spin 1s linear infinite}
 .rb-button--primary{--_bg:var(--button-primary-surface-default);--_bg-h:var(--button-primary-surface-hover);--_bg-d:var(--button-primary-surface-disabled);--_fg:var(--button-primary-foreground-default);--_fg-h:var(--button-primary-foreground-hover);--_fg-d:var(--button-primary-foreground-disabled);--_bd:var(--button-primary-border-default);--_bd-h:var(--button-primary-border-hover);--_bd-d:var(--button-primary-border-disabled)}

@@ -11,7 +11,15 @@
   },
   "homepage": "https://my-ui-two.vercel.app",
   "bugs": "https://github.com/rbbds/MyUI/issues",
-  "keywords": ["react", "design-system", "design-tokens", "components", "white-label", "figma", "accessibility"],
+  "keywords": [
+    "react",
+    "design-system",
+    "design-tokens",
+    "components",
+    "white-label",
+    "figma",
+    "accessibility"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -19,7 +27,8 @@
     "dist",
     "skills",
     "LICENSE",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "llms.txt"
   ],
   "sideEffects": [
     "**/*.css"
@@ -37,11 +46,12 @@
       "import": "./dist/flags.js"
     },
     "./styles.css": "./dist/styles.css",
-    "./tokens.css": "./dist/tokens.css"
+    "./tokens.css": "./dist/tokens.css",
+    "./tokens.json": "./dist/tokens.json"
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "vite build && tsc -p tsconfig.build.json",
+    "build": "vite build && tsc -p tsconfig.build.json && node scripts/build-tokens-json.mjs",
     "build-storybook": "storybook build",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "npm run build",

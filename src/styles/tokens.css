@@ -746,11 +746,11 @@
 --button-border-width:var(--border-width-default);
 --button-icon-only-lg-padding:var(--spacing-3);
 --button-icon-only-md-padding:var(--spacing-2-5);
---button-icon-only-sm-padding:var(--spacing-2);
+--button-icon-only-sm-padding:var(--spacing-2-5);
 --button-icon-size:var(--size-icon);
 --button-lg-gap:var(--spacing-2);
 --button-lg-padding-horizontal:var(--spacing-5);
---button-lg-padding-vertical:var(--spacing-2-5);
+--button-lg-padding-vertical:var(--spacing-3);
 --button-link-destructive-border-default:var(--color-surface-transparent);
 --button-link-destructive-border-disabled:var(--color-surface-transparent);
 --button-link-destructive-border-hover:var(--color-surface-transparent);
@@ -1181,7 +1181,7 @@
 --input-help-icon-size:var(--icon-size-sm);
 --input-leading-icon-size:var(--icon-size-md);
 --input-lg-padding-horizontal:var(--spacing-4);
---input-lg-padding-vertical:var(--spacing-2-5);
+--input-lg-padding-vertical:var(--spacing-3);
 --input-md-padding-horizontal:var(--spacing-3);
 --input-md-padding-vertical:var(--spacing-2);
 --input-radius:var(--border-radius-control-md);
@@ -1390,6 +1390,8 @@
 --qty-surface-disabled:var(--color-surface-disabled);
 --qty-surface-hover:var(--color-surface-hover);
 --qty-value-border-width:var(--border-width-control-default);
+--qty-size-md:var(--spacing-10);
+--qty-size-sm:var(--spacing-9);
 --rating-foreground-empty:var(--color-border-primary);
 --rating-foreground-filled:var(--color-surface-warning-solid);
 --rating-foreground-text:var(--color-foreground-tertiary);

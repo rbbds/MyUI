@@ -5,11 +5,11 @@
 .rb-field__hint{color:var(--input-foreground-hint)}
 .rb-field__error{color:var(--input-foreground-error)}
 
-.rb-control{display:flex;align-items:center;gap:var(--input-gap);padding:var(--input-md-padding-vertical) var(--input-md-padding-horizontal);background:var(--input-surface-default);border:var(--input-border-width) solid var(--input-border-default);border-radius:var(--input-radius);box-shadow:var(--shadow-xs);color:var(--input-foreground-value);transition:border-color .15s,box-shadow .15s;cursor:text}
+.rb-control{display:flex;align-items:center;gap:var(--input-gap);padding:calc(var(--input-md-padding-vertical) - var(--input-border-width)) calc(var(--input-md-padding-horizontal) - var(--input-border-width));background:var(--input-surface-default);border:var(--input-border-width) solid var(--input-border-default);border-radius:var(--input-radius);box-shadow:var(--shadow-xs);color:var(--input-foreground-value);transition:border-color .15s,box-shadow .15s;cursor:text}
 .rb-control:hover{border-color:var(--input-border-hover)}
 .rb-control:focus-within{border-color:var(--input-border-focus);box-shadow:var(--focus-ring)}
-.rb-control--sm{padding:var(--input-sm-padding-vertical) var(--input-sm-padding-horizontal)}
-.rb-control--lg{padding:var(--input-lg-padding-vertical) var(--input-lg-padding-horizontal)}
+.rb-control--sm{padding:calc(var(--input-sm-padding-vertical) - var(--input-border-width)) calc(var(--input-sm-padding-horizontal) - var(--input-border-width))}
+.rb-control--lg{padding:calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) - var(--input-border-width))}
 .rb-control--error,.rb-control--error:hover{border-color:var(--input-border-error)}
 .rb-control--error:focus-within{border-color:var(--input-border-error);box-shadow:var(--focus-ring-error)}
 .rb-control--disabled,.rb-control--disabled:hover{background:var(--input-surface-disabled);border-color:var(--input-border-disabled);box-shadow:none;cursor:not-allowed}
@@ -27,9 +27,9 @@
 
 .rb-control--select{position:relative;padding:0}
 .rb-control--select .rb-control__icon{position:absolute;left:var(--input-md-padding-horizontal);pointer-events:none}
-.rb-control__select{appearance:none;-webkit-appearance:none;cursor:pointer;width:100%;padding:var(--input-md-padding-vertical) calc(var(--input-md-padding-horizontal) + 28px) var(--input-md-padding-vertical) var(--input-md-padding-horizontal)}
-.rb-control--select.rb-control--sm .rb-control__select{padding:var(--input-sm-padding-vertical) calc(var(--input-sm-padding-horizontal) + 28px) var(--input-sm-padding-vertical) var(--input-sm-padding-horizontal)}
-.rb-control--select.rb-control--lg .rb-control__select{padding:var(--input-lg-padding-vertical) calc(var(--input-lg-padding-horizontal) + 28px) var(--input-lg-padding-vertical) var(--input-lg-padding-horizontal)}
+.rb-control__select{appearance:none;-webkit-appearance:none;cursor:pointer;width:100%;padding:calc(var(--input-md-padding-vertical) - var(--input-border-width)) calc(var(--input-md-padding-horizontal) + 28px) calc(var(--input-md-padding-vertical) - var(--input-border-width)) calc(var(--input-md-padding-horizontal) - var(--input-border-width))}
+.rb-control--select.rb-control--sm .rb-control__select{padding:calc(var(--input-sm-padding-vertical) - var(--input-border-width)) calc(var(--input-sm-padding-horizontal) + 28px) calc(var(--input-sm-padding-vertical) - var(--input-border-width)) calc(var(--input-sm-padding-horizontal) - var(--input-border-width))}
+.rb-control--select.rb-control--lg .rb-control__select{padding:calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) + 28px) calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) - var(--input-border-width))}
 .rb-control--has-icon .rb-control__select{padding-left:calc(var(--input-md-padding-horizontal) + 28px)}
 .rb-control__chevron{position:absolute;right:var(--input-md-padding-horizontal);pointer-events:none;display:inline-flex;color:var(--input-foreground-icon)}
 .rb-control__chevron svg{width:20px;height:20px}
