@@ -7,70 +7,44 @@ White label React component library and design tokens. Built from the Figma file
 - Icons: [Lucide](https://lucide.dev) (`lucide-react`)
 - Storybook 10 with a Light/Dark toolbar toggle and the a11y addon
 
-## Using it in a project
+## Getting started
 
-The package is published to **GitHub Packages** (private, free). Consumers need a token to install it.
+```bash
+npm install @rbbds/ui lucide-react
+```
 
-1. Create a GitHub personal access token (classic) with the `read:packages` scope.
-2. Add an `.npmrc` to the project (do not commit the token itself, use an env var):
+```tsx
+import '@rbbds/ui/styles.css';
+import { Button, Input } from '@rbbds/ui';
+import { Plus } from 'lucide-react';
 
-   ```
-   @rbbds:registry=https://npm.pkg.github.com
-   //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-   ```
+export function NewProject() {
+  return (
+    <form>
+      <Input label="Project name" required />
+      <Button type="submit" iconLeading={<Plus aria-hidden />}>Create project</Button>
+    </form>
+  );
+}
+```
 
-3. Install:
+Load the fonts yourself (for example `@fontsource-variable/inter`), or set `--brand-font-body` and `--brand-font-title` to your own fonts.
 
-   ```bash
-   npm install @rbbds/ui
-   ```
-
-4. Import the styles once (e.g. in `main.tsx`) and use the components:
-
-   ```tsx
-   import '@rbbds/ui/styles.css';
-   import { Button, Input } from '@rbbds/ui';
-   import { Plus } from 'lucide-react';
-
-   export function Example() {
-     return (
-       <form>
-         <Input label="E-mailadres" type="email" autoComplete="email" />
-         <Button iconLeading={<Plus aria-hidden />}>Nieuw project</Button>
-       </form>
-     );
-   }
-   ```
-
-   Load the Inter font yourself (e.g. `@fontsource-variable/inter`), or set `--brand-font-body` to another font.
-
-On Vercel or in CI, add `GITHUB_TOKEN` (with `read:packages`) as an environment variable so the install works.
-
-### Dark mode
-
-Set `data-theme="dark"` on `<html>` (or on any element for a dark section). Without it, Light is used.
-
-### Rebranding per project
-
-1. Kies een stijl. Die bepaalt de vorm (hoeken, randen, letterdikte):
-   - **Iris** (standaard, licht afgerond): geen attribuut nodig.
-   - **Forest** (hoekig): `<html data-brand="forest">`.
-   - **Berry** (rond): `<html data-brand="berry">`.
-2. Zet je eigen kleuren en fonts. Gebruik de **Brand builder** in Storybook: die berekent de kleurschaal, checkt contrast en geeft de CSS.
-   Or let your AI tool do it: the **myui-brand skill** (`skills/myui-brand`, also in the npm package) reads a brand guide PDF or moodboard and gives you `brand.json`, the CSS and the Figma values. See `skills/myui-brand/README.md`.
+- **Style:** `data-brand="forest"` or `data-brand="berry"` on `<html>`. Iris needs no attribute.
+- **Theme:** `data-theme="dark"` on `<html>`, or on any element for a dark section.
+- **Your own brand:** make the CSS with the Brand builder in Storybook, or let your AI tool do it with the **myui-brand skill** (`skills/myui-brand`, also in the npm package). Only change `--brand-*` tokens: colors, fonts, radius, border width and font weight.
 
 ```css
 :root {
-  --brand-color-primary-500: #0ea5e9;
   --brand-color-primary-600: #0284c7;
-  --brand-color-primary-700: #0369a1;
+  --brand-color-accent-400: #facc15;
   --brand-font-body: "Manrope", system-ui, sans-serif;
 }
 ```
 
-Alles wat een merk mag aanpassen begint met `--brand-`: kleuren, fonts, radius, randdikte en letterdikte. Spacing en maten blijven gelijk.
+Full guides for designers and developers, and the versioning policy, are in Storybook under **Getting started**: https://my-ui-two.vercel.app
 
-Meer context (architectuur, conventies, open punten): [docs/PROJECT.md](docs/PROJECT.md).
+More context (architecture, conventions, open points): [docs/PROJECT.md](docs/PROJECT.md).
 
 ## Token architecture
 
@@ -116,10 +90,14 @@ npm run build-storybook  # static Storybook to storybook-static/
 
 ## Releasing a new version
 
-1. Bump `version` in `package.json` and merge to `main`.
-2. Create a GitHub Release with tag `vX.Y.Z`.
-3. The **Publish package** workflow publishes it to GitHub Packages.
+MyUI follows semantic versioning (see Getting started / Versioning in Storybook).
 
-## Storybook on Vercel
+1. Update `CHANGELOG.md` and bump `version` in `package.json`. Merge to `main`.
+2. Create a GitHub Release with tag `vX.Y.Z` (the same number). The workflow `publish.yml` checks the tag and publishes to npmjs.com with provenance.
+3. Give the Figma file the same version number on the How to use page and publish the library.
 
-Import the repo in Vercel (Hobby plan). `vercel.json` already sets the build command (`npm run build-storybook`) and output directory (`storybook-static`). Every push to `main` deploys; every pull request gets a preview URL.
+The workflow needs the repository secret `NPM_TOKEN`: an npm token that can publish to the `@rbbds` scope.
+
+## License
+
+The React package is MIT licensed, see [LICENSE](LICENSE). The Figma file is sold separately under its own license.

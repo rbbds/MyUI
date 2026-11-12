@@ -1,0 +1,36 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting started/Versioning" />
+
+{/* Generated from docs/content/guides.mjs by scripts/docs/build-guides.mjs. Do not edit. */}
+
+# Versioning
+
+MyUI uses semantic versioning (major.minor.patch) for the React package and the Figma file. Both get the same number, so you always know which Figma file matches which package.
+
+## What a number means
+
+<table>
+  <thead><tr><th scope="col">Update</th><th scope="col">Example</th><th scope="col">What changes</th><th scope="col">What you do</th></tr></thead>
+  <tbody>
+    <tr><th scope="row">Patch</th><td>1.0.0 to 1.0.1</td><td>Fixes. No change in props, tokens or Figma properties.</td><td>Update. Nothing else.</td></tr>
+    <tr><th scope="row">Minor</th><td>1.0.0 to 1.1.0</td><td>New components, props, variants or tokens. Old ones keep working.</td><td>Update. Use the new parts when you want.</td></tr>
+    <tr><th scope="row">Major</th><td>1.0.0 to 2.0.0</td><td>Breaking changes: a prop, token, variant or component is renamed or removed.</td><td>Read Breaking in the changelog and change your code or files.</td></tr>
+  </tbody>
+</table>
+
+## Breaking changes
+
+- React: a removed or renamed prop, component, export or CSS custom property, or a changed default that changes how a page looks or works.
+- Figma: a renamed or removed component, variant or property. Instances can lose their overrides after such a change.
+- Before a breaking change, the old name stays for at least one minor version and is marked as deprecated in the changelog.
+
+## Not breaking
+
+- New components, props, variants, properties and tokens.
+- Small visual fixes that make a component match its design, and better contrast.
+- Changes in Storybook, docs, examples and templates.
+
+## Changelog
+
+Every release has a section in `CHANGELOG.md` with Breaking, New, Changed and Fixed. In the Figma file, the How to use page shows the version and the Changelog page lists the changes.

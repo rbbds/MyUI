@@ -1,0 +1,79 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Getting started/For developers" />
+
+{/* Generated from docs/content/guides.mjs by scripts/docs/build-guides.mjs. Do not edit. */}
+
+# For developers
+
+@rbbds/ui is the React version of MyUI: components, design tokens as CSS custom properties, Light and Dark, and TypeScript types. It works with React 18 and newer.
+
+## 1. Install
+
+```bash
+npm install @rbbds/ui lucide-react
+```
+
+lucide-react is the icon set the components use. Install it too, so you can pass icons to components.
+
+## 2. Load the styles and a font
+
+```tsx
+import '@rbbds/ui/styles.css';
+import '@fontsource-variable/inter';
+```
+
+Import `styles.css` once, for example in `main.tsx`. It holds the tokens and the component styles.
+
+Load the fonts yourself. Iris and Forest use Inter. Berry uses Source Serif 4 for titles. You can also set `--brand-font-body` and `--brand-font-title` to your own fonts.
+
+## 3. Use the components
+
+```tsx
+import { Button, Input } from '@rbbds/ui';
+import { Plus } from 'lucide-react';
+
+export function NewProject() {
+  return (
+    <form>
+      <Input label="Project name" required />
+      <Button type="submit" iconLeading={<Plus aria-hidden />}>Create project</Button>
+    </form>
+  );
+}
+```
+
+Every component has a Docs page in Storybook with its props, states and accessibility notes.
+
+## 4. Style and theme
+
+- Style: set `data-brand="forest"` or `data-brand="berry"` on `<html>`. Iris needs no attribute.
+- Theme: set `data-theme="dark"` on `<html>`, or on any element for a dark section.
+- Screen size: nothing to do. Type and spacing follow the screen width through media queries.
+
+## 5. Your own brand
+
+Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in `node_modules/@rbbds/ui/skills`). Load that CSS after `styles.css`.
+
+Only change `--brand-*` tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.
+
+```css
+:root {
+  --brand-color-primary-600: #0284c7;
+  --brand-color-accent-400: #facc15;
+  --brand-font-body: "Manrope", system-ui, sans-serif;
+}
+```
+
+## 6. Language and dates
+
+All built-in labels are English and dates and amounts use en-US. Every label is a prop. Components with dates or amounts have a locale prop, for example `locale="nl-NL"`.
+
+## 7. Updates
+
+```bash
+npm outdated @rbbds/ui
+npm install @rbbds/ui@latest
+```
+
+Read the changelog before you update. A major update can need changes in your code; the changelog lists them under Breaking. See Versioning.
