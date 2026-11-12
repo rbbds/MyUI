@@ -91,7 +91,7 @@ export const guides = [
         heading: '3. Use the components',
         codeFirst: true,
         code: "import { Button, Input } from '@rbbds/ui';\nimport { Plus } from 'lucide-react';\n\nexport function NewProject() {\n  return (\n    <form>\n      <Input label=\"Project name\" required />\n      <Button type=\"submit\" iconLeading={<Plus aria-hidden />}>Create project</Button>\n    </form>\n  );\n}",
-        paragraphs: ['Every component has a Docs page in Storybook with its props, states and accessibility notes.'],
+        paragraphs: ['Every component has a Docs page in Storybook with its props, states and accessibility notes.', 'For tools and AI assistants: @rbbds/ui/tokens.json has all tokens with their values, types and modes (Design Tokens format). llms.txt in the package explains the layers, the naming and the rules.'],
       },
       {
         heading: '4. Style and theme',
@@ -129,8 +129,9 @@ export const guides = [
       {
         heading: '1. Variant and base',
         bullets: [
-          'Each component has a base: _Name (base). The base holds all padding, gaps, radius, borders and effects.',
-          'A variant is a wrapper with padding 0 and one base instance in it. A variant only changes properties of the base.',
+          'A component with states or sizes has a base: _Name (base). The base holds all padding, gaps, radius, borders and effects.',
+          'A variant is a wrapper with padding 0 and one base instance in it. A variant only changes properties of the base. It may add a part next to the base, for example the subpages in Mobile nav item, State=Expanded.',
+          'Composed components are built from parts and have no single base: for example Tabs, Pagination, Stepper, Sidebar, Calendar, Tooltip and Popover. Simple shapes need no base: Divider, Spinner and Progress bar.',
           'Building blocks start with _. They are hidden in the library.',
         ],
       },
@@ -138,8 +139,10 @@ export const guides = [
         heading: '2. Padding belongs to the element you click',
         bullets: [
           'A button, row, link, tab or nav item has its own padding. Hover, focus and the click area are then always the same size.',
+          'Elements with a fixed size, such as a pagination item, a calendar day or a swatch, have a fixed width and height and center their content.',
           'Never put padding on text. Put the text in an auto layout frame.',
-          'A click area on touch screens is at least 44 px high. MyUI uses 48 px for rows in menus and lists.',
+          'A click area is at least 24 px (WCAG). Rows for touch screens, in Mobile nav and Bottom navigation, are 48 px. Menu items and nav items on desktop are 36 px.',
+          'Controls have three heights: 36 px (sm), 40 px (md) and 48 px (lg). This goes for Button, Input, Select, Search input, Button group and Quantity stepper. Tag and Badge are 20, 24 and 28 px.',
         ],
       },
       {
@@ -164,7 +167,7 @@ export const guides = [
         bullets: [
           'Spacing and radius use steps of 4 px. Half steps (2 px) are fine, for example spacing/1,5 or radius/1,5 = 6 px. Other values are not.',
           'The one exception is a technical offset of 1 px, for example the popover arrow that overlaps the border.',
-          'Borders do not count in the layout. Use an inside border, or turn off Include stroke in layout, so a 48 px row stays 48 px.',
+          'Borders do not count in the layout. In Figma, turn off Include stroke in layout. In CSS, the padding is calc(padding - border width), so a 48 px button stays 48 px.',
         ],
       },
       {
