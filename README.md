@@ -59,6 +59,8 @@ Same four layers as in Figma:
 
 The CSS names match the **WEB code syntax** on each Figma variable, so Dev Mode shows the same name as the code.
 
+The build also writes `dist/tokens.json` (import `@rbbds/ui/tokens.json`): every token in the Design Tokens (DTCG) format with its value, type, CSS name and its values per brand, theme and screen size. In that file the layers are named `primitive`, `brand`, `semantic` (theme and screen size alias) and `component` (mapped). `llms.txt` in the package explains the layers, the naming and the rules for AI assistants.
+
 ### Updating tokens from Figma
 
 1. Change variables in Figma.

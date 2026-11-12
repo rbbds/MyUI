@@ -1,0 +1,45 @@
+# @rbbds/ui (MyUI)
+
+> White label design system: a React component library with design tokens as CSS custom properties, three styles (Iris, Forest, Berry), Light and Dark, and a matching Figma library. React 18+, TypeScript, MIT.
+
+This file is for AI assistants and tools. It says how MyUI is built and how to use it without guessing.
+
+## Use the package
+
+- Install: `npm install @rbbds/ui lucide-react`
+- Load once: `import '@rbbds/ui/styles.css'` (tokens + component styles). Load fonts yourself (Inter; Berry also uses Source Serif 4).
+- Import components: `import { Button, Input } from '@rbbds/ui'`. Icons come from lucide-react and are passed as props, for example `iconLeading={<Plus aria-hidden />}`.
+- Style: `data-brand="forest"` or `data-brand="berry"` on `<html>` (Iris is the default). Theme: `data-theme="dark"` on `<html>` or on a section.
+- All labels are props in English. Dates and amounts have a `locale` prop.
+
+## Rules for generated code
+
+1. Use the components. Do not rebuild a button, input, menu or dialog with plain HTML and your own CSS.
+2. Never hard-code colors, spacing, radius or font sizes. Use tokens: `var(--color-surface-primary)`, `var(--spacing-4)`.
+3. For your own layout, use semantic tokens (`--color-*`, `--spacing-*`, `--border-radius-*`, `--text-*`). Component tokens (`--button-*`, `--input-*`) are for the components themselves.
+4. To make a brand, only override `--brand-*` tokens (colors, fonts, radius, border width, font weight). The `myui-brand` skill in `node_modules/@rbbds/ui/skills` does this with a contrast check.
+5. Keep accessibility: `ButtonIcon` needs an `aria-label`; form fields need a `label`; do not remove focus styles.
+
+## Tokens
+
+- Full list with values, types and modes: `@rbbds/ui/tokens.json` (Design Tokens / DTCG format). CSS: `@rbbds/ui/tokens.css`.
+- Layers, from raw to specific:
+  - primitive: raw values (`--gray-900`, `--spacings-3` = 12px, `--radius-1-5` = 6px). Do not use directly.
+  - brand: per style (`--brand-color-primary-500`, `--brand-font-body`). Override for your brand.
+  - semantic: meaning, follows the theme (`--color-surface-primary`, `--color-foreground-secondary`, `--color-border-focus`, `--spacing-4`, `--border-radius-control-sm`).
+  - component: `<component>-<part>-<property>-<state>` (`--button-primary-surface-hover`, `--mobile-nav-item-sub-padding-horizontal`).
+- Naming: the Figma variable path with `/` becomes `-`. A decimal comma becomes `-`: Figma `spacing/1,5` is `--spacing-1-5`. The state is always last: `-hover`, `-disabled`, `-checked-hover`.
+- Scale: steps of 4px, half steps (2px) allowed: `--spacing-3` = 12px, `--spacing-2-5` = 10px.
+- Focus: one ring for every component, `box-shadow: var(--focus-ring)` (`--focus-ring-error` for destructive actions).
+
+## Sizes
+
+- Controls (Button, Input, Select, Search input, Button group, Quantity stepper) are 36 (sm), 40 (md) or 48 (lg) px high. Borders are inside that height.
+- Tag and Badge: 20, 24, 28 px. Rows for touch (Mobile nav, Bottom navigation): 48 px.
+- Text styles: 12/16, 14/20, 16/24, 18/28, 20/32, 24/36, 40/60 (font size / line height).
+
+## Docs
+
+- Storybook (props, states, accessibility notes per component): https://my-ui-two.vercel.app
+- Guides in Storybook under Getting started: For designers, For developers, Building components (build rules), Versioning.
+- Changelog: `CHANGELOG.md` in the package.
