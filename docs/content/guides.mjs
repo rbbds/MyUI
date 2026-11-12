@@ -129,8 +129,9 @@ export const guides = [
       {
         heading: '1. Variant and base',
         bullets: [
-          'Each component has a base: _Name (base). The base holds all padding, gaps, radius, borders and effects.',
-          'A variant is a wrapper with padding 0 and one base instance in it. A variant only changes properties of the base.',
+          'A component with states or sizes has a base: _Name (base). The base holds all padding, gaps, radius, borders and effects.',
+          'A variant is a wrapper with padding 0 and one base instance in it. A variant only changes properties of the base. It may add a part next to the base, for example the subpages in Mobile nav item, State=Expanded.',
+          'Composed components are built from parts and have no single base: for example Tabs, Pagination, Stepper, Sidebar, Calendar, Tooltip and Popover. Simple shapes need no base: Divider, Spinner and Progress bar.',
           'Building blocks start with _. They are hidden in the library.',
         ],
       },
@@ -138,8 +139,9 @@ export const guides = [
         heading: '2. Padding belongs to the element you click',
         bullets: [
           'A button, row, link, tab or nav item has its own padding. Hover, focus and the click area are then always the same size.',
+          'Elements with a fixed size, such as a pagination item, a calendar day or a swatch, have a fixed width and height and center their content.',
           'Never put padding on text. Put the text in an auto layout frame.',
-          'A click area on touch screens is at least 44 px high. MyUI uses 48 px for rows in menus and lists.',
+          'A click area is at least 24 px (WCAG). Rows for touch screens, in Mobile nav and Bottom navigation, are 48 px. Menu items and nav items on desktop are 36 px.',
         ],
       },
       {
