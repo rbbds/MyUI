@@ -122,6 +122,70 @@ export const guides = [
     ],
   },
   {
+    id: 'building',
+    title: 'Building components',
+    intro: 'Rules for anyone who adds or changes a component in the Figma file. They keep spacing, click areas and focus the same in every component, and they match the CSS.',
+    sections: [
+      {
+        heading: '1. Variant and base',
+        bullets: [
+          'Each component has a base: _Name (base). The base holds all padding, gaps, radius, borders and effects.',
+          'A variant is a wrapper with padding 0 and one base instance in it. A variant only changes properties of the base.',
+          'Building blocks start with _. They are hidden in the library.',
+        ],
+      },
+      {
+        heading: '2. Padding belongs to the element you click',
+        bullets: [
+          'A button, row, link, tab or nav item has its own padding. Hover, focus and the click area are then always the same size.',
+          'Never put padding on text. Put the text in an auto layout frame.',
+          'A click area on touch screens is at least 44 px high. MyUI uses 48 px for rows in menus and lists.',
+        ],
+      },
+      {
+        heading: '3. Containers have padding, groups only a gap',
+        bullets: [
+          'The outer container (panel, sidebar, menu, card) has padding and a gap.',
+          'Groups inside it (a list of items, a header, a button row) have padding 0 and only a gap.',
+          'Items you click directly next to each other have a gap of 0. The space comes from their own padding, so there is no dead space between click areas.',
+          'Use an inset on the container only when a hover surface must not touch the edge. Example: the subpages in Mobile nav.',
+        ],
+      },
+      {
+        heading: '4. Indent and alignment',
+        bullets: [
+          'An indent (sub items, subpages) is padding on the row itself, with its own token. The list around it does not indent.',
+          'Content below a heading uses the same horizontal padding token as the heading. Text then lines up under the title.',
+          'The page margin is set once, on the outer frame of a template or header. Everything inside has padding 0.',
+        ],
+      },
+      {
+        heading: '5. The 4 px grid',
+        bullets: [
+          'Spacing and radius use steps of 4 px. Half steps (2 px) are fine, for example spacing/1,5 or radius/1,5 = 6 px. Other values are not.',
+          'The one exception is a technical offset of 1 px, for example the popover arrow that overlaps the border.',
+          'Borders do not count in the layout. Use an inside border, or turn off Include stroke in layout, so a 48 px row stays 48 px.',
+        ],
+      },
+      {
+        heading: '6. Focus',
+        bullets: [
+          'Focus is the effect style Focus ring/brand on the base. Use Focus ring/error for destructive actions.',
+          'The ring is a shadow, so it does not move the layout. It follows one token for the color: effect-tokens/border/focus. In CSS this is --focus-ring.',
+          'Do not add a focus border or a focus color to a single component. Inputs are the exception: their border also changes color on focus.',
+        ],
+      },
+      {
+        heading: '7. Tokens',
+        bullets: [
+          'Bind every padding, gap, radius, border width and color to a component token. Component tokens point to the mapped tokens, never to primitives.',
+          'Name tokens after the part: mobile-nav-item/sub-padding-horizontal, mega-menu/columns-gap.',
+          'Content areas that people fill themselves are slots with a fixed gap token.',
+        ],
+      },
+    ],
+  },
+  {
     id: 'versioning',
     title: 'Versioning',
     intro: 'MyUI uses semantic versioning (major.minor.patch) for the React package and the Figma file. Both get the same number, so you always know which Figma file matches which package.',

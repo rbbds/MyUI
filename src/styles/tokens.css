@@ -1193,7 +1193,7 @@
 --kbd-border-width:var(--border-width-default);
 --kbd-foreground:var(--color-foreground-tertiary);
 --kbd-padding-horizontal:var(--spacing-1-5);
---kbd-padding-vertical:var(--spacing-0-25);
+--kbd-padding-vertical:var(--spacing-0-5);
 --kbd-radius:var(--border-radius-control-xs);
 --kbd-surface:var(--color-surface-secondary);
 --logo-eye-surface:var(--color-static-white);
@@ -1250,6 +1250,7 @@
 --mini-cart-items-gap:var(--spacing-5);
 --mini-cart-totals-border-width:var(--border-width-containers-default);
 --mini-cart-totals-gap:var(--spacing-2);
+--mini-cart-totals-padding-top:var(--spacing-4);
 --modal-backdrop:var(--color-surface-overlay);
 --modal-close-icon-size:var(--icon-size-lg);
 --modal-content-gap:var(--spacing-2);
@@ -1288,6 +1289,8 @@
 --notification-count-radius:var(--border-radius-full);
 --notification-count-surface:var(--color-surface-error-solid);
 --notification-divider:var(--color-border-secondary);
+--notification-empty-gap:var(--spacing-1);
+--notification-empty-padding-vertical:var(--spacing-8);
 --notification-foreground-text:var(--color-foreground-secondary);
 --notification-foreground-time:var(--color-foreground-tertiary);
 --notification-foreground-title:var(--color-foreground-primary);

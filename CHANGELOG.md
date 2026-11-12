@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### New
+- Docs: guide **Building components** with the build rules for Figma: variant and base, padding on the element you click, containers and groups, indent and alignment, the 4 px grid (half steps allowed), focus and tokens.
+- Tokens `--notification-empty-padding-vertical`, `--notification-empty-gap` and `--mini-cart-totals-padding-top`.
+
+### Changed
+- `Kbd`: vertical padding is 2 px (was 1 px), so it fits the 4 px grid with half steps. The key is 2 px higher.
+- Notification panel: the empty state uses its own tokens. It looks the same.
+- Variant swatch: the focus ring uses `--focus-ring`, like all other components.
+- Figma: every Focus variant uses the effect style Focus ring/brand (Focus ring/error for destructive buttons). Mobile nav item and Bottom nav item had a 2 px focus border instead; Code digit and Swatch had no ring.
+
 ## 1.0.1
 
 ### Fixed

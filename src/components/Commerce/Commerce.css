@@ -140,7 +140,7 @@
 .rb-variant__input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
 .rb-variant__swatch{display:block;width:var(--variant-swatch-size);height:var(--variant-swatch-size);border-radius:50%;background:var(--_c);box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),0 0 0 2px var(--variant-surface),0 0 0 3px transparent}
 .rb-variant__input:checked+.rb-variant__swatch{box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),0 0 0 2px var(--variant-surface),0 0 0 4px var(--variant-border-checked)}
-.rb-variant__input:focus-visible+.rb-variant__swatch{box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),0 0 0 2px var(--variant-surface),0 0 0 4px var(--color-border-focus)}
+.rb-variant__input:focus-visible+.rb-variant__swatch{box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),var(--focus-ring)}
 .rb-variant__chip{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:40px;padding:0 var(--spacing-3);box-sizing:border-box;border:var(--border-width-control-default) solid var(--variant-border);border-radius:var(--variant-chip-radius);background:var(--variant-surface);color:var(--variant-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-variant__option:hover .rb-variant__chip{background:var(--variant-surface-hover)}
 .rb-variant__input:checked+.rb-variant__chip{border-color:var(--variant-border-checked);background:var(--variant-surface-checked);color:var(--variant-foreground-checked);box-shadow:inset 0 0 0 1px var(--variant-border-checked)}
