@@ -46,7 +46,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(fu
               autoComplete={autoComplete ?? (showStrength ? 'new-password' : 'current-password')} spellCheck={false}
               aria-invalid={invalid || undefined} aria-describedby={[describedBy, showStrength && `${fieldId}-req`].filter(Boolean).join(' ') || undefined}
               onChange={(e) => { if (value === undefined) setOwn(e.target.value); onChange?.(e.target.value); }} {...rest} />
-            <button type="button" className="rb-password__toggle" aria-pressed={visible} aria-label={visible ? hideLabelText : showLabel} disabled={disabled} onClick={() => setVisible((x) => !x)}>
+            <button type="button" className="rb-password__toggle" aria-label={visible ? hideLabelText : showLabel} disabled={disabled} onClick={() => setVisible((x) => !x)}>
               {visible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
             </button>
           </div>

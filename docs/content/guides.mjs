@@ -84,7 +84,7 @@ export const guides = [
         code: "import '@rbbds/ui/styles.css';\nimport '@fontsource-variable/inter';",
         paragraphs: [
           'Import styles.css once, for example in main.tsx. It holds the tokens and the component styles.',
-          'Load the fonts yourself. Iris and Forest use Inter. Berry uses Source Serif 4 for titles. You can also set --brand-font-body and --brand-font-title to your own fonts.',
+          'Load the fonts yourself. All styles use Inter. Forest also uses Source Serif 4 for titles. You can also set --brand-font-body and --brand-font-title to your own fonts.',
         ],
       },
       {
@@ -141,8 +141,8 @@ export const guides = [
           'A button, row, link, tab or nav item has its own padding. Hover, focus and the click area are then always the same size.',
           'Elements with a fixed size, such as a pagination item, a calendar day or a swatch, have a fixed width and height and center their content.',
           'Never put padding on text. Put the text in an auto layout frame.',
-          'A click area is at least 24 px (WCAG). Rows for touch screens, in Mobile nav and Bottom navigation, are 48 px. Menu items and nav items on desktop are 36 px.',
-          'Controls have three heights: 36 px (sm), 40 px (md) and 48 px (lg). This goes for Button, Input, Select, Search input, Button group and Quantity stepper. Tag and Badge are 20, 24 and 28 px.',
+          'A click area is at least 24 px (WCAG). Rows for touch screens, in Mobile nav and Bottom navigation, are 48 px. Menu items, nav items, Command items and Combobox options on desktop are 36 px.',
+          'Controls have three heights: 36 px (sm), 40 px (md) and 48 px (lg). This goes for Button, Input, Select and Search input. Button group has one height: 40 px. Quantity stepper has two: 36 px (sm) and 40 px (md). Tag and Badge are 20, 24 and 28 px.',
         ],
       },
       {
@@ -176,6 +176,7 @@ export const guides = [
           'Focus is the effect style Focus ring/brand on the base. Use Focus ring/error for destructive actions.',
           'The ring is a shadow, so it does not move the layout. It follows one token for the color: effect-tokens/border/focus. In CSS this is --focus-ring.',
           'Do not add a focus border or a focus color to a single component. Inputs are the exception: their border also changes color on focus.',
+          'Inside a scroll area the ring would be cut off. Use the inset ring there. In CSS this is --focus-ring-inset.',
         ],
       },
       {
@@ -216,7 +217,7 @@ export const guides = [
         heading: 'Not breaking',
         bullets: [
           'New components, props, variants, properties and tokens.',
-          'Small visual fixes that make a component match its design, and better contrast.',
+          'Small visual fixes that make a component match its design, and better contrast. A size correction of up to 2 px counts as a small fix.',
           'Changes in Storybook, docs, examples and templates.',
         ],
       },

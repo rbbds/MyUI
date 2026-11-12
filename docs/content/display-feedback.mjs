@@ -105,7 +105,7 @@ export default [
     figmaProps: [['Type', 'Line, Label', ''], ['Label', 'text', '']],
     reactProps: [['orientation', "'horizontal' | 'vertical'", ''], ['label', 'ReactNode', '']],
     behaviour: ['Static.'],
-    a11y: ['Without a label: role="separator". Purely decorative lines can be aria-hidden.'],
+    a11y: ['Without a label: role="separator". With a label: plain text, so screen readers read the label. Purely decorative lines can be aria-hidden.'],
     content: ['Short, small label: "or".'],
     do: [],
     dont: ['A divider under every row of a list.'],

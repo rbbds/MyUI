@@ -67,7 +67,7 @@ export function Avatar({ size = 'md', src, name, initials, status, className, ..
   const text = initials ?? toInitials(name);
   return (
     <span className={cx('rb-avatar', `rb-avatar--${size}`, className)} {...rest}>
-      <span className="rb-avatar__inner" role={!src || failed ? 'img' : undefined} aria-label={!src || failed ? name : undefined}>
+      <span className="rb-avatar__inner" role={(!src || failed) && name ? 'img' : undefined} aria-label={(!src || failed) && name ? name : undefined}>
         {src && !failed ? <img src={src} alt={name ?? ''} onError={() => setFailed(true)} /> : text ? <span aria-hidden="true">{text}</span> : <User aria-hidden="true" />}
       </span>
       {status && <span className={cx('rb-avatar__status', status === 'offline' && 'rb-avatar__status--offline')} aria-label={status === 'online' ? 'Online' : 'Offline'} role="img" />}
@@ -99,7 +99,8 @@ export interface DividerProps extends HTMLAttributes<HTMLElement> {
   label?: ReactNode;
 }
 export function Divider({ orientation = 'horizontal', label, className, ...rest }: DividerProps) {
-  if (label) return <div role="separator" className={cx('rb-divider-label', className)} {...rest}>{label}</div>;
+  /* No role="separator" here: a separator hides its text from screen readers, and the label must be read. */
+  if (label) return <div className={cx('rb-divider-label', className)} {...rest}>{label}</div>;
   return orientation === 'vertical'
     ? <div role="separator" aria-orientation="vertical" className={cx('rb-divider', 'rb-divider--vertical', className)} {...rest} />
     : <hr className={cx('rb-divider', className)} {...rest} />;

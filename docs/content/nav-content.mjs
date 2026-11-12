@@ -271,7 +271,7 @@ export default [
     figmaProps: [['Accordion: Show item 2 to 10', 'boolean', 'Group with 10 items, 4 on by default. Title and Expanded per item in the properties panel.'], ['Expanded', 'False, True', ''], ['State', 'Default, Hover, Focus', ''], ['Title / Panel', 'text / slot', 'via _Accordion item']],
     reactProps: [['items', '{ id, title, content }[]', ''], ['allowMultiple', 'boolean', 'Default true.'], ['defaultOpen', 'string[]', ''], ['headingLevel', '2 | 3 | 4', 'Default 3. Choose what fits the page.']],
     behaviour: ['Click, Enter or Space on the header opens or closes the panel.'],
-    a11y: ['The header is a <button> inside a heading (h2 to h4) with aria-expanded and aria-controls.', 'The panel is a region with aria-labelledby.'],
+    a11y: ['The header is a <button> inside a heading (h2 to h4) with aria-expanded and aria-controls.', 'The panel has aria-labelledby. It is a region with 6 items or fewer; more regions would crowd the landmark list.'],
     content: ['Titles as a question or a clear topic.'],
     do: ['Choose the right headingLevel so the heading structure is correct.'],
     dont: ['Accordions inside accordions.'],

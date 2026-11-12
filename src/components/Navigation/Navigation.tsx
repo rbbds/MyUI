@@ -17,7 +17,9 @@ export interface TabsProps {
 /** WAI-ARIA tabs with roving tabindex and arrow-key navigation. */
 export function Tabs({ items, type = 'underline', defaultValue, value, onChange, ...rest }: TabsProps) {
   const [inner, setInner] = useState(defaultValue ?? items[0]?.id);
-  const current = value ?? inner;
+  const wanted = value ?? inner;
+  /* An unknown value falls back to the first tab, so the tab list always has one tab stop. */
+  const current = items.some((t) => t.id === wanted) ? wanted : items[0]?.id;
   const base = useId();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
   const select = (id: string) => { setInner(id); onChange?.(id); };

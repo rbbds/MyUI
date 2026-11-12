@@ -34,7 +34,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
   return (
     <label className={cx('rb-check', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
       <span className="rb-check__control">
-        <input ref={inner} type="checkbox" className="rb-check__input" disabled={disabled} aria-checked={indeterminate ? 'mixed' : undefined} {...rest} />
+        <input ref={inner} type="checkbox" className="rb-check__input" disabled={disabled} {...rest} />
         <Check className="rb-check__indicator rb-check__indicator--check" aria-hidden="true" strokeWidth={3} />
         <Minus className="rb-check__indicator rb-check__indicator--minus" aria-hidden="true" strokeWidth={3} />
       </span>

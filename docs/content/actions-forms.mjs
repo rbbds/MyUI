@@ -322,7 +322,7 @@ export default [
       ['State', 'Default, Hover, Focus, Disabled', ''],
       ['Show text / Label / Show hint / Hint text', 'via _Checkbox', ''],
     ],
-    reactProps: [['label / hint', 'ReactNode', ''], ['indeterminate', 'boolean', 'Sets aria-checked="mixed".'], ['size', "'sm' | 'md'", ''], ['checked / onChange', 'native', '']],
+    reactProps: [['label / hint', 'ReactNode', ''], ['indeterminate', 'boolean', 'Partly selected. Uses the native indeterminate state.'], ['size', "'sm' | 'md'", ''], ['checked / onChange', 'native', '']],
     behaviour: ['Clicking the box or the label switches the value. Space when it has focus.'],
     a11y: ['Native <input type="checkbox"> inside a <label>.', 'Groups in a <fieldset> with a <legend>.', 'Without a visible label: add an aria-label (for example in a table row: "Select Robert Trimp").'],
     content: ['Label as a statement: "Send me updates by email."'],

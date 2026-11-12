@@ -100,7 +100,7 @@ export function Accordion({ items, allowMultiple = true, defaultOpen = [], headi
                 <span>{it.title}</span>{isOpen ? <Minus aria-hidden="true" /> : <Plus aria-hidden="true" />}
               </button>
             </H>
-            <div id={`${base}-${it.id}`} role="region" aria-labelledby={`${base}-${it.id}-btn`} hidden={!isOpen} className="rb-accordion__panel">{it.content}</div>
+            <div id={`${base}-${it.id}`} role={items.length <= 6 ? 'region' : undefined} aria-labelledby={`${base}-${it.id}-btn`} hidden={!isOpen} className="rb-accordion__panel">{it.content}</div>
           </div>
         );
       })}
@@ -161,7 +161,7 @@ export function FileUploadItem({ name, size, progress = 0, status = 'uploading',
         <p className="rb-file__meta">{isErr ? error ?? 'Upload failed. Try again.' : size}</p>
         {!isErr && <ProgressBar label={`Upload ${name}`} value={status === 'complete' ? 100 : progress} />}
       </div>
-      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label="Uploaded"><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Verwijder ${name}`} onClick={onRemove} />}
+      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label="Uploaded"><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Remove ${name}`} onClick={onRemove} />}
     </div>
   );
 }

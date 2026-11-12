@@ -2,7 +2,26 @@
 
 ## Unreleased
 
+### Fixed
+- `FileUploadItem`: the remove button said "Verwijder …" in Dutch. It now says "Remove …".
+- `DateRangePicker`: screen readers now hear the label and the chosen period on the button. Before, only the label was read.
+- `Input`, `Select`, `Textarea`: your own `aria-describedby` is added to the hint or error. Before, it replaced them.
+- `NotificationItem`: the focus ring is fully visible. It was cut off at the sides of the list. New effect token `--focus-ring-inset`.
+- `Avatar`: no `role="img"` without a name. `Checkbox`: no `aria-checked` on the native checkbox. `Divider` with a label: the label is read (no `role="separator"`). `PasswordInput`: the show/hide button changes its name only (no `aria-pressed`).
+- `Tabs`: a `value` that matches no tab falls back to the first tab, so the tab list can always be reached with Tab. `Accordion`: panels are a region only with 6 items or fewer.
+- `tokens.json`: when a token is declared twice, it now takes the last value, like the browser. `--table-header-padding-vertical` was 20 px in tokens.json and 12 px in CSS.
+- `scripts/figma-export-tokens.js` stops when two Figma variables give the same CSS name.
+- `llms.txt` and the guides: Forest (not Berry) uses Source Serif 4; Button group is 40 px and Quantity stepper 36 or 40 px; a token name that did not exist is replaced; fixed texts that are not a prop yet are listed.
+- Versioning guide: a size correction of up to 2 px is a small visual fix, not a breaking change.
+
+### Known issues
+- Escape in a Dropdown menu, Popover, Date picker or Date range picker inside a Modal also closes the Modal.
+- A Toast is behind the backdrop and is not read while a Modal, Slideout or Command menu is open.
+- `--table-header-padding-vertical` is still declared twice in `tokens.css`. The Figma variables get a new name with the next token export.
+- The first two are covered by `tests/browser` (marked as expected to fail) and get fixed with the shared panel layer.
+
 ### New
+- `npm run test:browser`: Playwright tests in Chromium and WebKit for keyboard and screen reader behaviour that axe cannot check. They run in CI.
 - `@rbbds/ui/tokens.json`: all tokens in the Design Tokens (DTCG) format, with value, type, CSS name and values per brand, theme and screen size. Built with every release.
 - `llms.txt` in the package: how MyUI is built and the rules for AI assistants (layers, naming, sizes, accessibility).
 - Tokens `--qty-size-md` (40 px) and `--qty-size-sm` (36 px).

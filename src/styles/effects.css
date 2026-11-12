@@ -7,5 +7,6 @@
 --shadow-xl:0 20px 24px -4px var(--effects-shadows-subtle),0 8px 8px -4px var(--effects-shadows-faint);
 --shadow-2xl:0 24px 48px -12px var(--effects-shadows-strong);
 --focus-ring:0 0 0 2px var(--color-surface-primary),0 0 0 4px var(--color-border-focus);
+--focus-ring-inset:inset 0 0 0 2px var(--color-border-focus);
 --focus-ring-error:0 0 0 2px var(--color-surface-primary),0 0 0 4px var(--color-border-focus-error);
 }

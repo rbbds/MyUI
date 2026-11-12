@@ -231,6 +231,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - axe via Playwright op elke story in Light en Dark (wachttijd circa 1200 ms per story).
 - Screenshots in Iris, Forest en Berry.
 - `npm run typecheck` en `npm run build-storybook` moeten slagen.
+- `npm run test:browser`: Playwright in Chromium en WebKit voor gedrag dat axe niet ziet (Escape in panelen, focus, schermlezernamen). Scenario's staan in `tests/harness/main.tsx`, tests in `tests/browser/`. Een bekende bug staat erin met `test.fail()`.
+- Review van 12 november 2026 met alle bevindingen en de volgorde van oplossen: `claude/MyUI-review-2026-11-12.md` in het Claude Project.
 - Laatste stand (PR #10): 0 axe-fouten op alle stories in Light en Dark.
 
 ### Geschiedenis

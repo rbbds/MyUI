@@ -93,4 +93,8 @@ for (let i = 1; i < ss.modes.length; i++) { const ls = inCol(ss.name).filter(v =
 
 
 const css = out.join('\n');
+// Two Figma variables that give the same CSS name in one block: the last one silently wins in the browser. Stop instead.
+const collisions = [];
+for (const block of css.split('}')) { const seen = new Set(); for (const m of block.matchAll(/(?:^|\n)(--[\w-]+):/g)) { if (seen.has(m[1])) collisions.push(m[1]); seen.add(m[1]); } }
+if (collisions.length) throw new Error('Token name collision, rename in Figma: ' + [...new Set(collisions)].join(', '));
 return { total: css.length, parts: Math.ceil(css.length / SIZE), chunk: css.slice(PART * SIZE, (PART + 1) * SIZE) };
