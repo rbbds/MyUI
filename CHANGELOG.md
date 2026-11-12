@@ -16,6 +16,7 @@
   - Button group: 40. Quantity stepper: 40 (md, was 44) and 36 (sm).
   - Tag and Badge: 20 / 24 / 28 (were 22 / 26 / 30). Kbd: 20. Link buttons have no border, so they are as high as their text.
 - Tag: the close button has a click area of 24 × 24 px (WCAG 2.5.8). It looks the same.
+- Button link sm and md: the click area is 24 px high (the text is 20 px). It looks the same. Link lg is already 24 px.
 - Figma: borders do not count in the layout in any component. Tab is 36 px: the indicator lies over the bottom edge, like in CSS.
 - Guide Building components: control heights and the border rule.
 - `Kbd`: vertical padding is 2 px (was 1 px), so it fits the 4 px grid with half steps. The key is 2 px higher.

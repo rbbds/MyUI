@@ -9,6 +9,9 @@
 
 .rb-button--lg{gap:var(--button-lg-gap);padding:calc(var(--button-lg-padding-vertical) - var(--button-border-width)) calc(var(--button-lg-padding-horizontal) - var(--button-border-width));font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
 .rb-button--link{padding:var(--button-link-padding);border-width:0}
+/* Link sm and md are 20 px high (text 14/20). The click area is 24 px high (WCAG 2.5.8); it looks the same. */
+.rb-button--link.rb-button--sm,.rb-button--link.rb-button--md{position:relative}
+.rb-button--link.rb-button--sm::after,.rb-button--link.rb-button--md::after{content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}
 .rb-button--link:hover:not(:disabled){text-decoration:underline}
 .rb-button--full{width:100%}
 .rb-button--icon-only.rb-button--sm{padding:calc(var(--button-icon-only-sm-padding) - var(--button-border-width))}
