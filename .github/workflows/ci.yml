@@ -18,6 +18,8 @@ jobs:
       - run: npm run lint:tokens
       # Fails when a control border or the active option is below 3:1 in any style or theme.
       - run: npm run check:contrast
+      # Fails on fixed user-facing text in component JSX: every text must be a prop.
+      - run: npm run check:strings
       - uses: actions/upload-artifact@v4
         with:
           name: token-lint

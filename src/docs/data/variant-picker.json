@@ -76,6 +76,11 @@
       "error",
       "string",
       ""
+    ],
+    [
+      "labels",
+      "{ unavailable }",
+      "Defaults in DEFAULT_VARIANT_PICKER_LABELS."
     ]
   ],
   "behaviour": [

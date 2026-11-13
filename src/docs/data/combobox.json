@@ -85,6 +85,11 @@
       "Flag: code, size, title",
       "string / 'sm' | 'md' | 'lg' | 'xl' / string",
       "Without a title the flag is decorative. Import from @rbbds/ui/flags."
+    ],
+    [
+      "labels",
+      "{ count(n), required }",
+      "Announced result count and the message when required and nothing is chosen. Defaults in DEFAULT_COMBOBOX_LABELS."
     ]
   ],
   "behaviour": [
@@ -97,6 +102,8 @@
     "APG combobox pattern with a listbox popup: role combobox, aria-expanded, aria-controls and aria-activedescendant.",
     "Groups are role group with a label. The visual is decorative (aria-hidden), the label carries the name.",
     "The chevron button is not in the tab order. The field itself opens the list.",
+    "The list is named by the label (aria-labelledby). One live region outside the list announces the number of results while you type.",
+    "required checks the chosen option, not the typed text. Leaving the field empty clears the value (onChange gets null); Escape keeps the old value.",
     "Flags have a 1 px border, so light flags stay visible on white."
   ],
   "content": [

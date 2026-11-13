@@ -39,6 +39,11 @@
       "label",
       "string",
       "Product name. The section is called \"Images {label}\"."
+    ],
+    [
+      "labels",
+      "{ gallery(label), roleDescription, previous, next, image(i, n, alt) }",
+      "Defaults in DEFAULT_PRODUCT_GALLERY_LABELS."
     ]
   ],
   "behaviour": [

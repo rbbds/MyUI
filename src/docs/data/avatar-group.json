@@ -49,6 +49,11 @@
       "children",
       "Avatar[]",
       ""
+    ],
+    [
+      "labels",
+      "{ more(n) }",
+      "Name of the \"+n\" avatar. Defaults in DEFAULT_AVATAR_GROUP_LABELS."
     ]
   ],
   "behaviour": [

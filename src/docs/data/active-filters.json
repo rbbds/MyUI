@@ -48,6 +48,11 @@
       "resultCount",
       "number",
       ""
+    ],
+    [
+      "labels",
+      "{ results(n), list, remove(label), clearAll }",
+      "Defaults in DEFAULT_ACTIVE_FILTERS_LABELS."
     ]
   ],
   "behaviour": [],

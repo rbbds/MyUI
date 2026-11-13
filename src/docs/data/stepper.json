@@ -57,6 +57,11 @@
       "statusLabels",
       "object",
       "Screen reader text, default 'completed', 'current step', 'to do'."
+    ],
+    [
+      "aria-label",
+      "string",
+      "Default 'Progress'."
     ]
   ],
   "behaviour": [

@@ -39,6 +39,11 @@
       "children",
       "ReactNode",
       "Your own text, for example \"Only 3 left\"."
+    ],
+    [
+      "labels",
+      "Record<status, string>",
+      "Text per status. Defaults in DEFAULT_STOCK_LABELS."
     ]
   ],
   "behaviour": [],

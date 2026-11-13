@@ -1,7 +1,7 @@
 import { cloneElement, isValidElement, useId, useRef, useState, type HTMLAttributes, type ReactElement, type ReactNode } from 'react';
 import { User, X } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { useEscape } from '../../utils/panel';
+import { useEscape, usePlacement } from '../../utils/panel';
 import './Display.css';
 
 export type StatusColor = 'gray' | 'brand' | 'error' | 'warning' | 'success' | 'info';
@@ -33,14 +33,18 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /** Renders a close button. Its accessible name is "Remove {label}" unless removeLabel is set. */
   onRemove?: () => void;
   removeLabel?: string;
+  labels?: Partial<TagLabels>;
 }
-export function Tag({ size = 'md', dot, onRemove, removeLabel, className, children, ...rest }: TagProps) {
+export interface TagLabels { remove: (label: string) => string }
+export const DEFAULT_TAG_LABELS: TagLabels = { remove: (label) => `Remove ${label}`.trim() };
+export function Tag({ size = 'md', dot, onRemove, removeLabel, labels, className, children, ...rest }: TagProps) {
+  const l = { ...DEFAULT_TAG_LABELS, ...labels };
   return (
     <span className={cx('rb-tag', `rb-tag--${size}`, className)} {...rest}>
       {dot && <span className="rb-tag__dot" aria-hidden="true" />}
       {children}
       {onRemove && (
-        <button type="button" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? `Remove ${typeof children === 'string' ? children : ''}`.trim()}>
+        <button type="button" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? l.remove(typeof children === 'string' ? children : '')}>
           <X aria-hidden="true" />
         </button>
       )}
@@ -50,6 +54,8 @@ export function Tag({ size = 'md', dot, onRemove, removeLabel, className, childr
 
 /* ---------- Avatar ---------- */
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export interface AvatarLabels { online: string; offline: string }
+export const DEFAULT_AVATAR_LABELS: AvatarLabels = { online: 'Online', offline: 'Offline' };
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   size?: AvatarSize;
   src?: string;
@@ -57,13 +63,15 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   name?: string;
   initials?: string;
   status?: 'online' | 'offline';
+  labels?: Partial<AvatarLabels>;
 }
 function toInitials(name?: string) {
   if (!name) return '';
   const p = name.trim().split(/\s+/);
   return ((p[0]?.[0] ?? '') + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase();
 }
-export function Avatar({ size = 'md', src, name, initials, status, className, ...rest }: AvatarProps) {
+export function Avatar({ size = 'md', src, name, initials, status, labels, className, ...rest }: AvatarProps) {
+  const l = { ...DEFAULT_AVATAR_LABELS, ...labels };
   const [failed, setFailed] = useState(false);
   const text = initials ?? toInitials(name);
   return (
@@ -71,7 +79,7 @@ export function Avatar({ size = 'md', src, name, initials, status, className, ..
       <span className="rb-avatar__inner" role={(!src || failed) && name ? 'img' : undefined} aria-label={(!src || failed) && name ? name : undefined}>
         {src && !failed ? <img src={src} alt={name ?? ''} onError={() => setFailed(true)} /> : text ? <span aria-hidden="true">{text}</span> : <User aria-hidden="true" />}
       </span>
-      {status && <span className={cx('rb-avatar__status', status === 'offline' && 'rb-avatar__status--offline')} aria-label={status === 'online' ? 'Online' : 'Offline'} role="img" />}
+      {status && <span className={cx('rb-avatar__status', status === 'offline' && 'rb-avatar__status--offline')} aria-label={status === 'online' ? l.online : l.offline} role="img" />}
     </span>
   );
 }
@@ -81,15 +89,19 @@ export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
   /** Max avatars before the "+n" counter. */
   max?: number;
   children: ReactNode;
+  labels?: Partial<AvatarGroupLabels>;
 }
-export function AvatarGroup({ size = 'sm', max = 4, className, children, ...rest }: AvatarGroupProps) {
+export interface AvatarGroupLabels { more: (count: number) => string }
+export const DEFAULT_AVATAR_GROUP_LABELS: AvatarGroupLabels = { more: (count) => `${count} ${count === 1 ? 'other' : 'others'}` };
+export function AvatarGroup({ size = 'sm', max = 4, labels, className, children, ...rest }: AvatarGroupProps) {
+  const l = { ...DEFAULT_AVATAR_GROUP_LABELS, ...labels };
   const items = (Array.isArray(children) ? children : [children]).filter(isValidElement) as ReactElement<AvatarProps>[];
   const shown = items.slice(0, max);
   const extra = items.length - shown.length;
   return (
     <div className={cx('rb-avatar-group', `rb-avatar-group--${size}`, className)} {...rest}>
       {shown.map((el, i) => cloneElement(el, { key: i, size }))}
-      {extra > 0 && <Avatar size={size} initials={`+${extra}`} name={`${extra} others`} />}
+      {extra > 0 && <Avatar size={size} initials={`+${extra}`} name={l.more(extra)} />}
     </div>
   );
 }
@@ -169,7 +181,10 @@ export function Tooltip({ title, text, placement = 'top', children }: TooltipPro
   const [open, setOpen] = useState(false);
   const id = `rb-tt-${useId()}`;
   const root = useRef<HTMLSpanElement>(null);
+  const tip = useRef<HTMLSpanElement>(null);
   useEscape({ open, root, anyTarget: true, onEscape: () => setOpen(false) });
+  // In the top layer, so a Modal or a table cannot clip it. It moves to the other side when there is no room.
+  const { side } = usePlacement({ open, panel: tip, anchor: root, side: placement, align: 'center' });
   return (
     <span
       ref={root}
@@ -180,7 +195,7 @@ export function Tooltip({ title, text, placement = 'top', children }: TooltipPro
       onBlur={() => setOpen(false)}
     >
       {cloneElement(children, { 'aria-describedby': id })}
-      <span id={id} role="tooltip" className={cx('rb-tooltip', `rb-tooltip--${placement}`)} data-open={open}>
+      <span ref={tip} id={id} role="tooltip" className={cx('rb-tooltip', `rb-tooltip--${open ? side : placement}`)} data-open={open}>
         <span className="rb-tooltip__title">{title}</span>
         {text && <span className="rb-tooltip__text">{text}</span>}
       </span>

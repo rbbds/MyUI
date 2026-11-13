@@ -64,6 +64,11 @@
       "size",
       "'sm' | 'md'",
       ""
+    ],
+    [
+      "labels",
+      "{ quantity(n), quantityOf(title), remove(title) }",
+      "Defaults in DEFAULT_CART_ITEM_LABELS."
     ]
   ],
   "behaviour": [

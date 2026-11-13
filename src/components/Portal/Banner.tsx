@@ -19,14 +19,16 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
   action?: ReactNode;
   onClose?: () => void;
   closeLabel?: string;
+  /** Name of the banner when role is 'region'. */
+  regionLabel?: string;
   /** 'status' for a banner that appears after an action; omit for a banner present on page load. */
   role?: 'status' | 'alert' | 'region';
 }
 
 /** Page-wide message above the content (maintenance, incomplete data, new feature). Inside content, use Alert. */
-export function Banner({ color = 'brand', title, children, icon, action, onClose, closeLabel = 'Close message', className, role, ...rest }: BannerProps) {
+export function Banner({ color = 'brand', title, children, icon, action, onClose, closeLabel = 'Close message', regionLabel = 'Message', className, role, ...rest }: BannerProps) {
   return (
-    <div className={cx('rb-banner', `rb-banner--${color}`, className)} role={role} aria-label={role === 'region' ? 'Message' : undefined} {...rest}>
+    <div className={cx('rb-banner', `rb-banner--${color}`, className)} role={role} aria-label={role === 'region' ? regionLabel : undefined} {...rest}>
       <span className="rb-banner__icon" aria-hidden="true">{icon ?? ICONS[color]}</span>
       <div className="rb-banner__body">
         <p className="rb-banner__text">

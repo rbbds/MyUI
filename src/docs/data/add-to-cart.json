@@ -75,6 +75,11 @@
       "hierarchy",
       "'accent' | 'primary'",
       "Default 'accent', so the buy action stands out from the brand color."
+    ],
+    [
+      "labels",
+      "{ quantity, quantityOf(name), soldOut }",
+      "Defaults in DEFAULT_ADD_TO_CART_LABELS."
     ]
   ],
   "behaviour": [

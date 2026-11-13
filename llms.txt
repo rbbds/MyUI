@@ -10,7 +10,7 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 - Load once: `import '@rbbds/ui/styles.css'` (tokens + component styles). Load fonts yourself (Inter; Forest also uses Source Serif 4 for titles).
 - Import components: `import { Button, Input } from '@rbbds/ui'`. Icons come from lucide-react and are passed as props, for example `iconLeading={<Plus aria-hidden />}`.
 - Style: `data-brand="forest"` or `data-brand="berry"` on `<html>` (Iris is the default). Theme: `data-theme="dark"` on `<html>` or on a section.
-- Built-in labels are English. Most are props. Some texts are still fixed: Date range picker, File upload item, Password strength, Pagination, Avatar status and the e-commerce components. Dates and amounts have a `locale` prop.
+- Built-in labels are English. Every text a user sees or hears is a prop: a single prop such as `closeLabel`, or a `labels` prop with the English defaults in an exported `DEFAULT_<COMPONENT>_LABELS` object, for example `<CartButton labels={{ count: (n) => `${n} artikelen` }} />`. Dates and amounts have a `locale` prop. CI fails on fixed text in component JSX (`npm run check:strings`).
 
 ## Rules for generated code
 

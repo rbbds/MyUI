@@ -14,16 +14,32 @@ const day = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
 const plus = (d: Date, n: number) => new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
 const same = (a?: Date | null, b?: Date | null) => !!a && !!b && day(a).getTime() === day(b).getTime();
 
-/** Default quick picks, relative to today. */
-export const defaultDateRangePresets = (today = day(new Date())): DateRangePreset[] => [
-  { label: 'Today', range: () => ({ start: today, end: today }) },
-  { label: 'Yesterday', range: () => ({ start: plus(today, -1), end: plus(today, -1) }) },
-  { label: 'Last 7 days', range: () => ({ start: plus(today, -6), end: today }) },
-  { label: 'Last 30 days', range: () => ({ start: plus(today, -29), end: today }) },
-  { label: 'This month', range: () => ({ start: new Date(today.getFullYear(), today.getMonth(), 1), end: new Date(today.getFullYear(), today.getMonth() + 1, 0) }) },
-  { label: 'Last month', range: () => ({ start: new Date(today.getFullYear(), today.getMonth() - 1, 1), end: new Date(today.getFullYear(), today.getMonth(), 0) }) },
-  { label: 'This year', range: () => ({ start: new Date(today.getFullYear(), 0, 1), end: new Date(today.getFullYear(), 11, 31) }) },
-];
+export interface DateRangePresetLabels { today: string; yesterday: string; last7: string; last30: string; thisMonth: string; lastMonth: string; thisYear: string }
+export const DEFAULT_DATE_RANGE_PRESET_LABELS: DateRangePresetLabels = {
+  today: 'Today', yesterday: 'Yesterday', last7: 'Last 7 days', last30: 'Last 30 days', thisMonth: 'This month', lastMonth: 'Last month', thisYear: 'This year',
+};
+/** Default quick picks, relative to today. Pass labels to translate them. */
+export const defaultDateRangePresets = (today = day(new Date()), labels: Partial<DateRangePresetLabels> = {}): DateRangePreset[] => {
+  const l = { ...DEFAULT_DATE_RANGE_PRESET_LABELS, ...labels };
+  return [
+    { label: l.today, range: () => ({ start: today, end: today }) },
+    { label: l.yesterday, range: () => ({ start: plus(today, -1), end: plus(today, -1) }) },
+    { label: l.last7, range: () => ({ start: plus(today, -6), end: today }) },
+    { label: l.last30, range: () => ({ start: plus(today, -29), end: today }) },
+    { label: l.thisMonth, range: () => ({ start: new Date(today.getFullYear(), today.getMonth(), 1), end: new Date(today.getFullYear(), today.getMonth() + 1, 0) }) },
+    { label: l.lastMonth, range: () => ({ start: new Date(today.getFullYear(), today.getMonth() - 1, 1), end: new Date(today.getFullYear(), today.getMonth(), 0) }) },
+    { label: l.thisYear, range: () => ({ start: new Date(today.getFullYear(), 0, 1), end: new Date(today.getFullYear(), 11, 31) }) },
+  ];
+};
+
+export interface DateRangePickerLabels {
+  quickPicks: string; custom: string; cancel: string; apply: string;
+  chooseStart: string; chooseEnd: string; days: (count: number) => string;
+}
+export const DEFAULT_DATE_RANGE_PICKER_LABELS: DateRangePickerLabels = {
+  quickPicks: 'Quick picks', custom: 'Custom', cancel: 'Cancel', apply: 'Apply',
+  chooseStart: 'Choose a start date', chooseEnd: 'Choose an end date', days: (count) => `${count} ${count === 1 ? 'day' : 'days'}`,
+};
 
 export interface DateRangePickerProps extends FieldBaseProps {
   value?: DateRange;
@@ -38,6 +54,7 @@ export interface DateRangePickerProps extends FieldBaseProps {
   placeholder?: string;
   locale?: string;
   dialogLabel?: string;
+  labels?: Partial<DateRangePickerLabels>;
   className?: string;
 }
 
@@ -48,8 +65,9 @@ const days = (r: DateRange) => (r.start && r.end ? Math.round((day(r.end).getTim
 export function DateRangePicker({
   label, hideLabel, hint, error, required, size = 'md', value, defaultValue = { start: null, end: null }, onChange,
   presets = defaultDateRangePresets(), min, max, disabled, id, placeholder = 'Choose a period', locale = 'en-US',
-  dialogLabel = 'Choose a period', className,
+  dialogLabel = 'Choose a period', labels, className,
 }: DateRangePickerProps) {
+  const l = { ...DEFAULT_DATE_RANGE_PICKER_LABELS, ...labels };
   const [own, setOwn] = useState<DateRange>(defaultValue);
   const range = value ?? own;
   const [open, setOpen] = useState(false);
@@ -98,8 +116,8 @@ export function DateRangePicker({
 
   const text = range.start && range.end ? `${formatDate(range.start, locale)} – ${formatDate(range.end, locale)}` : '';
   const summary = draft.start && draft.end
-    ? `${fmtShort(draft.start, locale, !(draft.start.getFullYear() === draft.end.getFullYear()))} – ${fmtShort(draft.end, locale, true)} · ${days(draft)} ${days(draft) === 1 ? 'day' : 'days'}`
-    : draft.start ? 'Choose an end date' : 'Choose a start date';
+    ? `${fmtShort(draft.start, locale, !(draft.start.getFullYear() === draft.end.getFullYear()))} – ${fmtShort(draft.end, locale, true)} · ${l.days(days(draft))}`
+    : draft.start ? l.chooseEnd : l.chooseStart;
   const next = new Date(month.getFullYear(), month.getMonth() + 1, 1);
   const common = { rangeStart: shown.start, rangeEnd: shown.end, onChange: pick, onDayHover: setHover, min, max, locale, className: 'rb-calendar--plain', views: ['day' as const] };
 
@@ -129,11 +147,11 @@ export function DateRangePicker({
           {open && (
             <div ref={panel} id={dialogId} role="dialog" aria-label={dialogLabel} className="rb-daterange__panel">
               {presetList.length > 0 && (
-                <div className="rb-daterange__presets" role="group" aria-label="Quick picks">
+                <div className="rb-daterange__presets" role="group" aria-label={l.quickPicks}>
                   {presetList.map((p) => (
                     <button key={p.label} type="button" className="rb-daterange__preset" aria-pressed={activePreset === p} onClick={() => choosePreset(p)}>{p.label}</button>
                   ))}
-                  <span className={cx('rb-daterange__preset', 'is-static', !activePreset && draft.start && 'is-current')} aria-hidden="true">Custom</span>
+                  <span className={cx('rb-daterange__preset', 'is-static', !activePreset && draft.start && 'is-current')} aria-hidden="true">{l.custom}</span>
                 </div>
               )}
               <div className="rb-daterange__main">
@@ -143,8 +161,8 @@ export function DateRangePicker({
                 </div>
                 <div className="rb-daterange__footer">
                   <p className="rb-daterange__summary" aria-live="polite">{summary}</p>
-                  <Button hierarchy="secondary" size="sm" onClick={close}>Cancel</Button>
-                  <Button size="sm" onClick={apply} disabled={!draft.start || !draft.end}>Apply</Button>
+                  <Button hierarchy="secondary" size="sm" onClick={close}>{l.cancel}</Button>
+                  <Button size="sm" onClick={apply} disabled={!draft.start || !draft.end}>{l.apply}</Button>
                 </div>
               </div>
             </div>

@@ -62,6 +62,16 @@
       "CartButton: count, onClick, label",
       "",
       "The name becomes \"Cart, 3 items\"."
+    ],
+    [
+      "labels (MiniCart)",
+      "{ title(n), subtotal, checkout, viewCart, emptyTitle, emptyText, continueShopping }",
+      "Defaults in DEFAULT_MINI_CART_LABELS."
+    ],
+    [
+      "labels (CartButton)",
+      "{ count(n) }",
+      "Defaults in DEFAULT_CART_BUTTON_LABELS."
     ]
   ],
   "behaviour": [

@@ -27,13 +27,20 @@ export interface ProductCardProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   onAddToCart?: () => void;
   addToCartLabel?: string;
   layout?: 'vertical' | 'horizontal';
+  labels?: Partial<ProductCardLabels>;
 }
+export interface ProductCardLabels { wishlist: (title: string) => string; colors: (count: number) => string }
+export const DEFAULT_PRODUCT_CARD_LABELS: ProductCardLabels = {
+  wishlist: (title) => `Save ${title} to wishlist`,
+  colors: (count) => `${count} ${count === 1 ? 'color' : 'colors'}`,
+};
 
 /** Product tile for grids and carousels. */
 export function ProductCard({
   title, href, image, meta, price, compareAt, currency, rating, reviewCount, badge, swatches, stock,
-  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel = 'Add to cart', layout = 'vertical', className, ...rest
+  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel = 'Add to cart', layout = 'vertical', labels, className, ...rest
 }: ProductCardProps) {
+  const l = { ...DEFAULT_PRODUCT_CARD_LABELS, ...labels };
   const shown = swatches?.slice(0, 4) ?? [];
   return (
     <article className={cx('rb-product-card', `rb-product-card--${layout}`, stock === 'out' && 'rb-product-card--out', className)} {...rest}>
@@ -46,7 +53,7 @@ export function ProductCard({
             hierarchy="secondary"
             size="sm"
             icon={<Heart fill={wishlisted ? 'currentColor' : 'none'} />}
-            aria-label={`Save ${title} to wishlist`}
+            aria-label={l.wishlist(title)}
             aria-pressed={!!wishlisted}
             onClick={onToggleWishlist}
           />
@@ -60,7 +67,7 @@ export function ProductCard({
           <p className="rb-product-card__swatches">
             {shown.map((c) => <span key={c} className="rb-product-card__swatch" style={{ background: c }} aria-hidden="true" />)}
             {swatches!.length > shown.length && <span aria-hidden="true">+{swatches!.length - shown.length}</span>}
-            <span className="rb-visually-hidden">{swatches!.length} colors</span>
+            <span className="rb-visually-hidden">{l.colors(swatches!.length)}</span>
           </p>
         )}
         <div className="rb-product-card__footer">

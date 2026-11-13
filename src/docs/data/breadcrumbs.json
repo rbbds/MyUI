@@ -67,6 +67,11 @@
       "aria-label",
       "string",
       "Default 'Breadcrumb'."
+    ],
+    [
+      "backLabel",
+      "string",
+      "Text of the back link when back.label is not set. Default 'Back'."
     ]
   ],
   "behaviour": [

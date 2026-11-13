@@ -27,10 +27,19 @@ export interface CartItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   readOnly?: boolean;
   size?: 'sm' | 'md';
   currency?: string;
+  labels?: Partial<CartItemLabels>;
 }
+export interface CartItemLabels { quantity: (quantity: number) => string; quantityOf: (title: string) => string; remove: (title: string) => string }
+export const DEFAULT_CART_ITEM_LABELS: CartItemLabels = {
+  quantity: (quantity) => `Quantity: ${quantity}`,
+  quantityOf: (title) => `Quantity ${title}`,
+  remove: (title) => `Remove ${title}`,
+};
 
 /** Product line in the cart, mini cart or order summary. */
-export function CartItem({ title, href, image, options, price, compareAt, quantity, maxQuantity = 99, onQuantityChange, onRemove, readOnly, size = 'md', currency, className, ...rest }: CartItemProps) {
+export function CartItem({ title, href, image, options, price, compareAt, quantity, maxQuantity = 99, onQuantityChange, onRemove, readOnly, size = 'md', currency, labels, className, ...rest }: CartItemProps) {
+  const l = { ...DEFAULT_CART_ITEM_LABELS, ...labels };
+  const name = typeof title === 'string' ? title : '';
   return (
     <div className={cx('rb-cart-item', `rb-cart-item--${size}`, className)} {...rest}>
       <div className="rb-cart-item__media">{image ? <img src={image.src} alt={image.alt ?? ''} /> : <span className="rb-product-card__placeholder" />}</div>
@@ -38,12 +47,12 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
         <div className="rb-cart-item__text">
           <p className="rb-cart-item__title">{href ? <a href={href}>{title}</a> : title}</p>
           {options && options.length > 0 && <p className="rb-cart-item__options">{options.join(' · ')}</p>}
-          {readOnly && <p className="rb-cart-item__options">Quantity: {quantity}</p>}
+          {readOnly && <p className="rb-cart-item__options">{l.quantity(quantity)}</p>}
         </div>
         {!readOnly && (
           <div className="rb-cart-item__actions">
-            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onChange={onQuantityChange} label={`Quantity ${title}`} />
-            {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={`Remove ${title}`} onClick={onRemove} />}
+            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onChange={onQuantityChange} label={l.quantityOf(name)} />
+            {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={l.remove(name)} onClick={onRemove} />}
           </div>
         )}
       </div>
@@ -53,6 +62,8 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
 }
 
 /* ---------- Cart summary ---------- */
+export interface CartSummaryLabels { subtotal: string; total: string }
+export const DEFAULT_CART_SUMMARY_LABELS: CartSummaryLabels = { subtotal: 'Subtotal', total: 'Total' };
 export interface SummaryLine { label: ReactNode; amount: number; /** Shown instead of the amount, e.g. "Free". */ note?: string }
 export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title?: ReactNode;
@@ -69,24 +80,26 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   /** Slot above the rows, e.g. read-only CartItems in checkout (order summary). */
   children?: ReactNode;
   currency?: string;
+  labels?: Partial<CartSummaryLabels>;
 }
 
 /** Totals block for cart and checkout. Use children for the order summary in checkout. */
-export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, action, children, currency = 'EUR', className, ...rest }: CartSummaryProps) {
+export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, action, children, currency = 'EUR', labels, className, ...rest }: CartSummaryProps) {
+  const l = { ...DEFAULT_CART_SUMMARY_LABELS, ...labels };
   const id = useId();
   return (
     <section className={cx('rb-cart-summary', className)} aria-labelledby={id} {...rest}>
       <h2 id={id} className="rb-cart-summary__title">{title}</h2>
       {children && <div className="rb-cart-summary__items">{children}</div>}
       <dl className="rb-cart-summary__rows">
-        <div className="rb-cart-summary__row"><dt>Subtotal</dt><dd>{formatMoney(subtotal, currency)}</dd></div>
+        <div className="rb-cart-summary__row"><dt>{l.subtotal}</dt><dd>{formatMoney(subtotal, currency)}</dd></div>
         {lines.map((l, i) => (
           <div key={i} className={cx('rb-cart-summary__row', l.amount < 0 && 'is-discount')}>
             <dt>{l.label}</dt>
             <dd>{l.note ?? (l.amount < 0 ? `− ${formatMoney(-l.amount, currency)}` : formatMoney(l.amount, currency))}</dd>
           </div>
         ))}
-        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>Total</dt><dd>{formatMoney(total, currency)}</dd></div>
+        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>{l.total}</dt><dd>{formatMoney(total, currency)}</dd></div>
       </dl>
       {totalNote && <p className="rb-cart-summary__note">{totalNote}</p>}
       {promo}
@@ -96,6 +109,8 @@ export function CartSummary({ title = 'Summary', subtotal, lines = [], total, to
 }
 
 /* ---------- Promo code ---------- */
+export interface PromoCodeLabels { empty: string; remove: (code: string) => string }
+export const DEFAULT_PROMO_CODE_LABELS: PromoCodeLabels = { empty: 'Enter a discount code.', remove: (code) => `Remove discount code ${code}` };
 export interface PromoCodeProps {
   /** Return an error message to show, or nothing when the code is accepted. */
   onApply: (code: string) => string | void | Promise<string | void>;
@@ -104,16 +119,18 @@ export interface PromoCodeProps {
   label?: string;
   buttonLabel?: string;
   className?: string;
+  labels?: Partial<PromoCodeLabels>;
 }
 
 /** Discount code field. After applying, the code is shown as a removable Tag. */
-export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel = 'Apply', className }: PromoCodeProps) {
+export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel = 'Apply', labels, className }: PromoCodeProps) {
+  const l = { ...DEFAULT_PROMO_CODE_LABELS, ...labels };
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!code.trim()) { setError('Enter a discount code.'); return; }
+    if (!code.trim()) { setError(l.empty); return; }
     setBusy(true);
     const res = await onApply(code.trim());
     setBusy(false);
@@ -124,7 +141,7 @@ export function PromoCode({ onApply, applied, onRemove, label = 'Discount code',
       {applied ? (
         <div className="rb-promo__applied" role="status">
           <span>{label}:</span>
-          <Tag onRemove={onRemove} removeLabel={`Remove discount code ${applied}`}>{applied}</Tag>
+          <Tag onRemove={onRemove} removeLabel={l.remove(applied)}>{applied}</Tag>
         </div>
       ) : (
         <form className="rb-promo__form" onSubmit={submit} noValidate>
@@ -137,12 +154,15 @@ export function PromoCode({ onApply, applied, onRemove, label = 'Discount code',
 }
 
 /* ---------- Cart button (header) ---------- */
-export interface CartButtonProps { count: number; onClick?: () => void; label?: string; className?: string }
+export interface CartButtonProps { count: number; onClick?: () => void; label?: string; labels?: Partial<CartButtonLabels>; className?: string }
+export interface CartButtonLabels { count: (count: number) => string }
+export const DEFAULT_CART_BUTTON_LABELS: CartButtonLabels = { count: (count) => `${count} ${count === 1 ? 'item' : 'items'}` };
 /** Header button with item count. The count is part of the accessible name. */
-export function CartButton({ count, onClick, label = 'Cart', className }: CartButtonProps) {
+export function CartButton({ count, onClick, label = 'Cart', labels, className }: CartButtonProps) {
+  const l = { ...DEFAULT_CART_BUTTON_LABELS, ...labels };
   return (
     <span className={cx('rb-cart-button', className)}>
-      <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${count} ${count === 1 ? 'item' : 'items'}`} onClick={onClick} />
+      <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${l.count(count)}`} onClick={onClick} />
       {count > 0 && <span className="rb-cart-button__count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}
     </span>
   );
@@ -161,28 +181,35 @@ export interface MiniCartProps {
   cartHref?: string;
   /** Extra line in the footer, e.g. "€12.05 to go for free shipping". */
   note?: ReactNode;
+  labels?: Partial<MiniCartLabels>;
 }
+export interface MiniCartLabels { title: (count: number) => string; subtotal: string; checkout: string; viewCart: string; emptyTitle: string; emptyText: string; continueShopping: string }
+export const DEFAULT_MINI_CART_LABELS: MiniCartLabels = {
+  title: (count) => `Cart (${count})`, subtotal: 'Subtotal', checkout: 'Checkout', viewCart: 'View cart',
+  emptyTitle: 'Your cart is empty', emptyText: 'Browse the shop and add something.', continueShopping: 'Continue shopping',
+};
 
 /** Cart in a Slideout: opens from the header after "Add to cart" or a click on the CartButton. */
-export function MiniCart({ open, onClose, children, itemCount, subtotal, currency = 'EUR', onCheckout, cartHref = '#', note }: MiniCartProps) {
+export function MiniCart({ open, onClose, children, itemCount, subtotal, currency = 'EUR', onCheckout, cartHref = '#', note, labels }: MiniCartProps) {
+  const l = { ...DEFAULT_MINI_CART_LABELS, ...labels };
   const empty = itemCount === 0;
   return (
     <Slideout
       open={open}
       onClose={onClose}
       size="sm"
-      title={`Cart (${itemCount})`}
+      title={l.title(itemCount)}
       footer={empty ? undefined : (
         <div className="rb-mini-cart__footer">
           {note && <p className="rb-mini-cart__note">{note}</p>}
-          <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>Subtotal</span><span>{formatMoney(subtotal, currency)}</span></div>
-          <Button fullWidth onClick={onCheckout}>Checkout</Button>
-          <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>View cart</Button>
+          <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>{l.subtotal}</span><span>{formatMoney(subtotal, currency)}</span></div>
+          <Button fullWidth onClick={onCheckout}>{l.checkout}</Button>
+          <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>{l.viewCart}</Button>
         </div>
       )}
     >
       {empty ? (
-        <EmptyState icon={<ShoppingBag />} title="Your cart is empty" description="Browse the shop and add something." actions={<Button hierarchy="secondary" onClick={onClose}>Continue shopping</Button>} />
+        <EmptyState icon={<ShoppingBag />} title={l.emptyTitle} description={l.emptyText} actions={<Button hierarchy="secondary" onClick={onClose}>{l.continueShopping}</Button>} />
       ) : (
         <div className="rb-mini-cart__items">{children}</div>
       )}

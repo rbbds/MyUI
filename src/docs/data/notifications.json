@@ -42,6 +42,11 @@
       "NotificationItem title, children, time, unread, avatar, href / onClick",
       "",
       "Mark as read in onClick."
+    ],
+    [
+      "labels (NotificationPanel)",
+      "{ emptyTitle, emptyText }",
+      "Defaults in DEFAULT_NOTIFICATION_PANEL_LABELS."
     ]
   ],
   "behaviour": [

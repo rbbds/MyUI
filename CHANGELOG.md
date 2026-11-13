@@ -3,6 +3,11 @@
 ## Unreleased
 
 ### Fixed
+- **Every text is a prop (H6).** Components with fixed English text get a `labels` prop. The English defaults are exported as `DEFAULT_<COMPONENT>_LABELS`, so you pass only what you change: Price, Rating, StockIndicator, CartItem, CartSummary, PromoCode, CartButton, MiniCart, AddressFields, FilterGroup, ActiveFilters, ProductGallery, VariantPicker, AddToCart, ProductCard, FileUploadItem, Tag, Avatar, AvatarGroup, DateRangePicker, PasswordInput, NotificationPanel, CommandMenu and Combobox. Breadcrumbs (`backLabel`, `aria-label`), Pagination, Stepper and BottomNavigation (`aria-label`) and Banner (`regionLabel`) get a single prop. `defaultDateRangePresets(today, labels)` and `passwordRequirements(labels)` translate the quick picks and the password rules.
+- **Modal, Slideout and Command menu (M2):** a click on the backdrop closes only when the press also started there, so selecting text and letting go outside keeps them open. A `<form method="dialog">` inside closes them through `onClose`, so they open again. The page behind does not scroll. Modal: no empty spacer without a footer.
+- **Command menu:** the dialog, the search field (Search) and the result list (Results) have their own names. Item ids with a space or other characters give valid ids.
+- **Combobox (M3):** one live region outside the list announces the number of results (it was inside the list and appeared with its text). `required` checks the chosen option, not the typed text. Leaving the field empty clears the value: `onChange(null, null)`. The list is named by the label, also when the label is not a string.
+- **Tooltip** opens in the top layer: a Modal or a table no longer clips it. It moves to the other side when there is no room.
 - **Escape in a panel inside a Modal closes only the panel**: Dropdown menu, Popover, Date picker, Date range picker and Tooltip. Before, the Modal closed too.
 - **A Toast stays visible and is read while a Modal, Slideout or Command menu is open.** `ToastRegion` renders inside the open dialog. A toast has no `role="status"` of its own anymore: the region is the live region, so it is not announced twice.
 - **Panels are no longer clipped** by a Modal, a scroll area or a table: Dropdown menu, Popover, Date picker, Date range picker, Notification menu and the Combobox list open in the top layer (`popover` attribute). They open above the trigger when there is no room below, and stay inside the screen.
@@ -25,6 +30,8 @@
 - Versioning guide: a size correction of up to 2 px is a small visual fix, not a breaking change.
 
 ### New
+- `initialFocus` on Modal and Slideout: the element that gets focus when they open, e.g. the first field of a form.
+- `npm run check:strings` in CI: fails on fixed user-facing text in component JSX (JSX text, aria-label, title, placeholder, label and other text props, and text built in a variable).
 - `src/utils/panel.ts`: one shared layer for panels (Escape for the topmost panel only, focus out, click outside, top layer and placement). Covered by `tests/browser` in Chromium and WebKit.
 - `npm run check:contrast`: checks control borders and the active option for 3:1 in every style and theme. Runs in CI and fails below 3:1.
 - Tokens for Mega menu, Mobile nav and the expanded Header nav item (from Figma). The React components follow later.

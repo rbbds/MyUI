@@ -46,7 +46,7 @@ export interface BottomNavigationProps {
 }
 
 /** App navigation at the bottom of the screen on mobile. Replaces the Sidebar below 900px. */
-export function BottomNavigation({ children, action, className, ...rest }: BottomNavigationProps) {
+export function BottomNavigation({ children, action, className, 'aria-label': ariaLabel = 'Main menu' }: BottomNavigationProps) {
   const items = (Array.isArray(children) ? children : [children]).map((c, i) => <li key={i}>{c}</li>);
   if (action) {
     const inner = <span className="rb-bottom-nav__action-icon" aria-hidden="true">{action.icon}</span>;
@@ -59,7 +59,7 @@ export function BottomNavigation({ children, action, className, ...rest }: Botto
     ));
   }
   return (
-    <nav className={cx('rb-bottom-nav', className)} aria-label={rest['aria-label'] ?? 'Main menu'}>
+    <nav className={cx('rb-bottom-nav', className)} aria-label={ariaLabel}>
       <ul className="rb-bottom-nav__list">{items}</ul>
     </nav>
   );

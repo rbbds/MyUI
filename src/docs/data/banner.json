@@ -62,6 +62,11 @@
       "role",
       "'status' | 'alert' | 'region'",
       "status for a banner that shows up after an action. Leave it out if the banner is there when the page loads."
+    ],
+    [
+      "regionLabel",
+      "string",
+      "Name when role is 'region'. Default 'Message'."
     ]
   ],
   "behaviour": [

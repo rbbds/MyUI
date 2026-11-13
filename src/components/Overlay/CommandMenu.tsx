@@ -1,6 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Search } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useModalDialog } from '../../utils/dialog';
 import { Kbd } from '../Display/Feedback';
 import './CommandMenu.css';
 
@@ -29,25 +30,28 @@ export interface CommandMenuProps {
   /** Show the keyboard hints footer. */
   showHints?: boolean;
   hintLabels?: { navigate: string; select: string; close: string };
+  /** Names of the search field and the result list, the key cap and the result count that screen readers hear. */
+  labels?: Partial<CommandMenuLabels>;
 }
+
+export interface CommandMenuLabels { search: string; results: string; escapeKey: string; count: (count: number) => string }
+export const DEFAULT_COMMAND_MENU_LABELS: CommandMenuLabels = {
+  search: 'Search', results: 'Results', escapeKey: 'Esc', count: (count) => `${count} ${count === 1 ? 'result' : 'results'}`,
+};
+const safeId = (id: string) => id.replace(/[^\w-]/g, '_');
 
 /**
  * Keyboard-first search over pages and actions. Combobox (input) + listbox (results);
  * arrow keys move aria-activedescendant, Enter runs the item, Escape closes.
  */
-export function CommandMenu({ open, onClose, items, label = 'Commands', placeholder = 'Search or type a command…', emptyText = 'No results found.', showHints = true, hintLabels = { navigate: 'navigate', select: 'open', close: 'close' } }: CommandMenuProps) {
-  const ref = useRef<HTMLDialogElement>(null);
+export function CommandMenu({ open, onClose, items, label = 'Commands', placeholder = 'Search or type a command…', emptyText = 'No results found.', showHints = true, hintLabels = { navigate: 'navigate', select: 'open', close: 'close' }, labels }: CommandMenuProps) {
+  const l = { ...DEFAULT_COMMAND_MENU_LABELS, ...labels };
   const list = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const base = useId();
-
-  useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    if (open && !d.open) { setQuery(''); setActive(0); d.showModal(); }
-    if (!open && d.open) d.close();
-  }, [open]);
+  const optId = (it: CommandItem) => `${base}-o-${safeId(it.id)}`;
+  const dialog = useModalDialog({ open, onClose, onOpen: () => { setQuery(''); setActive(0); } });
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -58,20 +62,14 @@ export function CommandMenu({ open, onClose, items, label = 'Commands', placehol
 
   useEffect(() => { setActive(0); }, [query]);
   useEffect(() => {
-    if (current) list.current?.querySelector(`#${CSS.escape(`${base}-${current.id}`)}`)?.scrollIntoView({ block: 'nearest' });
-  }, [current, base]);
+    if (current) list.current?.querySelector(`#${CSS.escape(optId(current))}`)?.scrollIntoView({ block: 'nearest' });
+  }, [current, base]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const run = (item?: CommandItem) => { if (!item || item.disabled) return; onClose(); item.onSelect(); };
   const groups = results.reduce<Record<string, CommandItem[]>>((acc, r) => { (acc[r.group ?? ''] ??= []).push(r); return acc; }, {});
 
   return (
-    <dialog
-      ref={ref}
-      className="rb-command"
-      aria-label={label}
-      onCancel={(e) => { e.preventDefault(); onClose(); }}
-      onClick={(e) => { if (e.target === ref.current) onClose(); }}
-    >
+    <dialog {...dialog} className="rb-command" aria-label={label}>
       <div className="rb-command__panel">
         <div className="rb-command__search">
           <Search aria-hidden="true" />
@@ -81,8 +79,8 @@ export function CommandMenu({ open, onClose, items, label = 'Commands', placehol
             aria-expanded="true"
             aria-controls={`${base}-list`}
             aria-autocomplete="list"
-            aria-activedescendant={current ? `${base}-${current.id}` : undefined}
-            aria-label={label}
+            aria-activedescendant={current ? optId(current) : undefined}
+            aria-label={l.search}
             placeholder={placeholder}
             value={query}
             autoFocus
@@ -93,17 +91,19 @@ export function CommandMenu({ open, onClose, items, label = 'Commands', placehol
               else if (e.key === 'Enter') { e.preventDefault(); run(current); }
             }}
           />
-          <Kbd aria-hidden="true">Esc</Kbd>
+          <Kbd aria-hidden="true">{l.escapeKey}</Kbd>
         </div>
-        <div ref={list} id={`${base}-list`} role="listbox" aria-label={label} className="rb-command__list">
-          {results.length === 0 && <p className="rb-command__empty" role="status">{emptyText}</p>}
+        {/* One live region that is always there: it announces the number of results while you type. */}
+        <p className="rb-visually-hidden" role="status">{open && query.trim() ? (results.length ? l.count(results.length) : emptyText) : ''}</p>
+        <div ref={list} id={`${base}-list`} role="listbox" aria-label={l.results} className="rb-command__list">
+          {results.length === 0 && <p className="rb-command__empty" aria-hidden="true">{emptyText}</p>}
           {Object.entries(groups).map(([group, its], gi) => (
             <div key={group} role="group" aria-labelledby={group ? `${base}-g${gi}` : undefined}>
               {group && <div id={`${base}-g${gi}`} className="rb-command__group" role="presentation">{group}</div>}
               {its.map((it) => (
                 <div
                   key={it.id}
-                  id={`${base}-${it.id}`}
+                  id={optId(it)}
                   role="option"
                   aria-selected={it === current}
                   aria-disabled={it.disabled || undefined}
@@ -123,7 +123,7 @@ export function CommandMenu({ open, onClose, items, label = 'Commands', placehol
           <div className="rb-command__footer" aria-hidden="true">
             <span><Kbd>↑</Kbd><Kbd>↓</Kbd> {hintLabels.navigate}</span>
             <span><Kbd>↵</Kbd> {hintLabels.select}</span>
-            <span><Kbd>Esc</Kbd> {hintLabels.close}</span>
+            <span><Kbd>{l.escapeKey}</Kbd> {hintLabels.close}</span>
           </div>
         )}
       </div>

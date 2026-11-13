@@ -74,6 +74,11 @@
       "children",
       "ReactNode",
       "For example <RangeSlider>."
+    ],
+    [
+      "labels (FilterGroup)",
+      "{ showLess, showAll(n) }",
+      "Defaults in DEFAULT_FILTER_GROUP_LABELS."
     ]
   ],
   "behaviour": [
