@@ -112,12 +112,15 @@ src/
     Commerce/    e-commerce (zie hieronder)
   flags/         Flag, CountrySelect
   docs/          Introduction.mdx, brand/ (Brand builder), components/*.mdx, data/*.json
-  styles/        tokens.css (gegenereerd uit Figma), index.css
+  styles/        tokens.css (gegenereerd uit Figma), effects.css (schaduwen, focus ring), index.css
 docs/
   content/*.mjs       bron van alle componentdocumentatie
   figma-pages.mjs     doc-naam naar Figma-pagina-id
 scripts/
   figma-export-tokens.js       Figma-variabelen naar tokens.css
+  lib/tokens.mjs               leest tokens.css en effects.css (voor tokens.json en de lint)
+  build-tokens-json.mjs        dist/tokens.json
+  lint-tokens.mjs              token-lint (npm run lint:tokens), regels in token-lint.config.mjs
   docs/build-mdx.mjs           docs naar Storybook (npm run docs:build)
   docs/build-figma-payload.mjs docs naar Figma-script (npm run docs:figma)
   docs/figma-builder.js        bouwt de Docs-frames in Figma

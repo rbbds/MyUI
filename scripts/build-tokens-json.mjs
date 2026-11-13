@@ -1,49 +1,19 @@
-// Builds dist/tokens.json from src/styles/tokens.css, in the Design Tokens (DTCG) format.
+// Builds dist/tokens.json from src/styles/tokens.css and effects.css, in the Design Tokens (DTCG) format.
 // One file that tools and AI assistants can read without parsing CSS.
 // - Groups: primitive, brand, semantic, component (see LAYER below).
 // - Aliases use DTCG references: "{semantic.color-surface-primary}".
 // - Values for other modes (brand, theme, size, viewport) are in $extensions["com.rbbds"].modes.
 // Run after the build: node scripts/build-tokens-json.mjs
+// Reads tokens.css and effects.css (shadows, focus rings) through scripts/lib/tokens.mjs.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readTokens, layerOf } from './lib/tokens.mjs';
 
-const css = readFileSync('src/styles/tokens.css', 'utf8');
 const version = JSON.parse(readFileSync('package.json', 'utf8')).version;
 
-// 1. Read blocks: selector (or media query) and the declarations in it.
-const modeOf = (sel, media) => {
-  if (media) return 'viewport:' + media.match(/max-width:\s*(\d+)px/)[1].replace(/^/, 'max-');
-  const s = sel.replace(/\s+/g, '');
-  if (/data-brand="(\w+)"/.test(s) && !s.includes(',')) return 'brand:' + s.match(/data-brand="(\w+)"/)[1];
-  if (s.includes('data-theme="light"')) return 'theme:light';
-  if (s.includes('data-theme="dark"')) return 'theme:dark';
-  if (/^\[data-size="(\w+)"\]$/.test(s)) return 'size:' + s.match(/data-size="(\w+)"/)[1];
-  return 'default';
-};
-const values = {}; // name -> { mode: value }
-const re = /(@media[^{]+)\{\s*:root\{([^}]*)\}\s*\}|([^{}@]+)\{([^}]*)\}/g;
-for (const m of css.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(re)) {
-  const mode = m[1] ? modeOf('', m[1]) : modeOf(m[3].trim());
-  const body = m[1] ? m[2] : m[4];
-  for (const d of body.split(';')) {
-    const i = d.indexOf(':');
-    const name = d.slice(0, i).trim();
-    if (!name.startsWith('--')) continue;
-    const key = name.slice(2);
-    const value = d.slice(i + 1).trim();
-    // The last declaration wins, like in CSS.
-    (values[key] ??= {})[mode === 'theme:light' ? 'default' : mode] = value;
-  }
-}
+// 1. Read all token declarations, per mode. The last declaration wins, like in CSS.
+const { values } = readTokens();
 
 // 2. Layer per token.
-const SEMANTIC = /^(color|spacing|border|font|size|shadow|focus|effect|layout|base|typography|responsive|icon|screen|opacity|motion|z)-/;
-const layerOf = (key, v) => {
-  if (key.startsWith('brand-')) return 'brand';
-  const def = v.default ?? Object.values(v)[0];
-  if (!def.includes('var(')) return 'primitive';
-  if (SEMANTIC.test(key)) return 'semantic';
-  return 'component';
-};
 const layer = Object.fromEntries(Object.entries(values).map(([k, v]) => [k, layerOf(k, v)]));
 
 // 3. Values: var(--x) becomes a DTCG reference {layer.x}.
@@ -60,6 +30,7 @@ const resolve = (key, seen = new Set()) => {
   return only ? resolve(only[1], seen) : v;
 };
 const typeOf = (key) => {
+  if (/^(shadow|focus-ring)(-|$)/.test(key)) return 'shadow';
   const v = resolve(key) ?? '';
   if (/^(#|rgba?\(|hsla?\(|transparent$)/.test(v)) return 'color';
   if (/font-family|font-body|font-title/.test(key) || /["',]/.test(v) && !/\d+px/.test(v)) return 'fontFamily';
@@ -83,14 +54,14 @@ for (const [key, v] of Object.entries(values)) {
 }
 
 const out = {
-  $description: `@rbbds/ui ${version} design tokens. Generated from src/styles/tokens.css (which is generated from Figma). Use the css name in code: var(--name). In components, use component and semantic tokens. Only change brand tokens to make your own brand.`,
+  $description: `@rbbds/ui ${version} design tokens. Generated from src/styles/tokens.css (Figma variables) and src/styles/effects.css (Figma effect styles: shadows and focus rings). Use the css name in code: var(--name). In components, use component and semantic tokens. Only change brand tokens to make your own brand.`,
   $extensions: {
     'com.rbbds': {
       version,
       layers: {
         primitive: 'Raw values: color scales, spacing scale (spacings-*), radius, font sizes. Do not use directly in components.',
         brand: 'Per style (Iris, Forest, Berry): primary and accent colors, fonts, radius, border width. Override these for your own brand.',
-        semantic: 'Meaning: color-surface-*, color-foreground-*, color-border-*, spacing-*, border-radius-*, text-*. Follows theme (Light, Dark).',
+        semantic: 'Meaning: color-surface-*, color-foreground-*, color-border-*, spacing-*, border-radius-*, text-*, shadow-*, focus-ring*. Follows theme (Light, Dark).',
         component: 'Per component and part: <component>-<part>-<property>-<state>, for example button-primary-surface-hover.',
       },
       modes: {

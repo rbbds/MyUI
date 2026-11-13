@@ -14,6 +14,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      # Report mode: writes the job summary and an artifact, never fails. Becomes --strict after PR 6.
+      - run: npm run lint:tokens
+      - uses: actions/upload-artifact@v4
+        with:
+          name: token-lint
+          path: reports/
       - run: npm run build
       - run: npm run build-storybook
       - run: npx playwright install --with-deps chromium webkit

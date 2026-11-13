@@ -30,7 +30,7 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
   - component: `<component>-<part>-<property>-<state>` (`--button-primary-surface-hover`, `--menu-item-padding-horizontal`).
 - Naming: the Figma variable path with `/` becomes `-`. A decimal comma becomes `-`: Figma `spacing/1,5` is `--spacing-1-5`. The state is always last: `-hover`, `-disabled`, `-checked-hover`.
 - Scale: steps of 4px, half steps (2px) allowed: `--spacing-3` = 12px, `--spacing-2-5` = 10px.
-- Focus: one ring for every component, `box-shadow: var(--focus-ring)` (`--focus-ring-error` for destructive actions, `--focus-ring-inset` inside a scroll area). These and `--shadow-*` are in `styles.css`, not yet in `tokens.css` or `tokens.json`.
+- Focus: one ring for every component, `box-shadow: var(--focus-ring)` (`--focus-ring-error` for destructive actions, `--focus-ring-inset` inside a scroll area). These and `--shadow-*` are in `tokens.css`, `tokens.json` and `styles.css`.
 
 ## Sizes
 
