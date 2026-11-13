@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- Component CSS uses the component tokens from Figma in 189 more places (padding, gap, border width, radius, icon size, colors), so a change in Figma reaches the code. Nothing changes on screen: 304 screenshots (152 stories in Iris Light and Berry Dark) are pixel-identical before and after.
 - **Every text is a prop (H6).** Components with fixed English text get a `labels` prop. The English defaults are exported as `DEFAULT_<COMPONENT>_LABELS`, so you pass only what you change: Price, Rating, StockIndicator, CartItem, CartSummary, PromoCode, CartButton, MiniCart, AddressFields, FilterGroup, ActiveFilters, ProductGallery, VariantPicker, AddToCart, ProductCard, FileUploadItem, Tag, Avatar, AvatarGroup, DateRangePicker, PasswordInput, NotificationPanel, CommandMenu and Combobox. Breadcrumbs (`backLabel`, `aria-label`), Pagination, Stepper and BottomNavigation (`aria-label`) and Banner (`regionLabel`) get a single prop. `defaultDateRangePresets(today, labels)` and `passwordRequirements(labels)` translate the quick picks and the password rules.
 - **Modal, Slideout and Command menu (M2):** a click on the backdrop closes only when the press also started there, so selecting text and letting go outside keeps them open. A `<form method="dialog">` inside closes them through `onClose`, so they open again. The page behind does not scroll. Modal: no empty spacer without a footer.
 - **Command menu:** the dialog, the search field (Search) and the result list (Results) have their own names. Item ids with a space or other characters give valid ids.
@@ -30,6 +31,7 @@
 - Versioning guide: a size correction of up to 2 px is a small visual fix, not a breaking change.
 
 ### New
+- `scripts/suggest-component-tokens.mjs`: finds a component token for a loose value in component CSS. It only suggests a token with exactly the same value in every style, theme, size and screen size; `--apply` writes them. Settings (block aliases, preferred and excluded matches) in `scripts/token-lint.config.mjs`.
 - `initialFocus` on Modal and Slideout: the element that gets focus when they open, e.g. the first field of a form.
 - `npm run check:strings` in CI: fails on fixed user-facing text in component JSX (JSX text, aria-label, title, placeholder, label and other text props, and text built in a variable).
 - `src/utils/panel.ts`: one shared layer for panels (Escape for the topmost panel only, focus out, click outside, top layer and placement). Covered by `tests/browser` in Chromium and WebKit.

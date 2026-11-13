@@ -19,4 +19,34 @@ export default {
     { property: '^flex(-basis)?$', reason: 'Wrap point of a flex layout (flex: 1 1 280px). Layout logic, not a design value.' },
     { property: '^text-underline-offset$', reason: 'Figma has no variable for underline offset.' },
   ],
+
+  // CSS block names that differ from the token prefix (scripts/suggest-component-tokens.mjs).
+  blockAliases: { file: 'file-upload-item', upload: 'file-upload', notif: 'notification', dlist: 'description-list', qty: 'qty', metric: 'metric-card', password: 'password-input', code: 'code-input', copy: 'copy-input', gallery: 'gallery', setting: 'setting-row', promo: 'promo-code', variant: 'variant', daterange: 'date-range', doclist: 'document-list', doc: 'document-item', datepicker: 'date-picker', control: 'input', field: 'input', range: 'range-slider', 'notif-panel': 'notification-panel', 'notif-button': 'notification-button', check: 'selection' },
+
+  // When several tokens fit, use this one.
+  suggestPrefer: [
+    { selector: '.rb-cart-summary__row--total', property: 'border-top', token: 'cart-summary-total-border-width' },
+    { selector: '.rb-password__reqs svg', property: 'width', token: 'password-input-requirement-icon-size' },
+    { selector: '.rb-password__reqs svg', property: 'height', token: 'password-input-requirement-icon-size' },
+  ],
+
+  // Suggestions with the same value but another meaning. Do not apply them.
+  suggestExclude: [
+    { selector: '.rb-combobox__toggle svg', property: 'width', token: 'combobox-check-icon-size', reason: 'Chevron, not the check icon.' },
+    { selector: '.rb-combobox__toggle svg', property: 'height', token: 'combobox-check-icon-size', reason: 'Chevron, not the check icon.' },
+    { selector: '.rb-calendar__header', property: 'gap', token: 'calendar-cells-gap', reason: 'Header, not the grid.' },
+    { selector: '.rb-calendar__header', property: 'padding-inline-start', token: 'calendar-view-switch-padding-horizontal', reason: 'Header, not the switch.' },
+    { selector: '.rb-file', property: 'padding', token: 'file-upload-padding-vertical', reason: 'Drop zone token, this is the file item.' },
+    { selector: '.rb-checklist__item', property: 'padding', token: 'checklist-padding-vertical', reason: 'Unclear if this token is for the item or the card.' },
+    { selector: '.rb-checklist__item', property: 'padding', token: 'checklist-padding-horizontal', reason: 'Unclear if this token is for the item or the card.' },
+    { selector: '.rb-upload__icon svg', property: 'width', token: 'file-upload-done-icon-size', reason: 'Upload icon, not the done icon.' },
+    { selector: '.rb-upload__icon svg', property: 'height', token: 'file-upload-done-icon-size', reason: 'Upload icon, not the done icon.' },
+    { selector: '.rb-control__chevron svg', property: 'width', token: 'input-leading-icon-size', reason: 'Chevron, not the leading icon.' },
+    { selector: '.rb-control__chevron svg', property: 'height', token: 'input-leading-icon-size', reason: 'Chevron, not the leading icon.' },
+    { selector: '.rb-control__trigger svg', property: 'width', token: 'input-leading-icon-size', reason: 'Calendar button, not the leading icon.' },
+    { selector: '.rb-control__trigger svg', property: 'height', token: 'input-leading-icon-size', reason: 'Calendar button, not the leading icon.' },
+    { selector: '.rb-notif__dot', property: 'border-radius', token: 'notification-count-radius', reason: 'Unread dot, not the count badge.' },
+    { selector: '.rb-cart-summary__row', property: 'gap', token: 'cart-summary-gap', reason: 'Unclear if this token is for the row or the summary.' },
+    { selector: '.rb-filter__list', property: 'gap', token: 'filter-gap', reason: 'Unclear if this token is for the list or the filter group.' },
+  ],
 };

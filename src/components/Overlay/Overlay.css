@@ -1,6 +1,6 @@
 .rb-alert{display:flex;align-items:flex-start;gap:var(--alert-gap);padding:var(--alert-padding);border:1px solid var(--_bd);border-radius:var(--alert-radius);background:var(--_bg)}
 .rb-alert__icon{display:inline-flex;color:var(--_ic);flex-shrink:0}
-.rb-alert__icon svg{width:20px;height:20px}
+.rb-alert__icon svg{width:var(--alert-glyph-icon-size);height:var(--alert-glyph-icon-size)}
 .rb-alert__content{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--alert-action-gap)}
 .rb-alert__text{display:flex;flex-direction:column;gap:var(--alert-text-gap)}
 .rb-alert__title{margin:0;color:var(--alert-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
@@ -9,7 +9,7 @@
 .rb-alert__close{display:inline-flex;padding:2px;margin:-2px;border:0;background:transparent;border-radius:var(--border-radius-control-xs);color:var(--alert-foreground-close);cursor:pointer}
 .rb-alert__close:hover{color:var(--alert-foreground-text)}
 .rb-alert__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-alert__close svg{width:20px;height:20px}
+.rb-alert__close svg{width:var(--alert-close-icon-size);height:var(--alert-close-icon-size)}
 .rb-alert--toast{--_bg:var(--toast-surface);--_bd:var(--toast-border);box-shadow:var(--shadow-lg);width:min(400px,100%)}
 .rb-toast-region{position:fixed;z-index:60;right:24px;bottom:24px;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
 @media (max-width:599px){.rb-toast-region{left:16px;right:16px;top:16px;bottom:auto}}
@@ -26,7 +26,7 @@
 .rb-modal__panel{display:flex;flex-direction:column;width:560px;max-width:100%;max-height:calc(100dvh - 32px);overflow:auto;border-radius:var(--modal-radius);background:var(--modal-surface);box-shadow:var(--shadow-2xl);color:var(--modal-foreground-title)}
 .rb-modal--sm .rb-modal__panel{width:400px}.rb-modal--lg .rb-modal__panel{width:720px}
 .rb-modal__header{display:flex;align-items:flex-start;gap:var(--modal-gap);padding:var(--modal-padding) var(--modal-padding) 0}
-.rb-modal__titles{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.rb-modal__titles{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--modal-text-gap)}
 .rb-modal__title{margin:0;color:var(--modal-foreground-title);font-family:var(--text-headings-h4-font-family);font-size:var(--text-headings-h4-font-size);line-height:var(--text-headings-h4-line-height);font-weight:var(--text-headings-h4-font-weight)}
 .rb-modal__description{margin:0;color:var(--modal-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-modal__close{display:inline-flex;padding:4px;margin:-4px;border:0;background:transparent;border-radius:var(--border-radius-control-sm);color:var(--modal-foreground-close);cursor:pointer}
@@ -42,7 +42,7 @@
 .rb-menu{--rb-layer-gap:var(--spacing-1);position:absolute;z-index:40;top:calc(100% + 4px);left:0;min-width:240px;display:flex;flex-direction:column;padding:var(--menu-padding);border:var(--menu-border-width) solid var(--menu-border);border-radius:var(--menu-radius);background:var(--menu-surface);box-shadow:var(--shadow-lg)}
 .rb-menu--end{left:auto;right:0}
 .rb-menu__item{display:flex;align-items:center;gap:var(--menu-item-gap);width:100%;padding:var(--menu-item-padding-vertical) var(--menu-item-padding-horizontal);border:0;border-radius:var(--menu-item-radius);background:var(--menu-item-surface-default);color:var(--menu-item-foreground);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
-.rb-menu__item svg{width:16px;height:16px;color:var(--menu-item-foreground-icon);flex-shrink:0}
+.rb-menu__item svg{width:var(--menu-item-leading-icon-size);height:var(--menu-item-leading-icon-size);color:var(--menu-item-foreground-icon);flex-shrink:0}
 .rb-menu__item:hover,.rb-menu__item:focus-visible{background:var(--menu-item-surface-hover);color:var(--menu-item-foreground-hover);outline:none}
 .rb-menu__item:focus-visible{box-shadow:var(--focus-ring)}
 .rb-menu__item--destructive,.rb-menu__item--destructive:hover,.rb-menu__item--destructive svg{color:var(--menu-item-foreground-destructive)}

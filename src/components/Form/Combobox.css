@@ -14,7 +14,7 @@
 .rb-combobox__option.is-disabled{color:var(--menu-item-foreground-disabled);cursor:not-allowed}
 .rb-combobox__option-icon{display:inline-flex;flex:none}
 .rb-combobox__option-label{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.rb-combobox__check{flex:none;width:20px;height:20px;color:var(--combobox-foreground-check)}
+.rb-combobox__check{flex:none;width:var(--combobox-check-icon-size);height:var(--combobox-check-icon-size);color:var(--combobox-foreground-check)}
 .rb-combobox__empty{margin:0;padding:var(--spacing-3) var(--menu-item-padding-horizontal);color:var(--combobox-foreground-group);font-size:var(--text-body-sub-text-medium-font-size)}
 @media (prefers-reduced-motion:reduce){.rb-combobox__toggle svg{transition:none}}
 .rb-combobox__option-icon .rb-flag svg{width:100%;height:100%}
