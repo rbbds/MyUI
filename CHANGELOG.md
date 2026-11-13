@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Added
+- `scripts/figma-scan-6b2.js`: read-only scan of the Figma file for PR 6b-2. Lists pages per category, component token groups, where each duplicate component token is bound, and the layer tree of the components in the Figma ≠ code choices. Run it with the Figma MCP `use_figma` tool or the Scripter plugin.
+
 ### Fixed
 - **Badge, Cart button, Active filters follow Figma (4 px grid):** the icon in a large Badge is 12 px (was 14 px). The Cart button count has 4 px side padding (was 5 px), from `--cart-button-count-padding-horizontal`. Active filters that wrap have 8 px between rows (was 12 px), from `--filter-row-gap`; the space between filters stays 12 px (`--filter-gap`).
 - Component CSS uses 46 more component tokens that were bound in Figma but not used in code, for example the File upload item padding, the Checklist item padding, the Notification header and count, the Stepper text and indicator, the Select chevron, the Search icons and the Modal close icon. Nothing changes on screen: 304 screenshots are pixel-identical, and every token has the same value in all styles, themes, sizes and screen sizes.
