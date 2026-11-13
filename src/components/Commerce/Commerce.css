@@ -110,7 +110,7 @@
 
 /* ---------- Cart button + mini cart ---------- */
 .rb-cart-button{position:relative;display:inline-flex}
-.rb-cart-button__count{position:absolute;top:0;right:0;min-width:18px;height:18px;padding:0 5px;box-sizing:border-box;border-radius:var(--cart-button-count-radius);background:var(--cart-button-surface-count);color:var(--cart-button-foreground-count);font-size:11px;font-weight:600;line-height:18px;text-align:center;pointer-events:none;transform:translate(25%,-15%)}
+.rb-cart-button__count{position:absolute;top:0;right:0;min-width:18px;height:18px;padding:0 var(--cart-button-count-padding-horizontal);box-sizing:border-box;border-radius:var(--cart-button-count-radius);background:var(--cart-button-surface-count);color:var(--cart-button-foreground-count);font-size:11px;font-weight:600;line-height:18px;text-align:center;pointer-events:none;transform:translate(25%,-15%)}
 .rb-mini-cart__items{display:flex;flex-direction:column;gap:var(--mini-cart-items-gap)}
 .rb-mini-cart__footer{display:flex;flex-direction:column;gap:var(--spacing-3);width:100%}
 .rb-mini-cart__footer .rb-cart-summary__row--total{margin:0;padding:0;border:0}
@@ -170,7 +170,7 @@
 .rb-filter__option{display:inline-flex;gap:var(--spacing-2)}
 .rb-filter__count{color:var(--filter-foreground-count)}
 @media (prefers-reduced-motion:reduce){.rb-filter__trigger svg{transition:none}}
-.rb-active-filters{display:flex;flex-wrap:wrap;align-items:center;gap:var(--spacing-3)}
+.rb-active-filters{display:flex;flex-wrap:wrap;align-items:center;gap:var(--filter-row-gap) var(--filter-gap)}
 .rb-active-filters__count{margin:0;color:var(--filter-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-active-filters__list{display:flex;flex-wrap:wrap;align-items:center;gap:var(--spacing-2);margin:0;padding:0;list-style:none}
 
