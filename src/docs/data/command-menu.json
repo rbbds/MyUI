@@ -60,6 +60,11 @@
       "useCommandShortcut(onOpen, key?)",
       "hook",
       "Links ⌘K / Ctrl+K."
+    ],
+    [
+      "labels",
+      "{ search, results, escapeKey, count(n) }",
+      "Names of the search field and the list, the key cap and the announced result count. Defaults in DEFAULT_COMMAND_MENU_LABELS."
     ]
   ],
   "behaviour": [
@@ -68,7 +73,7 @@
   ],
   "a11y": [
     "Combobox (input) with a listbox. aria-activedescendant follows the highlight, so focus stays in the search field.",
-    "Empty results are announced with role=\"status\"."
+    "The search field and the result list have their own names (Search, Results). One live region outside the list announces the number of results while you type."
   ],
   "content": [
     "Labels as a verb for actions (\"New project\"), as a name for pages."

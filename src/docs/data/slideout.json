@@ -62,10 +62,16 @@
       "side",
       "'right' | 'left'",
       "Default 'right'."
+    ],
+    [
+      "initialFocus",
+      "RefObject<HTMLElement>",
+      "Element that gets focus when the slideout opens. Default: the close button."
     ]
   ],
   "behaviour": [
-    "Slides in from the side. Escape, the close button or the backdrop closes it."
+    "Slides in from the side. Escape, the close button or the backdrop closes it (only when the press starts on the backdrop).",
+    "The page behind does not scroll while it is open."
   ],
   "a11y": [
     "Native <dialog> with showModal: focus goes in and stays in.",

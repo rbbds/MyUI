@@ -121,6 +121,8 @@ scripts/
   lib/tokens.mjs               leest tokens.css en effects.css (voor tokens.json en de lint)
   build-tokens-json.mjs        dist/tokens.json
   lint-tokens.mjs              token-lint (npm run lint:tokens), regels in token-lint.config.mjs
+  check-contrast.mjs           contrast control-randen en actieve optie (npm run check:contrast)
+  check-literal-strings.mjs    geen vaste tekst in component-JSX (npm run check:strings)
   docs/build-mdx.mjs           docs naar Storybook (npm run docs:build)
   docs/build-figma-payload.mjs docs naar Figma-script (npm run docs:figma)
   docs/figma-builder.js        bouwt de Docs-frames in Figma

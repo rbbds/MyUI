@@ -70,6 +70,11 @@
       "Calendar: rangeStart, rangeEnd, onDayHover, month, onMonthChange, hidePrevious, hideNext",
       "",
       "New Calendar props for ranges and linked months."
+    ],
+    [
+      "labels",
+      "{ quickPicks, custom, cancel, apply, chooseStart, chooseEnd, days(n) }",
+      "Defaults in DEFAULT_DATE_RANGE_PICKER_LABELS. Translate the quick picks with defaultDateRangePresets(today, labels)."
     ]
   ],
   "behaviour": [

@@ -95,6 +95,11 @@
       "layout",
       "'vertical' | 'horizontal'",
       ""
+    ],
+    [
+      "labels",
+      "{ wishlist(title), colors(n) }",
+      "Defaults in DEFAULT_PRODUCT_CARD_LABELS."
     ]
   ],
   "behaviour": [

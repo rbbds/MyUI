@@ -100,13 +100,13 @@ export interface CalendarProps {
 
 const DEFAULT_MIN = new Date(1900, 0, 1);
 const DEFAULT_MAX = new Date(2099, 11, 31);
-const switchDefault = (v: CalendarView) => (v === 'year' ? 'Choose a year' : v === 'month' ? 'Choose a month' : 'Back to days');
+const defaultSwitchViewLabel = (v: CalendarView) => (v === 'year' ? 'Choose a year' : v === 'month' ? 'Choose a month' : 'Back to days');
 
 export function Calendar({
   value, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
   views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
   yearsPerRow = 3, yearsOrder = 'asc', locale = 'en-US', weekStartsOn = 1, autoFocus,
-  previousLabel = 'Previous month', nextLabel = 'Next month', switchViewLabel = switchDefault,
+  previousLabel = 'Previous month', nextLabel = 'Next month', switchViewLabel = defaultSwitchViewLabel,
   rangeStart, rangeEnd, onDayHover, month: monthProp, onMonthChange, hidePrevious, hideNext, className,
 }: CalendarProps) {
   const today = startOfDay(new Date());

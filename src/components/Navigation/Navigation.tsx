@@ -71,13 +71,15 @@ export interface BreadcrumbsProps {
   back?: { href: string; label?: string };
   /** Screen reader name for the home link. */
   homeLabel?: string;
+  /** Text of the back link when `back.label` is not set. */
+  backLabel?: string;
   'aria-label'?: string;
 }
-export function Breadcrumbs({ items, homeHref, back, homeLabel = 'Home', ...rest }: BreadcrumbsProps) {
+export function Breadcrumbs({ items, homeHref, back, homeLabel = 'Home', backLabel = 'Back', 'aria-label': ariaLabel = 'Breadcrumb' }: BreadcrumbsProps) {
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
-    <nav className="rb-breadcrumbs" aria-label={rest['aria-label'] ?? 'Breadcrumb'}>
-      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? 'Back'}</a>}
+    <nav className="rb-breadcrumbs" aria-label={ariaLabel}>
+      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? backLabel}</a>}
       <ol>
         {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label={homeLabel}><House aria-hidden="true" /></a></li>}
         {items.map((c, i) => {
@@ -105,6 +107,8 @@ export interface PaginationProps {
   pageStatus?: (page: number, pageCount: number) => string;
   /** Screen reader name per page button. */
   pageLabel?: (page: number) => string;
+  /** Name of the navigation landmark. */
+  'aria-label'?: string;
 }
 function range(page: number, count: number): Array<number | '…'> {
   if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
@@ -112,9 +116,9 @@ function range(page: number, count: number): Array<number | '…'> {
   if (page >= count - 3) return [1, '…', count - 4, count - 3, count - 2, count - 1, count];
   return [1, '…', page - 1, page, page + 1, '…', count];
 }
-export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next', pageStatus = (p, c) => `Page ${p} of ${c}`, pageLabel = (p) => `Page ${p}` }: PaginationProps) {
+export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next', pageStatus = (p, c) => `Page ${p} of ${c}`, pageLabel = (p) => `Page ${p}`, 'aria-label': ariaLabel = 'Pagination' }: PaginationProps) {
   return (
-    <nav className="rb-pagination" aria-label="Pagination">
+    <nav className="rb-pagination" aria-label={ariaLabel}>
       <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{previousLabel}</Button>
       <ul className="rb-pagination__pages">
         {range(page, pageCount).map((p, i) => (

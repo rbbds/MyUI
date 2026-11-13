@@ -150,18 +150,23 @@ export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dro
   );
 }
 
-export interface FileUploadItemProps { name: string; size?: string; progress?: number; status?: 'uploading' | 'complete' | 'error'; error?: ReactNode; onRemove?: () => void }
-export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove }: FileUploadItemProps) {
+export interface FileUploadItemLabels { failed: string; uploading: (name: string) => string; uploaded: string; remove: (name: string) => string }
+export const DEFAULT_FILE_UPLOAD_ITEM_LABELS: FileUploadItemLabels = {
+  failed: 'Upload failed. Try again.', uploading: (name) => `Upload ${name}`, uploaded: 'Uploaded', remove: (name) => `Remove ${name}`,
+};
+export interface FileUploadItemProps { name: string; size?: string; progress?: number; status?: 'uploading' | 'complete' | 'error'; error?: ReactNode; onRemove?: () => void; labels?: Partial<FileUploadItemLabels> }
+export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove, labels }: FileUploadItemProps) {
+  const l = { ...DEFAULT_FILE_UPLOAD_ITEM_LABELS, ...labels };
   const isErr = status === 'error';
   return (
     <div className={cx('rb-file', isErr && 'rb-file--error')} aria-live="polite">
       <FeaturedIcon color={isErr ? 'error' : 'brand'} size="md" icon={isErr ? <CircleAlert /> : <FileIcon />} />
       <div className="rb-file__content">
         <p className="rb-file__name">{name}</p>
-        <p className="rb-file__meta">{isErr ? error ?? 'Upload failed. Try again.' : size}</p>
-        {!isErr && <ProgressBar label={`Upload ${name}`} value={status === 'complete' ? 100 : progress} />}
+        <p className="rb-file__meta">{isErr ? error ?? l.failed : size}</p>
+        {!isErr && <ProgressBar label={l.uploading(name)} value={status === 'complete' ? 100 : progress} />}
       </div>
-      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label="Uploaded"><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Remove ${name}`} onClick={onRemove} />}
+      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label={l.uploaded}><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={l.remove(name)} onClick={onRemove} />}
     </div>
   );
 }

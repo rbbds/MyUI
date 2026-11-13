@@ -65,6 +65,11 @@
       "suffix",
       "ReactNode",
       ""
+    ],
+    [
+      "labels",
+      "{ was, now }",
+      "Hidden texts for screen readers. Defaults in DEFAULT_PRICE_LABELS."
     ]
   ],
   "behaviour": [

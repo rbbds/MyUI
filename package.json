@@ -59,6 +59,7 @@
     "docs:figma": "node scripts/docs/build-figma-payload.mjs",
     "test:browser": "playwright test",
     "check:contrast": "node scripts/check-contrast.mjs",
+    "check:strings": "node scripts/check-literal-strings.mjs",
     "lint:tokens": "node scripts/lint-tokens.mjs --md reports/token-lint.md --json reports/token-lint.json"
   },
   "peerDependencies": {

@@ -66,13 +66,18 @@ export interface NotificationPanelProps {
   footer?: ReactNode;
   /** Shown when there are no NotificationItems. */
   empty?: ReactNode;
+  /** Texts of the default empty state. */
+  labels?: Partial<NotificationPanelLabels>;
   children?: ReactNode;
   id?: string;
   className?: string;
 }
+export interface NotificationPanelLabels { emptyTitle: string; emptyText: string }
+export const DEFAULT_NOTIFICATION_PANEL_LABELS: NotificationPanelLabels = { emptyTitle: 'No new notifications', emptyText: 'You are all caught up.' };
 
 /** Panel with notifications. Use it in NotificationMenu or on its own page. */
-export function NotificationPanel({ title = 'Notifications', onMarkAllRead, markAllLabel = 'Mark all as read', footer, empty, children, id, className }: NotificationPanelProps) {
+export function NotificationPanel({ title = 'Notifications', onMarkAllRead, markAllLabel = 'Mark all as read', footer, empty, labels, children, id, className }: NotificationPanelProps) {
+  const l = { ...DEFAULT_NOTIFICATION_PANEL_LABELS, ...labels };
   const titleId = useId();
   const has = Array.isArray(children) ? children.length > 0 : Boolean(children);
   return (
@@ -81,7 +86,7 @@ export function NotificationPanel({ title = 'Notifications', onMarkAllRead, mark
         <h2 id={titleId} className="rb-notif-panel__title">{title}</h2>
         {onMarkAllRead && has && <Button hierarchy="link" size="sm" onClick={onMarkAllRead}>{markAllLabel}</Button>}
       </div>
-      {has ? <ul className="rb-notif-panel__items">{children}</ul> : <div className="rb-notif-panel__empty">{empty ?? <><p className="rb-notif-panel__empty-title">No new notifications</p><p>You are all caught up.</p></>}</div>}
+      {has ? <ul className="rb-notif-panel__items">{children}</ul> : <div className="rb-notif-panel__empty">{empty ?? <><p className="rb-notif-panel__empty-title">{l.emptyTitle}</p><p>{l.emptyText}</p></>}</div>}
       {footer && <div className="rb-notif-panel__footer">{footer}</div>}
     </section>
   );

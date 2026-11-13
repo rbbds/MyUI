@@ -33,6 +33,7 @@
 .rb-modal__close:hover{background:var(--color-surface-hover)}
 .rb-modal__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-modal__body{padding:var(--modal-gap) var(--modal-padding) 0;color:var(--color-foreground-secondary)}
+.rb-modal__panel--no-footer{padding-bottom:var(--modal-padding)}
 .rb-modal__footer{display:flex;gap:var(--modal-footer-gap);padding:var(--modal-padding)}
 .rb-modal__footer>*{flex:1}
 @media (max-width:599px){.rb-modal__footer{flex-direction:column-reverse}}

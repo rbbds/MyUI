@@ -14,24 +14,29 @@ export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
   size?: 'sm' | 'md' | 'lg';
   /** Small text after the price, e.g. "per month" or "incl. VAT". */
   suffix?: ReactNode;
+  /** Hidden texts for screen readers. */
+  labels?: Partial<PriceLabels>;
 }
+export interface PriceLabels { was: string; now: string }
+export const DEFAULT_PRICE_LABELS: PriceLabels = { was: 'Was', now: 'Now' };
 
 export const formatMoney = (amount: number, currency = 'EUR', locale = 'en-US') =>
   new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount);
 
 /** Price with optional sale price. Screen readers hear "Was … Now …". */
-export function Price({ amount, compareAt, currency = 'EUR', locale = 'en-US', size = 'md', suffix, className, ...rest }: PriceProps) {
+export function Price({ amount, compareAt, currency = 'EUR', locale = 'en-US', size = 'md', suffix, labels, className, ...rest }: PriceProps) {
+  const l = { ...DEFAULT_PRICE_LABELS, ...labels };
   const sale = compareAt !== undefined && compareAt > amount;
   return (
     <span className={cx('rb-price', `rb-price--${size}`, sale && 'rb-price--sale', className)} {...rest}>
       {sale && (
         <s className="rb-price__compare">
-          <span className="rb-visually-hidden">Was </span>
+          <span className="rb-visually-hidden">{l.was} </span>
           {formatMoney(compareAt!, currency, locale)}
         </s>
       )}
       <span className="rb-price__amount">
-        {sale && <span className="rb-visually-hidden">Now </span>}
+        {sale && <span className="rb-visually-hidden">{l.now} </span>}
         {formatMoney(amount, currency, locale)}
       </span>
       {suffix && <span className="rb-price__suffix">{suffix}</span>}
@@ -50,13 +55,21 @@ export interface RatingProps extends HTMLAttributes<HTMLSpanElement> {
   /** Show the value as number, e.g. "4,5". */
   showValue?: boolean;
   locale?: string;
+  /** Accessible name. `value` is already formatted for the locale. */
+  labels?: Partial<RatingLabels>;
 }
+export interface RatingLabels { rating: (value: string, max: number) => string; reviews: (count: number) => string }
+export const DEFAULT_RATING_LABELS: RatingLabels = {
+  rating: (value, max) => `${value} out of ${max} stars`,
+  reviews: (count) => `${count} reviews`,
+};
 
 /** Star rating (read-only). One accessible name: "4.5 out of 5 stars, 128 reviews". */
-export function Rating({ value, max = 5, count, size = 'md', showValue, locale = 'en-US', className, ...rest }: RatingProps) {
+export function Rating({ value, max = 5, count, size = 'md', showValue, locale = 'en-US', labels, className, ...rest }: RatingProps) {
+  const l = { ...DEFAULT_RATING_LABELS, ...labels };
   const v = Math.max(0, Math.min(max, Math.round(value * 2) / 2));
   const num = v.toLocaleString(locale, { maximumFractionDigits: 1 });
-  const label = `${num} out of ${max} stars${count !== undefined ? `, ${count} reviews` : ''}`;
+  const label = [l.rating(num, max), count !== undefined ? l.reviews(count) : null].filter(Boolean).join(', ');
   return (
     <span className={cx('rb-rating', `rb-rating--${size}`, className)} role="img" aria-label={label} {...rest}>
       <span className="rb-rating__stars" aria-hidden="true">
@@ -138,15 +151,17 @@ export interface StockIndicatorProps extends HTMLAttributes<HTMLSpanElement> {
   status: StockStatus;
   /** Overrides the default text, e.g. "Only 3 left". */
   children?: ReactNode;
+  /** Text per status. */
+  labels?: Partial<Record<StockStatus, string>>;
 }
-const STOCK_TEXT: Record<StockStatus, string> = { 'in-stock': 'In stock', low: 'Almost sold out', out: 'Sold out', preorder: 'Pre-order' };
+export const DEFAULT_STOCK_LABELS: Record<StockStatus, string> = { 'in-stock': 'In stock', low: 'Almost sold out', out: 'Sold out', preorder: 'Pre-order' };
 
 /** Availability with a colored dot. The text carries the meaning, the dot only supports it. */
-export function StockIndicator({ status, children, className, ...rest }: StockIndicatorProps) {
+export function StockIndicator({ status, children, labels, className, ...rest }: StockIndicatorProps) {
   return (
     <span className={cx('rb-stock', `rb-stock--${status}`, className)} {...rest}>
       <span className="rb-stock__dot" aria-hidden="true" />
-      {children ?? STOCK_TEXT[status]}
+      {children ?? { ...DEFAULT_STOCK_LABELS, ...labels }[status]}
     </span>
   );
 }

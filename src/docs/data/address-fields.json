@@ -40,6 +40,11 @@
       "errors",
       "Partial<Record<keyof Address, string>>",
       "For example from the server."
+    ],
+    [
+      "labels",
+      "{ postcode, houseNumber, addition, additionHint, street, city, postcodeInvalid }",
+      "Defaults in DEFAULT_ADDRESS_FIELDS_LABELS."
     ]
   ],
   "behaviour": [

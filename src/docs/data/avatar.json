@@ -59,6 +59,11 @@
       "size",
       "AvatarSize",
       ""
+    ],
+    [
+      "labels",
+      "{ online, offline }",
+      "Status for screen readers. Defaults in DEFAULT_AVATAR_LABELS."
     ]
   ],
   "behaviour": [

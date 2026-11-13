@@ -44,6 +44,11 @@
       "label, buttonLabel",
       "string",
       ""
+    ],
+    [
+      "labels",
+      "{ empty, remove(code) }",
+      "Defaults in DEFAULT_PROMO_CODE_LABELS."
     ]
   ],
   "behaviour": [

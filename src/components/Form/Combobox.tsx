@@ -29,8 +29,16 @@ export interface ComboboxProps extends FieldBaseProps {
   emptyText?: string;
   /** Accessible label of the chevron button. */
   toggleLabel?: string;
+  /** Result count for screen readers and the message when required and nothing is chosen. */
+  labels?: Partial<ComboboxLabels>;
   className?: string;
 }
+
+export interface ComboboxLabels { count: (count: number) => string; required: string }
+export const DEFAULT_COMBOBOX_LABELS: ComboboxLabels = {
+  count: (count) => `${count} ${count === 1 ? 'result' : 'results'}`,
+  required: 'Choose an option from the list.',
+};
 
 const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
 
@@ -38,7 +46,8 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
  * Select with search and a visual per option (APG "combobox with listbox popup").
  * Use it when a native select is not enough: long lists that need filtering, or options that need a flag or avatar.
  */
-export function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel = 'Show options', className }: ComboboxProps) {
+export function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel = 'Show options', labels, className }: ComboboxProps) {
+  const l = { ...DEFAULT_COMBOBOX_LABELS, ...labels };
   const [own, setOwn] = useState<string | null>(defaultValue);
   const selectedValue = value !== undefined ? value : own;
   const selected = options.find((o) => o.value === selectedValue) ?? null;
@@ -68,7 +77,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
   }, [current]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!open) return;
-    const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) close(); };
+    const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) closeRef.current(); };
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -81,12 +90,21 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
     setActive(i < 0 ? 0 : i);
     setOpen(true);
   };
-  const close = () => { setOpen(false); setQuery(null); };
+  /* Closing with an empty field clears the value (onChange gets null). Escape keeps the old value. */
+  const close = (commitEmpty = true) => {
+    if (commitEmpty && query === '' && selectedValue !== null) { if (value === undefined) setOwn(null); onChange?.(null, null); }
+    setOpen(false);
+    setQuery(null);
+  };
+  const closeRef = useRef(close);
+  closeRef.current = close;
+  /* required checks the chosen value, not the typed text. */
+  useEffect(() => { input.current?.setCustomValidity(required && selectedValue === null ? l.required : ''); }, [required, selectedValue, l.required]);
   const pick = (o?: ComboboxOption) => {
     if (!o || o.disabled) return;
     if (value === undefined) setOwn(o.value);
     onChange?.(o.value, o);
-    close();
+    close(false);
     setText(o.label);
     input.current?.focus();
   };
@@ -99,7 +117,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
 
   return (
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-combobox', className)}>
-      {({ id: fieldId, describedBy, invalid }) => (
+      {({ id: fieldId, labelId, describedBy, invalid }) => (
         <div ref={root} className="rb-combobox__anchor">
           <div ref={control} className={cx('rb-control', `rb-control--${size}`, Boolean(selected?.icon) && 'rb-control--has-icon', invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
             {selected?.icon && query === null && <span className="rb-control__icon rb-combobox__value-icon" aria-hidden="true">{selected.icon}</span>}
@@ -128,7 +146,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
                 else if (e.key === 'Home' && open) { e.preventDefault(); setActive(0); }
                 else if (e.key === 'End' && open) { e.preventDefault(); setActive(enabled.length - 1); }
                 else if (e.key === 'Enter' && open) { e.preventDefault(); pick(current); }
-                else if (e.key === 'Escape') { if (open) { e.preventDefault(); e.stopPropagation(); close(); } }
+                else if (e.key === 'Escape') { if (open) { e.preventDefault(); e.stopPropagation(); close(false); } }
                 else if (e.key === 'Tab' && open && query) { pick(current); }
               }}
             />
@@ -137,8 +155,10 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
               <ChevronDown aria-hidden="true" className={cx(open && 'is-open')} />
             </button>
           </div>
-          <div ref={list} id={`${base}-list`} role="listbox" aria-label={typeof label === 'string' ? label : undefined} className="rb-combobox__list" hidden={!open}>
-            {open && results.length === 0 && <p className="rb-combobox__empty" role="status">{emptyText}</p>}
+          {/* One live region that is always there: it announces the number of results while you type. */}
+          <p className="rb-visually-hidden" role="status">{open && query ? (results.length ? l.count(results.length) : emptyText) : ''}</p>
+          <div ref={list} id={`${base}-list`} role="listbox" aria-labelledby={labelId} className="rb-combobox__list" hidden={!open}>
+            {open && results.length === 0 && <p className="rb-combobox__empty" aria-hidden="true">{emptyText}</p>}
             {open && groups.map((g, gi) => (
               <div key={`${g.name}-${gi}`} role="group" aria-labelledby={g.name ? `${base}-g${gi}` : undefined} className="rb-combobox__group">
                 {g.name && <div id={`${base}-g${gi}`} className="rb-combobox__group-label" role="presentation">{g.name}</div>}

@@ -78,11 +78,18 @@
       "closeLabel",
       "string",
       "Default 'Close'."
+    ],
+    [
+      "initialFocus",
+      "RefObject<HTMLElement>",
+      "Element that gets focus when the modal opens, e.g. the first field. Default: the close button."
     ]
   ],
   "behaviour": [
     "Native <dialog> with showModal: focus goes into the dialog and stays there.",
-    "Escape, the close button or a click on the backdrop closes the modal."
+    "Escape, the close button or a click on the backdrop closes the modal. A click only counts when the press starts on the backdrop, so selecting text and letting go outside keeps it open.",
+    "A <form method=\"dialog\"> inside closes it through onClose.",
+    "The page behind does not scroll while the modal is open."
   ],
   "a11y": [
     "aria-labelledby points to the title, aria-describedby to the explanation.",

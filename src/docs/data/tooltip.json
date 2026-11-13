@@ -60,7 +60,8 @@
     ]
   ],
   "behaviour": [
-    "Shows on hover and focus. Hides on leave, blur and Escape. The pointer can move onto the tooltip without hiding it."
+    "Shows on hover and focus. Hides on leave, blur and Escape. The pointer can move onto the tooltip without hiding it.",
+    "Opens in the top layer, so a Modal or a table cannot clip it. It moves to the other side when there is no room."
   ],
   "a11y": [
     "role=\"tooltip\", linked to the trigger with aria-describedby.",

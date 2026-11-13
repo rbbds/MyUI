@@ -54,6 +54,11 @@
       "FileUploadItem name / size / progress / status / error / onRemove",
       "",
       ""
+    ],
+    [
+      "labels (FileUploadItem)",
+      "{ failed, uploading(name), uploaded, remove(name) }",
+      "Defaults in DEFAULT_FILE_UPLOAD_ITEM_LABELS."
     ]
   ],
   "behaviour": [

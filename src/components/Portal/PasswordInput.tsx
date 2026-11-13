@@ -6,11 +6,20 @@ import './Portal2.css';
 
 export interface PasswordRequirement { label: string; test: (value: string) => boolean }
 
-export const defaultPasswordRequirements: PasswordRequirement[] = [
-  { label: 'At least 12 characters', test: (v) => v.length >= 12 },
-  { label: 'An upper and a lower case letter', test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
-  { label: 'A digit or a symbol', test: (v) => /[\d\W_]/.test(v) },
-];
+export interface PasswordRequirementLabels { length: string; case: string; digit: string }
+export const DEFAULT_PASSWORD_REQUIREMENT_LABELS: PasswordRequirementLabels = {
+  length: 'At least 12 characters', case: 'An upper and a lower case letter', digit: 'A digit or a symbol',
+};
+/** The default rules, with your own texts if you pass them. */
+export const passwordRequirements = (labels: Partial<PasswordRequirementLabels> = {}): PasswordRequirement[] => {
+  const l = { ...DEFAULT_PASSWORD_REQUIREMENT_LABELS, ...labels };
+  return [
+    { label: l.length, test: (v) => v.length >= 12 },
+    { label: l.case, test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
+    { label: l.digit, test: (v) => /[\d\W_]/.test(v) },
+  ];
+};
+export const defaultPasswordRequirements: PasswordRequirement[] = passwordRequirements();
 
 export interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size' | 'value' | 'defaultValue' | 'onChange'>, FieldBaseProps {
   value?: string;
@@ -21,16 +30,23 @@ export interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputEl
   requirements?: PasswordRequirement[];
   showLabel?: string;
   hideLabelText?: string;
+  /** Strength texts and the screen reader text per requirement. */
+  labels?: Partial<PasswordInputLabels>;
 }
 
-const LEVELS = ['Choose a strong password', 'Strength: weak', 'Strength: fair', 'Strength: good', 'Strength: strong'];
-const KEYS = ['empty', 'weak', 'fair', 'good', 'strong'];
+export interface PasswordInputLabels { empty: string; weak: string; fair: string; good: string; strong: string; met: string; notMet: string }
+export const DEFAULT_PASSWORD_INPUT_LABELS: PasswordInputLabels = {
+  empty: 'Choose a strong password', weak: 'Strength: weak', fair: 'Strength: fair', good: 'Strength: good', strong: 'Strength: strong',
+  met: ', met', notMet: ', not met yet',
+};
+const KEYS = ['empty', 'weak', 'fair', 'good', 'strong'] as const;
 
 /** Password field with show/hide. With showStrength: strength meter and requirement list for a new password. */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(function PasswordInput(
-  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onChange, showStrength, requirements = defaultPasswordRequirements, showLabel = 'Show password', hideLabelText = 'Hide password', disabled, id, className, autoComplete, ...rest },
+  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onChange, showStrength, requirements = defaultPasswordRequirements, showLabel = 'Show password', hideLabelText = 'Hide password', labels, disabled, id, className, autoComplete, ...rest },
   ref,
 ) {
+  const l = { ...DEFAULT_PASSWORD_INPUT_LABELS, ...labels };
   const [own, setOwn] = useState(defaultValue);
   const v = value ?? own;
   const [visible, setVisible] = useState(false);
@@ -53,12 +69,12 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(fu
           {showStrength && (
             <div className="rb-password__strength">
               <div className={cx('rb-password__meter', `is-${KEYS[level]}`)} aria-hidden="true">{[1, 2, 3, 4].map((n) => <span key={n} className={cx(n <= level && 'is-on')} />)}</div>
-              <p className="rb-password__level" aria-live="polite">{LEVELS[level]}</p>
+              <p className="rb-password__level" aria-live="polite">{l[KEYS[level]]}</p>
               <ul id={`${fieldId}-req`} className="rb-password__reqs">
                 {requirements.map((r, i) => (
                   <li key={r.label} className={cx(met[i] && 'is-met')}>
                     {met[i] ? <Check aria-hidden="true" /> : <Circle aria-hidden="true" />}
-                    {r.label}<span className="rb-visually-hidden">{met[i] ? ', met' : ', not met yet'}</span>
+                    {r.label}<span className="rb-visually-hidden">{met[i] ? l.met : l.notMet}</span>
                   </li>
                 ))}
               </ul>

@@ -65,6 +65,11 @@
       "size",
       "'sm' | 'md'",
       ""
+    ],
+    [
+      "labels",
+      "{ rating(value, max), reviews(count) }",
+      "Accessible name. Defaults in DEFAULT_RATING_LABELS."
     ]
   ],
   "behaviour": [],

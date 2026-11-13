@@ -84,6 +84,11 @@
       "BottomNavItem: other props",
       "anchor attributes",
       "href, onClick and so on."
+    ],
+    [
+      "aria-label",
+      "string",
+      "Name of the navigation. Default 'Main menu'."
     ]
   ],
   "behaviour": [

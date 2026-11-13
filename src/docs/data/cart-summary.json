@@ -72,6 +72,11 @@
       "children",
       "ReactNode",
       "Items for the order summary."
+    ],
+    [
+      "labels",
+      "{ subtotal, total }",
+      "Defaults in DEFAULT_CART_SUMMARY_LABELS."
     ]
   ],
   "behaviour": [

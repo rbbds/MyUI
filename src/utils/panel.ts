@@ -92,6 +92,9 @@ export function usePanelDismiss({ open, root, onDismiss }: DismissOptions) {
   }, [open, root, cb]);
 }
 
+export type Side = 'top' | 'bottom' | 'left' | 'right';
+const OPPOSITE: Record<Side, Side> = { top: 'bottom', bottom: 'top', left: 'right', right: 'left' };
+
 export interface PlacementOptions {
   open: boolean;
   /** The panel. It gets popover="manual" and is shown in the top layer. */
@@ -101,7 +104,9 @@ export interface PlacementOptions {
   align?: 'start' | 'center' | 'end';
   /** Same width as the anchor (Combobox list). */
   matchWidth?: boolean;
-  /** Open above when there is no room below. Off for a panel with an arrow. */
+  /** Side of the anchor. Default bottom. */
+  side?: Side;
+  /** Use the other side when there is no room. Off for a panel with an arrow. */
   flip?: boolean;
   /** Horizontal point the panel is aligned to, measured from the panel edge (Popover arrow). */
   arrowOffset?: () => number;
@@ -115,8 +120,8 @@ const px = (el: Element, name: string) => parseFloat(getComputedStyle(el).getPro
  * Distances come from CSS custom properties on the panel: --rb-layer-gap (anchor to panel, plus
  * --rb-layer-gap-extra for an arrow) and --rb-layer-margin (panel to the edge of the screen).
  */
-export function usePlacement({ open, panel, anchor, align = 'start', matchWidth = false, flip = true, arrowOffset }: PlacementOptions) {
-  const [above, setAbove] = useState(false);
+export function usePlacement({ open, panel, anchor, align = 'start', side = 'bottom', matchWidth = false, flip = true, arrowOffset }: PlacementOptions) {
+  const [placed, setPlaced] = useState<Side>(side);
   const offset = useLatest(arrowOffset);
   useLayoutEffect(() => {
     const el = panel.current;
@@ -136,17 +141,30 @@ export function usePlacement({ open, panel, anchor, align = 'start', matchWidth 
       const h = el.offsetHeight;
       const vw = document.documentElement.clientWidth;
       const vh = window.innerHeight;
-      const roomBelow = vh - r.bottom - gap - margin;
-      const up = flip && h > roomBelow && r.top - gap - margin >= h;
+      const room: Record<Side, number> = {
+        bottom: vh - r.bottom - gap - margin, top: r.top - gap - margin,
+        right: vw - r.right - gap - margin, left: r.left - gap - margin,
+      };
+      const need = (s: Side) => (s === 'top' || s === 'bottom' ? h : w);
+      const at: Side = flip && need(side) > room[side] && room[OPPOSITE[side]] >= need(side) ? OPPOSITE[side] : side;
+      let top: number;
       let left: number;
-      if (offset.current) left = r.left + r.width / 2 - offset.current();
-      else if (align === 'end') left = r.right - w;
-      else if (align === 'center') left = r.left + r.width / 2 - w / 2;
-      else left = r.left;
+      if (at === 'top' || at === 'bottom') {
+        if (offset.current) left = r.left + r.width / 2 - offset.current();
+        else if (align === 'end') left = r.right - w;
+        else if (align === 'center') left = r.left + r.width / 2 - w / 2;
+        else left = r.left;
+        top = at === 'top' ? r.top - gap - h : r.bottom + gap;
+      } else {
+        left = at === 'left' ? r.left - gap - w : r.right + gap;
+        top = r.top + r.height / 2 - h / 2;
+      }
       left = Math.max(margin, Math.min(left, vw - w - margin));
-      const top = up ? r.top - gap - h : r.bottom + gap;
+      // Next to the anchor: keep it on screen. Above or below: never move it over the anchor.
+      if (at === 'left' || at === 'right') top = Math.max(margin, Math.min(top, vh - h - margin));
+      else if (at === 'top') top = Math.max(margin, top);
       Object.assign(el.style, { top: `${Math.round(top)}px`, left: `${Math.round(left)}px`, right: 'auto', bottom: 'auto' });
-      setAbove(up);
+      setPlaced(at);
     };
     const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(place); };
     place();
@@ -162,8 +180,8 @@ export function usePlacement({ open, panel, anchor, align = 'start', matchWidth 
       ro?.disconnect();
       try { if (el.matches(':popover-open')) el.hidePopover(); } catch { /* already hidden */ }
     };
-  }, [open, panel, anchor, align, matchWidth, flip, offset]);
-  return { above };
+  }, [open, panel, anchor, align, side, matchWidth, flip, offset]);
+  return { side: placed, above: placed === 'top' };
 }
 
 /**

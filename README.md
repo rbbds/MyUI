@@ -92,6 +92,9 @@ npm run dev              # Storybook on http://localhost:6006
 npm run build            # library to dist/ (index.js, styles.css, tokens.css, types)
 npm run build-storybook  # static Storybook to storybook-static/
 npm run lint:tokens      # token-lint report to reports/ (px, layers, unused and duplicate tokens)
+npm run check:contrast   # 3:1 for control borders and the active option, every style and theme
+npm run check:strings    # no fixed user-facing text in component JSX
+npm run test:browser     # Playwright, Chromium and WebKit
 ```
 
 ## Releasing a new version

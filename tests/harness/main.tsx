@@ -1,7 +1,7 @@
-import { useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Button, ButtonIcon, Combobox, DatePicker, DateRangePicker, DropdownMenu, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Button, ButtonIcon, CartButton, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -37,8 +37,73 @@ const scenarios: Record<string, ReactNode> = {
   ),
   dropdown: <DropdownKeys />,
   tooltip: <Tooltip title="More info"><ButtonIcon aria-label="Info" icon={<Info />} /></Tooltip>,
+  'modal-tooltip': (
+    <InModal>
+      <div style={{ height: 40, overflow: 'hidden', display: 'flex', alignItems: 'flex-end' }}>
+        <Tooltip title="More info" placement="top"><ButtonIcon aria-label="Info" icon={<Info />} /></Tooltip>
+      </div>
+    </InModal>
+  ),
+  'modal-text': <div style={{ height: 3000 }}><InModal><p>Some text you can select.</p></InModal></div>,
+  'modal-form': <FormModal />,
+  'modal-focus': <FocusModal />,
+  command: <CommandScenario />,
+  'combobox-form': <ComboboxForm />,
+  labels: <CartButton count={3} labels={{ count: (n) => `${n} artikelen` }} label="Winkelwagen" />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };
+
+function FormModal() {
+  const [open, setOpen] = useState(false);
+  const [closes, setCloses] = useState(0);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <p>Closed: {closes}</p>
+      <Modal open={open} onClose={() => { setOpen(false); setCloses((c) => c + 1); }} title="Modal title">
+        <form method="dialog"><Button type="submit">Done</Button></form>
+      </Modal>
+    </>
+  );
+}
+
+function FocusModal() {
+  const [open, setOpen] = useState(false);
+  const name = useRef<HTMLInputElement>(null);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal open={open} onClose={() => setOpen(false)} title="Modal title" initialFocus={name}>
+        <Input ref={name} label="Name" />
+      </Modal>
+    </>
+  );
+}
+
+function CommandScenario() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open commands</Button>
+      <CommandMenu open={open} onClose={() => setOpen(false)} items={[
+        { id: 'new project', label: 'New project', onSelect: () => {} },
+        { id: 'settings', label: 'Settings', onSelect: () => {} },
+        { id: 'log out', label: 'Log out', onSelect: () => {} },
+      ]} />
+    </>
+  );
+}
+
+function ComboboxForm() {
+  const [value, setValue] = useState<string | null>('be');
+  return (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <Combobox label="Country" options={options} value={value} onChange={(v) => setValue(v)} required />
+      <p>Value: {value ?? 'none'}</p>
+      <Button type="submit">Send</Button>
+    </form>
+  );
+}
 
 function DropdownKeys() {
   const [clicks, setClicks] = useState(0);

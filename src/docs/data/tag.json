@@ -52,6 +52,11 @@
       "size / dot",
       "",
       ""
+    ],
+    [
+      "labels",
+      "{ remove(label) }",
+      "Used when removeLabel is not set. Defaults in DEFAULT_TAG_LABELS."
     ]
   ],
   "behaviour": [

@@ -1,6 +1,7 @@
-import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { useId, type ReactNode, type RefObject } from 'react';
 import { X } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useModalDialog } from '../../utils/dialog';
 import './Overlay.css';
 
 export interface ModalProps {
@@ -15,29 +16,27 @@ export interface ModalProps {
   footer?: ReactNode;
   size?: 'sm' | 'md' | 'lg';
   closeLabel?: string;
+  /** Element that gets focus when the modal opens, e.g. the first field of a form. Default: the close button. */
+  initialFocus?: RefObject<HTMLElement | null>;
 }
 
-/** Built on the native <dialog>: focus trap, Escape and backdrop handling come from the browser. */
-export function Modal({ open, onClose, title, description, icon, children, footer, size = 'md', closeLabel = 'Close' }: ModalProps) {
-  const ref = useRef<HTMLDialogElement>(null);
+/**
+ * Built on the native <dialog>: focus trap, Escape and focus back to the trigger come from the browser.
+ * The backdrop closes it (only when the press starts there), the page behind does not scroll,
+ * and onClose also runs when a <form method="dialog"> inside closes it.
+ */
+export function Modal({ open, onClose, title, description, icon, children, footer, size = 'md', closeLabel = 'Close', initialFocus }: ModalProps) {
+  const dialog = useModalDialog({ open, onClose, initialFocus });
   const titleId = useId();
   const descId = useId();
-  useEffect(() => {
-    const d = ref.current;
-    if (!d) return;
-    if (open && !d.open) d.showModal();
-    if (!open && d.open) d.close();
-  }, [open]);
   return (
     <dialog
-      ref={ref}
+      {...dialog}
       className={cx('rb-modal', `rb-modal--${size}`)}
       aria-labelledby={titleId}
       aria-describedby={description ? descId : undefined}
-      onCancel={(e) => { e.preventDefault(); onClose(); }}
-      onClick={(e) => { if (e.target === ref.current) onClose(); }}
     >
-      <div className="rb-modal__panel">
+      <div className={cx('rb-modal__panel', !footer && 'rb-modal__panel--no-footer')}>
         <div className="rb-modal__header">
           {icon}
           <div className="rb-modal__titles">
@@ -47,7 +46,7 @@ export function Modal({ open, onClose, title, description, icon, children, foote
           <button type="button" className="rb-modal__close" onClick={onClose} aria-label={closeLabel}><X aria-hidden="true" /></button>
         </div>
         {children && <div className="rb-modal__body">{children}</div>}
-        {footer ? <div className="rb-modal__footer">{footer}</div> : <div style={{ height: 'var(--modal-padding)' }} />}
+        {footer && <div className="rb-modal__footer">{footer}</div>}
       </div>
     </dialog>
   );
