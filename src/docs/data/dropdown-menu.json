@@ -83,7 +83,7 @@
     "Nested submenus."
   ],
   "tokens": [
-    "--menu-{surface|border|padding|radius}",
+    "--menu-{surface|border|border-width|padding|radius}",
     "--menu-item-{surface|foreground}-*",
     "--menu-item-padding-*",
     "--menu-item-gap"

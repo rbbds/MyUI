@@ -83,6 +83,9 @@
   ],
   "tokens": [
     "--selection-{surface|border|foreground}-*",
+    "--selection-control-size (label line height)",
+    "--selection-border-width",
+    "--checkbox-indicator-icon-size",
     "--selection-checkbox-{size}-radius",
     "--selection-{size}-gap"
   ],

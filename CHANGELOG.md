@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Fixed
+- `--table-header-padding-vertical` is declared once (12 px). The Figma variable for the table card header got its own name.
+- Figma: Input in State=Error focus has the Focus ring/error effect style. Command item and Combobox option are 36 px, like in CSS.
 - `@rbbds/ui/tokens.css` and `tokens.json` now include the effect styles: `--shadow-xs` to `--shadow-2xl`, `--focus-ring`, `--focus-ring-error` and `--focus-ring-inset`. Before, they were only in `styles.css`.
 - `tokens.json`: `--effects-shadows-*` (shadow colours per theme) are in the semantic group, not component.
 - `FileUploadItem`: the remove button said "Verwijder …" in Dutch. It now says "Remove …".
@@ -19,10 +21,11 @@
 ### Known issues
 - Escape in a Dropdown menu, Popover, Date picker or Date range picker inside a Modal also closes the Modal.
 - A Toast is behind the backdrop and is not read while a Modal, Slideout or Command menu is open.
-- `--table-header-padding-vertical` is still declared twice in `tokens.css`. The Figma variables get a new name with the next token export.
 - The first two are covered by `tests/browser` (marked as expected to fail) and get fixed with the shared panel layer.
 
 ### New
+- `npm run check:contrast`: checks control borders and the active option for 3:1 in every style and theme. Runs in CI and fails below 3:1.
+- Tokens for Mega menu, Mobile nav and the expanded Header nav item (from Figma). The React components follow later.
 - `npm run lint:tokens`: token-lint in CI, as a report in the job summary and an artifact (it does not fail the build yet). Rules: no px in component CSS outside a short allowlist, only component tokens in component CSS (plus `--text-*`, `--shadow-*`, `--focus-ring*`), no `var()` to a token that does not exist, unused tokens and duplicate tokens. Settings and allowlist in `scripts/token-lint.config.mjs`.
 - `npm run test:browser`: Playwright tests in Chromium and WebKit for keyboard and screen reader behaviour that axe cannot check. They run in CI.
 - `@rbbds/ui/tokens.json`: all tokens in the Design Tokens (DTCG) format, with value, type, CSS name and values per brand, theme and screen size. Built with every release.
@@ -45,6 +48,12 @@
 - Notification panel: the empty state uses its own tokens. It looks the same.
 - Variant swatch: the focus ring uses `--focus-ring`, like all other components.
 - Figma: every Focus variant uses the effect style Focus ring/brand (Focus ring/error for destructive buttons). Mobile nav item and Bottom nav item had a 2 px focus border instead; Code digit and Swatch had no ring.
+- **Form controls have a border of at least 3:1** (WCAG 1.4.11) in every style and theme. New tokens `--color-border-control` and `--color-border-control-hover`. Input, Select, Search input, Combobox, Code input, Checkbox, Radio and the off track of Toggle use them. `--gray-400` is a little darker (`#9aa4b2` to `#838d9a`) so it reaches 3:1; this also makes `--color-border-strong` and disabled text a little darker in Light.
+- **Checkbox and Radio are as high as the line height of their label**: 20 px (sm) and 24 px (md) on desktop, 16 and 20 px on small screens. The control no longer needs a top offset. New tokens `--selection-control-size`, `--selection-border-width`, `--radio-indicator-size`; `--checkbox-indicator-icon-size` follows the size. `--selection-control-offset` is removed.
+- Button: the border width follows the style (`--brand-border-width-control-default`): 1 px in Iris and Forest, 2 px in Berry. The height stays the same.
+- Combobox and Command menu: the option you reach with the arrow keys has a 2 px inside border in the focus color (WCAG 2.4.7). Before, only the background changed (1.05:1). New tokens `--menu-item-border-active`, `--menu-item-border-width-active`, `--command-item-border-active`, `--command-item-border-width-active`.
+- Dropdown menu and Combobox list: the border width uses the new token `--menu-border-width`.
+- Table card: the header above the table uses `--table-card-header-padding-vertical` (20 px, as before).
 
 ## 1.0.1
 

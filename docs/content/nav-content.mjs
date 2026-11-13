@@ -30,7 +30,7 @@ export default [
     content: ['Labels start with a verb. Destructive actions go at the bottom, after a divider.'],
     do: ['Group related actions with a separator.'],
     dont: ['More than about 8 items.', 'Nested submenus.'],
-    tokens: ['--menu-{surface|border|padding|radius}', '--menu-item-{surface|foreground}-*', '--menu-item-padding-*', '--menu-item-gap'],
+    tokens: ['--menu-{surface|border|border-width|padding|radius}', '--menu-item-{surface|foreground}-*', '--menu-item-padding-*', '--menu-item-gap'],
     related: ['Button icon', 'Select'],
     open: [],
   },

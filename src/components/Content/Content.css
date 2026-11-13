@@ -1,5 +1,5 @@
 .rb-table-wrap{border:1px solid var(--table-border);border-radius:var(--table-radius);background:var(--table-surface);box-shadow:var(--shadow-xs);overflow:hidden}
-.rb-table-wrap__header{display:flex;align-items:center;gap:var(--spacing-2);padding:var(--spacing-5) var(--table-cell-padding-horizontal);border-bottom:1px solid var(--table-border)}
+.rb-table-wrap__header{display:flex;align-items:center;gap:var(--spacing-2);padding:var(--table-card-header-padding-vertical) var(--table-cell-padding-horizontal);border-bottom:1px solid var(--table-border)}
 .rb-table-wrap__title{margin:0;color:var(--table-foreground-primary);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-table-scroll{overflow-x:auto}
 .rb-table{width:100%;border-collapse:collapse}
