@@ -6,14 +6,16 @@
  * (Scripter: print, otherwise console and the return value).
  *
  * Reads:
- * 1. Pages per category ("---- Category ----" header pages).
+ * 1. Pages per category ("⤵️ Category ⤵️" header pages).
  * 2. Component token groups (component-tokens/<group>/...) and how many are already nested.
  * 3. The duplicate tokens from the PR 6 decision list: where each one is bound (page > component > layer > field).
  * 4. The pages of the 18a choices: a compact tree with sizes, gaps, padding, radius and bound tokens.
  */
 async function scan() {
+  // Without this, bindings on hidden layers inside instances are missed.
+  figma.skipInvisibleInstanceChildren = false;
   const PREFIX = 'component-tokens/';
-  const DUPES = ['header/header-border-width', 'slideout/slideout-border-width', 'selection-card/selection-card-border-width', 'selection-card/selection-card-border-width-2', 'step-horizontal/indicator-border-width', 'step-vertical/indicator-border-width', 'stepper/indicator-border-width', 'command/kbd-border-width', 'command/item-shortcut-border-width', 'command/shortcut-border-width', 'search/shortcut-border-width', 'notification/border-width-2', 'date-picker/calendar-border-width', 'mini-cart/totals-border-width', 'mini-cart/totals-padding-top', 'code-input/label-foreground', 'code-input/hint-foreground', 'code-input/error-message-foreground', 'file-upload/text-gap', 'file-upload/progress-gap', 'file-upload/track-radius', 'file-upload/indicator-radius', 'file-upload/percent-foreground', 'file-upload/icon-surface', 'alert/foreground-action', 'select/leading-icon-size', 'input/help-icon-size'];
+  const DUPES = ['header/header-border-width', 'slideout/slideout-border-width', 'selection-card/selection-card-border-width', 'selection-card/selection-card-border-width-2', 'step-horizontal/indicator-border-width', 'step-vertical/indicator-border-width', 'stepper/indicator-border-width', 'command/kbd-border-width', 'command/shortcut-border-width', 'search/shortcut-border-width', 'notification/border-width-2', 'date-picker/calendar-border-width', 'mini-cart/totals-border-width', 'mini-cart/totals-padding-top', 'code-input/label-foreground', 'code-input/hint-foreground', 'code-input/error-message-foreground', 'file-upload/text-gap', 'file-upload/progress-gap', 'file-upload/track-radius', 'file-upload/indicator-radius', 'file-upload/percent-foreground', 'file-upload/icon-surface', 'alert/foreground-action', 'select/leading-icon-size', 'input/help-icon-size'];
   const DETAIL_PAGES = ['Filter group', 'Variant picker', 'Password input', 'Avatar', 'Mini cart', 'Date picker'];
 
   const cols = await figma.variables.getLocalVariableCollectionsAsync();
@@ -24,7 +26,7 @@ async function scan() {
   // 1. Pages
   let cat = null; const pages = [];
   for (const p of figma.root.children) {
-    const m = p.name.match(/^-{2,}\s*(.+?)\s*-{2,}$/);
+    const m = p.name.match(/^⤵️\s*(.+?)\s*⤵️$/);
     if (m) { cat = m[1]; continue; }
     pages.push({ page: p, cat });
   }
