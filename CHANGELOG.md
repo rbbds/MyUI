@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Fixed
+- `@rbbds/ui/tokens.css` and `tokens.json` now include the effect styles: `--shadow-xs` to `--shadow-2xl`, `--focus-ring`, `--focus-ring-error` and `--focus-ring-inset`. Before, they were only in `styles.css`.
+- `tokens.json`: `--effects-shadows-*` (shadow colours per theme) are in the semantic group, not component.
 - `FileUploadItem`: the remove button said "Verwijder …" in Dutch. It now says "Remove …".
 - `DateRangePicker`: screen readers now hear the label and the chosen period on the button. Before, only the label was read.
 - `Input`, `Select`, `Textarea`: your own `aria-describedby` is added to the hint or error. Before, it replaced them.
@@ -21,6 +23,7 @@
 - The first two are covered by `tests/browser` (marked as expected to fail) and get fixed with the shared panel layer.
 
 ### New
+- `npm run lint:tokens`: token-lint in CI, as a report in the job summary and an artifact (it does not fail the build yet). Rules: no px in component CSS outside a short allowlist, only component tokens in component CSS (plus `--text-*`, `--shadow-*`, `--focus-ring*`), no `var()` to a token that does not exist, unused tokens and duplicate tokens. Settings and allowlist in `scripts/token-lint.config.mjs`.
 - `npm run test:browser`: Playwright tests in Chromium and WebKit for keyboard and screen reader behaviour that axe cannot check. They run in CI.
 - `@rbbds/ui/tokens.json`: all tokens in the Design Tokens (DTCG) format, with value, type, CSS name and values per brand, theme and screen size. Built with every release.
 - `llms.txt` in the package: how MyUI is built and the rules for AI assistants (layers, naming, sizes, accessibility).

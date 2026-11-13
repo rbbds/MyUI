@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { copyFileSync, mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export default defineConfig({
@@ -10,7 +10,9 @@ export default defineConfig({
       name: 'copy-tokens',
       closeBundle() {
         mkdirSync('dist', { recursive: true });
-        copyFileSync(resolve(import.meta.dirname, 'src/styles/tokens.css'), resolve(import.meta.dirname, 'dist/tokens.css'));
+        // dist/tokens.css = Figma variables (tokens.css) plus Figma effect styles (effects.css: shadows, focus rings).
+        const read = (f: string) => readFileSync(resolve(import.meta.dirname, 'src/styles', f), 'utf8').trimEnd();
+        writeFileSync(resolve(import.meta.dirname, 'dist/tokens.css'), `${read('tokens.css')}\n${read('effects.css')}\n`);
       },
     },
   ],

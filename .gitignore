@@ -6,3 +6,4 @@ storybook-static
 docs/figma-payload/
 test-results
 playwright-report
+reports/

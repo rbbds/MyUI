@@ -59,6 +59,8 @@ Same four layers as in Figma:
 
 The CSS names match the **WEB code syntax** on each Figma variable, so Dev Mode shows the same name as the code.
 
+`@rbbds/ui/tokens.css` has all variables plus the effect styles: `--shadow-*`, `--focus-ring`, `--focus-ring-error` and `--focus-ring-inset` (from `src/styles/effects.css`).
+
 The build also writes `dist/tokens.json` (import `@rbbds/ui/tokens.json`): every token in the Design Tokens (DTCG) format with its value, type, CSS name and its values per brand, theme and screen size. In that file the layers are named `primitive`, `brand`, `semantic` (theme and screen size alias) and `component` (mapped). `llms.txt` in the package explains the layers, the naming and the rules for AI assistants.
 
 ### Updating tokens from Figma
@@ -66,6 +68,7 @@ The build also writes `dist/tokens.json` (import `@rbbds/ui/tokens.json`): every
 1. Change variables in Figma.
 2. Run `scripts/figma-export-tokens.js` in the Figma file (as a plugin snippet, e.g. via Claude with the Figma connector).
 3. Replace `src/styles/tokens.css` with the output and open a pull request.
+4. Check the token-lint report in the CI job summary (or run `npm run lint:tokens`).
 
 ## Components
 
@@ -88,6 +91,7 @@ npm install
 npm run dev              # Storybook on http://localhost:6006
 npm run build            # library to dist/ (index.js, styles.css, tokens.css, types)
 npm run build-storybook  # static Storybook to storybook-static/
+npm run lint:tokens      # token-lint report to reports/ (px, layers, unused and duplicate tokens)
 ```
 
 ## Releasing a new version
