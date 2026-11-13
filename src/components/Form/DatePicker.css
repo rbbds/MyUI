@@ -1,12 +1,12 @@
-.rb-calendar{display:inline-flex;flex-direction:column;gap:var(--calendar-gap);width:var(--calendar-width);padding:var(--calendar-padding);border:1px solid var(--calendar-border);border-radius:var(--calendar-radius);background:var(--calendar-surface);box-shadow:var(--shadow-lg);box-sizing:content-box}
+.rb-calendar{display:inline-flex;flex-direction:column;gap:var(--calendar-gap);width:var(--calendar-width);padding:var(--calendar-padding);border:var(--calendar-border-width) solid var(--calendar-border);border-radius:var(--calendar-radius);background:var(--calendar-surface);box-shadow:var(--shadow-lg);box-sizing:content-box}
 .rb-calendar__header{display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-2);min-height:40px;padding-inline-start:var(--spacing-2)}
 .rb-calendar__title,.rb-calendar__switch{color:var(--calendar-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-calendar__switch{display:inline-flex;align-items:center;gap:var(--spacing-1);height:32px;margin-inline-start:calc(var(--spacing-2) * -1);padding:0 var(--spacing-2);border:0;border-radius:var(--calendar-switch-radius);background:transparent;cursor:pointer}
+.rb-calendar__switch{display:inline-flex;align-items:center;gap:var(--spacing-1);height:32px;margin-inline-start:calc(var(--spacing-2) * -1);padding:0 var(--calendar-view-switch-padding-horizontal);border:0;border-radius:var(--calendar-switch-radius);background:transparent;cursor:pointer}
 .rb-calendar__switch:hover{background:var(--calendar-day-surface-hover)}
 .rb-calendar__switch:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-calendar__switch-icon{width:20px;height:20px;color:var(--calendar-foreground-switch-icon);transition:transform .2s ease}
+.rb-calendar__switch-icon{width:var(--calendar-chevron-icon-size);height:var(--calendar-chevron-icon-size);color:var(--calendar-foreground-switch-icon);transition:transform .2s ease}
 .rb-calendar__switch-icon.is-open{transform:rotate(180deg)}
-.rb-calendar__arrows{display:flex;gap:var(--spacing-1)}
+.rb-calendar__arrows{display:flex;gap:var(--calendar-arrows-gap)}
 .rb-calendar__body{height:var(--calendar-body-height);overflow:hidden}
 .rb-calendar--year .rb-calendar__body{overflow-y:auto;overscroll-behavior:contain}
 .rb-calendar__grid{border-collapse:collapse}
@@ -21,7 +21,7 @@
 .rb-calendar__day.is-today,.rb-calendar__cell.is-today{border-color:var(--calendar-day-border-today)}
 .rb-calendar__day.is-selected,.rb-calendar__day.is-selected:hover,.rb-calendar__cell.is-selected,.rb-calendar__cell.is-selected:hover{border-color:transparent;background:var(--calendar-day-surface-selected);color:var(--calendar-day-foreground-selected);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-calendar__day:disabled,.rb-calendar__cell:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed}
-.rb-calendar__cells{display:grid;align-content:start;gap:var(--spacing-2) var(--spacing-1);padding:var(--spacing-1)}
+.rb-calendar__cells{display:grid;align-content:start;gap:var(--calendar-cells-gap) var(--spacing-1);padding:var(--spacing-1)}
 .rb-calendar__cells--3{grid-template-columns:repeat(3,1fr)}
 .rb-calendar__cells--4{grid-template-columns:repeat(4,1fr)}
 .rb-calendar--month .rb-calendar__cells{padding-block:var(--spacing-4)}

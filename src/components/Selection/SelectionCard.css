@@ -1,11 +1,11 @@
-.rb-selection-card{display:flex;align-items:flex-start;gap:var(--selection-card-gap);padding:var(--selection-card-padding);border:1px solid var(--selection-card-border);border-radius:var(--selection-card-radius);background:var(--selection-card-surface);cursor:pointer;transition:background-color .15s,border-color .15s,box-shadow .15s}
+.rb-selection-card{display:flex;align-items:flex-start;gap:var(--selection-card-gap);padding:var(--selection-card-padding);border:var(--selection-card-border-width) solid var(--selection-card-border);border-radius:var(--selection-card-radius);background:var(--selection-card-surface);cursor:pointer;transition:background-color .15s,border-color .15s,box-shadow .15s}
 .rb-selection-card:hover{background:var(--selection-card-surface-hover)}
 .rb-selection-card:has(.rb-check__input:checked){background:var(--selection-card-surface-checked);border-color:var(--selection-card-border-checked);box-shadow:inset 0 0 0 1px var(--selection-card-border-checked)}
 .rb-selection-card:has(.rb-check__input:focus-visible){box-shadow:var(--focus-ring)}
 .rb-selection-card:has(.rb-check__input:checked:focus-visible){box-shadow:inset 0 0 0 1px var(--selection-card-border-checked),var(--focus-ring)}
 .rb-selection-card .rb-check__control:has(.rb-check__input:focus-visible){box-shadow:none}
 .rb-selection-card__icon{display:inline-flex;flex-shrink:0}
-.rb-selection-card__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--spacing-0-5)}
+.rb-selection-card__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--selection-card-text-gap)}
 .rb-selection-card__title{color:var(--selection-card-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-selection-card__description{color:var(--selection-card-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);font-weight:var(--text-body-sub-text-font-weight)}
 .rb-selection-card--disabled,.rb-selection-card--disabled:hover{background:var(--selection-card-surface-disabled);border-color:var(--selection-card-border);box-shadow:none;cursor:not-allowed}

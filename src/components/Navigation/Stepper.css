@@ -1,7 +1,7 @@
 .rb-stepper{display:flex;margin:0;padding:0;list-style:none}
 .rb-step{display:flex;min-width:0}
 .rb-step__track{display:flex;align-items:center;gap:var(--stepper-gap)}
-.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;box-sizing:border-box;border:2px solid var(--stepper-border-upcoming);border-radius:var(--border-radius-full);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;box-sizing:border-box;border:var(--step-indicator-border-width) solid var(--stepper-border-upcoming);border-radius:var(--border-radius-full);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-step__indicator svg{width:16px;height:16px}
 .rb-step__connector{flex:1;border-radius:var(--border-radius-full);background:var(--stepper-connector)}
 .rb-step:last-child .rb-step__connector{visibility:hidden}

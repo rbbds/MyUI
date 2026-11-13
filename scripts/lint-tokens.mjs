@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { readTokens, layerOf, refsIn } from './lib/tokens.mjs';
+import { parseCss } from './lib/css.mjs';
 import config from './token-lint.config.mjs';
 
 const args = process.argv.slice(2);
@@ -29,51 +30,7 @@ const filesIn = (dirs, ext) => dirs.flatMap((d) => walk(d, ext)).sort();
 const { values, declarations } = readTokens();
 const layer = Object.fromEntries(Object.entries(values).map(([k, v]) => [k, layerOf(k, v)]));
 
-// --- Component CSS: declarations with selector, at-rule and line ----------------------------
-function parseCss(file) {
-  const src = readFileSync(file, 'utf8').replace(/\/\*[\s\S]*?\*\//g, (c) => c.replace(/[^\n]/g, ' '));
-  const out = [];
-  const stack = []; // selectors and at-rules
-  let buf = '';
-  let bufStart = 0;
-  const lineAt = (i) => src.slice(0, i).split('\n').length;
-  const flushDecls = (text, start) => {
-    let offset = start;
-    for (const d of text.split(';')) {
-      const at = offset;
-      offset += d.length + 1;
-      const i = d.indexOf(':');
-      if (i < 0 || !d.trim()) continue;
-      const property = d.slice(0, i).trim();
-      const value = d.slice(i + 1).trim();
-      const lead = d.length - d.trimStart().length;
-      const selector = [...stack].reverse().find((s) => !s.startsWith('@')) ?? '';
-      const atRule = stack.filter((s) => s.startsWith('@')).join(' ');
-      out.push({ file, line: lineAt(at + lead), selector, atRule, property, value });
-    }
-  };
-  for (let i = 0; i < src.length; i++) {
-    const c = src[i];
-    if (c === '{') {
-      // Declarations before a nested rule end at the last ';'.
-      const cut = buf.lastIndexOf(';');
-      if (cut >= 0) flushDecls(buf.slice(0, cut), bufStart);
-      stack.push(buf.slice(cut + 1).trim().replace(/\s+/g, ' '));
-      buf = '';
-      bufStart = i + 1;
-    } else if (c === '}') {
-      flushDecls(buf, bufStart);
-      stack.pop();
-      buf = '';
-      bufStart = i + 1;
-    } else {
-      if (!buf) bufStart = i;
-      buf += c;
-    }
-  }
-  return out;
-}
-
+// --- Component CSS: declarations with selector, at-rule and line (scripts/lib/css.mjs) ---------
 const cssFiles = filesIn(config.componentCss, ['.css']);
 const decls = cssFiles.flatMap(parseCss).map((d) => ({ ...d, file: relative('.', d.file) }));
 

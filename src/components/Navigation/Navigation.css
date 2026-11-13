@@ -1,7 +1,7 @@
 .rb-tabs__list{display:flex;gap:var(--tabs-gap);overflow-x:auto}
 .rb-tabs__list--underline{box-shadow:inset 0 -1px 0 var(--tab-track)}
 .rb-tab{display:inline-flex;align-items:center;gap:var(--tab-gap);padding:var(--tab-padding-vertical) var(--tab-padding-horizontal);border:0;background:transparent;color:var(--tab-foreground);cursor:pointer;white-space:nowrap;border-radius:var(--tab-radius);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-tab svg{width:16px;height:16px}
+.rb-tab svg{width:var(--tab-leading-icon-size);height:var(--tab-leading-icon-size)}
 .rb-tab:hover{color:var(--tab-foreground-hover)}
 .rb-tab:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-tabs__list--underline .rb-tab{border-radius:var(--tab-radius) var(--tab-radius) 0 0}
@@ -9,7 +9,7 @@
 .rb-tabs__list--underline .rb-tab[aria-selected="true"]:focus-visible{box-shadow:inset 0 -2px 0 var(--tab-indicator),var(--focus-ring)}
 .rb-tabs__list--pill .rb-tab:hover{background:var(--tab-surface-hover)}
 .rb-tabs__list--pill .rb-tab[aria-selected="true"]{color:var(--tab-foreground-active);background:var(--tab-surface-active)}
-.rb-tab__count{padding:2px 8px;border-radius:var(--border-radius-full);background:var(--color-surface-tertiary);color:var(--color-foreground-secondary);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
+.rb-tab__count{padding:var(--tab-count-padding-vertical) var(--tab-count-padding-horizontal);border-radius:var(--tab-count-radius);background:var(--tab-count-surface);color:var(--tab-count-foreground);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
 .rb-tab[aria-selected="true"] .rb-tab__count{background:var(--color-surface-brand-subtle);color:var(--color-foreground-brand-strong)}
 .rb-tabs__panel{padding-top:var(--spacing-6)}
 .rb-tabs__panel:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--border-radius-control-sm)}

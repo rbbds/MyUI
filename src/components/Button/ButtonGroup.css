@@ -5,4 +5,4 @@
 .rb-button-group__item:hover{background:var(--button-group-surface-hover)}
 .rb-button-group__item[aria-pressed="true"]{background:var(--button-group-surface-current);color:var(--button-group-foreground-current)}
 .rb-button-group__item:focus-visible{outline:none;box-shadow:var(--focus-ring);z-index:1}
-.rb-button-group__item svg{width:20px;height:20px}
+.rb-button-group__item svg{width:var(--button-group-leading-icon-size);height:var(--button-group-leading-icon-size)}

@@ -19,7 +19,7 @@
 .rb-tag__close:hover{background:var(--tag-surface-hover);color:var(--tag-foreground)}
 .rb-tag__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-tag__close svg{width:14px;height:14px}
-.rb-tag--sm .rb-tag__close svg{width:12px;height:12px}
+.rb-tag--sm .rb-tag__close svg{width:var(--tag-close-icon-size);height:var(--tag-close-icon-size)}
 
 .rb-avatar{--_d:40px;position:relative;display:inline-flex;flex-shrink:0;width:var(--_d);height:var(--_d)}
 .rb-avatar__inner{display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;overflow:hidden;border-radius:var(--avatar-radius);background:var(--avatar-surface);border:1px solid var(--avatar-border);color:var(--avatar-foreground);font-family:var(--text-body-paragraph-semibold-font-family);font-weight:var(--font-font-weight-paragraph-semibold);font-size:calc(var(--_d) * .4);line-height:1}
