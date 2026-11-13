@@ -38,7 +38,7 @@
 @media (max-width:599px){.rb-modal__footer{flex-direction:column-reverse}}
 
 .rb-menu-anchor{position:relative;display:inline-flex}
-.rb-menu{position:absolute;z-index:40;top:calc(100% + 4px);left:0;min-width:240px;display:flex;flex-direction:column;padding:var(--menu-padding);border:1px solid var(--menu-border);border-radius:var(--menu-radius);background:var(--menu-surface);box-shadow:var(--shadow-lg)}
+.rb-menu{position:absolute;z-index:40;top:calc(100% + 4px);left:0;min-width:240px;display:flex;flex-direction:column;padding:var(--menu-padding);border:var(--menu-border-width) solid var(--menu-border);border-radius:var(--menu-radius);background:var(--menu-surface);box-shadow:var(--shadow-lg)}
 .rb-menu--end{left:auto;right:0}
 .rb-menu__item{display:flex;align-items:center;gap:var(--menu-item-gap);width:100%;padding:var(--menu-item-padding-vertical) var(--menu-item-padding-horizontal);border:0;border-radius:var(--menu-item-radius);background:var(--menu-item-surface-default);color:var(--menu-item-foreground);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-menu__item svg{width:16px;height:16px;color:var(--menu-item-foreground-icon);flex-shrink:0}

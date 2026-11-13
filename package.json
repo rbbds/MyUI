@@ -58,6 +58,7 @@
     "docs:build": "node scripts/docs/build-mdx.mjs && node scripts/docs/build-guides.mjs",
     "docs:figma": "node scripts/docs/build-figma-payload.mjs",
     "test:browser": "playwright test",
+    "check:contrast": "node scripts/check-contrast.mjs",
     "lint:tokens": "node scripts/lint-tokens.mjs --md reports/token-lint.md --json reports/token-lint.json"
   },
   "peerDependencies": {

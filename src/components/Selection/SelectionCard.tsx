@@ -29,7 +29,7 @@ export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(fu
         {description && <span id={`${id}-d`} className="rb-selection-card__description">{description}</span>}
       </span>
       {aside && <span className="rb-selection-card__aside">{aside}</span>}
-      <span className={cx('rb-check', 'rb-check--sm', type === 'radio' && 'rb-check--radio', disabled && 'rb-check--disabled')}>
+      <span data-size="sm" className={cx('rb-check', 'rb-check--sm', type === 'radio' && 'rb-check--radio', disabled && 'rb-check--disabled')}>
         <span className="rb-check__control">
           <input
             ref={ref}

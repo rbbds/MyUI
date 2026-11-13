@@ -32,7 +32,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
   useImperativeHandle(ref, () => inner.current as HTMLInputElement);
   useEffect(() => { if (inner.current) inner.current.indeterminate = indeterminate; }, [indeterminate]);
   return (
-    <label className={cx('rb-check', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
+    <label data-size={size} className={cx('rb-check', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
       <span className="rb-check__control">
         <input ref={inner} type="checkbox" className="rb-check__input" disabled={disabled} {...rest} />
         <Check className="rb-check__indicator rb-check__indicator--check" aria-hidden="true" strokeWidth={3} />
@@ -47,7 +47,7 @@ export type RadioProps = BaseProps;
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio({ label, hint, size = 'sm', disabled, className, ...rest }, ref) {
   return (
-    <label className={cx('rb-check', 'rb-check--radio', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
+    <label data-size={size} className={cx('rb-check', 'rb-check--radio', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
       <span className="rb-check__control">
         <input ref={ref} type="radio" className="rb-check__input" disabled={disabled} {...rest} />
         <span className="rb-check__dot" aria-hidden="true" />

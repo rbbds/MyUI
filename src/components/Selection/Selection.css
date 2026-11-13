@@ -1,13 +1,11 @@
 .rb-check{display:inline-flex;align-items:flex-start;gap:var(--selection-sm-gap);cursor:pointer;color:var(--selection-foreground-label)}
 .rb-check--md{gap:var(--selection-md-gap)}
-.rb-check__control{position:relative;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;margin-top:var(--selection-control-offset);background:var(--selection-surface-default);border:1px solid var(--selection-border-default);border-radius:var(--selection-checkbox-sm-radius);color:var(--selection-foreground-indicator);transition:background-color .15s,border-color .15s,box-shadow .15s}
-.rb-check--md .rb-check__control{width:20px;height:20px;border-radius:var(--selection-checkbox-md-radius)}
+.rb-check__control{position:relative;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;width:var(--selection-control-size);height:var(--selection-control-size);background:var(--selection-surface-default);border:var(--selection-border-width) solid var(--selection-border-default);border-radius:var(--selection-checkbox-sm-radius);color:var(--selection-foreground-indicator);transition:background-color .15s,border-color .15s,box-shadow .15s}
+.rb-check--md .rb-check__control{border-radius:var(--selection-checkbox-md-radius)}
 .rb-check--radio .rb-check__control{border-radius:var(--selection-radio-radius)}
 .rb-check__input{position:absolute;inset:0;margin:0;opacity:0;cursor:inherit}
-.rb-check__indicator{display:none;width:12px;height:12px}
-.rb-check--md .rb-check__indicator{width:14px;height:14px}
-.rb-check__dot{display:none;width:6px;height:6px;border-radius:50%;background:currentColor}
-.rb-check--md .rb-check__dot{width:8px;height:8px}
+.rb-check__indicator{display:none;width:var(--checkbox-indicator-icon-size);height:var(--checkbox-indicator-icon-size)}
+.rb-check__dot{display:none;width:var(--radio-indicator-size);height:var(--radio-indicator-size);border-radius:50%;background:currentColor}
 .rb-check:hover .rb-check__control{background:var(--selection-surface-hover);border-color:var(--selection-border-hover)}
 .rb-check__control:has(.rb-check__input:checked),.rb-check__control:has(.rb-check__input:indeterminate){background:var(--selection-surface-checked);border-color:var(--selection-border-checked)}
 .rb-check:hover .rb-check__control:has(.rb-check__input:checked),.rb-check:hover .rb-check__control:has(.rb-check__input:indeterminate){background:var(--selection-surface-checked-hover);border-color:var(--selection-border-checked-hover)}

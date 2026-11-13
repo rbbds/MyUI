@@ -71,6 +71,8 @@
   ],
   "tokens": [
     "--selection-*",
+    "--selection-control-size (label line height)",
+    "--radio-indicator-size",
     "--selection-radio-radius"
   ],
   "related": [
