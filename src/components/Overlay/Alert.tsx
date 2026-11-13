@@ -1,6 +1,8 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useTopModal } from '../../utils/panel';
 import type { StatusColor } from '../Display/Display';
 import './Overlay.css';
 
@@ -42,11 +44,18 @@ export function Alert({ color = 'info', title, children, icon, actions, onClose,
 
 export type ToastProps = Omit<AlertProps, 'role'>;
 
-/** Temporary notification. Render inside ToastRegion. role="status" (polite). */
+/** Temporary notification. Render inside ToastRegion: the region is the live region (polite), so a toast has no role of its own. */
 export function Toast({ className, ...props }: ToastProps) {
-  return <Alert {...props} role="status" className={cx('rb-alert--toast', className)} />;
+  return <Alert {...props} className={cx('rb-alert--toast', className)} />;
 }
 
+/**
+ * Place for toasts, always rendered (also when empty), so screen readers announce a toast that is added.
+ * While a Modal, Slideout or Command menu is open, the region renders inside that dialog: everything
+ * outside it is inert and below the backdrop.
+ */
 export function ToastRegion({ children, label = 'Notifications' }: { children: ReactNode; label?: string }) {
-  return <section className="rb-toast-region" aria-label={label} aria-live="polite">{children}</section>;
+  const modal = useTopModal();
+  const region = <section className="rb-toast-region" aria-label={label} aria-live="polite">{children}</section>;
+  return modal ? createPortal(region, modal) : region;
 }

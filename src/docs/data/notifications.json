@@ -45,7 +45,7 @@
     ]
   ],
   "behaviour": [
-    "Clicking the bell opens the panel. Escape or a click outside closes it and moves focus back.",
+    "Clicking the bell opens the panel. Escape closes it and moves focus back. Tab out of the panel or a click outside closes it too.",
     "Clicking a notification opens the subject and marks it as read."
   ],
   "a11y": [

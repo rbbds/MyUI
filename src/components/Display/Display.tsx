@@ -1,6 +1,7 @@
-import { cloneElement, isValidElement, useId, useState, type HTMLAttributes, type ReactElement, type ReactNode } from 'react';
+import { cloneElement, isValidElement, useId, useRef, useState, type HTMLAttributes, type ReactElement, type ReactNode } from 'react';
 import { User, X } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useEscape } from '../../utils/panel';
 import './Display.css';
 
 export type StatusColor = 'gray' | 'brand' | 'error' | 'warning' | 'success' | 'info';
@@ -160,18 +161,23 @@ export interface TooltipProps {
   /** A single focusable element (e.g. ButtonIcon). */
   children: ReactElement<{ 'aria-describedby'?: string }>;
 }
-/** Shows on hover and keyboard focus, hides on Escape. Not for essential or interactive content. */
+/**
+ * Shows on hover and keyboard focus. Escape hides it wherever the focus is, and the pointer can move
+ * onto the tooltip without hiding it (WCAG 1.4.13). Not for essential or interactive content.
+ */
 export function Tooltip({ title, text, placement = 'top', children }: TooltipProps) {
   const [open, setOpen] = useState(false);
   const id = `rb-tt-${useId()}`;
+  const root = useRef<HTMLSpanElement>(null);
+  useEscape({ open, root, anyTarget: true, onEscape: () => setOpen(false) });
   return (
     <span
+      ref={root}
       className="rb-tooltip-anchor"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
       onBlur={() => setOpen(false)}
-      onKeyDown={(e) => { if (e.key === 'Escape') setOpen(false); }}
     >
       {cloneElement(children, { 'aria-describedby': id })}
       <span id={id} role="tooltip" className={cx('rb-tooltip', `rb-tooltip--${placement}`)} data-open={open}>

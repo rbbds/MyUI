@@ -73,7 +73,7 @@ export default [
       'View switch: click "month year ▾" to go to the list of years. Choosing a year goes to the next view (Month or Day). The list scrolls to the chosen year.',
       'Day view: arrows move by day and week, Home/End go to the start/end of the week, PageUp/PageDown move by month (with Shift by year).',
       'Month and Year view: arrows move through the grid, Enter or a click chooses.',
-      'Enter or a click on a day chooses the date, closes the calendar and moves focus back to the button. Escape and a click outside also close it.',
+      'Enter or a click on a day chooses the date, closes the calendar and moves focus back to the button. Escape closes it and moves focus back to the button. Tab out or a click outside close it too. Inside a Modal, Escape closes only the calendar.',
       'The calendar keeps the same height in every view, so the popover does not jump.',
     ],
     a11y: ['The grid of days is a grid with aria-labelledby pointing to the month title. The month is announced with aria-live.', 'Weekdays show one letter, but the full name is there for screen readers.', 'Every day has a full label ("Thursday, November 12, 2026"). Today has aria-current="date" and a ring, not only color.', 'Year and Month view are a radiogroup with aria-checked. The view switch has aria-expanded.'],

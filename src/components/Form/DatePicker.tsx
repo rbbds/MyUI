@@ -3,6 +3,7 @@ import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from
 import { cx } from '../../utils/cx';
 import { ButtonIcon } from '../Button/Button';
 import { Field, type FieldBaseProps } from './Field';
+import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './DatePicker.css';
 
 /* ---------- date helpers (local time, no library) ---------- */
@@ -360,21 +361,18 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
   const popId = useId();
 
   useEffect(() => { setText(date ? formatDate(date, locale) : ''); }, [date?.getTime()]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false); };
-    document.addEventListener('mousedown', onDown);
-    return () => document.removeEventListener('mousedown', onDown);
-  }, [open]);
-
   const commit = (d: Date | null) => { if (value === undefined) setOwn(d); onChange?.(d); };
   const close = () => { setOpen(false); trigger.current?.focus(); };
+  const panel = useRef<HTMLDivElement>(null);
+  const control = useRef<HTMLDivElement>(null);
+  usePanelDismiss({ open, root, onDismiss: (reason) => (reason === 'escape' ? close() : setOpen(false)) });
+  usePlacement({ open, panel, anchor: control });
 
   return (
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-datepicker', className)}>
       {({ id: fieldId, describedBy, invalid }) => (
         <div ref={root} className="rb-datepicker__anchor">
-          <div className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
+          <div ref={control} className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
             <button
               ref={trigger}
               type="button"
@@ -405,7 +403,7 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
             />
           </div>
           {open && (
-            <div id={popId} role="dialog" aria-label={calendarLabel} className="rb-datepicker__popover" onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
+            <div ref={panel} id={popId} role="dialog" aria-label={calendarLabel} className="rb-datepicker__popover">
               <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
             </div>
           )}

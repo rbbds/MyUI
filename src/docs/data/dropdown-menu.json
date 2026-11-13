@@ -46,7 +46,7 @@
     [
       "trigger",
       "ReactElement",
-      "Usually a Button or ButtonIcon."
+      "Usually a Button or ButtonIcon. Its own onClick and ref keep working."
     ],
     [
       "items",
@@ -65,8 +65,10 @@
     ]
   ],
   "behaviour": [
-    "Opening moves focus to the first item. Arrow up/down, Home and End move the focus.",
-    "Escape or a choice closes the menu and moves focus back to the trigger."
+    "Opening moves focus to the first item. Arrow down on the trigger opens on the first item, Arrow up on the last.",
+    "Arrow up/down, Home and End move the focus. Typing a letter moves to the next item that starts with it.",
+    "Escape or a choice closes the menu and moves focus back to the trigger. Tab or a click outside closes it; the focus stays where it went.",
+    "Inside a Modal, Escape closes only the menu. The menu opens in the top layer, so a scroll area or a table cannot clip it."
   ],
   "a11y": [
     "The trigger has aria-haspopup, aria-expanded and aria-controls.",

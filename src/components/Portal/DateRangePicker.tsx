@@ -4,6 +4,7 @@ import { cx } from '../../utils/cx';
 import { Button } from '../Button/Button';
 import { Calendar, formatDate } from '../Form/DatePicker';
 import { Field, type FieldBaseProps } from '../Form/Field';
+import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './Portal.css';
 
 export interface DateRange { start: Date | null; end: Date | null }
@@ -68,12 +69,6 @@ export function DateRangePicker({
     return () => mq.removeEventListener('change', on);
   }, []);
 
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) setOpen(false); };
-    document.addEventListener('mousedown', onDown);
-    return () => document.removeEventListener('mousedown', onDown);
-  }, [open]);
 
   const openPanel = () => {
     setDraft(range); setHover(null);
@@ -81,6 +76,10 @@ export function DateRangePicker({
     setOpen(true);
   };
   const close = () => { setOpen(false); trigger.current?.focus(); };
+  const panel = useRef<HTMLDivElement>(null);
+  const control = useRef<HTMLDivElement>(null);
+  usePanelDismiss({ open, root, onDismiss: (reason) => (reason === 'escape' ? close() : setOpen(false)) });
+  usePlacement({ open, panel, anchor: control });
   const apply = () => { if (value === undefined) setOwn(draft); onChange?.(draft); close(); };
 
   const pick = (d: Date) => {
@@ -108,7 +107,7 @@ export function DateRangePicker({
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-daterange', className)}>
       {({ id: fieldId, labelId, describedBy, invalid }) => (
         <div ref={root} className="rb-daterange__anchor">
-          <div className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
+          <div ref={control} className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
             <CalendarIcon aria-hidden="true" className="rb-daterange__icon" />
             <button
               ref={trigger}
@@ -128,8 +127,7 @@ export function DateRangePicker({
             </button>
           </div>
           {open && (
-            <div id={dialogId} role="dialog" aria-label={dialogLabel} className="rb-daterange__panel"
-              onKeyDown={(e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } }}>
+            <div ref={panel} id={dialogId} role="dialog" aria-label={dialogLabel} className="rb-daterange__panel">
               {presetList.length > 0 && (
                 <div className="rb-daterange__presets" role="group" aria-label="Quick picks">
                   {presetList.map((p) => (

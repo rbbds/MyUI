@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'rea
 import { Check, ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Field, type FieldBaseProps } from './Field';
+import { usePlacement } from '../../utils/panel';
 import './Combobox.css';
 
 export interface ComboboxOption {
@@ -48,6 +49,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
   const root = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
   const list = useRef<HTMLDivElement>(null);
+  const control = useRef<HTMLDivElement>(null);
   const base = useId();
 
   useEffect(() => { if (query === null) setText(selected?.label ?? ''); }, [selected?.label, query]);
@@ -70,6 +72,8 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  usePlacement({ open, panel: list, anchor: control, matchWidth: true });
 
   const openList = () => {
     if (disabled || open) return;
@@ -97,7 +101,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-combobox', className)}>
       {({ id: fieldId, describedBy, invalid }) => (
         <div ref={root} className="rb-combobox__anchor">
-          <div className={cx('rb-control', `rb-control--${size}`, Boolean(selected?.icon) && 'rb-control--has-icon', invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
+          <div ref={control} className={cx('rb-control', `rb-control--${size}`, Boolean(selected?.icon) && 'rb-control--has-icon', invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
             {selected?.icon && query === null && <span className="rb-control__icon rb-combobox__value-icon" aria-hidden="true">{selected.icon}</span>}
             <input
               ref={input}

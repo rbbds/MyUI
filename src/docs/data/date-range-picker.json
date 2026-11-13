@@ -75,7 +75,8 @@
   "behaviour": [
     "First click = start, second click = end. If you click before the start, they swap.",
     "While you pick, you see the range on hover or focus.",
-    "Cancel or Escape closes without a change. Focus goes back to the field."
+    "Cancel or Escape closes without a change. Focus goes back to the field. Tab out or a click outside also close without a change.",
+    "Inside a Modal, Escape closes only the panel. The panel opens in the top layer and stays inside the screen."
   ],
   "a11y": [
     "The field is a button with aria-haspopup=\"dialog\". The panel is a dialog.",

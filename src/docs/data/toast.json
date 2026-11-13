@@ -46,7 +46,8 @@
     "Pause the timer on hover and focus."
   ],
   "a11y": [
-    "Put toasts in a ToastRegion (aria-live=\"polite\").",
+    "Put toasts in a ToastRegion (aria-live=\"polite\"). Render the region always, also when it is empty; a toast has no role of its own.",
+    "While a Modal, Slideout or Command menu is open, the region moves into that dialog, so toasts stay visible and are read.",
     "Give people enough time to read (WCAG 2.2.1)."
   ],
   "content": [
