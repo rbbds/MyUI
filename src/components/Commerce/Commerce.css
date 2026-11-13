@@ -31,7 +31,7 @@
 .rb-qty__btn:hover:not(:disabled){background:var(--qty-surface-hover);color:var(--qty-foreground)}
 .rb-qty__btn:disabled{color:var(--qty-foreground-disabled);cursor:not-allowed}
 .rb-qty__btn:focus-visible{outline:none;background:var(--qty-surface-hover)}
-.rb-qty__input{width:3.5ch;min-width:40px;padding:0;border:0;border-inline:var(--border-width-control-default) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
+.rb-qty__input{width:3.5ch;min-width:40px;padding:0;border:0;border-inline:var(--qty-value-border-width) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
 .rb-qty__input::-webkit-outer-spin-button,.rb-qty__input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .rb-qty__input:focus{outline:none}
 .rb-qty--disabled{background:var(--qty-surface-disabled)}
@@ -62,7 +62,7 @@
 .rb-product-card__title a:focus-visible{outline:none}
 .rb-product-card:hover .rb-product-card__title a{text-decoration:underline;text-underline-offset:3px}
 .rb-product-card__swatches{display:flex;align-items:center;gap:var(--product-card-swatches-gap);margin:0;color:var(--product-card-foreground-meta);font-size:var(--text-body-description-font-size)}
-.rb-product-card__swatch{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--product-card-swatch-border)}
+.rb-product-card__swatch{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 var(--product-card-swatch-border-width) var(--product-card-swatch-border)}
 .rb-product-card__footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--product-card-gap);margin-top:auto}
 .rb-product-card__cta{position:relative;z-index:1}
 .rb-product-card--horizontal{flex-direction:row}
@@ -160,7 +160,7 @@
 /* ---------- Filters ---------- */
 .rb-filter{border-bottom:var(--filter-border-width) solid var(--filter-border)}
 .rb-filter__heading{margin:0}
-.rb-filter__trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:var(--filter-trigger-padding-vertical) 0;border:0;background:transparent;color:var(--filter-foreground-title);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-filter__trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:var(--filter-trigger-padding-vertical)var(--filter-trigger-padding-horizontal);border:0;background:transparent;color:var(--filter-foreground-title);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-filter__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--border-radius-control-xs)}
 .rb-filter__trigger svg{width:var(--filter-chevron-icon-size);height:var(--filter-chevron-icon-size);color:var(--filter-foreground-icon);transition:transform .2s ease}
 .rb-filter__trigger svg.is-open{transform:rotate(180deg)}

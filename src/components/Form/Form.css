@@ -17,7 +17,7 @@
 .rb-control__icon svg{width:var(--input-leading-icon-size);height:var(--input-leading-icon-size)}
 .rb-control__addon{flex-shrink:0;color:var(--input-addon-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);white-space:nowrap;user-select:none}
 .rb-control__status{display:inline-flex;color:var(--input-foreground-error)}
-.rb-control__status svg{width:16px;height:16px}
+.rb-control__status svg{width:var(--input-error-icon-size);height:var(--input-error-icon-size)}
 .rb-control__input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:0;margin:0;color:inherit;font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height);font-weight:var(--text-body-paragraph-font-weight)}
 .rb-control--sm .rb-control__input{font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-control__input::placeholder{color:var(--input-foreground-placeholder);opacity:1}
@@ -32,7 +32,7 @@
 .rb-control--select.rb-control--lg .rb-control__select{padding:calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) + 28px) calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) - var(--input-border-width))}
 .rb-control--has-icon .rb-control__select{padding-left:calc(var(--input-md-padding-horizontal) + 28px)}
 .rb-control__chevron{position:absolute;right:var(--input-md-padding-horizontal);pointer-events:none;display:inline-flex;color:var(--input-foreground-icon)}
-.rb-control__chevron svg{width:20px;height:20px}
+.rb-control__chevron svg{width:var(--select-chevron-icon-size);height:var(--select-chevron-icon-size)}
 .rb-control__select:has(option[value=""]:checked){color:var(--input-foreground-placeholder)}
 
 .rb-control--textarea{align-items:stretch;padding:0;border-radius:var(--textarea-radius)}
@@ -58,9 +58,10 @@
 
 /* Search input */
 .rb-control--search .rb-control__icon{color:var(--search-foreground-icon)}
+.rb-control--search .rb-control__icon svg{width:var(--search-search-icon-size);height:var(--search-search-icon-size)}
 .rb-control--search .rb-control__input::-webkit-search-cancel-button,.rb-control--search .rb-control__input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
 .rb-control__clear,.rb-control__trigger{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:2px;margin:-2px;border:0;background:transparent;border-radius:var(--border-radius-control-xs);color:var(--input-foreground-icon);cursor:pointer}
-.rb-control__clear svg{width:16px;height:16px}
+.rb-control__clear svg{width:var(--search-clear-icon-size);height:var(--search-clear-icon-size)}
 .rb-control__trigger svg{width:20px;height:20px}
 .rb-control__clear:hover,.rb-control__trigger:hover{background:var(--color-surface-hover)}
 .rb-control__clear:focus-visible,.rb-control__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}

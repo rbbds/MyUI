@@ -45,7 +45,7 @@
   "do": [],
   "dont": [],
   "tokens": [
-    "--copy-input-foreground-copied",
+    "--copy-input-gap",
     "--input-*"
   ],
   "related": [

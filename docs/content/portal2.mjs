@@ -104,5 +104,5 @@ export const docs = [
     reactProps: [['value', 'string', 'Required.'], ['label, hint', '', ''], ['copyLabel, copiedLabel, copiedMessage', 'string', '']],
     behaviour: ['Copies with the clipboard. If that fails, the text is selected.'],
     a11y: ['After copying there is a status message for screen readers.', 'The field is read-only but can get focus, and selects its text on focus.'],
-    tokens: ['--copy-input-foreground-copied', '--input-*'], related: ['Input', 'Button'] }),
+    tokens: ['--copy-input-gap', '--input-*'], related: ['Input', 'Button'] }),
 ];

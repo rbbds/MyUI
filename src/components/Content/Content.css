@@ -63,12 +63,12 @@
 .rb-upload__hint{margin:0;color:var(--file-upload-foreground-text);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
 .rb-upload--disabled .rb-upload__text,.rb-upload--disabled .rb-upload__hint,.rb-upload--disabled .rb-upload__action{color:var(--file-upload-foreground-disabled)}
 
-.rb-file{display:flex;align-items:flex-start;gap:var(--spacing-3);padding:var(--spacing-4);border:1px solid var(--file-upload-border);border-radius:var(--file-upload-item-radius);background:var(--file-upload-surface)}
+.rb-file{display:flex;align-items:flex-start;gap:var(--spacing-3);padding:var(--file-upload-padding-vertical) var(--file-upload-item-padding-horizontal);border:1px solid var(--file-upload-border);border-radius:var(--file-upload-item-radius);background:var(--file-upload-surface)}
 .rb-file--error{border-color:var(--file-item-border-error)}
-.rb-file__content{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--spacing-1)}
-.rb-file__name{margin:0;color:var(--color-foreground-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
-.rb-file__meta{margin:0;color:var(--color-foreground-tertiary);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
-.rb-file--error .rb-file__meta{color:var(--color-foreground-error)}
+.rb-file__content{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--file-upload-content-gap)}
+.rb-file__name{margin:0;color:var(--file-upload-file-name-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
+.rb-file__meta{margin:0;color:var(--file-upload-meta-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-file--error .rb-file__meta{color:var(--file-upload-meta-foreground-2)}
 .rb-file__done{display:inline-flex;color:var(--color-foreground-brand)}
 .rb-file__done svg{width:var(--file-upload-done-icon-size);height:var(--file-upload-done-icon-size)}
 .rb-file .rb-progress__indicator{background:var(--file-item-progress)}

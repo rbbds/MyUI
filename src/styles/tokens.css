@@ -946,7 +946,6 @@
 --code-input-code-digit-border-width:var(--border-width-control-strong);
 --code-input-error-message-foreground:var(--color-foreground-error);
 --code-input-foreground:var(--color-foreground-primary);
---code-input-foreground-placeholder:var(--color-foreground-quaternary);
 --code-input-gap:var(--spacing-2);
 --code-input-group-gap:var(--spacing-3);
 --code-input-hint-foreground:var(--color-foreground-tertiary);
@@ -1002,7 +1001,6 @@
 --command-search-padding-vertical:var(--spacing-4);
 --command-shortcut-border-width:var(--border-width-default);
 --command-surface:var(--color-surface-primary);
---copy-input-foreground-copied:var(--color-foreground-success);
 --copy-input-gap:var(--spacing-2);
 --date-picker-calendar-border-width:var(--border-width-default);
 --date-picker-gap:var(--spacing-2);
@@ -1012,7 +1010,6 @@
 --date-range-footer-gap:var(--spacing-3);
 --date-range-footer-padding-horizontal:var(--spacing-4);
 --date-range-footer-padding-vertical:var(--spacing-3);
---date-range-gap:var(--spacing-4);
 --date-range-months-gap:var(--spacing-6);
 --date-range-months-padding-horizontal:var(--spacing-4);
 --date-range-months-padding-vertical:var(--spacing-4);
@@ -1171,14 +1168,10 @@
 --header-header-border-width:var(--border-width-default);
 --header-header-padding-horizontal:var(--spacing-4);
 --header-header-padding-vertical:var(--spacing-3);
---header-logo-mark-gap:var(--spacing-2);
---header-mark-radius:var(--border-radius-control-sm);
---header-mark-surface:var(--color-surface-brand-solid);
 --header-nav-gap:var(--spacing-1);
 --header-padding-horizontal:var(--spacing-8);
 --header-padding-vertical:var(--spacing-4);
 --header-surface:var(--color-surface-primary);
---header-wordmark-foreground:var(--color-foreground-primary);
 --icon-icon-surface:var(--color-foreground-primary);
 --icon-size:var(--size-icon);
 --input-addon-foreground:var(--color-foreground-tertiary);
@@ -1374,8 +1367,6 @@
 --page-header-foreground-description:var(--color-foreground-secondary);
 --page-header-foreground-title:var(--color-foreground-primary);
 --page-header-gap:var(--spacing-5);
---page-header-icon-size:var(--icon-size-sm);
---page-header-icon-surface:var(--color-foreground-quaternary);
 --page-header-padding-bottom:var(--spacing-5);
 --page-header-row-gap:var(--spacing-4);
 --page-header-row-row-gap:var(--spacing-4);
@@ -1519,7 +1510,6 @@
 --settings-divider:var(--color-border-secondary);
 --settings-foreground-description:var(--color-foreground-secondary);
 --settings-foreground-title:var(--color-foreground-primary);
---settings-gap:var(--spacing-8);
 --settings-intro-gap:var(--spacing-1);
 --settings-padding:var(--spacing-6);
 --settings-radius:var(--border-radius-containers-md);
@@ -1532,7 +1522,6 @@
 --sidebar-border:var(--color-border-secondary);
 --sidebar-border-width:var(--border-width-default);
 --sidebar-foreground-email:var(--color-foreground-tertiary);
---sidebar-foreground-heading:var(--color-foreground-quaternary);
 --sidebar-foreground-name:var(--color-foreground-primary);
 --sidebar-foreground-panel-title:var(--color-foreground-primary);
 --sidebar-gap:var(--spacing-6);
@@ -1770,10 +1759,6 @@
 --text-body-description-font-size:var(--typography-body-description);
 --text-body-description-font-weight:var(--font-font-weight-paragraph-regular);
 --text-body-description-line-height:var(--typography-line-height-xs);
---text-body-link-bold-font-family:var(--font-font-family-body);
---text-body-link-bold-font-size:var(--typography-body-body);
---text-body-link-bold-font-weight:var(--font-font-weight-paragraph-semibold);
---text-body-link-bold-line-height:var(--typography-line-height-md);
 --text-body-link-font-family:var(--font-font-family-body);
 --text-body-link-font-size:var(--typography-body-body);
 --text-body-link-font-weight:var(--font-font-weight-paragraph-regular);

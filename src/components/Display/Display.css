@@ -1,7 +1,7 @@
 .rb-badge{display:inline-flex;align-items:center;gap:var(--badge-gap);padding:calc(var(--badge-md-padding-vertical) - 1px) calc(var(--badge-md-padding-horizontal) - 1px);border:1px solid var(--_bd);border-radius:var(--badge-radius);background:var(--_bg);color:var(--_fg);white-space:nowrap;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-badge--sm{padding:calc(var(--badge-sm-padding-vertical) - 1px) calc(var(--badge-sm-padding-horizontal) - 1px);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
 .rb-badge--lg{padding:calc(var(--badge-lg-padding-vertical) - 1px) calc(var(--badge-lg-padding-horizontal) - 1px)}
-.rb-badge svg{width:12px;height:12px}
+.rb-badge svg{width:var(--badge-leading-icon-size);height:var(--badge-leading-icon-size)}
 .rb-badge--lg svg{width:14px;height:14px}
 .rb-badge__dot{width:6px;height:6px;border-radius:50%;background:var(--_dot)}
 .rb-badge--gray{--_bg:var(--badge-gray-surface);--_bd:var(--badge-gray-border);--_fg:var(--badge-gray-foreground);--_dot:var(--badge-gray-dot)}
