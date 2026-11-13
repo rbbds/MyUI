@@ -14,8 +14,8 @@
 .rb-doc{position:relative;display:flex;align-items:center;gap:var(--document-list-item-gap);padding:var(--document-list-padding-vertical) 0;border-bottom:var(--document-item-border-width) solid var(--document-list-divider)}
 .rb-doc:last-child{border-bottom:0}
 .rb-doc:hover{background:var(--document-list-surface-hover);box-shadow:calc(-1 * var(--document-list-padding-horizontal)) 0 0 var(--document-list-surface-hover),var(--document-list-padding-horizontal) 0 0 var(--document-list-surface-hover)}
-.rb-doc__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.rb-doc__title{display:inline-flex;align-items:center;gap:var(--spacing-2);color:var(--document-list-foreground-title);text-decoration:none;font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);border-radius:var(--border-radius-control-xs)}
+.rb-doc__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--document-list-text-gap)}
+.rb-doc__title{display:inline-flex;align-items:center;gap:var(--document-list-title-row-gap);color:var(--document-list-foreground-title);text-decoration:none;font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);border-radius:var(--border-radius-control-xs)}
 .rb-doc__title:hover{text-decoration:underline}
 .rb-doc__title:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-doc--unread .rb-doc__title{font-weight:var(--text-body-sub-text-semibold-font-weight)}
@@ -34,8 +34,8 @@
 .rb-activity__marker--icon{background:var(--activity-marker-surface);border:var(--activity-border-width) solid var(--activity-marker-border);color:var(--activity-marker-icon);box-sizing:border-box}
 .rb-activity__marker--icon svg{width:var(--activity-icon-size);height:var(--activity-icon-size)}
 .rb-activity__marker--dot::after{content:"";width:10px;height:10px;border-radius:var(--activity-radius);background:var(--activity-connector)}
-.rb-activity__content{flex:1;min-width:0;padding:6px 0 var(--activity-item-padding-bottom)}
-.rb-activity__head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--spacing-2)}
+.rb-activity__content{flex:1;min-width:0;padding:var(--activity-content-padding-top) 0 var(--activity-item-padding-bottom)}
+.rb-activity__head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--activity-title-row-gap)}
 .rb-activity__title{flex:1;min-width:160px;color:var(--activity-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-activity__time{color:var(--activity-foreground-time);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
 .rb-activity__text{color:var(--activity-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
@@ -45,11 +45,11 @@
 .rb-notif-button:hover{background:var(--color-surface-hover)}
 .rb-notif-button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-notif-button svg{width:20px;height:20px}
-.rb-notif-button__count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;box-sizing:border-box;border-radius:var(--border-radius-full);background:var(--notification-count-surface);color:var(--notification-count-foreground);font-size:var(--text-body-description-semibold-font-size);line-height:16px;font-weight:var(--text-body-description-semibold-font-weight);text-align:center}
+.rb-notif-button__count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 var(--notification-count-padding-horizontal);box-sizing:border-box;border-radius:var(--notification-count-radius);background:var(--notification-count-surface);color:var(--notification-count-foreground);font-size:var(--text-body-description-semibold-font-size);line-height:16px;font-weight:var(--text-body-description-semibold-font-weight);text-align:center}
 .rb-notif-menu{position:relative;display:inline-block}
 .rb-notif-menu__panel{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));right:0;width:min(400px,calc(100vw - 32px))}
 .rb-notif-panel{background:var(--notification-panel-surface);border:var(--border-width-overlays-default) solid var(--notification-panel-border);border-radius:var(--notification-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
-.rb-notif-panel__header{display:flex;align-items:center;gap:var(--spacing-3);padding:var(--notification-item-padding);border-bottom:var(--border-width-containers-default) solid var(--notification-divider)}
+.rb-notif-panel__header{display:flex;align-items:center;gap:var(--notification-header-gap);padding:var(--notification-item-padding);border-bottom:var(--notification-header-border-width) solid var(--notification-divider)}
 .rb-notif-panel__title{flex:1;margin:0;color:var(--notification-foreground-title);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-notif-panel__items{list-style:none;margin:0;padding:0;max-height:min(480px,60vh);overflow:auto}
 .rb-notif-panel__empty{display:flex;flex-direction:column;gap:var(--notification-empty-gap);padding:var(--notification-empty-padding-vertical) var(--notification-item-padding);text-align:center;color:var(--notification-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
@@ -96,9 +96,9 @@
 .rb-settings__card{flex:1 1 320px;min-width:0;background:var(--settings-surface);border:var(--settings-card-border-width) solid var(--settings-border);border-radius:var(--settings-radius);overflow:hidden}
 .rb-settings__rows{padding:var(--settings-rows-padding-vertical) var(--settings-padding)}
 .rb-settings__actions{display:flex;justify-content:flex-end;gap:var(--settings-actions-gap);padding:var(--settings-actions-padding-vertical) var(--settings-padding);border-top:var(--settings-actions-border-width) solid var(--settings-divider)}
-.rb-setting{display:flex;align-items:center;gap:var(--spacing-4);padding:var(--settings-row-padding-vertical) 0;border-bottom:var(--setting-row-border-width) solid var(--settings-divider)}
+.rb-setting{display:flex;align-items:center;gap:var(--settings-setting-row-gap);padding:var(--settings-row-padding-vertical) 0;border-bottom:var(--setting-row-border-width) solid var(--settings-divider)}
 .rb-setting:last-child{border-bottom:0}
-.rb-setting__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rb-setting__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--settings-text-gap)}
 .rb-setting__label{color:var(--settings-foreground-title);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-setting__description{color:var(--settings-foreground-description);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 @media (max-width:599px){.rb-settings__intro{flex-basis:100%}}
@@ -109,7 +109,7 @@
 .rb-checklist__title{margin:0;color:var(--checklist-foreground-title);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-checklist__progress{color:var(--checklist-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-checklist__items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--checklist-items-gap)}
-.rb-checklist__item{display:flex;gap:var(--checklist-item-gap);padding:var(--spacing-3);border-radius:var(--checklist-item-radius)}
+.rb-checklist__item{display:flex;gap:var(--checklist-item-gap);padding:var(--checklist-padding-vertical) var(--checklist-padding-horizontal);border-radius:var(--checklist-item-radius)}
 .rb-checklist__item--current{background:var(--checklist-current-surface)}
 .rb-checklist__icon{flex:none;width:var(--checklist-icon-size);height:var(--checklist-icon-size);color:var(--checklist-open-icon)}
 .rb-checklist__item--done .rb-checklist__icon{color:var(--checklist-done-icon)}

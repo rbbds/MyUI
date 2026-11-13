@@ -30,6 +30,7 @@
 .rb-modal__title{margin:0;color:var(--modal-foreground-title);font-family:var(--text-headings-h4-font-family);font-size:var(--text-headings-h4-font-size);line-height:var(--text-headings-h4-line-height);font-weight:var(--text-headings-h4-font-weight)}
 .rb-modal__description{margin:0;color:var(--modal-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-modal__close{display:inline-flex;padding:4px;margin:-4px;border:0;background:transparent;border-radius:var(--border-radius-control-sm);color:var(--modal-foreground-close);cursor:pointer}
+.rb-modal__close svg{width:var(--modal-close-icon-size);height:var(--modal-close-icon-size)}
 .rb-modal__close:hover{background:var(--color-surface-hover)}
 .rb-modal__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-modal__body{padding:var(--modal-gap) var(--modal-padding) 0;color:var(--color-foreground-secondary)}
@@ -50,4 +51,4 @@
 .rb-menu__item:disabled svg{color:var(--menu-item-foreground-disabled)}
 .rb-menu__label{flex:1}
 .rb-menu__shortcut{color:var(--menu-item-foreground-shortcut);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size)}
-.rb-menu__separator{height:1px;margin:4px 0;background:var(--divider-color);border:0}
+.rb-menu__separator{height:1px;margin:var(--menu-divider-padding-vertical) 0;background:var(--divider-color);border:0}

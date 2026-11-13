@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Fixed
+- Component CSS uses 46 more component tokens that were bound in Figma but not used in code, for example the File upload item padding, the Checklist item padding, the Notification header and count, the Stepper text and indicator, the Select chevron, the Search icons and the Modal close icon. Nothing changes on screen: 304 screenshots are pixel-identical, and every token has the same value in all styles, themes, sizes and screen sizes.
 - Component CSS uses the component tokens from Figma in 189 more places (padding, gap, border width, radius, icon size, colors), so a change in Figma reaches the code. Nothing changes on screen: 304 screenshots (152 stories in Iris Light and Berry Dark) are pixel-identical before and after.
 - **Every text is a prop (H6).** Components with fixed English text get a `labels` prop. The English defaults are exported as `DEFAULT_<COMPONENT>_LABELS`, so you pass only what you change: Price, Rating, StockIndicator, CartItem, CartSummary, PromoCode, CartButton, MiniCart, AddressFields, FilterGroup, ActiveFilters, ProductGallery, VariantPicker, AddToCart, ProductCard, FileUploadItem, Tag, Avatar, AvatarGroup, DateRangePicker, PasswordInput, NotificationPanel, CommandMenu and Combobox. Breadcrumbs (`backLabel`, `aria-label`), Pagination, Stepper and BottomNavigation (`aria-label`) and Banner (`regionLabel`) get a single prop. `defaultDateRangePresets(today, labels)` and `passwordRequirements(labels)` translate the quick picks and the password rules.
 - **Modal, Slideout and Command menu (M2):** a click on the backdrop closes only when the press also started there, so selecting text and letting go outside keeps them open. A `<form method="dialog">` inside closes them through `onClose`, so they open again. The page behind does not scroll. Modal: no empty spacer without a footer.
@@ -44,6 +45,9 @@
 - Tokens `--qty-size-md` (40 px) and `--qty-size-sm` (36 px).
 - Docs: guide **Building components** with the build rules for Figma: variant and base, padding on the element you click, containers and groups, indent and alignment, the 4 px grid (half steps allowed), focus and tokens.
 - Tokens `--notification-empty-padding-vertical`, `--notification-empty-gap` and `--mini-cart-totals-padding-top`.
+
+### Removed
+- 15 component and text tokens that no layer in Figma and no CSS used: `--text-body-link-bold-*` (4), `--sidebar-foreground-heading`, `--date-range-gap`, `--settings-gap`, `--code-input-foreground-placeholder`, `--copy-input-foreground-copied`, `--header-logo-mark-gap`, `--header-mark-radius`, `--header-mark-surface`, `--header-wordmark-foreground`, `--page-header-icon-size` and `--page-header-icon-surface`. If you used one in your own CSS, use the semantic token it pointed to.
 
 ### Changed
 - `useDismiss` (exported from Popover) is deprecated and will be removed in 2.0.0. It now also closes when the focus leaves the element.

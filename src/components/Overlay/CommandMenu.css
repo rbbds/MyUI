@@ -11,7 +11,7 @@
 .rb-command__item.is-active{background:var(--command-item-surface-active);color:var(--command-item-foreground-active);box-shadow:inset 0 0 0 var(--command-item-border-width-active) var(--command-item-border-active)}
 .rb-command__item.is-disabled{color:var(--command-item-foreground-disabled);cursor:not-allowed}
 .rb-command__icon{display:inline-flex;color:var(--command-item-foreground-icon)}
-.rb-command__icon svg{width:20px;height:20px}
+.rb-command__icon svg{width:var(--command-item-icon-size);height:var(--command-item-icon-size)}
 .rb-command__item.is-active .rb-command__icon{color:var(--color-foreground-secondary)}
 .rb-command__label{flex:1;min-width:0}
 .rb-command__empty{margin:0;padding:var(--spacing-6) var(--spacing-3);text-align:center;color:var(--command-foreground-hint);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size)}

@@ -1,9 +1,9 @@
 .rb-stepper{display:flex;margin:0;padding:0;list-style:none}
 .rb-step{display:flex;min-width:0}
 .rb-step__track{display:flex;align-items:center;gap:var(--stepper-gap)}
-.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;box-sizing:border-box;border:var(--step-indicator-border-width) solid var(--stepper-border-upcoming);border-radius:var(--border-radius-full);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-step__indicator svg{width:16px;height:16px}
-.rb-step__connector{flex:1;border-radius:var(--border-radius-full);background:var(--stepper-connector)}
+.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;box-sizing:border-box;border:var(--step-indicator-border-width) solid var(--stepper-border-upcoming);border-radius:var(--stepper-indicator-radius);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-step__indicator svg{width:var(--stepper-check-icon-size);height:var(--stepper-check-icon-size)}
+.rb-step__connector{flex:1;border-radius:var(--stepper-connector-radius);background:var(--stepper-connector)}
 .rb-step:last-child .rb-step__connector{visibility:hidden}
 .rb-step--complete .rb-step__indicator{border-color:var(--stepper-border-current);background:var(--stepper-indicator-complete);color:var(--stepper-foreground-indicator)}
 .rb-step--complete .rb-step__connector{background:var(--stepper-connector-complete)}
@@ -18,14 +18,14 @@
 /* Horizontal: indicator + line on top, text below */
 .rb-stepper--horizontal .rb-step{flex:1;flex-direction:column;gap:var(--stepper-gap)}
 .rb-stepper--horizontal .rb-step__connector{height:2px;margin-right:var(--stepper-gap)}
-.rb-stepper--horizontal .rb-step__text{padding-right:var(--spacing-4)}
+.rb-stepper--horizontal .rb-step__text{padding-right:var(--stepper-padding-right)}
 
 /* Vertical: indicator + line on the left, text on the right */
 .rb-stepper--vertical{flex-direction:column}
 .rb-stepper--vertical .rb-step{gap:var(--stepper-gap)}
-.rb-stepper--vertical .rb-step__track{flex-direction:column;gap:var(--spacing-1);align-self:stretch}
+.rb-stepper--vertical .rb-step__track{flex-direction:column;gap:var(--stepper-track-gap);align-self:stretch}
 .rb-stepper--vertical .rb-step__connector{width:2px;min-height:24px}
-.rb-stepper--vertical .rb-step__text{padding:var(--spacing-1) 0 var(--spacing-6)}
+.rb-stepper--vertical .rb-step__text{padding:var(--stepper-text-padding-top) 0 var(--stepper-text-padding-bottom)}
 
 .rb-step__number{display:none}
 
