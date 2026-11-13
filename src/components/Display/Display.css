@@ -2,7 +2,6 @@
 .rb-badge--sm{padding:calc(var(--badge-sm-padding-vertical) - 1px) calc(var(--badge-sm-padding-horizontal) - 1px);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
 .rb-badge--lg{padding:calc(var(--badge-lg-padding-vertical) - 1px) calc(var(--badge-lg-padding-horizontal) - 1px)}
 .rb-badge svg{width:var(--badge-leading-icon-size);height:var(--badge-leading-icon-size)}
-.rb-badge--lg svg{width:14px;height:14px}
 .rb-badge__dot{width:6px;height:6px;border-radius:50%;background:var(--_dot)}
 .rb-badge--gray{--_bg:var(--badge-gray-surface);--_bd:var(--badge-gray-border);--_fg:var(--badge-gray-foreground);--_dot:var(--badge-gray-dot)}
 .rb-badge--brand{--_bg:var(--badge-brand-surface);--_bd:var(--badge-brand-border);--_fg:var(--badge-brand-foreground);--_dot:var(--badge-brand-dot)}

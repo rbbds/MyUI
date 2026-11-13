@@ -62,7 +62,7 @@ export const Upload: StoryObj<typeof FileUpload> = {
   decorators: [(S) => <div style={{ maxWidth: 512, display: 'grid', gap: 12 }}><S /></div>],
   render: () => (
     <>
-      <FileUpload onFiles={() => {}} accept=".pdf,.jpg,.png" hint="PDF, JPG of PNG (max. 10 MB)" />
+      <FileUpload onFiles={() => {}} accept=".pdf,.jpg,.png" hint="PDF, JPG or PNG (max. 10 MB)" />
       <FileUploadItem name="project-brief.pdf" size="720 KB" progress={40} onRemove={() => {}} />
       <FileUploadItem name="invoice-october.pdf" size="320 KB" status="complete" />
       <FileUploadItem name="moodboard.jpg" status="error" onRemove={() => {}} />
