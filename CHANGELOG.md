@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Changed (Figma, PR 6b-2)
+- **Component tokens in folders per category** (`component-tokens/<category>/<component>/…`), like the Figma pages: action, forms, selection-controls, badges-and-tags, avatars, feedback, overlays, navigation, data-display, content, e-commerce, utilities. CSS names stay the same: the token export will skip the category level (code step of PR 6b-2). Until then, do not run the old export.
+- **Duplicate component tokens removed.** Layers now use the token the code uses: `header/border-width`, `slideout/border-width`, `selection-card/border-width`, `step/indicator-border-width`, `kbd/border-width` (Command menu, Search input, Sidebar, Table), `calendar/border-width`, `input/foreground-label`, `-hint`, `-error` (Verification code), `progress/gap` and `progress/radius` (File upload), `input/leading-icon-size` (Select). 22 duplicates deleted, among them `size-chip/size-chip-border-width`, `variant/size-chip-border-width`, `swatch/swatch-border-width`, `password-input/requirement-icon-size`, `alert/foreground-action`, `avatar/icon-size`, `mini-cart/totals-padding-top` and `mini-cart/totals-border-width`.
+- Renamed: `selection-card/border-width-checked`, `variant/swatch-ring-width`, `notification/panel-border-width`, `file-upload/foreground-icon`, `calendar/cells-padding-vertical` and `-sm`.
+- New: `filter/options-gap` (8), `variant/head-gap` (8), `variant/swatch-ring-offset` (2), `size-chip/inset-width-checked` (1), `calendar/cells-padding-horizontal` (4), `mini-cart/footer-gap` (12).
+- Filter group: options in their own frame with 8 px between them; slider track and fill fully rounded; the range shows one row with the chosen values, like the code.
+- Variant picker: the swatch ring is a stroke with padding (2 px ring, 2 px gap); a selected size chip has the control border plus a 1 px inner shadow; 8 px between the label and the action.
+- Password input: requirement icon 20 px. Avatar: the icon is half the avatar size in every size. Calendar: month and year views have padding at the bottom and sides too.
+- Slideout: the footer is a slot. Mini cart uses it: totals (8 px) and full-width Checkout and View cart buttons, 12 px apart.
+- Alert and Toast: the actions are Link buttons (sm), like the code.
+
 ### Added
 - `scripts/figma-scan-6b2.js`: read-only scan of the Figma file for PR 6b-2. Lists pages per category, component token groups, where each duplicate component token is bound, and the layer tree of the components in the Figma ≠ code choices. Run it with the Figma MCP `use_figma` tool or the Scripter plugin.
 
