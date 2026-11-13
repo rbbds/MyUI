@@ -65,7 +65,8 @@
     ]
   ],
   "behaviour": [
-    "Focus moves to the panel when it opens and back to the button when it closes."
+    "Focus moves to the panel when it opens. The close button and Escape move it back to the button; Tab out or a click outside leave it where it went.",
+    "Inside a Modal, Escape closes only the popover. It opens in the top layer and stays inside the screen."
   ],
   "a11y": [
     "Non-modal dialog with the title as its name."
@@ -82,7 +83,7 @@
     "Modal"
   ],
   "open": [
-    "In code the popover always opens below the button. Bottom, Left and Right only exist in Figma."
+    "In code the popover opens below the button (above when there is no room and it has no arrow). Bottom, Left and Right only exist in Figma."
   ],
   "name": "Popover",
   "page": "Overlays",
@@ -91,5 +92,5 @@
     "base": "_Popover (base)"
   },
   "react": "Popover",
-  "summary": "Panel next to a button with an explanation or a small form. Closes with the close button, Escape or a click outside."
+  "summary": "Panel next to a button with an explanation or a small form. Closes with the close button, Escape, Tab out of the panel or a click outside."
 }

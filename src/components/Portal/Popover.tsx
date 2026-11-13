@@ -1,18 +1,15 @@
-import { cloneElement, useEffect, useId, useRef, useState, type ReactElement, type ReactNode, type RefObject } from 'react';
+import { cloneElement, useEffect, useId, useRef, useState, type MouseEvent, type ReactElement, type ReactNode, type RefObject } from 'react';
+import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import { X } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import './Portal2.css';
 
-/** Close on Escape and on a click outside `root`, and return focus to the trigger. */
+/**
+ * Close on Escape, on a click outside `root` and when the focus leaves `root`.
+ * @deprecated Will be removed in 2.0.0. The components use the shared panel layer (src/utils/panel.ts).
+ */
 export function useDismiss(open: boolean, root: RefObject<HTMLElement | null>, close: () => void) {
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => { if (!root.current?.contains(e.target as Node)) close(); };
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
-    document.addEventListener('mousedown', onDown);
-    document.addEventListener('keydown', onKey);
-    return () => { document.removeEventListener('mousedown', onDown); document.removeEventListener('keydown', onKey); };
-  }, [open, root, close]);
+  usePanelDismiss({ open, root, onDismiss: () => close() });
 }
 
 export interface PopoverProps {
@@ -45,12 +42,28 @@ export function Popover({ trigger, title, children, actions, closable = true, cl
   const panel = useRef<HTMLDivElement>(null);
   const id = useId();
   const titleId = `${id}-title`;
-  const close = () => { set(false); (root.current?.querySelector('[aria-controls]') as HTMLElement | null)?.focus(); };
-  useDismiss(open, root, close);
+  const triggerEl = () => root.current?.querySelector<HTMLElement>("[aria-controls]");
+  /* Escape and the close button return the focus to the trigger; a click outside or Tab leaves it where it went. */
+  const close = () => { set(false); triggerEl()?.focus(); };
+  usePanelDismiss({ open, root, onDismiss: (reason) => (reason === 'escape' ? close() : set(false)) });
+  const anchor = useRef<HTMLElement | null>(null);
+  anchor.current = triggerEl() ?? root.current;
+  usePlacement({
+    open, panel, anchor, align, flip: !arrow,
+    // With an arrow, the arrow tip points to the middle of the trigger.
+    arrowOffset: arrow ? () => {
+      const el = panel.current;
+      if (!el) return 0;
+      const cs = getComputedStyle(el);
+      const off = parseFloat(cs.getPropertyValue('--popover-arrow-offset')) || 0;
+      const w = parseFloat(cs.getPropertyValue('--popover-arrow-width')) || 0;
+      return align === 'end' ? el.offsetWidth - off - w / 2 : off + w / 2;
+    } : undefined,
+  });
   useEffect(() => { if (open) panel.current?.focus(); }, [open]);
   return (
     <span ref={root} className="rb-popover-anchor">
-      {cloneElement(trigger, { 'aria-expanded': open, 'aria-controls': id, 'aria-haspopup': 'dialog', onClick: () => set(!open) })}
+      {cloneElement(trigger, { 'aria-expanded': open, 'aria-controls': id, 'aria-haspopup': 'dialog', onClick: (e: MouseEvent) => { (trigger.props.onClick as ((e: MouseEvent) => void) | undefined)?.(e); if (!e.defaultPrevented) set(!open); } })}
       {open && (
         <div ref={panel} id={id} role="dialog" aria-labelledby={title ? titleId : undefined} tabIndex={-1} className={cx('rb-popover', `rb-popover--${align}`, arrow && 'rb-popover--arrow', className)}>
           {(title || closable) && (

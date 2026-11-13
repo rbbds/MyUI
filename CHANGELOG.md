@@ -3,6 +3,12 @@
 ## Unreleased
 
 ### Fixed
+- **Escape in a panel inside a Modal closes only the panel**: Dropdown menu, Popover, Date picker, Date range picker and Tooltip. Before, the Modal closed too.
+- **A Toast stays visible and is read while a Modal, Slideout or Command menu is open.** `ToastRegion` renders inside the open dialog. A toast has no `role="status"` of its own anymore: the region is the live region, so it is not announced twice.
+- **Panels are no longer clipped** by a Modal, a scroll area or a table: Dropdown menu, Popover, Date picker, Date range picker, Notification menu and the Combobox list open in the top layer (`popover` attribute). They open above the trigger when there is no room below, and stay inside the screen.
+- Popover, Date picker, Date range picker and Notification menu close when the focus leaves them (Tab) (WCAG 2.4.11). A click outside closes them without moving the focus back to the trigger.
+- Tooltip: the pointer can move onto the tooltip, and Escape hides it also when it is open by hover (WCAG 1.4.13).
+- Dropdown menu: the own `onClick` and `ref` of the trigger keep working. Arrow down or up on the trigger opens the menu on the first or last item. Typing a letter moves to the next item that starts with it. Removed items no longer stay in the arrow-key order.
 - `--table-header-padding-vertical` is declared once (12 px). The Figma variable for the table card header got its own name.
 - Figma: Input in State=Error focus has the Focus ring/error effect style. Command item and Combobox option are 36 px, like in CSS.
 - `@rbbds/ui/tokens.css` and `tokens.json` now include the effect styles: `--shadow-xs` to `--shadow-2xl`, `--focus-ring`, `--focus-ring-error` and `--focus-ring-inset`. Before, they were only in `styles.css`.
@@ -18,12 +24,8 @@
 - `llms.txt` and the guides: Forest (not Berry) uses Source Serif 4; Button group is 40 px and Quantity stepper 36 or 40 px; a token name that did not exist is replaced; fixed texts that are not a prop yet are listed.
 - Versioning guide: a size correction of up to 2 px is a small visual fix, not a breaking change.
 
-### Known issues
-- Escape in a Dropdown menu, Popover, Date picker or Date range picker inside a Modal also closes the Modal.
-- A Toast is behind the backdrop and is not read while a Modal, Slideout or Command menu is open.
-- The first two are covered by `tests/browser` (marked as expected to fail) and get fixed with the shared panel layer.
-
 ### New
+- `src/utils/panel.ts`: one shared layer for panels (Escape for the topmost panel only, focus out, click outside, top layer and placement). Covered by `tests/browser` in Chromium and WebKit.
 - `npm run check:contrast`: checks control borders and the active option for 3:1 in every style and theme. Runs in CI and fails below 3:1.
 - Tokens for Mega menu, Mobile nav and the expanded Header nav item (from Figma). The React components follow later.
 - `npm run lint:tokens`: token-lint in CI, as a report in the job summary and an artifact (it does not fail the build yet). Rules: no px in component CSS outside a short allowlist, only component tokens in component CSS (plus `--text-*`, `--shadow-*`, `--focus-ring*`), no `var()` to a token that does not exist, unused tokens and duplicate tokens. Settings and allowlist in `scripts/token-lint.config.mjs`.
@@ -35,6 +37,7 @@
 - Tokens `--notification-empty-padding-vertical`, `--notification-empty-gap` and `--mini-cart-totals-padding-top`.
 
 ### Changed
+- `useDismiss` (exported from Popover) is deprecated and will be removed in 2.0.0. It now also closes when the focus leaves the element.
 - **Control heights follow the 4 px grid: 36 (sm), 40 (md), 48 (lg).** The border is now inside the height, in Figma and in CSS (`calc(padding - border width)`). Most controls get 2 px lower; Button lg gets 2 px higher (46 to 48).
   - Button: 36 / 40 / 48. `--button-lg-padding-vertical` is 12 px (was 10). Icon-only buttons are square: 36 / 40 / 48, with icons of 16 / 20 / 24 px.
   - Input, Select, Search input: 36 / 40 / 48. `--input-lg-padding-vertical` is 12 px (was 10).

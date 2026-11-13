@@ -19,6 +19,7 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 3. For your own layout, use semantic tokens (`--color-*`, `--spacing-*`, `--border-radius-*`, `--text-*`). Component tokens (`--button-*`, `--input-*`) are for the components themselves.
 4. To make a brand, only override `--brand-*` tokens (colors, fonts, radius, border width, font weight). The `myui-brand` skill in `node_modules/@rbbds/ui/skills` does this with a contrast check.
 5. Keep accessibility: `ButtonIcon` needs an `aria-label`; form fields need a `label`; do not remove focus styles.
+6. Panels (Dropdown menu, Popover, Date picker, Date range picker, Notification menu, Combobox list) open in the browser top layer and place themselves. Do not wrap them in a portal or give them a z-index. Render one `ToastRegion` always, also when it is empty; it moves into an open Modal by itself.
 
 ## Tokens
 
@@ -35,7 +36,7 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 ## Sizes
 
 - Controls (Button, Input, Select, Search input) are 36 (sm), 40 (md) or 48 (lg) px high. Button group is 40 px. Quantity stepper is 36 (sm) or 40 (md) px. Borders are inside that height.
-- Tag and Badge: 20, 24, 28 px. Rows for touch (Bottom navigation): 48 px. Menu items, nav items, Command items and Combobox options: 36 px.
+- Checkbox and Radio: as high as the line height of their label (20 or 24 px, 16 or 20 px on small screens). Tag and Badge: 20, 24, 28 px. Rows for touch (Bottom navigation): 48 px. Menu items, nav items, Command items and Combobox options: 36 px.
 - Text styles: 12/16, 14/20, 16/24, 18/28, 20/32, 24/36, 40/60 (font size / line height).
 
 ## Docs

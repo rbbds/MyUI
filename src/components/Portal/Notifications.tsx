@@ -1,8 +1,8 @@
-import { forwardRef, useId, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useId, useMemo, useRef, useState, type ButtonHTMLAttributes, type ReactNode, type RefObject } from 'react';
 import { Bell } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Button } from '../Button/Button';
-import { useDismiss } from './Popover';
+import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './Portal2.css';
 
 export interface NotificationButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -91,13 +91,15 @@ export interface NotificationMenuProps extends Omit<NotificationPanelProps, 'id'
   count?: number;
 }
 
-/** NotificationButton that opens a NotificationPanel. Escape or a click outside closes it. */
+/** NotificationButton that opens a NotificationPanel. Escape, a click outside or Tab out of the panel closes it. */
 export function NotificationMenu({ count = 0, ...panel }: NotificationMenuProps) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const btn = useRef<HTMLButtonElement>(null);
   const id = useId();
-  useDismiss(open, root, () => { setOpen(false); btn.current?.focus(); });
+  usePanelDismiss({ open, root, onDismiss: (reason) => { setOpen(false); if (reason === 'escape') btn.current?.focus(); } });
+  const panelRef = useMemo<RefObject<HTMLElement | null>>(() => ({ get current() { return root.current?.querySelector<HTMLElement>('.rb-notif-menu__panel') ?? null; } }), []);
+  usePlacement({ open, panel: panelRef, anchor: btn, align: 'end' });
   return (
     <div ref={root} className="rb-notif-menu">
       <NotificationButton ref={btn} count={count} aria-expanded={open} aria-controls={id} onClick={() => setOpen((o) => !o)} />

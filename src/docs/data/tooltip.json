@@ -60,11 +60,11 @@
     ]
   ],
   "behaviour": [
-    "Shows on hover and focus. Hides on leave, blur and Escape."
+    "Shows on hover and focus. Hides on leave, blur and Escape. The pointer can move onto the tooltip without hiding it."
   ],
   "a11y": [
     "role=\"tooltip\", linked to the trigger with aria-describedby.",
-    "Escape closes the tooltip without moving focus (WCAG 1.4.13)."
+    "Escape closes the tooltip without moving focus, also when it is open by hover (WCAG 1.4.13). Inside a Modal it closes only the tooltip."
   ],
   "content": [
     "One sentence at most."
