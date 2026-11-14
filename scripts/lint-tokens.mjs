@@ -45,6 +45,8 @@ const findings = { px: [], layer: [], unknown: [], unused: [], duplicate: [] };
 const matchesAllow = (d, px, a) =>
   (!a.property || new RegExp(a.property).test(d.property)) &&
   (!a.value || a.value === px) &&
+  (!a.px || new RegExp(a.px).test(px)) &&
+  (!a.declValue || new RegExp(a.declValue).test(d.value)) &&
   (!a.selector || new RegExp(a.selector).test(d.selector)) &&
   (!a.file || d.file.includes(a.file));
 for (const d of decls) {
@@ -85,7 +87,7 @@ usedDirect.forEach(visit);
 const referencedByToken = new Set(Object.values(values).flatMap((m) => Object.values(m).flatMap(refsIn)));
 for (const k of Object.keys(values)) {
   if (used.has(k)) continue;
-  if (layer[k] !== 'component' && referencedByToken.has(k)) continue;
+  if (!config.unusedLayers.includes(layer[k])) continue; // keuze 18b: primitives, brand and semantic may be unused
   const first = declarations.find((d) => d.name === k);
   findings.unused.push({ token: k, layer: layer[k], file: first.file, line: first.line });
 }

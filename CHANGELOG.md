@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+### Changed (PR 6c)
+- Token lint: technical CSS that Figma cannot set with a variable is on the allowlist, each with a reason (margin corrections, positions, gradients, box-shadow lines, screen margin of overlays, padding minus a 1 px border, visually hidden input, 24 px hit areas, 16 px input font for iOS, optical alignment). New match options `px` and `declValue`. Rule 4 (unused) only checks component tokens (keuze 18b). Report: px 271 → 190, unused 242 → 101.
+
 ### Changed (PR 6b-2, code)
 - **Token export skips the category folder** (`scripts/figma-export-tokens.js`), so CSS names stay the same. `tokens.css` is exported again: 41 duplicate or obsolete tokens gone, 19 new (see below). `scripts/figma-lib.js` finds component tokens without the category too.
 - Filter group: 8 px between options (`--filter-options-gap`, was 12). Variant picker: 8 px between label and action (`--variant-head-gap`, was 12); swatch ring and size chip from `--variant-swatch-ring-offset`, `--variant-swatch-ring-width`, `--size-chip-border-width` and `--size-chip-inset-width-checked`. Selection card: checked border from `--selection-card-border-width-checked`.
