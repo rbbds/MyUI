@@ -9,7 +9,7 @@
 - New: `filter/options-gap` (8), `variant/head-gap` (8), `variant/swatch-ring-offset` (2), `size-chip/inset-width-checked` (1), `calendar/cells-padding-horizontal` (4), `mini-cart/footer-gap` (12).
 - Filter group: options in their own frame with 8 px between them; slider track and fill fully rounded; the range shows one row with the chosen values, like the code.
 - Variant picker: the swatch ring is a stroke with padding (2 px ring, 2 px gap); a selected size chip has the control border plus a 1 px inner shadow; 8 px between the label and the action.
-- Password input: requirement icon 20 px. Avatar: the icon is half the avatar size in every size. Calendar: month and year views have padding at the bottom and sides too.
+- Password input: requirement icon 20 px. Avatar: the icon is half the avatar size in every size; initials stay centered. Cart item: the image follows the size (md 96 px, sm 64 px, new `size/cart-item-media` and `cart-item/media-size`), so the actions fit in the Mini cart. Calendar: month and year views have padding at the bottom and sides too.
 - Slideout: the footer is a slot. Mini cart uses it: totals (8 px) and full-width Checkout and View cart buttons, 12 px apart.
 - Alert and Toast: the actions are Link buttons (sm), like the code.
 
