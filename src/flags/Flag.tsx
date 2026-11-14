@@ -26,7 +26,7 @@ export const flagCodes = Object.keys(set).filter((k) => /^[A-Z]{2}$/.test(k)).so
 export function Flag({ code, size = 'md', title, className }: FlagProps) {
   const Svg = set[code.toUpperCase()];
   return (
-    <span className={cx('rb-flag', `rb-flag--${size}`, className)} role={title ? 'img' : undefined} aria-label={title} aria-hidden={title ? undefined : true}>
+    <span className={cx('rb-flag', `rb-flag--${size}`, className)} data-size={size === 'xl' ? undefined : size} role={title ? 'img' : undefined} aria-label={title} aria-hidden={title ? undefined : true}>
       {Svg ? <Svg /> : <span className="rb-flag__placeholder" />}
     </span>
   );

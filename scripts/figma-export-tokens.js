@@ -19,7 +19,7 @@
  *   (so mapped values re-resolve inside a themed, branded or sized subtree)
  *
  * Names:
- * - component-tokens/x/y  -> --x-y
+ * - component-tokens/<category>/x/y -> --x-y (category folder skipped)
  * - typography-tokens/x/y -> --text-x-y
  * - base-tokens/x/y       -> --base-x-y
  * - effect-tokens/x/y     -> --effect-x-y
@@ -36,9 +36,12 @@ const byId = Object.fromEntries(all.map(v => [v.id, v]));
 const colName = Object.fromEntries(cols.map(c => [c.id, c.name]));
 const C = Object.fromEntries(cols.map(c => [c.name, c]));
 const SKIP = new Set(['∙ shadows', '∙ opacity', '∙ sizing']);
+// Component tokens sit in a folder per category in Figma (component-tokens/<category>/<component>/…).
+// The category is not part of the CSS name, so names stay the same when a component moves.
+const CATEGORIES = new Set(['action', 'forms', 'selection-controls', 'badges-and-tags', 'avatars', 'feedback', 'overlays', 'navigation', 'data-display', 'content', 'e-commerce', 'utilities']);
 const cssName = n => {
   let s = n;
-  if (s.startsWith('component-tokens/')) s = s.slice(17);
+  if (s.startsWith('component-tokens/')) { s = s.slice(17); const [cat, ...rest] = s.split('/'); if (CATEGORIES.has(cat)) s = rest.join('/'); }
   else if (s.startsWith('typography-tokens/')) s = 'text/' + s.slice(18);
   else if (s.startsWith('base-tokens/')) s = 'base/' + s.slice(12);
   else if (s.startsWith('effect-tokens/')) s = 'effect/' + s.slice(14);

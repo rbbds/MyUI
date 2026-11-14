@@ -1,7 +1,7 @@
 .rb-combobox__anchor{position:relative}
 .rb-combobox .rb-control{padding-inline-end:0}
 .rb-combobox__value-icon{display:inline-flex}
-.rb-combobox__toggle{display:inline-flex;align-items:center;justify-content:center;align-self:stretch;width:var(--combobox-toggle-width);padding:0;border:0;background:transparent;color:var(--combobox-foreground-icon);cursor:pointer}
+.rb-combobox__toggle{display:inline-flex;align-items:center;justify-content:center;align-self:stretch;--_toggle-w:40px;width:var(--_toggle-w);padding:0;border:0;background:transparent;color:var(--input-foreground-icon);cursor:pointer}
 .rb-combobox__toggle:disabled{cursor:not-allowed}
 .rb-combobox__toggle svg{width:20px;height:20px;transition:transform .2s ease}
 .rb-combobox__toggle svg.is-open{transform:rotate(180deg)}

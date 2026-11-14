@@ -48,7 +48,7 @@
 .rb-notif-button__count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 var(--notification-count-padding-horizontal);box-sizing:border-box;border-radius:var(--notification-count-radius);background:var(--notification-count-surface);color:var(--notification-count-foreground);font-size:var(--text-body-description-semibold-font-size);line-height:16px;font-weight:var(--text-body-description-semibold-font-weight);text-align:center}
 .rb-notif-menu{position:relative;display:inline-block}
 .rb-notif-menu__panel{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));right:0;width:min(400px,calc(100vw - 32px))}
-.rb-notif-panel{background:var(--notification-panel-surface);border:var(--border-width-overlays-default) solid var(--notification-panel-border);border-radius:var(--notification-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
+.rb-notif-panel{background:var(--notification-panel-surface);border:var(--notification-panel-border-width) solid var(--notification-panel-border);border-radius:var(--notification-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
 .rb-notif-panel__header{display:flex;align-items:center;gap:var(--notification-header-gap);padding:var(--notification-item-padding);border-bottom:var(--notification-header-border-width) solid var(--notification-divider)}
 .rb-notif-panel__title{flex:1;margin:0;color:var(--notification-foreground-title);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-notif-panel__items{list-style:none;margin:0;padding:0;max-height:min(480px,60vh);overflow:auto}
@@ -145,7 +145,7 @@
 .rb-password__level{color:var(--password-strength-foreground);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
 .rb-password__reqs{list-style:none;margin:var(--spacing-1) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--password-input-requirements-gap);color:var(--password-strength-foreground);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-password__reqs li{display:flex;align-items:center;gap:var(--password-input-requirement-gap)}
-.rb-password__reqs svg{width:var(--password-input-requirement-icon-size);height:var(--password-input-requirement-icon-size);color:var(--password-strength-check-unmet);flex:none}
+.rb-password__reqs svg{width:var(--password-input-icon-size);height:var(--password-input-icon-size);color:var(--password-strength-check-unmet);flex:none}
 .rb-password__reqs li.is-met svg{color:var(--password-strength-check-met)}
 
 /* ---------- Copy input ---------- */

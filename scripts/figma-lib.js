@@ -1,7 +1,8 @@
 figma.skipInvisibleInstanceChildren=false;
 const COLS=await figma.variables.getLocalVariableCollectionsAsync();const VC={};for(const c of COLS)for(const id of c.variableIds){const v=await figma.variables.getVariableByIdAsync(id);VC[v.name]=v}
 const ICX=COLS.find(c=>c.name.includes('icon-context'));const IM=Object.fromEntries(ICX.modes.map(m=>[m.name,m.modeId]));
-const V=n=>{const k=n.startsWith('ct/')?'component-tokens/'+n.slice(3):n.startsWith('tt/')?'typography-tokens/'+n.slice(3):n;const v=VC[k];if(!v)throw new Error('var '+k);return v};
+// 'ct/button/radius' finds component-tokens/<category>/button/radius (tokens sit in a folder per category).
+const V=n=>{if(n.startsWith('ct/')){const r=n.slice(3);const k=Object.keys(VC).find(x=>x.startsWith('component-tokens/')&&(x==='component-tokens/'+r||x.split('/').slice(2).join('/')===r));if(!k)throw new Error('var ct/'+r);return VC[k]}const k=n.startsWith('tt/')?'typography-tokens/'+n.slice(3):n;const v=VC[k];if(!v)throw new Error('var '+k);return v};
 const P=n=>figma.variables.setBoundVariableForPaint({type:'SOLID',color:{r:.5,g:.5,b:.5}},'color',V(n));
 const fill=(x,n)=>{x.fills=n?[P(n)]:[]};
 const stroke=(x,n,w='border/width/default',sides)=>{x.strokes=[P(n)];x.strokeAlign='INSIDE';for(const k of ['Top','Right','Bottom','Left']){const key='stroke'+k+'Weight';if(!sides||sides.includes(k))x.setBoundVariable(key,V(w));else x[key]=0}};

@@ -96,7 +96,8 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 
 ### 4. Mapped (↳ mapped, one mode, published)
 
-- component-tokens/…: every value a component uses, including border widths, effects and icon sizes.
+- component-tokens/…: every value a component uses, including border widths, effects and icon sizes. In Figma they sit in a folder per category, like the pages: `component-tokens/<category>/<component>/…` (action, forms, selection-controls, badges-and-tags, avatars, feedback, overlays, navigation, data-display, content, e-commerce, utilities). The export skips the category, so `component-tokens/action/button/radius` becomes `--button-radius`.
+- Technical values that Figma cannot set with a variable (an animation colour stop, a click area, an offset by position) are not component tokens. They are local CSS variables (`--_name`) in the component CSS.
 - typography-tokens/…, effect-tokens/…, layout-tokens/….
 - Only points to Theme, Style, Screen size or Size.
 

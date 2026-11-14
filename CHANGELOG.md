@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Changed (PR 6b-2, code)
+- **Token export skips the category folder** (`scripts/figma-export-tokens.js`), so CSS names stay the same. `tokens.css` is exported again: 41 duplicate or obsolete tokens gone, 19 new (see below). `scripts/figma-lib.js` finds component tokens without the category too.
+- Filter group: 8 px between options (`--filter-options-gap`, was 12). Variant picker: 8 px between label and action (`--variant-head-gap`, was 12); swatch ring and size chip from `--variant-swatch-ring-offset`, `--variant-swatch-ring-width`, `--size-chip-border-width` and `--size-chip-inset-width-checked`. Selection card: checked border from `--selection-card-border-width-checked`.
+- Password input: requirement icon 20 px (`--password-input-icon-size`, was 16). File upload: 4 px between the text and the hint (`--file-upload-text-gap`), icon and percentage from `--file-upload-foreground-icon` and `--file-upload-percent-foreground`.
+- Mini cart: note and subtotal grouped with 8 px (`--mini-cart-totals-gap`), 12 px to the buttons (`--mini-cart-footer-gap`). Cart item: image size from `--cart-item-media-size` (size mode on the image).
+- Calendar cells padding from `--calendar-cells-padding-vertical(-sm)` and `--calendar-cells-padding-horizontal`. Slider track and fill radius from `--slider-track-radius` and `--slider-fill-radius`. Notification panel border from `--notification-panel-border-width`. Page header divider in the Divider colour.
+- **Flag:** one token `--flag-width` with the size modes sm 16, md 20, lg 24 (`data-size` on the flag). `size="xl"` keeps working with a local value and is deprecated (removed in 2.0.0).
+- Removed tokens: `--flag-sm-width`, `--flag-md-width`, `--flag-lg-width`, `--flag-xl-width`, `--skeleton-highlight`, `--combobox-toggle-width`, `--bottom-nav-action-offset` (technical values are local CSS variables now), `--combobox-foreground-icon` (Combobox uses `--input-foreground-icon`), `--page-header-border`, `--metric-card-icon-size`, `--password-input-requirement-icon-size`, `--alert-foreground-action`, `--avatar-icon-size` and the duplicates listed under the Figma part.
+
+### Changed (Figma, PR 6b-2, part 2)
+- Featured icon: the icon has the colour of its variant (was grey in every colour). Calendar size, Combobox list max height and Metric card trend icon bound to their tokens. New states: Avatar status Offline, Table cell State=Hover, Date range preset (Default, Hover, Current), Bottom nav action Hover, Skeleton Type=Lines. Flags: width from `size/flag`, placeholder flag added.
+
 ### Changed (Figma, PR 6b-2)
 - **Component tokens in folders per category** (`component-tokens/<category>/<component>/…`), like the Figma pages: action, forms, selection-controls, badges-and-tags, avatars, feedback, overlays, navigation, data-display, content, e-commerce, utilities. CSS names stay the same: the token export will skip the category level (code step of PR 6b-2). Until then, do not run the old export.
 - **Duplicate component tokens removed.** Layers now use the token the code uses: `header/border-width`, `slideout/border-width`, `selection-card/border-width`, `step/indicator-border-width`, `kbd/border-width` (Command menu, Search input, Sidebar, Table), `calendar/border-width`, `input/foreground-label`, `-hint`, `-error` (Verification code), `progress/gap` and `progress/radius` (File upload), `input/leading-icon-size` (Select). 22 duplicates deleted, among them `size-chip/size-chip-border-width`, `variant/size-chip-border-width`, `swatch/swatch-border-width`, `password-input/requirement-icon-size`, `alert/foreground-action`, `avatar/icon-size`, `mini-cart/totals-padding-top` and `mini-cart/totals-border-width`.

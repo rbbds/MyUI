@@ -59,7 +59,6 @@
   ],
   "tokens": [
     "--skeleton-surface",
-    "--skeleton-highlight",
     "--skeleton-radius",
     "--skeleton-radius-text",
     "--skeleton-gap"

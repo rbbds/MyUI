@@ -139,7 +139,7 @@ export default [
     content: [],
     do: ['Follow the real layout as closely as you can.'],
     dont: ['Show skeletons for more than a few seconds without an explanation.'],
-    tokens: ['--skeleton-surface', '--skeleton-highlight', '--skeleton-radius', '--skeleton-radius-text', '--skeleton-gap'],
+    tokens: ['--skeleton-surface', '--skeleton-radius', '--skeleton-radius-text', '--skeleton-gap'],
     related: ['Spinner', 'Progress'],
     open: [],
   },
