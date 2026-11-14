@@ -139,7 +139,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 | 1. Primitives | `∙ color`, `∙ spacing`, `∙ border`, `∙ typography`, ... (no modes) | `:root` |
 | 2. Brand | `↳ brand`, modes Iris, Forest, Berry | `--brand-*`; Forest and Berry on `:root[data-brand="forest"\|"berry"]` |
 | 3. Alias | `↳ theme` (Light, Dark: colors), `↳ style` (spacing, radius, border, font, icon size), `↳ screen-size`, `↳ size` (md, sm, lg) | theme on `[data-theme]`, size on `[data-size]` |
-| 4. Mapped | `↳ mapped`: `component-tokens/*`, `typography-tokens/*`, `base-tokens/*`, `effect-tokens/*` | `--x-y`, `--text-*`, `--base-*`, `--effect-*` |
+| 4. Mapped | `↳ mapped`: `component-tokens/<category>/*` (export skips the category), `typography-tokens/*`, `base-tokens/*`, `effect-tokens/*` | `--x-y`, `--text-*`, `--base-*`, `--effect-*` |
 
 **Rules**
 - Components and frames only use mapped tokens. Never alias or primitives.

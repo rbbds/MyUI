@@ -42,7 +42,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
   const name = typeof title === 'string' ? title : '';
   return (
     <div className={cx('rb-cart-item', `rb-cart-item--${size}`, className)} {...rest}>
-      <div className="rb-cart-item__media">{image ? <img src={image.src} alt={image.alt ?? ''} /> : <span className="rb-product-card__placeholder" />}</div>
+      <div className="rb-cart-item__media" data-size={size}>{image ? <img src={image.src} alt={image.alt ?? ''} /> : <span className="rb-product-card__placeholder" />}</div>
       <div className="rb-cart-item__main">
         <div className="rb-cart-item__text">
           <p className="rb-cart-item__title">{href ? <a href={href}>{title}</a> : title}</p>
@@ -201,8 +201,10 @@ export function MiniCart({ open, onClose, children, itemCount, subtotal, currenc
       title={l.title(itemCount)}
       footer={empty ? undefined : (
         <div className="rb-mini-cart__footer">
-          {note && <p className="rb-mini-cart__note">{note}</p>}
-          <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>{l.subtotal}</span><span>{formatMoney(subtotal, currency)}</span></div>
+          <div className="rb-mini-cart__totals">
+            {note && <p className="rb-mini-cart__note">{note}</p>}
+            <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>{l.subtotal}</span><span>{formatMoney(subtotal, currency)}</span></div>
+          </div>
           <Button fullWidth onClick={onCheckout}>{l.checkout}</Button>
           <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>{l.viewCart}</Button>
         </div>

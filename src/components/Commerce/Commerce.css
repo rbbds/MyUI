@@ -77,8 +77,7 @@
 
 /* ---------- Cart item ---------- */
 .rb-cart-item{display:grid;grid-template-columns:auto 1fr auto;gap:var(--cart-item-gap);align-items:start}
-.rb-cart-item__media{width:var(--_m);aspect-ratio:1;overflow:hidden;border-radius:var(--cart-item-media-radius);background:var(--product-card-media)}
-.rb-cart-item--md{--_m:96px}.rb-cart-item--sm{--_m:64px}
+.rb-cart-item__media{width:var(--cart-item-media-size);aspect-ratio:1;overflow:hidden;border-radius:var(--cart-item-media-radius);background:var(--product-card-media)}
 .rb-cart-item__media img{display:block;width:100%;height:100%;object-fit:cover}
 .rb-cart-item__main{display:flex;flex-direction:column;gap:var(--cart-item-main-gap);min-width:0}
 .rb-cart-item__text{display:flex;flex-direction:column;gap:var(--cart-item-text-gap)}
@@ -112,7 +111,8 @@
 .rb-cart-button{position:relative;display:inline-flex}
 .rb-cart-button__count{position:absolute;top:0;right:0;min-width:18px;height:18px;padding:0 var(--cart-button-count-padding-horizontal);box-sizing:border-box;border-radius:var(--cart-button-count-radius);background:var(--cart-button-surface-count);color:var(--cart-button-foreground-count);font-size:11px;font-weight:600;line-height:18px;text-align:center;pointer-events:none;transform:translate(25%,-15%)}
 .rb-mini-cart__items{display:flex;flex-direction:column;gap:var(--mini-cart-items-gap)}
-.rb-mini-cart__footer{display:flex;flex-direction:column;gap:var(--spacing-3);width:100%}
+.rb-mini-cart__footer{display:flex;flex-direction:column;gap:var(--mini-cart-footer-gap);width:100%}
+.rb-mini-cart__totals{display:flex;flex-direction:column;gap:var(--mini-cart-totals-gap)}
 .rb-mini-cart__footer .rb-cart-summary__row--total{margin:0;padding:0;border:0}
 .rb-mini-cart__note{margin:0;color:var(--cart-summary-foreground);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
 
@@ -132,18 +132,18 @@
 
 /* ---------- Variant picker ---------- */
 .rb-variant{margin:0;padding:0;border:0;display:flex;flex-direction:column;gap:var(--variant-gap)}
-.rb-variant__head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--spacing-3)}
+.rb-variant__head{display:flex;justify-content:space-between;align-items:baseline;gap:var(--variant-head-gap)}
 .rb-variant__legend{float:left;padding:0;color:var(--variant-foreground-label);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-variant__current{font-weight:var(--text-body-sub-text-font-weight);color:var(--variant-foreground-value)}
 .rb-variant__options{display:flex;flex-wrap:wrap;gap:var(--variant-options-gap);clear:both}
 .rb-variant__option{position:relative;display:inline-flex;cursor:pointer}
 .rb-variant__input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
-.rb-variant__swatch{display:block;width:var(--variant-swatch-size);height:var(--variant-swatch-size);border-radius:50%;background:var(--_c);box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),0 0 0 2px var(--variant-surface),0 0 0 3px transparent}
-.rb-variant__input:checked+.rb-variant__swatch{box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),0 0 0 2px var(--variant-surface),0 0 0 4px var(--variant-border-checked)}
-.rb-variant__input:focus-visible+.rb-variant__swatch{box-shadow:inset 0 0 0 1px var(--product-card-swatch-border),var(--focus-ring)}
-.rb-variant__chip{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:40px;padding:0 var(--variant-padding-horizontal);box-sizing:border-box;border:var(--border-width-control-default) solid var(--variant-border);border-radius:var(--variant-chip-radius);background:var(--variant-surface);color:var(--variant-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);font-weight:var(--text-body-sub-text-medium-font-weight)}
+.rb-variant__swatch{display:block;width:var(--variant-swatch-size);height:var(--variant-swatch-size);border-radius:50%;background:var(--_c);box-shadow:inset 0 0 0 var(--swatch-color-border-width) var(--product-card-swatch-border),0 0 0 var(--variant-swatch-ring-offset) var(--variant-surface)}
+.rb-variant__input:checked+.rb-variant__swatch{box-shadow:inset 0 0 0 var(--swatch-color-border-width) var(--product-card-swatch-border),0 0 0 var(--variant-swatch-ring-offset) var(--variant-surface),0 0 0 calc(var(--variant-swatch-ring-offset) + var(--variant-swatch-ring-width)) var(--variant-border-checked)}
+.rb-variant__input:focus-visible+.rb-variant__swatch{box-shadow:inset 0 0 0 var(--swatch-color-border-width) var(--product-card-swatch-border),var(--focus-ring)}
+.rb-variant__chip{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:40px;padding:0 var(--variant-padding-horizontal);box-sizing:border-box;border:var(--size-chip-border-width) solid var(--variant-border);border-radius:var(--variant-chip-radius);background:var(--variant-surface);color:var(--variant-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-variant__option:hover .rb-variant__chip{background:var(--variant-surface-hover)}
-.rb-variant__input:checked+.rb-variant__chip{border-color:var(--variant-border-checked);background:var(--variant-surface-checked);color:var(--variant-foreground-checked);box-shadow:inset 0 0 0 1px var(--variant-border-checked)}
+.rb-variant__input:checked+.rb-variant__chip{border-color:var(--variant-border-checked);background:var(--variant-surface-checked);color:var(--variant-foreground-checked);box-shadow:inset 0 0 0 var(--size-chip-inset-width-checked) var(--variant-border-checked)}
 .rb-variant__input:focus-visible+.rb-variant__chip{box-shadow:var(--focus-ring)}
 .rb-variant__option.is-unavailable{cursor:not-allowed}
 .rb-variant__option.is-unavailable .rb-variant__chip{color:var(--variant-foreground-unavailable);text-decoration:line-through;background:var(--variant-surface-unavailable)}
@@ -166,7 +166,7 @@
 .rb-filter__trigger svg.is-open{transform:rotate(180deg)}
 .rb-filter__selected{color:var(--filter-foreground-count)}
 .rb-filter__panel{padding-bottom:var(--filter-panel-padding-bottom)}
-.rb-filter__list{display:flex;flex-direction:column;align-items:flex-start;gap:var(--spacing-3);margin:0;padding:0;border:0}
+.rb-filter__list{display:flex;flex-direction:column;align-items:flex-start;gap:var(--filter-options-gap);margin:0;padding:0;border:0}
 .rb-filter__option{display:inline-flex;gap:var(--spacing-2)}
 .rb-filter__count{color:var(--filter-foreground-count)}
 @media (prefers-reduced-motion:reduce){.rb-filter__trigger svg{transition:none}}

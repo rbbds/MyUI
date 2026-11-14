@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+### Changed (PR 6b-2, code)
+- **Token export skips the category folder** (`scripts/figma-export-tokens.js`), so CSS names stay the same. `tokens.css` is exported again: 41 duplicate or obsolete tokens gone, 19 new (see below). `scripts/figma-lib.js` finds component tokens without the category too.
+- Filter group: 8 px between options (`--filter-options-gap`, was 12). Variant picker: 8 px between label and action (`--variant-head-gap`, was 12); swatch ring and size chip from `--variant-swatch-ring-offset`, `--variant-swatch-ring-width`, `--size-chip-border-width` and `--size-chip-inset-width-checked`. Selection card: checked border from `--selection-card-border-width-checked`.
+- Password input: requirement icon 20 px (`--password-input-icon-size`, was 16). File upload: 4 px between the text and the hint (`--file-upload-text-gap`), icon and percentage from `--file-upload-foreground-icon` and `--file-upload-percent-foreground`.
+- Mini cart: note and subtotal grouped with 8 px (`--mini-cart-totals-gap`), 12 px to the buttons (`--mini-cart-footer-gap`). Cart item: image size from `--cart-item-media-size` (size mode on the image).
+- Calendar cells padding from `--calendar-cells-padding-vertical(-sm)` and `--calendar-cells-padding-horizontal`. Slider track and fill radius from `--slider-track-radius` and `--slider-fill-radius`. Notification panel border from `--notification-panel-border-width`. Page header divider in the Divider colour.
+- **Flag:** one token `--flag-width` with the size modes sm 16, md 20, lg 24 (`data-size` on the flag). `size="xl"` keeps working with a local value and is deprecated (removed in 2.0.0).
+- Removed tokens: `--flag-sm-width`, `--flag-md-width`, `--flag-lg-width`, `--flag-xl-width`, `--skeleton-highlight`, `--combobox-toggle-width`, `--bottom-nav-action-offset` (technical values are local CSS variables now), `--combobox-foreground-icon` (Combobox uses `--input-foreground-icon`), `--page-header-border`, `--metric-card-icon-size`, `--password-input-requirement-icon-size`, `--alert-foreground-action`, `--avatar-icon-size` and the duplicates listed under the Figma part.
+
+### Changed (Figma, PR 6b-2, part 2)
+- Featured icon: the icon has the colour of its variant (was grey in every colour). Calendar size, Combobox list max height and Metric card trend icon bound to their tokens. New states: Avatar status Offline, Table cell State=Hover, Date range preset (Default, Hover, Current), Bottom nav action Hover, Skeleton Type=Lines. Flags: width from `size/flag`, placeholder flag added.
+
+### Changed (Figma, PR 6b-2)
+- **Component tokens in folders per category** (`component-tokens/<category>/<component>/…`), like the Figma pages: action, forms, selection-controls, badges-and-tags, avatars, feedback, overlays, navigation, data-display, content, e-commerce, utilities. CSS names stay the same: the token export will skip the category level (code step of PR 6b-2). Until then, do not run the old export.
+- **Duplicate component tokens removed.** Layers now use the token the code uses: `header/border-width`, `slideout/border-width`, `selection-card/border-width`, `step/indicator-border-width`, `kbd/border-width` (Command menu, Search input, Sidebar, Table), `calendar/border-width`, `input/foreground-label`, `-hint`, `-error` (Verification code), `progress/gap` and `progress/radius` (File upload), `input/leading-icon-size` (Select). 22 duplicates deleted, among them `size-chip/size-chip-border-width`, `variant/size-chip-border-width`, `swatch/swatch-border-width`, `password-input/requirement-icon-size`, `alert/foreground-action`, `avatar/icon-size`, `mini-cart/totals-padding-top` and `mini-cart/totals-border-width`.
+- Renamed: `selection-card/border-width-checked`, `variant/swatch-ring-width`, `notification/panel-border-width`, `file-upload/foreground-icon`, `calendar/cells-padding-vertical` and `-sm`.
+- New: `filter/options-gap` (8), `variant/head-gap` (8), `variant/swatch-ring-offset` (2), `size-chip/inset-width-checked` (1), `calendar/cells-padding-horizontal` (4), `mini-cart/footer-gap` (12).
+- Filter group: options in their own frame with 8 px between them; slider track and fill fully rounded; the range shows one row with the chosen values, like the code.
+- Variant picker: the swatch ring is a stroke with padding (2 px ring, 2 px gap); a selected size chip has the control border plus a 1 px inner shadow; 8 px between the label and the action.
+- Password input: requirement icon 20 px. Avatar: the icon is half the avatar size in every size; initials stay centered. Cart item: the image follows the size (md 96 px, sm 64 px, new `size/cart-item-media` and `cart-item/media-size`), so the actions fit in the Mini cart. Calendar: month and year views have padding at the bottom and sides too.
+- Slideout: the footer is a slot. Mini cart uses it: totals (8 px) and full-width Checkout and View cart buttons, 12 px apart.
+- Alert and Toast: the actions are Link buttons (sm), like the code.
+
+### Added
+- `scripts/figma-scan-6b2.js`: read-only scan of the Figma file for PR 6b-2. Lists pages per category, component token groups, where each duplicate component token is bound, and the layer tree of the components in the Figma ≠ code choices. Run it with the Figma MCP `use_figma` tool or the Scripter plugin.
+
 ### Fixed
 - **Badge, Cart button, Active filters follow Figma (4 px grid):** the icon in a large Badge is 12 px (was 14 px). The Cart button count has 4 px side padding (was 5 px), from `--cart-button-count-padding-horizontal`. Active filters that wrap have 8 px between rows (was 12 px), from `--filter-row-gap`; the space between filters stays 12 px (`--filter-gap`).
 - Component CSS uses 46 more component tokens that were bound in Figma but not used in code, for example the File upload item padding, the Checklist item padding, the Notification header and count, the Stepper text and indicator, the Select chevron, the Search icons and the Modal close icon. Nothing changes on screen: 304 screenshots are pixel-identical, and every token has the same value in all styles, themes, sizes and screen sizes.

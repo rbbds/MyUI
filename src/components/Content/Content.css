@@ -69,10 +69,12 @@
 .rb-file__name{margin:0;color:var(--file-upload-file-name-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-file__meta{margin:0;color:var(--file-upload-meta-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-file--error .rb-file__meta{color:var(--file-upload-meta-foreground-2)}
-.rb-file__done{display:inline-flex;color:var(--color-foreground-brand)}
+.rb-file__done{display:inline-flex;color:var(--file-upload-foreground-icon)}
 .rb-file__done svg{width:var(--file-upload-done-icon-size);height:var(--file-upload-done-icon-size)}
 .rb-file .rb-progress__indicator{background:var(--file-item-progress)}
 .rb-file .rb-progress__track{background:var(--file-item-progress-track)}
+.rb-file .rb-progress__value{color:var(--file-upload-percent-foreground)}
+.rb-upload__body{display:flex;flex-direction:column;align-items:center;gap:var(--file-upload-text-gap)}
 
 .rb-table-wrap__actions{margin-left:auto;display:flex;gap:var(--spacing-3)}
 .rb-table tbody tr[aria-selected="true"] td{background:var(--table-surface-selected)}

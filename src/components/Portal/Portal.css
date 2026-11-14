@@ -18,7 +18,7 @@
 
 /* ---------- Page header ---------- */
 .rb-page-header{display:flex;flex-direction:column;gap:var(--page-header-gap);padding-bottom:var(--page-header-padding-bottom)}
-.rb-page-header--divider{border-bottom:var(--border-width-containers-default) solid var(--page-header-border)}
+.rb-page-header--divider{border-bottom:var(--border-width-containers-default) solid var(--divider-color)}
 .rb-page-header__row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--page-header-row-row-gap) var(--page-header-row-gap)}
 .rb-page-header__text{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:var(--page-header-text-gap)}
 .rb-page-header__title{margin:0;color:var(--page-header-foreground-title);font-family:var(--text-headings-h1-font-family);font-size:var(--text-headings-h1-font-size);line-height:var(--text-headings-h1-line-height);font-weight:var(--text-headings-h1-font-weight);overflow-wrap:break-word}

@@ -144,8 +144,10 @@ export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dro
     >
       <input type="file" className="rb-upload__input" disabled={disabled} aria-label={actionLabel} aria-describedby={hint ? hintId : undefined} onChange={(e) => onFiles(Array.from(e.target.files ?? []))} {...rest} />
       <span className="rb-upload__icon" aria-hidden="true"><CloudUpload /></span>
-      <p className="rb-upload__text"><span className="rb-upload__action">{actionLabel}</span> {dropLabel}</p>
-      {hint && <p id={hintId} className="rb-upload__hint">{hint}</p>}
+      <div className="rb-upload__body">
+        <p className="rb-upload__text"><span className="rb-upload__action">{actionLabel}</span> {dropLabel}</p>
+        {hint && <p id={hintId} className="rb-upload__hint">{hint}</p>}
+      </div>
     </div>
   );
 }
