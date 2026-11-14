@@ -124,7 +124,7 @@
 .rb-code__group{display:inline-flex;gap:var(--code-input-gap)}
 .rb-code__separator{color:var(--code-input-separator-foreground);font-family:var(--text-headings-h3-font-family);font-size:var(--text-headings-h3-font-size);line-height:var(--text-headings-h3-line-height);font-weight:var(--text-headings-h3-font-weight);pointer-events:none}
 .rb-code__input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;opacity:0;font-size:16px;letter-spacing:0;cursor:text;caret-color:transparent}
-.rb-code__box{display:inline-flex;align-items:center;justify-content:center;width:48px;height:56px;box-sizing:border-box;background:var(--code-input-surface);border:var(--code-input-border-width) solid var(--code-input-border);border-radius:var(--code-input-radius);color:var(--code-input-foreground);font-family:var(--text-headings-h3-font-family);font-size:var(--text-headings-h3-font-size);line-height:1;font-weight:var(--text-headings-h3-font-weight);pointer-events:none}
+.rb-code__box{display:inline-flex;align-items:center;justify-content:center;width:var(--code-input-digit-width);height:var(--code-input-digit-height);box-sizing:border-box;background:var(--code-input-surface);border:var(--code-input-border-width) solid var(--code-input-border);border-radius:var(--code-input-radius);color:var(--code-input-foreground);font-family:var(--text-headings-h3-font-family);font-size:var(--text-headings-h3-font-size);line-height:1;font-weight:var(--text-headings-h3-font-weight);pointer-events:none}
 .rb-code__box.is-active{border:var(--code-input-code-digit-border-width) solid var(--code-input-border-focus);box-shadow:var(--focus-ring)}
 .rb-code__boxes.is-invalid .rb-code__box{border-color:var(--code-input-border-error)}
 .rb-code__boxes.is-disabled .rb-code__box{background:var(--code-input-surface-disabled)}
@@ -135,9 +135,9 @@
 .rb-password__toggle:hover{color:var(--color-foreground-secondary)}
 .rb-password__toggle:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-password__toggle svg{width:18px;height:18px}
-.rb-password__strength{display:flex;flex-direction:column;gap:var(--password-input-strength-gap);margin-top:var(--spacing-3)}
+.rb-password__strength{display:flex;flex-direction:column;gap:var(--password-input-strength-gap);margin-top:var(--password-input-gap)}
 .rb-password__meter{display:flex;gap:var(--password-strength-gap)}
-.rb-password__meter span{flex:1;height:4px;border-radius:var(--password-input-segment-radius);background:var(--password-strength-segment-empty)}
+.rb-password__meter span{flex:1;height:var(--password-strength-segment-height);border-radius:var(--password-input-segment-radius);background:var(--password-strength-segment-empty)}
 .rb-password__meter.is-weak .is-on{background:var(--password-strength-weak)}
 .rb-password__meter.is-fair .is-on{background:var(--password-strength-fair)}
 .rb-password__meter.is-good .is-on{background:var(--password-strength-good)}

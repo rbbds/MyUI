@@ -6,6 +6,11 @@ import { readFileSync } from 'node:fs';
 
 export const TOKEN_FILES = ['src/styles/tokens.css', 'src/styles/effects.css'];
 
+// Names declared in the mapped block (`:root,[data-theme],[data-brand],[data-size]`, the Figma
+// collection "↳ mapped"). A mapped token whose value is a plain number is still a component token:
+// the export writes values from "∙ sizing" as numbers, not as var().
+export const MAPPED = new Set();
+
 const modeOf = (sel, media) => {
   if (media) return 'viewport:max-' + media.match(/max-width:\s*(\d+)px/)[1];
   const s = sel.replace(/\s+/g, '');
@@ -38,6 +43,7 @@ export function readTokens(files = TOKEN_FILES) {
         const key = name.slice(2);
         const value = d.slice(i + 1).trim();
         const line = css.slice(0, start + d.indexOf('--')).split('\n').length;
+        if (!m[1] && /\[data-size\]/.test(m[3]) && /\[data-theme\]/.test(m[3])) MAPPED.add(key);
         declarations.push({ name: key, value, mode, file, line });
         (values[key] ??= {})[mode] = value;
       }
@@ -51,7 +57,7 @@ const SEMANTIC = /^(color|spacing|border|font|size|shadow|focus|effect|effects|l
 export function layerOf(key, modes) {
   if (key.startsWith('brand-')) return 'brand';
   const def = modes.default ?? Object.values(modes)[0];
-  if (!def.includes('var(')) return 'primitive';
+  if (!def.includes('var(') && !(MAPPED.has(key) && !SEMANTIC.test(key))) return 'primitive';
   if (SEMANTIC.test(key)) return 'semantic';
   return 'component';
 }

@@ -88,6 +88,7 @@ const referencedByToken = new Set(Object.values(values).flatMap((m) => Object.va
 for (const k of Object.keys(values)) {
   if (used.has(k)) continue;
   if (!config.unusedLayers.includes(layer[k])) continue; // keuze 18b: primitives, brand and semantic may be unused
+  if (config.unusedPending.some((p) => p.prefixes.some((x) => k.startsWith(x)))) continue;
   const first = declarations.find((d) => d.name === k);
   findings.unused.push({ token: k, layer: layer[k], file: first.file, line: first.line });
 }

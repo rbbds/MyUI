@@ -14,6 +14,12 @@ export default {
   // be unused; component tokens must be used in code (and bound in Figma).
   unusedLayers: ['component'],
 
+  // Temporary: component tokens for components that are in Figma but not in code yet.
+  // Remove the entry in the PR that builds the component.
+  unusedPending: [
+    { prefixes: ['mega-menu', 'mobile-nav', 'header-nav-item'], until: 'PR 8 (Mega menu and Mobile nav in React)' },
+  ],
+
   // Tokens outside the component layer that component CSS may use.
   // text-*: text styles (Figma text styles). shadow-*, focus-ring*: effect styles.
   allowedNonComponent: ['text', 'shadow', 'focus-ring'],

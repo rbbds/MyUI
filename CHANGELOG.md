@@ -3,6 +3,8 @@
 ## Unreleased
 
 ### Changed (PR 6c)
+- **Round 1 (Action, Forms, Selection controls), values that Figma and code already shared:** new component tokens in Figma, bound to their layer, used in CSS: `--button-group-border-width`, `--slider-track-height`, `--slider-handle-border-width`, `--date-range-presets-width`, `--code-input-digit-width`, `--code-input-digit-height`, `--password-strength-segment-height`, `--calendar-switch-height`, `--calendar-weekday-height`, `--calendar-day-size`, `--calendar-cell-height`. CSS also uses existing tokens: `--button-icon-size` (icon-only buttons), `--select-chevron-icon-size` (Combobox chevron, select padding), `--input-leading-icon-size` and the input colours without fallback (Date range picker), `--password-input-gap`, `--calendar-row-gap`. Nothing changes on screen: 152 stories pixel-identical.
+- Token reader (`scripts/lib/tokens.mjs`): a token in the mapped block is a component token, also when its value is a plain number (values from "∙ sizing" are exported as numbers). `tokens.json` now counts these as component.
 - Token lint: technical CSS that Figma cannot set with a variable is on the allowlist, each with a reason (margin corrections, positions, gradients, box-shadow lines, screen margin of overlays, padding minus a 1 px border, visually hidden input, 24 px hit areas, 16 px input font for iOS, optical alignment). New match options `px` and `declValue`. Rule 4 (unused) only checks component tokens (keuze 18b). Report: px 271 → 190, unused 242 → 101.
 
 ### Changed (PR 6b-2, code)

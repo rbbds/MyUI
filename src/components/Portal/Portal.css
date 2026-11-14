@@ -73,12 +73,12 @@
 /* ---------- Date range picker ---------- */
 .rb-daterange__anchor{position:relative;width:max-content;max-width:100%}
 .rb-daterange .rb-control{min-width:280px;cursor:pointer}
-.rb-daterange__icon{width:20px;height:20px;color:var(--input-foreground-icon,var(--color-foreground-tertiary));flex:none}
+.rb-daterange__icon{width:var(--input-leading-icon-size);height:var(--input-leading-icon-size);color:var(--input-foreground-icon);flex:none}
 .rb-daterange__trigger{flex:1;min-width:0;padding:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 .rb-daterange__trigger:focus{outline:none}
-.rb-daterange__trigger.is-placeholder{color:var(--input-foreground-placeholder,var(--color-foreground-tertiary))}
-.rb-daterange__panel{position:absolute;z-index:20;top:calc(100% + var(--spacing-2));left:0;display:flex;background:var(--calendar-surface);border:var(--date-range-panel-border-width) solid var(--calendar-border);border-radius:var(--date-range-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
-.rb-daterange__presets{display:flex;flex-direction:column;gap:var(--date-range-presets-gap);width:184px;padding:var(--date-range-presets-padding-vertical) var(--date-range-presets-padding-horizontal);border-right:var(--date-range-presets-border-width) solid var(--date-range-presets-border);box-sizing:border-box}
+.rb-daterange__trigger.is-placeholder{color:var(--input-foreground-placeholder)}
+.rb-daterange__panel{position:absolute;z-index:20;top:calc(100% + var(--rb-layer-gap));left:0;display:flex;background:var(--calendar-surface);border:var(--date-range-panel-border-width) solid var(--calendar-border);border-radius:var(--date-range-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
+.rb-daterange__presets{display:flex;flex-direction:column;gap:var(--date-range-presets-gap);width:var(--date-range-presets-width);padding:var(--date-range-presets-padding-vertical) var(--date-range-presets-padding-horizontal);border-right:var(--date-range-presets-border-width) solid var(--date-range-presets-border);box-sizing:border-box}
 .rb-daterange__preset{display:block;width:100%;padding:var(--date-range-preset-padding-vertical) var(--date-range-preset-padding-horizontal);border:0;border-radius:var(--date-range-preset-radius);background:transparent;color:var(--date-range-preset-foreground);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);box-sizing:border-box}
 .rb-daterange__preset:hover{background:var(--date-range-preset-surface-hover)}
 .rb-daterange__preset:focus-visible{outline:none;box-shadow:var(--focus-ring)}
