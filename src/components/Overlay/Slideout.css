@@ -1,6 +1,6 @@
-.rb-slideout{position:fixed;inset:0 0 0 auto;width:480px;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:0;border:0;background:transparent;overflow:visible}
+.rb-slideout{position:fixed;inset:0 0 0 auto;width:var(--slideout-md-width);max-width:100vw;height:100dvh;max-height:100dvh;margin:0;padding:0;border:0;background:transparent;overflow:visible}
 .rb-slideout--left{inset:0 auto 0 0}
-.rb-slideout--sm{width:360px}.rb-slideout--lg{width:640px}
+.rb-slideout--sm{width:var(--slideout-sm-width)}.rb-slideout--lg{width:var(--slideout-lg-width)}
 .rb-slideout::backdrop{background:var(--modal-backdrop)}
 .rb-slideout[open]{animation:rb-slide-in-right .22s ease-out}
 .rb-slideout--left[open]{animation-name:rb-slide-in-left}

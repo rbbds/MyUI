@@ -26,6 +26,9 @@ export default {
   // A non-component token in one place, with a reason (technical, like pxAllow).
   layerAllow: [
     { selector: '\\.rb-control__input', token: 'font-size-400', reason: 'Inputs below 16 px make iOS zoom in on focus; small inputs keep 16 px on touch screens.' },
+    { selector: '^\\.rb-menu$', token: 'spacing-1', reason: 'Distance between trigger and panel (--rb-layer-gap), keuze 25. Figma draws the panel without its trigger.' },
+    { selector: '^\\.rb-(popover|popover--arrow|notif-menu__panel)$', token: 'spacing-2', reason: 'Fallback position below the trigger without popover support, keuze 25.' },
+    { selector: '^\\.rb-tooltip::before$', token: 'spacing-2', reason: 'Invisible hover bridge to the trigger (WCAG 1.4.13), keuze 25.' },
   ],
 
   // px values that are allowed in component CSS: technical CSS that Figma cannot set with a variable
@@ -44,6 +47,7 @@ export default {
     { selector: '\\.rb-variant__input$', reason: 'Visually hidden native input (1 x 1 px).' },
     { selector: '::after$', property: '^(width|height)$', value: '24px', reason: 'Invisible hit area of 24 x 24 px (WCAG 2.5.8 target size).' },
     { selector: '\\.rb-code__input$', property: '^font-size$', value: '16px', reason: 'Inputs below 16 px make iOS zoom in on focus.' },
+    { selector: '^\\.rb-command$', property: '^margin-top$', reason: 'Position of the command menu on small screens (distance from the top edge), keuze 25.' },
     { selector: '(\\.rb-accordion__trigger svg|\\.rb-notif__dot)$', property: '^margin-top$', reason: 'Optical alignment of an icon or dot with the first line of text.' },
   ],
 

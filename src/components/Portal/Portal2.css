@@ -3,7 +3,7 @@
 
 /* ---------- Status indicator ---------- */
 .rb-status{display:inline-flex;align-items:center;gap:var(--status-indicator-gap);color:var(--status-indicator-foreground);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
-.rb-status__dot{width:8px;height:8px;border-radius:var(--border-radius-full);background:var(--_dot);flex:none}
+.rb-status__dot{width:var(--status-indicator-dot-size);height:var(--status-indicator-dot-size);border-radius:50%;background:var(--_dot);flex:none}
 .rb-status--gray{--_dot:var(--status-indicator-gray-dot)}.rb-status--success{--_dot:var(--status-indicator-success-dot)}.rb-status--warning{--_dot:var(--status-indicator-warning-dot)}.rb-status--error{--_dot:var(--status-indicator-error-dot)}.rb-status--info{--_dot:var(--status-indicator-info-dot)}
 
 /* ---------- Document list ---------- */
@@ -45,9 +45,9 @@
 .rb-notif-button:hover{background:var(--color-surface-hover)}
 .rb-notif-button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-notif-button svg{width:20px;height:20px}
-.rb-notif-button__count{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 var(--notification-count-padding-horizontal);box-sizing:border-box;border-radius:var(--notification-count-radius);background:var(--notification-count-surface);color:var(--notification-count-foreground);font-size:var(--text-body-description-semibold-font-size);line-height:16px;font-weight:var(--text-body-description-semibold-font-weight);text-align:center}
+.rb-notif-button__count{position:absolute;top:2px;right:2px;min-width:var(--notification-count-size);height:var(--notification-count-size);padding:0 var(--notification-count-padding-horizontal);box-sizing:border-box;border-radius:var(--notification-count-radius);background:var(--notification-count-surface);color:var(--notification-count-foreground);font-size:var(--text-body-description-semibold-font-size);line-height:var(--notification-count-size);font-weight:var(--text-body-description-semibold-font-weight);text-align:center}
 .rb-notif-menu{position:relative;display:inline-block}
-.rb-notif-menu__panel{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));right:0;width:min(400px,calc(100vw - 32px))}
+.rb-notif-menu__panel{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));right:0;width:min(var(--notification-panel-width),calc(100vw - 32px))}
 .rb-notif-panel{background:var(--notification-panel-surface);border:var(--notification-panel-border-width) solid var(--notification-panel-border);border-radius:var(--notification-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
 .rb-notif-panel__header{display:flex;align-items:center;gap:var(--notification-header-gap);padding:var(--notification-item-padding);border-bottom:var(--notification-header-border-width) solid var(--notification-divider)}
 .rb-notif-panel__title{flex:1;margin:0;color:var(--notification-foreground-title);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
@@ -65,11 +65,11 @@
 .rb-notif__title{color:var(--notification-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-notif__text{color:var(--notification-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-notif__time{color:var(--notification-foreground-time);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
-.rb-notif__dot{width:8px;height:8px;margin-top:6px;border-radius:var(--border-radius-full);background:var(--notification-unread-dot);flex:none}
+.rb-notif__dot{width:var(--notification-dot-size);height:var(--notification-dot-size);margin-top:6px;border-radius:50%;background:var(--notification-unread-dot);flex:none}
 
 /* ---------- Popover ---------- */
 .rb-popover-anchor{position:relative;display:inline-block}
-.rb-popover{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));width:min(320px,calc(100vw - 32px));display:flex;flex-direction:column;gap:var(--popover-gap);padding:var(--popover-padding);background:var(--popover-surface);border:var(--popover-border-width) solid var(--popover-border);border-radius:var(--popover-radius);box-shadow:var(--shadow-lg);box-sizing:border-box;text-align:left}
+.rb-popover{position:absolute;z-index:30;top:calc(100% + var(--spacing-2));width:min(var(--popover-width),calc(100vw - 32px));display:flex;flex-direction:column;gap:var(--popover-gap);padding:var(--popover-padding);background:var(--popover-surface);border:var(--popover-border-width) solid var(--popover-border);border-radius:var(--popover-radius);box-shadow:var(--shadow-lg);box-sizing:border-box;text-align:left}
 .rb-popover--start{left:0}.rb-popover--end{right:0}
 .rb-popover--arrow{--rb-layer-gap-extra:var(--popover-arrow-height);top:calc(100% + var(--spacing-2) + var(--popover-arrow-height))}
 .rb-popover--arrow.rb-popover--start{left:calc(50% - var(--popover-arrow-offset) - var(--popover-arrow-width) / 2)}

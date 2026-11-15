@@ -1,4 +1,4 @@
-.rb-command{width:640px;max-width:calc(100vw - 32px);margin:12vh auto auto;padding:0;border:0;background:transparent;overflow:visible}
+.rb-command{width:var(--command-width);max-width:calc(100vw - 32px);margin:12vh auto auto;padding:0;border:0;background:transparent;overflow:visible}
 .rb-command::backdrop{background:var(--modal-backdrop)}
 .rb-command__panel{display:flex;flex-direction:column;max-height:min(560px,76vh);overflow:hidden;border:var(--command-border-width) solid var(--command-border);border-radius:var(--command-radius);background:var(--command-surface);box-shadow:var(--shadow-2xl)}
 .rb-command__search{display:flex;align-items:center;gap:var(--command-search-gap);padding:var(--command-search-padding-vertical) var(--command-search-padding-horizontal);border-bottom:var(--command-search-border-width) solid var(--command-border);color:var(--search-foreground-icon)}
