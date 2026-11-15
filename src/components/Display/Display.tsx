@@ -22,7 +22,7 @@ export function Badge({ color = 'gray', size = 'md', dot, iconLeading, iconTrail
       {dot && <span className="rb-badge__dot" aria-hidden="true" />}
       {iconLeading}
       {children}
-      {iconTrailing}
+      {iconTrailing && <span className="rb-badge__trailing">{iconTrailing}</span>}
     </span>
   );
 }

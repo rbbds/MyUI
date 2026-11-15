@@ -25,7 +25,7 @@
 .rb-modal__titles{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--modal-text-gap)}
 .rb-modal__title{margin:0;color:var(--modal-foreground-title);font-family:var(--text-headings-h4-font-family);font-size:var(--text-headings-h4-font-size);line-height:var(--text-headings-h4-line-height);font-weight:var(--text-headings-h4-font-weight)}
 .rb-modal__description{margin:0;color:var(--modal-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
-.rb-modal__body{padding:var(--modal-gap) var(--modal-padding) 0;color:var(--modal-foreground-body)}
+.rb-modal__body{display:flex;flex-direction:column;gap:var(--modal-content-gap);padding:var(--modal-gap) var(--modal-padding) 0;color:var(--modal-foreground-body)}
 .rb-modal__panel--no-footer{padding-bottom:var(--modal-padding)}
 .rb-modal__footer{display:flex;gap:var(--modal-footer-gap);padding:var(--modal-padding)}
 .rb-modal__footer>*{flex:1}

@@ -24,7 +24,8 @@ const walk = (dir, ext) =>
     if (statSync(p).isDirectory()) return walk(p, ext);
     return ext.some((e) => p.endsWith(e)) ? [p] : [];
   });
-const filesIn = (dirs, ext) => dirs.flatMap((d) => walk(d, ext)).sort();
+// Entries can be folders or single files (for example the Storybook logo, keuze 32).
+const filesIn = (dirs, ext) => dirs.flatMap((d) => (statSync(d).isFile() ? [d] : walk(d, ext))).sort();
 
 // --- Tokens -------------------------------------------------------------------------------
 const { values, declarations } = readTokens();

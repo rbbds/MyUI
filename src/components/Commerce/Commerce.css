@@ -12,8 +12,7 @@
 /* ---------- Rating ---------- */
 .rb-rating{display:inline-flex;align-items:center;gap:var(--rating-gap);color:var(--rating-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-rating__stars{display:inline-flex;gap:var(--rating-stars-gap)}
-.rb-rating__star{position:relative;display:inline-flex;width:var(--_s);height:var(--_s)}
-.rb-rating--sm{--_s:16px}.rb-rating--md{--_s:20px}
+.rb-rating__star{position:relative;display:inline-flex;width:var(--rating-star-size);height:var(--rating-star-size)}
 .rb-rating__star svg{position:absolute;inset:0;width:100%;height:100%;stroke-width:0}
 .rb-rating__bg{fill:var(--rating-foreground-empty)}
 .rb-rating__fg{fill:var(--rating-foreground-filled)}
@@ -31,7 +30,7 @@
 .rb-qty__btn:hover:not(:disabled){background:var(--qty-surface-hover);color:var(--qty-foreground)}
 .rb-qty__btn:disabled{color:var(--qty-foreground-disabled);cursor:not-allowed}
 .rb-qty__btn:focus-visible{outline:none;background:var(--qty-surface-hover)}
-.rb-qty__input{width:3.5ch;min-width:40px;padding:0;border:0;border-inline:var(--qty-value-border-width) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
+.rb-qty__input{width:3.5ch;min-width:var(--_w);padding:0;border:0;border-inline:var(--qty-value-border-width) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
 .rb-qty__input::-webkit-outer-spin-button,.rb-qty__input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .rb-qty__input:focus{outline:none}
 .rb-qty--disabled{background:var(--qty-surface-disabled)}
@@ -84,7 +83,7 @@
 .rb-cart-item__title{margin:0;color:var(--cart-item-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-cart-item__title a{color:inherit;text-decoration:none}
 .rb-cart-item__title a:hover{text-decoration:underline}
-.rb-cart-item__title a:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:2px}
+.rb-cart-item__title a:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--focus-radius-inline)}
 .rb-cart-item__options{margin:0;color:var(--cart-item-foreground-options);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
 .rb-cart-item__actions{display:flex;align-items:center;gap:var(--cart-item-actions-gap)}
 .rb-cart-item__price{flex-direction:column;align-items:flex-end;text-align:right;gap:0}
@@ -98,8 +97,8 @@
 .rb-cart-summary__row{display:flex;justify-content:space-between;gap:var(--spacing-4);color:var(--cart-summary-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-cart-summary__row dt,.rb-cart-summary__row dd{margin:0}
 .rb-cart-summary__row.is-discount dd{color:var(--cart-summary-foreground-discount)}
-.rb-cart-summary__row--total{margin-top:var(--spacing-2);padding-top:var(--cart-summary-total-padding-top);border-top:var(--cart-summary-total-border-width) solid var(--cart-summary-border);color:var(--cart-summary-foreground-total);font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
-.rb-cart-summary__note{margin:calc(var(--cart-summary-gap) * -1 + var(--spacing-1)) 0 0;color:var(--cart-summary-foreground);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height);text-align:right}
+.rb-cart-summary__row--total{padding-top:var(--cart-summary-total-padding-top);border-top:var(--cart-summary-total-border-width) solid var(--cart-summary-border);color:var(--cart-summary-foreground-total);font-family:var(--text-body-paragraph-semibold-font-family);font-size:var(--text-body-paragraph-semibold-font-size);line-height:var(--text-body-paragraph-semibold-line-height);font-weight:var(--text-body-paragraph-semibold-font-weight)}
+.rb-cart-summary__note{margin:calc(var(--cart-summary-note-gap) - var(--cart-summary-gap)) 0 0;color:var(--cart-summary-foreground);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height);text-align:right}
 
 /* ---------- Promo code ---------- */
 .rb-promo__form{display:flex;align-items:flex-start;gap:var(--promo-code-form-gap)}
@@ -167,8 +166,11 @@
 .rb-filter__trigger svg.is-open{transform:rotate(180deg)}
 .rb-filter__selected{color:var(--filter-foreground-count)}
 .rb-filter__panel{padding-bottom:var(--filter-panel-padding-bottom)}
-.rb-filter__list{display:flex;flex-direction:column;align-items:flex-start;gap:var(--filter-options-gap);margin:0;padding:0;border:0}
-.rb-filter__option{display:inline-flex;gap:var(--spacing-2)}
+.rb-filter__panel:not([hidden]){display:flex;flex-direction:column;gap:var(--filter-panel-gap)}
+.rb-filter__panel .rb-slider{--slider-gap:var(--filter-range-gap)}
+.rb-filter__title{display:inline-flex;align-items:baseline;gap:var(--filter-heading-gap)}
+.rb-filter__list{display:flex;flex-direction:column;align-items:flex-start;gap:var(--filter-options-gap)}
+.rb-filter__list .rb-checkbox-group{--checkbox-group-gap:var(--filter-options-gap)}
 .rb-filter__count{color:var(--filter-foreground-count)}
 @media (prefers-reduced-motion:reduce){.rb-filter__trigger svg{transition:none}}
 .rb-active-filters{display:flex;flex-wrap:wrap;align-items:center;gap:var(--filter-row-gap) var(--filter-gap)}

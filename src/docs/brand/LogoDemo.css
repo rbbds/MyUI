@@ -1,0 +1,12 @@
+/* Docs demo: a surface so the logo follows Light and Dark on the docs page. Not part of the logo. */
+.myui-logo-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacings-12);
+  margin-block: var(--spacings-6);
+  padding: var(--spacings-8);
+  border: var(--border-width-containers-default) solid var(--color-border-secondary);
+  border-radius: var(--border-radius-containers-md);
+  background: var(--color-surface-primary);
+}

@@ -75,7 +75,7 @@
 .rb-popover:focus{outline:none}
 .rb-popover__header{display:flex;align-items:flex-start;gap:var(--popover-header-gap)}
 .rb-popover__title{flex:1;color:var(--popover-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-popover__body{color:var(--popover-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-popover__body{display:flex;flex-direction:column;gap:var(--popover-content-gap);color:var(--popover-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-popover__actions{display:flex;justify-content:flex-end;gap:var(--popover-actions-gap)}
 
 /* ---------- Settings ---------- */

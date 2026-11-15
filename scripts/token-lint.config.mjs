@@ -4,11 +4,11 @@ export default {
   tokenFiles: ['src/styles/tokens.css', 'src/styles/effects.css'],
 
   // Component CSS: rules 1 to 3 apply here.
-  componentCss: ['src/components', 'src/flags'],
+  componentCss: ['src/components', 'src/flags', 'src/docs/brand/Logo.css'],
 
-  // Where a token counts as used (rule 4). Storybook docs (src/docs) do not count:
+  // Where a token counts as used (rule 4). Storybook docs (src/docs) do not count, except the MyUI logo (same tokens as _Logo in Figma):
   // a token that only a docs page shows is still unused by the library.
-  usageSources: ['src/components', 'src/flags', 'src/styles', 'src/templates'],
+  usageSources: ['src/components', 'src/flags', 'src/styles', 'src/templates', 'src/docs/brand/Logo.css'],
 
   // Rule 4 only checks these layers (keuze 18b): primitives, brand and the semantic alias layer may
   // be unused; component tokens must be used in code (and bound in Figma).
@@ -18,6 +18,9 @@ export default {
   // Remove the entry in the PR that builds the component.
   unusedPending: [
     { prefixes: ['mega-menu', 'mobile-nav', 'header-nav-item'], until: 'PR 8 (Mega menu and Mobile nav in React)' },
+    { prefixes: ['command-item-shortcut'], until: 'PR 7 (shortcut prop with Kbd on Command item, keuze 32)' },
+    { prefixes: ['input-help-icon'], until: 'PR 7 (help icon on Input, keuze 19)' },
+    { prefixes: ['logo-padding'], until: 'Choice Robert: clear space of _Logo (padding in code makes Header and Sidebar taller)' },
   ],
 
   // Tokens outside the component layer that component CSS may use.
@@ -35,7 +38,6 @@ export default {
     { selector: '^\\.rb-product-card__wish$', token: 'spacing-2', reason: 'Position of the wishlist button on the product image, keuze 25.' },
     { selector: '^\\.rb-gallery__(nav--prev|nav--next|counter)$', token: 'spacing-3', reason: 'Position of the arrows and counter on the gallery image, keuze 25.' },
     { selector: '^\\.rb-cart-summary__row$', token: 'spacing-4', reason: 'Minimum space between label and amount (justify-content: space-between). Figma uses Auto spacing.' },
-    { selector: '^\\.rb-cart-summary__note$', token: 'spacing-1', reason: 'Margin correction that pulls the note closer to the total (keuze 16).' },
     { selector: '^\\.rb-promo__form>\\.rb-button$', token: 'spacing-1-5', reason: 'Aligns the button with the input below the label (margin correction, keuze 16).' },
     { selector: '^\\.rb-skeleton$', token: 'color-surface-secondary', reason: 'Highlight in the shimmer gradient (keuze 16: gradients are technical CSS).' },
     { selector: '^\\.rb-pagination$', token: 'spacing-3', reason: 'Minimum space between previous, pages and next (justify-content: space-between). Figma uses Auto spacing, which has no minimum.' },
@@ -67,6 +69,9 @@ export default {
     { selector: '^\\.rb-activity__title$', property: '^min-width$', reason: 'Wrap point of the title row (title and time wrap below 160 px). Layout logic.' },
     { selector: '^\\.rb-stepper--vertical \\.rb-step__connector$', property: '^min-height$', reason: 'Minimum length of the vertical connector when a step has little text. Figma draws a fixed step height.' },
     { selector: '^\\.rb-command$', property: '^margin-top$', reason: 'Position of the command menu on small screens (distance from the top edge), keuze 25.' },
+    { selector: '^\\.rb-gallery__thumbs$', property: '^padding$', reason: 'Room for the thumbnail border and focus ring inside the scroll row (overflow clips them). Figma does not scroll (keuze 32).' },
+    { selector: '^\\.rb-daterange__panel$', property: '^width$', reason: 'Mobile fallback width of the date range panel (one month). Figma shows the desktop panel (keuze 32).' },
+    { selector: '^\\.myui-logo__mark$', property: '^(inline|block)-size$', reason: 'Logo artwork drawn on a 32 grid (viewBox 0 0 32 32). Fixed artwork size, not a design value.' },
     { selector: '(\\.rb-accordion__trigger svg|\\.rb-notif__dot)$', property: '^margin-top$', reason: 'Optical alignment of an icon or dot with the first line of text.' },
   ],
 

@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from 'react';
 import './Logo.css';
+import './LogoDemo.css';
 
 export interface LogoProps extends HTMLAttributes<HTMLSpanElement> {
   /** large: mark + wordmark + tagline. small: mark only. Same as the Size property of _Logo in Figma. */

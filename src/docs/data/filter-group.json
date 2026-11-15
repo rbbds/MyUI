@@ -15,7 +15,7 @@
   ],
   "anatomy": [
     "Button with the title, the number chosen and a chevron.",
-    "Panel with checkboxes and \"Show all n\", or a Range slider."
+    "Panel with a Checkbox group (legend hidden, the title names it) and \"Show all n\", or a Range slider."
   ],
   "figmaProps": [
     [
@@ -95,12 +95,14 @@
   ],
   "tokens": [
     "--filter-*",
-    "--slider-*"
+    "--slider-*",
+    "--checkbox-group-*"
   ],
   "related": [
     "Active filters",
     "Product grid",
-    "Slider"
+    "Slider",
+    "Checkbox"
   ],
   "open": [
     "Filter panel as a Slideout on mobile (a pattern, not a component yet)."

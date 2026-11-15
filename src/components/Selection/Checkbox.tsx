@@ -73,6 +73,24 @@ export function RadioGroup({ legend, children, className }: RadioGroupProps) {
   );
 }
 
+export interface CheckboxGroupProps {
+  legend: ReactNode;
+  /** Hide the legend visually; screen readers still read it. Use when a heading or trigger already names the group. */
+  hideLegend?: boolean;
+  children: ReactNode;
+  className?: string;
+}
+
+/** Groups checkboxes in a fieldset with a legend (required for screen readers). For one choice, use RadioGroup. */
+export function CheckboxGroup({ legend, hideLegend, children, className }: CheckboxGroupProps) {
+  return (
+    <fieldset className={cx('rb-checkbox-group', className)}>
+      <legend className={cx('rb-checkbox-group__legend', hideLegend && 'rb-visually-hidden')}>{legend}</legend>
+      {children}
+    </fieldset>
+  );
+}
+
 export type ToggleProps = BaseProps;
 
 /** Switch for settings that apply immediately. Use Checkbox for form submissions. */

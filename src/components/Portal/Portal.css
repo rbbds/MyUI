@@ -47,7 +47,7 @@
 .rb-banner__icon{display:inline-flex;color:var(--_icon)}
 .rb-banner__icon svg{width:var(--banner-icon-size);height:var(--banner-icon-size)}
 .rb-banner__body{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;column-gap:var(--banner-body-gap);row-gap:var(--banner-body-row-gap)}
-.rb-banner__text{flex:1 1 240px;margin:0;color:var(--banner-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-banner__text{display:flex;flex-wrap:wrap;column-gap:var(--banner-text-gap);flex:1 1 240px;margin:0;color:var(--banner-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-banner__title{color:var(--banner-foreground-title);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-banner--brand{background:var(--banner-brand-surface);--_border:var(--banner-brand-border);--_icon:var(--banner-brand-icon)}
 .rb-banner--gray{background:var(--banner-gray-surface);--_border:var(--banner-gray-border);--_icon:var(--banner-gray-icon)}
