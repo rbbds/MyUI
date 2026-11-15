@@ -19,9 +19,7 @@ export default {
   unusedPending: [
     { prefixes: ['mega-menu', 'mobile-nav', 'header-nav-item'], until: 'PR 8 (Mega menu and Mobile nav in React)' },
     { prefixes: ['command-item-shortcut'], until: 'PR 7 (shortcut prop with Kbd on Command item, keuze 32)' },
-    { prefixes: ['input-help-icon'], until: 'PR 7 (help icon on Input, keuze 19)' },
-    { prefixes: ['logo-padding'], until: 'Choice Robert: clear space of _Logo (padding in code makes Header and Sidebar taller)' },
-  ],
+    { prefixes: ['input-help-icon'], until: 'PR 7 (help icon on Input, keuze 19)' },  ],
 
   // Tokens outside the component layer that component CSS may use.
   // text-*: text styles (Figma text styles). shadow-*, focus-ring*: effect styles.
