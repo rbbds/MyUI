@@ -76,7 +76,6 @@
   ],
   "tokens": [
     "--tag-{surface|border|foreground}",
-    "--tag-surface-hover",
     "--tag-{size}-padding-*",
     "--tag-radius"
   ],

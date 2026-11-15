@@ -38,7 +38,7 @@ export const DataTable: StoryObj<typeof Table> = {
                 <td><PersonCell avatar={<Avatar name={p.name} />} name={p.name} secondary={p.email} /></td>
                 <td><Badge color={p.active ? 'success' : 'gray'} size="sm" dot>{p.active ? 'Active' : 'Inactive'}</Badge></td>
                 <td>{p.role}</td>
-                <td className="rb-table__align-right"><ButtonIcon hierarchy="tertiary" size="sm" icon={<Pencil aria-hidden />} aria-label={`Edit ${p.name}`} /> <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Remove ${p.name}`} /></td>
+                <td className="rb-table__align-right"><span className="rb-table__actions"><ButtonIcon hierarchy="tertiary" size="sm" icon={<Pencil aria-hidden />} aria-label={`Edit ${p.name}`} /><ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={`Remove ${p.name}`} /></span></td>
               </tr>
             ))}
           </tbody>

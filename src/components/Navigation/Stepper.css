@@ -13,7 +13,7 @@
 .rb-step__description{color:var(--stepper-foreground-text);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height);font-weight:var(--text-body-description-font-weight)}
 .rb-step--upcoming .rb-step__title{color:var(--stepper-foreground-text)}
 .rb-step__link{color:inherit;text-decoration:underline;text-underline-offset:2px}
-.rb-step__link:focus-visible{outline:none;border-radius:var(--border-radius-control-xs);box-shadow:var(--focus-ring)}
+.rb-step__link:focus-visible{outline:none;border-radius:var(--focus-radius-inline);box-shadow:var(--focus-ring)}
 
 /* Horizontal: indicator + line on top, text below */
 .rb-stepper--horizontal .rb-step{flex:1;flex-direction:column;gap:var(--stepper-gap)}

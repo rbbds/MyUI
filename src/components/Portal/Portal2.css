@@ -15,26 +15,22 @@
 .rb-doc:last-child{border-bottom:0}
 .rb-doc:hover{background:var(--document-list-surface-hover);box-shadow:calc(-1 * var(--document-list-padding-horizontal)) 0 0 var(--document-list-surface-hover),var(--document-list-padding-horizontal) 0 0 var(--document-list-surface-hover)}
 .rb-doc__text{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--document-list-text-gap)}
-.rb-doc__title{display:inline-flex;align-items:center;gap:var(--document-list-title-row-gap);color:var(--document-list-foreground-title);text-decoration:none;font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);border-radius:var(--border-radius-control-xs)}
+.rb-doc__title{display:inline-flex;align-items:center;gap:var(--document-list-title-row-gap);color:var(--document-list-foreground-title);text-decoration:none;font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);border-radius:var(--focus-radius-inline)}
 .rb-doc__title:hover{text-decoration:underline}
 .rb-doc__title:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-doc--unread .rb-doc__title{font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-doc__dot{width:var(--document-list-dot-size);height:var(--document-list-dot-size);border-radius:50%;background:var(--document-list-unread-dot);flex:none}
 .rb-doc__meta{color:var(--document-list-foreground-meta);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
-.rb-doc__download{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--border-radius-control-sm);color:var(--color-foreground-secondary)}
-.rb-doc__download:hover{background:var(--color-surface-hover)}
-.rb-doc__download:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-doc__download svg{width:20px;height:20px}
 
 /* ---------- Activity feed ---------- */
 .rb-activity{list-style:none;margin:0;padding:0}
 .rb-activity__item{position:relative;display:flex;gap:var(--activity-gap)}
-.rb-activity__item:not(:last-child)::before{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:var(--activity-connector-width);background:var(--activity-connector)}
+.rb-activity__item:not(:last-child)::before{content:"";position:absolute;left:calc((var(--activity-marker-size) - var(--activity-connector-width)) / 2);top:calc(var(--activity-marker-size) + var(--activity-marker-column-gap));bottom:4px;width:var(--activity-connector-width);background:var(--activity-connector)}
 .rb-activity__marker{flex:none;display:inline-flex;align-items:center;justify-content:center;width:var(--activity-marker-size);height:var(--activity-marker-size);border-radius:var(--activity-radius)}
 .rb-activity__marker--icon{background:var(--activity-marker-surface);border:var(--activity-border-width) solid var(--activity-marker-border);color:var(--activity-marker-icon);box-sizing:border-box}
 .rb-activity__marker--icon svg{width:var(--activity-icon-size);height:var(--activity-icon-size)}
 .rb-activity__marker--dot::after{content:"";width:var(--activity-dot-size);height:var(--activity-dot-size);border-radius:var(--activity-radius);background:var(--activity-connector)}
-.rb-activity__content{flex:1;min-width:0;padding:var(--activity-content-padding-top) 0 var(--activity-item-padding-bottom)}
+.rb-activity__content{display:flex;flex-direction:column;gap:var(--activity-content-gap);flex:1;min-width:0;padding:var(--activity-content-padding-top) 0 var(--activity-item-padding-bottom)}
 .rb-activity__head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--activity-title-row-gap)}
 .rb-activity__title{flex:1;min-width:160px;color:var(--activity-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-activity__time{color:var(--activity-foreground-time);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}

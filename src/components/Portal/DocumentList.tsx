@@ -52,7 +52,7 @@ export function DocumentItem({ title, href, meta, unread, icon, downloadHref, do
         {meta && <p className="rb-doc__meta">{meta}</p>}
       </div>
       {downloadHref && (
-        <a href={downloadHref} download className="rb-doc__download" aria-label={downloadLabel}>
+        <a href={downloadHref} download data-size="sm" className="rb-button rb-button--icon-only rb-button--tertiary rb-button--sm rb-doc__download" aria-label={downloadLabel}>
           <Download aria-hidden="true" />
         </a>
       )}

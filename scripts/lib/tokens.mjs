@@ -58,7 +58,8 @@ export function layerOf(key, modes) {
   if (key.startsWith('brand-')) return 'brand';
   const def = modes.default ?? Object.values(modes)[0];
   if (!def.includes('var(') && !(MAPPED.has(key) && !SEMANTIC.test(key))) return 'primitive';
-  if (SEMANTIC.test(key)) return 'semantic';
+  // focus-* in the mapped block are component tokens (Figma: component-tokens/action/focus, keuze 23).
+  if (SEMANTIC.test(key) && !(MAPPED.has(key) && key.startsWith('focus-'))) return 'semantic';
   return 'component';
 }
 

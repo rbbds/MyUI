@@ -7,10 +7,11 @@
 .rb-table td{padding:var(--table-cell-padding-vertical) var(--table-cell-padding-horizontal);border-bottom:var(--table-border-width) solid var(--table-border);color:var(--table-foreground-secondary);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-table tbody tr:last-child td{border-bottom:0}
 .rb-table tbody tr:hover td{background:var(--table-surface-hover)}
-.rb-table__sort{display:inline-flex;align-items:center;gap:var(--table-label-group-gap);padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:var(--border-radius-control-xs)}
+.rb-table__sort{display:inline-flex;align-items:center;gap:var(--table-label-group-gap);padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:var(--focus-radius-inline)}
 .rb-table__sort:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-table__sort svg{width:var(--table-sort-icon-size);height:var(--table-sort-icon-size);flex-shrink:0;color:var(--table-foreground-icon)}
 .rb-table__align-right{text-align:right!important}
+.rb-table__actions{display:inline-flex;gap:var(--table-gap)}
 .rb-cell-person{display:flex;align-items:center;gap:var(--table-cell-gap)}
 .rb-cell-person__primary{color:var(--table-foreground-primary);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-cell-person__secondary{color:var(--table-foreground-secondary)}
@@ -19,6 +20,7 @@
 .rb-card--elevated{box-shadow:var(--shadow-lg)}
 .rb-card__media{display:block;background:var(--card-media);aspect-ratio:16/9;object-fit:cover;width:100%}
 .rb-card__body{display:flex;flex-direction:column;gap:var(--card-gap);padding:var(--card-padding)}
+.rb-card__content{display:flex;flex-direction:column;gap:var(--card-content-gap)}
 .rb-card__text{display:flex;flex-direction:column;gap:var(--card-text-gap)}
 .rb-card__meta{margin:0;color:var(--card-foreground-meta);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-card__title{margin:0;color:var(--card-foreground-title);font-family:var(--text-headings-h4-font-family);font-size:var(--text-headings-h4-font-size);line-height:var(--text-headings-h4-line-height);font-weight:var(--text-headings-h4-font-weight)}
@@ -31,7 +33,7 @@
 .rb-card__body>.rb-button{align-self:flex-start}
 .rb-card__description{color:var(--card-foreground-text);font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 
-.rb-accordion{border-top:var(--accordion-border-width) solid var(--accordion-border)}
+.rb-accordion{display:flex;flex-direction:column;gap:var(--accordion-item-gap);border-top:var(--accordion-border-width) solid var(--accordion-border)}
 .rb-accordion__item{border-bottom:var(--accordion-border-width) solid var(--accordion-border);border-radius:var(--accordion-item-radius);transition:background-color .15s ease}
 /* Hover and focus cover the whole item (title + open panel), like Figma. Only the title is the button. */
 .rb-accordion__item:has(.rb-accordion__trigger:hover){background:var(--accordion-surface-hover)}
@@ -42,6 +44,7 @@
 .rb-accordion__trigger:focus-visible{outline:none}
 .rb-accordion__trigger span{flex:1}
 .rb-accordion__trigger svg{width:var(--accordion-toggle-icon-size);height:var(--accordion-toggle-icon-size);color:var(--accordion-foreground-icon);flex-shrink:0;margin-top:2px}
+.rb-accordion__panel:not([hidden]){display:flex;flex-direction:column;gap:var(--accordion-panel-gap)}
 .rb-accordion__panel{padding:0 var(--accordion-padding-horizontal) var(--accordion-padding-vertical);margin-top:calc(var(--accordion-gap) - var(--accordion-padding-vertical));color:var(--accordion-foreground-text);font-family:var(--text-body-paragraph-font-family);font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 
 .rb-empty{display:flex;flex-direction:column;align-items:center;gap:var(--empty-state-gap);max-width:var(--empty-state-max-width);margin:0 auto;padding:var(--empty-state-padding-vertical) 0;text-align:center}
@@ -56,8 +59,6 @@
 .rb-upload:has(input:focus-visible){box-shadow:var(--focus-ring)}
 .rb-upload--disabled{background:var(--file-upload-surface-disabled);cursor:not-allowed;color:var(--file-upload-foreground-disabled)}
 .rb-upload__input{position:absolute;inset:0;opacity:0;cursor:inherit;width:100%}
-.rb-upload__icon{display:inline-flex;padding:10px;border:1px solid var(--color-border-primary);border-radius:var(--border-radius-control-md);background:var(--color-surface-primary);color:var(--color-foreground-secondary);box-shadow:var(--shadow-xs)}
-.rb-upload__icon svg{width:20px;height:20px}
 .rb-upload__text{margin:0;color:var(--file-upload-foreground-text);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-upload__action{color:var(--file-upload-foreground-action);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-upload__hint{margin:0;color:var(--file-upload-foreground-text);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
@@ -76,7 +77,7 @@
 .rb-file .rb-progress__value{color:var(--file-upload-percent-foreground)}
 .rb-upload__body{display:flex;flex-direction:column;align-items:center;gap:var(--file-upload-text-gap)}
 
-.rb-table-wrap__actions{margin-left:auto;display:flex;gap:var(--spacing-3)}
+.rb-table-wrap__actions{margin-left:auto;display:flex;gap:var(--table-header-actions-gap)}
 .rb-table tbody tr[aria-selected="true"] td{background:var(--table-surface-selected)}
 .rb-table__empty td{padding:0}
 .rb-table__empty:hover td{background:transparent!important}

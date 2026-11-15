@@ -682,6 +682,8 @@
 --button-tertiary-surface-default:var(--color-surface-transparent);
 --button-tertiary-surface-disabled:var(--color-surface-transparent);
 --button-tertiary-surface-hover:var(--color-surface-hover);
+--focus-radius-inline:var(--border-radius-control-xs);
+--focus-radius-panel:var(--border-radius-control-sm);
 --focus-surface-fallback:var(--color-surface-primary);
 --avatar-2xl-size:64px;
 --avatar-border:var(--color-border-secondary);
@@ -759,7 +761,6 @@
 --tag-sm-padding-horizontal:var(--spacing-2);
 --tag-sm-padding-vertical:var(--spacing-0-5);
 --tag-surface:var(--color-surface-primary);
---tag-surface-hover:var(--color-surface-hover);
 --accordion-border:var(--color-border-secondary);
 --accordion-border-width:var(--border-width-containers-default);
 --accordion-foreground-icon:var(--color-foreground-quaternary);
@@ -781,9 +782,7 @@
 --card-foreground-text:var(--color-foreground-tertiary);
 --card-foreground-title:var(--color-foreground-primary);
 --card-gap:var(--spacing-4);
---card-icon-surface:var(--color-foreground-quaternary);
 --card-media:var(--color-surface-tertiary);
---card-media-icon-size:var(--sizing-8);
 --card-padding:var(--spacing-6);
 --card-radius:var(--border-radius-containers-md);
 --card-surface:var(--color-surface-primary);
@@ -922,6 +921,7 @@
 --metric-card-foreground-meta:var(--color-foreground-tertiary);
 --metric-card-foreground-value:var(--color-foreground-primary);
 --metric-card-gap:var(--spacing-4);
+--metric-card-grid-gap:var(--spacing-6);
 --metric-card-header-gap:var(--spacing-3);
 --metric-card-padding:var(--spacing-6);
 --metric-card-radius:var(--border-radius-containers-md);
@@ -952,6 +952,7 @@
 --table-foreground-primary:var(--color-foreground-primary);
 --table-foreground-secondary:var(--color-foreground-tertiary);
 --table-gap:var(--spacing-1);
+--table-header-actions-gap:var(--spacing-3);
 --table-header-gap:var(--spacing-2);
 --table-header-padding-vertical:var(--spacing-3);
 --table-label-group-gap:var(--spacing-1);
@@ -1486,7 +1487,6 @@
 --nav-item-surface-active:var(--color-surface-tertiary);
 --nav-item-surface-hover:var(--color-surface-hover);
 --page-header-actions-gap:var(--spacing-3);
---page-header-breadcrumbs-gap:var(--spacing-1);
 --page-header-foreground-description:var(--color-foreground-secondary);
 --page-header-foreground-title:var(--color-foreground-primary);
 --page-header-gap:var(--spacing-5);
@@ -1563,6 +1563,7 @@
 --tab-surface-hover:var(--color-surface-hover);
 --tab-track:var(--color-border-secondary);
 --tabs-gap:var(--spacing-1);
+--tabs-panel-gap:var(--spacing-6);
 --command-empty-padding-horizontal:var(--spacing-3);
 --command-empty-padding-vertical:var(--spacing-6);
 --command-foreground-input:var(--color-foreground-primary);
