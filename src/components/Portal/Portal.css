@@ -49,10 +49,6 @@
 .rb-banner__body{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;column-gap:var(--banner-body-gap);row-gap:var(--banner-body-row-gap)}
 .rb-banner__text{flex:1 1 240px;margin:0;color:var(--banner-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-banner__title{color:var(--banner-foreground-title);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-banner__close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;padding:0;border:0;border-radius:var(--border-radius-control-sm);background:transparent;color:var(--color-foreground-secondary);cursor:pointer}
-.rb-banner__close:hover{background:var(--color-surface-hover)}
-.rb-banner__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-banner__close svg{width:20px;height:20px}
 .rb-banner--brand{background:var(--banner-brand-surface);--_border:var(--banner-brand-border);--_icon:var(--banner-brand-icon)}
 .rb-banner--gray{background:var(--banner-gray-surface);--_border:var(--banner-gray-border);--_icon:var(--banner-gray-icon)}
 .rb-banner--info{background:var(--banner-info-surface);--_border:var(--banner-info-border);--_icon:var(--banner-info-icon)}

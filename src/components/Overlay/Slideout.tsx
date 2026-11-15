@@ -1,5 +1,5 @@
 import { useId, type ReactNode, type RefObject } from 'react';
-import { X } from 'lucide-react';
+import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useModalDialog } from '../../utils/dialog';
 import './Slideout.css';
@@ -40,7 +40,7 @@ export function Slideout({ open, onClose, title, description, children, footer, 
             <h2 id={titleId} className="rb-slideout__title">{title}</h2>
             {description && <p id={descId} className="rb-slideout__description">{description}</p>}
           </div>
-          <button type="button" className="rb-slideout__close" onClick={onClose} aria-label={closeLabel}><X aria-hidden="true" /></button>
+          <CloseButton size="md" className="rb-slideout__close" onClick={onClose} aria-label={closeLabel} />
         </div>
         <div className="rb-slideout__body">{children}</div>
         {footer && <div className="rb-slideout__footer">{footer}</div>}

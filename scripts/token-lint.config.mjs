@@ -47,6 +47,7 @@ export default {
     { selector: '\\.rb-variant__input$', reason: 'Visually hidden native input (1 x 1 px).' },
     { selector: '::after$', property: '^(width|height)$', value: '24px', reason: 'Invisible hit area of 24 x 24 px (WCAG 2.5.8 target size).' },
     { selector: '\\.rb-code__input$', property: '^font-size$', value: '16px', reason: 'Inputs below 16 px make iOS zoom in on focus.' },
+    { selector: '^\\.rb-close--(xs|sm|md)$', property: '^--_p$', reason: 'Hit area around the close icon (padding with an equal negative margin), keuze 25. In Figma the hover surface sits outside the icon.' },
     { selector: '^\\.rb-command$', property: '^margin-top$', reason: 'Position of the command menu on small screens (distance from the top edge), keuze 25.' },
     { selector: '(\\.rb-accordion__trigger svg|\\.rb-notif__dot)$', property: '^margin-top$', reason: 'Optical alignment of an icon or dot with the first line of text.' },
   ],

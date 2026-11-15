@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react';
+import { CircleAlert, CircleCheck, Info, TriangleAlert } from 'lucide-react';
+import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useTopModal } from '../../utils/panel';
 import type { StatusColor } from '../Display/Display';
@@ -37,7 +38,7 @@ export function Alert({ color = 'info', title, children, icon, actions, onClose,
         </div>
         {actions && <div className="rb-alert__actions">{actions}</div>}
       </div>
-      {onClose && <button type="button" className="rb-alert__close" onClick={onClose} aria-label={closeLabel}><X aria-hidden="true" /></button>}
+      {onClose && <CloseButton size="sm" className="rb-alert__close" onClick={onClose} aria-label={closeLabel} />}
     </div>
   );
 }

@@ -13,25 +13,19 @@
 .rb-tag--sm{padding:calc(var(--tag-sm-padding-vertical) - 1px) calc(var(--tag-sm-padding-horizontal) - 1px);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height)}
 .rb-tag--lg{padding:calc(var(--tag-lg-padding-vertical) - 1px) calc(var(--tag-lg-padding-horizontal) - 1px)}
 .rb-tag__dot{width:var(--tag-dot-size);height:var(--tag-dot-size);border-radius:50%;background:var(--badge-success-dot)}
-.rb-tag__close{position:relative;display:inline-flex;padding:2px;margin:-2px;border:0;border-radius:var(--border-radius-control-xs);background:transparent;color:var(--tag-foreground-icon);cursor:pointer}
-.rb-tag__close::after{content:"";position:absolute;top:50%;left:50%;width:24px;height:24px;transform:translate(-50%,-50%)}
-.rb-tag__close:hover{background:var(--tag-surface-hover);color:var(--tag-foreground)}
-.rb-tag__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-tag__close svg{width:14px;height:14px}
-.rb-tag--sm .rb-tag__close svg{width:var(--tag-close-icon-size);height:var(--tag-close-icon-size)}
 
 .rb-avatar{--_d:var(--avatar-md-size);position:relative;display:inline-flex;flex-shrink:0;width:var(--_d);height:var(--_d)}
 .rb-avatar__inner{display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;overflow:hidden;border-radius:var(--avatar-radius);background:var(--avatar-surface);border:var(--avatar-border-width) solid var(--avatar-border);color:var(--avatar-foreground);font-family:var(--text-body-paragraph-semibold-font-family);font-weight:var(--text-body-description-semibold-font-weight);font-size:calc(var(--_d) * .4);line-height:1}
 .rb-avatar__inner img{width:100%;height:100%;object-fit:cover}
 .rb-avatar__inner svg{width:50%;height:50%}
 .rb-avatar--xs{--_d:var(--avatar-xs-size)}.rb-avatar--sm{--_d:var(--avatar-sm-size)}.rb-avatar--md{--_d:var(--avatar-md-size)}.rb-avatar--lg{--_d:var(--avatar-lg-size)}.rb-avatar--xl{--_d:var(--avatar-xl-size)}.rb-avatar--2xl{--_d:var(--avatar-2xl-size)}
-.rb-avatar__status{position:absolute;right:0;bottom:0;width:25%;height:25%;min-width:6px;min-height:6px;border-radius:50%;background:var(--avatar-status-online);box-shadow:0 0 0 1.5px var(--avatar-status-ring)}
+.rb-avatar__status{position:absolute;right:0;bottom:0;width:25%;height:25%;border-radius:50%;background:var(--avatar-status-online);box-shadow:0 0 0 1.5px var(--avatar-status-ring)}
 .rb-avatar__status--offline{background:var(--avatar-status-offline)}
 .rb-avatar-group{display:inline-flex;align-items:center}
 .rb-avatar-group{isolation:isolate}
-.rb-avatar-group .rb-avatar__inner{box-shadow:0 0 0 2px var(--avatar-group-ring)}
-.rb-avatar-group>*+*{margin-left:calc(var(--_d, 32px) * -0.25)}
-.rb-avatar-group--xs{--_d:var(--avatar-xs-size)}.rb-avatar-group--sm{--_d:var(--avatar-sm-size)}.rb-avatar-group--md{--_d:var(--avatar-md-size)}
+.rb-avatar-group .rb-avatar__inner{box-shadow:0 0 0 var(--avatar-group-ring-width) var(--avatar-group-ring)}
+.rb-avatar-group>*+*{margin-left:var(--_o)}
+.rb-avatar-group{--_o:var(--avatar-group-sm-overlap)}.rb-avatar-group--xs{--_o:var(--avatar-group-xs-overlap)}.rb-avatar-group--sm{--_o:var(--avatar-group-sm-overlap)}.rb-avatar-group--md{--_o:var(--avatar-group-md-overlap)}
 .rb-avatar-group>*:nth-child(1){z-index:5}.rb-avatar-group>*:nth-child(2){z-index:4}.rb-avatar-group>*:nth-child(3){z-index:3}.rb-avatar-group>*:nth-child(4){z-index:2}.rb-avatar-group>*:nth-child(5){z-index:1}
 
 .rb-divider{border:0;margin:0;height:1px;background:var(--divider-color);width:100%}
@@ -59,14 +53,16 @@
 .rb-progress__value{color:var(--progress-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);font-variant-numeric:tabular-nums}
 
 .rb-tooltip-anchor{position:relative;display:inline-flex}
-.rb-tooltip{position:absolute;z-index:50;width:max-content;max-width:240px;padding:var(--tooltip-padding-vertical) var(--tooltip-padding-horizontal);border-radius:var(--tooltip-radius);background:var(--tooltip-surface);color:var(--tooltip-foreground);box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transition:opacity .12s;display:flex;flex-direction:column;gap:var(--tooltip-gap)}
+.rb-tooltip{position:absolute;z-index:50;width:max-content;max-width:var(--tooltip-max-width);padding:var(--tooltip-padding-vertical) var(--tooltip-padding-horizontal);border-radius:var(--tooltip-radius);background:var(--tooltip-surface);color:var(--tooltip-foreground);box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transition:opacity .12s;display:flex;flex-direction:column;gap:var(--tooltip-gap)}
 .rb-tooltip[data-open="true"]{opacity:1;visibility:visible}
 /* Bridges the gap to the trigger, so the pointer can move onto the tooltip without closing it (WCAG 1.4.13). */
 .rb-tooltip::before{content:"";position:absolute;inset:calc(-1 * var(--spacing-2))}
 .rb-tooltip__title{font-family:var(--text-body-description-semibold-font-family);font-size:var(--text-body-description-semibold-font-size);line-height:var(--text-body-description-semibold-line-height);font-weight:var(--text-body-description-semibold-font-weight)}
 .rb-tooltip__text{color:var(--tooltip-foreground-secondary);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
-.rb-tooltip::after{content:"";position:absolute;width:8px;height:8px;background:inherit;transform:rotate(45deg)}
-.rb-tooltip--top{bottom:calc(100% + 8px);left:50%;translate:-50% 0}.rb-tooltip--top::after{top:calc(100% - 4px);left:calc(50% - 4px)}
-.rb-tooltip--bottom{top:calc(100% + 8px);left:50%;translate:-50% 0}.rb-tooltip--bottom::after{bottom:calc(100% - 4px);left:calc(50% - 4px)}
-.rb-tooltip--left{right:calc(100% + 8px);top:50%;translate:0 -50%}.rb-tooltip--left::after{left:calc(100% - 4px);top:calc(50% - 4px)}
-.rb-tooltip--right{left:calc(100% + 8px);top:50%;translate:0 -50%}.rb-tooltip--right::after{right:calc(100% - 4px);top:calc(50% - 4px)}
+.rb-tooltip::after{content:"";position:absolute;background:inherit}
+.rb-tooltip--top::after,.rb-tooltip--bottom::after{left:calc(50% - var(--tooltip-arrow-width) / 2);width:var(--tooltip-arrow-width);height:var(--tooltip-arrow-height)}
+.rb-tooltip--left::after,.rb-tooltip--right::after{top:calc(50% - var(--tooltip-arrow-width) / 2);width:var(--tooltip-arrow-height);height:var(--tooltip-arrow-width)}
+.rb-tooltip--top{bottom:calc(100% + 8px);left:50%;translate:-50% 0}.rb-tooltip--top::after{top:calc(100% - 1px);clip-path:polygon(0 0,100% 0,50% 100%)}
+.rb-tooltip--bottom{top:calc(100% + 8px);left:50%;translate:-50% 0}.rb-tooltip--bottom::after{bottom:calc(100% - 1px);clip-path:polygon(0 100%,50% 0,100% 100%)}
+.rb-tooltip--left{right:calc(100% + 8px);top:50%;translate:0 -50%}.rb-tooltip--left::after{left:calc(100% - 1px);clip-path:polygon(0 0,100% 50%,0 100%)}
+.rb-tooltip--right{left:calc(100% + 8px);top:50%;translate:0 -50%}.rb-tooltip--right::after{right:calc(100% - 1px);clip-path:polygon(100% 0,0 50%,100% 100%)}
