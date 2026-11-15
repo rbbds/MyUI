@@ -128,13 +128,12 @@
 .rb-code__box.is-active{border:var(--code-input-code-digit-border-width) solid var(--code-input-border-focus);box-shadow:var(--focus-ring)}
 .rb-code__boxes.is-invalid .rb-code__box{border-color:var(--code-input-border-error)}
 .rb-code__boxes.is-disabled .rb-code__box{background:var(--code-input-surface-disabled)}
-@media (max-width:399px){.rb-code__box{width:40px;height:48px}}
 
 /* ---------- Password ---------- */
-.rb-password__toggle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;margin:-4px -6px -4px 0;padding:0;border:0;border-radius:var(--border-radius-control-xs);background:transparent;color:var(--color-foreground-tertiary);cursor:pointer;flex:none}
-.rb-password__toggle:hover{color:var(--color-foreground-secondary)}
+.rb-password__toggle{display:inline-flex;align-items:center;justify-content:center;width:var(--password-input-toggle-size);height:var(--password-input-toggle-size);margin:-4px -6px -4px 0;padding:0;border:0;border-radius:var(--password-input-toggle-radius);background:transparent;color:var(--password-input-toggle-foreground);cursor:pointer;flex:none}
+.rb-password__toggle:hover{color:var(--password-input-toggle-foreground-hover)}
 .rb-password__toggle:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-password__toggle svg{width:18px;height:18px}
+.rb-password__toggle svg{width:var(--password-input-toggle-icon-size);height:var(--password-input-toggle-icon-size)}
 .rb-password__strength{display:flex;flex-direction:column;gap:var(--password-input-strength-gap);margin-top:var(--password-input-gap)}
 .rb-password__meter{display:flex;gap:var(--password-strength-gap)}
 .rb-password__meter span{flex:1;height:var(--password-strength-segment-height);border-radius:var(--password-input-segment-radius);background:var(--password-strength-segment-empty)}
@@ -143,7 +142,7 @@
 .rb-password__meter.is-good .is-on{background:var(--password-strength-good)}
 .rb-password__meter.is-strong .is-on{background:var(--password-strength-strong)}
 .rb-password__level{color:var(--password-strength-foreground);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
-.rb-password__reqs{list-style:none;margin:var(--spacing-1) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--password-input-requirements-gap);color:var(--password-strength-foreground);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-password__reqs{list-style:none;margin:var(--password-input-gap) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--password-input-requirements-gap);color:var(--password-strength-foreground);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-password__reqs li{display:flex;align-items:center;gap:var(--password-input-requirement-gap)}
 .rb-password__reqs svg{width:var(--password-input-icon-size);height:var(--password-input-icon-size);color:var(--password-strength-check-unmet);flex:none}
 .rb-password__reqs li.is-met svg{color:var(--password-strength-check-met)}

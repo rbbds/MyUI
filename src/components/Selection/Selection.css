@@ -21,17 +21,15 @@
 .rb-check--md .rb-check__hint{font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 .rb-check--disabled .rb-check__hint{color:var(--selection-foreground-disabled)}
 
-.rb-radio-group{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--spacing-3)}
-.rb-radio-group__legend{padding:0;margin-bottom:var(--spacing-3);color:var(--input-foreground-label);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
+.rb-radio-group{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--radio-group-gap)}
+.rb-radio-group__legend{padding:0;margin-bottom:var(--radio-group-legend-gap);color:var(--radio-group-legend-foreground);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 
-.rb-toggle__track{position:relative;flex-shrink:0;display:inline-flex;align-items:center;width:36px;height:20px;padding:var(--toggle-padding);border-radius:var(--toggle-radius);background:var(--toggle-track-off);transition:background-color .15s,box-shadow .15s}
-.rb-check--md .rb-toggle__track{width:44px;height:24px}
-.rb-toggle__knob{width:16px;height:16px;border-radius:50%;background:var(--toggle-knob);box-shadow:var(--shadow-sm);transition:transform .15s}
-.rb-check--md .rb-toggle__knob{width:20px;height:20px}
+.rb-toggle__track{position:relative;flex-shrink:0;display:inline-flex;align-items:center;width:var(--toggle-track-width);height:var(--toggle-track-height);padding:var(--toggle-padding);border-radius:var(--toggle-radius);background:var(--toggle-track-off);transition:background-color .15s,box-shadow .15s}
+.rb-toggle__knob{width:var(--toggle-knob-size);height:var(--toggle-knob-size);border-radius:50%;background:var(--toggle-knob);box-shadow:var(--shadow-sm);transition:transform .15s}
 .rb-check:hover .rb-toggle__track{background:var(--toggle-track-off-hover)}
 .rb-toggle__track:has(.rb-check__input:checked){background:var(--toggle-track-on)}
 .rb-check:hover .rb-toggle__track:has(.rb-check__input:checked){background:var(--toggle-track-on-hover)}
-.rb-toggle__track:has(.rb-check__input:checked) .rb-toggle__knob{transform:translateX(16px)}
+.rb-toggle__track:has(.rb-check__input:checked) .rb-toggle__knob{transform:translateX(calc(var(--toggle-track-width) - var(--toggle-knob-size) - 2 * var(--toggle-padding)))}
 .rb-check--md .rb-toggle__track:has(.rb-check__input:checked) .rb-toggle__knob{transform:translateX(20px)}
 .rb-toggle__track:has(.rb-check__input:focus-visible){box-shadow:var(--focus-ring)}
 .rb-check--disabled .rb-toggle__track,.rb-check--disabled:hover .rb-toggle__track{background:var(--toggle-track-disabled)}

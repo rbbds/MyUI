@@ -78,7 +78,7 @@ export type ToggleProps = BaseProps;
 /** Switch for settings that apply immediately. Use Checkbox for form submissions. */
 export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(function Toggle({ label, hint, size = 'sm', disabled, className, ...rest }, ref) {
   return (
-    <label className={cx('rb-check', 'rb-toggle', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
+    <label data-size={size} className={cx('rb-check', 'rb-toggle', `rb-check--${size}`, disabled && 'rb-check--disabled', className)}>
       <span className="rb-toggle__track">
         <input ref={ref} type="checkbox" role="switch" className="rb-check__input" disabled={disabled} {...rest} />
         <span className="rb-toggle__knob" aria-hidden="true" />

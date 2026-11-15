@@ -23,6 +23,10 @@ export default {
   // Tokens outside the component layer that component CSS may use.
   // text-*: text styles (Figma text styles). shadow-*, focus-ring*: effect styles.
   allowedNonComponent: ['text', 'shadow', 'focus-ring'],
+  // A non-component token in one place, with a reason (technical, like pxAllow).
+  layerAllow: [
+    { selector: '\\.rb-control__input', token: 'font-size-400', reason: 'Inputs below 16 px make iOS zoom in on focus; small inputs keep 16 px on touch screens.' },
+  ],
 
   // px values that are allowed in component CSS: technical CSS that Figma cannot set with a variable
   // (keuze 16 en 18d). Match on property (regex), value (exact px), px (regex on the px value),

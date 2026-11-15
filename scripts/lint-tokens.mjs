@@ -64,7 +64,7 @@ for (const d of decls) {
   for (const k of refsIn(d.value)) {
     if (isLocal(k) && !(k in layer)) continue;
     if (!(k in layer)) findings.unknown.push({ ...d, token: k });
-    else if (layer[k] !== 'component' && !allowedPrefix(k)) findings.layer.push({ ...d, token: k, layer: layer[k] });
+    else if (layer[k] !== 'component' && !allowedPrefix(k) && !config.layerAllow.some((a) => a.token === k && new RegExp(a.selector).test(d.selector))) findings.layer.push({ ...d, token: k, layer: layer[k] });
   }
 }
 
