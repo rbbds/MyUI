@@ -15,11 +15,11 @@
 .rb-button--link:hover:not(:disabled){text-decoration:underline}
 .rb-button--full{width:100%}
 .rb-button--icon-only.rb-button--sm{padding:calc(var(--button-icon-only-sm-padding) - var(--button-border-width))}
-.rb-button--icon-only.rb-button--sm svg{width:var(--icon-size-sm);height:var(--icon-size-sm)}
+.rb-button--icon-only.rb-button--sm svg{width:var(--button-icon-size);height:var(--button-icon-size)}
 .rb-button--icon-only.rb-button--md{padding:calc(var(--button-icon-only-md-padding) - var(--button-border-width))}
-.rb-button--icon-only.rb-button--md svg{width:var(--icon-size-md);height:var(--icon-size-md)}
+.rb-button--icon-only.rb-button--md svg{width:var(--button-icon-size);height:var(--button-icon-size)}
 .rb-button--icon-only.rb-button--lg{padding:calc(var(--button-icon-only-lg-padding) - var(--button-border-width))}
-.rb-button--icon-only.rb-button--lg svg{width:var(--icon-size-lg);height:var(--icon-size-lg)}
+.rb-button--icon-only.rb-button--lg svg{width:var(--button-icon-size);height:var(--button-icon-size)}
 
 .rb-button__spinner{animation:rb-spin 1s linear infinite}
 .rb-button--primary{--_bg:var(--button-primary-surface-default);--_bg-h:var(--button-primary-surface-hover);--_bg-d:var(--button-primary-surface-disabled);--_fg:var(--button-primary-foreground-default);--_fg-h:var(--button-primary-foreground-hover);--_fg-d:var(--button-primary-foreground-disabled);--_bd:var(--button-primary-border-default);--_bd-h:var(--button-primary-border-hover);--_bd-d:var(--button-primary-border-disabled)}

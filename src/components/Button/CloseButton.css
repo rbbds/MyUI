@@ -1,0 +1,8 @@
+.rb-close{position:relative;display:inline-flex;flex-shrink:0;padding:var(--_p);margin:calc(-1 * var(--_p));border:0;border-radius:var(--_r);background:transparent;color:var(--close-button-foreground);cursor:pointer}
+.rb-close::after{content:"";position:absolute;top:50%;left:50%;width:24px;height:24px;transform:translate(-50%,-50%)}
+.rb-close:hover{background:var(--close-button-surface-hover);color:var(--close-button-foreground-hover)}
+.rb-close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.rb-close svg{width:var(--_s);height:var(--_s)}
+.rb-close--xs{--_p:2px;--_r:var(--close-button-xs-radius);--_s:var(--close-button-xs-icon-size)}
+.rb-close--sm{--_p:2px;--_r:var(--close-button-sm-radius);--_s:var(--close-button-sm-icon-size)}
+.rb-close--md{--_p:4px;--_r:var(--close-button-md-radius);--_s:var(--close-button-md-icon-size)}

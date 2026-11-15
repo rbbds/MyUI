@@ -5,7 +5,7 @@ export interface DocData {
   name: string;
   page: string;
   react: string;
-  figma: { node: string; base: string | null };
+  figma: { node: string; base: string | null; pattern?: string };
   summary: string;
   use: string[];
   avoid: string[];
@@ -75,7 +75,7 @@ export function DocHeader({ doc }: { doc: DocData }) {
         <a href={`${FIGMA_FILE}?node-id=${node}`} target="_blank" rel="noreferrer">
           {doc.page} / {doc.name}
         </a>
-        {doc.figma.base ? <> (base <code>{doc.figma.base}</code>)</> : null}
+        {doc.figma.pattern ? <> (pattern, built with <code>{doc.figma.pattern}</code>)</> : doc.figma.base ? <> (base <code>{doc.figma.base}</code>)</> : null}
       </p>
     </>
   );

@@ -3,7 +3,7 @@
 
 /* ---------- Metric card ---------- */
 .rb-metric{display:flex;flex-direction:column;gap:var(--metric-card-gap);padding:var(--metric-card-padding);background:var(--metric-card-surface);border:var(--metric-card-border-width) solid var(--metric-card-border);border-radius:var(--metric-card-radius);box-shadow:var(--shadow-xs);min-width:0}
-.rb-metric__header{display:flex;align-items:center;gap:var(--metric-card-header-gap);min-height:32px}
+.rb-metric__header{display:flex;align-items:center;gap:var(--metric-card-header-gap)}
 .rb-metric__label{flex:1;min-width:0;margin:0;color:var(--metric-card-foreground-label);font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-metric__menu{margin:-4px -8px -4px 0}
 .rb-metric__value{margin:0;color:var(--metric-card-foreground-value);font-family:var(--text-headings-h2-font-family);font-size:var(--text-headings-h2-font-size);line-height:var(--text-headings-h2-line-height);font-weight:var(--text-headings-h2-font-weight);font-variant-numeric:tabular-nums}
@@ -14,11 +14,11 @@
 .rb-metric__trend--down{background:var(--metric-card-trend-down-surface);color:var(--metric-card-trend-down-foreground)}
 .rb-metric__trend--neutral{background:var(--metric-card-trend-neutral-surface);color:var(--metric-card-trend-neutral-foreground)}
 .rb-metric__meta{color:var(--metric-card-foreground-meta);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
-.rb-metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--spacing-6)}
+.rb-metric-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:var(--metric-card-grid-gap)}
 
 /* ---------- Page header ---------- */
 .rb-page-header{display:flex;flex-direction:column;gap:var(--page-header-gap);padding-bottom:var(--page-header-padding-bottom)}
-.rb-page-header--divider{border-bottom:var(--border-width-containers-default) solid var(--divider-color)}
+.rb-page-header--divider{border-bottom:var(--divider-width) solid var(--divider-color)}
 .rb-page-header__row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--page-header-row-row-gap) var(--page-header-row-gap)}
 .rb-page-header__text{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:var(--page-header-text-gap)}
 .rb-page-header__title{margin:0;color:var(--page-header-foreground-title);font-family:var(--text-headings-h1-font-family);font-size:var(--text-headings-h1-font-size);line-height:var(--text-headings-h1-line-height);font-weight:var(--text-headings-h1-font-weight);overflow-wrap:break-word}
@@ -34,7 +34,7 @@
 .rb-dlist__title{margin:0;color:var(--description-list-foreground-value);font-family:var(--text-headings-h4-font-family);font-size:var(--text-headings-h4-font-size);line-height:var(--text-headings-h4-line-height);font-weight:var(--text-headings-h4-font-weight)}
 .rb-dlist__description{margin:0;color:var(--description-list-foreground-label);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-dlist__items{margin:0;padding:0 var(--description-list-padding-horizontal)}
-.rb-dlist--plain .rb-dlist__items{padding:0}
+.rb-dlist--plain .rb-dlist__items{padding:0 var(--description-list-description-list-padding-horizontal)}
 .rb-dlist__item{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--description-list-row-gap);row-gap:var(--description-list-row-row-gap);padding:var(--description-list-padding-vertical) 0;border-bottom:var(--description-list-border-width) solid var(--description-list-divider)}
 .rb-dlist__item:last-child{border-bottom:0}
 .rb-dlist__label{flex:0 0 200px;color:var(--description-list-foreground-label);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
@@ -47,12 +47,8 @@
 .rb-banner__icon{display:inline-flex;color:var(--_icon)}
 .rb-banner__icon svg{width:var(--banner-icon-size);height:var(--banner-icon-size)}
 .rb-banner__body{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;column-gap:var(--banner-body-gap);row-gap:var(--banner-body-row-gap)}
-.rb-banner__text{flex:1 1 240px;margin:0;color:var(--banner-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-banner__text{display:flex;flex-wrap:wrap;column-gap:var(--banner-text-gap);flex:1 1 240px;margin:0;color:var(--banner-foreground-text);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-banner__title{color:var(--banner-foreground-title);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-banner__close{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;padding:0;border:0;border-radius:var(--border-radius-control-sm);background:transparent;color:var(--color-foreground-secondary);cursor:pointer}
-.rb-banner__close:hover{background:var(--color-surface-hover)}
-.rb-banner__close:focus-visible{outline:none;box-shadow:var(--focus-ring)}
-.rb-banner__close svg{width:20px;height:20px}
 .rb-banner--brand{background:var(--banner-brand-surface);--_border:var(--banner-brand-border);--_icon:var(--banner-brand-icon)}
 .rb-banner--gray{background:var(--banner-gray-surface);--_border:var(--banner-gray-border);--_icon:var(--banner-gray-icon)}
 .rb-banner--info{background:var(--banner-info-surface);--_border:var(--banner-info-border);--_icon:var(--banner-info-icon)}
@@ -62,23 +58,24 @@
 @media (max-width:599px){.rb-banner{align-items:flex-start;padding-left:var(--banner-banner-padding-horizontal);padding-right:var(--banner-banner-padding-horizontal-2)}}
 
 /* ---------- Table toolbar and bulk actions ---------- */
-.rb-table-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);border-bottom:var(--border-width-containers-default) solid var(--table-border)}
-.rb-table-toolbar__start{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);flex:1 1 280px;min-width:0}
+.rb-table-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);border-bottom:var(--table-border-width) solid var(--table-border)}
+.rb-table-toolbar__start{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-search-and-filter-controls-gap);flex:1 1 280px;min-width:0}
 .rb-table-toolbar__start>.rb-field{flex:0 1 280px;min-width:180px}
-.rb-table-toolbar__end{display:flex;align-items:center;gap:var(--table-toolbar-gap)}
-.rb-table-bulk{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);background:var(--table-bulk-surface);border-bottom:var(--border-width-containers-default) solid var(--table-bulk-border)}
+.rb-table-toolbar__end{display:flex;align-items:center;gap:var(--table-table-view-controls-gap)}
+.rb-table-bulk{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);background:var(--table-bulk-surface);border-bottom:var(--table-border-width) solid var(--table-bulk-border)}
 .rb-table-bulk__count{margin:0;color:var(--table-bulk-foreground);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-table-bulk__actions{margin-left:auto;display:flex;gap:var(--table-toolbar-gap)}
 
 /* ---------- Date range picker ---------- */
+.rb-daterange{--rb-layer-gap:var(--date-range-field-gap)}
 .rb-daterange__anchor{position:relative;width:max-content;max-width:100%}
 .rb-daterange .rb-control{min-width:280px;cursor:pointer}
-.rb-daterange__icon{width:20px;height:20px;color:var(--input-foreground-icon,var(--color-foreground-tertiary));flex:none}
+.rb-daterange__icon{width:var(--input-leading-icon-size);height:var(--input-leading-icon-size);color:var(--input-foreground-icon);flex:none}
 .rb-daterange__trigger{flex:1;min-width:0;padding:0;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;font-size:var(--text-body-paragraph-font-size);line-height:var(--text-body-paragraph-line-height)}
 .rb-daterange__trigger:focus{outline:none}
-.rb-daterange__trigger.is-placeholder{color:var(--input-foreground-placeholder,var(--color-foreground-tertiary))}
-.rb-daterange__panel{position:absolute;z-index:20;top:calc(100% + var(--spacing-2));left:0;display:flex;background:var(--calendar-surface);border:var(--date-range-panel-border-width) solid var(--calendar-border);border-radius:var(--date-range-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
-.rb-daterange__presets{display:flex;flex-direction:column;gap:var(--date-range-presets-gap);width:184px;padding:var(--date-range-presets-padding-vertical) var(--date-range-presets-padding-horizontal);border-right:var(--date-range-presets-border-width) solid var(--date-range-presets-border);box-sizing:border-box}
+.rb-daterange__trigger.is-placeholder{color:var(--input-foreground-placeholder)}
+.rb-daterange__panel{position:absolute;z-index:20;top:calc(100% + var(--rb-layer-gap));left:0;display:flex;background:var(--calendar-surface);border:var(--date-range-panel-border-width) solid var(--calendar-border);border-radius:var(--date-range-panel-radius);box-shadow:var(--shadow-lg);overflow:hidden}
+.rb-daterange__presets{display:flex;flex-direction:column;gap:var(--date-range-presets-gap);width:var(--date-range-presets-width);padding:var(--date-range-presets-padding-vertical) var(--date-range-presets-padding-horizontal);border-right:var(--date-range-presets-border-width) solid var(--date-range-presets-border);box-sizing:border-box}
 .rb-daterange__preset{display:block;width:100%;padding:var(--date-range-preset-padding-vertical) var(--date-range-preset-padding-horizontal);border:0;border-radius:var(--date-range-preset-radius);background:transparent;color:var(--date-range-preset-foreground);text-align:left;cursor:pointer;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight);box-sizing:border-box}
 .rb-daterange__preset:hover{background:var(--date-range-preset-surface-hover)}
 .rb-daterange__preset:focus-visible{outline:none;box-shadow:var(--focus-ring)}

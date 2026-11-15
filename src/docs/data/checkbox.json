@@ -17,7 +17,8 @@
   "anatomy": [
     "Box (check mark or dash).",
     "Label (optional in Figma, required in code).",
-    "Hint (optional)."
+    "Hint (optional).",
+    "Group with a legend (CheckboxGroup; Figma: Checkbox group)."
   ],
   "figmaProps": [
     [
@@ -61,6 +62,16 @@
       "checked / onChange",
       "native",
       ""
+    ],
+    [
+      "CheckboxGroup legend",
+      "ReactNode",
+      "Required."
+    ],
+    [
+      "CheckboxGroup hideLegend",
+      "boolean",
+      "Hides the legend visually, screen readers still read it. Use when a heading or trigger already names the group (Filter group). Figma: Show legend."
     ]
   ],
   "behaviour": [
@@ -87,7 +98,8 @@
     "--selection-border-width",
     "--checkbox-indicator-icon-size",
     "--selection-checkbox-{size}-radius",
-    "--selection-{size}-gap"
+    "--selection-{size}-gap",
+    "--checkbox-group-*"
   ],
   "related": [
     "Radio",

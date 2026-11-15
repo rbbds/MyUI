@@ -1,5 +1,5 @@
 import { useId, type ReactNode, type RefObject } from 'react';
-import { X } from 'lucide-react';
+import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useModalDialog } from '../../utils/dialog';
 import './Overlay.css';
@@ -43,7 +43,7 @@ export function Modal({ open, onClose, title, description, icon, children, foote
             <h2 id={titleId} className="rb-modal__title">{title}</h2>
             {description && <p id={descId} className="rb-modal__description">{description}</p>}
           </div>
-          <button type="button" className="rb-modal__close" onClick={onClose} aria-label={closeLabel}><X aria-hidden="true" /></button>
+          <CloseButton size="md" className="rb-modal__close" onClick={onClose} aria-label={closeLabel} />
         </div>
         {children && <div className="rb-modal__body">{children}</div>}
         {footer && <div className="rb-modal__footer">{footer}</div>}

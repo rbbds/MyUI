@@ -71,7 +71,7 @@ export function Rating({ value, max = 5, count, size = 'md', showValue, locale =
   const num = v.toLocaleString(locale, { maximumFractionDigits: 1 });
   const label = [l.rating(num, max), count !== undefined ? l.reviews(count) : null].filter(Boolean).join(', ');
   return (
-    <span className={cx('rb-rating', `rb-rating--${size}`, className)} role="img" aria-label={label} {...rest}>
+    <span data-size={size} className={cx('rb-rating', `rb-rating--${size}`, className)} role="img" aria-label={label} {...rest}>
       <span className="rb-rating__stars" aria-hidden="true">
         {Array.from({ length: max }, (_, i) => {
           const fill = v >= i + 1 ? 'full' : v >= i + 0.5 ? 'half' : 'empty';

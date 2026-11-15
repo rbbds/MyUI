@@ -43,7 +43,7 @@ export default [
     content: ['Show the value, not the category: "Amsterdam", not "Location".'],
     do: ['Offer "Clear all" when there are more than three tags.'],
     dont: ['Tags without a close button when you can remove them.'],
-    tokens: ['--tag-{surface|border|foreground}', '--tag-surface-hover', '--tag-{size}-padding-*', '--tag-radius'],
+    tokens: ['--tag-{surface|border|foreground}', '--tag-{size}-padding-*', '--tag-radius'],
     related: ['Badge', 'Checkbox'],
     open: [],
   },

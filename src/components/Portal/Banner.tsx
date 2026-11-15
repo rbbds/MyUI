@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react';
+import { ButtonIcon } from '../Button/Button';
 import { cx } from '../../utils/cx';
 import type { StatusColor } from '../Display/Display';
 import './Portal.css';
@@ -36,7 +37,7 @@ export function Banner({ color = 'brand', title, children, icon, action, onClose
         </p>
         {action && <div className="rb-banner__action">{action}</div>}
       </div>
-      {onClose && <button type="button" className="rb-banner__close" onClick={onClose} aria-label={closeLabel}><X aria-hidden="true" /></button>}
+      {onClose && <ButtonIcon hierarchy="tertiary" size="sm" className="rb-banner__close" icon={<X aria-hidden="true" />} onClick={onClose} aria-label={closeLabel} />}
     </div>
   );
 }

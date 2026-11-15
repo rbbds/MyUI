@@ -74,7 +74,7 @@ export function Card({ media, meta, title, href, description, action, elevated, 
           <h3 className="rb-card__title">{href ? <a href={href}>{title}</a> : title}</h3>
           {description && <p className="rb-card__description">{description}</p>}
         </div>
-        {children}
+        {children && <div className="rb-card__content">{children}</div>}
         {!href && action}
       </div>
     </article>
@@ -143,7 +143,7 @@ export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dro
       onDrop={onDrop}
     >
       <input type="file" className="rb-upload__input" disabled={disabled} aria-label={actionLabel} aria-describedby={hint ? hintId : undefined} onChange={(e) => onFiles(Array.from(e.target.files ?? []))} {...rest} />
-      <span className="rb-upload__icon" aria-hidden="true"><CloudUpload /></span>
+      <span data-size="md" className="rb-button rb-button--icon-only rb-button--secondary rb-button--md rb-upload__icon" aria-hidden="true"><CloudUpload /></span>
       <div className="rb-upload__body">
         <p className="rb-upload__text"><span className="rb-upload__action">{actionLabel}</span> {dropLabel}</p>
         {hint && <p id={hintId} className="rb-upload__hint">{hint}</p>}

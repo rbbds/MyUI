@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Checkbox, Radio, RadioGroup, Toggle } from './Checkbox';
+import { Checkbox, CheckboxGroup, Radio, RadioGroup, Toggle } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Selection controls/Checkbox',
@@ -20,6 +20,15 @@ export const States: Story = {
       <Checkbox label="Disabled" disabled />
       <Checkbox label="Disabled and selected" disabled defaultChecked />
     </div>
+  ),
+};
+export const Group: Story = {
+  render: () => (
+    <CheckboxGroup legend="How do you want to hear from us?">
+      <Checkbox name="contact" value="email" label="Email" defaultChecked />
+      <Checkbox name="contact" value="sms" label="Text message" />
+      <Checkbox name="contact" value="push" label="Push notification" hint="Only on the mobile app." />
+    </CheckboxGroup>
   ),
 };
 export const Radios: StoryObj<typeof Radio> = {

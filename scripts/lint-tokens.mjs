@@ -1,6 +1,6 @@
 // Token lint: checks that component CSS is token-first. Report mode by default (exit 0).
 //   node scripts/lint-tokens.mjs            report, never fails
-//   node scripts/lint-tokens.mjs --strict   fails on any finding (for later, when the report is clean)
+//   node scripts/lint-tokens.mjs --strict   fails on any finding (CI since PR 6c)
 //   node scripts/lint-tokens.mjs --json reports/token-lint.json --md reports/token-lint.md
 // Rules (see scripts/token-lint.config.mjs):
 //   1. px     No px values in component CSS, except the allowlist.
@@ -24,7 +24,8 @@ const walk = (dir, ext) =>
     if (statSync(p).isDirectory()) return walk(p, ext);
     return ext.some((e) => p.endsWith(e)) ? [p] : [];
   });
-const filesIn = (dirs, ext) => dirs.flatMap((d) => walk(d, ext)).sort();
+// Entries can be folders or single files (for example the Storybook logo, keuze 32).
+const filesIn = (dirs, ext) => dirs.flatMap((d) => (statSync(d).isFile() ? [d] : walk(d, ext))).sort();
 
 // --- Tokens -------------------------------------------------------------------------------
 const { values, declarations } = readTokens();
@@ -45,6 +46,8 @@ const findings = { px: [], layer: [], unknown: [], unused: [], duplicate: [] };
 const matchesAllow = (d, px, a) =>
   (!a.property || new RegExp(a.property).test(d.property)) &&
   (!a.value || a.value === px) &&
+  (!a.px || new RegExp(a.px).test(px)) &&
+  (!a.declValue || new RegExp(a.declValue).test(d.value)) &&
   (!a.selector || new RegExp(a.selector).test(d.selector)) &&
   (!a.file || d.file.includes(a.file));
 for (const d of decls) {
@@ -62,7 +65,7 @@ for (const d of decls) {
   for (const k of refsIn(d.value)) {
     if (isLocal(k) && !(k in layer)) continue;
     if (!(k in layer)) findings.unknown.push({ ...d, token: k });
-    else if (layer[k] !== 'component' && !allowedPrefix(k)) findings.layer.push({ ...d, token: k, layer: layer[k] });
+    else if (layer[k] !== 'component' && !allowedPrefix(k) && !config.layerAllow.some((a) => a.token === k && new RegExp(a.selector).test(d.selector))) findings.layer.push({ ...d, token: k, layer: layer[k] });
   }
 }
 
@@ -85,7 +88,8 @@ usedDirect.forEach(visit);
 const referencedByToken = new Set(Object.values(values).flatMap((m) => Object.values(m).flatMap(refsIn)));
 for (const k of Object.keys(values)) {
   if (used.has(k)) continue;
-  if (layer[k] !== 'component' && referencedByToken.has(k)) continue;
+  if (!config.unusedLayers.includes(layer[k])) continue; // keuze 18b: primitives, brand and semantic may be unused
+  if (config.unusedPending.some((p) => p.prefixes.some((x) => k.startsWith(x)))) continue;
   const first = declarations.find((d) => d.name === k);
   findings.unused.push({ token: k, layer: layer[k], file: first.file, line: first.line });
 }

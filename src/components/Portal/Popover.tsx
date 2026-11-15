@@ -1,6 +1,7 @@
 import { cloneElement, useEffect, useId, useRef, useState, type MouseEvent, type ReactElement, type ReactNode, type RefObject } from 'react';
 import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import { X } from 'lucide-react';
+import { ButtonIcon } from '../Button/Button';
 import { cx } from '../../utils/cx';
 import './Portal2.css';
 
@@ -69,7 +70,7 @@ export function Popover({ trigger, title, children, actions, closable = true, cl
           {(title || closable) && (
             <div className="rb-popover__header">
               {title && <p id={titleId} className="rb-popover__title">{title}</p>}
-              {closable && <button type="button" className="rb-popover__close" onClick={close} aria-label={closeLabel}><X aria-hidden="true" /></button>}
+              {closable && <ButtonIcon hierarchy="tertiary" size="sm" className="rb-popover__close" icon={<X aria-hidden="true" />} onClick={close} aria-label={closeLabel} />}
             </div>
           )}
           {children && <div className="rb-popover__body">{children}</div>}

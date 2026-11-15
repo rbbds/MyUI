@@ -2,11 +2,12 @@
   "name": "Checkout options",
   "page": "E-commerce",
   "figma": {
-    "node": "17037:802",
-    "base": "_Checkout options"
+    "node": "17186:6856",
+    "base": null,
+    "pattern": "Selection card group"
   },
-  "react": "SelectionCard (aside)",
-  "summary": "Delivery and payment options as Selection cards with the price or a logo on the right (prop aside).",
+  "react": "SelectionCardGroup + SelectionCard (aside)",
+  "summary": "A pattern, not a component: delivery and payment options as a Selection card group, with the price or a logo on the right (prop aside). Copy the example in Figma and change the texts.",
   "use": [
     "Checkout: delivery, payment method, insurance."
   ],
@@ -19,14 +20,14 @@
   ],
   "figmaProps": [
     [
-      "Type",
-      "Delivery, Payment",
-      ""
+      "Selection card group: Legend, Show option 1 to 6",
+      "text, boolean",
+      "Part of Selection card group."
     ],
     [
-      "Selection card: Show aside, Aside",
-      "boolean, text",
-      "Part of Selection card."
+      "Selection card: Aside",
+      "text",
+      "Show the Aside text layer for the price."
     ]
   ],
   "reactProps": [

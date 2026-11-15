@@ -1,7 +1,7 @@
 import { forwardRef, useId, useMemo, useRef, useState, type ButtonHTMLAttributes, type ReactNode, type RefObject } from 'react';
 import { Bell } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { Button } from '../Button/Button';
+import { Button, ButtonIcon } from '../Button/Button';
 import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './Portal2.css';
 
@@ -18,10 +18,8 @@ export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButt
   { count = 0, label = 'Notifications', countLabel = (n) => `${n} unread`, className, ...rest }, ref,
 ) {
   return (
-    <button ref={ref} type="button" className={cx('rb-notif-button', className)} aria-label={count > 0 ? `${label}, ${countLabel(count)}` : label} {...rest}>
-      <Bell aria-hidden="true" />
-      {count > 0 && <span className="rb-notif-button__count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}
-    </button>
+    <ButtonIcon ref={ref} hierarchy="tertiary" size="md" className={cx('rb-notif-button', className)} aria-label={count > 0 ? `${label}, ${countLabel(count)}` : label} {...rest}
+      icon={<><Bell aria-hidden="true" />{count > 0 && <span className="rb-notif-button__count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}</>} />
   );
 });
 

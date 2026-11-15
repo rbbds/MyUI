@@ -2,7 +2,7 @@ import { useId, useState, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { Button } from '../Button/Button';
-import { Checkbox } from '../Selection/Checkbox';
+import { Checkbox, CheckboxGroup } from '../Selection/Checkbox';
 import { Tag } from '../Display/Display';
 import './Commerce.css';
 
@@ -40,27 +40,28 @@ export function FilterGroup({ title, options = [], value = [], onChange, limit =
     <div className={cx('rb-filter', className)}>
       <H className="rb-filter__heading">
         <button type="button" className="rb-filter__trigger" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
-          <span>{title}{value.length > 0 && <span className="rb-filter__selected"> ({value.length})</span>}</span>
+          <span className="rb-filter__title">{title}{value.length > 0 && <> <span className="rb-filter__selected">({value.length})</span></>}</span>
           <ChevronDown aria-hidden="true" className={cx(open && 'is-open')} />
         </button>
       </H>
       <div id={id} className="rb-filter__panel" hidden={!open}>
         {children ?? (
-          <fieldset className="rb-filter__list">
-            <legend className="rb-visually-hidden">{title}</legend>
-            {shown.map((o) => (
-              <Checkbox
-                key={o.value}
-                checked={value.includes(o.value)}
-                disabled={o.disabled}
-                onChange={() => toggle(o.value)}
-                label={<span className="rb-filter__option">{o.label}{o.count !== undefined && <span className="rb-filter__count">{o.count}</span>}</span>}
-              />
-            ))}
+          <div className="rb-filter__list">
+            <CheckboxGroup legend={title} hideLegend>
+              {shown.map((o) => (
+                <Checkbox
+                  key={o.value}
+                  checked={value.includes(o.value)}
+                  disabled={o.disabled}
+                  onChange={() => toggle(o.value)}
+                  label={<>{o.label}{o.count !== undefined && <> <span className="rb-filter__count">{o.count}</span></>}</>}
+                />
+              ))}
+            </CheckboxGroup>
             {options.length > limit && (
               <Button hierarchy="link" size="sm" onClick={() => setAll(!all)}>{all ? l.showLess : l.showAll(options.length)}</Button>
             )}
-          </fieldset>
+          </div>
         )}
       </div>
     </div>

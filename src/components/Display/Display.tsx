@@ -1,5 +1,6 @@
 import { cloneElement, isValidElement, useId, useRef, useState, type HTMLAttributes, type ReactElement, type ReactNode } from 'react';
-import { User, X } from 'lucide-react';
+import { User } from 'lucide-react';
+import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useEscape, usePlacement } from '../../utils/panel';
 import './Display.css';
@@ -21,7 +22,7 @@ export function Badge({ color = 'gray', size = 'md', dot, iconLeading, iconTrail
       {dot && <span className="rb-badge__dot" aria-hidden="true" />}
       {iconLeading}
       {children}
-      {iconTrailing}
+      {iconTrailing && <span className="rb-badge__trailing">{iconTrailing}</span>}
     </span>
   );
 }
@@ -44,9 +45,7 @@ export function Tag({ size = 'md', dot, onRemove, removeLabel, labels, className
       {dot && <span className="rb-tag__dot" aria-hidden="true" />}
       {children}
       {onRemove && (
-        <button type="button" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? l.remove(typeof children === 'string' ? children : '')}>
-          <X aria-hidden="true" />
-        </button>
+        <CloseButton size="xs" className="rb-tag__close" onClick={onRemove} aria-label={removeLabel ?? l.remove(typeof children === 'string' ? children : '')} />
       )}
     </span>
   );
