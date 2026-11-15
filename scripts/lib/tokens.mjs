@@ -54,12 +54,14 @@ export function readTokens(files = TOKEN_FILES) {
 
 // Layer per token: primitive, brand, semantic or component.
 const SEMANTIC = /^(color|spacing|border|font|size|shadow|focus|effect|effects|layout|base|typography|responsive|icon|screen|opacity|motion|z)-/;
+// focus-* and size-chip-* in the mapped block are component tokens (keuze 23; e-commerce/size-chip); the prefix only looks semantic.
+const isSemanticName = (key) => SEMANTIC.test(key) && !(MAPPED.has(key) && /^(focus|size-chip)-/.test(key));
+
 export function layerOf(key, modes) {
   if (key.startsWith('brand-')) return 'brand';
   const def = modes.default ?? Object.values(modes)[0];
-  if (!def.includes('var(') && !(MAPPED.has(key) && !SEMANTIC.test(key))) return 'primitive';
-  // focus-* in the mapped block are component tokens (Figma: component-tokens/action/focus, keuze 23).
-  if (SEMANTIC.test(key) && !(MAPPED.has(key) && key.startsWith('focus-'))) return 'semantic';
+  if (!def.includes('var(') && !(MAPPED.has(key) && !isSemanticName(key))) return 'primitive';
+  if (isSemanticName(key)) return 'semantic';
   return 'component';
 }
 

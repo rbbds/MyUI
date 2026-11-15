@@ -43,4 +43,4 @@
 .rb-menu__item:disabled svg{color:var(--menu-item-foreground-disabled)}
 .rb-menu__label{flex:1}
 .rb-menu__shortcut{color:var(--menu-item-foreground-shortcut);font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size)}
-.rb-menu__separator{height:1px;margin:var(--menu-divider-padding-vertical) 0;background:var(--divider-color);border:0}
+.rb-menu__separator{height:var(--divider-width);margin:var(--menu-divider-padding-vertical) 0;background:var(--divider-color);border:0}
