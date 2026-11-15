@@ -1,6 +1,6 @@
 // Token lint: checks that component CSS is token-first. Report mode by default (exit 0).
 //   node scripts/lint-tokens.mjs            report, never fails
-//   node scripts/lint-tokens.mjs --strict   fails on any finding (for later, when the report is clean)
+//   node scripts/lint-tokens.mjs --strict   fails on any finding (CI since PR 6c)
 //   node scripts/lint-tokens.mjs --json reports/token-lint.json --md reports/token-lint.md
 // Rules (see scripts/token-lint.config.mjs):
 //   1. px     No px values in component CSS, except the allowlist.

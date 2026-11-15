@@ -132,6 +132,12 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 3. **Code.** Export script, CSS layers, renamed variables, Brand builder, Storybook check (axe in Light and Dark for Iris, Forest and Berry). This PR also brings the Sidebar, the Berry radius fix, the new component tokens and the icon sizes to code.
 4. **English.** Token names, Figma Docs frames, docs/content, Storybook stories and example text in B1 English.
 
+## Checks on component tokens (keuze 18b)
+
+- **Code:** `npm run lint:tokens -- --strict` in CI. Component CSS uses component tokens only, no px outside the allowlist (`scripts/token-lint.config.mjs`, every entry with a reason), and every component token is used. Tokens for components that are not built yet sit in `unusedPending` with the PR that builds them.
+- **Figma:** after every token export, run `scripts/figma-binding-scan.js` in the Figma file (read-only), save the result as `reports/figma-bindings.json` and run `npm run report:figma-bindings`. It writes `reports/figma-bindings.md`. CI fails when a component token has no binding in Figma and is not pending, or when its code syntax differs from the CSS name.
+- **Exception:** focus variants without a background keep a surface fill in Figma, because Figma only draws a drop shadow from a visible fill. Code stays transparent.
+
 ## Open points
 
 1. **Icon color and size (decided 9 November 2026):**
