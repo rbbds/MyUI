@@ -29,6 +29,9 @@ export default {
     { selector: '^\\.rb-menu$', token: 'spacing-1', reason: 'Distance between trigger and panel (--rb-layer-gap), keuze 25. Figma draws the panel without its trigger.' },
     { selector: '^\\.rb-(popover|popover--arrow|notif-menu__panel)$', token: 'spacing-2', reason: 'Fallback position below the trigger without popover support, keuze 25.' },
     { selector: '^\\.rb-tooltip::before$', token: 'spacing-2', reason: 'Invisible hover bridge to the trigger (WCAG 1.4.13), keuze 25.' },
+    { selector: '^\\.rb-nav-item__dot$', token: 'spacing-1', reason: 'Position of the indicator on the collapsed nav item (top, right), keuze 25.' },
+    { selector: '^\\.rb-nav-item__tip$', token: 'spacing-2', reason: 'Position of the tooltip next to the collapsed nav item, keuze 25.' },
+    { selector: '^\\.rb-pagination$', token: 'spacing-3', reason: 'Minimum space between previous, pages and next (justify-content: space-between). Figma uses Auto spacing, which has no minimum.' },
   ],
 
   // px values that are allowed in component CSS: technical CSS that Figma cannot set with a variable
@@ -48,6 +51,10 @@ export default {
     { selector: '::after$', property: '^(width|height)$', value: '24px', reason: 'Invisible hit area of 24 x 24 px (WCAG 2.5.8 target size).' },
     { selector: '\\.rb-code__input$', property: '^font-size$', value: '16px', reason: 'Inputs below 16 px make iOS zoom in on focus.' },
     { selector: '^\\.rb-close--(xs|sm|md)$', property: '^--_p$', reason: 'Hit area around the close icon (padding with an equal negative margin), keuze 25. In Figma the hover surface sits outside the icon.' },
+    { selector: '^\\.rb-bottom-nav__action$', property: '^--_raise$', reason: 'How far the center action rises above the bar (transform offset), keuze 25.' },
+    { selector: '^\\.rb-table-toolbar__start>\\.rb-field$', property: '^min-width$', reason: 'Wrap point of the search field in the toolbar (with flex-basis 280px). Layout logic.' },
+    { selector: '^\\.rb-activity__title$', property: '^min-width$', reason: 'Wrap point of the title row (title and time wrap below 160 px). Layout logic.' },
+    { selector: '^\\.rb-stepper--vertical \\.rb-step__connector$', property: '^min-height$', reason: 'Minimum length of the vertical connector when a step has little text. Figma draws a fixed step height.' },
     { selector: '^\\.rb-command$', property: '^margin-top$', reason: 'Position of the command menu on small screens (distance from the top edge), keuze 25.' },
     { selector: '(\\.rb-accordion__trigger svg|\\.rb-notif__dot)$', property: '^margin-top$', reason: 'Optical alignment of an icon or dot with the first line of text.' },
   ],

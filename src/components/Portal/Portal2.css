@@ -19,7 +19,7 @@
 .rb-doc__title:hover{text-decoration:underline}
 .rb-doc__title:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-doc--unread .rb-doc__title{font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-doc__dot{width:8px;height:8px;border-radius:var(--border-radius-full);background:var(--document-list-unread-dot);flex:none}
+.rb-doc__dot{width:var(--document-list-dot-size);height:var(--document-list-dot-size);border-radius:50%;background:var(--document-list-unread-dot);flex:none}
 .rb-doc__meta{color:var(--document-list-foreground-meta);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
 .rb-doc__download{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:var(--border-radius-control-sm);color:var(--color-foreground-secondary)}
 .rb-doc__download:hover{background:var(--color-surface-hover)}
@@ -29,11 +29,11 @@
 /* ---------- Activity feed ---------- */
 .rb-activity{list-style:none;margin:0;padding:0}
 .rb-activity__item{position:relative;display:flex;gap:var(--activity-gap)}
-.rb-activity__item:not(:last-child)::before{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:2px;background:var(--activity-connector)}
-.rb-activity__marker{flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:var(--activity-radius)}
+.rb-activity__item:not(:last-child)::before{content:"";position:absolute;left:15px;top:36px;bottom:4px;width:var(--activity-connector-width);background:var(--activity-connector)}
+.rb-activity__marker{flex:none;display:inline-flex;align-items:center;justify-content:center;width:var(--activity-marker-size);height:var(--activity-marker-size);border-radius:var(--activity-radius)}
 .rb-activity__marker--icon{background:var(--activity-marker-surface);border:var(--activity-border-width) solid var(--activity-marker-border);color:var(--activity-marker-icon);box-sizing:border-box}
 .rb-activity__marker--icon svg{width:var(--activity-icon-size);height:var(--activity-icon-size)}
-.rb-activity__marker--dot::after{content:"";width:10px;height:10px;border-radius:var(--activity-radius);background:var(--activity-connector)}
+.rb-activity__marker--dot::after{content:"";width:var(--activity-dot-size);height:var(--activity-dot-size);border-radius:var(--activity-radius);background:var(--activity-connector)}
 .rb-activity__content{flex:1;min-width:0;padding:var(--activity-content-padding-top) 0 var(--activity-item-padding-bottom)}
 .rb-activity__head{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:var(--activity-title-row-gap)}
 .rb-activity__title{flex:1;min-width:160px;color:var(--activity-foreground-title);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}

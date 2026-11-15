@@ -58,11 +58,11 @@
 @media (max-width:599px){.rb-banner{align-items:flex-start;padding-left:var(--banner-banner-padding-horizontal);padding-right:var(--banner-banner-padding-horizontal-2)}}
 
 /* ---------- Table toolbar and bulk actions ---------- */
-.rb-table-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);border-bottom:var(--border-width-containers-default) solid var(--table-border)}
-.rb-table-toolbar__start{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);flex:1 1 280px;min-width:0}
+.rb-table-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);border-bottom:var(--table-border-width) solid var(--table-border)}
+.rb-table-toolbar__start{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-search-and-filter-controls-gap);flex:1 1 280px;min-width:0}
 .rb-table-toolbar__start>.rb-field{flex:0 1 280px;min-width:180px}
-.rb-table-toolbar__end{display:flex;align-items:center;gap:var(--table-toolbar-gap)}
-.rb-table-bulk{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);background:var(--table-bulk-surface);border-bottom:var(--border-width-containers-default) solid var(--table-bulk-border)}
+.rb-table-toolbar__end{display:flex;align-items:center;gap:var(--table-table-view-controls-gap)}
+.rb-table-bulk{display:flex;flex-wrap:wrap;align-items:center;gap:var(--table-toolbar-gap);padding:var(--table-toolbar-padding) var(--table-cell-padding-horizontal);background:var(--table-bulk-surface);border-bottom:var(--table-border-width) solid var(--table-bulk-border)}
 .rb-table-bulk__count{margin:0;color:var(--table-bulk-foreground);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-table-bulk__actions{margin-left:auto;display:flex;gap:var(--table-toolbar-gap)}
 

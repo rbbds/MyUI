@@ -1,7 +1,7 @@
 .rb-stepper{display:flex;margin:0;padding:0;list-style:none}
 .rb-step{display:flex;min-width:0}
 .rb-step__track{display:flex;align-items:center;gap:var(--stepper-gap)}
-.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;box-sizing:border-box;border:var(--step-indicator-border-width) solid var(--stepper-border-upcoming);border-radius:var(--stepper-indicator-radius);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
+.rb-step__indicator{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:var(--step-indicator-size);height:var(--step-indicator-size);box-sizing:border-box;border:var(--step-indicator-border-width) solid var(--stepper-border-upcoming);border-radius:var(--stepper-indicator-radius);background:var(--stepper-indicator-upcoming);color:var(--stepper-foreground-upcoming);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:1;font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-step__indicator svg{width:var(--stepper-check-icon-size);height:var(--stepper-check-icon-size)}
 .rb-step__connector{flex:1;border-radius:var(--stepper-connector-radius);background:var(--stepper-connector)}
 .rb-step:last-child .rb-step__connector{visibility:hidden}
@@ -17,14 +17,14 @@
 
 /* Horizontal: indicator + line on top, text below */
 .rb-stepper--horizontal .rb-step{flex:1;flex-direction:column;gap:var(--stepper-gap)}
-.rb-stepper--horizontal .rb-step__connector{height:2px;margin-right:var(--stepper-gap)}
+.rb-stepper--horizontal .rb-step__connector{height:var(--step-connector-width);margin-right:var(--stepper-gap)}
 .rb-stepper--horizontal .rb-step__text{padding-right:var(--stepper-padding-right)}
 
 /* Vertical: indicator + line on the left, text on the right */
 .rb-stepper--vertical{flex-direction:column}
 .rb-stepper--vertical .rb-step{gap:var(--stepper-gap)}
 .rb-stepper--vertical .rb-step__track{flex-direction:column;gap:var(--stepper-track-gap);align-self:stretch}
-.rb-stepper--vertical .rb-step__connector{width:2px;min-height:24px}
+.rb-stepper--vertical .rb-step__connector{width:var(--step-connector-width);min-height:24px}
 .rb-stepper--vertical .rb-step__text{padding:var(--stepper-text-padding-top) 0 var(--stepper-text-padding-bottom)}
 
 .rb-step__number{display:none}
@@ -32,7 +32,7 @@
 /* Compact: short title on top, a bar per step below. Used on small screens. */
 .rb-stepper--compact{gap:var(--stepper-compact-gap)}
 .rb-stepper--compact .rb-step{flex:1;flex-direction:column-reverse;gap:var(--stepper-compact-gap)}
-.rb-stepper--compact .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--border-radius-full);background:var(--stepper-connector)}
+.rb-stepper--compact .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--stepper-connector-radius);background:var(--stepper-connector)}
 .rb-stepper--compact .rb-step--complete .rb-step__track,.rb-stepper--compact .rb-step--current .rb-step__track{background:var(--stepper-connector-complete)}
 .rb-stepper--compact .rb-step__indicator,.rb-stepper--compact .rb-step__connector,.rb-stepper--compact .rb-step__description{display:none}
 .rb-stepper--compact .rb-step__number{display:inline}
@@ -43,7 +43,7 @@
 @media (max-width:599px){
   .rb-stepper--horizontal{gap:var(--stepper-compact-gap)}
   .rb-stepper--horizontal .rb-step{flex-direction:column-reverse;gap:var(--stepper-compact-gap)}
-  .rb-stepper--horizontal .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--border-radius-full);background:var(--stepper-connector)}
+  .rb-stepper--horizontal .rb-step__track{display:block;height:var(--stepper-compact-bar-height);border-radius:var(--stepper-connector-radius);background:var(--stepper-connector)}
   .rb-stepper--horizontal .rb-step--complete .rb-step__track,.rb-stepper--horizontal .rb-step--current .rb-step__track{background:var(--stepper-connector-complete)}
   .rb-stepper--horizontal .rb-step__indicator,.rb-stepper--horizontal .rb-step__connector,.rb-stepper--horizontal .rb-step__description{display:none}
   .rb-stepper--horizontal .rb-step__number{display:inline}
