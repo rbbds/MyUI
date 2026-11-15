@@ -12,7 +12,7 @@
 .rb-command__item.is-disabled{color:var(--command-item-foreground-disabled);cursor:not-allowed}
 .rb-command__icon{display:inline-flex;color:var(--command-item-foreground-icon)}
 .rb-command__icon svg{width:var(--command-item-icon-size);height:var(--command-item-icon-size)}
-.rb-command__item.is-active .rb-command__icon{color:var(--color-foreground-secondary)}
+.rb-command__item.is-active .rb-command__icon{color:var(--command-item-foreground)}
 .rb-command__label{flex:1;min-width:0}
 .rb-command__empty{margin:0;padding:var(--spacing-6) var(--spacing-3);text-align:center;color:var(--command-foreground-hint);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size)}
 .rb-command__footer{display:flex;flex-wrap:wrap;gap:var(--command-footer-gap);padding:var(--command-footer-padding-vertical) var(--command-footer-padding-horizontal);border-top:var(--command-footer-border-width) solid var(--command-border);background:var(--command-footer-surface);color:var(--command-foreground-hint);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
