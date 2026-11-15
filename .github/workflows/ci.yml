@@ -16,7 +16,7 @@ jobs:
       - run: npm run typecheck
       # Fails on any token-lint finding (keuze 18b). Writes the job summary and an artifact.
       - run: npm run lint:tokens -- --strict
-      # Fails when a component token has no binding in Figma and is not pending (reports/figma-bindings.json, keuze 18b).
+      # Fails when a component token has no binding in Figma and is not pending (docs/reports/figma-bindings.json, keuze 18b).
       - run: npm run report:figma-bindings -- --strict
       # Fails when a control border or the active option is below 3:1 in any style or theme.
       - run: npm run check:contrast

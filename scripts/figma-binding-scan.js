@@ -2,8 +2,8 @@
  * Figma binding scan (read-only, keuze 18b). Changes nothing in the file.
  *
  * Run in "WL Design System (rbbds)" as a plugin snippet (Figma MCP use_figma, or Scripter).
- * Returns JSON. Save it as reports/figma-bindings.json and run
- * `npm run report:figma-bindings` to write reports/figma-bindings.md.
+ * Returns JSON. Save it as docs/reports/figma-bindings.json and run
+ * `npm run report:figma-bindings` to write docs/reports/figma-bindings.md.
  *
  * Counts, for every component token (component-tokens/…), where it is used:
  * - layer fields (boundVariables), fills, strokes, effects and text ranges on every page,

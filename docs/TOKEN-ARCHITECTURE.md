@@ -135,7 +135,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 ## Checks on component tokens (keuze 18b)
 
 - **Code:** `npm run lint:tokens -- --strict` in CI. Component CSS uses component tokens only, no px outside the allowlist (`scripts/token-lint.config.mjs`, every entry with a reason), and every component token is used. Tokens for components that are not built yet sit in `unusedPending` with the PR that builds them.
-- **Figma:** after every token export, run `scripts/figma-binding-scan.js` in the Figma file (read-only), save the result as `reports/figma-bindings.json` and run `npm run report:figma-bindings`. It writes `reports/figma-bindings.md`. CI fails when a component token has no binding in Figma and is not pending, or when its code syntax differs from the CSS name.
+- **Figma:** after every token export, run `scripts/figma-binding-scan.js` in the Figma file (read-only), save the result as `docs/reports/figma-bindings.json` and run `npm run report:figma-bindings`. It writes `docs/reports/figma-bindings.md`. CI fails when a component token has no binding in Figma and is not pending, or when its code syntax differs from the CSS name.
 - **Exception:** focus variants without a background keep a surface fill in Figma, because Figma only draws a drop shadow from a visible fill. Code stays transparent.
 
 ## Open points

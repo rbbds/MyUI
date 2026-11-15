@@ -6,7 +6,7 @@
 - **Checkbox group** (`CheckboxGroup`, keuze 32): checkboxes in a fieldset with a legend, like `RadioGroup` and `SelectionCardGroup`. `hideLegend` hides the legend visually (screen readers still read it). Tokens `--checkbox-group-gap`, `--checkbox-group-legend-gap`, `--checkbox-group-legend-foreground`. Figma: `Checkbox group` with Legend, Show legend and Show option 1 to 6. Story Selection controls/Checkbox/Group.
 
 ### Changed (PR 6c)
-- **Token checks are strict (keuze 18b):** CI runs `npm run lint:tokens -- --strict` (0 findings) and `npm run report:figma-bindings -- --strict`. New `scripts/figma-binding-scan.js` (read-only Figma scan: layers, text ranges, aliases and styles) and `scripts/figma-binding-report.mjs` (writes `reports/figma-bindings.md`). First scan: 1,236 component tokens, 1 without a binding (`mega-menu-link/icon-foreground`, pending until PR 8), code syntax all correct. See `docs/TOKEN-ARCHITECTURE.md`.
+- **Token checks are strict (keuze 18b):** CI runs `npm run lint:tokens -- --strict` (0 findings) and `npm run report:figma-bindings -- --strict`. New `scripts/figma-binding-scan.js` (read-only Figma scan: layers, text ranges, aliases and styles) and `scripts/figma-binding-report.mjs` (writes `docs/reports/figma-bindings.md`). First scan: 1,236 component tokens, 1 without a binding (`mega-menu-link/icon-foreground`, pending until PR 8), code syntax all correct. See `docs/TOKEN-ARCHITECTURE.md`.
 - **Round 4, choices (15 November):**
   - Rating: star size from `--rating-star-size` with the size mode (`size/rating-star`: sm 16, md 20). Figma: half-star variants are named `Stars=4.5` etc. (the comma broke the variant names).
   - Quantity stepper: the value field is as wide as a button in both sizes (sm 36, was 40).

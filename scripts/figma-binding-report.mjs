@@ -1,10 +1,10 @@
-// Writes reports/figma-bindings.md from reports/figma-bindings.json (output of scripts/figma-binding-scan.js)
+// Writes docs/reports/figma-bindings.md from docs/reports/figma-bindings.json (output of scripts/figma-binding-scan.js)
 // and checks it against tokens.css and the token-lint config (keuze 18b).
 // Usage: npm run report:figma-bindings [-- --strict]   (--strict exits 1 on an unbound token that is not pending)
 import { readFileSync, writeFileSync } from 'node:fs';
 import config from './token-lint.config.mjs';
 
-const scan = JSON.parse(readFileSync('reports/figma-bindings.json', 'utf8'));
+const scan = JSON.parse(readFileSync('docs/reports/figma-bindings.json', 'utf8'));
 const css = readFileSync('src/styles/tokens.css', 'utf8');
 const CATEGORIES = new Set(['action', 'forms', 'selection-controls', 'badges-and-tags', 'avatars', 'feedback', 'overlays', 'navigation', 'data-display', 'content', 'e-commerce', 'utilities']);
 const cssName = (n) => { const [cat, ...rest] = n.split('/'); return (CATEGORIES.has(cat) ? rest.join('/') : n).toLowerCase().replace(/[\/, ]+/g, '-'); };
@@ -38,6 +38,6 @@ const md = [
   'Run the scan again after every token export and commit the new JSON (keuze 18b).',
   '',
 ].join('\n');
-writeFileSync('reports/figma-bindings.md', md);
+writeFileSync('docs/reports/figma-bindings.md', md);
 console.log(`Figma bindings: ${scan.unbound.length} unbound (${open.length} not pending), ${scan.codeSyntaxMismatch.length} code syntax mismatches`);
 if (process.argv.includes('--strict') && (open.length || scan.codeSyntaxMismatch.length)) process.exit(1);
