@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (16 November 2026)
 
 ### Added (PR 9, links and cleanup)
 - **`LinkProvider`** (M20): pass your router link once (for example Next.js `Link` or React Router `Link`) and every MyUI link uses it: Header, Mega menu, Mobile nav, Nav item, Breadcrumbs, Stepper, Bottom navigation, Product card, Cart, Document list, Notifications and content links. Without a provider MyUI renders a plain `<a>`. Download links stay a plain `<a>`. Types `LinkComponent`, `LinkComponentProps`, `LinkProviderProps`.
