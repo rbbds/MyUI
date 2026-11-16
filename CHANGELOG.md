@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- Docs: the Figma file is called **MyUI Design System** (was named WL Design System (rbbds) in README, Introduction, PROJECT.md and the scan scripts). The file key is unchanged.
+
 ## 1.1.0 (16 November 2026)
 
 ### Added (PR 9, links and cleanup)

@@ -13,7 +13,7 @@ Eigen white-label design system van Robert Trimp: een Figma-library plus een Rea
 - **Naam:** MyUI · white label design system
 - **Omschrijving (plakken):**
 
-> Eigen white label design system van Robert: Figma-library "WL Design System (rbbds)" plus React-library @rbbds/ui met Storybook (repo rbbds/MyUI). Doel: één herbruikbare basis voor eigen projecten en klanten. Per project kies je een stijl (Iris, Forest of Berry) en pas je kleuren, fonts en logo aan. Los van PGGM.
+> Eigen white label design system van Robert: Figma-library "MyUI Design System" plus React-library @rbbds/ui met Storybook (repo rbbds/MyUI). Doel: één herbruikbare basis voor eigen projecten en klanten. Per project kies je een stijl (Iris, Forest of Berry) en pas je kleuren, fonts en logo aan. Los van PGGM.
 
 ### 2. Projectinstructies (plakken)
 
@@ -21,7 +21,7 @@ Eigen white-label design system van Robert Trimp: een Figma-library plus een Rea
 Je bent mijn sparringpartner en bouwer voor MyUI, mijn eigen white label design system. Dit project staat los van PGGM: gebruik geen PGGM-bestanden, -merken of -afspraken, en schrijf nooit naar PGGM Figma-bestanden.
 
 Bronnen
-- Figma: WL Design System (rbbds), file key gV7OuQywH2cOUVfQagW6nC. Alleen in dit bestand werken.
+- Figma: MyUI Design System, file key gV7OuQywH2cOUVfQagW6nC. Alleen in dit bestand werken.
 - Repo: github.com/rbbds/MyUI (koppel hem aan de sessie). npm: @rbbds/ui.
 - Storybook live: https://my-ui-two.vercel.app (build van main via Vercel).
 - MyUI-projectoverdracht.md in dit project: architectuur, conventies en open punten. Lees die eerst.
@@ -73,7 +73,7 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 
 | Wat | Waar |
 | --- | --- |
-| Figma-bestand | WL Design System (rbbds), `gV7OuQywH2cOUVfQagW6nC`. Staat in een aparte map in het PGGM Figma-account (geen extra betaalde seat). |
+| Figma-bestand | MyUI Design System, `gV7OuQywH2cOUVfQagW6nC`. Staat in een aparte map in het PGGM Figma-account (geen extra betaalde seat). |
 | Repo | https://github.com/rbbds/MyUI (GitHub-gebruiker `rbbds`) |
 | npm-pakket | `@rbbds/ui`, MIT. Versie in package.json en CHANGELOG.md (semver, zie Getting started / Versioning in Storybook). Een GitHub Release met tag `vX.Y.Z` start `publish.yml`, dat via npm trusted publishing (OIDC, geen token) publiceert |
 | Storybook live | https://my-ui-two.vercel.app (main) |
