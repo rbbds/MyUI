@@ -1,0 +1,96 @@
+{
+  "name": "Mega menu",
+  "page": "Navigation",
+  "figma": {
+    "node": "17223:24",
+    "base": "_Mega menu link"
+  },
+  "react": "MegaMenu",
+  "summary": "Panel below the Header for a main link with many subpages: 2 to 4 columns with a heading and links (icon, title, one line of description), and an optional featured block. Header renders it for links with a menu.",
+  "use": [
+    "Websites with many pages per section: product, solutions, resources."
+  ],
+  "avoid": [
+    "A few subpages: link to an overview page instead.",
+    "Apps: use Sidebar."
+  ],
+  "anatomy": [
+    "Columns: heading and Mega menu links.",
+    "Mega menu link: icon, title, description.",
+    "Featured (optional): image, title, text and a link."
+  ],
+  "figmaProps": [
+    [
+      "Column 1 to 4 heading",
+      "text",
+      ""
+    ],
+    [
+      "Show column 3 / Show column 4 / Show link 3 / Show link 4 / Show featured",
+      "boolean",
+      ""
+    ],
+    [
+      "Featured title / Featured text",
+      "text",
+      ""
+    ],
+    [
+      "_Mega menu link: State",
+      "Default, Hover, Focus, Current",
+      "Current: the page you are on."
+    ],
+    [
+      "_Mega menu link: Show icon / Icon / Show description",
+      "",
+      ""
+    ]
+  ],
+  "reactProps": [
+    [
+      "columns",
+      "{ heading, links: { label, href, description?, icon?, current? }[] }[]",
+      ""
+    ],
+    [
+      "featured",
+      "ReactNode",
+      "Usually <MegaMenuFeatured title media action>."
+    ],
+    [
+      "MegaMenuLink",
+      "component",
+      "One link, for a custom panel."
+    ]
+  ],
+  "behaviour": [
+    "Opens on click of its Header nav item, not on hover: hover menus open by accident and do not work on touch.",
+    "The spacing between links is the padding of the link; there is no gap. The column heading is indented by the same padding, so it lines up with the icons."
+  ],
+  "a11y": [
+    "Each column is a list named by its heading (aria-labelledby).",
+    "The current page has aria-current=\"page\" and a background, not only color.",
+    "Icons are decorative (aria-hidden)."
+  ],
+  "content": [
+    "Column headings: one or two words.",
+    "Description: one short line that says what you find there."
+  ],
+  "do": [
+    "Keep 3 to 5 links per column.",
+    "Use the same icons on desktop and mobile."
+  ],
+  "dont": [
+    "Put actions (buttons, forms) in the columns. The featured block may have one link."
+  ],
+  "tokens": [
+    "--mega-menu-*",
+    "--mega-menu-link-*",
+    "--mega-menu-featured-*"
+  ],
+  "related": [
+    "Header",
+    "Mobile nav"
+  ],
+  "open": []
+}

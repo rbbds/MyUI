@@ -1,17 +1,15 @@
 {
   "file": "WL Design System (rbbds)",
-  "scannedAt": "2026-11-16T09:01:53.460Z",
+  "scannedAt": "2026-11-16T11:08:31.557Z",
   "script": "scripts/figma-binding-scan.js",
   "pages": 113,
-  "nodes": 57391,
-  "componentTokens": 1236,
-  "unbound": [
-    "navigation/mega-menu-link/icon-foreground"
-  ],
+  "nodes": 57680,
+  "componentTokens": 1243,
+  "unbound": [],
   "codeSyntaxMismatch": [],
   "exceptions": [
     {
-      "where": "Focus variants without a background: Button, Button destructive and Button icon (Tertiary, Link), Nav item, Tabs (Underline, Pill), Pagination item, Accordion",
+      "where": "Focus variants without a background: Button, Button destructive and Button icon (Tertiary, Link), Nav item, Tabs (Underline, Pill), Pagination item, Accordion, Header nav item, Mega menu link, Mobile nav item, Mobile nav sublink",
       "binding": "fill base-tokens/color/surface/primary (semantic, not a component token)",
       "reason": "Figma only draws a drop shadow (Focus ring effect style) from a visible fill. Code stays transparent (keuze 32)."
     },

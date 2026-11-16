@@ -4,3 +4,5 @@ import meta, * as S from './AppShell.cases';
 export default { ...meta, title: 'Navigation/Header' } as typeof meta;
 export const Desktop = S.Desktop;
 export const Mobile = S.Mobile;
+export const WithMegaMenu = S.WithMegaMenu;
+export const WithMegaMenuMobile = S.WithMegaMenuMobile;

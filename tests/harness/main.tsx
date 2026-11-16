@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Header, MobileNav, Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -15,6 +15,12 @@ function InModal({ children, toast }: { children?: ReactNode; toast?: boolean })
     </>
   );
 }
+
+const megaLinks = [
+  { label: 'Product', menu: { columns: [{ heading: 'Features', links: [{ label: 'Analytics', href: '#a' }, { label: 'Projects', href: '#p', current: true }] }, { heading: 'Learn', links: [{ label: 'Guides', href: '#g' }] }] } },
+  { label: 'Solutions', menu: { columns: [{ heading: 'Pages', links: [{ label: 'For teams', href: '#t' }] }] } },
+  { label: 'Pricing', href: '#price' },
+];
 
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
@@ -53,6 +59,8 @@ const scenarios: Record<string, ReactNode> = {
   api: <ApiScenario />,
   'components-7b': <Scenario7b />,
   'a11y-7c': <Scenario7c />,
+  'mega-menu': <Header logo={<a href="#">Logo</a>} links={megaLinks} search={<SearchInput label="Search" size="sm" />} actions={<Button hierarchy="secondary">After</Button>} />,
+  'mobile-nav': <MobileNav label="Main menu" items={megaLinks} />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };
 

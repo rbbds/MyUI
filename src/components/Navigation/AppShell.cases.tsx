@@ -7,6 +7,7 @@ import { SearchInput } from '../Form/SearchInput';
 import { NavItem } from './Navigation';
 import { Logo as BrandLogo } from '../../docs/brand/Logo';
 import { DualSidebar, Header, Sidebar, SidebarUser } from './AppShell';
+import { siteLinks } from './MegaMenu.cases';
 
 const Logo = ({ size = 'large' }: { size?: 'large' | 'small' }) => (
   <a href="#" aria-label="MyUI home" style={{ display: 'inline-flex', textDecoration: 'none' }}>
@@ -21,10 +22,10 @@ const meta: Meta<typeof Header> = {
   args: {
     logo: <Logo />,
     links: [
-      { label: 'Overview', href: '#', current: true, icon: <House /> },
-      { label: 'Projects', href: '#', icon: <Layers /> },
-      { label: 'Team', href: '#', icon: <Users /> },
-      { label: 'Reports', href: '#', icon: <ChartColumn /> },
+      { label: 'Overview', href: '#', current: true },
+      { label: 'Projects', href: '#' },
+      { label: 'Team', href: '#' },
+      { label: 'Reports', href: '#' },
     ],
     actions: <><ButtonIcon hierarchy="tertiary" icon={<Bell />} aria-label="Notifications" /><Avatar size="sm" name="Sanne de Vries" initials="SV" /></>,
   },
@@ -34,6 +35,11 @@ export default meta;
 type Story = StoryObj<typeof Header>;
 export const Desktop: Story = {};
 export const Mobile: Story = { globals: { viewport: { value: 'mobile1', isRotated: false } } };
+
+const search = <SearchInput label="Search" size="sm" shortcut="⌘K" />;
+/** Links with a menu open a Mega menu on click. Search sits on the right; on mobile it moves to the top of the menu. */
+export const WithMegaMenu: Story = { args: { links: siteLinks, search } };
+export const WithMegaMenuMobile: Story = { args: { links: siteLinks, search }, globals: { viewport: { value: 'mobile1', isRotated: false } } };
 
 export const AppSidebar: StoryObj<typeof Sidebar> = {
   render: () => (

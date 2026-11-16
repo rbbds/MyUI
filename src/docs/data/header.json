@@ -6,7 +6,7 @@
     "base": "_Header"
   },
   "react": "Header",
-  "summary": "Top bar with logo, main navigation and actions. Below 900px the links move into a Slideout behind a menu button. Logo and Navigation are native Figma slots.",
+  "summary": "Top bar with logo, main navigation, search and actions. A link with a menu opens a Mega menu. Below 900px the links and the search move into a Slideout behind a menu button, with Mobile nav. Logo and Navigation are native Figma slots.",
   "use": [
     "Websites and apps with a few main sections."
   ],
@@ -15,7 +15,8 @@
   ],
   "anatomy": [
     "Logo (slot, _Logo by default).",
-    "Navigation (slot) with Header nav items.",
+    "Navigation (slot) with Header nav items. An item with Has menu opens a Mega menu.",
+    "Search (optional, Show search): a Search input sm of 240 px.",
     "Actions: notifications, avatar, buttons.",
     "Menu button (mobile only)."
   ],
@@ -31,14 +32,19 @@
       "Logo holds a _Logo instance (Size=Large, tagline off). Select it in the slot to turn the tagline on or to swap in your own logo."
     ],
     [
-      "Show navigation / Show menu button",
+      "Show navigation / Show menu button / Show search",
       "boolean",
-      "Via _Header."
+      "Via _Header. Show search is off by default."
     ],
     [
       "_Header nav item: State",
-      "Default, Hover, Focus, Current",
-      ""
+      "Default, Hover, Focus, Current, Expanded",
+      "Expanded: its Mega menu is open."
+    ],
+    [
+      "_Header nav item: Has menu",
+      "boolean",
+      "Shows the chevron."
     ]
   ],
   "reactProps": [
@@ -49,8 +55,13 @@
     ],
     [
       "links",
-      "{ label, href, current?, icon? }[]",
-      "icon is used in the mobile menu."
+      "{ label, href?, current?, menu? }[]",
+      "menu: { columns, featured? } opens a Mega menu; the item becomes a button. icon is deprecated (the mobile menu uses Mobile nav)."
+    ],
+    [
+      "search",
+      "ReactNode",
+      "Usually a SearchInput (size sm). Right side on desktop, top of the mobile menu."
     ],
     [
       "actions",
@@ -69,10 +80,14 @@
     ]
   ],
   "behaviour": [
-    "Desktop: links in the bar. Mobile: the menu button opens a Slideout with the same links."
+    "Desktop: links in the bar. A link with a menu opens its Mega menu on click (or Enter/Space). Escape, a click outside, focus leaving the navigation or a click on a link closes it. One menu is open at a time.",
+    "Mobile: the menu button opens a Slideout \"Menu\" with the search and Mobile nav."
   ],
   "a11y": [
     "<header> with a <nav aria-label>. Current page with aria-current=\"page\".",
+    "An item with a menu is a <button aria-expanded aria-controls>. The panel follows it in the tab order and holds plain links (a disclosure, not an ARIA menu): Tab works as usual, no arrow keys needed.",
+    "Escape moves focus back to the button.",
+    "The search is a separate role=\"search\" landmark, next to the navigation.",
     "The menu button has aria-expanded and aria-haspopup=\"dialog\"."
   ],
   "content": [
@@ -89,11 +104,11 @@
     "--header-nav-item-*"
   ],
   "related": [
+    "Mega menu",
+    "Mobile nav",
     "Sidebar",
     "Slideout",
-    "Nav item"
+    "Search input"
   ],
-  "open": [
-    "Dropdowns under main links (mega menu) are not there yet."
-  ]
+  "open": []
 }
