@@ -8,3 +8,4 @@ export const PrefixSuffix = S.PrefixSuffix;
 export const WithError = S.WithError;
 export const Disabled = S.Disabled;
 export const Required = S.Required;
+export const WithHelp = S.WithHelp;

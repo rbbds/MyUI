@@ -21,6 +21,7 @@ export const WithError: Story = { args: { defaultValue: 'robert@', error: 'Enter
 export const PrefixSuffix: Story = { args: { label: 'Monthly amount', type: 'text', inputMode: 'decimal', placeholder: '0,00', prefix: '€', suffix: 'per month', hint: undefined, autoComplete: 'off' } };
 export const Disabled: Story = { args: { disabled: true } };
 export const Required: Story = { args: { required: true } };
+export const WithHelp: Story = { args: { label: 'IBAN', defaultValue: 'NL91 ABNA 0417 1643 00', hint: 'The account we pay your refund to.', help: 'You find your IBAN on your bank card or in your banking app.' } };
 
 export const SelectField: StoryObj<typeof Select> = {
   render: () => (

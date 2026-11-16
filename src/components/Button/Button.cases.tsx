@@ -71,3 +71,12 @@ export const Group: StoryObj<typeof ButtonGroup> = {
     );
   },
 };
+export const GroupDisabled: StoryObj<typeof ButtonGroup> = {
+  name: 'Group, disabled',
+  render: () => (
+    <div style={{ display: 'grid', gap: 16, justifyItems: 'start' }}>
+      <ButtonGroup label="Period" defaultValue="week" disabled options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }]} />
+      <ButtonGroup label="View" defaultValue="list" options={[{ value: 'list', label: 'List' }, { value: 'grid', label: 'Grid' }, { value: 'map', label: 'Map', disabled: true }]} />
+    </div>
+  ),
+};

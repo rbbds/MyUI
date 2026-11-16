@@ -1,4 +1,4 @@
-import { Children, useId, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { Children, useEffect, useId, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
 import { Menu, PanelLeft } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -188,20 +188,33 @@ export interface DualSidebarLabels {
   /** Name of the navigation at the bottom of the rail. */
   railFooter: string;
   collapse: string;
+  /** Name of the button in the rail that opens the panel again. */
+  expand: string;
 }
-export const DEFAULT_DUAL_SIDEBAR_LABELS: DualSidebarLabels = { rail: 'Sections', railFooter: 'More', collapse: 'Collapse panel' };
+export const DEFAULT_DUAL_SIDEBAR_LABELS: DualSidebarLabels = { rail: 'Sections', railFooter: 'More', collapse: 'Collapse panel', expand: 'Expand panel' };
 
 /** Sidebar with two levels: a rail with the main sections and a panel with the pages of the chosen section. */
 export function DualSidebar({ logo, rail, railFooter, avatar, title, children, user, collapsed = false, onCollapsedChange, labels, railLabel, railFooterLabel, collapseLabel, className, ...rest }: DualSidebarProps) {
   const l = mergeLabels(DEFAULT_DUAL_SIDEBAR_LABELS, labels, { rail: railLabel, railFooter: railFooterLabel, collapse: collapseLabel });
   const titleId = useId();
   const panelId = useId();
+  const expandRef = useRef<HTMLButtonElement>(null);
+  const collapseRef = useRef<HTMLButtonElement>(null);
+  const toggled = useRef(false);
+  const toggle = (next: boolean) => { toggled.current = true; onCollapsedChange?.(next); };
+  // The button you pressed disappears, so the focus moves to the button that does the opposite.
+  useEffect(() => {
+    if (!toggled.current) return;
+    toggled.current = false;
+    (collapsed ? expandRef : collapseRef).current?.focus();
+  }, [collapsed]);
   return (
     <aside className={cx('rb-sidebar', 'rb-sidebar--dual', collapsed && 'rb-sidebar--collapsed', className)} {...rest}>
       <NavCompactContext.Provider value>
         <div className="rb-sidebar__rail">
           <div className="rb-sidebar__top">
             <div className="rb-sidebar__logo">{logo}</div>
+            {onCollapsedChange && collapsed && <ButtonIcon ref={expandRef} hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={l.expand} aria-expanded={false} aria-controls={panelId} onClick={() => toggle(false)} className="rb-sidebar__toggle" />}
             <nav aria-label={l.rail}>{asList(rail)}</nav>
           </div>
           <div className="rb-sidebar__bottom">
@@ -214,7 +227,7 @@ export function DualSidebar({ logo, rail, railFooter, avatar, title, children, u
         <div className="rb-sidebar__top">
           <div className="rb-sidebar__panel-head">
             <h2 id={titleId} className="rb-sidebar__panel-title">{title}</h2>
-            {onCollapsedChange && <ButtonIcon hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={l.collapse} aria-expanded={!collapsed} aria-controls={panelId} onClick={() => onCollapsedChange(true)} />}
+            {onCollapsedChange && <ButtonIcon ref={collapseRef} hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={l.collapse} aria-expanded={!collapsed} aria-controls={panelId} onClick={() => toggle(true)} />}
           </div>
           <nav aria-labelledby={titleId}>{asList(children)}</nav>
         </div>

@@ -102,6 +102,16 @@
       "prefix / suffix",
       "ReactNode",
       "Fixed text before or after the value. Read out through aria-describedby."
+    ],
+    [
+      "help",
+      "ReactNode",
+      "Extra explanation behind a help icon in the field, shown in a Tooltip. Figma: Help icon."
+    ],
+    [
+      "labels",
+      "{ help }",
+      "Name of the help button. Default \"More information\"."
     ]
   ],
   "behaviour": [

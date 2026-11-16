@@ -1,6 +1,6 @@
 # Figma binding scan
 
-File: WL Design System (rbbds). Scanned 2026-11-15T20:48:30.840Z with `scripts/figma-binding-scan.js` (read-only): 113 pages, 57118 layers, 1236 component tokens.
+File: WL Design System (rbbds). Scanned 2026-11-16T07:17:51.440Z with `scripts/figma-binding-scan.js` (read-only): 113 pages, 57139 layers, 1237 component tokens.
 Counted: layer fields, fills, strokes, effects and text ranges (also hidden layers in instances), aliases and styles.
 
 | Check | Result |

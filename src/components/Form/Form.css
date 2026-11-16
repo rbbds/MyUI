@@ -63,6 +63,7 @@
 .rb-control__clear,.rb-control__trigger{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:var(--input-action-padding);margin:calc(var(--input-action-padding) * -1);border:0;background:transparent;border-radius:var(--input-action-radius);color:var(--input-foreground-icon);cursor:pointer}
 .rb-control__clear svg{width:var(--search-clear-icon-size);height:var(--search-clear-icon-size)}
 .rb-control__trigger svg{width:var(--input-action-icon-size);height:var(--input-action-icon-size)}
+.rb-control__help svg{width:var(--input-help-icon-size);height:var(--input-help-icon-size)}
 .rb-control__clear:hover,.rb-control__trigger:hover{background:var(--input-action-surface-hover)}
 .rb-control__clear:focus-visible,.rb-control__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-control__trigger:disabled{cursor:not-allowed;color:var(--input-foreground-disabled);background:transparent}
