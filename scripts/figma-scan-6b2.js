@@ -1,7 +1,7 @@
 /**
  * PR 6b-2 scan (read-only). Changes nothing in the file.
  *
- * Run in "WL Design System (rbbds)" as a plugin snippet: Figma MCP use_figma,
+ * Run in "MyUI Design System" as a plugin snippet: Figma MCP use_figma,
  * or the Scripter plugin in Figma desktop. The result is printed as JSON
  * (Scripter: print, otherwise console and the return value).
  *

@@ -1,7 +1,7 @@
 /**
  * Figma binding scan (read-only, keuze 18b). Changes nothing in the file.
  *
- * Run in "WL Design System (rbbds)" as a plugin snippet (Figma MCP use_figma, or Scripter).
+ * Run in "MyUI Design System" as a plugin snippet (Figma MCP use_figma, or Scripter).
  * Returns JSON. Save it as docs/reports/figma-bindings.json and run
  * `npm run report:figma-bindings` to write docs/reports/figma-bindings.md.
  *
@@ -52,7 +52,7 @@ for (const page of figma.root.children) {
 const css = (name) => { let s = name.slice(PREFIX.length); const [cat, ...rest] = s.split('/'); if (CATEGORIES.has(cat)) s = rest.join('/'); return '--' + s.toLowerCase().replace(/[\/, ]+/g, '-'); };
 const tokens = ct.map((v) => ({ name: v.name.slice(PREFIX.length), css: css(v.name), codeSyntax: v.codeSyntax.WEB || null, ...uses[v.id] }));
 return {
-  file: 'WL Design System (rbbds)',
+  file: 'MyUI Design System',
   scannedAt: new Date().toISOString(),
   pages: figma.root.children.length,
   nodes,

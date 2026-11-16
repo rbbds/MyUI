@@ -1,6 +1,6 @@
 # @rbbds/ui
 
-White label React component library and design tokens. Built from the Figma file **WL Design System (rbbds)**, with Storybook for documentation.
+White label React component library and design tokens. Built from the Figma file **MyUI Design System**, with Storybook for documentation.
 
 - React 18+ components, TypeScript types, no runtime CSS-in-JS
 - Design tokens as CSS custom properties, Light and Dark mode, responsive type and spacing

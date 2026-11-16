@@ -1,5 +1,5 @@
 /**
- * Regenerates src/styles/tokens.css from the Figma variables in "WL Design System (rbbds)".
+ * Regenerates src/styles/tokens.css from the Figma variables in "MyUI Design System".
  *
  * How to run: in Figma, open the file and run this script as a plugin snippet
  * (for example with the Figma MCP use_figma tool, or the "Scripter" plugin).
