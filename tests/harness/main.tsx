@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Alert, Button, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Alert, Button, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -51,6 +51,7 @@ const scenarios: Record<string, ReactNode> = {
   'combobox-form': <ComboboxForm />,
   labels: <CartButton count={3} labels={{ count: (n) => `${n} artikelen` }} label="Winkelwagen" />,
   api: <ApiScenario />,
+  'components-7b': <Scenario7b />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };
 
@@ -135,3 +136,20 @@ function ApiScenario() {
     </div>
   );
 }
+
+/* PR 7b: Input help, ButtonGroup disabled, DualSidebar expand. */
+function Scenario7b() {
+  const [collapsed, setCollapsed] = useState(false);
+  return (
+    <div style={{ display: 'flex', gap: 24 }}>
+      <DualSidebar collapsed={collapsed} onCollapsedChange={setCollapsed} logo={<span>Logo</span>} title="Projects" rail={<NavItem href="#" icon={<Info />}>Home</NavItem>}>
+        <NavItem href="#">All projects</NavItem>
+      </DualSidebar>
+      <div style={{ display: 'grid', gap: 16, alignContent: 'start' }}>
+        <Input label="IBAN" help="On your bank card." />
+        <ButtonGroup label="View" defaultValue="list" options={[{ value: 'list', label: 'List' }, { value: 'map', label: 'Map', disabled: true }]} />
+      </div>
+    </div>
+  );
+}
+

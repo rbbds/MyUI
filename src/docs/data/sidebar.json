@@ -84,12 +84,17 @@
       "DualSidebar: rail, railFooter, title, avatar",
       "ReactNode",
       "rail holds NavItems for sections. title is the panel heading."
+    ],
+    [
+      "DualSidebar: labels",
+      "{ rail, railFooter, collapse, expand }",
+      "When collapsed, the rail shows an expand button below the logo."
     ]
   ],
   "behaviour": [
     "Fixed width 280px, collapsed 72px. Content scrolls when it does not fit.",
     "Collapsed: labels are visually hidden and show as a tooltip on hover and focus. A count becomes a dot.",
-    "Focus stays on the collapse button after a toggle."
+    "Focus stays on the collapse button after a toggle. In DualSidebar the focus moves to the expand button in the rail, and back."
   ],
   "a11y": [
     "<aside> with two <nav> elements, each with its own label.",

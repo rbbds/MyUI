@@ -263,3 +263,15 @@ test('API (PR 7a): label, labels, uncontrolled state and deprecated props', asyn
   await expect(page.getByTestId('last')).toHaveText('card action');
 });
 
+test('PR 7b: help tooltip, disabled option, DualSidebar expand keeps the focus', async ({ page }) => {
+  await page.goto('/?s=components-7b');
+  const help = page.getByRole('button', { name: 'More information' });
+  await help.focus();
+  await expect(page.getByRole('tooltip')).toContainText('On your bank card.');
+  await expect(page.getByRole('button', { name: 'Map' })).toBeDisabled();
+  await page.getByRole('button', { name: 'Collapse panel' }).click();
+  await expect(page.getByRole('button', { name: 'Expand panel' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Collapse panel' })).toBeFocused();
+});
+

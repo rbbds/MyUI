@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added (PR 7b)
+- **Input `help`** (keuze 19): a help icon in the field (Figma: Help icon) that shows the text in a Tooltip on hover and focus. The button is named by `labels.help` ("More information"). Uses `--input-help-icon-size`. Story Forms/Input/WithHelp.
+- **ButtonGroup `disabled`**, for the whole group or per option (`options[].disabled`). New tokens `--button-group-foreground-disabled` and `--button-group-border-disabled`; Figma: `_Button group item` State=Disabled. Story Button group/GroupDisabled.
+- **DualSidebar expand button** (M19): when collapsed, the rail shows a button below the logo that opens the panel again (Figma: Sidebar Dual, Collapsed, Show expand button). `labels.expand` ("Expand panel"). The focus moves between the collapse and expand buttons, so it is never lost.
+
+### Changed (PR 7b)
+- ButtonGroup: vertical padding minus `--button-group-border-width` instead of a fixed 1 px (M14).
+- Removed token `--command-item-shortcut-border-width`: the shortcut in a Command item is a Kbd and uses `--kbd-border-width`, in Figma too.
+
 ### Changed (PR 7a, API alignment, M19)
 New names work now; the old ones still work, are marked `@deprecated` and go in 2.0.0 (keuze 5). No visual change.
 - **`onValueChange`** with the value on ButtonGroup, Tabs, SearchInput, PasswordInput, Slider, RangeSlider, Combobox, Calendar, DatePicker, DateRangePicker, VerificationCode, QuantityStepper, VariantPicker, FilterGroup and AddressFields. `onChange` with a value is deprecated; on SearchInput, PasswordInput and Slider it becomes the native change event in 2.0.0, like Input.

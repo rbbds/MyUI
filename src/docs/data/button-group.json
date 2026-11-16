@@ -28,7 +28,7 @@
     ],
     [
       "Item: State",
-      "Default, Hover, Focus, Current",
+      "Default, Hover, Focus, Current, Disabled",
       "Current marks the active option."
     ],
     [
@@ -40,13 +40,13 @@
   "reactProps": [
     [
       "options",
-      "{ value, label, icon? }[]",
-      ""
+      "{ value, label, icon?, disabled? }[]",
+      "disabled on an option disables only that option."
     ],
     [
-      "value",
-      "string",
-      "Active option."
+      "disabled",
+      "boolean",
+      "Disables all options."
     ],
     [
       "value / defaultValue",
@@ -65,7 +65,8 @@
     ]
   ],
   "behaviour": [
-    "Click or Enter/Space makes an item active. There is always exactly one active item."
+    "Click or Enter/Space makes an item active. There is always exactly one active item.",
+    "Disabled: the option cannot be chosen and is skipped by Tab. Use it for an option that does not apply now, and say why nearby."
   ],
   "a11y": [
     "role=\"group\" with an aria-label on the group.",
@@ -85,7 +86,8 @@
     "--button-group-{surface|foreground|border}",
     "--button-group-surface-current",
     "--button-group-foreground-current",
-    "--button-group-surface-hover"
+    "--button-group-surface-hover",
+    "--button-group-{foreground|border}-disabled"
   ],
   "related": [
     "Tabs",

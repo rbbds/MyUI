@@ -1,11 +1,13 @@
 {
   "file": "WL Design System (rbbds)",
-  "scannedAt": "2026-11-15T20:48:30.840Z",
+  "scannedAt": "2026-11-16T07:17:51.440Z",
   "script": "scripts/figma-binding-scan.js",
   "pages": 113,
-  "nodes": 57118,
-  "componentTokens": 1236,
-  "unbound": ["navigation/mega-menu-link/icon-foreground"],
+  "nodes": 57139,
+  "componentTokens": 1237,
+  "unbound": [
+    "navigation/mega-menu-link/icon-foreground"
+  ],
   "codeSyntaxMismatch": [],
   "exceptions": [
     {

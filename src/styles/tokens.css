@@ -580,9 +580,11 @@
 --base-color-surface-success-subtle:var(--color-surface-success-subtle);
 --base-color-surface-warning-subtle:var(--color-surface-warning-subtle);
 --button-group-border:var(--color-border-primary);
+--button-group-border-disabled:var(--color-border-disabled);
 --button-group-border-width:var(--border-width-default);
 --button-group-foreground:var(--color-foreground-secondary);
 --button-group-foreground-current:var(--color-foreground-primary);
+--button-group-foreground-disabled:var(--color-foreground-disabled);
 --button-group-leading-icon-size:var(--icon-size-md);
 --button-group-surface:var(--color-surface-primary);
 --button-group-surface-current:var(--color-surface-tertiary);
@@ -1578,7 +1580,6 @@
 --command-item-padding-horizontal:var(--spacing-3);
 --command-item-padding-vertical:var(--spacing-2);
 --command-item-radius:var(--border-radius-control-sm);
---command-item-shortcut-border-width:var(--border-width-default);
 --command-item-surface-active:var(--color-surface-hover);
 --command-border:var(--color-border-secondary);
 --command-border-width:var(--border-width-default);
