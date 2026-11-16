@@ -73,7 +73,12 @@
     [
       "loading",
       "boolean",
-      "Shows a spinner, sets aria-busy and blocks the button."
+      "Shows a spinner, sets aria-busy and aria-disabled and ignores clicks. The button keeps focus."
+    ],
+    [
+      "aria-disabled",
+      "boolean",
+      "Looks disabled and ignores clicks (also no form submit), but stays in the tab order. Use it for a button that switches itself off."
     ],
     [
       "destructive",
@@ -95,11 +100,11 @@
     "Hover: the color moves one step. Link gets an underline.",
     "Focus: a visible focus ring with keyboard navigation (:focus-visible).",
     "Disabled: lower contrast colors, no hover, cursor not-allowed.",
-    "Loading: the spinner replaces the leading icon and the label stays. You cannot click the button for a moment."
+    "Loading: the spinner replaces the leading icon and the label stays. You cannot click the button for a moment, but it keeps focus."
   ],
   "a11y": [
     "Native <button> that works with Enter and Space. No div with onClick.",
-    "Native disabled takes the button out of the tab order. If the button must keep focus so you can explain why it does not work, use aria-disabled=\"true\" and block the action yourself.",
+    "Native disabled takes the button out of the tab order. A button that switches itself off (Loading, Next on the last page) uses aria-disabled instead, so focus does not drop to the page. Button blocks the click for you.",
     "Loading sets aria-busy=\"true\". Announce the result (success or failure) with a Toast or Alert in a live region.",
     "Icons next to a label are decorative: aria-hidden.",
     "Contrast of label and background meets WCAG 1.4.3 in Light and Dark."
@@ -131,7 +136,5 @@
     "Button group",
     "Toggle"
   ],
-  "open": [
-    "Loading now uses native disabled, so the button loses focus. Think about aria-disabled during Loading, so focus stays."
-  ]
+  "open": []
 }

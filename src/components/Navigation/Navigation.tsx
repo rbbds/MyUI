@@ -162,7 +162,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   const l = mergeLabels(DEFAULT_PAGINATION_LABELS, labels, { label: label ?? ariaLabel, previous: previousLabel, next: nextLabel, pageStatus, page: pageLabel });
   return (
     <nav ref={ref} className={cx('rb-pagination', className)} aria-label={l.label} {...rest}>
-      <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{l.previous}</Button>
+      <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} aria-disabled={page <= 1 || undefined} onClick={() => { if (page > 1) onPageChange(page - 1); }}>{l.previous}</Button>
       <ul className="rb-pagination__pages">
         {range(page, pageCount).map((p, i) => (
           <li key={i}>
@@ -173,7 +173,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
         ))}
       </ul>
       <span className="rb-pagination__compact">{l.pageStatus(page, pageCount)}</span>
-      <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>{l.next}</Button>
+      <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} aria-disabled={page >= pageCount || undefined} onClick={() => { if (page < pageCount) onPageChange(page + 1); }}>{l.next}</Button>
     </nav>
   );
 });

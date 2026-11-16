@@ -275,3 +275,74 @@ test('PR 7b: help tooltip, disabled option, DualSidebar expand keeps the focus',
   await expect(page.getByRole('button', { name: 'Collapse panel' })).toBeFocused();
 });
 
+
+test('PR 7c: self-disabling buttons keep the focus (M9)', async ({ page }) => {
+  await page.goto('/?s=a11y-7c');
+  const less = page.getByRole('button', { name: 'One less' });
+  await less.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('spinbutton', { name: 'Quantity' })).toHaveValue('1');
+  await expect(less).toBeFocused();
+  await expect(less).toHaveAttribute('aria-disabled', 'true');
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('spinbutton', { name: 'Quantity' })).toHaveValue('1');
+
+  const next = page.getByRole('button', { name: 'Next', exact: true });
+  await next.focus();
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Enter');
+  await expect(next).toBeFocused();
+  await expect(next).toHaveAttribute('aria-disabled', 'true');
+  await expect(page.getByRole('button', { name: 'Previous', exact: true })).not.toHaveAttribute('aria-disabled', 'true');
+
+  const save = page.getByRole('button', { name: 'Save' });
+  await save.click();
+  await expect(save).toHaveAttribute('aria-busy', 'true');
+  await expect(save).toBeFocused();
+  await page.keyboard.press('Enter');
+  await save.click({ force: true });
+  await expect(page.getByTestId('clicks')).toHaveText('1');
+});
+
+test('PR 7c: DatePicker errors and Calendar skips unavailable days (M6)', async ({ page }) => {
+  await page.goto('/?s=a11y-7c');
+  const field = page.getByRole('textbox', { name: 'Appointment' });
+  await expect(page.getByText('Format: MM/DD/YYYY')).toBeVisible();
+  await field.fill('11/31/2026');
+  await expect(field).toHaveValue('11/31/2026');
+  await field.press('Tab');
+  await expect(page.getByText('Enter a date as MM/DD/YYYY.')).toBeVisible();
+  await expect(field).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByTestId('reason')).toHaveText('invalid');
+  await field.fill('12/15/2026');
+  await field.press('Tab');
+  await expect(page.getByText('Choose a date between 11/01/2026 and 11/30/2026.')).toBeVisible();
+  await expect(page.getByTestId('reason')).toHaveText('unavailable');
+  await field.fill('11/20/2026');
+  await field.press('Tab');
+  await expect(field).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByTestId('reason')).toHaveText('valid');
+
+  const friday = page.getByRole('button', { name: /Friday, November 6, 2026/ });
+  await friday.focus();
+  await expect(friday).toBeFocused();
+  await page.keyboard.press('ArrowRight');
+  await expect(page.getByRole('button', { name: /Monday, November 9, 2026/ })).toBeFocused();
+  await expect(page.getByRole('button', { name: /Saturday, November 7, 2026/ })).toHaveAttribute('aria-disabled', 'true');
+});
+
+test('PR 7c: one focus ring in a field, Table scroll region, bulk live region (M8, M11)', async ({ page }) => {
+  await page.goto('/?s=a11y-7c');
+  const clear = page.getByRole('button', { name: 'Clear search' });
+  const control = clear.locator('xpath=ancestor::*[contains(@class,"rb-control")][1]');
+  const resting = await control.evaluate((el) => getComputedStyle(el).boxShadow);
+  await clear.focus();
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Tab');
+  await expect(clear).toBeFocused();
+  await expect(control).toHaveCSS('box-shadow', resting);
+  await expect(clear).not.toHaveCSS('box-shadow', 'none');
+  const region = page.getByRole('region', { name: 'Orders' });
+  await expect(region).toHaveAttribute('tabindex', '0');
+  await expect(page.getByRole('status').filter({ hasText: '' }).first()).toBeAttached();
+});

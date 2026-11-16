@@ -2,12 +2,14 @@
 .rb-table-wrap__header{display:flex;align-items:center;gap:var(--table-header-gap);padding:var(--table-card-header-padding-vertical) var(--table-cell-padding-horizontal);border-bottom:var(--table-border-width) solid var(--table-border)}
 .rb-table-wrap__title{margin:0;color:var(--table-foreground-primary);font-family:var(--text-headings-h5-font-family);font-size:var(--text-headings-h5-font-size);line-height:var(--text-headings-h5-line-height);font-weight:var(--text-headings-h5-font-weight)}
 .rb-table-scroll{overflow-x:auto}
+.rb-table-scroll:focus-visible{outline:none;box-shadow:var(--focus-ring-inset)}
 .rb-table{width:100%;border-collapse:collapse}
 .rb-table th{padding:var(--table-header-padding-vertical) var(--table-cell-padding-horizontal);background:var(--table-surface-header);border-bottom:var(--table-border-width) solid var(--table-border);color:var(--table-foreground-header);text-align:left;white-space:nowrap;font-family:var(--text-body-description-medium-font-family);font-size:var(--text-body-description-medium-font-size);line-height:var(--text-body-description-medium-line-height);font-weight:var(--text-body-description-medium-font-weight)}
 .rb-table td{padding:var(--table-cell-padding-vertical) var(--table-cell-padding-horizontal);border-bottom:var(--table-border-width) solid var(--table-border);color:var(--table-foreground-secondary);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-table tbody tr:last-child td{border-bottom:0}
 .rb-table tbody tr:hover td{background:var(--table-surface-hover)}
-.rb-table__sort{display:inline-flex;align-items:center;gap:var(--table-label-group-gap);padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:var(--focus-radius-inline)}
+.rb-table__sort{position:relative;display:inline-flex;align-items:center;gap:var(--table-label-group-gap);padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;border-radius:var(--focus-radius-inline)}
+.rb-table__sort::after{content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}
 .rb-table__sort:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-table__sort svg{width:var(--table-sort-icon-size);height:var(--table-sort-icon-size);flex-shrink:0;color:var(--table-foreground-icon)}
 .rb-table__align-right{text-align:right!important}

@@ -46,13 +46,18 @@ export const DEFAULT_TABLE_BULK_ACTIONS_LABELS: TableBulkActionsLabels = { count
  */
 export function TableBulkActions({ count, onClear, actions, labels, countLabel, clearLabel, className, ...rest }: TableBulkActionsProps) {
   const l = mergeLabels(DEFAULT_TABLE_BULK_ACTIONS_LABELS, labels, { count: countLabel, clear: clearLabel });
-  if (count < 1) return null;
+  /* M11: the live region is always there, so the first change ("1 selected") is read out too */
+  const status = <p className="rb-visually-hidden" role="status">{count > 0 ? l.count(count) : ''}</p>;
+  if (count < 1) return status;
   return (
-    <div className={cx('rb-table-bulk', className)} {...rest}>
-      <p className="rb-table-bulk__count" role="status">{l.count(count)}</p>
-      <Button hierarchy="link" size="sm" onClick={onClear}>{l.clear}</Button>
-      {actions && <div className="rb-table-bulk__actions">{actions}</div>}
-    </div>
+    <>
+      {status}
+      <div className={cx('rb-table-bulk', className)} {...rest}>
+        <p className="rb-table-bulk__count" aria-hidden="true">{l.count(count)}</p>
+        <Button hierarchy="link" size="sm" onClick={onClear}>{l.clear}</Button>
+        {actions && <div className="rb-table-bulk__actions">{actions}</div>}
+      </div>
+    </>
   );
 }
 

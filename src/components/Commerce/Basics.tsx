@@ -128,7 +128,8 @@ export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps
   const set = (n: number) => setValue(Math.max(min, Math.min(max, Number.isFinite(n) ? Math.round(n) : min)));
   return (
     <div className={cx('rb-qty', `rb-qty--${size}`, disabled && 'rb-qty--disabled', className)}>
-      <button type="button" className="rb-qty__btn" aria-label={l.decrease} aria-controls={id ?? autoId} disabled={disabled || v <= min} onClick={() => set(v - 1)}>
+      {/* M9: at the limit the button stays focusable (aria-disabled), so focus does not drop to the page */}
+      <button type="button" className="rb-qty__btn" aria-label={l.decrease} aria-controls={id ?? autoId} disabled={disabled} aria-disabled={v <= min || undefined} onClick={() => { if (v > min) set(v - 1); }}>
         <Minus aria-hidden="true" />
       </button>
       <input
@@ -147,7 +148,7 @@ export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps
         onKeyDown={(e) => { if (e.key === 'Enter' && draft !== null) { set(parseInt(draft, 10)); setDraft(null); } }}
         {...rest}
       />
-      <button type="button" className="rb-qty__btn" aria-label={l.increase} aria-controls={id ?? autoId} disabled={disabled || v >= max} onClick={() => set(v + 1)}>
+      <button type="button" className="rb-qty__btn" aria-label={l.increase} aria-controls={id ?? autoId} disabled={disabled} aria-disabled={v >= max || undefined} onClick={() => { if (v < max) set(v + 1); }}>
         <Plus aria-hidden="true" />
       </button>
     </div>

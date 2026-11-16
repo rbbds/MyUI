@@ -25,8 +25,8 @@
   "figmaProps": [
     [
       "Date picker: State",
-      "Closed, Open",
-      ""
+      "Closed, Open, Error",
+      "Error: the built-in message replaces the hint."
     ],
     [
       "Calendar: View",
@@ -62,13 +62,18 @@
     ],
     [
       "onValueChange",
-      "(date: Date | null) => void",
-      "null when the field is empty or not valid. onChange is deprecated."
+      "(date: Date | null, { reason }) => void",
+      "reason: 'valid', 'empty', 'invalid' (not a date) or 'unavailable' (outside min/max or disabled). onChange is deprecated."
+    ],
+    [
+      "hideFormat",
+      "boolean",
+      "Hides \"Format: MM/DD/YYYY\" after the hint. Only when the format is clear from the page."
     ],
     [
       "labels",
-      "{ calendar }",
-      "Name of the calendar button. Default 'Choose a date'. calendarLabel is deprecated."
+      "{ calendar, format, invalid, unavailable }",
+      "Name of the calendar button (default 'Choose a date'), the format hint and the built-in error messages. calendarLabel is deprecated."
     ],
     [
       "min / max",
@@ -127,9 +132,10 @@
     ]
   ],
   "behaviour": [
-    "Typing: the value is checked when you leave the field.",
+    "Typing: the value is checked when you leave the field. Not a date: \"Enter a date as MM/DD/YYYY.\" A date outside min/max or disabled: \"Choose a date between … and ….\" The error prop wins over these messages.",
+    "The format shows after the hint (\"Format: MM/DD/YYYY\"), so it stays visible while you type.",
     "View switch: click \"month year ▾\" to go to the list of years. Choosing a year goes to the next view (Month or Day). The list scrolls to the chosen year.",
-    "Day view: arrows move by day and week, Home/End go to the start/end of the week, PageUp/PageDown move by month (with Shift by year).",
+    "Day view: arrows move by day and week, Home/End go to the start/end of the week, PageUp/PageDown move by month (with Shift by year). Unavailable days are skipped.",
     "Month and Year view: arrows move through the grid, Enter or a click chooses.",
     "Enter or a click on a day chooses the date, closes the calendar and moves focus back to the button. Escape closes it and moves focus back to the button. Tab out or a click outside close it too. Inside a Modal, Escape closes only the calendar.",
     "The calendar keeps the same height in every view, so the popover does not jump."
@@ -138,11 +144,12 @@
     "The grid of days is a grid with aria-labelledby pointing to the month title. The month is announced with aria-live.",
     "Weekdays show one letter, but the full name is there for screen readers.",
     "Every day has a full label (\"Thursday, November 12, 2026\"). Today has aria-current=\"date\" and a ring, not only color.",
-    "Year and Month view are a radiogroup with aria-checked. The view switch has aria-expanded."
+    "Year and Month view are a radiogroup with aria-checked. The view switch has aria-expanded.",
+    "Unavailable days have aria-disabled, not disabled: the grid always keeps one reachable tab stop."
   ],
   "content": [
-    "Name the format in the hint or placeholder: mm/dd/yyyy.",
-    "Error message with an example: \"Enter a date as mm/dd/yyyy, for example 12/31/2027.\""
+    "The format is in the hint by default (MM/DD/YYYY). The placeholder shows it too, but disappears while typing.",
+    "Error message that says how to fix it: \"Enter a date as MM/DD/YYYY.\""
   ],
   "do": [
     "Always allow typing, also when the calendar is there.",

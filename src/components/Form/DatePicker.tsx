@@ -180,6 +180,16 @@ export function Calendar({
   }, [focused.getTime(), view]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const go = (d: Date) => { moveFocus.current = true; setFocused(clamp(d)); };
+  /* M6: skip unavailable days. Walk in the direction of the key; stay put when nothing is available that way. */
+  const goDay = (target: Date, dir: 1 | -1) => {
+    let d = clamp(target);
+    while (isDisabled(d)) {
+      const n = addDays(d, dir);
+      if (n < lo || n > hi) return;
+      d = n;
+    }
+    go(d);
+  };
   const nextView = (from: CalendarView) => views[views.indexOf(from) + 1] ?? null;
   /* MUI: the header button toggles between the day view and the first other view */
   const switchTarget: CalendarView | null = view === 'day' ? (views.find((v) => v !== 'day') ?? null) : views.includes('day') ? 'day' : null;
@@ -201,18 +211,18 @@ export function Calendar({
 
   const onDayKey = (e: KeyboardEvent<HTMLButtonElement>) => {
     const dow = (focused.getDay() - weekStartsOn + 7) % 7;
-    const map: Record<string, () => Date> = {
-      ArrowLeft: () => addDays(focused, -1),
-      ArrowRight: () => addDays(focused, 1),
-      ArrowUp: () => addDays(focused, -7),
-      ArrowDown: () => addDays(focused, 7),
-      Home: () => addDays(focused, -dow),
-      End: () => addDays(focused, 6 - dow),
-      PageUp: () => addMonths(focused, e.shiftKey ? -12 : -1),
-      PageDown: () => addMonths(focused, e.shiftKey ? 12 : 1),
+    const map: Record<string, [() => Date, 1 | -1]> = {
+      ArrowLeft: [() => addDays(focused, -1), -1],
+      ArrowRight: [() => addDays(focused, 1), 1],
+      ArrowUp: [() => addDays(focused, -7), -1],
+      ArrowDown: [() => addDays(focused, 7), 1],
+      Home: [() => addDays(focused, -dow), 1],
+      End: [() => addDays(focused, 6 - dow), -1],
+      PageUp: [() => addMonths(focused, e.shiftKey ? -12 : -1), -1],
+      PageDown: [() => addMonths(focused, e.shiftKey ? 12 : 1), 1],
     };
     const next = map[e.key];
-    if (next) { e.preventDefault(); go(next()); }
+    if (next) { e.preventDefault(); goDay(next[0](), next[1]); }
   };
   const gridKey = (e: KeyboardEvent<HTMLButtonElement>, perRow: number, step: (n: number) => Date) => {
     const map: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -perRow, ArrowDown: perRow };
@@ -269,6 +279,7 @@ export function Calendar({
                     const inRange = !!rangeStart && !!rangeEnd && d > rangeStart && d < rangeEnd;
                     const selected = sameDay(d, value) || isStart || isEnd;
                     const hasRange = !!rangeStart && !!rangeEnd && !sameDay(rangeStart, rangeEnd);
+                    const off = isDisabled(d);
                     return (
                       <td key={key(d)} aria-selected={selected || inRange || undefined}
                         className={cx(inRange && 'is-in-range', hasRange && isStart && 'is-range-start', hasRange && isEnd && 'is-range-end')}>
@@ -279,11 +290,11 @@ export function Calendar({
                           className={cx('rb-calendar__day', selected && 'is-selected', outside && 'is-outside', sameDay(d, today) && 'is-today')}
                           aria-current={sameDay(d, today) ? 'date' : undefined}
                           aria-label={d.toLocaleDateString(locale, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                          disabled={isDisabled(d)}
+                          aria-disabled={off || undefined}
                           onKeyDown={onDayKey}
-                          onFocus={() => { if (!sameDay(d, focused)) setFocused(d); onDayHover?.(d); }}
-                          onMouseEnter={() => onDayHover?.(d)}
-                          onClick={() => choose(d)}
+                          onFocus={() => { if (!sameDay(d, focused)) setFocused(d); if (!off) onDayHover?.(d); }}
+                          onMouseEnter={() => { if (!off) onDayHover?.(d); }}
+                          onClick={() => { if (!off) choose(d); }}
                         >
                           {d.getDate()}
                         </button>
@@ -350,11 +361,15 @@ export function Calendar({
 }
 
 /* ---------- DatePicker ---------- */
+/** Why the value changed. `valid`: a date was typed or picked. `empty`: the field was cleared. `invalid`: the text is not a date. `unavailable`: the date exists but cannot be chosen (min, max, disablePast, disableFuture, shouldDisableDate). */
+export type DateChangeReason = 'valid' | 'empty' | 'invalid' | 'unavailable';
+export interface DateChangeDetails { reason: DateChangeReason }
+
 export interface DatePickerProps extends FieldBaseProps {
   value?: Date | null;
   defaultValue?: Date | null;
-  /** Called with a valid date, or null when the field is cleared or the text is not a valid date. */
-  onValueChange?: (date: Date | null) => void;
+  /** Called with a valid date, or null with a reason when the field is cleared, the text is not a date or the date is unavailable. */
+  onValueChange?: (date: Date | null, details: DateChangeDetails) => void;
   /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (date: Date | null) => void;
   min?: Date;
@@ -366,7 +381,9 @@ export interface DatePickerProps extends FieldBaseProps {
   placeholder?: string;
   /** Locale for the typed date order, month and day names. Default en-US. Use e.g. nl-NL for dd-mm-yyyy. */
   locale?: string;
-  /** Accessible name of the calendar button and popover. */
+  /** Hide the format ("Format: MM/DD/YYYY") after the hint. Only when the format is clear from the label or the page. */
+  hideFormat?: boolean;
+  /** Texts: names, the format hint and the built-in error messages. */
   labels?: Partial<DatePickerLabels>;
   /** @deprecated Use labels.calendar. Removed in 2.0.0. */
   calendarLabel?: string;
@@ -378,18 +395,48 @@ export interface DatePickerProps extends FieldBaseProps {
 export interface DatePickerLabels {
   /** Name of the calendar button and popover. */
   calendar: string;
+  /** Format shown after the hint. Receives the pattern, e.g. MM/DD/YYYY. */
+  format: (pattern: string) => string;
+  /** Error when the text is not a date. Receives the pattern. */
+  invalid: (pattern: string) => string;
+  /** Error when the date cannot be chosen. Receives the first and last date that can, formatted, when known. */
+  unavailable: (range: { min?: string; max?: string }) => string;
 }
-export const DEFAULT_DATE_PICKER_LABELS: DatePickerLabels = { calendar: 'Choose a date' };
+export const DEFAULT_DATE_PICKER_LABELS: DatePickerLabels = {
+  calendar: 'Choose a date',
+  format: (p) => `Format: ${p}`,
+  invalid: (p) => `Enter a date as ${p}.`,
+  unavailable: ({ min, max }) =>
+    min && max ? `Choose a date between ${min} and ${max}.` : min ? `Choose a date on or after ${min}.` : max ? `Choose a date on or before ${max}.` : 'This date is not available. Choose another date.',
+};
 
 /** Text input (date in the order of the locale) with a calendar popover. Typing always works; the calendar is an extra. */
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onValueChange, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, labels, calendarLabel, calendarProps, className }, ref) {
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onValueChange, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, hideFormat, labels, calendarLabel, calendarProps, className }, ref) {
   const l = mergeLabels(DEFAULT_DATE_PICKER_LABELS, labels, { calendar: calendarLabel });
-  const [date, commit] = useControlled<Date | null>(value, defaultValue, (d) => { onValueChange?.(d); onChange?.(d); });
+  const [date, commit] = useControlled<Date | null>(value, defaultValue);
   const [text, setText] = useState(date ? formatDate(date, locale) : '');
+  const [problem, setProblem] = useState<'invalid' | 'unavailable' | null>(null);
+  const lastReason = useRef<DateChangeReason>(date ? 'valid' : 'empty');
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const popId = useId();
+  const pattern = datePlaceholder(locale).toUpperCase();
+
+  /* the same limits as the calendar, so typing cannot choose what clicking cannot */
+  const today = startOfDay(new Date());
+  const lo = [min && startOfDay(min), calendarProps?.disablePast && today].filter(Boolean).reduce<Date | undefined>((a, b) => (!a || b! > a ? (b as Date) : a), undefined);
+  const hi = [max && startOfDay(max), calendarProps?.disableFuture && today].filter(Boolean).reduce<Date | undefined>((a, b) => (!a || b! < a ? (b as Date) : a), undefined);
+  const unavailable = (d: Date) => (lo && d < lo) || (hi && d > hi) || Boolean(calendarProps?.shouldDisableDate?.(d));
+
+  const change = (d: Date | null, reason: DateChangeReason) => {
+    setProblem(reason === 'invalid' || reason === 'unavailable' ? reason : null);
+    if (sameDay(d, date) && reason === lastReason.current) return;
+    if (!(d === null && date === null)) commit(d);
+    lastReason.current = reason;
+    onValueChange?.(d, { reason });
+    onChange?.(d);
+  };
 
   useEffect(() => { setText(date ? formatDate(date, locale) : ''); }, [date?.getTime()]); // eslint-disable-line react-hooks/exhaustive-deps
   const close = () => { setOpen(false); trigger.current?.focus(); };
@@ -398,8 +445,22 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
   usePanelDismiss({ open, root, onDismiss: (reason) => (reason === 'escape' ? close() : setOpen(false)) });
   usePlacement({ open, panel, anchor: control });
 
+  const onBlur = () => {
+    if (!text.trim()) return change(null, 'empty');
+    const d = parseDate(text, locale);
+    if (!d) return change(null, 'invalid');
+    if (unavailable(d)) return change(null, 'unavailable');
+    change(d, 'valid');
+  };
+  const builtIn = problem === 'invalid' ? l.invalid(pattern)
+    : problem === 'unavailable' ? l.unavailable({ min: lo && formatDate(lo, locale), max: hi && formatDate(hi, locale) })
+    : undefined;
+  const format = hideFormat ? undefined : l.format(pattern);
+  const formatNode = format && <span className="rb-datepicker__format">{format}</span>;
+  const fullHint = hint && formatNode ? <>{hint} {formatNode}</> : hint ?? formatNode;
+
   return (
-    <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-datepicker', className)}>
+    <Field id={id} label={label} hideLabel={hideLabel} hint={fullHint} error={error ?? builtIn} required={required} disabled={disabled} className={cx('rb-datepicker', className)}>
       {({ id: fieldId, describedBy, invalid }) => (
         <div ref={root} className="rb-datepicker__anchor">
           <div ref={control} className={cx('rb-control', `rb-control--${size}`, invalid && 'rb-control--error', disabled && 'rb-control--disabled')}>
@@ -430,12 +491,12 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function
               aria-invalid={invalid || undefined}
               aria-describedby={describedBy}
               onChange={(e) => setText(e.target.value)}
-              onBlur={() => { const d = text ? parseDate(text, locale) : null; if (!sameDay(d, date) && !(d === null && date === null)) commit(d); }}
+              onBlur={onBlur}
             />
           </div>
           {open && (
             <div ref={panel} id={popId} role="dialog" aria-label={l.calendar} className="rb-datepicker__popover">
-              <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onValueChange={(d) => { commit(d); close(); }} />
+              <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onValueChange={(d) => { change(d, 'valid'); close(); }} />
             </div>
           )}
         </div>

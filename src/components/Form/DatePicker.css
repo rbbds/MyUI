@@ -20,7 +20,7 @@
 .rb-calendar__day.is-outside{color:var(--calendar-day-foreground-outside)}
 .rb-calendar__day.is-today,.rb-calendar__cell.is-today{border-color:var(--calendar-day-border-today)}
 .rb-calendar__day.is-selected,.rb-calendar__day.is-selected:hover,.rb-calendar__cell.is-selected,.rb-calendar__cell.is-selected:hover{border-color:transparent;background:var(--calendar-day-surface-selected);color:var(--calendar-day-foreground-selected);font-weight:var(--text-body-sub-text-semibold-font-weight)}
-.rb-calendar__day:disabled,.rb-calendar__cell:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed}
+.rb-calendar__day[aria-disabled="true"],.rb-calendar__cell:disabled{background:transparent;color:var(--calendar-day-foreground-muted);cursor:not-allowed}
 .rb-calendar__cells{display:grid;align-content:start;gap:var(--calendar-cells-gap) var(--calendar-row-gap);padding:var(--calendar-cells-padding-vertical-sm) var(--calendar-cells-padding-horizontal)}
 .rb-calendar__cells--3{grid-template-columns:repeat(3,1fr)}
 .rb-calendar__cells--4{grid-template-columns:repeat(4,1fr)}
@@ -37,3 +37,4 @@
 .rb-calendar__grid td.is-range-start{background:linear-gradient(to right,transparent 50%,var(--calendar-day-surface-range) 50%)}
 .rb-calendar__grid td.is-range-end{background:linear-gradient(to left,transparent 50%,var(--calendar-day-surface-range) 50%)}
 .rb-calendar--plain{padding:0;border:0;box-shadow:none;background:transparent}
+.rb-datepicker__format{white-space:nowrap}

@@ -21,11 +21,13 @@ export interface TableCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ti
 /** Bordered container for a table with an optional header. Put a <Table> inside. */
 export function TableCard({ title, badge, actions, toolbar, headingLevel = 3, className, children, ...rest }: TableCardProps) {
   const H = `h${headingLevel}` as 'h3';
+  const titleId = useId();
   return (
     <div className={cx('rb-table-wrap', className)} {...rest}>
-      {(title || actions) && <div className="rb-table-wrap__header">{title && <H className="rb-table-wrap__title">{title}</H>}{badge}{actions && <div className="rb-table-wrap__actions">{actions}</div>}</div>}
+      {(title || actions) && <div className="rb-table-wrap__header">{title && <H id={titleId} className="rb-table-wrap__title">{title}</H>}{badge}{actions && <div className="rb-table-wrap__actions">{actions}</div>}</div>}
       {toolbar}
-      <div className="rb-table-scroll">{children}</div>
+      {/* M11: the scroll area is focusable, so keyboard users can scroll a wide table. Named after the title. */}
+      <div className="rb-table-scroll" tabIndex={0} role={title ? 'region' : undefined} aria-labelledby={title ? titleId : undefined}>{children}</div>
     </div>
   );
 }

@@ -12,7 +12,7 @@
 /* Link sm and md are 20 px high (text 14/20). The click area is 24 px high (WCAG 2.5.8); it looks the same. */
 .rb-button--link.rb-button--sm,.rb-button--link.rb-button--md{position:relative}
 .rb-button--link.rb-button--sm::after,.rb-button--link.rb-button--md::after{content:"";position:absolute;left:0;right:0;top:50%;height:24px;transform:translateY(-50%)}
-.rb-button--link:hover:not(:disabled){text-decoration:underline}
+.rb-button--link:hover:not(:disabled):not([aria-disabled="true"]){text-decoration:underline}
 .rb-button--full{width:100%}
 .rb-button--icon-only.rb-button--sm{padding:calc(var(--button-icon-only-sm-padding) - var(--button-border-width))}
 .rb-button--icon-only.rb-button--sm svg{width:var(--button-icon-size);height:var(--button-icon-size)}
@@ -34,4 +34,5 @@
 .rb-button--primary,.rb-button--accent,.rb-button--secondary{box-shadow:var(--shadow-xs)}
 .rb-button--primary:focus-visible,.rb-button--accent:focus-visible,.rb-button--secondary:focus-visible{box-shadow:var(--shadow-xs),var(--focus-ring)}
 .rb-button--primary.rb-button--destructive:focus-visible,.rb-button--secondary.rb-button--destructive:focus-visible{box-shadow:var(--shadow-xs),var(--focus-ring-error)}
-.rb-button--primary:disabled,.rb-button--accent:disabled,.rb-button--secondary:disabled{box-shadow:none}
+.rb-button--primary:disabled,.rb-button--accent:disabled,.rb-button--secondary:disabled,.rb-button--primary[aria-disabled="true"]:not(:focus-visible),.rb-button--accent[aria-disabled="true"]:not(:focus-visible),.rb-button--secondary[aria-disabled="true"]:not(:focus-visible){box-shadow:none}
+.rb-button--primary[aria-disabled="true"]:focus-visible,.rb-button--accent[aria-disabled="true"]:focus-visible,.rb-button--secondary[aria-disabled="true"]:focus-visible{box-shadow:var(--focus-ring)}

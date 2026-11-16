@@ -83,7 +83,7 @@
     ]
   ],
   "behaviour": [
-    "Previous is disabled on page 1, Next on the last page.",
+    "Previous is off on page 1, Next on the last page. They keep focus (aria-disabled), so focus does not drop to the page when you reach the end.",
     "Below 600px the numbers make way for the page status."
   ],
   "a11y": [
