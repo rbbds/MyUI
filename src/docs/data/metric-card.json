@@ -66,9 +66,9 @@
       ""
     ],
     [
-      "trendLabels",
-      "Record<trend, string>",
-      "Words for screen readers. Default Up, Down, No change."
+      "labels",
+      "{ up, down, neutral }",
+      "Screen reader words for the trend. trendLabels is deprecated."
     ]
   ],
   "behaviour": [

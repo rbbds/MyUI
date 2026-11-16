@@ -47,9 +47,9 @@
       ""
     ],
     [
-      "onChange",
+      "onValueChange",
       "(range) => void",
-      "Only on Apply."
+      "Only on Apply. onChange is deprecated."
     ],
     [
       "presets",

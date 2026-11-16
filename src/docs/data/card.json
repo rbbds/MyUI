@@ -51,9 +51,14 @@
       "Makes the whole card clickable through the title link."
     ],
     [
-      "media / meta / description / action",
+      "media / meta / description / actions",
       "ReactNode",
-      ""
+      "Actions stay clickable when href is set. action is deprecated."
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Default 3."
     ],
     [
       "elevated",

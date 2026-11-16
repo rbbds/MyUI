@@ -61,9 +61,14 @@
       ""
     ],
     [
-      "onChange",
+      "onValueChange",
       "(date: Date | null) => void",
-      "null when the field is empty or not valid."
+      "null when the field is empty or not valid. onChange is deprecated."
+    ],
+    [
+      "labels",
+      "{ calendar }",
+      "Name of the calendar button. Default 'Choose a date'. calendarLabel is deprecated."
     ],
     [
       "min / max",

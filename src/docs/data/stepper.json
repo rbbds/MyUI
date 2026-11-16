@@ -54,14 +54,14 @@
       "Horizontal becomes compact below 600px."
     ],
     [
-      "statusLabels",
-      "object",
-      "Screen reader text, default 'completed', 'current step', 'to do'."
+      "label",
+      "string",
+      "Name of the navigation. Default 'Progress'."
     ],
     [
-      "aria-label",
-      "string",
-      "Default 'Progress'."
+      "labels",
+      "{ complete, current, upcoming }",
+      "Screen reader text per status. Default 'completed', 'current step', 'to do'. statusLabels is deprecated."
     ]
   ],
   "behaviour": [

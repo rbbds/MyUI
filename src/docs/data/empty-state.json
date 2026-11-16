@@ -52,6 +52,16 @@
       "actions",
       "ReactNode",
       ""
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Default 3."
+    ],
+    [
+      "className, ref, ...rest",
+      "",
+      ""
     ]
   ],
   "behaviour": [

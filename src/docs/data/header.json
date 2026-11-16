@@ -58,9 +58,14 @@
       ""
     ],
     [
-      "navLabel / menuLabel / menuTitle",
+      "label",
       "string",
-      "Default 'Main menu', 'Open menu', 'Menu'."
+      "Name of the navigation. Default 'Main menu'. navLabel is deprecated."
+    ],
+    [
+      "labels",
+      "{ menu, menuTitle }",
+      "Default 'Open menu', 'Menu'. menuLabel and menuTitle are deprecated."
     ]
   ],
   "behaviour": [

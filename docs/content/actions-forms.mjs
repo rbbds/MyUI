@@ -167,7 +167,9 @@ export default [
     reactProps: [
       ['options', '{ value, label, icon? }[]', ''],
       ['value', 'string', 'Active option.'],
-      ['onChange', '(value) => void', ''],
+      ['value / defaultValue', 'string', 'Leave value out to let the group keep its own state.'],
+      ['onValueChange', '(value) => void', 'onChange is deprecated (removed in 2.0.0).'],
+      ['label', 'string', 'Name of the group, for example "Period". aria-label also works.']
     ],
     behaviour: ['Click or Enter/Space makes an item active. There is always exactly one active item.'],
     a11y: ['role="group" with an aria-label on the group.', 'Items are buttons with aria-pressed. The active item has aria-pressed="true".'],

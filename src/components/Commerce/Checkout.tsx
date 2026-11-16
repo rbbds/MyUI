@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import { Input } from '../Form/Input';
 import './Commerce.css';
 
 export interface Address { postcode: string; houseNumber: string; addition?: string; street: string; city: string }
 export interface AddressFieldsProps {
   value?: Partial<Address>;
+  defaultValue?: Partial<Address>;
+  /** Called with the whole address after each change. */
+  onValueChange?: (value: Partial<Address>) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (value: Partial<Address>) => void;
   /** Prefix for name/autocomplete sections, e.g. "shipping" or "billing". */
   section?: 'shipping' | 'billing';
@@ -23,10 +29,11 @@ export const DEFAULT_ADDRESS_FIELDS_LABELS: AddressFieldsLabels = {
 const PC = /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/;
 
 /** Dutch address: postcode + house number first (that is how people know their address), then street and city. Uses autocomplete tokens so browsers can fill it in. */
-export function AddressFields({ value = {}, onChange, section = 'shipping', errors = {}, labels, className }: AddressFieldsProps) {
+export function AddressFields({ value: valueProp, defaultValue = {}, onValueChange, onChange, section = 'shipping', errors = {}, labels, className }: AddressFieldsProps) {
   const l = { ...DEFAULT_ADDRESS_FIELDS_LABELS, ...labels };
   const [touched, setTouched] = useState<Partial<Record<keyof Address, boolean>>>({});
-  const set = (k: keyof Address, v: string) => onChange?.({ ...value, [k]: v });
+  const [value, setValue] = useControlled(valueProp, defaultValue, (v) => { onValueChange?.(v); onChange?.(v); });
+  const set = (k: keyof Address, v: string) => setValue({ ...value, [k]: v });
   const pcError = errors.postcode ?? (touched.postcode && value.postcode && !PC.test(value.postcode) ? l.postcodeInvalid : undefined);
   const ac = (t: string) => `${section} ${t}`;
   return (

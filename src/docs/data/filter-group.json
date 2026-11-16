@@ -51,9 +51,9 @@
       ""
     ],
     [
-      "value, onChange",
+      "value / defaultValue, onValueChange",
       "string[]",
-      ""
+      "onChange is deprecated."
     ],
     [
       "limit",

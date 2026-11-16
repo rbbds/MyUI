@@ -86,9 +86,9 @@
       "href, onClick and so on."
     ],
     [
-      "aria-label",
+      "label",
       "string",
-      "Name of the navigation. Default 'Main menu'."
+      "Name of the navigation. Default 'Main menu'. aria-label also works."
     ]
   ],
   "behaviour": [

@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Button, ButtonIcon, CartButton, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Alert, Button, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -50,6 +50,7 @@ const scenarios: Record<string, ReactNode> = {
   command: <CommandScenario />,
   'combobox-form': <ComboboxForm />,
   labels: <CartButton count={3} labels={{ count: (n) => `${n} artikelen` }} label="Winkelwagen" />,
+  api: <ApiScenario />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };
 
@@ -98,7 +99,7 @@ function ComboboxForm() {
   const [value, setValue] = useState<string | null>('be');
   return (
     <form onSubmit={(e) => e.preventDefault()}>
-      <Combobox label="Country" options={options} value={value} onChange={(v) => setValue(v)} required />
+      <Combobox label="Country" options={options} value={value} onValueChange={(v) => setValue(v)} required />
       <p>Value: {value ?? 'none'}</p>
       <Button type="submit">Send</Button>
     </form>
@@ -118,3 +119,19 @@ function DropdownKeys() {
 
 const name = new URLSearchParams(location.search).get('s') ?? '';
 createRoot(document.getElementById('root')!).render(<div className="rb-root" style={{ padding: 24 }}>{scenarios[name] ?? <p>Unknown scenario</p>}</div>);
+
+/* PR 7a: new props, deprecated props that still work, uncontrolled state. */
+function ApiScenario() {
+  const [last, setLast] = useState('');
+  return (
+    <div style={{ display: 'grid', gap: 16, maxWidth: 480 }}>
+      <ButtonGroup label="Period" defaultValue="week" onValueChange={setLast} options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }]} />
+      <p data-testid="last">{last}</p>
+      <Tabs label="Sections" variant="pill" items={[{ id: 'a', label: 'A', content: 'Panel A' }, { id: 'b', label: 'B', content: 'Panel B' }]} />
+      <Pagination page={2} pageCount={5} onPageChange={() => undefined} labels={{ previous: 'Vorige', next: 'Volgende' }} label="Paginering" />
+      <Alert title="Old prop" onClose={() => undefined} closeLabel="Sluiten" />
+      <SearchInput label="Zoeken" clearLabel="Wissen" defaultValue="abc" />
+      <Card title="Card with link" href="#card" actions={<Button size="sm" onClick={() => setLast('card action')}>Action</Button>} />
+    </div>
+  );
+}

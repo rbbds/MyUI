@@ -71,14 +71,14 @@
       "Shows the collapse button when onCollapsedChange is set."
     ],
     [
-      "collapseLabel / expandLabel",
-      "string",
-      "Default \"Collapse sidebar\" and \"Expand sidebar\"."
+      "labels",
+      "{ footer, collapse, expand }",
+      "Default \"More\", \"Collapse sidebar\", \"Expand sidebar\". The single props are deprecated."
     ],
     [
-      "navLabel / footerLabel",
+      "label",
       "string",
-      "Default \"Main menu\" and \"More\"."
+      "Name of the main navigation. Default \"Main menu\". navLabel is deprecated."
     ],
     [
       "DualSidebar: rail, railFooter, title, avatar",

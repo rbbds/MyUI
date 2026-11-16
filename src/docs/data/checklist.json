@@ -28,14 +28,14 @@
   ],
   "reactProps": [
     [
-      "Checklist title, done, total, progressLabel",
+      "Checklist title, done, total, labels.progress",
       "",
-      ""
+      "progressLabel is deprecated. headingLevel default 2."
     ],
     [
-      "ChecklistItem title, status, description, action",
+      "ChecklistItem title, status, description, actions, labels.done",
       "",
-      "status: 'done' | 'current' | 'open'."
+      "status: 'done' | 'current' | 'open'. action and doneLabel are deprecated."
     ]
   ],
   "behaviour": [],

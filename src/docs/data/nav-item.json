@@ -61,7 +61,7 @@
     [
       "countLabel",
       "string",
-      "Word after the count for screen readers. Default \"new\"."
+      "Word after the count for screen readers, also in the full variant. Default \"new\"."
     ]
   ],
   "behaviour": [

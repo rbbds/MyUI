@@ -75,9 +75,19 @@
       ""
     ],
     [
-      "closeLabel",
-      "string",
-      "Default 'Close'."
+      "labels",
+      "{ close }",
+      "Default 'Close'. closeLabel is deprecated."
+    ],
+    [
+      "headingLevel",
+      "2 | 3 | 4",
+      "Default 2: a dialog is its own context."
+    ],
+    [
+      "className, ref, ...rest",
+      "",
+      "Go to the <dialog>."
     ],
     [
       "initialFocus",

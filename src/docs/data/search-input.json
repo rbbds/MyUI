@@ -50,9 +50,9 @@
       "Required. Visually hidden unless showLabel."
     ],
     [
-      "showLabel",
+      "hideLabel",
       "boolean",
-      ""
+      "Default true: the label is visually hidden. showLabel is deprecated."
     ],
     [
       "value / defaultValue / onChange",
@@ -65,9 +65,14 @@
       "Only the hint. The app handles the shortcut itself."
     ],
     [
-      "clearLabel",
-      "string",
-      "Default 'Clear search'."
+      "onValueChange",
+      "(value: string) => void",
+      "onChange with the value is deprecated; in 2.0.0 onChange gets the native event."
+    ],
+    [
+      "labels",
+      "{ clear }",
+      "Default 'Clear search'. clearLabel is deprecated."
     ],
     [
       "size",

@@ -15,7 +15,7 @@ export default meta;
 const narrow = [(S: React.ComponentType) => <div style={{ maxWidth: 360 }}><S /></div>];
 type Story = StoryObj<typeof Card>;
 
-export const Default: Story = { decorators: narrow, args: { media: <div className="rb-card__media" role="presentation" />, action: <Button hierarchy="link" iconTrailing={<ArrowUpRight aria-hidden />}>Read more</Button> } };
+export const Default: Story = { decorators: narrow, args: { media: <div className="rb-card__media" role="presentation" />, actions: <Button hierarchy="link" iconTrailing={<ArrowUpRight aria-hidden />}>Read more</Button> } };
 export const ClickableCard: Story = { decorators: narrow, args: { href: '#', media: <div className="rb-card__media" role="presentation" /> } };
 export const Elevated: Story = { decorators: narrow, args: { elevated: true } };
 

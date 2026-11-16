@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Changed (PR 7a, API alignment, M19)
+New names work now; the old ones still work, are marked `@deprecated` and go in 2.0.0 (keuze 5). No visual change.
+- **`onValueChange`** with the value on ButtonGroup, Tabs, SearchInput, PasswordInput, Slider, RangeSlider, Combobox, Calendar, DatePicker, DateRangePicker, VerificationCode, QuantityStepper, VariantPicker, FilterGroup and AddressFields. `onChange` with a value is deprecated; on SearchInput, PasswordInput and Slider it becomes the native change event in 2.0.0, like Input.
+- **Controlled or not, one rule:** new `useControlled` hook (exported). Leave `value` out and the component keeps its own state from `defaultValue`. New: `value`/`onValueChange` on Accordion (`defaultOpen` deprecated, use `defaultValue`), `defaultValue` on ButtonGroup, FilterGroup and AddressFields, `open`/`defaultOpen`/`onOpenChange` on DropdownMenu, `defaultOpen` on Popover.
+- **`label`** is the accessible name of the component itself: Tabs, ButtonGroup (both accept `aria-label` too, one of the two is required), Pagination, Breadcrumbs, Stepper, BottomNavigation, Header and Sidebar (`navLabel` deprecated).
+- **`labels`** holds all texts. Deprecated single props: `closeLabel` (Alert, Toast, Modal, Slideout, Banner, Popover), `regionLabel`, `clearLabel`, `toggleLabel`, `hintLabels`, `calendarLabel`, `previousLabel`/`nextLabel`/`switchViewLabel` (Calendar), `previousLabel`/`nextLabel`/`pageStatus`/`pageLabel` (Pagination), `homeLabel`/`backLabel`, `statusLabels`, `menuLabel`/`menuTitle`, `footerLabel`/`collapseLabel`/`expandLabel`, `railLabel`/`railFooterLabel`, `dialogLabel`, `minLabel`/`maxLabel`, `copyLabel`/`copiedLabel`/`copiedMessage`, `trendLabels`, `countLabel` (NotificationButton, TableBulkActions), `unreadLabel`, `markAllLabel`, `downloadLabel`, `doneLabel`, `progressLabel`, `actionLabel`/`dropLabel`, `decreaseLabel`/`increaseLabel`, `buttonLabel` (PromoCode), `addToCartLabel`, `removeLabel` (Tag). New exported defaults (`DEFAULT_PAGINATION_LABELS` and so on).
+- **PasswordInput:** `showLabel` and `hideLabelText` become `labels.show` and `labels.hide`. **SearchInput:** `showLabel` becomes `hideLabel` (default true), like Field.
+- **`variant`** for the look: Tabs and VariantPicker (`type` deprecated).
+- **`actions`** for button slots: Banner, Card, CartSummary, DescriptionList, DescriptionItem, DocumentList, ChecklistItem, SidebarUser (`action` deprecated). Card shows its actions also when `href` is set (they used to disappear).
+- **`headingLevel`** is `2 | 3 | 4` everywhere (type `HeadingLevel`). New on Card, EmptyState (default 3), Modal and Slideout (default 2). Checklist and SettingsSection now accept 4.
+- **`className`, `ref` and other HTML attributes** on Modal, Slideout, CommandMenu (to the `<dialog>`), Tabs, Accordion, Pagination, Breadcrumbs, EmptyState, RangeSlider, Stepper, BottomNavigation and ButtonGroup. Combobox and DatePicker forward `ref` to the input. DropdownMenu accepts `className`.
+- **Fixes:** Slider without `defaultValue` starts in the middle between `min` and `max` (was always 50). NavItem reads the count word (`countLabel`) also in the full variant.
+- Docs: "Props that work the same everywhere" in For developers, and the props tables. Not changed: the default `size` (sm for Checkbox, Radio, Toggle and AvatarGroup) is now documented instead.
+
 ### Added (PR 6c)
 - **Checkbox group** (`CheckboxGroup`, keuze 32): checkboxes in a fieldset with a legend, like `RadioGroup` and `SelectionCardGroup`. `hideLegend` hides the legend visually (screen readers still read it). Tokens `--checkbox-group-gap`, `--checkbox-group-legend-gap`, `--checkbox-group-legend-foreground`. Figma: `Checkbox group` with Legend, Show legend and Show option 1 to 6. Story Selection controls/Checkbox/Group.
 

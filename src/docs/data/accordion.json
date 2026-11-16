@@ -52,14 +52,19 @@
       "Default true."
     ],
     [
-      "defaultOpen",
+      "value / defaultValue / onValueChange",
       "string[]",
-      ""
+      "Ids of the open items. defaultOpen is deprecated."
     ],
     [
       "headingLevel",
       "2 | 3 | 4",
       "Default 3. Choose what fits the page."
+    ],
+    [
+      "className, ref, ...rest",
+      "",
+      ""
     ]
   ],
   "behaviour": [

@@ -178,7 +178,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
   const preview = (mode: string) => (
     <div className="bb-preview__screen">
       <Header
-        navLabel={`Main menu example ${mode}`}
+        label={`Main menu example ${mode}`}
         logo={logo ? <img src={logo} alt={name} className="bb-logo" /> : <span className="bb-wordmark">{name}</span>}
         links={[{ label: 'Overview', href: '#', current: true }, { label: 'Products', href: '#' }]}
         actions={<Button size="sm">Log in</Button>}
@@ -197,7 +197,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
             <Toggle label="Keep me updated" defaultChecked />
             <Alert color="brand" title="Good to know">You can change your choice later.</Alert>
           </div>
-          <Card meta="News · 3 min read" title="A brand that fits everywhere" description="Colors, fonts and shapes from one source." action={<Button hierarchy="link">Read more</Button>} />
+          <Card meta="News · 3 min read" title="A brand that fits everywhere" description="Colors, fonts and shapes from one source." actions={<Button hierarchy="link">Read more</Button>} />
         </div>
       </div>
     </div>

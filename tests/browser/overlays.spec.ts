@@ -247,3 +247,19 @@ test('Labels: a component speaks the language you pass', async ({ page }) => {
   await page.goto('/?s=labels');
   await expect(page.getByRole('button', { name: 'Winkelwagen, 3 artikelen' })).toBeVisible();
 });
+
+test('API (PR 7a): label, labels, uncontrolled state and deprecated props', async ({ page }) => {
+  await page.goto('/?s=api');
+  await expect(page.getByRole('group', { name: 'Period' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Week' })).toHaveAttribute('aria-pressed', 'true');
+  await page.getByRole('button', { name: 'Day' }).click();
+  await expect(page.getByRole('button', { name: 'Day' })).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.getByTestId('last')).toHaveText('day');
+  await expect(page.getByRole('tablist', { name: 'Sections' })).toBeVisible();
+  await expect(page.getByRole('navigation', { name: 'Paginering' }).getByRole('button', { name: 'Volgende' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Sluiten' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Wissen' })).toBeVisible();
+  await page.getByRole('button', { name: 'Action' }).click();
+  await expect(page.getByTestId('last')).toHaveText('card action');
+});
+

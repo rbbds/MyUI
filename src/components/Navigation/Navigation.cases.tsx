@@ -7,8 +7,8 @@ const meta: Meta<typeof Tabs> = {
   title: 'Components/Navigation/Tabs',
   component: Tabs,
   args: {
-    'aria-label': 'Project sections',
-    type: 'underline',
+    label: 'Project sections',
+    variant: 'underline',
     items: [
       { id: 'overview', label: 'Overview', content: 'Overview content' },
       { id: 'details', label: 'Details', content: 'Details content' },
@@ -21,7 +21,7 @@ const meta: Meta<typeof Tabs> = {
 export default meta;
 type Story = StoryObj<typeof Tabs>;
 export const Underline: Story = {};
-export const Pill: Story = { args: { type: 'pill' } };
+export const Pill: Story = { args: { variant: 'pill' } };
 
 export const Breadcrumb: StoryObj<typeof Breadcrumbs> = {
   render: () => <Breadcrumbs homeHref="#" items={[{ label: 'Projects', href: '#' }, { label: 'Client A', href: '#' }, { label: 'Design system' }]} />,

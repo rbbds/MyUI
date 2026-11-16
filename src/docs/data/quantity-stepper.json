@@ -42,9 +42,9 @@
       ""
     ],
     [
-      "onChange",
+      "onValueChange",
       "(value: number) => void",
-      ""
+      "onChange is deprecated."
     ],
     [
       "min, max",
@@ -57,9 +57,9 @@
       "Accessible name, for example \"Quantity Wool sweater\"."
     ],
     [
-      "decreaseLabel, increaseLabel",
-      "string",
-      ""
+      "labels",
+      "{ decrease, increase }",
+      "decreaseLabel and increaseLabel are deprecated."
     ],
     [
       "size, disabled",

@@ -13,11 +13,11 @@ export default meta;
 type Story = StoryObj<typeof SearchInput>;
 export const Playground: Story = {};
 export const Filled: Story = { args: { defaultValue: 'annual report' } };
-export const WithLabel: Story = { args: { showLabel: true, shortcut: undefined } };
+export const WithLabel: Story = { args: { hideLabel: false, shortcut: undefined } };
 export const Disabled: Story = { args: { disabled: true } };
 export const Controlled: Story = {
   render: (args) => {
     const [q, setQ] = useState('');
-    return <><SearchInput {...args} value={q} onChange={setQ} /><p style={{ font: 'inherit', color: 'var(--color-foreground-tertiary)' }}>Search term: {q || '–'}</p></>;
+    return <><SearchInput {...args} value={q} onValueChange={setQ} /><p style={{ font: 'inherit', color: 'var(--color-foreground-tertiary)' }}>Search term: {q || '–'}</p></>;
   },
 };

@@ -58,9 +58,9 @@
       ""
     ],
     [
-      "onChange",
+      "onValueChange",
       "([lo, hi]) => void",
-      ""
+      "onChange is deprecated."
     ],
     [
       "formatValue",
@@ -68,9 +68,9 @@
       "For example formatMoney."
     ],
     [
-      "minLabel, maxLabel",
-      "string",
-      "Names of the handles."
+      "labels",
+      "{ min, max }",
+      "Names of the handles. minLabel and maxLabel are deprecated."
     ]
   ],
   "behaviour": [

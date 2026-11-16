@@ -72,9 +72,14 @@
       "Screen reader name per number. Default 'Page 3'."
     ],
     [
-      "aria-label",
+      "label",
       "string",
-      "Name of the navigation. Default 'Pagination'."
+      "Name of the navigation. Default 'Pagination'. aria-label also works."
+    ],
+    [
+      "labels",
+      "{ previous, next, pageStatus, page }",
+      "The single props are deprecated."
     ]
   ],
   "behaviour": [

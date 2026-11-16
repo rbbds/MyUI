@@ -67,7 +67,7 @@ export const Group: StoryObj<typeof ButtonGroup> = {
   render: () => {
     const [v, setV] = useState('week');
     return (
-      <ButtonGroup aria-label="Period" value={v} onChange={setV} options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }, { value: 'year', label: 'Year' }]} />
+      <ButtonGroup label="Period" value={v} onValueChange={setV} options={[{ value: 'day', label: 'Day' }, { value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }, { value: 'year', label: 'Year' }]} />
     );
   },
 };

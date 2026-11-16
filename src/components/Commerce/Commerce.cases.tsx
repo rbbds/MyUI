@@ -81,7 +81,7 @@ export const QuantitySteppers: Story = {
     const [q, setQ] = useState(2);
     return (
       <div style={col}>
-        <QuantityStepper value={q} onChange={setQ} max={5} label="Quantity mugs" />
+        <QuantityStepper value={q} onValueChange={setQ} max={5} label="Quantity mugs" />
         <span>Quantity: {q} (max 5)</span>
         <QuantityStepper size="sm" defaultValue={1} label="Quantity small" />
         <QuantityStepper disabled defaultValue={1} label="Quantity disabled" />
@@ -128,7 +128,7 @@ export const CartSummaryExample: Story = {
       <div style={{ maxWidth: 380 }}>
         <CartSummary subtotal={108.95} lines={[{ label: 'Shipping', amount: 0, note: 'Free' }, ...(code ? [{ label: `Discount (${code})`, amount: discount }] : [])]} total={108.95 + discount}
           promo={<PromoCode applied={code} onRemove={() => setCode(null)} onApply={(c) => (c.toUpperCase() === 'WELCOME10' ? void setCode('WELCOME10') : 'We do not know this code. Try WELCOME10.')} />}
-          action={<Button fullWidth>Checkout</Button>} />
+          actions={<Button fullWidth>Checkout</Button>} />
       </div>
     );
   },
@@ -181,7 +181,7 @@ const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((s) => ({ value: s, label: 
 export const VariantPickers: Story = {
   render: () => (
     <div style={col}>
-      <VariantPicker type="color" label="Color" options={colors} defaultValue="blue" />
+      <VariantPicker variant="color" label="Color" options={colors} defaultValue="blue" />
       <VariantPicker label="Size" options={sizes} aside={<Button hierarchy="link" size="sm">Size guide</Button>} />
       <VariantPicker label="Size" options={sizes} error="Choose a size." />
     </div>
@@ -225,7 +225,7 @@ export const DeliveryAndPayment: Story = {
 export const Address: Story = {
   render: () => {
     const [a, setA] = useState({});
-    return <div style={{ maxWidth: 520 }}><AddressFields value={a} onChange={setA} /></div>;
+    return <div style={{ maxWidth: 520 }}><AddressFields value={a} onValueChange={setA} /></div>;
   },
 };
 
@@ -237,9 +237,9 @@ export const Filters: Story = {
     const [price, setPrice] = useState<[number, number]>([20, 150]);
     return (
       <div style={{ maxWidth: 300 }}>
-        <FilterGroup title="Brand" options={brandOptions} value={brands} onChange={setBrands} limit={5} />
+        <FilterGroup title="Brand" options={brandOptions} value={brands} onValueChange={setBrands} limit={5} />
         <FilterGroup title="Price">
-          <RangeSlider label="Price" hideLabel min={0} max={250} step={5} value={price} onChange={setPrice} formatValue={(v) => formatMoney(v)} minLabel="Minimum price" maxLabel="Maximum price" />
+          <RangeSlider label="Price" hideLabel min={0} max={250} step={5} value={price} onValueChange={setPrice} formatValue={(v) => formatMoney(v)} minLabel="Minimum price" maxLabel="Maximum price" />
         </FilterGroup>
         <FilterGroup title="Availability" defaultOpen={false} options={[{ value: 'stock', label: 'In stock', count: 182 }, { value: 'sale', label: 'On sale', count: 23 }]} />
       </div>
@@ -277,7 +277,7 @@ export const ProductListingPage: Story = {
           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(200px,260px) 1fr', gap: 32 }}>
             <aside aria-labelledby="flt-h">
               <h2 id="flt-h" className="rb-visually-hidden">Filters</h2>
-              <FilterGroup title="Brand" options={brandOptions} value={brands} onChange={setBrands} limit={5} />
+              <FilterGroup title="Brand" options={brandOptions} value={brands} onValueChange={setBrands} limit={5} />
               <FilterGroup title="Price"><RangeSlider label="Price" hideLabel min={0} max={250} step={5} defaultValue={[0, 250]} formatValue={(v) => formatMoney(v)} minLabel="Minimum price" maxLabel="Maximum price" /></FilterGroup>
             </aside>
             <div style={{ display: 'grid', gap: 24, alignContent: 'start' }}>
@@ -315,7 +315,7 @@ export const ProductDetailPage: Story = {
                 <Rating value={4.5} count={128} showValue />
               </div>
               <Price amount={79.95} compareAt={99.95} size="lg" />
-              <VariantPicker type="color" label="Color" options={colors} defaultValue="blue" />
+              <VariantPicker variant="color" label="Color" options={colors} defaultValue="blue" />
               <VariantPicker label="Size" options={sizes} defaultValue="M" aside={<Button hierarchy="link" size="sm">Size guide</Button>} />
               <AddToCart productName="Wool sweater" stock="in-stock" delivery="Order before 22:00, delivered tomorrow" onAdd={(q) => { setCount((c) => c + q); setOpen(true); }} />
               <Accordion headingLevel={2} items={[{ id: 'm', title: 'Material and care', content: '100% merino wool. Wash at 30 degrees on the wool cycle.' }, { id: 'v', title: 'Shipping and returns', content: 'Free shipping from €50. Free returns within 30 days.' }]} />
@@ -348,7 +348,7 @@ export const CartPage: Story = {
           </section>
           <CartSummary subtotal={sub} lines={[{ label: 'Shipping', amount: 0, note: sub >= 50 ? 'Free' : formatMoney(4.95) }, ...(code ? [{ label: `Discount (${code})`, amount: disc }] : [])]} total={sub + disc + (sub >= 50 ? 0 : 4.95)}
             promo={<PromoCode applied={code} onRemove={() => setCode(null)} onApply={(c) => (c.toUpperCase() === 'WELCOME10' ? void setCode('WELCOME10') : 'We do not know this code.')} />}
-            action={<Button fullWidth>Continue to checkout</Button>} />
+            actions={<Button fullWidth>Continue to checkout</Button>} />
         </main>
       </>
     );
@@ -370,7 +370,7 @@ export const CheckoutPage: Story = {
             <form style={{ display: 'grid', gap: 32, minWidth: 0 }} onSubmit={(e) => e.preventDefault()}>
               <section style={{ display: 'grid', gap: 16 }}>
                 <h2 style={{ margin: 0, fontFamily: 'var(--text-headings-h4-font-family)', fontSize: 'var(--text-headings-h4-font-size)', fontWeight: 'var(--text-headings-h4-font-weight)' as never }}>Delivery address</h2>
-                <AddressFields value={a} onChange={setA} />
+                <AddressFields value={a} onValueChange={setA} />
                 <Checkbox label="Billing address is the same" defaultChecked />
               </section>
               <SelectionCardGroup legend="Delivery">

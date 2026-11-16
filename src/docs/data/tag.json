@@ -44,11 +44,6 @@
       "Shows the close button."
     ],
     [
-      "removeLabel",
-      "string",
-      "Accessible name of the close button."
-    ],
-    [
       "size / dot",
       "",
       ""
@@ -56,7 +51,7 @@
     [
       "labels",
       "{ remove(label) }",
-      "Used when removeLabel is not set. Defaults in DEFAULT_TAG_LABELS."
+      "Name of the close button. Defaults in DEFAULT_TAG_LABELS. removeLabel is deprecated."
     ]
   ],
   "behaviour": [

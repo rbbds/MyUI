@@ -64,9 +64,9 @@
       ""
     ],
     [
-      "promo, action",
+      "promo, actions",
       "ReactNode",
-      ""
+      "action is deprecated."
     ],
     [
       "children",

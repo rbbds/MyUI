@@ -47,14 +47,14 @@
   ],
   "reactProps": [
     [
-      "title, description, action",
+      "title, description, actions",
       "ReactNode",
-      ""
+      "action is deprecated."
     ],
     [
       "headingLevel",
       "2 | 3 | 4",
-      "Default 2."
+      "Default 2: a page section."
     ],
     [
       "plain",
@@ -62,9 +62,9 @@
       "Without the card border, for example in a Modal."
     ],
     [
-      "DescriptionItem label, children, action",
+      "DescriptionItem label, children, actions",
       "ReactNode",
-      "children is the value."
+      "children is the value. action is deprecated."
     ]
   ],
   "behaviour": [

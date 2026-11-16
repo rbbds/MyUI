@@ -37,7 +37,7 @@ export default [
     avoid: ['Only showing a status: use Badge.'],
     anatomy: ['Container.', 'Dot (optional).', 'Label.', 'Close button (optional, Closable).'],
     figmaProps: [['Size', 'sm, md, lg', ''], ['State', 'Default, Hover, Focus', ''], ['Label / Dot / Closable', 'via _Tag', '']],
-    reactProps: [['onRemove', '() => void', 'Shows the close button.'], ['removeLabel', 'string', 'Accessible name of the close button.'], ['size / dot', '', ''], ['labels', '{ remove(label) }', 'Used when removeLabel is not set. Defaults in DEFAULT_TAG_LABELS.']],
+    reactProps: [['onRemove', '() => void', 'Shows the close button.'], ['size / dot', '', ''], ['labels', '{ remove(label) }', 'Name of the close button. Defaults in DEFAULT_TAG_LABELS. removeLabel is deprecated.']],
     behaviour: ['The close button removes the tag. Then move focus to a logical place (the next tag or the filter field).'],
     a11y: ['The close button is a <button> with a label like "Remove filter Active".'],
     content: ['Show the value, not the category: "Amsterdam", not "Location".'],

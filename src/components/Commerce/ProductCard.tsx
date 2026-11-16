@@ -1,6 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
 import { Button, ButtonIcon } from '../Button/Button';
 import { Price, Rating, StockIndicator, type StockStatus } from './Basics';
 import './Commerce.css';
@@ -25,22 +26,24 @@ export interface ProductCardProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   wishlisted?: boolean;
   onToggleWishlist?: () => void;
   onAddToCart?: () => void;
+  /** @deprecated Use labels.addToCart. Removed in 2.0.0. */
   addToCartLabel?: string;
   layout?: 'vertical' | 'horizontal';
   labels?: Partial<ProductCardLabels>;
 }
-export interface ProductCardLabels { wishlist: (title: string) => string; colors: (count: number) => string }
+export interface ProductCardLabels { wishlist: (title: string) => string; colors: (count: number) => string; addToCart: string }
 export const DEFAULT_PRODUCT_CARD_LABELS: ProductCardLabels = {
   wishlist: (title) => `Save ${title} to wishlist`,
   colors: (count) => `${count} ${count === 1 ? 'color' : 'colors'}`,
+  addToCart: 'Add to cart',
 };
 
 /** Product tile for grids and carousels. */
 export function ProductCard({
   title, href, image, meta, price, compareAt, currency, rating, reviewCount, badge, swatches, stock,
-  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel = 'Add to cart', layout = 'vertical', labels, className, ...rest
+  wishlisted, onToggleWishlist, onAddToCart, addToCartLabel, layout = 'vertical', labels, className, ...rest
 }: ProductCardProps) {
-  const l = { ...DEFAULT_PRODUCT_CARD_LABELS, ...labels };
+  const l = mergeLabels(DEFAULT_PRODUCT_CARD_LABELS, labels, { addToCart: addToCartLabel });
   const shown = swatches?.slice(0, 4) ?? [];
   return (
     <article className={cx('rb-product-card', `rb-product-card--${layout}`, stock === 'out' && 'rb-product-card--out', className)} {...rest}>
@@ -75,8 +78,8 @@ export function ProductCard({
           {stock && stock !== 'in-stock' && <StockIndicator status={stock} />}
         </div>
         {onAddToCart && (
-          <Button className="rb-product-card__cta" hierarchy="secondary" size="sm" iconLeading={<ShoppingCart />} disabled={stock === 'out'} onClick={onAddToCart} aria-label={`${addToCartLabel}: ${title}`}>
-            {addToCartLabel}
+          <Button className="rb-product-card__cta" hierarchy="secondary" size="sm" iconLeading={<ShoppingCart />} disabled={stock === 'out'} onClick={onAddToCart} aria-label={`${l.addToCart}: ${title}`}>
+            {l.addToCart}
           </Button>
         )}
       </div>

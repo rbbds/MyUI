@@ -39,9 +39,9 @@
   ],
   "reactProps": [
     [
-      "DocumentList title, action, headingLevel",
+      "DocumentList title, actions, headingLevel",
       "",
-      "headingLevel default 2."
+      "headingLevel default 2. action is deprecated."
     ],
     [
       "DocumentItem title, href",
@@ -59,9 +59,14 @@
       ""
     ],
     [
-      "downloadHref, downloadLabel",
+      "downloadHref",
       "string",
       "Download link next to the title."
+    ],
+    [
+      "labels",
+      "{ download(title), unread }",
+      "downloadLabel and unreadLabel are deprecated."
     ],
     [
       "icon",
