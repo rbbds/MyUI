@@ -64,9 +64,14 @@
       "Back link before the trail. Default label 'Back'."
     ],
     [
-      "aria-label",
+      "label",
       "string",
-      "Default 'Breadcrumb'."
+      "Default 'Breadcrumb'. aria-label also works."
+    ],
+    [
+      "labels",
+      "{ home, back }",
+      "homeLabel and backLabel are deprecated."
     ],
     [
       "backLabel",

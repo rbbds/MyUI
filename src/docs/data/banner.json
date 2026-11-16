@@ -49,14 +49,19 @@
       "Default brand."
     ],
     [
-      "title, children, icon, action",
+      "title, children, icon, actions",
       "ReactNode",
-      ""
+      "action is deprecated."
     ],
     [
-      "onClose, closeLabel",
-      "() => void, string",
+      "onClose",
+      "() => void",
       "Shows the close button."
+    ],
+    [
+      "labels",
+      "{ close, region }",
+      "closeLabel and regionLabel are deprecated."
     ],
     [
       "role",

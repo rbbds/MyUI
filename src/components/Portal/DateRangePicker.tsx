@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useControlled } from '../../utils/useControlled';
+import { mergeLabels } from '../../utils/labels';
 import { Button } from '../Button/Button';
 import { Calendar, formatDate } from '../Form/DatePicker';
 import { Field, type FieldBaseProps } from '../Form/Field';
@@ -35,16 +37,21 @@ export const defaultDateRangePresets = (today = day(new Date()), labels: Partial
 export interface DateRangePickerLabels {
   quickPicks: string; custom: string; cancel: string; apply: string;
   chooseStart: string; chooseEnd: string; days: (count: number) => string;
+  /** Name of the dialog. */
+  dialog: string;
 }
 export const DEFAULT_DATE_RANGE_PICKER_LABELS: DateRangePickerLabels = {
   quickPicks: 'Quick picks', custom: 'Custom', cancel: 'Cancel', apply: 'Apply',
   chooseStart: 'Choose a start date', chooseEnd: 'Choose an end date', days: (count) => `${count} ${count === 1 ? 'day' : 'days'}`,
+  dialog: 'Choose a period',
 };
 
 export interface DateRangePickerProps extends FieldBaseProps {
   value?: DateRange;
   defaultValue?: DateRange;
   /** Called on Apply with the chosen range. */
+  onValueChange?: (range: DateRange) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (range: DateRange) => void;
   presets?: DateRangePreset[] | false;
   min?: Date;
@@ -53,6 +60,7 @@ export interface DateRangePickerProps extends FieldBaseProps {
   id?: string;
   placeholder?: string;
   locale?: string;
+  /** @deprecated Use labels.dialog. Removed in 2.0.0. */
   dialogLabel?: string;
   labels?: Partial<DateRangePickerLabels>;
   className?: string;
@@ -63,13 +71,12 @@ const days = (r: DateRange) => (r.start && r.end ? Math.round((day(r.end).getTim
 
 /** Pick a period: quick picks, two months side by side, confirm with Apply. */
 export function DateRangePicker({
-  label, hideLabel, hint, error, required, size = 'md', value, defaultValue = { start: null, end: null }, onChange,
+  label, hideLabel, hint, error, required, size = 'md', value, defaultValue = { start: null, end: null }, onValueChange, onChange,
   presets = defaultDateRangePresets(), min, max, disabled, id, placeholder = 'Choose a period', locale = 'en-US',
-  dialogLabel = 'Choose a period', labels, className,
+  dialogLabel, labels, className,
 }: DateRangePickerProps) {
-  const l = { ...DEFAULT_DATE_RANGE_PICKER_LABELS, ...labels };
-  const [own, setOwn] = useState<DateRange>(defaultValue);
-  const range = value ?? own;
+  const l = mergeLabels(DEFAULT_DATE_RANGE_PICKER_LABELS, labels, { dialog: dialogLabel });
+  const [range, setRange] = useControlled<DateRange>(value, defaultValue, (r) => { onValueChange?.(r); onChange?.(r); });
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DateRange>(range);
   const [hover, setHover] = useState<Date | null>(null);
@@ -98,7 +105,7 @@ export function DateRangePicker({
   const control = useRef<HTMLDivElement>(null);
   usePanelDismiss({ open, root, onDismiss: (reason) => (reason === 'escape' ? close() : setOpen(false)) });
   usePlacement({ open, panel, anchor: control });
-  const apply = () => { if (value === undefined) setOwn(draft); onChange?.(draft); close(); };
+  const apply = () => { setRange(draft); close(); };
 
   const pick = (d: Date) => {
     if (!draft.start || draft.end) setDraft({ start: d, end: null });
@@ -119,7 +126,7 @@ export function DateRangePicker({
     ? `${fmtShort(draft.start, locale, !(draft.start.getFullYear() === draft.end.getFullYear()))} – ${fmtShort(draft.end, locale, true)} · ${l.days(days(draft))}`
     : draft.start ? l.chooseEnd : l.chooseStart;
   const next = new Date(month.getFullYear(), month.getMonth() + 1, 1);
-  const common = { rangeStart: shown.start, rangeEnd: shown.end, onChange: pick, onDayHover: setHover, min, max, locale, className: 'rb-calendar--plain', views: ['day' as const] };
+  const common = { rangeStart: shown.start, rangeEnd: shown.end, onValueChange: pick, onDayHover: setHover, min, max, locale, className: 'rb-calendar--plain', views: ['day' as const] };
 
   return (
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={cx('rb-daterange', className)}>
@@ -145,7 +152,7 @@ export function DateRangePicker({
             </button>
           </div>
           {open && (
-            <div ref={panel} id={dialogId} role="dialog" aria-label={dialogLabel} className="rb-daterange__panel">
+            <div ref={panel} id={dialogId} role="dialog" aria-label={l.dialog} className="rb-daterange__panel">
               {presetList.length > 0 && (
                 <div className="rb-daterange__presets" role="group" aria-label={l.quickPicks}>
                   {presetList.map((p) => (

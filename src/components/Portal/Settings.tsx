@@ -1,5 +1,6 @@
 import { cloneElement, isValidElement, useId, type HTMLAttributes, type ReactElement, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
+import type { HeadingLevel } from '../../utils/useControlled';
 import './Portal2.css';
 
 export interface SettingsSectionProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
@@ -7,7 +8,8 @@ export interface SettingsSectionProps extends Omit<HTMLAttributes<HTMLElement>, 
   description?: ReactNode;
   /** Save/Cancel for a group of fields. Toggles save immediately and need no actions. */
   actions?: ReactNode;
-  headingLevel?: 2 | 3;
+  /** 2 by default: a page section below the h1. */
+  headingLevel?: HeadingLevel;
   /** SettingRow elements or form fields. */
   children: ReactNode;
 }

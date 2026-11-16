@@ -83,3 +83,4 @@
 .rb-table__empty:hover td{background:transparent!important}
 .rb-table__skeleton:hover td{background:transparent!important}
 @media (max-width:599px){.rb-table-wrap__header{flex-wrap:wrap}.rb-table-wrap__actions{margin-left:0;width:100%}.rb-table-wrap__actions>*{flex:1}}
+.rb-card--link .rb-card__actions{position:relative;z-index:1}

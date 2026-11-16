@@ -50,14 +50,19 @@
       ""
     ],
     [
-      "type",
+      "variant",
       "'underline' | 'pill'",
-      ""
+      "type is deprecated."
     ],
     [
-      "value / defaultValue / onChange",
+      "value / defaultValue / onValueChange",
       "string",
-      ""
+      "onChange is deprecated."
+    ],
+    [
+      "label",
+      "string",
+      "Name of the tab list. aria-label also works."
     ]
   ],
   "behaviour": [

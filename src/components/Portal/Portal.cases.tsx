@@ -53,10 +53,10 @@ export const PageHeaderSimple: Story = { name: 'Title only', render: () => <Page
 export const DescriptionLists: Story = {
   render: () => (
     <div style={{ maxWidth: 720 }}>
-      <DescriptionList title="Personal details" description="We use these details for your account and invoices." action={<Button hierarchy="secondary" size="sm">Change</Button>}>
+      <DescriptionList title="Personal details" description="We use these details for your account and invoices." actions={<Button hierarchy="secondary" size="sm">Change</Button>}>
         <DescriptionItem label="Name">Robert Jansen</DescriptionItem>
         <DescriptionItem label="Member since">March 12, 2024</DescriptionItem>
-        <DescriptionItem label="Email address" action={<Button hierarchy="link" size="sm">Change<span className="rb-visually-hidden"> email address</span></Button>}>robert@example.com</DescriptionItem>
+        <DescriptionItem label="Email address" actions={<Button hierarchy="link" size="sm">Change<span className="rb-visually-hidden"> email address</span></Button>}>robert@example.com</DescriptionItem>
         <DescriptionItem label="Address">Lange Voorhout 1<br />2514 EA Den Haag</DescriptionItem>
         <DescriptionItem label="Phone number"><span style={{ color: 'var(--color-foreground-tertiary)' }}>Not filled in</span></DescriptionItem>
       </DescriptionList>
@@ -71,10 +71,10 @@ export const Banners: Story = {
     const [open, setOpen] = useState(true);
     return (
       <div style={{ display: 'grid', gap: 16 }}>
-        {open && <Banner color="warning" title="Your details are incomplete." action={<Button hierarchy="link" size="sm">Complete details</Button>} onClose={() => setOpen(false)}>Add a billing address to keep your plan active.</Banner>}
+        {open && <Banner color="warning" title="Your details are incomplete." actions={<Button hierarchy="link" size="sm">Complete details</Button>} onClose={() => setOpen(false)}>Add a billing address to keep your plan active.</Banner>}
         <Banner color="brand" title="New:">you can now download your documents as PDF.</Banner>
         <Banner color="info" title="Maintenance on Saturday, November 14.">Your account is unavailable from 8:00 to 12:00.</Banner>
-        <Banner color="error" title="Your payment failed." action={<Button hierarchy="link" size="sm">Pay again</Button>}>Check your card details and try again.</Banner>
+        <Banner color="error" title="Your payment failed." actions={<Button hierarchy="link" size="sm">Pay again</Button>}>Check your card details and try again.</Banner>
         <Banner color="success" title="Your request has been sent.">We process it within 2 working days.</Banner>
         <Banner color="gray">You are viewing the account of Anne de Vries as an admin.</Banner>
       </div>
@@ -107,7 +107,7 @@ function TeamTable({ loading = false, data = team, actions = true }: { loading?:
       actions={actions && data.length > 0 && <Button size="sm" iconLeading={<Plus aria-hidden />}>Add team member</Button>}
       toolbar={<>
         <TableToolbar end={<><Button hierarchy="secondary" size="sm">Columns</Button><ButtonIcon hierarchy="secondary" size="sm" icon={<Download />} aria-label="Export" /></>}>
-          <SearchInput label="Search team members" size="sm" value={query} onChange={search} />
+          <SearchInput label="Search team members" size="sm" value={query} onValueChange={search} />
           <Button hierarchy="secondary" size="sm" iconLeading={<ListFilter aria-hidden />}>Filters</Button>
         </TableToolbar>
         <TableBulkActions count={selected.length} onClear={() => setSelected([])}
@@ -152,7 +152,7 @@ export const DateRangePickers: Story = {
     const [r, setR] = useState<DateRange>({ start: new Date(2026, 10, 23), end: new Date(2026, 11, 4) });
     return (
       <div style={{ minHeight: 520 }}>
-        <DateRangePicker label="Period" value={r} onChange={setR} hint="Choose a quick pick or click a start and end date." />
+        <DateRangePicker label="Period" value={r} onValueChange={setR} hint="Choose a quick pick or click a start and end date." />
       </div>
     );
   },
@@ -168,7 +168,7 @@ export const Dashboard: Story = {
         <Banner color="info" title="Maintenance on Saturday, November 14.">The app is unavailable from 8:00 to 12:00.</Banner>
         <main style={{ display: 'grid', gap: 32, padding: '32px clamp(16px,4vw,48px)', maxWidth: 1280, margin: '0 auto' }}>
           <PageHeader title="Dashboard" description="Overview of your workspace."
-            actions={<ButtonGroup aria-label="Period" value={period} onChange={setPeriod} options={[{ value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }, { value: 'year', label: 'Year' }]} />} />
+            actions={<ButtonGroup label="Period" value={period} onValueChange={setPeriod} options={[{ value: 'week', label: 'Week' }, { value: 'month', label: 'Month' }, { value: 'year', label: 'Year' }]} />} />
           <section aria-labelledby="kpi"><h2 id="kpi" className="rb-visually-hidden">Key figures</h2>
             <div className="rb-metric-grid">
               <MetricCard label="Team members" value="1.204" delta="+18" trend="up" meta={`this ${period}`} icon={<FeaturedIcon size="sm" icon={<Users />} />} />
@@ -190,21 +190,21 @@ export const MyDetails: Story = {
   parameters: { layout: 'fullscreen' },
   render: () => (
     <div>
-      <Banner color="warning" title="Your details are incomplete." action={<Button hierarchy="link" size="sm">Complete details</Button>}>Add a billing address to keep your plan active.</Banner>
+      <Banner color="warning" title="Your details are incomplete." actions={<Button hierarchy="link" size="sm">Complete details</Button>}>Add a billing address to keep your plan active.</Banner>
       <main style={{ display: 'grid', gap: 32, padding: '32px clamp(16px,4vw,48px)', maxWidth: 960, margin: '0 auto' }}>
         <PageHeader breadcrumbs={<Breadcrumbs items={[{ label: 'My account', href: '#' }, { label: 'My details' }]} />} title="My details" description="Check your details. Is something wrong? Change it right away." />
-        <DescriptionList title="Personal details" action={<Button hierarchy="secondary" size="sm">Change</Button>}>
+        <DescriptionList title="Personal details" actions={<Button hierarchy="secondary" size="sm">Change</Button>}>
           <DescriptionItem label="Name">Robert Jansen</DescriptionItem>
           <DescriptionItem label="Member since">March 12, 2024</DescriptionItem>
           <DescriptionItem label="Account ID">ACC-2048-7731</DescriptionItem>
         </DescriptionList>
-        <DescriptionList title="Contact and address" action={<Button hierarchy="secondary" size="sm">Change</Button>}>
+        <DescriptionList title="Contact and address" actions={<Button hierarchy="secondary" size="sm">Change</Button>}>
           <DescriptionItem label="Email address">robert@example.com</DescriptionItem>
           <DescriptionItem label="Phone number">+31 6 12 34 56 78</DescriptionItem>
           <DescriptionItem label="Address">Lange Voorhout 1<br />2514 EA Den Haag</DescriptionItem>
         </DescriptionList>
         <DescriptionList title="Billing" description="We charge your plan to this card.">
-          <DescriptionItem label="Payment card" action={<Button hierarchy="link" size="sm">Add<span className="rb-visually-hidden"> payment card</span></Button>}><span style={{ color: 'var(--color-foreground-tertiary)' }}>Not filled in</span></DescriptionItem>
+          <DescriptionItem label="Payment card" actions={<Button hierarchy="link" size="sm">Add<span className="rb-visually-hidden"> payment card</span></Button>}><span style={{ color: 'var(--color-foreground-tertiary)' }}>Not filled in</span></DescriptionItem>
         </DescriptionList>
       </main>
     </div>

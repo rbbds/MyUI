@@ -1,36 +1,51 @@
-import { forwardRef, useImperativeHandle, useRef, useState, type InputHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useImperativeHandle, useRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { Search, X } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import { Kbd } from '../Display/Feedback';
 import { Field } from './Field';
 
+export interface SearchInputLabels {
+  /** Name of the clear button. */
+  clear: string;
+}
+export const DEFAULT_SEARCH_INPUT_LABELS: SearchInputLabels = { clear: 'Clear search' };
+
 export interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'type' | 'value' | 'defaultValue' | 'onChange'> {
-  /** Accessible label. Visually hidden unless `showLabel` is set. */
+  /** Accessible label. Visually hidden by default (`hideLabel` is true). */
   label: ReactNode;
-  showLabel?: boolean;
+  /** Hide the label visually. Default true: a search field usually explains itself. Set false to show it, like Field. */
+  hideLabel?: boolean;
   size?: 'sm' | 'md' | 'lg';
   value?: string;
   defaultValue?: string;
-  onChange?: (value: string) => void;
+  /** Called with the new text. */
+  onValueChange?: (value: string) => void;
   /** Shortcut hint shown while the field is empty, e.g. "⌘K". The shortcut itself is up to the app. */
   shortcut?: ReactNode;
-  /** Accessible name of the clear button. */
+  labels?: Partial<SearchInputLabels>;
+  /** @deprecated Use hideLabel={false}. Removed in 2.0.0. */
+  showLabel?: boolean;
+  /** @deprecated Use onValueChange. In 2.0.0 onChange gets the native change event, like Input. */
+  onChange?: (value: string) => void;
+  /** @deprecated Use labels.clear. Removed in 2.0.0. */
   clearLabel?: string;
 }
 
 /** Search field with clear button. Wrap it in <form role="search"> or a region with role="search". */
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(function SearchInput(
-  { label, showLabel = false, size = 'md', value, defaultValue = '', onChange, shortcut, clearLabel = 'Clear search', placeholder = 'Search', disabled, className, id, onKeyDown, ...rest },
+  { label, hideLabel, showLabel, size = 'md', value, defaultValue = '', onValueChange, onChange, shortcut, labels, clearLabel, placeholder = 'Search', disabled, className, id, onKeyDown, ...rest },
   ref,
 ) {
   const inner = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inner.current as HTMLInputElement);
-  const [own, setOwn] = useState(defaultValue);
-  const current = value ?? own;
-  const set = (v: string) => { if (value === undefined) setOwn(v); onChange?.(v); };
+  const l = mergeLabels(DEFAULT_SEARCH_INPUT_LABELS, labels, { clear: clearLabel });
+  const [current, set] = useControlled(value, defaultValue, (v) => { onValueChange?.(v); onChange?.(v); });
+  const hidden = hideLabel ?? (showLabel === undefined ? true : !showLabel);
 
   return (
-    <Field id={id} label={label} hideLabel={!showLabel} disabled={disabled} className={className}>
+    <Field id={id} label={label} hideLabel={hidden} disabled={disabled} className={className}>
       {({ id: fieldId }) => (
         <div className={cx('rb-control', 'rb-control--search', `rb-control--${size}`, disabled && 'rb-control--disabled')}>
           <span className="rb-control__icon" aria-hidden="true"><Search /></span>
@@ -47,7 +62,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(functi
             {...rest}
           />
           {current && !disabled ? (
-            <button type="button" className="rb-control__clear" aria-label={clearLabel} onClick={() => { set(''); inner.current?.focus(); }}>
+            <button type="button" className="rb-control__clear" aria-label={l.clear} onClick={() => { set(''); inner.current?.focus(); }}>
               <X aria-hidden="true" />
             </button>
           ) : shortcut ? (

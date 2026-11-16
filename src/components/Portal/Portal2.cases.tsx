@@ -44,7 +44,7 @@ const docs = [
 export const DocumentLists: Story = {
   render: () => (
     <div style={{ maxWidth: 720 }}>
-      <DocumentList title="Documents" action={<Button hierarchy="link" size="sm">All documents</Button>}>
+      <DocumentList title="Documents" actions={<Button hierarchy="link" size="sm">All documents</Button>}>
         {docs.map((d) => <DocumentItem key={d.id} title={d.title} href="#" meta={d.meta} unread={d.unread} downloadHref="#" />)}
       </DocumentList>
     </div>
@@ -128,7 +128,7 @@ export const Checklists: Story = {
       <Checklist title="Complete your account" done={2} total={5}>
         <ChecklistItem status="done" title="Account created" />
         <ChecklistItem status="done" title="Email address confirmed" />
-        <ChecklistItem status="current" title="Add company details" description="Add your company details so your invoices are correct." action={<Button hierarchy="link" size="sm">Check now</Button>} />
+        <ChecklistItem status="current" title="Add company details" description="Add your company details so your invoices are correct." actions={<Button hierarchy="link" size="sm">Check now</Button>} />
         <ChecklistItem status="open" title="Add a billing address" />
         <ChecklistItem status="open" title="Invite your team" />
       </Checklist>
@@ -143,7 +143,7 @@ export const VerificationCodes: Story = {
     return (
       <div style={{ display: 'grid', gap: 32 }}>
         <VerificationCode label="Verification code" hint="We sent a code to +31 6 •• •• •• 78." value={v} error={err}
-          onChange={(x) => { setV(x); setErr(undefined); }} onComplete={(x) => { if (x !== '123456') setErr('This code is not right. Check the digits or ask for a new code.'); }} />
+          onValueChange={(x) => { setV(x); setErr(undefined); }} onComplete={(x) => { if (x !== '123456') setErr('This code is not right. Check the digits or ask for a new code.'); }} />
         <p style={{ margin: 0, fontSize: 14, color: 'var(--color-foreground-tertiary)' }}>Tip: 123456 is right, any other code shows an error.</p>
         <VerificationCode label="Disabled" defaultValue="482" disabled />
       </div>

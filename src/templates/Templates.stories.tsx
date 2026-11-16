@@ -75,7 +75,7 @@ export const Dashboard: Story = {
               </div>
             </section>
             <div className="rb-template__row">
-              <DocumentList title="Recent documents" action={<Button hierarchy="link" size="sm">View all</Button>}>
+              <DocumentList title="Recent documents" actions={<Button hierarchy="link" size="sm">View all</Button>}>
                 <DocumentItem title="Quarterly report Q3" href="#" meta="PDF, Oct 12" unread />
                 <DocumentItem title="Invoice October" href="#" meta="PDF, Oct 1" />
                 <DocumentItem title="Project plan" href="#" meta="PDF, Sep 18" />
@@ -117,7 +117,7 @@ export const Account: Story = {
         <div className="rb-template__content">
           <PageHeader breadcrumbs={<Breadcrumbs items={[{ label: 'Workspace', href: '#' }, { label: 'Account', href: '#' }, { label: 'My details' }]} />} title="My details" description="Check your details and change them right away." />
           <div className="rb-template__row">
-            <DescriptionList title="Personal details" action={<Button hierarchy="secondary" size="sm">Change</Button>}>
+            <DescriptionList title="Personal details" actions={<Button hierarchy="secondary" size="sm">Change</Button>}>
               <DescriptionItem label="Name">Sanne de Vries</DescriptionItem>
               <DescriptionItem label="Email address">sanne@example.com</DescriptionItem>
               <DescriptionItem label="Member since">11/06/2026</DescriptionItem>
@@ -140,7 +140,7 @@ export const Shop: Story = {
   render: () => {
     const [brands, setBrands] = useState<string[]>(['Northlight']);
     const [open, setOpen] = useState(false);
-    const filters = <FilterGroup title="Brand" options={brandOptions} value={brands} onChange={setBrands} />;
+    const filters = <FilterGroup title="Brand" options={brandOptions} value={brands} onValueChange={setBrands} />;
     return (
       <div className="rb-template">
         {siteHeader}

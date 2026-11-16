@@ -29,9 +29,9 @@
       ""
     ],
     [
-      "copyLabel, copiedLabel, copiedMessage",
-      "string",
-      ""
+      "labels",
+      "{ copy, copied, copiedMessage }",
+      "The single props are deprecated."
     ]
   ],
   "behaviour": [

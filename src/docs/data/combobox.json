@@ -57,9 +57,9 @@
       ""
     ],
     [
-      "onChange",
+      "onValueChange",
       "(value, option) => void",
-      ""
+      "onChange is deprecated (removed in 2.0.0)."
     ],
     [
       "label, hint, error, required, size, disabled, name",

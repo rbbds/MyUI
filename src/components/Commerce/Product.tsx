@@ -1,6 +1,8 @@
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { ChevronLeft, ChevronRight, ShoppingCart, Truck } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import { Button, ButtonIcon } from '../Button/Button';
 import { QuantityStepper, StockIndicator, type StockStatus } from './Basics';
 import './Commerce.css';
@@ -75,10 +77,16 @@ export const DEFAULT_VARIANT_PICKER_LABELS: VariantPickerLabels = { unavailable:
 export interface VariantPickerProps {
   /** Group label, e.g. "Color" or "Size". */
   label: string;
+  /** Color swatches or size chips. */
+  variant?: 'color' | 'size';
+  /** @deprecated Use variant. Removed in 2.0.0. */
   type?: 'color' | 'size';
   options: VariantOption[];
   value?: string;
   defaultValue?: string;
+  /** Called with the chosen value. */
+  onValueChange?: (value: string) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (value: string) => void;
   name?: string;
   /** Link or button next to the label, e.g. "Size guide". */
@@ -89,10 +97,10 @@ export interface VariantPickerProps {
 }
 
 /** Color swatches or size chips. A native radio group, so arrow keys and screen readers work out of the box. */
-export function VariantPicker({ label, type = 'size', options, value, defaultValue, onChange, name, aside, error, labels, className }: VariantPickerProps) {
+export function VariantPicker({ label, variant, type: typeProp, options, value, defaultValue, onValueChange, onChange, name, aside, error, labels, className }: VariantPickerProps) {
+  const type = variant ?? typeProp ?? 'size';
   const l = { ...DEFAULT_VARIANT_PICKER_LABELS, ...labels };
-  const [own, setOwn] = useState(defaultValue);
-  const v = value ?? own;
+  const [v, setValue] = useControlled<string | undefined>(value, defaultValue, (x) => { if (x === undefined) return; onValueChange?.(x); onChange?.(x); });
   const auto = useId();
   const current = options.find((o) => o.value === v);
   return (
@@ -113,7 +121,7 @@ export function VariantPicker({ label, type = 'size', options, value, defaultVal
               value={o.value}
               checked={v === o.value}
               disabled={o.unavailable}
-              onChange={() => { if (value === undefined) setOwn(o.value); onChange?.(o.value); }}
+              onChange={() => setValue(o.value)}
             />
             {type === 'color' ? (
               <span className="rb-variant__swatch" style={{ ['--_c' as string]: o.color }}>
@@ -161,7 +169,7 @@ export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQ
     <div className={cx('rb-add-to-cart', className)}>
       <StockIndicator status={stock}>{stockText}</StockIndicator>
       <div className="rb-add-to-cart__row">
-        <QuantityStepper value={q} onChange={setQ} max={maxQuantity} disabled={out} label={productName ? l.quantityOf(productName) : l.quantity} />
+        <QuantityStepper value={q} onValueChange={setQ} max={maxQuantity} disabled={out} label={productName ? l.quantityOf(productName) : l.quantity} />
         <Button className="rb-add-to-cart__button" hierarchy={hierarchy} iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
           {out ? l.soldOut : label}
         </Button>

@@ -3,6 +3,8 @@ import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import { X } from 'lucide-react';
 import { ButtonIcon } from '../Button/Button';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import './Portal2.css';
 
 /**
@@ -22,23 +24,30 @@ export interface PopoverProps {
   actions?: ReactNode;
   /** Show the close button. Escape and clicking outside always close. */
   closable?: boolean;
+  labels?: Partial<PopoverLabels>;
+  /** @deprecated Use labels.close. Removed in 2.0.0. */
   closeLabel?: string;
   align?: 'start' | 'end';
   /** Show an arrow that points to the middle of the trigger. The panel shifts so the arrow lines up. */
   arrow?: boolean;
   open?: boolean;
+  defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   className?: string;
 }
+export interface PopoverLabels {
+  /** Name of the close button. */
+  close: string;
+}
+export const DEFAULT_POPOVER_LABELS: PopoverLabels = { close: 'Close' };
 
 /**
  * Non-modal panel next to a button with an explanation or a small form.
  * For actions only use DropdownMenu; for one sentence use Tooltip.
  */
-export function Popover({ trigger, title, children, actions, closable = true, closeLabel = 'Close', align = 'start', arrow = false, open: openProp, onOpenChange, className }: PopoverProps) {
-  const [own, setOwn] = useState(false);
-  const open = openProp ?? own;
-  const set = (o: boolean) => { if (openProp === undefined) setOwn(o); onOpenChange?.(o); };
+export function Popover({ trigger, title, children, actions, closable = true, labels, closeLabel, align = 'start', arrow = false, open: openProp, defaultOpen = false, onOpenChange, className }: PopoverProps) {
+  const l = mergeLabels(DEFAULT_POPOVER_LABELS, labels, { close: closeLabel });
+  const [open, set] = useControlled(openProp, defaultOpen, onOpenChange);
   const root = useRef<HTMLSpanElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const id = useId();
@@ -70,7 +79,7 @@ export function Popover({ trigger, title, children, actions, closable = true, cl
           {(title || closable) && (
             <div className="rb-popover__header">
               {title && <p id={titleId} className="rb-popover__title">{title}</p>}
-              {closable && <ButtonIcon hierarchy="tertiary" size="sm" className="rb-popover__close" icon={<X aria-hidden="true" />} onClick={close} aria-label={closeLabel} />}
+              {closable && <ButtonIcon hierarchy="tertiary" size="sm" className="rb-popover__close" icon={<X aria-hidden="true" />} onClick={close} aria-label={l.close} />}
             </div>
           )}
           {children && <div className="rb-popover__body">{children}</div>}

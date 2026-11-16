@@ -42,7 +42,7 @@ export const AppSidebar: StoryObj<typeof Sidebar> = {
         logo={<Logo />}
         search={<form role="search" onSubmit={(e) => e.preventDefault()}><SearchInput label="Search" size="sm" shortcut="⌘K" /></form>}
         footer={<><NavItem href="#" icon={<Settings />}>Settings</NavItem><NavItem href="#" icon={<CircleHelp />}>Help</NavItem></>}
-        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" action={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Log out" />} />}
+        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" actions={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Log out" />} />}
       >
         <NavItem href="#" icon={<House />} active>Dashboard</NavItem>
         <NavItem href="#" icon={<Layers />} count={12}>Projects</NavItem>
@@ -76,7 +76,7 @@ function CollapsibleDemo() {
         search={<form role="search" onSubmit={(e) => e.preventDefault()}><SearchInput label="Search" size="sm" shortcut="⌘K" /></form>}
         searchCollapsed={<ButtonIcon hierarchy="tertiary" size="sm" icon={<Search />} aria-label="Search" />}
         footer={<><NavItem href="#" icon={<Settings />}>Settings</NavItem><NavItem href="#" icon={<CircleHelp />}>Help</NavItem></>}
-        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" action={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Log out" />} />}
+        user={<SidebarUser avatar={<Avatar name="Sanne de Vries" initials="SV" />} name="Sanne de Vries" email="sanne@example.com" actions={<ButtonIcon hierarchy="tertiary" size="sm" icon={<LogOut />} aria-label="Log out" />} />}
         userCollapsed={<Avatar name="Sanne de Vries" initials="SV" />}
       >
         {mainNav}
@@ -115,7 +115,7 @@ function DualDemo() {
         railFooter={<><NavItem href="#" icon={<Settings />} active onClick={open}>Settings</NavItem><NavItem href="#" icon={<CircleHelp />} onClick={open}>Help</NavItem></>}
         avatar={<Avatar name="Sanne de Vries" initials="SV" />}
         title="Settings"
-        user={<SidebarUser name="Sanne de Vries" email="sanne@example.com" action={<ButtonIcon hierarchy="tertiary" size="sm" icon={<EllipsisVertical />} aria-label="Account menu" />} />}
+        user={<SidebarUser name="Sanne de Vries" email="sanne@example.com" actions={<ButtonIcon hierarchy="tertiary" size="sm" icon={<EllipsisVertical />} aria-label="Account menu" />} />}
       >
         <NavItem href="#" icon={<User />}>Profile</NavItem>
         <NavItem href="#" icon={<Lock />} active>Security</NavItem>

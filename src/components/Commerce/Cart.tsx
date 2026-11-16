@@ -1,6 +1,7 @@
 import { useId, useState, type FormEvent, type HTMLAttributes, type ReactNode } from 'react';
 import { ShoppingBag, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
 import { Button, ButtonIcon } from '../Button/Button';
 import { Input } from '../Form/Input';
 import { Tag } from '../Display/Display';
@@ -51,7 +52,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
         </div>
         {!readOnly && (
           <div className="rb-cart-item__actions">
-            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onChange={onQuantityChange} label={l.quantityOf(name)} />
+            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onValueChange={onQuantityChange} label={l.quantityOf(name)} />
             {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={l.remove(name)} onClick={onRemove} />}
           </div>
         )}
@@ -76,6 +77,8 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   /** Slot for PromoCode. */
   promo?: ReactNode;
   /** Primary action, e.g. <Button fullWidth>Checkout</Button>. */
+  actions?: ReactNode;
+  /** @deprecated Use actions. Removed in 2.0.0. */
   action?: ReactNode;
   /** Slot above the rows, e.g. read-only CartItems in checkout (order summary). */
   children?: ReactNode;
@@ -84,7 +87,7 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
 }
 
 /** Totals block for cart and checkout. Use children for the order summary in checkout. */
-export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, action, children, currency = 'EUR', labels, className, ...rest }: CartSummaryProps) {
+export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, actions, action, children, currency = 'EUR', labels, className, ...rest }: CartSummaryProps) {
   const l = { ...DEFAULT_CART_SUMMARY_LABELS, ...labels };
   const id = useId();
   return (
@@ -103,28 +106,29 @@ export function CartSummary({ title = 'Summary', subtotal, lines = [], total, to
       </dl>
       {totalNote && <p className="rb-cart-summary__note">{totalNote}</p>}
       {promo}
-      {action}
+      {actions ?? action}
     </section>
   );
 }
 
 /* ---------- Promo code ---------- */
-export interface PromoCodeLabels { empty: string; remove: (code: string) => string }
-export const DEFAULT_PROMO_CODE_LABELS: PromoCodeLabels = { empty: 'Enter a discount code.', remove: (code) => `Remove discount code ${code}` };
+export interface PromoCodeLabels { empty: string; remove: (code: string) => string; apply: string }
+export const DEFAULT_PROMO_CODE_LABELS: PromoCodeLabels = { empty: 'Enter a discount code.', remove: (code) => `Remove discount code ${code}`, apply: 'Apply' };
 export interface PromoCodeProps {
   /** Return an error message to show, or nothing when the code is accepted. */
   onApply: (code: string) => string | void | Promise<string | void>;
   applied?: string | null;
   onRemove?: () => void;
   label?: string;
-  buttonLabel?: string;
   className?: string;
   labels?: Partial<PromoCodeLabels>;
+  /** @deprecated Use labels.apply. Removed in 2.0.0. */
+  buttonLabel?: string;
 }
 
 /** Discount code field. After applying, the code is shown as a removable Tag. */
-export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel = 'Apply', labels, className }: PromoCodeProps) {
-  const l = { ...DEFAULT_PROMO_CODE_LABELS, ...labels };
+export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel, labels, className }: PromoCodeProps) {
+  const l = mergeLabels(DEFAULT_PROMO_CODE_LABELS, labels, { apply: buttonLabel });
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
@@ -141,12 +145,12 @@ export function PromoCode({ onApply, applied, onRemove, label = 'Discount code',
       {applied ? (
         <div className="rb-promo__applied" role="status">
           <span>{label}:</span>
-          <Tag onRemove={onRemove} removeLabel={l.remove(applied)}>{applied}</Tag>
+          <Tag onRemove={onRemove} labels={{ remove: () => l.remove(applied) }}>{applied}</Tag>
         </div>
       ) : (
         <form className="rb-promo__form" onSubmit={submit} noValidate>
           <Input label={label} size="sm" value={code} onChange={(e) => { setCode(e.target.value); setError(undefined); }} error={error} autoComplete="off" />
-          <Button type="submit" hierarchy="secondary" size="sm" loading={busy}>{buttonLabel}</Button>
+          <Button type="submit" hierarchy="secondary" size="sm" loading={busy}>{l.apply}</Button>
         </form>
       )}
     </div>

@@ -23,14 +23,17 @@ export interface MetricCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 't
   /** Link or button at the bottom, e.g. <Button hierarchy="link" size="sm">View details</Button>. */
   footer?: ReactNode;
   /** Screen reader words for the trend. */
+  labels?: Partial<Record<MetricTrend, string>>;
+  /** @deprecated Use labels. Removed in 2.0.0. */
   trendLabels?: Record<MetricTrend, string>;
 }
 
 const ICON = { up: ArrowUp, down: ArrowDown, neutral: Minus };
-const TREND_LABELS: Record<MetricTrend, string> = { up: 'Up', down: 'Down', neutral: 'No change' };
+export const DEFAULT_METRIC_CARD_LABELS: Record<MetricTrend, string> = { up: 'Up', down: 'Down', neutral: 'No change' };
 
 /** KPI tile: label, value and the change versus the previous period. */
-export function MetricCard({ label, value, delta, trend = 'neutral', meta, icon, menu, footer, trendLabels = TREND_LABELS, className, ...rest }: MetricCardProps) {
+export function MetricCard({ label, value, delta, trend = 'neutral', meta, icon, menu, footer, labels, trendLabels, className, ...rest }: MetricCardProps) {
+  const l = { ...DEFAULT_METRIC_CARD_LABELS, ...labels, ...trendLabels };
   const labelId = useId();
   const Icon = ICON[trend];
   return (
@@ -46,7 +49,7 @@ export function MetricCard({ label, value, delta, trend = 'neutral', meta, icon,
           {delta && (
             <span className={cx('rb-metric__trend', `rb-metric__trend--${trend}`)}>
               <Icon aria-hidden="true" />
-              <span className="rb-visually-hidden">{trendLabels[trend]}: </span>
+              <span className="rb-visually-hidden">{l[trend]}: </span>
               {delta}
             </span>
           )}

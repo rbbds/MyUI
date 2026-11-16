@@ -1,6 +1,8 @@
 import { useId, useState, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled, type HeadingLevel } from '../../utils/useControlled';
 import { Button } from '../Button/Button';
 import { Checkbox, CheckboxGroup } from '../Selection/Checkbox';
 import { Tag } from '../Display/Display';
@@ -15,12 +17,16 @@ export interface FilterGroupProps {
   options?: FilterOption[];
   /** Selected values (checkbox list). */
   value?: string[];
+  defaultValue?: string[];
+  /** Called with the new selection. */
+  onValueChange?: (value: string[]) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (value: string[]) => void;
   /** Show this many options; the rest behind "Show more". */
   limit?: number;
   defaultOpen?: boolean;
   /** Heading level of the title. Default 3 (under an h2 such as "Filters"). */
-  headingLevel?: 2 | 3 | 4;
+  headingLevel?: HeadingLevel;
   /** Custom content instead of the checkbox list, e.g. a RangeSlider. */
   children?: ReactNode;
   className?: string;
@@ -28,14 +34,15 @@ export interface FilterGroupProps {
 }
 
 /** Collapsible filter section with a checkbox list (or custom content). Stack several in a filter panel. */
-export function FilterGroup({ title, options = [], value = [], onChange, limit = 6, defaultOpen = true, headingLevel = 3, children, labels, className }: FilterGroupProps) {
+export function FilterGroup({ title, options = [], value: valueProp, defaultValue = [], onValueChange, onChange, limit = 6, defaultOpen = true, headingLevel = 3, children, labels, className }: FilterGroupProps) {
   const l = { ...DEFAULT_FILTER_GROUP_LABELS, ...labels };
   const H = `h${headingLevel}` as 'h3';
   const [open, setOpen] = useState(defaultOpen);
   const [all, setAll] = useState(false);
   const id = useId();
   const shown = all ? options : options.slice(0, limit);
-  const toggle = (v: string) => onChange?.(value.includes(v) ? value.filter((x) => x !== v) : [...value, v]);
+  const [value, setValue] = useControlled(valueProp, defaultValue, (v) => { onValueChange?.(v); onChange?.(v); });
+  const toggle = (v: string) => setValue(value.includes(v) ? value.filter((x) => x !== v) : [...value, v]);
   return (
     <div className={cx('rb-filter', className)}>
       <H className="rb-filter__heading">
@@ -93,7 +100,7 @@ export function ActiveFilters({ filters, onRemove, onClear, resultCount, labels,
       {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{l.results(resultCount)}</p>}
       {filters.length > 0 && (
         <ul className="rb-active-filters__list" aria-label={l.list}>
-          {filters.map((f) => <li key={f.id}><Tag onRemove={() => onRemove(f.id)} removeLabel={l.remove(f.label)}>{f.label}</Tag></li>)}
+          {filters.map((f) => <li key={f.id}><Tag onRemove={() => onRemove(f.id)} labels={{ remove: () => l.remove(f.label) }}>{f.label}</Tag></li>)}
           {onClear && <li><Button hierarchy="link" size="sm" onClick={onClear}>{l.clearAll}</Button></li>}
         </ul>
       )}

@@ -49,9 +49,19 @@
       "Active option."
     ],
     [
-      "onChange",
+      "value / defaultValue",
+      "string",
+      "Leave value out to let the group keep its own state."
+    ],
+    [
+      "onValueChange",
       "(value) => void",
-      ""
+      "onChange is deprecated (removed in 2.0.0)."
+    ],
+    [
+      "label",
+      "string",
+      "Name of the group, for example \"Period\". aria-label also works."
     ]
   ],
   "behaviour": [

@@ -19,13 +19,13 @@ export const Disabled: Story = { args: { disabled: true, defaultValue: new Date(
 export const CalendarOnly: StoryObj<typeof Calendar> = {
   render: () => {
     const [d, setD] = useState<Date | null>(new Date(2026, 10, 12));
-    return <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}><Calendar value={d} onChange={setD} /><span>Chosen: {d ? formatDate(d) : '–'}</span></div>;
+    return <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}><Calendar value={d} onValueChange={setD} /><span>Chosen: {d ? formatDate(d) : '–'}</span></div>;
   },
 };
 
 const CalDemo = (props: Partial<React.ComponentProps<typeof Calendar>>) => {
   const [d, setD] = useState<Date | null>(new Date(2026, 10, 12));
-  return <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}><Calendar value={d} onChange={setD} {...props} /><span>Chosen: {d ? formatDate(d) : '–'}</span></div>;
+  return <div style={{ display: 'grid', gap: 12, justifyItems: 'start' }}><Calendar value={d} onValueChange={setD} {...props} /><span>Chosen: {d ? formatDate(d) : '–'}</span></div>;
 };
 /** Click "November 2026 ▾" to choose a year, then a month, then a day. */
 export const YearMonthDay: StoryObj<typeof Calendar> = { render: () => <CalDemo views={['year', 'month', 'day']} /> };

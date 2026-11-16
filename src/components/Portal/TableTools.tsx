@@ -1,5 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
 import { Button } from '../Button/Button';
 import { Skeleton } from '../Display/Feedback';
 import './Portal.css';
@@ -27,20 +28,29 @@ export interface TableBulkActionsProps extends HTMLAttributes<HTMLDivElement> {
   onClear: () => void;
   /** Actions for the selection, e.g. Export and a destructive Delete. */
   actions?: ReactNode;
+  labels?: Partial<TableBulkActionsLabels>;
+  /** @deprecated Use labels.count. Removed in 2.0.0. */
   countLabel?: (count: number) => string;
+  /** @deprecated Use labels.clear. Removed in 2.0.0. */
   clearLabel?: string;
 }
+export interface TableBulkActionsLabels {
+  count: (count: number) => string;
+  clear: string;
+}
+export const DEFAULT_TABLE_BULK_ACTIONS_LABELS: TableBulkActionsLabels = { count: (n) => `${n} selected`, clear: 'Clear selection' };
 
 /**
  * Selection bar below the TableToolbar. Clear the selection when search or filters change,
  * so no one acts on rows they cannot see.
  */
-export function TableBulkActions({ count, onClear, actions, countLabel = (n) => `${n} selected`, clearLabel = 'Clear selection', className, ...rest }: TableBulkActionsProps) {
+export function TableBulkActions({ count, onClear, actions, labels, countLabel, clearLabel, className, ...rest }: TableBulkActionsProps) {
+  const l = mergeLabels(DEFAULT_TABLE_BULK_ACTIONS_LABELS, labels, { count: countLabel, clear: clearLabel });
   if (count < 1) return null;
   return (
     <div className={cx('rb-table-bulk', className)} {...rest}>
-      <p className="rb-table-bulk__count" role="status">{countLabel(count)}</p>
-      <Button hierarchy="link" size="sm" onClick={onClear}>{clearLabel}</Button>
+      <p className="rb-table-bulk__count" role="status">{l.count(count)}</p>
+      <Button hierarchy="link" size="sm" onClick={onClear}>{l.clear}</Button>
       {actions && <div className="rb-table-bulk__actions">{actions}</div>}
     </div>
   );

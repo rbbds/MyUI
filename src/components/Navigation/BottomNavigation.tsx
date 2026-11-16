@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
 import './BottomNavigation.css';
 
@@ -36,17 +36,17 @@ export interface BottomNavAction {
   href?: string;
 }
 
-export interface BottomNavigationProps {
+export interface BottomNavigationProps extends HTMLAttributes<HTMLElement> {
   /** 3 to 5 BottomNavItem elements. With an action, use 4. */
   children: ReactNode;
   /** Raised round button in the middle for the main action. Off by default. */
   action?: BottomNavAction;
-  'aria-label'?: string;
-  className?: string;
+  /** Name of the navigation. Default "Main menu". */
+  label?: string;
 }
 
 /** App navigation at the bottom of the screen on mobile. Replaces the Sidebar below 900px. */
-export function BottomNavigation({ children, action, className, 'aria-label': ariaLabel = 'Main menu' }: BottomNavigationProps) {
+export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(function BottomNavigation({ children, action, label = 'Main menu', 'aria-label': ariaLabel, className, ...rest }, ref) {
   const items = (Array.isArray(children) ? children : [children]).map((c, i) => <li key={i}>{c}</li>);
   if (action) {
     const inner = <span className="rb-bottom-nav__action-icon" aria-hidden="true">{action.icon}</span>;
@@ -59,8 +59,8 @@ export function BottomNavigation({ children, action, className, 'aria-label': ar
     ));
   }
   return (
-    <nav className={cx('rb-bottom-nav', className)} aria-label={ariaLabel}>
+    <nav ref={ref} className={cx('rb-bottom-nav', className)} aria-label={ariaLabel ?? label} {...rest}>
       <ul className="rb-bottom-nav__list">{items}</ul>
     </nav>
   );
-}
+});
