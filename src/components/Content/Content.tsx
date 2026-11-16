@@ -1,4 +1,5 @@
 import { forwardRef, useId, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
+import { Link } from '../../utils/link';
 import { ArrowDown, ArrowUp, ChevronsUpDown, CircleAlert, CircleCheck, CloudUpload, File as FileIcon, Minus, Plus, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -82,7 +83,7 @@ export function Card({ media, meta, title, href, description, actions, action, e
       <div className="rb-card__body">
         <div className="rb-card__text">
           {meta && <p className="rb-card__meta">{meta}</p>}
-          <H className="rb-card__title">{href ? <a href={href}>{title}</a> : title}</H>
+          <H className="rb-card__title">{href ? <Link href={href}>{title}</Link> : title}</H>
           {description && <p className="rb-card__description">{description}</p>}
         </div>
         {children && <div className="rb-card__content">{children}</div>}
@@ -192,16 +193,25 @@ export function FileUpload({ onFiles, hint, labels, actionLabel, dropLabel, disa
   );
 }
 
-export interface FileUploadItemLabels { failed: string; uploading: (name: string) => string; uploaded: string; remove: (name: string) => string }
+export interface FileUploadItemLabels {
+  failed: string; uploading: (name: string) => string; uploaded: string; remove: (name: string) => string;
+  /** Read out when the upload is done. */
+  uploadedFile: (name: string) => string;
+  /** Read out when the upload fails. */
+  failedFile: (name: string) => string;
+}
 export const DEFAULT_FILE_UPLOAD_ITEM_LABELS: FileUploadItemLabels = {
   failed: 'Upload failed. Try again.', uploading: (name) => `Upload ${name}`, uploaded: 'Uploaded', remove: (name) => `Remove ${name}`,
+  uploadedFile: (name) => `${name} uploaded`, failedFile: (name) => `${name}: upload failed`,
 };
 export interface FileUploadItemProps { name: string; size?: string; progress?: number; status?: 'uploading' | 'complete' | 'error'; error?: ReactNode; onRemove?: () => void; labels?: Partial<FileUploadItemLabels> }
 export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove, labels }: FileUploadItemProps) {
   const l = { ...DEFAULT_FILE_UPLOAD_ITEM_LABELS, ...labels };
   const isErr = status === 'error';
   return (
-    <div className={cx('rb-file', isErr && 'rb-file--error')} aria-live="polite">
+    <div className={cx('rb-file', isErr && 'rb-file--error')}>
+      {/* L6: only the result is read out, not every step of the progress bar */}
+      <span className="rb-visually-hidden" role="status">{status === 'complete' ? l.uploadedFile(name) : isErr ? l.failedFile(name) : ''}</span>
       <FeaturedIcon color={isErr ? 'error' : 'brand'} size="md" icon={isErr ? <CircleAlert /> : <FileIcon />} />
       <div className="rb-file__content">
         <p className="rb-file__name">{name}</p>

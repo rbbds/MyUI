@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Header, MobileNav, Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { LinkProvider, NavItem as NavItemLink, Breadcrumbs, Header, MobileNav, Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -60,6 +60,13 @@ const scenarios: Record<string, ReactNode> = {
   'components-7b': <Scenario7b />,
   'a11y-7c': <Scenario7c />,
   'mega-menu': <Header logo={<a href="#">Logo</a>} links={megaLinks} search={<SearchInput label="Search" size="sm" />} actions={<Button hierarchy="secondary">After</Button>} />,
+  'link-provider': (
+    <LinkProvider component={({ href, ...p }) => <a {...p} href={href} data-router="yes" />}>
+      <NavItemLink href="#home">Home</NavItemLink>
+      <Breadcrumbs items={[{ label: 'Docs', href: '#docs' }, { label: 'Page' }]} />
+      <Header logo={<span>Logo</span>} links={megaLinks} />
+    </LinkProvider>
+  ),
   'mobile-nav': <MobileNav label="Main menu" items={megaLinks} />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };

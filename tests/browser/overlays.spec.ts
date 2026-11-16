@@ -392,3 +392,13 @@ test('PR 8: mobile menu has search and an accordion MobileNav', async ({ page })
   await expect(dialog.getByRole('link', { name: 'For teams' })).toBeVisible();
   await expect(dialog.getByRole('link', { name: 'Pricing' })).toBeVisible();
 });
+
+test('M20: LinkProvider puts the router link in every MyUI link', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/?s=link-provider');
+  await expect(page.getByRole('link', { name: 'Home' })).toHaveAttribute('data-router', 'yes');
+  await expect(page.getByRole('link', { name: 'Docs' })).toHaveAttribute('data-router', 'yes');
+  await expect(page.getByRole('link', { name: 'Pricing' })).toHaveAttribute('data-router', 'yes');
+  await page.getByRole('button', { name: 'Product' }).click();
+  await expect(page.getByRole('link', { name: 'Analytics' })).toHaveAttribute('data-router', 'yes');
+});

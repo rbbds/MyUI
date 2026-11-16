@@ -53,7 +53,22 @@ For tools and AI assistants: `@rbbds/ui/tokens.json` has all tokens with their v
 - Theme: set `data-theme="dark"` on `<html>`, or on any element for a dark section.
 - Screen size: nothing to do. Type and spacing follow the screen width through media queries.
 
-## 5. Your own brand
+## 5. Routing and Next.js
+
+```tsx
+import NextLink from 'next/link';
+import { LinkProvider } from '@rbbds/ui';
+
+<LinkProvider component={NextLink}>
+  <App />
+</LinkProvider>
+```
+
+MyUI links (NavItem, Header, Mega menu, Breadcrumbs, Card, Bottom navigation, Stepper, Document list) render a plain \<a href\>. Put a LinkProvider around your app and they use the link of your router, so a click does not reload the page. For React Router, map href to to: component=\{(\{ href, ...p \}) =\> \<RouterLink to=\{href\} \{...p\} /\>\}.
+
+Next.js App Router: every file in the package starts with 'use client'. You can import the components in a server component.
+
+## 6. Your own brand
 
 Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in `node_modules/@rbbds/ui/skills`). Load that CSS after `styles.css`.
 
@@ -67,7 +82,7 @@ Only change `--brand-*` tokens: colors, fonts, radius, border width and font wei
 }
 ```
 
-## 6. Language and dates
+## 7. Language and dates
 
 All built-in labels are English and dates and amounts use en-US. Components with texts have a labels prop with English defaults (DEFAULT_X_LABELS). Components with dates or amounts have a locale prop, for example `locale="nl-NL"`.
 
@@ -77,7 +92,7 @@ All built-in labels are English and dates and amounts use en-US. Components with
   labels={{ previous: "Vorige", next: "Volgende", pageStatus: (p, c) => `Pagina ${p} van ${c}` }} />
 ```
 
-## 7. Props that work the same everywhere
+## 8. Props that work the same everywhere
 
 - value, defaultValue and onValueChange: leave value out and the component keeps its own state from defaultValue. onValueChange gets the value. onChange on Input, Select, Textarea and Checkbox gets the native event.
 - Open state: open, defaultOpen and onOpenChange (DropdownMenu, Popover). Modal and Slideout are always controlled.
@@ -90,7 +105,7 @@ All built-in labels are English and dates and amounts use en-US. Components with
 - className, ref and other HTML attributes go to the root element. Form components forward ref to the input.
 - Deprecated props keep working until 2.0.0. Your editor shows them crossed out.
 
-## 8. Updates
+## 9. Updates
 
 ```bash
 npm outdated @rbbds/ui

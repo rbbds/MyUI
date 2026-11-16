@@ -1,4 +1,5 @@
 import { Children, useEffect, useId, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { ChevronDown, Menu, PanelLeft } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -104,7 +105,7 @@ export function Header({ logo, links = [], search, actions, label, labels, navLa
                     />
                   </>
                 ) : (
-                  <a href={item.href} className="rb-header__link" aria-current={item.current ? 'page' : undefined}>{item.label}</a>
+                  <Link href={item.href} className="rb-header__link" aria-current={item.current ? 'page' : undefined}>{item.label}</Link>
                 )}
               </li>
             ))}

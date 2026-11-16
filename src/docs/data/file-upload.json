@@ -67,7 +67,7 @@
   ],
   "a11y": [
     "Works fully without dragging: the action link opens the native file input.",
-    "File upload item announces progress and errors with aria-live=\"polite\".",
+    "File upload item reads out only the result (\"report.pdf uploaded\", or that the upload failed) in a status region; the progress bar is not read out at every step.",
     "The remove button has a label with the file name."
   ],
   "content": [

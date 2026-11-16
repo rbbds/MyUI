@@ -1,4 +1,5 @@
 import { useId, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import './MegaMenu.css';
@@ -31,13 +32,13 @@ export interface MegaMenuLinkProps extends Omit<HTMLAttributes<HTMLAnchorElement
 /** Link in a Mega menu: icon, label and a one-line description. */
 export function MegaMenuLink({ label, href, description, icon, current, className, ...rest }: MegaMenuLinkProps) {
   return (
-    <a href={href} className={cx('rb-mega-link', className)} aria-current={current ? 'page' : undefined} {...rest}>
+    <Link href={href} className={cx('rb-mega-link', className)} aria-current={current ? 'page' : undefined} {...rest}>
       {icon && <span className="rb-mega-link__icon" aria-hidden="true">{icon}</span>}
       <span className="rb-mega-link__text">
         <span className="rb-mega-link__title">{label}</span>
         {description && <span className="rb-mega-link__description">{description}</span>}
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -136,18 +137,18 @@ export function MobileNav({ items, label, className, ...rest }: MobileNavProps) 
                   <ul id={subId} className="rb-mobile-nav__sub" hidden={!expanded}>
                     {links.map((l, j) => (
                       <li key={j}>
-                        <a href={l.href} className="rb-mobile-nav__sublink" aria-current={l.current ? 'page' : undefined}>
+                        <Link href={l.href} className="rb-mobile-nav__sublink" aria-current={l.current ? 'page' : undefined}>
                           {l.icon && <span className="rb-mobile-nav__icon" aria-hidden="true">{l.icon}</span>}
                           {l.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
                 </>
               ) : (
-                <a href={it.href} className="rb-mobile-nav__item" aria-current={it.current ? 'page' : undefined}>
+                <Link href={it.href} className="rb-mobile-nav__item" aria-current={it.current ? 'page' : undefined}>
                   <span className="rb-mobile-nav__label">{it.label}</span>
-                </a>
+                </Link>
               )}
             </li>
           );

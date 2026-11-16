@@ -102,7 +102,16 @@ export const guides = [
         ],
       },
       {
-        heading: '5. Your own brand',
+        heading: '5. Routing and Next.js',
+        codeFirst: true,
+        code: "import NextLink from 'next/link';\nimport { LinkProvider } from '@rbbds/ui';\n\n<LinkProvider component={NextLink}>\n  <App />\n</LinkProvider>",
+        paragraphs: [
+          'MyUI links (NavItem, Header, Mega menu, Breadcrumbs, Card, Bottom navigation, Stepper, Document list) render a plain <a href>. Put a LinkProvider around your app and they use the link of your router, so a click does not reload the page. For React Router, map href to to: component={({ href, ...p }) => <RouterLink to={href} {...p} />}.',
+          'Next.js App Router: every file in the package starts with \'use client\'. You can import the components in a server component.',
+        ],
+      },
+      {
+        heading: '6. Your own brand',
         paragraphs: [
           'Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in node_modules/@rbbds/ui/skills). Load that CSS after styles.css.',
           'Only change --brand-* tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.',
@@ -110,12 +119,12 @@ export const guides = [
         code: ':root {\n  --brand-color-primary-600: #0284c7;\n  --brand-color-accent-400: #facc15;\n  --brand-font-body: "Manrope", system-ui, sans-serif;\n}',
       },
       {
-        heading: '6. Language and dates',
+        heading: '7. Language and dates',
         paragraphs: ['All built-in labels are English and dates and amounts use en-US. Components with texts have a labels prop with English defaults (DEFAULT_X_LABELS). Components with dates or amounts have a locale prop, for example locale="nl-NL".'],
         code: '<Pagination page={2} pageCount={8} onPageChange={setPage}\n  label="Paginering"\n  labels={{ previous: "Vorige", next: "Volgende", pageStatus: (p, c) => `Pagina ${p} van ${c}` }} />',
       },
       {
-        heading: '7. Props that work the same everywhere',
+        heading: '8. Props that work the same everywhere',
         bullets: [
           'value, defaultValue and onValueChange: leave value out and the component keeps its own state from defaultValue. onValueChange gets the value. onChange on Input, Select, Textarea and Checkbox gets the native event.',
           'Open state: open, defaultOpen and onOpenChange (DropdownMenu, Popover). Modal and Slideout are always controlled.',
@@ -130,7 +139,7 @@ export const guides = [
         ],
       },
       {
-        heading: '8. Updates',
+        heading: '9. Updates',
         codeFirst: true,
         code: 'npm outdated @rbbds/ui\nnpm install @rbbds/ui@latest',
         paragraphs: ['Read the changelog before you update. A major update can need changes in your code; the changelog lists them under Breaking. See Versioning.'],

@@ -1,4 +1,5 @@
 import { forwardRef, useContext, createContext, useId, useRef, type AnchorHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { ArrowLeft, ArrowRight, ChevronRight, House } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -104,15 +105,15 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(function Br
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
     <nav ref={ref} className={cx('rb-breadcrumbs', className)} aria-label={l.label} {...rest}>
-      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? l.back}</a>}
+      {back && <Link href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? l.back}</Link>}
       <ol>
-        {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label={l.home}><House aria-hidden="true" /></a></li>}
+        {homeHref && <li><Link href={homeHref} className="rb-breadcrumbs__link" aria-label={l.home}><House aria-hidden="true" /></Link></li>}
         {items.map((c, i) => {
           const last = i === items.length - 1;
           return (
             <li key={i}>
               {(homeHref || i > 0) && <Sep />}
-              {last || !c.href ? <span className="rb-breadcrumbs__link" aria-current={last ? 'page' : undefined}>{c.label}</span> : <a href={c.href} className="rb-breadcrumbs__link">{c.label}</a>}
+              {last || !c.href ? <span className="rb-breadcrumbs__link" aria-current={last ? 'page' : undefined}>{c.label}</span> : <Link href={c.href} className="rb-breadcrumbs__link">{c.label}</Link>}
             </li>
           );
         })}
@@ -193,19 +194,19 @@ export function NavItem({ icon, active, count, countLabel = 'new', className, ch
   const compact = useContext(NavCompactContext);
   if (compact) {
     return (
-      <a className={cx('rb-nav-item', 'rb-nav-item--compact', className)} aria-current={active ? 'page' : undefined} {...rest}>
+      <Link className={cx('rb-nav-item', 'rb-nav-item--compact', className)} aria-current={active ? 'page' : undefined} {...rest}>
         {icon}
         <span className="rb-visually-hidden">{children}{count ? `, ${count} ${countLabel}` : ''}</span>
         {!!count && <span className="rb-nav-item__dot" aria-hidden="true" />}
         <span className="rb-nav-item__tip" aria-hidden="true">{children}</span>
-      </a>
+      </Link>
     );
   }
   return (
-    <a className={cx('rb-nav-item', className)} aria-current={active ? 'page' : undefined} {...rest}>
+    <Link className={cx('rb-nav-item', className)} aria-current={active ? 'page' : undefined} {...rest}>
       {icon}
       <span className="rb-nav-item__label">{children}</span>
       {count !== undefined && <span className="rb-nav-item__count">{count}<span className="rb-visually-hidden"> {countLabel}</span></span>}
-    </a>
+    </Link>
   );
 }

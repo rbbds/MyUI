@@ -1,4 +1,5 @@
 import { useId, useState, type FormEvent, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { ShoppingBag, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -46,7 +47,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
       <div className="rb-cart-item__media" data-size={size}>{image ? <img src={image.src} alt={image.alt ?? ''} /> : <span className="rb-product-card__placeholder" />}</div>
       <div className="rb-cart-item__main">
         <div className="rb-cart-item__text">
-          <p className="rb-cart-item__title">{href ? <a href={href}>{title}</a> : title}</p>
+          <p className="rb-cart-item__title">{href ? <Link href={href}>{title}</Link> : title}</p>
           {options && options.length > 0 && <p className="rb-cart-item__options">{options.join(' · ')}</p>}
           {readOnly && <p className="rb-cart-item__options">{l.quantity(quantity)}</p>}
         </div>

@@ -15,4 +15,5 @@ export const FIGMA_PAGES = {
   'Divider': '17017:3307', 'Featured icon': '17017:3308', 'Spinner': '17017:3310', 'Skeleton': '17017:3311', 'Kbd': '17017:3313',
   'Product card': '17030:120', 'Product grid': '17030:121', 'Price': '17030:122', 'Rating': '17030:123', 'Quantity stepper': '17030:124', 'Stock indicator': '17030:125', 'Product gallery': '17030:126', 'Variant picker': '17030:127', 'Add to cart': '17030:128', 'Cart item': '17030:129', 'Cart summary': '17030:130', 'Promo code': '17030:131', 'Mini cart': '17030:132', 'Checkout options': '17030:133', 'Address fields': '17030:134', 'Filter group': '17030:135', 'Active filters': '17030:136',
   'Range slider': '17017:1130',
+  'Mega menu': '17222:2', 'Mobile nav': '17222:2',
 };

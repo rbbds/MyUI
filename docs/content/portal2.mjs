@@ -93,7 +93,7 @@ export const docs = [
     figmaProps: [['Strength', 'Empty, Weak, Fair, Good, Strong', ''], ['Visible', 'False, True', ''], ['Show strength / Show requirements', 'boolean', '']],
     reactProps: [['value / defaultValue, onValueChange', 'string', 'onChange with the value is deprecated; in 2.0.0 onChange gets the native event.'], ['showStrength', 'boolean', 'Shows the meter and rules. Sets autocomplete new-password.'], ['requirements', '{ label, test }[]', 'Default: 12 characters, upper and lower case letter, digit or symbol.'], ['labels', '{ show, hide, empty, weak, fair, good, strong, met, notMet }', 'Names of the toggle button and strength texts. showLabel and hideLabelText are deprecated. Defaults in DEFAULT_PASSWORD_INPUT_LABELS. Translate the rules with passwordRequirements(labels).']],
     behaviour: ['The eye button switches between hidden and visible.'],
-    a11y: ['Eye button with aria-pressed and a clear name ("Show password").', 'Strength is read out (aria-live). Rules are linked as a description with "met" or "not met yet".'],
+    a11y: ['Eye button whose name says what it does: "Show password" or "Hide password" (no aria-pressed as well, so it is not read twice).', 'Strength is read out (aria-live). Rules are linked as a description with "met" or "not met yet".'],
     content: ['Write rules in a positive way.'], dont: ['Block pasting.'], tokens: ['--password-strength-*', '--input-*'], related: ['Input'] }),
   d({ id: 'copy-input', name: 'Copy input', page: 'Form inputs', figma: { node: '17075:734', base: '_Copy input' }, react: 'CopyInput',
     stories: { file: f + 'CopyInput.stories', items: ['CopyInputs'] },

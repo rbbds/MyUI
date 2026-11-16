@@ -10,6 +10,8 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 - Load once: `import '@rbbds/ui/styles.css'` (tokens + component styles). Load fonts yourself (Inter; Forest also uses Source Serif 4 for titles).
 - Import components: `import { Button, Input } from '@rbbds/ui'`. Icons come from lucide-react and are passed as props, for example `iconLeading={<Plus aria-hidden />}`.
 - Style: `data-brand="forest"` or `data-brand="berry"` on `<html>` (Iris is the default). Theme: `data-theme="dark"` on `<html>` or on a section.
+- Routing: MyUI links render a plain `<a href>`. Wrap the app in `<LinkProvider component={NextLink}>` (Next.js) or `<LinkProvider component={({ href, ...p }) => <RouterLink to={href} {...p} />}>` (React Router) so NavItem, Header, Mega menu, Breadcrumbs, Card and the other links use your router. Downloads stay a plain `<a download>`.
+- Next.js App Router: every file in the package starts with `'use client'`, so you can import components in a server component without a wrapper.
 - Built-in labels are English. Every text a user sees or hears is a prop: a single prop such as `closeLabel`, or a `labels` prop with the English defaults in an exported `DEFAULT_<COMPONENT>_LABELS` object, for example `<CartButton labels={{ count: (n) => `${n} artikelen` }} />`. Dates and amounts have a `locale` prop. CI fails on fixed text in component JSX (`npm run check:strings`).
 
 ## Rules for generated code
@@ -19,7 +21,8 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 3. For your own layout, use semantic tokens (`--color-*`, `--spacing-*`, `--border-radius-*`, `--text-*`). Component tokens (`--button-*`, `--input-*`) are for the components themselves.
 4. To make a brand, only override `--brand-*` tokens (colors, fonts, radius, border width, font weight). The `myui-brand` skill in `node_modules/@rbbds/ui/skills` does this with a contrast check.
 5. Keep accessibility: `ButtonIcon` needs an `aria-label`; form fields need a `label`; do not remove focus styles.
-6. Panels (Dropdown menu, Popover, Date picker, Date range picker, Notification menu, Combobox list) open in the browser top layer and place themselves. Do not wrap them in a portal or give them a z-index. Render one `ToastRegion` always, also when it is empty; it moves into an open Modal by itself.
+6. Site navigation: use `Header` with `links`. A link with `menu: { columns, featured }` opens a Mega menu (a disclosure: a button with `aria-expanded` and plain links, opened on click, not on hover). Below 900px Header moves the links into a Slideout with `MobileNav` (accordion). Pass the search as `search={<SearchInput … />}`, not in `actions`: Header moves it into the mobile menu.
+7. Panels (Dropdown menu, Popover, Date picker, Date range picker, Notification menu, Combobox list) open in the browser top layer and place themselves. Do not wrap them in a portal or give them a z-index. Render one `ToastRegion` always, also when it is empty; it moves into an open Modal by itself.
 
 ## Tokens
 
@@ -36,7 +39,7 @@ This file is for AI assistants and tools. It says how MyUI is built and how to u
 ## Sizes
 
 - Controls (Button, Input, Select, Search input) are 36 (sm), 40 (md) or 48 (lg) px high. Button group is 40 px. Quantity stepper is 36 (sm) or 40 (md) px. Borders are inside that height.
-- Checkbox and Radio: as high as the line height of their label (20 or 24 px, 16 or 20 px on small screens). Tag and Badge: 20, 24, 28 px. Rows for touch (Bottom navigation): 48 px. Menu items, nav items, Command items and Combobox options: 36 px.
+- Checkbox and Radio: as high as the line height of their label (20 or 24 px, 16 or 20 px on small screens). Tag and Badge: 20, 24, 28 px. Rows for touch (Mobile nav, Bottom navigation): 48 px. Menu items, nav items, Command items and Combobox options: 36 px.
 - Text styles: 12/16, 14/20, 16/24, 18/28, 20/32, 24/36, 40/60 (font size / line height).
 
 ## Docs

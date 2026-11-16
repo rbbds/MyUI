@@ -334,7 +334,7 @@ export default [
       ['labels (FileUploadItem)', '{ failed, uploading(name), uploaded, remove(name) }', 'Defaults in DEFAULT_FILE_UPLOAD_ITEM_LABELS.'],
     ],
     behaviour: ['Clicking opens the file picker. Dragging shows the Drag over state.', 'Each file gets its own item with progress.'],
-    a11y: ['Works fully without dragging: the action link opens the native file input.', 'File upload item announces progress and errors with aria-live="polite".', 'The remove button has a label with the file name.'],
+    a11y: ['Works fully without dragging: the action link opens the native file input.', 'File upload item reads out only the result ("report.pdf uploaded", or that the upload failed) in a status region; the progress bar is not read out at every step.', 'The remove button has a label with the file name.'],
     content: ['The hint names the file types and maximum size: "PDF, JPG or PNG (max. 10 MB)".', 'The error message names the cause: "The file is larger than 10 MB."'],
     do: ['Check the type and size before uploading.'],
     dont: ['Offer drag and drop only.'],
