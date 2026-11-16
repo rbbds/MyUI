@@ -1,6 +1,7 @@
 import './styles/index.css';
 
 export { cx } from './utils/cx';
+export { useControlled, type HeadingLevel, type AccessibleName } from './utils/useControlled';
 export * from './components/Button/Button';
 export * from './components/Button/ButtonGroup';
 export * from './components/Form/Field';

@@ -1,28 +1,38 @@
-import { useContext, createContext, useId, useRef, useState, type AnchorHTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
+import { forwardRef, useContext, createContext, useId, useRef, type AnchorHTMLAttributes, type HTMLAttributes, type KeyboardEvent, type ReactNode } from 'react';
 import { ArrowLeft, ArrowRight, ChevronRight, House } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled, type AccessibleName } from '../../utils/useControlled';
 import { Button } from '../Button/Button';
 import './Navigation.css';
 
 /* ---------- Tabs ---------- */
 export interface TabItem { id: string; label: ReactNode; icon?: ReactNode; count?: number; content: ReactNode }
-export interface TabsProps {
-  items: TabItem[];
-  type?: 'underline' | 'pill';
-  defaultValue?: string;
-  value?: string;
-  onChange?: (id: string) => void;
-  'aria-label': string;
-}
-/** WAI-ARIA tabs with roving tabindex and arrow-key navigation. */
-export function Tabs({ items, type = 'underline', defaultValue, value, onChange, ...rest }: TabsProps) {
-  const [inner, setInner] = useState(defaultValue ?? items[0]?.id);
-  const wanted = value ?? inner;
+export type TabsProps = Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'> &
+  AccessibleName & {
+    items: TabItem[];
+    /** Look of the tab list. */
+    variant?: 'underline' | 'pill';
+    /** @deprecated Use variant. Removed in 2.0.0. */
+    type?: 'underline' | 'pill';
+    defaultValue?: string;
+    value?: string;
+    /** Called with the id of the chosen tab. */
+    onValueChange?: (id: string) => void;
+    /** @deprecated Use onValueChange. Removed in 2.0.0. */
+    onChange?: (id: string) => void;
+  };
+/** WAI-ARIA tabs with roving tabindex and arrow-key navigation. Name the tab list with `label`. */
+export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
+  { items, variant, type, defaultValue, value, onValueChange, onChange, label, 'aria-label': ariaLabel, className, ...rest },
+  ref,
+) {
+  const look = variant ?? type ?? 'underline';
+  const [wanted, select] = useControlled(value, defaultValue ?? items[0]?.id, (id) => { if (id === undefined) return; onValueChange?.(id); onChange?.(id); });
   /* An unknown value falls back to the first tab, so the tab list always has one tab stop. */
   const current = items.some((t) => t.id === wanted) ? wanted : items[0]?.id;
   const base = useId();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
-  const select = (id: string) => { setInner(id); onChange?.(id); };
   const onKey = (e: KeyboardEvent, i: number) => {
     const n = items.length;
     let next = -1;
@@ -33,8 +43,8 @@ export function Tabs({ items, type = 'underline', defaultValue, value, onChange,
     if (next >= 0) { e.preventDefault(); refs.current[next]?.focus(); select(items[next].id); }
   };
   return (
-    <div className="rb-tabs">
-      <div role="tablist" aria-label={rest['aria-label']} className={cx('rb-tabs__list', `rb-tabs__list--${type}`)}>
+    <div ref={ref} className={cx('rb-tabs', className)} {...rest}>
+      <div role="tablist" aria-label={label ?? ariaLabel} className={cx('rb-tabs__list', `rb-tabs__list--${look}`)}>
         {items.map((t, i) => (
           <button
             key={t.id}
@@ -60,28 +70,43 @@ export function Tabs({ items, type = 'underline', defaultValue, value, onChange,
       ))}
     </div>
   );
-}
+});
 
 /* ---------- Breadcrumbs ---------- */
 export interface Crumb { label: string; href?: string }
-export interface BreadcrumbsProps {
+export interface BreadcrumbsLabels {
+  /** Name of the navigation landmark. */
+  label: string;
+  /** Screen reader name for the home link. */
+  home: string;
+  /** Text of the back link when `back.label` is not set. */
+  back: string;
+}
+export const DEFAULT_BREADCRUMBS_LABELS: BreadcrumbsLabels = { label: 'Breadcrumb', home: 'Home', back: 'Back' };
+export interface BreadcrumbsProps extends HTMLAttributes<HTMLElement> {
   items: Crumb[];
   homeHref?: string;
   /** Back link before the trail, for example to the previous overview. */
   back?: { href: string; label?: string };
-  /** Screen reader name for the home link. */
+  /** Name of the navigation landmark. Default "Breadcrumb". */
+  label?: string;
+  labels?: Partial<BreadcrumbsLabels>;
+  /** @deprecated Use labels.home. Removed in 2.0.0. */
   homeLabel?: string;
-  /** Text of the back link when `back.label` is not set. */
+  /** @deprecated Use labels.back. Removed in 2.0.0. */
   backLabel?: string;
-  'aria-label'?: string;
 }
-export function Breadcrumbs({ items, homeHref, back, homeLabel = 'Home', backLabel = 'Back', 'aria-label': ariaLabel = 'Breadcrumb' }: BreadcrumbsProps) {
+export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(function Breadcrumbs(
+  { items, homeHref, back, label, labels, homeLabel, backLabel, 'aria-label': ariaLabel, className, ...rest },
+  ref,
+) {
+  const l = mergeLabels(DEFAULT_BREADCRUMBS_LABELS, labels, { home: homeLabel, back: backLabel, label: label ?? ariaLabel });
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
-    <nav className="rb-breadcrumbs" aria-label={ariaLabel}>
-      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? backLabel}</a>}
+    <nav ref={ref} className={cx('rb-breadcrumbs', className)} aria-label={l.label} {...rest}>
+      {back && <a href={back.href} className="rb-breadcrumbs__link rb-breadcrumbs__back"><ArrowLeft aria-hidden="true" />{back.label ?? l.back}</a>}
       <ol>
-        {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label={homeLabel}><House aria-hidden="true" /></a></li>}
+        {homeHref && <li><a href={homeHref} className="rb-breadcrumbs__link" aria-label={l.home}><House aria-hidden="true" /></a></li>}
         {items.map((c, i) => {
           const last = i === items.length - 1;
           return (
@@ -94,21 +119,35 @@ export function Breadcrumbs({ items, homeHref, back, homeLabel = 'Home', backLab
       </ol>
     </nav>
   );
-}
+});
 
 /* ---------- Pagination ---------- */
-export interface PaginationProps {
+export interface PaginationLabels {
+  /** Name of the navigation landmark. */
+  label: string;
+  previous: string;
+  next: string;
+  /** Text on small screens, where the page numbers are hidden. */
+  pageStatus: (page: number, pageCount: number) => string;
+  /** Screen reader name per page button. */
+  page: (page: number) => string;
+}
+export const DEFAULT_PAGINATION_LABELS: PaginationLabels = { label: 'Pagination', previous: 'Previous', next: 'Next', pageStatus: (p, c) => `Page ${p} of ${c}`, page: (p) => `Page ${p}` };
+export interface PaginationProps extends HTMLAttributes<HTMLElement> {
   page: number;
   pageCount: number;
   onPageChange: (page: number) => void;
+  /** Name of the navigation landmark. Default "Pagination". */
+  label?: string;
+  labels?: Partial<PaginationLabels>;
+  /** @deprecated Use labels.previous. Removed in 2.0.0. */
   previousLabel?: string;
+  /** @deprecated Use labels.next. Removed in 2.0.0. */
   nextLabel?: string;
-  /** Text on small screens, where the page numbers are hidden. */
+  /** @deprecated Use labels.pageStatus. Removed in 2.0.0. */
   pageStatus?: (page: number, pageCount: number) => string;
-  /** Screen reader name per page button. */
+  /** @deprecated Use labels.page. Removed in 2.0.0. */
   pageLabel?: (page: number) => string;
-  /** Name of the navigation landmark. */
-  'aria-label'?: string;
 }
 function range(page: number, count: number): Array<number | '…'> {
   if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
@@ -116,24 +155,28 @@ function range(page: number, count: number): Array<number | '…'> {
   if (page >= count - 3) return [1, '…', count - 4, count - 3, count - 2, count - 1, count];
   return [1, '…', page - 1, page, page + 1, '…', count];
 }
-export function Pagination({ page, pageCount, onPageChange, previousLabel = 'Previous', nextLabel = 'Next', pageStatus = (p, c) => `Page ${p} of ${c}`, pageLabel = (p) => `Page ${p}`, 'aria-label': ariaLabel = 'Pagination' }: PaginationProps) {
+export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagination(
+  { page, pageCount, onPageChange, label, labels, previousLabel, nextLabel, pageStatus, pageLabel, 'aria-label': ariaLabel, className, ...rest },
+  ref,
+) {
+  const l = mergeLabels(DEFAULT_PAGINATION_LABELS, labels, { label: label ?? ariaLabel, previous: previousLabel, next: nextLabel, pageStatus, page: pageLabel });
   return (
-    <nav className="rb-pagination" aria-label={ariaLabel}>
-      <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{previousLabel}</Button>
+    <nav ref={ref} className={cx('rb-pagination', className)} aria-label={l.label} {...rest}>
+      <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} disabled={page <= 1} onClick={() => onPageChange(page - 1)}>{l.previous}</Button>
       <ul className="rb-pagination__pages">
         {range(page, pageCount).map((p, i) => (
           <li key={i}>
             {p === '…' ? <span className="rb-pagination__ellipsis" aria-hidden="true">…</span> : (
-              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={pageLabel(p)} onClick={() => onPageChange(p)}>{p}</button>
+              <button type="button" className="rb-pagination__page" aria-current={p === page ? 'page' : undefined} aria-label={l.page(p)} onClick={() => onPageChange(p)}>{p}</button>
             )}
           </li>
         ))}
       </ul>
-      <span className="rb-pagination__compact">{pageStatus(page, pageCount)}</span>
-      <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>{nextLabel}</Button>
+      <span className="rb-pagination__compact">{l.pageStatus(page, pageCount)}</span>
+      <Button hierarchy="secondary" size="sm" iconTrailing={<ArrowRight aria-hidden />} disabled={page >= pageCount} onClick={() => onPageChange(page + 1)}>{l.next}</Button>
     </nav>
   );
-}
+});
 
 /* ---------- Nav item ---------- */
 /** Set by Sidebar (collapsed) and DualSidebar (rail): NavItems then show only their icon. */
@@ -143,7 +186,7 @@ export interface NavItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   icon?: ReactNode;
   active?: boolean;
   count?: number;
-  /** Text for screen readers after the label when there is a count, e.g. "new". Default "new". */
+  /** Text for screen readers after the count, e.g. "new". Default "new". */
   countLabel?: string;
 }
 export function NavItem({ icon, active, count, countLabel = 'new', className, children, ...rest }: NavItemProps) {
@@ -162,7 +205,7 @@ export function NavItem({ icon, active, count, countLabel = 'new', className, ch
     <a className={cx('rb-nav-item', className)} aria-current={active ? 'page' : undefined} {...rest}>
       {icon}
       <span className="rb-nav-item__label">{children}</span>
-      {count !== undefined && <span className="rb-nav-item__count">{count}</span>}
+      {count !== undefined && <span className="rb-nav-item__count">{count}<span className="rb-visually-hidden"> {countLabel}</span></span>}
     </a>
   );
 }

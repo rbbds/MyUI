@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { Check } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
 import './Stepper.css';
 
 export interface StepItem {
@@ -10,7 +11,17 @@ export interface StepItem {
   href?: string;
 }
 
-export interface StepperProps {
+export interface StepperLabels {
+  /** Name of the navigation. */
+  label: string;
+  /** Screen reader text per status. */
+  complete: string;
+  current: string;
+  upcoming: string;
+}
+export const DEFAULT_STEPPER_LABELS: StepperLabels = { label: 'Progress', complete: 'completed', current: 'current step', upcoming: 'to do' };
+
+export interface StepperProps extends HTMLAttributes<HTMLElement> {
   steps: StepItem[];
   /** Index (0-based) of the current step. Steps before it are complete. */
   current: number;
@@ -19,18 +30,18 @@ export interface StepperProps {
    * Compact shows short titles above a bar per step. Keep titles to one or two words.
    */
   orientation?: 'horizontal' | 'vertical' | 'compact';
-  'aria-label'?: string;
-  /** Screen reader text per status. */
+  /** Name of the navigation. Default "Progress". */
+  label?: string;
+  labels?: Partial<StepperLabels>;
+  /** @deprecated Use labels.complete, labels.current and labels.upcoming. Removed in 2.0.0. */
   statusLabels?: { complete: string; current: string; upcoming: string };
-  className?: string;
 }
 
-const DEFAULT_LABELS = { complete: 'completed', current: 'current step', upcoming: 'to do' };
-
 /** Progress through a multi-step flow. Renders <nav> with an ordered list. */
-export function Stepper({ steps, current, orientation = 'horizontal', statusLabels = DEFAULT_LABELS, className, 'aria-label': ariaLabel = 'Progress' }: StepperProps) {
+export const Stepper = forwardRef<HTMLElement, StepperProps>(function Stepper({ steps, current, orientation = 'horizontal', label, labels, statusLabels, 'aria-label': ariaLabel, className, ...rest }, ref) {
+  const l = mergeLabels(DEFAULT_STEPPER_LABELS, labels, { ...statusLabels, label: label ?? ariaLabel });
   return (
-    <nav aria-label={ariaLabel} className={className}>
+    <nav ref={ref} aria-label={l.label} className={className} {...rest}>
       <ol className={cx('rb-stepper', `rb-stepper--${orientation}`)}>
         {steps.map((s, i) => {
           const status = i < current ? 'complete' : i === current ? 'current' : 'upcoming';
@@ -42,7 +53,7 @@ export function Stepper({ steps, current, orientation = 'horizontal', statusLabe
                 <span className="rb-step__connector" />
               </span>
               <span className="rb-step__text">
-                <span className="rb-step__title"><span className="rb-step__number" aria-hidden="true">{i + 1}. </span>{title}<span className="rb-visually-hidden">, {statusLabels[status]}</span></span>
+                <span className="rb-step__title"><span className="rb-step__number" aria-hidden="true">{i + 1}. </span>{title}<span className="rb-visually-hidden">, {l[status]}</span></span>
                 {s.description && <span className="rb-step__description">{s.description}</span>}
               </span>
             </li>
@@ -51,4 +62,4 @@ export function Stepper({ steps, current, orientation = 'horizontal', statusLabe
       </ol>
     </nav>
   );
-}
+});

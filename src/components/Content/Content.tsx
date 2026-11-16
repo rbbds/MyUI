@@ -1,6 +1,8 @@
-import { useId, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
+import { forwardRef, useId, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
 import { ArrowDown, ArrowUp, ChevronsUpDown, CircleAlert, CircleCheck, CloudUpload, File as FileIcon, Minus, Plus, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled, type HeadingLevel } from '../../utils/useControlled';
 import { ButtonIcon } from '../Button/Button';
 import { FeaturedIcon, ProgressBar } from '../Display/Display';
 import './Content.css';
@@ -61,21 +63,28 @@ export interface CardProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   /** Makes the whole card clickable via the title link (single tab stop). */
   href?: string;
   description?: ReactNode;
+  /** Buttons or links at the bottom. They stay clickable when the card has an href. */
+  actions?: ReactNode;
+  /** @deprecated Use actions. Removed in 2.0.0. */
   action?: ReactNode;
   elevated?: boolean;
+  /** Level of the title. Default 3. */
+  headingLevel?: HeadingLevel;
 }
-export function Card({ media, meta, title, href, description, action, elevated, className, children, ...rest }: CardProps) {
+export function Card({ media, meta, title, href, description, actions, action, elevated, headingLevel = 3, className, children, ...rest }: CardProps) {
+  const H = `h${headingLevel}` as 'h3';
+  const act = actions ?? action;
   return (
     <article className={cx('rb-card', elevated && 'rb-card--elevated', href && 'rb-card--link', className)} {...rest}>
       {media}
       <div className="rb-card__body">
         <div className="rb-card__text">
           {meta && <p className="rb-card__meta">{meta}</p>}
-          <h3 className="rb-card__title">{href ? <a href={href}>{title}</a> : title}</h3>
+          <H className="rb-card__title">{href ? <a href={href}>{title}</a> : title}</H>
           {description && <p className="rb-card__description">{description}</p>}
         </div>
         {children && <div className="rb-card__content">{children}</div>}
-        {!href && action}
+        {act && (href ? <div className="rb-card__actions">{act}</div> : act)}
       </div>
     </article>
   );
@@ -83,14 +92,25 @@ export function Card({ media, meta, title, href, description, action, elevated, 
 
 /* ---------- Accordion ---------- */
 export interface AccordionItem { id: string; title: ReactNode; content: ReactNode }
-export interface AccordionProps { items: AccordionItem[]; allowMultiple?: boolean; defaultOpen?: string[]; headingLevel?: 2 | 3 | 4 }
-export function Accordion({ items, allowMultiple = true, defaultOpen = [], headingLevel = 3 }: AccordionProps) {
-  const [open, setOpen] = useState<string[]>(defaultOpen);
+export interface AccordionProps extends Omit<HTMLAttributes<HTMLDivElement>, 'defaultValue'> {
+  items: AccordionItem[];
+  allowMultiple?: boolean;
+  /** Ids of the open items. Leave out to let the accordion keep its own state. */
+  value?: string[];
+  defaultValue?: string[];
+  onValueChange?: (open: string[]) => void;
+  /** @deprecated Use defaultValue. Removed in 2.0.0. */
+  defaultOpen?: string[];
+  /** Level of the item headings. Default 3. */
+  headingLevel?: HeadingLevel;
+}
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion({ items, allowMultiple = true, value, defaultValue, onValueChange, defaultOpen, headingLevel = 3, className, ...rest }, ref) {
+  const [open, setOpen] = useControlled(value, defaultValue ?? defaultOpen ?? [], onValueChange);
   const base = useId();
   const H = `h${headingLevel}` as 'h3';
-  const toggle = (id: string) => setOpen((o) => (o.includes(id) ? o.filter((x) => x !== id) : allowMultiple ? [...o, id] : [id]));
+  const toggle = (id: string) => setOpen(open.includes(id) ? open.filter((x) => x !== id) : allowMultiple ? [...open, id] : [id]);
   return (
-    <div className="rb-accordion">
+    <div ref={ref} className={cx('rb-accordion', className)} {...rest}>
       {items.map((it) => {
         const isOpen = open.includes(it.id);
         return (
@@ -106,32 +126,50 @@ export function Accordion({ items, allowMultiple = true, defaultOpen = [], headi
       })}
     </div>
   );
-}
+});
 
 /* ---------- Empty state ---------- */
-export interface EmptyStateProps { icon?: ReactNode; title: ReactNode; description?: ReactNode; actions?: ReactNode }
-export function EmptyState({ icon, title, description, actions }: EmptyStateProps) {
+export interface EmptyStateProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
+  icon?: ReactNode;
+  title: ReactNode;
+  description?: ReactNode;
+  actions?: ReactNode;
+  /** Level of the title. Default 3. */
+  headingLevel?: HeadingLevel;
+}
+export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(function EmptyState({ icon, title, description, actions, headingLevel = 3, className, ...rest }, ref) {
+  const H = `h${headingLevel}` as 'h3';
   return (
-    <div className="rb-empty">
+    <div ref={ref} className={cx('rb-empty', className)} {...rest}>
       {icon}
       <div className="rb-empty__text">
-        <h3 className="rb-empty__title">{title}</h3>
+        <H className="rb-empty__title">{title}</H>
         {description && <p className="rb-empty__description">{description}</p>}
       </div>
       {actions && <div className="rb-empty__actions">{actions}</div>}
     </div>
   );
-}
+});
 
 /* ---------- File upload ---------- */
+export interface FileUploadLabels {
+  /** Link-like text, also the name of the file input. */
+  action: string;
+  drop: string;
+}
+export const DEFAULT_FILE_UPLOAD_LABELS: FileUploadLabels = { action: 'Click to upload', drop: 'or drag a file here' };
 export interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   onFiles: (files: File[]) => void;
   hint?: ReactNode;
+  labels?: Partial<FileUploadLabels>;
+  /** @deprecated Use labels.action. Removed in 2.0.0. */
   actionLabel?: string;
+  /** @deprecated Use labels.drop. Removed in 2.0.0. */
   dropLabel?: string;
 }
 /** Drop zone backed by a real file input: click, keyboard and drag-and-drop. */
-export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dropLabel = 'or drag a file here', disabled, className, ...rest }: FileUploadProps) {
+export function FileUpload({ onFiles, hint, labels, actionLabel, dropLabel, disabled, className, ...rest }: FileUploadProps) {
+  const l = mergeLabels(DEFAULT_FILE_UPLOAD_LABELS, labels, { action: actionLabel, drop: dropLabel });
   const [active, setActive] = useState(false);
   const hintId = useId();
   const onDrop = (e: DragEvent) => { e.preventDefault(); setActive(false); if (!disabled) onFiles(Array.from(e.dataTransfer.files)); };
@@ -142,10 +180,10 @@ export function FileUpload({ onFiles, hint, actionLabel = 'Click to upload', dro
       onDragLeave={() => setActive(false)}
       onDrop={onDrop}
     >
-      <input type="file" className="rb-upload__input" disabled={disabled} aria-label={actionLabel} aria-describedby={hint ? hintId : undefined} onChange={(e) => onFiles(Array.from(e.target.files ?? []))} {...rest} />
+      <input type="file" className="rb-upload__input" disabled={disabled} aria-label={l.action} aria-describedby={hint ? hintId : undefined} onChange={(e) => onFiles(Array.from(e.target.files ?? []))} {...rest} />
       <span data-size="md" className="rb-button rb-button--icon-only rb-button--secondary rb-button--md rb-upload__icon" aria-hidden="true"><CloudUpload /></span>
       <div className="rb-upload__body">
-        <p className="rb-upload__text"><span className="rb-upload__action">{actionLabel}</span> {dropLabel}</p>
+        <p className="rb-upload__text"><span className="rb-upload__action">{l.action}</span> {l.drop}</p>
         {hint && <p id={hintId} className="rb-upload__hint">{hint}</p>}
       </div>
     </div>

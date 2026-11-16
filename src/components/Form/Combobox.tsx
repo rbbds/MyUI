@@ -1,6 +1,8 @@
-import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
+import { forwardRef, useEffect, useId, useImperativeHandle, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import { Field, type FieldBaseProps } from './Field';
 import { usePlacement } from '../../utils/panel';
 import './Combobox.css';
@@ -21,23 +23,32 @@ export interface ComboboxProps extends FieldBaseProps {
   options: ComboboxOption[];
   value?: string | null;
   defaultValue?: string | null;
+  /** Called with the chosen value and option, or null when the field is cleared. */
+  onValueChange?: (value: string | null, option: ComboboxOption | null) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (value: string | null, option: ComboboxOption | null) => void;
   placeholder?: string;
   disabled?: boolean;
   name?: string;
   id?: string;
   emptyText?: string;
-  /** Accessible label of the chevron button. */
-  toggleLabel?: string;
-  /** Result count for screen readers and the message when required and nothing is chosen. */
+  /** Result count for screen readers, the message when required and nothing is chosen, and the name of the chevron button. */
   labels?: Partial<ComboboxLabels>;
+  /** @deprecated Use labels.toggle. Removed in 2.0.0. */
+  toggleLabel?: string;
   className?: string;
 }
 
-export interface ComboboxLabels { count: (count: number) => string; required: string }
+export interface ComboboxLabels {
+  count: (count: number) => string;
+  required: string;
+  /** Name of the chevron button. */
+  toggle: string;
+}
 export const DEFAULT_COMBOBOX_LABELS: ComboboxLabels = {
   count: (count) => `${count} ${count === 1 ? 'result' : 'results'}`,
   required: 'Choose an option from the list.',
+  toggle: 'Show options',
 };
 
 const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
@@ -46,10 +57,9 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
  * Select with search and a visual per option (APG "combobox with listbox popup").
  * Use it when a native select is not enough: long lists that need filtering, or options that need a flag or avatar.
  */
-export function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel = 'Show options', labels, className }: ComboboxProps) {
-  const l = { ...DEFAULT_COMBOBOX_LABELS, ...labels };
-  const [own, setOwn] = useState<string | null>(defaultValue);
-  const selectedValue = value !== undefined ? value : own;
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onValueChange, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel, labels, className }, ref) {
+  const l = mergeLabels(DEFAULT_COMBOBOX_LABELS, labels, { toggle: toggleLabel });
+  const [selectedValue, setSelectedValue] = useControlled<string | null>(value, defaultValue, (v) => { const o = options.find((x) => x.value === v) ?? null; onValueChange?.(v, o); onChange?.(v, o); });
   const selected = options.find((o) => o.value === selectedValue) ?? null;
   const [text, setText] = useState(selected?.label ?? '');
   const [query, setQuery] = useState<string | null>(null);
@@ -59,6 +69,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
   const input = useRef<HTMLInputElement>(null);
   const list = useRef<HTMLDivElement>(null);
   const control = useRef<HTMLDivElement>(null);
+  useImperativeHandle(ref, () => input.current as HTMLInputElement);
   const base = useId();
 
   useEffect(() => { if (query === null) setText(selected?.label ?? ''); }, [selected?.label, query]);
@@ -92,7 +103,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
   };
   /* Closing with an empty field clears the value (onChange gets null). Escape keeps the old value. */
   const close = (commitEmpty = true) => {
-    if (commitEmpty && query === '' && selectedValue !== null) { if (value === undefined) setOwn(null); onChange?.(null, null); }
+    if (commitEmpty && query === '' && selectedValue !== null) { setSelectedValue(null); }
     setOpen(false);
     setQuery(null);
   };
@@ -102,8 +113,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
   useEffect(() => { input.current?.setCustomValidity(required && selectedValue === null ? l.required : ''); }, [required, selectedValue, l.required]);
   const pick = (o?: ComboboxOption) => {
     if (!o || o.disabled) return;
-    if (value === undefined) setOwn(o.value);
-    onChange?.(o.value, o);
+    setSelectedValue(o.value);
     close(false);
     setText(o.label);
     input.current?.focus();
@@ -151,7 +161,7 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
               }}
             />
             {name && <input type="hidden" name={name} value={selectedValue ?? ''} />}
-            <button type="button" tabIndex={-1} className="rb-combobox__toggle" aria-label={toggleLabel} aria-expanded={open} aria-controls={`${base}-list`} disabled={disabled} onClick={() => { if (open) close(); else { openList(); input.current?.focus(); } }}>
+            <button type="button" tabIndex={-1} className="rb-combobox__toggle" aria-label={l.toggle} aria-expanded={open} aria-controls={`${base}-list`} disabled={disabled} onClick={() => { if (open) close(); else { openList(); input.current?.focus(); } }}>
               <ChevronDown aria-hidden="true" className={cx(open && 'is-open')} />
             </button>
           </div>
@@ -186,4 +196,4 @@ export function Combobox({ label, hideLabel, hint, error, required, size = 'md',
       )}
     </Field>
   );
-}
+});

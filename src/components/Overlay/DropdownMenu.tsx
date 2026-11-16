@@ -1,5 +1,6 @@
-import { cloneElement, useEffect, useId, useRef, useState, type KeyboardEvent, type MouseEvent, type ReactElement, type ReactNode, type Ref } from 'react';
+import { cloneElement, useEffect, useId, useRef, type KeyboardEvent, type MouseEvent, type ReactElement, type ReactNode, type Ref } from 'react';
 import { cx } from '../../utils/cx';
+import { useControlled } from '../../utils/useControlled';
 import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './Overlay.css';
 
@@ -13,6 +14,11 @@ export interface DropdownMenuProps {
   items: MenuEntry[];
   align?: 'start' | 'end';
   label?: string;
+  /** Open state. Leave out to let the menu keep its own state. */
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  className?: string;
 }
 
 const setRef = <T,>(ref: Ref<T> | undefined, value: T) => {
@@ -25,8 +31,8 @@ const setRef = <T,>(ref: Ref<T> | undefined, value: T) => {
  * Arrow keys, Home and End move, typing a letter jumps to the next item that starts with it.
  * Escape closes and returns the focus to the trigger; Tab or a click outside closes.
  */
-export function DropdownMenu({ trigger, items, align = 'start', label }: DropdownMenuProps) {
-  const [open, setOpen] = useState(false);
+export function DropdownMenu({ trigger, items, align = 'start', label, open: openProp, defaultOpen = false, onOpenChange, className }: DropdownMenuProps) {
+  const [open, setOpen] = useControlled(openProp, defaultOpen, onOpenChange);
   const menuId = useId();
   const rootRef = useRef<HTMLSpanElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
@@ -73,7 +79,7 @@ export function DropdownMenu({ trigger, items, align = 'start', label }: Dropdow
   // Items that are gone (fewer items than before) are skipped by isConnected in enabled().
   let n = 0;
   return (
-    <span className="rb-menu-anchor" ref={rootRef}>
+    <span className={cx('rb-menu-anchor', className)} ref={rootRef}>
       {cloneElement(trigger, {
         ref: (el: HTMLElement | null) => { triggerRef.current = el; setRef(ownRef, el); },
         'aria-haspopup': 'menu',

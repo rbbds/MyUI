@@ -1,6 +1,8 @@
 import { forwardRef, useId, useState, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { Minus, Plus, Star } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import './Commerce.css';
 
 /* ---------- Price ---------- */
@@ -93,33 +95,40 @@ export function Rating({ value, max = 5, count, size = 'md', showValue, locale =
 export interface QuantityStepperProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'size'> {
   value?: number;
   defaultValue?: number;
-  onChange?: (value: number) => void;
+  /** Called with the new quantity (clamped to min and max). */
+  onValueChange?: (value: number) => void;
   min?: number;
   max?: number;
   size?: 'sm' | 'md';
   /** Accessible name, e.g. "Quantity Wool sweater". */
   label?: string;
+  labels?: Partial<QuantityStepperLabels>;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
+  onChange?: (value: number) => void;
+  /** @deprecated Use labels.decrease. Removed in 2.0.0. */
   decreaseLabel?: string;
+  /** @deprecated Use labels.increase. Removed in 2.0.0. */
   increaseLabel?: string;
 }
+export interface QuantityStepperLabels {
+  decrease: string;
+  increase: string;
+}
+export const DEFAULT_QUANTITY_STEPPER_LABELS: QuantityStepperLabels = { decrease: 'One less', increase: 'One more' };
 
 /** Number field with − and + buttons. Typing works too; the value is clamped to min and max. */
 export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps>(function QuantityStepper(
-  { value, defaultValue = 1, onChange, min = 1, max = 99, size = 'md', label = 'Quantity', decreaseLabel = 'One less', increaseLabel = 'One more', disabled, className, id, ...rest },
+  { value, defaultValue = 1, onValueChange, onChange, min = 1, max = 99, size = 'md', label = 'Quantity', labels, decreaseLabel, increaseLabel, disabled, className, id, ...rest },
   ref,
 ) {
-  const [own, setOwn] = useState(defaultValue);
+  const l = mergeLabels(DEFAULT_QUANTITY_STEPPER_LABELS, labels, { decrease: decreaseLabel, increase: increaseLabel });
   const [draft, setDraft] = useState<string | null>(null);
-  const v = value ?? own;
+  const [v, setValue] = useControlled(value, defaultValue, (n) => { onValueChange?.(n); onChange?.(n); });
   const autoId = useId();
-  const set = (n: number) => {
-    const c = Math.max(min, Math.min(max, Number.isFinite(n) ? Math.round(n) : min));
-    if (value === undefined) setOwn(c);
-    onChange?.(c);
-  };
+  const set = (n: number) => setValue(Math.max(min, Math.min(max, Number.isFinite(n) ? Math.round(n) : min)));
   return (
     <div className={cx('rb-qty', `rb-qty--${size}`, disabled && 'rb-qty--disabled', className)}>
-      <button type="button" className="rb-qty__btn" aria-label={decreaseLabel} aria-controls={id ?? autoId} disabled={disabled || v <= min} onClick={() => set(v - 1)}>
+      <button type="button" className="rb-qty__btn" aria-label={l.decrease} aria-controls={id ?? autoId} disabled={disabled || v <= min} onClick={() => set(v - 1)}>
         <Minus aria-hidden="true" />
       </button>
       <input
@@ -138,7 +147,7 @@ export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps
         onKeyDown={(e) => { if (e.key === 'Enter' && draft !== null) { set(parseInt(draft, 10)); setDraft(null); } }}
         {...rest}
       />
-      <button type="button" className="rb-qty__btn" aria-label={increaseLabel} aria-controls={id ?? autoId} disabled={disabled || v >= max} onClick={() => set(v + 1)}>
+      <button type="button" className="rb-qty__btn" aria-label={l.increase} aria-controls={id ?? autoId} disabled={disabled || v >= max} onClick={() => set(v + 1)}>
         <Plus aria-hidden="true" />
       </button>
     </div>

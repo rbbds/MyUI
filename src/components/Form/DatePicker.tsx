@@ -1,6 +1,8 @@
-import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { forwardRef, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
+import { useControlled } from '../../utils/useControlled';
 import { ButtonIcon } from '../Button/Button';
 import { Field, type FieldBaseProps } from './Field';
 import { usePanelDismiss, usePlacement } from '../../utils/panel';
@@ -57,6 +59,9 @@ export type CalendarView = 'day' | 'month' | 'year';
 
 export interface CalendarProps {
   value?: Date | null;
+  /** Called with the chosen day. */
+  onValueChange?: (date: Date) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (date: Date) => void;
   /** Month shown when there is no value. Defaults to today. */
   defaultMonth?: Date;
@@ -81,9 +86,13 @@ export interface CalendarProps {
   weekStartsOn?: 0 | 1;
   /** Move keyboard focus into the grid on mount (used by DatePicker). */
   autoFocus?: boolean;
+  labels?: Partial<CalendarLabels>;
+  /** @deprecated Use labels.previous. Removed in 2.0.0. */
   previousLabel?: string;
+  /** @deprecated Use labels.next. Removed in 2.0.0. */
   nextLabel?: string;
   /** Accessible label of the view switch button. Receives the view that opens on click. */
+  /** @deprecated Use labels.switchView. Removed in 2.0.0. */
   switchViewLabel?: (next: CalendarView) => string;
   /** Range mode (used by DateRangePicker): start and end of the selected range. */
   rangeStart?: Date | null;
@@ -100,15 +109,27 @@ export interface CalendarProps {
 
 const DEFAULT_MIN = new Date(1900, 0, 1);
 const DEFAULT_MAX = new Date(2099, 11, 31);
-const defaultSwitchViewLabel = (v: CalendarView) => (v === 'year' ? 'Choose a year' : v === 'month' ? 'Choose a month' : 'Back to days');
+export interface CalendarLabels {
+  previous: string;
+  next: string;
+  /** Name of the view switch button. Receives the view that opens on click. */
+  switchView: (next: CalendarView) => string;
+}
+export const DEFAULT_CALENDAR_LABELS: CalendarLabels = {
+  previous: 'Previous month',
+  next: 'Next month',
+  switchView: (v) => (v === 'year' ? 'Choose a year' : v === 'month' ? 'Choose a month' : 'Back to days'),
+};
 
 export function Calendar({
-  value, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
+  value, onValueChange, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
   views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
   yearsPerRow = 3, yearsOrder = 'asc', locale = 'en-US', weekStartsOn = 1, autoFocus,
-  previousLabel = 'Previous month', nextLabel = 'Next month', switchViewLabel = defaultSwitchViewLabel,
+  labels, previousLabel, nextLabel, switchViewLabel,
   rangeStart, rangeEnd, onDayHover, month: monthProp, onMonthChange, hidePrevious, hideNext, className,
 }: CalendarProps) {
+  const l = mergeLabels(DEFAULT_CALENDAR_LABELS, labels, { previous: previousLabel, next: nextLabel, switchView: switchViewLabel });
+  const choose = (d: Date) => { onValueChange?.(d); onChange?.(d); };
   const today = startOfDay(new Date());
   const lo = startOfDay(new Date(Math.max((min ?? DEFAULT_MIN).getTime(), disablePast ? today.getTime() : -Infinity)));
   const hi = startOfDay(new Date(Math.min((max ?? DEFAULT_MAX).getTime(), disableFuture ? today.getTime() : Infinity)));
@@ -168,14 +189,14 @@ export function Calendar({
     const d = clamp(new Date(y, focused.getMonth(), Math.min(focused.getDate(), new Date(y, focused.getMonth() + 1, 0).getDate())));
     setFocused(d);
     const n = nextView('year');
-    if (n) toView(n); else onChange?.(d);
+    if (n) toView(n); else choose(d);
   };
   const pickMonth = (m: number) => {
     const y = focused.getFullYear();
     const d = clamp(new Date(y, m, Math.min(focused.getDate(), new Date(y, m + 1, 0).getDate())));
     setFocused(d);
     const n = nextView('month');
-    if (n) toView(n); else onChange?.(d);
+    if (n) toView(n); else choose(d);
   };
 
   const onDayKey = (e: KeyboardEvent<HTMLButtonElement>) => {
@@ -213,7 +234,7 @@ export function Calendar({
           <button
             type="button"
             className="rb-calendar__switch"
-            aria-label={`${monthLabel}, ${switchViewLabel(switchTarget)}`}
+            aria-label={`${monthLabel}, ${l.switchView(switchTarget)}`}
             aria-expanded={view !== 'day'}
             onClick={() => toView(switchTarget)}
           >
@@ -225,8 +246,8 @@ export function Calendar({
         )}
         {view === 'day' && (
           <div className="rb-calendar__arrows">
-            {!hidePrevious && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={previousLabel} disabled={!canPrev} onClick={() => shiftMonth(-1)} />}
-            {!hideNext && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={nextLabel} disabled={!canNext} onClick={() => shiftMonth(1)} />}
+            {!hidePrevious && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronLeft />} aria-label={l.previous} disabled={!canPrev} onClick={() => shiftMonth(-1)} />}
+            {!hideNext && <ButtonIcon hierarchy="tertiary" size="sm" icon={<ChevronRight />} aria-label={l.next} disabled={!canNext} onClick={() => shiftMonth(1)} />}
           </div>
         )}
       </div>
@@ -262,7 +283,7 @@ export function Calendar({
                           onKeyDown={onDayKey}
                           onFocus={() => { if (!sameDay(d, focused)) setFocused(d); onDayHover?.(d); }}
                           onMouseEnter={() => onDayHover?.(d)}
-                          onClick={() => onChange?.(d)}
+                          onClick={() => choose(d)}
                         >
                           {d.getDate()}
                         </button>
@@ -276,7 +297,7 @@ export function Calendar({
         )}
 
         {view === 'month' && (
-          <div role="radiogroup" aria-label={switchViewLabel('month')} className="rb-calendar__cells rb-calendar__cells--3">
+          <div role="radiogroup" aria-label={l.switchView('month')} className="rb-calendar__cells rb-calendar__cells--3">
             {Array.from({ length: 12 }, (_, m) => {
               const y = focused.getFullYear();
               const selected = !!value && value.getFullYear() === y && value.getMonth() === m;
@@ -302,7 +323,7 @@ export function Calendar({
         )}
 
         {view === 'year' && (
-          <div role="radiogroup" aria-label={switchViewLabel('year')} className={cx('rb-calendar__cells', 'rb-calendar__cells--years', `rb-calendar__cells--${yearsPerRow}`)}>
+          <div role="radiogroup" aria-label={l.switchView('year')} className={cx('rb-calendar__cells', 'rb-calendar__cells--years', `rb-calendar__cells--${yearsPerRow}`)}>
             {years.map((y) => {
               const selected = value?.getFullYear() === y;
               return (
@@ -333,6 +354,8 @@ export interface DatePickerProps extends FieldBaseProps {
   value?: Date | null;
   defaultValue?: Date | null;
   /** Called with a valid date, or null when the field is cleared or the text is not a valid date. */
+  onValueChange?: (date: Date | null) => void;
+  /** @deprecated Use onValueChange. Removed in 2.0.0. */
   onChange?: (date: Date | null) => void;
   min?: Date;
   max?: Date;
@@ -344,16 +367,24 @@ export interface DatePickerProps extends FieldBaseProps {
   /** Locale for the typed date order, month and day names. Default en-US. Use e.g. nl-NL for dd-mm-yyyy. */
   locale?: string;
   /** Accessible name of the calendar button and popover. */
+  labels?: Partial<DatePickerLabels>;
+  /** @deprecated Use labels.calendar. Removed in 2.0.0. */
   calendarLabel?: string;
   /** Extra Calendar options (views, openTo, disablePast, shouldDisableDate, …). */
-  calendarProps?: Omit<CalendarProps, 'value' | 'onChange' | 'min' | 'max' | 'autoFocus'>;
+  calendarProps?: Omit<CalendarProps, 'value' | 'onChange' | 'onValueChange' | 'min' | 'max' | 'autoFocus'>;
   className?: string;
 }
 
+export interface DatePickerLabels {
+  /** Name of the calendar button and popover. */
+  calendar: string;
+}
+export const DEFAULT_DATE_PICKER_LABELS: DatePickerLabels = { calendar: 'Choose a date' };
+
 /** Text input (date in the order of the locale) with a calendar popover. Typing always works; the calendar is an extra. */
-export function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, calendarLabel = 'Choose a date', calendarProps, className }: DatePickerProps) {
-  const [own, setOwn] = useState<Date | null>(defaultValue);
-  const date = value !== undefined ? value : own;
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onValueChange, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, labels, calendarLabel, calendarProps, className }, ref) {
+  const l = mergeLabels(DEFAULT_DATE_PICKER_LABELS, labels, { calendar: calendarLabel });
+  const [date, commit] = useControlled<Date | null>(value, defaultValue, (d) => { onValueChange?.(d); onChange?.(d); });
   const [text, setText] = useState(date ? formatDate(date, locale) : '');
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -361,7 +392,6 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
   const popId = useId();
 
   useEffect(() => { setText(date ? formatDate(date, locale) : ''); }, [date?.getTime()]); // eslint-disable-line react-hooks/exhaustive-deps
-  const commit = (d: Date | null) => { if (value === undefined) setOwn(d); onChange?.(d); };
   const close = () => { setOpen(false); trigger.current?.focus(); };
   const panel = useRef<HTMLDivElement>(null);
   const control = useRef<HTMLDivElement>(null);
@@ -377,7 +407,7 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
               ref={trigger}
               type="button"
               className="rb-control__trigger"
-              aria-label={calendarLabel}
+              aria-label={l.calendar}
               aria-haspopup="dialog"
               aria-expanded={open}
               aria-controls={open ? popId : undefined}
@@ -387,6 +417,7 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
               <CalendarIcon aria-hidden="true" />
             </button>
             <input
+              ref={ref}
               id={fieldId}
               name={name}
               className="rb-control__input"
@@ -403,12 +434,12 @@ export function DatePicker({ label, hideLabel, hint, error, required, size = 'md
             />
           </div>
           {open && (
-            <div ref={panel} id={popId} role="dialog" aria-label={calendarLabel} className="rb-datepicker__popover">
-              <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onChange={(d) => { commit(d); close(); }} />
+            <div ref={panel} id={popId} role="dialog" aria-label={l.calendar} className="rb-datepicker__popover">
+              <Calendar locale={locale} {...calendarProps} value={date} min={min} max={max} autoFocus onValueChange={(d) => { commit(d); close(); }} />
             </div>
           )}
         </div>
       )}
     </Field>
   );
-}
+});

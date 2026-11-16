@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { CircleAlert, CircleCheck, Info, TriangleAlert } from 'lucide-react';
 import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
+import { mergeLabels } from '../../utils/labels';
 import { useTopModal } from '../../utils/panel';
 import type { StatusColor } from '../Display/Display';
 import './Overlay.css';
@@ -10,6 +11,12 @@ import './Overlay.css';
 const ICONS: Record<StatusColor, ReactNode> = {
   gray: <Info />, brand: <Info />, info: <Info />, error: <CircleAlert />, warning: <TriangleAlert />, success: <CircleCheck />,
 };
+
+export interface AlertLabels {
+  /** Name of the close button. */
+  close: string;
+}
+export const DEFAULT_ALERT_LABELS: AlertLabels = { close: 'Close' };
 
 export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
   color?: StatusColor;
@@ -21,13 +28,16 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
   /** Buttons (e.g. Button hierarchy="link" size="sm"). */
   actions?: ReactNode;
   onClose?: () => void;
+  labels?: Partial<AlertLabels>;
+  /** @deprecated Use labels.close. Removed in 2.0.0. */
   closeLabel?: string;
   /** Use 'alert' only when the alert appears dynamically for an error or warning. */
   role?: 'alert' | 'status' | 'region';
 }
 
 /** Inline message tied to page content. Do not auto-dismiss. */
-export function Alert({ color = 'info', title, children, icon, actions, onClose, closeLabel = 'Close', className, role, ...rest }: AlertProps) {
+export function Alert({ color = 'info', title, children, icon, actions, onClose, labels, closeLabel, className, role, ...rest }: AlertProps) {
+  const l = mergeLabels(DEFAULT_ALERT_LABELS, labels, { close: closeLabel });
   return (
     <div className={cx('rb-alert', `rb-alert--${color}`, className)} role={role} {...rest}>
       <span className="rb-alert__icon" aria-hidden="true">{icon ?? ICONS[color]}</span>
@@ -38,7 +48,7 @@ export function Alert({ color = 'info', title, children, icon, actions, onClose,
         </div>
         {actions && <div className="rb-alert__actions">{actions}</div>}
       </div>
-      {onClose && <CloseButton size="sm" className="rb-alert__close" onClick={onClose} aria-label={closeLabel} />}
+      {onClose && <CloseButton size="sm" className="rb-alert__close" onClick={onClose} aria-label={l.close} />}
     </div>
   );
 }

@@ -31,8 +31,9 @@ export function Badge({ color = 'gray', size = 'md', dot, iconLeading, iconTrail
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   size?: 'sm' | 'md' | 'lg';
   dot?: boolean;
-  /** Renders a close button. Its accessible name is "Remove {label}" unless removeLabel is set. */
+  /** Renders a close button. Its accessible name comes from labels.remove ("Remove {label}"). */
   onRemove?: () => void;
+  /** @deprecated Use labels.remove. Removed in 2.0.0. */
   removeLabel?: string;
   labels?: Partial<TagLabels>;
 }
