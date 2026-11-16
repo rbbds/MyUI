@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (16 November 2026)
 
 ### Added (PR 8, Mega menu and Mobile nav)
 - **Mega menu** (`MegaMenu`, `MegaMenuLink`, `MegaMenuFeatured`): a panel below the Header with 2 to 4 columns of links (icon, title, description) and an optional featured block. Header renders it for a link with `menu: { columns, featured }`; the link becomes a button with `aria-expanded` (a disclosure with plain links, no ARIA menu). Opens on click, closes on Escape (focus back to the button), a click outside, focus leaving the navigation or a click on a link. One menu at a time. Story Navigation/Mega menu and Header/WithMegaMenu.
