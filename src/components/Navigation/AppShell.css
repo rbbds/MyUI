@@ -1,4 +1,4 @@
-.rb-header{display:flex;align-items:center;gap:var(--header-gap);padding:var(--header-padding-vertical) var(--header-padding-horizontal);border-bottom:var(--header-border-width) solid var(--header-border);background:var(--header-surface)}
+.rb-header{position:relative;display:flex;align-items:center;gap:var(--header-gap);padding:var(--header-padding-vertical) var(--header-padding-horizontal);border-bottom:var(--header-border-width) solid var(--header-border);background:var(--header-surface)}
 .rb-header__logo{display:flex;align-items:center;flex-shrink:0}
 .rb-header__nav{flex:1;min-width:0}
 .rb-header__links{display:flex;align-items:center;gap:var(--header-nav-gap);margin:0;padding:0;list-style:none}
@@ -6,11 +6,20 @@
 .rb-header__link:hover{background:var(--header-nav-item-surface-hover)}
 .rb-header__link:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .rb-header__link[aria-current="page"]{background:var(--header-nav-item-surface-current);color:var(--header-nav-item-foreground-current)}
+.rb-header__trigger{align-items:center;gap:var(--header-nav-item-gap);border:0;background:transparent;cursor:pointer}
+.rb-header__chevron{flex-shrink:0;width:var(--header-nav-item-chevron-size);height:var(--header-nav-item-chevron-size)}
+.rb-header__trigger.is-current{background:var(--header-nav-item-surface-current);color:var(--header-nav-item-foreground-current)}
+.rb-header__trigger[aria-expanded="true"]{background:var(--header-nav-item-surface-expanded);color:var(--header-nav-item-foreground-expanded)}
+.rb-header__trigger[aria-expanded="true"] .rb-header__chevron{transform:rotate(180deg)}
+.rb-header__panel{position:absolute;top:100%;left:0;right:0;z-index:40}
+.rb-header__panel[hidden]{display:none}
+.rb-header__search{width:var(--header-search-width)}
 .rb-header__actions{display:flex;align-items:center;gap:var(--header-actions-gap);margin-left:auto}
 .rb-header__menu{display:none}
 @media (max-width:899px){
   .rb-header{padding:var(--header-header-padding-vertical) var(--header-header-padding-horizontal)}
   .rb-header__nav{display:none}
+  .rb-header__search{display:none}
   .rb-header__menu{display:inline-flex}
 }
 

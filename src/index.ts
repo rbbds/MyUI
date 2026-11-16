@@ -23,6 +23,7 @@ export * from './components/Form/Combobox';
 export * from './components/Selection/SelectionCard';
 export * from './components/Navigation/Stepper';
 export * from './components/Navigation/AppShell';
+export * from './components/Navigation/MegaMenu';
 export * from './components/Navigation/BottomNavigation';
 export * from './components/Overlay/Slideout';
 export * from './components/Overlay/CommandMenu';

@@ -346,3 +346,49 @@ test('PR 7c: one focus ring in a field, Table scroll region, bulk live region (M
   await expect(region).toHaveAttribute('tabindex', '0');
   await expect(page.getByRole('status').filter({ hasText: '' }).first()).toBeAttached();
 });
+
+test('PR 8: Mega menu is a disclosure that opens on click and closes on Escape and focus out', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/?s=mega-menu');
+  const product = page.getByRole('button', { name: 'Product' });
+  await expect(product).toHaveAttribute('aria-expanded', 'false');
+  await product.click();
+  await expect(product).toHaveAttribute('aria-expanded', 'true');
+  const analytics = page.getByRole('link', { name: 'Analytics' });
+  await expect(analytics).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Features' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+  // the panel follows the button in the tab order
+  await page.keyboard.press('Tab');
+  await expect(analytics).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(product).toHaveAttribute('aria-expanded', 'false');
+  await expect(product).toBeFocused();
+  await expect(analytics).toBeHidden();
+  // one menu at a time
+  await product.click();
+  await page.getByRole('button', { name: 'Solutions' }).click();
+  await expect(product).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByRole('button', { name: 'Solutions' })).toHaveAttribute('aria-expanded', 'true');
+  // focus leaving the navigation closes it
+  await page.getByRole('button', { name: 'After' }).focus();
+  await expect(page.getByRole('button', { name: 'Solutions' })).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByRole('search')).toBeVisible();
+});
+
+test('PR 8: mobile menu has search and an accordion MobileNav', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 800 });
+  await page.goto('/?s=mega-menu');
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Menu' });
+  await expect(dialog.getByRole('search')).toBeVisible();
+  const product = dialog.getByRole('button', { name: 'Product' });
+  await expect(product).toHaveAttribute('aria-expanded', 'true');
+  await expect(dialog.getByRole('link', { name: 'Projects' })).toHaveAttribute('aria-current', 'page');
+  const solutions = dialog.getByRole('button', { name: 'Solutions' });
+  await solutions.click();
+  await expect(solutions).toHaveAttribute('aria-expanded', 'true');
+  await expect(product).toHaveAttribute('aria-expanded', 'false');
+  await expect(dialog.getByRole('link', { name: 'For teams' })).toBeVisible();
+  await expect(dialog.getByRole('link', { name: 'Pricing' })).toBeVisible();
+});

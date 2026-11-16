@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Added (PR 8, Mega menu and Mobile nav)
+- **Mega menu** (`MegaMenu`, `MegaMenuLink`, `MegaMenuFeatured`): a panel below the Header with 2 to 4 columns of links (icon, title, description) and an optional featured block. Header renders it for a link with `menu: { columns, featured }`; the link becomes a button with `aria-expanded` (a disclosure with plain links, no ARIA menu). Opens on click, closes on Escape (focus back to the button), a click outside, focus leaving the navigation or a click on a link. One menu at a time. Story Navigation/Mega menu and Header/WithMegaMenu.
+- **Mobile nav** (`MobileNav`): the navigation in the Header mobile menu. Items with a menu expand in place (accordion, one at a time, the section with the current page starts open); subpages show the same icons as the Mega menu.
+- **Header `search`**: usually a SearchInput (sm). Right side on desktop (`--header-search-width`, 240 px), at the top of the mobile menu. Both in a `role="search"` landmark.
+- `_Header nav item` State=Expanded and Has menu, `_Mega menu link` State=Current, `_Mobile nav sublink` (Default, Hover, Focus, Current, with an optional icon), Header `Show search` in Figma.
+- Tokens: `--mega-menu-link-surface-current`, `--mega-menu-featured-width`, `--mega-menu-featured-image-height`, `--mega-menu-featured-image-radius`, `--mobile-nav-item-sub-foreground-current`, `--mobile-nav-item-sub-icon-size`, `--mobile-nav-item-sub-icon-gap`, `--mobile-nav-item-sub-icon-foreground`, `--header-search-width`. The Mega menu, Mobile nav and Header nav item tokens are now used (off the pending list).
+
+### Changed (PR 8)
+- **Header mobile menu** uses Mobile nav instead of Nav items. `links[].icon` is no longer shown and is deprecated (removed in 2.0.0). `links[].href` is optional for an item with a `menu`.
+- `--mega-menu-link-icon-foreground` is `--color-foreground-secondary` (was brand): calmer with many links.
+- Removed tokens `--mega-menu-column-gap` (the padding of a link is the spacing between links) and `--mobile-nav-padding-horizontal` (the Slideout gives the padding).
+- Figma: Search input variants have a Fill base, so an instance can be narrower than 320 px. Instances in Sidebar (248), Table (280) and the templates now show their set width instead of running to 320.
+- Figma: focus states of Header nav item, Mega menu link and Mobile nav item show the ring (fill and clip content).
+
 ### Added (PR 7c, accessibility)
 - **DatePicker checks what you type** (M6): text that is not a date gives "Enter a date as MM/DD/YYYY.", a date outside `min`/`max` (or disabled through `calendarProps`) gives "Choose a date between … and …." The `error` prop wins. Texts in `labels.invalid`, `labels.unavailable`. Figma: Date picker State=Error. Story Form/DatePicker/BuiltInErrors.
 - **DatePicker format in the hint**: "Format: MM/DD/YYYY" after the hint (`labels.format`, `hideFormat`). The placeholder disappears while you type; the hint does not.

@@ -1,25 +1,33 @@
 import { Children, useEffect, useId, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
-import { Menu, PanelLeft } from 'lucide-react';
+import { ChevronDown, Menu, PanelLeft } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
 import { ButtonIcon } from '../Button/Button';
 import { Divider } from '../Display/Display';
 import { Slideout } from '../Overlay/Slideout';
+import { usePanelDismiss } from '../../utils/panel';
+import { MegaMenu, MobileNav, type MegaMenuData } from './MegaMenu';
 import { NavCompactContext, NavItem } from './Navigation';
 import './AppShell.css';
 
 /* ---------- Header ---------- */
 export interface HeaderLink {
   label: ReactNode;
-  href: string;
+  /** Link of the item. Leave out for an item that only opens its menu. */
+  href?: string;
   current?: boolean;
+  /** @deprecated Not shown since the mobile menu uses MobileNav (PR 8). Removed in 2.0.0. */
   icon?: ReactNode;
+  /** Opens a Mega menu on desktop and an accordion row in the mobile menu. The item becomes a button. */
+  menu?: MegaMenuData;
 }
 
 export interface HeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
   /** Logo, usually a link to the home page. */
   logo: ReactNode;
   links?: HeaderLink[];
+  /** Usually a SearchInput (size sm). Right side on desktop, at the top of the menu on mobile. */
+  search?: ReactNode;
   /** Right side: notifications, avatar, buttons. */
   actions?: ReactNode;
   /** Name of the navigation. Default "Main menu". */
@@ -42,39 +50,78 @@ export interface HeaderLabels {
 }
 export const DEFAULT_HEADER_LABELS: HeaderLabels = { label: 'Main menu', menu: 'Open menu', menuTitle: 'Menu' };
 
-/** Top bar. Below 900px the links move into a Slideout behind a menu button. */
-export function Header({ logo, links = [], actions, label, labels, navLabel, menuLabel, menuTitle, className, ...rest }: HeaderProps) {
+const menuHasCurrent = (m?: MegaMenuData) => Boolean(m?.columns.some((c) => c.links.some((x) => x.current)));
+
+/**
+ * Top bar. Links with a `menu` open a Mega menu on click (disclosure: a button with aria-expanded and plain links).
+ * Below 900px the links and the search move into a Slideout behind a menu button.
+ */
+export function Header({ logo, links = [], search, actions, label, labels, navLabel, menuLabel, menuTitle, className, ...rest }: HeaderProps) {
   const l = mergeLabels(DEFAULT_HEADER_LABELS, labels, { label: label ?? navLabel, menu: menuLabel, menuTitle });
   const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState<number | null>(null);
+  const nav = useRef<HTMLElement>(null);
+  const triggers = useRef<(HTMLButtonElement | null)[]>([]);
+  const base = useId();
+  usePanelDismiss({
+    open: menu !== null,
+    root: nav,
+    onDismiss: (reason) => {
+      const i = menu;
+      setMenu(null);
+      if (reason === 'escape' && i !== null) triggers.current[i]?.focus();
+    },
+  });
+  const hasMobileMenu = links.length > 0 || Boolean(search);
   return (
     <header className={cx('rb-header', className)} {...rest}>
       <div className="rb-header__logo">{logo}</div>
       {links.length > 0 && (
-        <nav aria-label={l.label} className="rb-header__nav">
+        <nav ref={nav} aria-label={l.label} className="rb-header__nav">
           <ul className="rb-header__links">
-            {links.map((l, i) => (
+            {links.map((item, i) => (
               <li key={i}>
-                <a href={l.href} className="rb-header__link" aria-current={l.current ? 'page' : undefined}>{l.label}</a>
+                {item.menu ? (
+                  <>
+                    <button
+                      ref={(el) => { triggers.current[i] = el; }}
+                      type="button"
+                      className={cx('rb-header__link', 'rb-header__trigger', menuHasCurrent(item.menu) && 'is-current')}
+                      aria-expanded={menu === i}
+                      aria-controls={`${base}-${i}`}
+                      onClick={() => setMenu(menu === i ? null : i)}
+                    >
+                      {item.label}
+                      <ChevronDown aria-hidden="true" className="rb-header__chevron" />
+                    </button>
+                    <MegaMenu
+                      id={`${base}-${i}`}
+                      className="rb-header__panel"
+                      hidden={menu !== i}
+                      columns={item.menu.columns}
+                      featured={item.menu.featured}
+                      onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setMenu(null); }}
+                    />
+                  </>
+                ) : (
+                  <a href={item.href} className="rb-header__link" aria-current={item.current ? 'page' : undefined}>{item.label}</a>
+                )}
               </li>
             ))}
           </ul>
         </nav>
       )}
       <div className="rb-header__actions">
+        {search && <div role="search" className="rb-header__search">{search}</div>}
         {actions}
-        {links.length > 0 && (
+        {hasMobileMenu && (
           <ButtonIcon className="rb-header__menu" hierarchy="secondary" icon={<Menu />} aria-label={l.menu} aria-haspopup="dialog" aria-expanded={open} onClick={() => setOpen(true)} />
         )}
       </div>
-      {links.length > 0 && (
+      {hasMobileMenu && (
         <Slideout open={open} onClose={() => setOpen(false)} title={l.menuTitle} size="sm">
-          <nav aria-label={l.label}>
-            <ul className="rb-sidebar__list">
-              {links.map((l, i) => (
-                <li key={i}><NavItem href={l.href} icon={l.icon} active={l.current}>{l.label}</NavItem></li>
-              ))}
-            </ul>
-          </nav>
+          {search && <div role="search" className="rb-header__menu-search">{search}</div>}
+          {links.length > 0 && <MobileNav label={l.label} items={links} />}
         </Slideout>
       )}
     </header>
