@@ -1,4 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -64,7 +65,7 @@ export function ProductCard({
       </div>
       <div className="rb-product-card__body">
         {meta && <p className="rb-product-card__meta">{meta}</p>}
-        <h3 className="rb-product-card__title"><a href={href}>{title}</a></h3>
+        <h3 className="rb-product-card__title"><Link href={href}>{title}</Link></h3>
         {rating !== undefined && <Rating value={rating} count={reviewCount} size="sm" />}
         {shown.length > 0 && (
           <p className="rb-product-card__swatches">

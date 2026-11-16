@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 9 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 16 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -75,7 +75,7 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 | --- | --- |
 | Figma-bestand | WL Design System (rbbds), `gV7OuQywH2cOUVfQagW6nC`. Staat in een aparte map in het PGGM Figma-account (geen extra betaalde seat). |
 | Repo | https://github.com/rbbds/MyUI (GitHub-gebruiker `rbbds`) |
-| npm-pakket | `@rbbds/ui`, versie 1.0.0 in package.json, MIT, publiceert naar npmjs.com via `publish.yml` bij een GitHub Release, met npm trusted publishing (geen token). 1.0.0 gaat met de hand |
+| npm-pakket | `@rbbds/ui`, MIT. Versie in package.json en CHANGELOG.md (semver, zie Getting started / Versioning in Storybook). Een GitHub Release met tag `vX.Y.Z` start `publish.yml`, dat via npm trusted publishing (OIDC, geen token) publiceert |
 | Storybook live | https://my-ui-two.vercel.app (main) |
 | Storybook previews | Per branch via Vercel, link staat in de PR |
 
@@ -200,7 +200,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Kleur koppelen: eerst de waarde ophalen (`resolveForConsumer`) en die als placeholder gebruiken, anders rendert het zwart.
 - De huidige pagina kun je niet verwijderen; eerst wisselen.
 
-### Componenten (stand 8 november 2026)
+### Componenten (stand 16 november 2026)
 
 **Basis**
 - Buttons: Button, Button destructive, Button icon, Button group
@@ -208,7 +208,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Selection controls: Checkbox, Radio, Toggle, Selection card (met `aside`)
 - Badges & tags, Avatars, Feedback (Alert, Toast, Tooltip, Progress)
 - Overlays: Dropdown menu, Modal, Slideout, Command menu (⌘K)
-- Navigation: Header (met mobiel menu), Sidebar, Nav item, Tabs, Breadcrumbs, Pagination, Stepper
+- Navigation: Header (met mobiel menu en `search`), Mega menu, Mobile nav, Sidebar (inklapbaar, twee niveaus, Dual), Nav item, Tabs, Breadcrumbs, Pagination, Stepper, Bottom navigation
+- Routing: `LinkProvider` geeft alle MyUI-links je router-link (Next.js, React Router). Build heeft `'use client'`.
 - Data display: Table. Content: Card, Accordion, Empty state, File upload
 - Utilities: Divider, Featured icon, Spinner, Skeleton, Kbd
 - Flags: 250+ vlaggen en CountrySelect (aparte entry)
@@ -240,7 +241,9 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - `npm run typecheck` en `npm run build-storybook` moeten slagen.
 - `npm run test:browser`: Playwright in Chromium en WebKit voor gedrag dat axe niet ziet (Escape in panelen, focus, schermlezernamen). Scenario's staan in `tests/harness/main.tsx`, tests in `tests/browser/`. Een bekende bug staat erin met `test.fail()`.
 - Review van 12 november 2026 met alle bevindingen en de volgorde van oplossen: `claude/MyUI-review-2026-11-12.md` in het Claude Project.
-- Laatste stand (PR #10): 0 axe-fouten op alle stories in Light en Dark.
+- Vaste checks in elke PR: `npx tsc --noEmit -p .`, `npm run build`, `npm run lint:tokens -- --strict`, `npm run check:strings`, `npm run check:contrast`, `npm run report:figma-bindings -- --strict`, `npm run docs:build`, Playwright (64 tests).
+- Visuele regressie: Storybook van main en van de branch bouwen en vergelijken met `node scripts/compare-stories.mjs <oud> <nieuw>`.
+- Laatste stand (PR #42): 0 axe-fouten op de gewijzigde stories in Light en Dark, Iris, Forest en Berry. Schermlezers (VoiceOver, NVDA) zijn nog niet met de hand getest.
 
 ### Geschiedenis
 
@@ -256,6 +259,13 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #8 | Portaal ronde 2 (prio 2 en 3) en breakpoint-variabelen |
 | #9 | Logo en cover in Storybook, Foundations in Figma bijgewerkt |
 | #10 | Token architecture 0.3.0 (brand, alias, mapped), Icon set, collapsible and two-level Sidebar, Berry radius fixes |
+| #11–#16 | Status indicator zonder brand, gegroepeerde Verification code, Popover-pijl, docs in B1-Engels, Show code, myui-brand skill |
+| #17 | Fase 4: Engelse standaardteksten, en-US, neutrale voorbeelden |
+| #18–#20 | Templates, Bottom navigation, responsive tokens, Accent button, gele accentkleur |
+| #21–#24 | Getting started, versiebeleid, npm trusted publishing, release 1.0.0 en 1.0.1 |
+| #25–#27 | Building components guide, control-hoogtes op 4 px, tokens.json, llms.txt |
+| #28–#41 | Review 12 november, PR 1 t/m 8: browsertests, token-lint, contrast, panelenlaag, teksten als prop (`labels`), component tokens in CSS, strikte token-checks, API-afstemming met deprecations, Input help, toegankelijkheid (focus, aria-disabled, hit areas), Mega menu, Mobile nav en Header search |
+| #42 | `LinkProvider` (router-links), `'use client'`, L2/L6/L9, Docs-frames opnieuw gegenereerd |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -272,14 +282,13 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 
 **Dashboards en portalen**
 - Grafieken (lijn, staaf, donut, sparkline): on hold. Keuze tussen Recharts of eigen SVG, plus een token-reeks voor grafiekkleuren.
-- Notifications: tabs Alle/Ongelezen. Popover: pijltje naar de knop.
+- Notifications: tabs Alle/Ongelezen.
 - Date range picker: begin- en einddatum typen.
 - Table: gestapelde mobiele weergave; variant Empty splitsen in "geen data" en "geen resultaten".
 
 **Tokens en Figma**
 - Test what a Starter plan user can do with a copy of the file.
 - Voorstel voor `on-warning` in Dark.
-- 43 oudere Docs-frames opnieuw genereren, zodat het Storybook-pad "Categorie / Component / Docs" klopt.
 - Brand builder: bij de standaardkleur precies de Forest- en Berry-tokens gebruiken (nu een iets andere tint).
 
 **Werkafspraken (vastgelegd in november 2026)**
@@ -290,11 +299,9 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 **Proces**
 - E-commerce is code-first gebouwd. Nog een design review in Figma doen en aanpassingen doorzetten naar code.
 - Templates per stijl uitdenken (uitgesteld).
-- Release v0.2.0 of v0.3.0 publiceren wanneer Robert dat vraagt.
 - Figma-naar-code workflow voor token- en componentwijzigingen vastleggen.
 
-**Fase 4: Engels (PR volgt)**
-- Standaardlabels in code Engels, standaard locale en-US (bedragen, datums, landnamen). DatePicker kreeg een `locale`-prop; de getypte datum volgt de volgorde van de locale.
-- Stories, voorbeelden en Introduction in het Engels, met neutrale voorbeeldcontent (geen pensioentermen).
-- Storybook: "Portaal" heet nu "Account/Examples", "Voorbeelden" heet "Examples".
-- Figma: voorbeeldteksten Engels en en-US; `icon-size/*` staat in `↳ screen-size`, `↳ size` kiest alleen de maat per component (modes op 183 varianten).
+**Toegankelijkheid (na de review)**
+- L5: actieve optie in Button group en Pagination heeft 1,11:1 contrast met de rust-optie (vlak). Ontwerpbesluit nodig: rand, vulling of vinkje.
+- Handmatige test met VoiceOver (macOS, iOS) en NVDA (Windows) en een ronde in echte Safari.
+- L7 (z-index en transities op de allowlist) en L10 (volgt Figma) blijven bewust zoals ze zijn.

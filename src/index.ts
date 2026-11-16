@@ -50,3 +50,4 @@ export * from './components/Portal/Checklist';
 export * from './components/Portal/VerificationCode';
 export * from './components/Portal/PasswordInput';
 export * from './components/Portal/CopyInput';
+export { LinkProvider, type LinkComponent, type LinkComponentProps, type LinkProviderProps } from './utils/link';

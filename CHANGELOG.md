@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Added (PR 9, links and cleanup)
+- **`LinkProvider`** (M20): pass your router link once (for example Next.js `Link` or React Router `Link`) and every MyUI link uses it: Header, Mega menu, Mobile nav, Nav item, Breadcrumbs, Stepper, Bottom navigation, Product card, Cart, Document list, Notifications and content links. Without a provider MyUI renders a plain `<a>`. Download links stay a plain `<a>`. Types `LinkComponent`, `LinkComponentProps`, `LinkProviderProps`.
+- **`'use client'`** at the top of every built file, so the components work in the Next.js App Router without a wrapper.
+- Developer guide: section "Routing and Next.js". llms.txt: routing, site navigation (Header menu, Mega menu, Mobile nav, search).
+
+### Changed (PR 9)
+- **FileUploadItem** (L6): the row is no longer a live region. A hidden status reads out "{name} uploaded" or "{name}: upload failed" once (`labels.uploadedFile`, `labels.failedFile`), not every progress step.
+- **PasswordInput** (L9): the eye button has no `aria-pressed` anymore. Its name already switches between "Show password" and "Hide password", so screen readers no longer read the state twice.
+- **Textarea and File upload** (L2): the padding subtracts the border width, so a thicker border (File upload active) no longer moves the content.
+- Figma: Docs frames regenerated for all components, including Mega menu and Mobile nav.
+- `docs/PROJECT.md` brought up to date (history, components, checks, open points).
+
 ### Added (PR 8, Mega menu and Mobile nav)
 - **Mega menu** (`MegaMenu`, `MegaMenuLink`, `MegaMenuFeatured`): a panel below the Header with 2 to 4 columns of links (icon, title, description) and an optional featured block. Header renders it for a link with `menu: { columns, featured }`; the link becomes a button with `aria-expanded` (a disclosure with plain links, no ARIA menu). Opens on click, closes on Escape (focus back to the button), a click outside, focus leaving the navigation or a click on a link. One menu at a time. Story Navigation/Mega menu and Header/WithMegaMenu.
 - **Mobile nav** (`MobileNav`): the navigation in the Header mobile menu. Items with a menu expand in place (accordion, one at a time, the section with the current page starts open); subpages show the same icons as the Mega menu.

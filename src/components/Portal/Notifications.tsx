@@ -1,4 +1,5 @@
 import { forwardRef, useId, useMemo, useRef, useState, type ButtonHTMLAttributes, type ReactNode, type RefObject } from 'react';
+import { Link } from '../../utils/link';
 import { Bell } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -68,7 +69,7 @@ export function NotificationItem({ title, children, time, dateTime, unread, avat
   );
   return (
     <li className={cx('rb-notif', unread && 'rb-notif--unread')}>
-      {href ? <a href={href} onClick={onClick} className="rb-notif__link">{inner}</a> : <button type="button" onClick={onClick} className="rb-notif__link">{inner}</button>}
+      {href ? <Link href={href} onClick={onClick} className="rb-notif__link">{inner}</Link> : <button type="button" onClick={onClick} className="rb-notif__link">{inner}</button>}
     </li>
   );
 }

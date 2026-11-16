@@ -57,7 +57,7 @@
 
 .rb-upload{position:relative;display:flex;flex-direction:column;align-items:center;gap:var(--file-upload-gap);padding:var(--file-upload-padding) var(--file-upload-padding-horizontal);border:var(--file-upload-border-width) dashed var(--file-upload-border);border-radius:var(--file-upload-radius);background:var(--file-upload-surface);text-align:center;cursor:pointer;transition:background-color .15s,border-color .15s}
 .rb-upload:hover{background:var(--file-upload-surface-hover)}
-.rb-upload--active{border:var(--file-upload-border-width-active) solid var(--file-upload-border-active);background:var(--file-upload-surface-active)}
+.rb-upload--active{--_shift:calc(var(--file-upload-border-width-active) - var(--file-upload-border-width));padding:calc(var(--file-upload-padding) - var(--_shift)) calc(var(--file-upload-padding-horizontal) - var(--_shift));border:var(--file-upload-border-width-active) solid var(--file-upload-border-active);background:var(--file-upload-surface-active)}
 .rb-upload:has(input:focus-visible){box-shadow:var(--focus-ring)}
 .rb-upload--disabled{background:var(--file-upload-surface-disabled);cursor:not-allowed;color:var(--file-upload-foreground-disabled)}
 .rb-upload__input{position:absolute;inset:0;opacity:0;cursor:inherit;width:100%}

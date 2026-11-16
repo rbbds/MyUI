@@ -1,4 +1,5 @@
 import { forwardRef, type AnchorHTMLAttributes, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { cx } from '../../utils/cx';
 import './BottomNavigation.css';
 
@@ -17,13 +18,13 @@ export interface BottomNavItemProps extends AnchorHTMLAttributes<HTMLAnchorEleme
 /** One destination in BottomNavigation: icon with a label below. */
 export function BottomNavItem({ icon, children, active, badge, badgeLabel = 'new', className, ...rest }: BottomNavItemProps) {
   return (
-    <a className={cx('rb-bottom-nav__item', className)} aria-current={active ? 'page' : undefined} {...rest}>
+    <Link className={cx('rb-bottom-nav__item', className)} aria-current={active ? 'page' : undefined} {...rest}>
       <span className="rb-bottom-nav__indicator" aria-hidden="true">
         {icon}
         {badge && <span className="rb-bottom-nav__badge" />}
       </span>
       <span className="rb-bottom-nav__label">{children}{badge && <span className="rb-visually-hidden">, {badgeLabel}</span>}</span>
-    </a>
+    </Link>
   );
 }
 
@@ -53,7 +54,7 @@ export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(f
     items.splice(Math.ceil(items.length / 2), 0, (
       <li key="action" className="rb-bottom-nav__action-slot">
         {action.href
-          ? <a className="rb-bottom-nav__action" href={action.href} aria-label={action.label} onClick={action.onClick}>{inner}</a>
+          ? <Link className="rb-bottom-nav__action" href={action.href} aria-label={action.label} onClick={action.onClick}>{inner}</Link>
           : <button type="button" className="rb-bottom-nav__action" aria-label={action.label} onClick={action.onClick}>{inner}</button>}
       </li>
     ));

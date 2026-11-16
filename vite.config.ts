@@ -25,6 +25,8 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom', 'react/jsx-runtime', 'lucide-react', /^country-flag-icons/],
+      // M20: the components use state and effects. Mark every chunk as a client module for the Next.js App Router.
+      output: { banner: "'use client';" },
     },
     sourcemap: true,
     emptyOutDir: true,

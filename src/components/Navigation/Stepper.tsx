@@ -1,4 +1,5 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { Check } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -45,7 +46,7 @@ export const Stepper = forwardRef<HTMLElement, StepperProps>(function Stepper({ 
       <ol className={cx('rb-stepper', `rb-stepper--${orientation}`)}>
         {steps.map((s, i) => {
           const status = i < current ? 'complete' : i === current ? 'current' : 'upcoming';
-          const title = status === 'complete' && s.href ? <a href={s.href} className="rb-step__link">{s.title}</a> : s.title;
+          const title = status === 'complete' && s.href ? <Link href={s.href} className="rb-step__link">{s.title}</Link> : s.title;
           return (
             <li key={i} className={cx('rb-step', `rb-step--${status}`)} aria-current={status === 'current' ? 'step' : undefined}>
               <span className="rb-step__track" aria-hidden="true">

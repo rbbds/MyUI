@@ -1,4 +1,5 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react';
+import { Link } from '../../utils/link';
 import { Download, FileText } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
@@ -62,10 +63,10 @@ export function DocumentItem({ title, href, meta, unread, icon, downloadHref, la
     <li className={cx('rb-doc', unread && 'rb-doc--unread')}>
       {icon ?? <FeaturedIcon size="sm" color="gray" icon={<FileText />} />}
       <div className="rb-doc__text">
-        <a href={href} className="rb-doc__title">
+        <Link href={href} className="rb-doc__title">
           {title}
           {unread && <><span className="rb-doc__dot" aria-hidden="true" /><span className="rb-visually-hidden">, {l.unread}</span></>}
-        </a>
+        </Link>
         {meta && <p className="rb-doc__meta">{meta}</p>}
       </div>
       {downloadHref && (
