@@ -12,6 +12,7 @@
 - **PasswordInput** (L9): the eye button has no `aria-pressed` anymore. Its name already switches between "Show password" and "Hide password", so screen readers no longer read the state twice.
 - **Textarea and File upload** (L2): the padding subtracts the border width, so a thicker border (File upload active) no longer moves the content.
 - Figma: Docs frames regenerated for all components, including Mega menu and Mobile nav.
+- `docs/PROJECT.md` brought up to date (history, components, checks, open points).
 
 ### Added (PR 8, Mega menu and Mobile nav)
 - **Mega menu** (`MegaMenu`, `MegaMenuLink`, `MegaMenuFeatured`): a panel below the Header with 2 to 4 columns of links (icon, title, description) and an optional featured block. Header renders it for a link with `menu: { columns, featured }`; the link becomes a button with `aria-expanded` (a disclosure with plain links, no ARIA menu). Opens on click, closes on Escape (focus back to the button), a click outside, focus leaving the navigation or a click on a link. One menu at a time. Story Navigation/Mega menu and Header/WithMegaMenu.
