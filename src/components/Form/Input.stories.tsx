@@ -6,6 +6,7 @@ export const Playground = S.Playground;
 export const WithIcon = S.WithIcon;
 export const PrefixSuffix = S.PrefixSuffix;
 export const WithError = S.WithError;
+export const ErrorEmpty = S.ErrorEmpty;
 export const Disabled = S.Disabled;
 export const Required = S.Required;
 export const WithHelp = S.WithHelp;

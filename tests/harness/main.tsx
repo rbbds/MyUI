@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Alert, Button, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -52,6 +52,7 @@ const scenarios: Record<string, ReactNode> = {
   labels: <CartButton count={3} labels={{ count: (n) => `${n} artikelen` }} label="Winkelwagen" />,
   api: <ApiScenario />,
   'components-7b': <Scenario7b />,
+  'a11y-7c': <Scenario7c />,
   daterange: <DateRangePicker label="Period" defaultValue={{ start: new Date(2026, 10, 1), end: new Date(2026, 10, 7) }} />,
 };
 
@@ -138,6 +139,28 @@ function ApiScenario() {
 }
 
 /* PR 7b: Input help, ButtonGroup disabled, DualSidebar expand. */
+function Scenario7c() {
+  const [page, setPage] = useState(1);
+  const [saving, setSaving] = useState(false);
+  const [clicks, setClicks] = useState(0);
+  const [reason, setReason] = useState('');
+  return (
+    <div style={{ display: 'grid', gap: 16, maxWidth: 480 }}>
+      <QuantityStepper label="Quantity" defaultValue={2} min={1} max={3} />
+      <Pagination page={page} pageCount={3} onPageChange={setPage} />
+      <Button loading={saving} onClick={() => { setClicks((c) => c + 1); setSaving(true); }}>Save</Button>
+      <output data-testid="clicks">{clicks}</output>
+      <DatePicker label="Appointment" min={new Date(2026, 10, 1)} max={new Date(2026, 10, 30)} onValueChange={(_, d) => setReason(d.reason)} />
+      <output data-testid="reason">{reason}</output>
+      <Calendar defaultMonth={new Date(2026, 10, 6)} value={new Date(2026, 10, 6)} shouldDisableDate={(d) => d.getDay() === 0 || d.getDay() === 6} />
+      <SearchInput label="Search" defaultValue="report" />
+      <TableCard title="Orders" toolbar={<TableBulkActions count={0} onClear={() => {}} />}>
+        <Table><tbody><tr><td>One</td></tr></tbody></Table>
+      </TableCard>
+    </div>
+  );
+}
+
 function Scenario7b() {
   const [collapsed, setCollapsed] = useState(false);
   return (

@@ -143,8 +143,10 @@
   ],
   "a11y": [
     "Native <table> with <th scope=\"col\">.",
-    "Sortable headers have aria-sort.",
-    "Checkboxes in rows have a label with the row name."
+    "Sortable headers have aria-sort. The sort button has a hit area of at least 24 px high.",
+    "Checkboxes in rows have a label with the row name and a hit area of 24 px.",
+    "The scroll area is focusable and named after the TableCard title, so keyboard users can scroll a wide table.",
+    "Table bulk actions keep a live region on the page, so \"1 selected\" is read out too."
   ],
   "content": [
     "Short column headers. Align numbers right and text left."

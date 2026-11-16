@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type MouseEvent, type ReactNode } from 'react';
 import { LoaderCircle } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import './Button.css';
@@ -17,9 +17,22 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconLeading?: ReactNode;
   /** Icon after the label. */
   iconTrailing?: ReactNode;
-  /** Shows a spinner, sets aria-busy and blocks interaction. Keep the label. */
+  /** Shows a spinner, sets aria-busy and blocks clicks. The button stays focusable (aria-disabled), so focus is not lost. Keep the label. */
   loading?: boolean;
   fullWidth?: boolean;
+}
+
+/**
+ * M9: a loading or aria-disabled button stays focusable but ignores clicks (and does not submit a form).
+ * `disabled` would drop the focus to the page when the button disables itself.
+ */
+function blockWhenBusy(loading: boolean | undefined, rest: ButtonHTMLAttributes<HTMLButtonElement>) {
+  const off = Boolean(loading) || rest['aria-disabled'] === true || rest['aria-disabled'] === 'true';
+  if (!off) return {};
+  return {
+    'aria-disabled': true as const,
+    onClick: (e: MouseEvent<HTMLButtonElement>) => { e.preventDefault(); },
+  };
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -32,9 +45,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       data-size={size}
       className={cx('rb-button', `rb-button--${hierarchy}`, `rb-button--${size}`, destructive && 'rb-button--destructive', fullWidth && 'rb-button--full', className)}
-      disabled={disabled || loading}
+      disabled={disabled}
       aria-busy={loading || undefined}
       {...rest}
+      {...blockWhenBusy(loading, rest)}
     >
       {loading ? <LoaderCircle className="rb-button__spinner" aria-hidden="true" /> : iconLeading}
       {children}
@@ -61,9 +75,10 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(functio
       type={type}
       data-size={size}
       className={cx('rb-button', 'rb-button--icon-only', `rb-button--${hierarchy}`, `rb-button--${size}`, destructive && 'rb-button--destructive', className)}
-      disabled={disabled || loading}
+      disabled={disabled}
       aria-busy={loading || undefined}
       {...rest}
+      {...blockWhenBusy(loading, rest)}
     >
       {loading ? <LoaderCircle className="rb-button__spinner" aria-hidden="true" /> : icon}
     </button>

@@ -1340,7 +1340,6 @@
 --password-strength-segment-height:4px;
 --password-strength-strong:var(--color-surface-success-solid);
 --password-strength-weak:var(--color-surface-error-solid);
---search-clear-icon-size:var(--icon-size-sm);
 --search-foreground-icon:var(--color-foreground-quaternary);
 --search-search-icon-size:var(--icon-size-md);
 --select-chevron-icon-size:var(--icon-size-md);

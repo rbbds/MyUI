@@ -26,8 +26,8 @@
     ],
     [
       "State",
-      "Default, Hover, Focus, Disabled, At minimum",
-      "At minimum: − is disabled."
+      "Default, Hover, Focus value, Focus button, Disabled, At minimum",
+      "Focus value: ring around the stepper while typing. Focus button: ring inside the button. At minimum: − is off."
     ],
     [
       "Value",
@@ -69,11 +69,12 @@
   ],
   "behaviour": [
     "A typed value is checked on Enter or when you leave the field.",
-    "− is off at the minimum, + at the maximum."
+    "− is off at the minimum, + at the maximum. They keep focus (aria-disabled), so you can keep pressing without losing your place."
   ],
   "a11y": [
     "Native number field: arrow up and down work.",
-    "The buttons have their own names and point to the field (aria-controls)."
+    "The buttons have their own names and point to the field (aria-controls).",
+    "Focus is visible on the part that has it: a ring inside − or +, a ring around the stepper for the field."
   ],
   "content": [],
   "do": [

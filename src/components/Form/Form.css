@@ -7,11 +7,11 @@
 
 .rb-control{display:flex;align-items:center;gap:var(--input-gap);padding:calc(var(--input-md-padding-vertical) - var(--input-border-width)) calc(var(--input-md-padding-horizontal) - var(--input-border-width));background:var(--input-surface-default);border:var(--input-border-width) solid var(--input-border-default);border-radius:var(--input-radius);box-shadow:var(--shadow-xs);color:var(--input-foreground-value);transition:border-color .15s,box-shadow .15s;cursor:text}
 .rb-control:hover{border-color:var(--input-border-hover)}
-.rb-control:focus-within{border-color:var(--input-border-focus);box-shadow:var(--focus-ring)}
+.rb-control:focus-within:not(:has(.rb-control__clear:focus-visible,.rb-control__trigger:focus-visible)){border-color:var(--input-border-focus);box-shadow:var(--focus-ring)}
 .rb-control--sm{padding:calc(var(--input-sm-padding-vertical) - var(--input-border-width)) calc(var(--input-sm-padding-horizontal) - var(--input-border-width))}
 .rb-control--lg{padding:calc(var(--input-lg-padding-vertical) - var(--input-border-width)) calc(var(--input-lg-padding-horizontal) - var(--input-border-width))}
 .rb-control--error,.rb-control--error:hover{border-color:var(--input-border-error)}
-.rb-control--error:focus-within{border-color:var(--input-border-error);box-shadow:var(--focus-ring-error)}
+.rb-control--error:focus-within:not(:has(.rb-control__clear:focus-visible,.rb-control__trigger:focus-visible)){border-color:var(--input-border-error);box-shadow:var(--focus-ring-error)}
 .rb-control--disabled,.rb-control--disabled:hover{background:var(--input-surface-disabled);border-color:var(--input-border-disabled);box-shadow:none;cursor:not-allowed}
 .rb-control__icon{display:inline-flex;color:var(--input-foreground-icon);flex-shrink:0}
 .rb-control__icon svg{width:var(--input-leading-icon-size);height:var(--input-leading-icon-size)}
@@ -61,8 +61,7 @@
 .rb-control--search .rb-control__icon svg{width:var(--search-search-icon-size);height:var(--search-search-icon-size)}
 .rb-control--search .rb-control__input::-webkit-search-cancel-button,.rb-control--search .rb-control__input::-webkit-search-decoration{-webkit-appearance:none;appearance:none}
 .rb-control__clear,.rb-control__trigger{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;padding:var(--input-action-padding);margin:calc(var(--input-action-padding) * -1);border:0;background:transparent;border-radius:var(--input-action-radius);color:var(--input-foreground-icon);cursor:pointer}
-.rb-control__clear svg{width:var(--search-clear-icon-size);height:var(--search-clear-icon-size)}
-.rb-control__trigger svg{width:var(--input-action-icon-size);height:var(--input-action-icon-size)}
+.rb-control__clear svg,.rb-control__trigger svg{width:var(--input-action-icon-size);height:var(--input-action-icon-size)}
 .rb-control__help svg{width:var(--input-help-icon-size);height:var(--input-help-icon-size)}
 .rb-control__clear:hover,.rb-control__trigger:hover{background:var(--input-action-surface-hover)}
 .rb-control__clear:focus-visible,.rb-control__trigger:focus-visible{outline:none;box-shadow:var(--focus-ring)}

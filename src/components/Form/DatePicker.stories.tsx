@@ -14,7 +14,9 @@ type Story = StoryObj<typeof DatePicker>;
 export const Playground: Story = {};
 export const WithValue: Story = { args: { defaultValue: new Date(2026, 10, 12) } };
 export const MinMax: Story = { args: { label: 'Appointment date', hint: 'Choose a date in the next 30 days.', min: new Date(), max: new Date(Date.now() + 30 * 864e5) } };
-export const WithError: Story = { args: { error: 'Enter a date as mm/dd/yyyy, for example 12/31/2027.' } };
+export const WithError: Story = { args: { error: 'Enter a date as MM/DD/YYYY, for example 12/31/2027.' } };
+/** Type 11/31/2026 (does not exist) or a date outside the next 30 days and leave the field: the built-in message appears. */
+export const BuiltInErrors: Story = { args: { label: 'Appointment date', min: new Date(), max: new Date(Date.now() + 30 * 864e5) } };
 export const Disabled: Story = { args: { disabled: true, defaultValue: new Date(2026, 10, 6) } };
 export const CalendarOnly: StoryObj<typeof Calendar> = {
   render: () => {

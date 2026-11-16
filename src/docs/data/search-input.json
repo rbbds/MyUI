@@ -82,7 +82,8 @@
   ],
   "behaviour": [
     "Escape clears the field when it has a value.",
-    "The clear button moves focus back into the field."
+    "The clear button moves focus back into the field.",
+    "The clear button is a field action of 24 px, like the other buttons in a field."
   ],
   "a11y": [
     "Native <input type=\"search\"> with a label.",

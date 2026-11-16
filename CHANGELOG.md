@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### Added (PR 7c, accessibility)
+- **DatePicker checks what you type** (M6): text that is not a date gives "Enter a date as MM/DD/YYYY.", a date outside `min`/`max` (or disabled through `calendarProps`) gives "Choose a date between … and …." The `error` prop wins. Texts in `labels.invalid`, `labels.unavailable`. Figma: Date picker State=Error. Story Form/DatePicker/BuiltInErrors.
+- **DatePicker format in the hint**: "Format: MM/DD/YYYY" after the hint (`labels.format`, `hideFormat`). The placeholder disappears while you type; the hint does not.
+- **`onValueChange(date, { reason })`** on DatePicker: `'valid' | 'empty' | 'invalid' | 'unavailable'`. Existing handlers with one argument keep working.
+- **Input `State=Error empty`** in Figma (a required field left empty, placeholder stays) next to `Error` (invalid input, the value stays dark). Story Forms/Input/ErrorEmpty.
+- **Figma**: effect style `Focus ring/inset` (`--focus-ring-inset`), Quantity stepper `Focus value` and `Focus button`, `_Field action` State=Focus.
+
+### Changed (PR 7c, accessibility)
+- **Buttons that switch themselves off keep focus** (M9): QuantityStepper − and + at the limit, Pagination Previous and Next, and Button/ButtonIcon `loading` use `aria-disabled` instead of `disabled`. Button ignores clicks (and form submit) when `loading` or `aria-disabled` is set.
+- **One focus ring at a time** (M8): a field (`.rb-control`) shows its ring only when the input has focus; the clear, help or calendar button gets its own ring. QuantityStepper: a ring inside the focused button (`--focus-ring-inset`), the ring around the stepper only while typing in the value.
+- **Hit areas of 24 px** (M10): Checkbox, Radio and Toggle controls and the Table sort button get an invisible 24 px hit area. The SearchInput clear button is now a field action of 24 px with a 20 px icon, like the other buttons in a field.
+- **Calendar**: unavailable days use `aria-disabled` and the arrow keys skip them, so the grid never loses its tab stop (M6).
+- **Table** (M11): the scroll area is focusable (`tabindex="0"`, focus ring inside) and is a region named after the TableCard title. TableBulkActions keeps an (empty) live region on the page, so the first "1 selected" is read out.
+- Removed token `--search-clear-icon-size`: the clear button uses `--input-action-icon-size`, in Figma too.
+- Figma: `_Field action` is 20 × 20 with the 24 px button on top (like the negative margin in code). A field no longer grows by 4 px when it has a field action. Calendar weekday letters are English (M T W T F S S), like the code.
+
 ### Added (PR 7b)
 - **Input `help`** (keuze 19): a help icon in the field (Figma: Help icon) that shows the text in a Tooltip on hover and focus. The button is named by `labels.help` ("More information"). Uses `--input-help-icon-size`. Story Forms/Input/WithHelp.
 - **ButtonGroup `disabled`**, for the whole group or per option (`options[].disabled`). New tokens `--button-group-foreground-disabled` and `--button-group-border-disabled`; Figma: `_Button group item` State=Disabled. Story Button group/GroupDisabled.
