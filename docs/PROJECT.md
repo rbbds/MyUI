@@ -143,10 +143,10 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 
 **Rules**
 - Components and frames only use mapped tokens. Never alias or primitives.
-- Mapped always points to an alias. Alias points to brand or primitives. Brand points to primitives.
+- Mapped points to an alias. Exception: fixed sizes point to `∙ sizing` and fixed stroke widths to `∙ border` (see rule 2 in `docs/TOKEN-ARCHITECTURE.md`). Alias points to brand or primitives. Brand points to primitives.
 - Designers only edit the brand layer: primary and accent color, fonts, font weights, radius, border width.
 - Spacing is the same for all brands.
-- Only mapped is published. The other collections are hidden and have no scopes.
+- Mapped and `↳ size` are published, the rest is hidden. Only base tokens (`base-tokens/*`: colors, border width, spacing, radius) have scopes, so designers see a short set in the picker. Component tokens have no scopes.
 
 **What a brand can change (all in `↳ brand`):**
 - `brand/color/primary/*` and `brand/color/accent/*` (12-step scales)

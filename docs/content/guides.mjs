@@ -36,7 +36,7 @@ export const guides = [
       {
         heading: '4. Colors and text',
         bullets: [
-          'The variable picker shows only the base tokens: a short list of surface, text and border colors. Use these for your own shapes and frames.',
+          'The variable picker shows only the base tokens: surface, text and border colors, border width, spacing (gap and padding) and radius. Use these for your own shapes and frames.',
           'All other tokens are already inside the components. You do not need to pick them.',
           'Use the text styles for text. They follow the style and the screen size.',
         ],
