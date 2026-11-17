@@ -1,6 +1,6 @@
 # MyUI token architecture (plan)
 
-Status: all phases done. Rules last updated 17 November 2026 (version 1.2.1: scopes, base tokens, fixed sizes). Written in B1 English. The progress list below is history.
+Status: all phases done. Rules last updated 17 November 2026 (version 1.3.0: scopes, base tokens, fixed sizes). Written in B1 English. The progress list below is history.
 
 ## Progress
 
