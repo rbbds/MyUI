@@ -1,10 +1,10 @@
 {
   "file": "MyUI Design System",
-  "scannedAt": "2026-11-16T11:08:31.557Z",
+  "scannedAt": "2026-11-17T12:52:25.536Z",
   "script": "scripts/figma-binding-scan.js",
   "pages": 113,
-  "nodes": 57680,
-  "componentTokens": 1243,
+  "nodes": 58228,
+  "componentTokens": 1247,
   "unbound": [],
   "codeSyntaxMismatch": [],
   "exceptions": [

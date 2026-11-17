@@ -10,6 +10,8 @@ const PAIRS = [
   ...['input-border-default', 'selection-border-default', 'code-input-border', 'toggle-track-off'].flatMap((fg) => SURFACES.map((bg) => [fg, bg])),
   ['menu-item-border-active', 'menu-item-surface-hover'],
   ['command-item-border-active', 'command-item-surface-active'],
+  // L5: the ring of the current option in Button group and Pagination, on the page and on its own fill.
+  ...['button-group', 'pagination'].flatMap((c) => [...SURFACES, `${c}-surface-current`].map((bg) => [`${c}-border-current`, bg])),
 ];
 
 const { values } = readTokens();

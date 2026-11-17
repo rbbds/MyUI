@@ -3,7 +3,8 @@
 .rb-button-group__item:first-child{border-top-left-radius:var(--button-radius);border-bottom-left-radius:var(--button-radius)}
 .rb-button-group__item:last-child{border-right-width:var(--button-group-border-width);border-top-right-radius:var(--button-radius);border-bottom-right-radius:var(--button-radius)}
 .rb-button-group__item:hover:not(:disabled){background:var(--button-group-surface-hover)}
-.rb-button-group__item[aria-pressed="true"]{background:var(--button-group-surface-current);color:var(--button-group-foreground-current)}
 .rb-button-group__item:focus-visible{outline:none;box-shadow:var(--focus-ring);z-index:1}
+/* L5: the current option gets a ring of its own, drawn over the shared border (outline, not an inset shadow), so it is equally thick on every side. After :focus-visible, so a focused current option keeps it. */
+.rb-button-group__item[aria-pressed="true"]{background:var(--button-group-surface-current);color:var(--button-group-foreground-current);outline:var(--button-group-border-width-current) solid var(--button-group-border-current);outline-offset:calc(-1 * var(--button-group-border-width-current))}
 .rb-button-group__item svg{width:var(--button-group-leading-icon-size);height:var(--button-group-leading-icon-size)}
 .rb-button-group__item:disabled{color:var(--button-group-foreground-disabled);border-color:var(--button-group-border-disabled);cursor:not-allowed}
