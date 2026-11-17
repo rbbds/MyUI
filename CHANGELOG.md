@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0 (17 November 2026)
 
 ### Changed
 - **Button group and Pagination, current option (L5, WCAG 1.4.11)**: the active option has a 2 px ring in the brand color, a brand-tinted background and brand-colored text. Before, only a light gray background showed it (1.11:1 against the other options). The ring is an `outline` with a negative offset, so it is equally thick on every side and sits over the shared border; a focused active option keeps it. Figma: `_Button group item` and `_Pagination item` State=Current use the same ring as a 2 px inside stroke.
