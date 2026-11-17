@@ -1,6 +1,6 @@
 # MyUI token architecture (plan)
 
-Status: phases 1, 2 and 3 done (9 November 2026, PR #10, version 0.3.0). Phase 4 (English) is next. Written in B1 English.
+Status: all phases done. Rules last updated 17 November 2026 (version 1.2.1: scopes, base tokens, fixed sizes). Written in B1 English. The progress list below is history.
 
 ## Progress
 
@@ -29,14 +29,17 @@ Status: phases 1, 2 and 3 done (9 November 2026, PR #10, version 0.3.0). Phase 4
 ## Rules
 
 1. Components and styles only bind to **Mapped** variables. Never to an alias or a primitive.
-2. Mapped only points to **alias** collections (Theme, Style, Screen size, Size). Never to primitives or Brand.
+2. Mapped only points to **alias** collections (Theme, Style, Screen size, Size). Never to Brand. Exception: a fixed size a designer chooses (keuze 29), such as a modal width or an avatar size, may point to **∙ sizing**, and a fixed stroke width to **∙ border** width. No brand changes these.
+   - Raw values in Mapped are only allowed when no primitive exists. Today: `avatar-group/{xs|sm|md}-overlap` (−6, −8, −10: there are no negative primitives), `nav-item/indicator-border-width` (1.5) and `cart-button/count-font-size` (11). The last two are off the grid (review L8) and are up for a design change.
 3. Alias collections point to **Primitives** and **Brand**.
 4. Each collection changes along **one** axis only:
    - Brand: which brand
    - Theme: Light or Dark
    - Screen size: breakpoint
    - Size: component size
-5. Only Mapped is published. All other collections are hidden from publishing and have empty scopes, so they do not show up in pickers.
+5. Mapped and ↳ size are published. ↳ size stays visible so designers can pick sm, md or lg as a mode on a frame. All other collections are hidden from publishing.
+   - Scopes: only the **base tokens** (`base-tokens/*`) have scopes, so the picker shows a short set to design with: surface, text and border colors, border width, spacing (GAP) and radius (CORNER_RADIUS). Component tokens, typography, effect and alias variables have empty scopes. They are bound inside components and text and effect styles, not picked by hand.
+   - Every Mapped variable has a WEB code syntax that matches the export name, for example `var(--base-spacing-4)`. Agents working through the Plugin API bind by name or ID; scopes do not limit that.
 6. Spacing is the same for every brand.
 
 ## Layers
@@ -98,8 +101,9 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 
 - component-tokens/…: every value a component uses, including border widths, effects and icon sizes. In Figma they sit in a folder per category, like the pages: `component-tokens/<category>/<component>/…` (action, forms, selection-controls, badges-and-tags, avatars, feedback, overlays, navigation, data-display, content, e-commerce, utilities). The export skips the category, so `component-tokens/action/button/radius` becomes `--button-radius`.
 - Technical values that Figma cannot set with a variable (an animation colour stop, a click area, an offset by position) are not component tokens. They are local CSS variables (`--_name`) in the component CSS.
+- base-tokens/…: the set designers pick from in their own frames. Colors (`color/surface|foreground|border/*`), `border/width/*`, `spacing/*` (2 to 80 px) and `radius/{control|containers|overlays}/{xs|sm|md|lg}` plus `radius/full`. CSS: `--base-*`. Radius follows the brand.
 - typography-tokens/…, effect-tokens/…, layout-tokens/….
-- Only points to Theme, Style, Screen size or Size.
+- Points to Theme, Style, Screen size or Size, with the exceptions in rule 2.
 
 ## What changes compared to today
 

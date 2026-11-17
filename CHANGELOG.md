@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- **Base tokens for spacing and radius** (Figma `base-tokens/*`, CSS `--base-*`): `--base-spacing-{0-5|1|1-5|2|2-5|3|4|5|6|8|10|12|15|20}` (2 to 80 px) and `--base-radius-{control|containers|overlays}-{xs|sm|md|lg}` plus `--base-radius-full`. For your own frames and layouts. Radius follows the brand.
+
+### Changed
+- Figma: only base tokens have scopes, so the variable picker shows a short set (colors, border width, spacing, radius). Component tokens no longer show in pickers; they stay bound inside the components. Every base token has a WEB code syntax.
+- Tokens: `--spinner-{sm|md|lg}-stroke-width` now point to `--width-2`, `--width-3` and `--width-4` (same values). In Figma `variant/swatch-size` points to `sizing/8` (CSS unchanged, 32px).
+- Docs: `TOKEN-ARCHITECTURE.md` rules 2 and 5 match how the file works (fixed sizes may point to `∙ sizing`, `↳ size` is published, scopes only on base tokens, the remaining raw values listed). `PROJECT.md` and the designer guide updated.
+
 ## 1.2.0 (17 November 2026)
 
 ### Changed
