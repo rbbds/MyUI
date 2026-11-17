@@ -37,7 +37,7 @@
     [
       "_Pagination item: State",
       "Default, Hover, Focus, Current",
-      ""
+      "Current: a 2 px ring and background in the brand color."
     ],
     [
       "Number",
@@ -88,7 +88,8 @@
   ],
   "a11y": [
     "<nav> with an aria-label. Current page with aria-current=\"page\".",
-    "Numbers have a label: \"Page 3\"."
+    "Numbers have a label: \"Page 3\".",
+    "The current page does not rely on color alone: its ring has at least 3:1 contrast with the page and with its own background (WCAG 1.4.11)."
   ],
   "content": [],
   "do": [
@@ -98,7 +99,9 @@
     "Pagination with fewer than two pages."
   ],
   "tokens": [
-    "--pagination-{foreground|foreground-current|surface-current|surface-hover|gap|radius}"
+    "--pagination-{foreground|foreground-current|surface-current|surface-hover|gap|radius}",
+    "--pagination-border-current",
+    "--pagination-border-width-current"
   ],
   "related": [
     "Table"

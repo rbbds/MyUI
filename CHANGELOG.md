@@ -3,6 +3,11 @@
 ## Unreleased
 
 ### Changed
+- **Button group and Pagination, current option (L5, WCAG 1.4.11)**: the active option has a 2 px ring in the brand color, a brand-tinted background and brand-colored text. Before, only a light gray background showed it (1.11:1 against the other options). The ring is an `outline` with a negative offset, so it is equally thick on every side and sits over the shared border; a focused active option keeps it. Figma: `_Button group item` and `_Pagination item` State=Current use the same ring as a 2 px inside stroke.
+  - New tokens: `--button-group-border-current`, `--button-group-border-width-current`, `--pagination-border-current`, `--pagination-border-width-current` (brand border color, `--border-width-control-strong`).
+  - Changed tokens: `--button-group-surface-current` and `--pagination-surface-current` now use `--color-surface-brand-subtle` (was `--color-surface-tertiary`), `--button-group-foreground-current` and `--pagination-foreground-current` use `--color-foreground-brand` (was `--color-foreground-primary`).
+  - `npm run check:contrast` also checks the ring on the page and on its own background: at least 3.82:1 in Iris, Forest and Berry, Light and Dark.
+  - Figma: the icon in Button group Current follows the current text color.
 - Docs: the Figma file is called **MyUI Design System** (was named WL Design System (rbbds) in README, Introduction, PROJECT.md and the scan scripts). The file key is unchanged.
 
 ## 1.1.0 (16 November 2026)

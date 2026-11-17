@@ -159,10 +159,10 @@ export default [
     summary: 'Row of joined buttons where one is active, like a period choice (Day, Week, Month). Built from Button group items.',
     use: ['Switch between 2 to 5 views or filters of the same content.', 'When the choice works straight away, without saving.'],
     avoid: ['Separate actions next to each other: use separate Buttons with space between them.', 'Navigation between sections with their own content: use Tabs.', 'More than 5 options: use Select.'],
-    anatomy: ['Group container with a shared border.', 'Items: label, optional leading icon. The active item has its own background.'],
+    anatomy: ['Group container with a shared border.', 'Items: label, optional leading icon. The active item has a ring and background in the brand color.'],
     figmaProps: [
       ['Item: Position', 'First, Middle, Last', 'Sets which corners are rounded.'],
-      ['Item: State', 'Default, Hover, Focus, Current, Disabled', 'Current marks the active option.'],
+      ['Item: State', 'Default, Hover, Focus, Current, Disabled', 'Current marks the active option with a 2 px ring in the brand color, on every side.'],
       ['Item: Label, Icon leading, Leading icon', 'via _Button group item', ''],
     ],
     reactProps: [
@@ -173,11 +173,11 @@ export default [
       ['label', 'string', 'Name of the group, for example "Period". aria-label also works.']
     ],
     behaviour: ['Click or Enter/Space makes an item active. There is always exactly one active item.', 'Disabled: the option cannot be chosen and is skipped by Tab. Use it for an option that does not apply now, and say why nearby.'],
-    a11y: ['role="group" with an aria-label on the group.', 'Items are buttons with aria-pressed. The active item has aria-pressed="true".'],
+    a11y: ['role="group" with an aria-label on the group.', 'Items are buttons with aria-pressed. The active item has aria-pressed="true".', 'The active item does not rely on a light background alone: its ring has at least 3:1 contrast with the page and with its own background (WCAG 1.4.11), checked by npm run check:contrast.'],
     content: ['Short labels of the same kind: "Day", "Week", "Month".'],
     do: ['Keep the order logical (small to large, in time order).'],
     dont: ['Mix items with different kinds of actions.', 'A Button group without an active default value.'],
-    tokens: ['--button-group-{surface|foreground|border}', '--button-group-surface-current', '--button-group-foreground-current', '--button-group-surface-hover', '--button-group-{foreground|border}-disabled'],
+    tokens: ['--button-group-{surface|foreground|border}', '--button-group-{surface|foreground|border}-current', '--button-group-border-width-current', '--button-group-surface-hover', '--button-group-{foreground|border}-disabled'],
     related: ['Tabs', 'Button', 'Radio'],
     open: [],
   },

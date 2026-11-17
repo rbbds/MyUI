@@ -18,7 +18,7 @@
   ],
   "anatomy": [
     "Group container with a shared border.",
-    "Items: label, optional leading icon. The active item has its own background."
+    "Items: label, optional leading icon. The active item has a ring and background in the brand color."
   ],
   "figmaProps": [
     [
@@ -29,7 +29,7 @@
     [
       "Item: State",
       "Default, Hover, Focus, Current, Disabled",
-      "Current marks the active option."
+      "Current marks the active option with a 2 px ring in the brand color, on every side."
     ],
     [
       "Item: Label, Icon leading, Leading icon",
@@ -70,7 +70,8 @@
   ],
   "a11y": [
     "role=\"group\" with an aria-label on the group.",
-    "Items are buttons with aria-pressed. The active item has aria-pressed=\"true\"."
+    "Items are buttons with aria-pressed. The active item has aria-pressed=\"true\".",
+    "The active item does not rely on a light background alone: its ring has at least 3:1 contrast with the page and with its own background (WCAG 1.4.11), checked by npm run check:contrast."
   ],
   "content": [
     "Short labels of the same kind: \"Day\", \"Week\", \"Month\"."
@@ -84,8 +85,8 @@
   ],
   "tokens": [
     "--button-group-{surface|foreground|border}",
-    "--button-group-surface-current",
-    "--button-group-foreground-current",
+    "--button-group-{surface|foreground|border}-current",
+    "--button-group-border-width-current",
     "--button-group-surface-hover",
     "--button-group-{foreground|border}-disabled"
   ],
