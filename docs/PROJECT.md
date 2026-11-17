@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 16 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 17 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -95,22 +95,24 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 - Storybook 10 (`@storybook/react-vite`), addons docs en a11y.
 - Afhankelijkheden: `lucide-react`, `country-flag-icons` (alleen in entry `@rbbds/ui/flags`).
 - Fonts in Storybook: Inter (variable), Source Serif 4 (400, 600, 700).
-- Package-exports: `.`, `./flags`, `./styles.css`, `./tokens.css`.
+- Package-exports: `.`, `./flags`, `./styles.css`, `./tokens.css`, `./tokens.json`.
 
 ### Repostructuur
 
 ```
 src/
   components/
-    Button/      Button, ButtonGroup
+    Button/      Button, ButtonGroup, CloseButton (intern)
     Form/        Input, Select, Textarea, Slider, RangeSlider, SearchInput, DatePicker, Combobox, Field
     Selection/   Checkbox, Radio, Toggle, SelectionCard
     Display/     Badge, Tag, Avatar, Divider, Featured icon, Spinner, Skeleton, Kbd, Table
     Content/     Card, Accordion, Empty state, File upload
-    Navigation/  Header, Sidebar, Nav item, Tabs, Breadcrumbs, Pagination, Stepper, AppShell
+    Navigation/  Header, Mega menu, Mobile nav, Sidebar, Nav item, Tabs, Breadcrumbs, Pagination, Stepper, AppShell
     Overlay/     Alert, Toast, Tooltip, Progress, Dropdown menu, Modal, Slideout, Command menu
     Commerce/    e-commerce (zie hieronder)
   flags/         Flag, CountrySelect
+  utils/         panel.ts (Escape, focus-out, top layer, positie), dialog.ts (Modal, Slideout, Command menu), link.tsx (LinkProvider), labels.ts, useControlled.ts, cx.ts
+  templates/     voorbeeldpagina's (Dashboard, Shop, enz.)
   docs/          Introduction.mdx, brand/ (Brand builder), components/*.mdx, data/*.json
   styles/        tokens.css (gegenereerd uit Figma), effects.css (schaduwen, focus ring), index.css
 docs/
@@ -239,11 +241,12 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - axe via Playwright op elke story in Light en Dark (wachttijd circa 1200 ms per story).
 - Screenshots in Iris, Forest en Berry.
 - `npm run typecheck` en `npm run build-storybook` moeten slagen.
-- `npm run test:browser`: Playwright in Chromium en WebKit voor gedrag dat axe niet ziet (Escape in panelen, focus, schermlezernamen). Scenario's staan in `tests/harness/main.tsx`, tests in `tests/browser/`. Een bekende bug staat erin met `test.fail()`.
+- `npm run test:browser`: Playwright in Chromium en WebKit voor gedrag dat axe niet ziet (Escape in panelen, focus, schermlezernamen). Scenario's staan in `tests/harness/main.tsx`, tests in `tests/browser/`.
 - Review van 12 november 2026 met alle bevindingen en de volgorde van oplossen: `claude/MyUI-review-2026-11-12.md` in het Claude Project.
 - Vaste checks in elke PR: `npx tsc --noEmit -p .`, `npm run build`, `npm run lint:tokens -- --strict`, `npm run check:strings`, `npm run check:contrast`, `npm run report:figma-bindings -- --strict`, `npm run docs:build`, Playwright (64 tests).
 - Visuele regressie: Storybook van main en van de branch bouwen en vergelijken met `node scripts/compare-stories.mjs <oud> <nieuw>`.
-- Laatste stand (PR #42): 0 axe-fouten op de gewijzigde stories in Light en Dark, Iris, Forest en Berry. Schermlezers (VoiceOver, NVDA) zijn nog niet met de hand getest.
+- Laatste stand (17 november): axe op alle 163 stories in Light en Dark, Iris, Forest en Berry (978 runs): 0 fouten. Schermlezers (VoiceOver, NVDA) zijn nog niet met de hand getest.
+- Onafhankelijke controle van 17 november: `claude/MyUI-controle-2026-11-17.md` in het Claude Project.
 
 ### Geschiedenis
 
@@ -266,6 +269,10 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #25–#27 | Building components guide, control-hoogtes op 4 px, tokens.json, llms.txt |
 | #28–#41 | Review 12 november, PR 1 t/m 8: browsertests, token-lint, contrast, panelenlaag, teksten als prop (`labels`), component tokens in CSS, strikte token-checks, API-afstemming met deprecations, Input help, toegankelijkheid (focus, aria-disabled, hit areas), Mega menu, Mobile nav en Header search |
 | #42 | `LinkProvider` (router-links), `'use client'`, L2/L6/L9, Docs-frames opnieuw gegenereerd |
+| #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
+| #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
+| #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |
+| #50 | Figma-states (Date picker Disabled, Quantity stepper At maximum, Table header cell Focus), L8, TableCard-tabstop, `MegaMenuFeatured actions`, Close button-docs, docs-correcties |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -302,6 +309,6 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 - Figma-naar-code workflow voor token- en componentwijzigingen vastleggen.
 
 **Toegankelijkheid (na de review)**
-- L5: actieve optie in Button group en Pagination heeft 1,11:1 contrast met de rust-optie (vlak). Ontwerpbesluit nodig: rand, vulling of vinkje.
 - Handmatige test met VoiceOver (macOS, iOS) en NVDA (Windows) en een ronde in echte Safari.
-- L7 (z-index en transities op de allowlist) en L10 (volgt Figma) blijven bewust zoals ze zijn.
+- L7 (z-index en transities; de token-lint controleert alleen px) en L10 (volgt Figma) blijven bewust zoals ze zijn.
+- Close button heeft in Figma nog geen Focus-state.

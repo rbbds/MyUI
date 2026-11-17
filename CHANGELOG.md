@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- **TableCard** `labels.region` (default "Table"): names the scroll area of a wide table that has no `title`. Exported `DEFAULT_TABLE_CARD_LABELS`.
+- **MegaMenuFeatured** `actions`, like the other components (7a). `action` is deprecated (removed in 2.0.0).
+- Figma: Date picker State=Disabled, Quantity stepper State=At maximum (md and sm), Table header cell State=Focus (focus ring on the sort button). Docs page and Figma Docs frame for the internal **Close button** (Utilities / Close button).
+
+### Changed
+- **TableCard**: the scroll area is only a tab stop (and a named region) when the table is wider than the card. Before, it was always a tab stop, also when there was nothing to scroll.
+- **Nav item** (collapsed, with indicator): the ring around the dot is 2 px (was 1.5 px), `--nav-item-indicator-border-width` → `var(--width-2)`. Review L8.
+- **Cart button** count: 12 px text (was 11 px), `--cart-button-count-font-size` → `var(--typography-body-description)`. Review L8.
+
+### Docs
+- Quantity stepper md is 40 px (said 44). Date picker: removed the open point about the popover position (it flips since PR 4). Table header cell State, Date picker Disabled, Quantity stepper At maximum.
+- `PROJECT.md`: package exports with `./tokens.json`, repo structure (`utils/`, `templates/`, Mega menu, Close button), history to #50, no more `test.fail()`, L5 done. `TOKEN-ARCHITECTURE.md`: only the avatar-group overlaps are still raw values.
+
 ## 1.3.0 (17 November 2026)
 
 ### Added

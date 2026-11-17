@@ -63,6 +63,11 @@
       ""
     ],
     [
+      "Table header cell: State",
+      "Default, Focus",
+      "Focus: the focus ring around the sort button (label and arrow)."
+    ],
+    [
       "Table header cell: Label / Checkbox",
       "via _Table header cell",
       ""
@@ -98,6 +103,11 @@
       "TableCard headingLevel",
       "2 | 3 | 4",
       "Default 3."
+    ],
+    [
+      "TableCard labels",
+      "{ region }",
+      "Name of the scroll area of a wide table without a title. Default 'Table'."
     ],
     [
       "TableToolbar children / end",
@@ -145,7 +155,7 @@
     "Native <table> with <th scope=\"col\">.",
     "Sortable headers have aria-sort. The sort button has a hit area of at least 24 px high.",
     "Checkboxes in rows have a label with the row name and a hit area of 24 px.",
-    "The scroll area is focusable and named after the TableCard title, so keyboard users can scroll a wide table.",
+    "When the table is wider than its card, the scroll area is a tab stop and a region named after the TableCard title (or labels.region), so keyboard users can scroll it. A table that fits is no extra tab stop.",
     "Table bulk actions keep a live region on the page, so \"1 selected\" is read out too."
   ],
   "content": [

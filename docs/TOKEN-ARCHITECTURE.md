@@ -30,7 +30,7 @@ Status: all phases done. Rules last updated 17 November 2026 (version 1.3.0: sco
 
 1. Components and styles only bind to **Mapped** variables. Never to an alias or a primitive.
 2. Mapped only points to **alias** collections (Theme, Style, Screen size, Size). Never to Brand. Exception: a fixed size a designer chooses (keuze 29), such as a modal width or an avatar size, may point to **∙ sizing**, and a fixed stroke width to **∙ border** width. No brand changes these.
-   - Raw values in Mapped are only allowed when no primitive exists. Today: `avatar-group/{xs|sm|md}-overlap` (−6, −8, −10: there are no negative primitives), `nav-item/indicator-border-width` (1.5) and `cart-button/count-font-size` (11). The last two are off the grid (review L8) and are up for a design change.
+   - Raw values in Mapped are only allowed when no primitive exists. Today only `avatar-group/{xs|sm|md}-overlap` (−6, −8, −10): there are no negative primitives.
 3. Alias collections point to **Primitives** and **Brand**.
 4. Each collection changes along **one** axis only:
    - Brand: which brand

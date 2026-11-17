@@ -82,7 +82,7 @@ export const docs = [
     summary: 'Choose an amount with − and +. You can also type. The value stays between min and max.',
     use: ['Amount in the cart and on the product page.'], avoid: ['Large numbers or money amounts: use Input with type number.'],
     anatomy: ['Minus button.', 'Number (native number field).', 'Plus button.'],
-    figmaProps: [['Size', 'md (44), sm (36)', ''], ['State', 'Default, Hover, Focus value, Focus button, Disabled, At minimum', 'Focus value: ring around the stepper while typing. Focus button: ring inside the button. At minimum: − is off.'], ['Value', 'text', '']],
+    figmaProps: [['Size', 'md (40), sm (36)', ''], ['State', 'Default, Hover, Focus value, Focus button, Disabled, At minimum, At maximum', 'Focus value: ring around the stepper while typing. Focus button: ring inside the button. At minimum: − is off. At maximum: + is off.'], ['Value', 'text', '']],
     reactProps: [['value / defaultValue', 'number', ''], ['onValueChange', '(value: number) => void', 'onChange is deprecated.'], ['min, max', 'number', 'Default 1 and 99.'], ['label', 'string', 'Accessible name, for example "Quantity Wool sweater".'], ['labels', '{ decrease, increase }', 'decreaseLabel and increaseLabel are deprecated.'], ['size, disabled', '', '']],
     behaviour: ['A typed value is checked on Enter or when you leave the field.', '− is off at the minimum, + at the maximum. They keep focus (aria-disabled), so you can keep pressing without losing your place.'],
     a11y: ['Native number field: arrow up and down work.', 'The buttons have their own names and point to the field (aria-controls).', 'Focus is visible on the part that has it: a ring inside − or +, a ring around the stepper for the field.'],
