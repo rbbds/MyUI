@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0 (17 November 2026)
 
 ### Added
 - **Base tokens for spacing and radius** (Figma `base-tokens/*`, CSS `--base-*`): `--base-spacing-{0-5|1|1-5|2|2-5|3|4|5|6|8|10|12|15|20}` (2 to 80 px) and `--base-radius-{control|containers|overlays}-{xs|sm|md|lg}` plus `--base-radius-full`. For your own frames and layouts. Radius follows the brand.
