@@ -25,8 +25,8 @@
   "figmaProps": [
     [
       "Date picker: State",
-      "Closed, Open, Error",
-      "Error: the built-in message replaces the hint."
+      "Closed, Open, Error, Disabled",
+      "Error: the built-in message replaces the hint. Disabled: the field and the calendar button cannot be used."
     ],
     [
       "Calendar: View",
@@ -170,7 +170,5 @@
     "Date range picker",
     "Combobox"
   ],
-  "open": [
-    "The popover does not adjust yet when there is not enough room below the field."
-  ]
+  "open": []
 }

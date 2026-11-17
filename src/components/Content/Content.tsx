@@ -1,4 +1,4 @@
-import { forwardRef, useId, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
+import { forwardRef, useEffect, useId, useRef, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
 import { Link } from '../../utils/link';
 import { ArrowDown, ArrowUp, ChevronsUpDown, CircleAlert, CircleCheck, CloudUpload, File as FileIcon, Minus, Plus, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
@@ -17,18 +17,44 @@ export interface TableCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'ti
   /** TableToolbar and TableBulkActions, shown between the header and the table. */
   toolbar?: ReactNode;
   headingLevel?: 2 | 3 | 4;
+  /** Texts. `region` names the scroll area of a wide table when there is no `title`. */
+  labels?: Partial<TableCardLabels>;
   children: ReactNode;
 }
+export interface TableCardLabels { region: string }
+export const DEFAULT_TABLE_CARD_LABELS: TableCardLabels = { region: 'Table' };
 /** Bordered container for a table with an optional header. Put a <Table> inside. */
-export function TableCard({ title, badge, actions, toolbar, headingLevel = 3, className, children, ...rest }: TableCardProps) {
+export function TableCard({ title, badge, actions, toolbar, headingLevel = 3, labels, className, children, ...rest }: TableCardProps) {
   const H = `h${headingLevel}` as 'h3';
   const titleId = useId();
+  const l = mergeLabels(DEFAULT_TABLE_CARD_LABELS, labels);
+  // Only a table that is wider than its card is a tab stop: otherwise Tab would land on an area with nothing to scroll.
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollable, setScrollable] = useState(false);
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => setScrollable(el.scrollWidth > el.clientWidth + 1);
+    check();
+    if (typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(check);
+    ro.observe(el);
+    if (el.firstElementChild) ro.observe(el.firstElementChild);
+    return () => ro.disconnect();
+  }, []);
   return (
     <div className={cx('rb-table-wrap', className)} {...rest}>
       {(title || actions) && <div className="rb-table-wrap__header">{title && <H id={titleId} className="rb-table-wrap__title">{title}</H>}{badge}{actions && <div className="rb-table-wrap__actions">{actions}</div>}</div>}
       {toolbar}
-      {/* M11: the scroll area is focusable, so keyboard users can scroll a wide table. Named after the title. */}
-      <div className="rb-table-scroll" tabIndex={0} role={title ? 'region' : undefined} aria-labelledby={title ? titleId : undefined}>{children}</div>
+      {/* M11: a scroll area that scrolls is focusable, so keyboard users can scroll a wide table. Named after the title, or labels.region. */}
+      <div
+        ref={scrollRef}
+        className="rb-table-scroll"
+        tabIndex={scrollable ? 0 : undefined}
+        role={title || scrollable ? 'region' : undefined}
+        aria-labelledby={title ? titleId : undefined}
+        aria-label={!title && scrollable ? l.region : undefined}
+      >{children}</div>
     </div>
   );
 }

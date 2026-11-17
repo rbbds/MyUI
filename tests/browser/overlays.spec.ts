@@ -344,6 +344,9 @@ test('PR 7c: one focus ring in a field, Table scroll region, bulk live region (M
   await expect(clear).not.toHaveCSS('box-shadow', 'none');
   const region = page.getByRole('region', { name: 'Orders' });
   await expect(region).toHaveAttribute('tabindex', '0');
+  // Check C3: a table that fits is no tab stop; a wide table without a title is named through labels.region.
+  await expect(page.getByRole('region', { name: 'Small' })).not.toHaveAttribute('tabindex', /.*/);
+  await expect(page.getByRole('region', { name: 'Invoices' })).toHaveAttribute('tabindex', '0');
   await expect(page.getByRole('status').filter({ hasText: '' }).first()).toBeAttached();
 });
 

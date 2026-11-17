@@ -21,13 +21,13 @@
   "figmaProps": [
     [
       "Size",
-      "md (44), sm (36)",
+      "md (40), sm (36)",
       ""
     ],
     [
       "State",
-      "Default, Hover, Focus value, Focus button, Disabled, At minimum",
-      "Focus value: ring around the stepper while typing. Focus button: ring inside the button. At minimum: − is off."
+      "Default, Hover, Focus value, Focus button, Disabled, At minimum, At maximum",
+      "Focus value: ring around the stepper while typing. Focus button: ring inside the button. At minimum: − is off. At maximum: + is off."
     ],
     [
       "Value",

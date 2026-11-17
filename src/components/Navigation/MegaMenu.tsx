@@ -47,17 +47,19 @@ export interface MegaMenuFeaturedProps extends Omit<HTMLAttributes<HTMLDivElemen
   title: ReactNode;
   /** Image or illustration. Decorative unless you give it an alt text. */
   media?: ReactNode;
-  /** Usually a Button with hierarchy "link". */
+  /** Usually one Button with hierarchy "link". */
+  actions?: ReactNode;
+  /** @deprecated Use `actions` (removed in 2.0.0). */
   action?: ReactNode;
 }
 /** Highlighted block on the right of a Mega menu. */
-export function MegaMenuFeatured({ title, media, action, children, className, ...rest }: MegaMenuFeaturedProps) {
+export function MegaMenuFeatured({ title, media, actions, action, children, className, ...rest }: MegaMenuFeaturedProps) {
   return (
     <div className={cx('rb-mega-menu__featured', className)} {...rest}>
       <div className="rb-mega-menu__featured-media">{media}</div>
       <p className="rb-mega-menu__featured-title">{title}</p>
       {children && <p className="rb-mega-menu__featured-text">{children}</p>}
-      {action}
+      {actions ?? action}
     </div>
   );
 }

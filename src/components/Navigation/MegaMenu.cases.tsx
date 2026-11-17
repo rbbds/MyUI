@@ -25,7 +25,7 @@ export const productMenu: MegaMenuData = {
     ] },
   ],
   featured: (
-    <MegaMenuFeatured title="New: page templates" action={<Button hierarchy="link" size="sm">Explore templates</Button>}>
+    <MegaMenuFeatured title="New: page templates" actions={<Button hierarchy="link" size="sm">Explore templates</Button>}>
       Start faster with a dashboard, account, shop and form template.
     </MegaMenuFeatured>
   ),

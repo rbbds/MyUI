@@ -55,7 +55,7 @@
     [
       "featured",
       "ReactNode",
-      "Usually <MegaMenuFeatured title media action>."
+      "Usually <MegaMenuFeatured title media actions>. action is deprecated (removed in 2.0.0)."
     ],
     [
       "MegaMenuLink",

@@ -1004,7 +1004,7 @@
 --add-to-cart-row-gap:var(--spacing-3);
 --address-fields-gap:var(--spacing-4);
 --address-fields-postcode-row-gap:var(--spacing-3);
---cart-button-count-font-size:11px;
+--cart-button-count-font-size:var(--typography-body-description);
 --cart-button-count-padding-horizontal:var(--spacing-1);
 --cart-button-count-radius:var(--border-radius-full);
 --cart-button-count-size:18px;
@@ -1514,7 +1514,7 @@
 --nav-item-foreground-icon:var(--color-foreground-quaternary);
 --nav-item-gap:var(--spacing-3);
 --nav-item-indicator-border:var(--color-surface-primary);
---nav-item-indicator-border-width:1.5px;
+--nav-item-indicator-border-width:var(--width-2);
 --nav-item-indicator-size:8px;
 --nav-item-indicator-surface:var(--color-surface-brand-solid);
 --nav-item-leading-icon-size:var(--icon-size-md);

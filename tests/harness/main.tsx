@@ -169,9 +169,17 @@ function Scenario7c() {
       <output data-testid="reason">{reason}</output>
       <Calendar defaultMonth={new Date(2026, 10, 6)} value={new Date(2026, 10, 6)} shouldDisableDate={(d) => d.getDay() === 0 || d.getDay() === 6} />
       <SearchInput label="Search" defaultValue="report" />
-      <TableCard title="Orders" toolbar={<TableBulkActions count={0} onClear={() => {}} />}>
-        <Table><tbody><tr><td>One</td></tr></tbody></Table>
-      </TableCard>
+      <div style={{ width: 400 }}>
+        <TableCard title="Orders" toolbar={<TableBulkActions count={0} onClear={() => {}} />}>
+          <Table><tbody><tr><td style={{ minWidth: 1200 }}>One</td></tr></tbody></Table>
+        </TableCard>
+        <TableCard title="Small">
+          <Table><tbody><tr><td>Two</td></tr></tbody></Table>
+        </TableCard>
+        <TableCard labels={{ region: 'Invoices' }}>
+          <Table><tbody><tr><td style={{ minWidth: 1200 }}>Three</td></tr></tbody></Table>
+        </TableCard>
+      </div>
     </div>
   );
 }
