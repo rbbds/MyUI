@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Docs
+- Figma changelog (page 📝 Changelog, source `figmaChangelog` in `docs/content/guides.mjs`): versions 1.1.0 to 1.5.0 added. 1.1.0 was only in Figma, now also in the source.
+
 ## 1.5.0 (18 November 2026)
 
 ### Added
