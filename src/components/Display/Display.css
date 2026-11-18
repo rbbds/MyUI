@@ -20,7 +20,7 @@
 .rb-avatar__inner img{width:100%;height:100%;object-fit:cover}
 .rb-avatar__inner svg{width:50%;height:50%}
 .rb-avatar--xs{--_d:var(--avatar-xs-size)}.rb-avatar--sm{--_d:var(--avatar-sm-size)}.rb-avatar--md{--_d:var(--avatar-md-size)}.rb-avatar--lg{--_d:var(--avatar-lg-size)}.rb-avatar--xl{--_d:var(--avatar-xl-size)}.rb-avatar--2xl{--_d:var(--avatar-2xl-size)}
-.rb-avatar__status{position:absolute;right:0;bottom:0;width:25%;height:25%;border-radius:50%;background:var(--avatar-status-online);box-shadow:0 0 0 1.5px var(--avatar-status-ring)}
+.rb-avatar__status{position:absolute;right:0;bottom:0;width:25%;height:25%;border-radius:50%;background:var(--avatar-status-online);box-shadow:0 0 0 var(--avatar-status-ring-width) var(--avatar-status-ring)}
 .rb-avatar__status--offline{background:var(--avatar-status-offline)}
 .rb-avatar-group{display:inline-flex;align-items:center}
 .rb-avatar-group{isolation:isolate}

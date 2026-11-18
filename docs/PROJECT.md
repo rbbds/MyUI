@@ -275,6 +275,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |
 | #50 | Figma-states (Date picker Disabled, Quantity stepper At maximum, Table header cell Focus), L8, TableCard-tabstop, `MegaMenuFeatured actions`, Close button-docs, docs-correcties |
+| #51–#53 | Release 1.4.0, types zonder CSS-imports, axe en docs-check in CI, lintregel `raw`, release 1.4.1 |
+| #54 | Tokens `tab/indicator-width` en `avatar/status-ring-width`, Close button Focus-state, timeout op de a11y-job |
 
 Na een deploy kan een open Storybook-tab "Importing a module script failed" geven. Dat komt door de cache: hard verversen (Cmd + Shift + R).
 
@@ -312,5 +314,4 @@ Na een deploy kan een open Storybook-tab "Importing a module script failed" geve
 
 **Toegankelijkheid (na de review)**
 - Handmatige test met VoiceOver (macOS, iOS) en NVDA (Windows) en een ronde in echte Safari.
-- L7 (z-index en transities; de token-lint controleert alleen px) en L10 (volgt Figma) blijven bewust zoals ze zijn.
-- Close button heeft in Figma nog geen Focus-state.
+- L7 is vastgelegd in de lintregel `raw` (z-index, duren en radius in % alleen met reden). L10 (volgt Figma) blijft bewust zoals hij is.

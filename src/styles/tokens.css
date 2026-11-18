@@ -730,6 +730,7 @@
 --avatar-status-offline:var(--color-foreground-disabled);
 --avatar-status-online:var(--color-surface-success-solid);
 --avatar-status-ring:var(--color-surface-primary);
+--avatar-status-ring-width:var(--width-2);
 --avatar-surface:var(--color-surface-tertiary);
 --avatar-xl-size:56px;
 --avatar-xs-size:24px;
@@ -1594,6 +1595,7 @@
 --tab-foreground-hover:var(--color-foreground-secondary);
 --tab-gap:var(--spacing-2);
 --tab-indicator:var(--color-border-brand);
+--tab-indicator-width:var(--width-2);
 --tab-leading-icon-size:var(--icon-size-sm);
 --tab-padding-horizontal:var(--spacing-3);
 --tab-padding-vertical:var(--spacing-2);
