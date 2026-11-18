@@ -26,8 +26,8 @@
     ],
     [
       "State",
-      "Default, Hover",
-      ""
+      "Default, Hover, Focus",
+      "Focus: the standard focus ring around the hover shape."
     ]
   ],
   "reactProps": [
@@ -71,7 +71,5 @@
     "Slideout",
     "Button icon"
   ],
-  "open": [
-    "Figma has no Focus state yet; the code uses the standard focus ring."
-  ]
+  "open": []
 }

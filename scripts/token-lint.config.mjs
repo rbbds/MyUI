@@ -68,8 +68,6 @@ export default {
     // Box-shadow lines (per selector since the check of 17 November).
     { property: '^box-shadow$', selector: '^\\.rb-flag::after$', px: '^1px$', reason: 'Hairline edge so a white flag stays visible on white. Figma: inside stroke on the flag.' },
     { property: '^box-shadow$', selector: '^\\.rb-tabs__list--underline$', px: '^-1px$', reason: 'Track under the tabs drawn as an inset line, so it does not add height.' },
-    { property: '^box-shadow$', selector: '^\\.rb-tabs__list--underline \\.rb-tab\\[aria-selected="true"\\](:focus-visible)?$', px: '^-2px$', reason: 'Indicator of the selected tab, drawn inside the tab. Candidate for a token (tabs/indicator-width): Figma first.' },
-    { property: '^box-shadow$', selector: '^\\.rb-avatar__status$', px: '^1\\.5px$', reason: 'Ring between the status dot and the avatar. Off the grid; candidate for a token (avatar/status-ring-width): Figma first.' },
     { declValue: 'calc\\(100(vw|dvh) - 32px\\)', px: '^32px$', reason: 'Screen margin: an overlay never touches the edge of a small screen.' },
     { declValue: '- 1px\\)', px: '^1px$', reason: 'Padding minus the 1 px border, so the outer size stays on the 4 px grid.' },
     { selector: '\\.rb-variant__input$', reason: 'Visually hidden native input (1 x 1 px).' },

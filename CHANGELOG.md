@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Tokens `--tab-indicator-width` (2 px, the line under the selected underline tab) and `--avatar-status-ring-width`. Both were fixed values in CSS and are now set in Figma.
+- Figma: Close button State=Focus (xs, sm, md).
+
+### Changed
+- **Avatar** status dot: the ring between dot and avatar is 2 px (was 1.5 px, off the 4 px grid).
+- Token-lint: the two allowlist entries for these box-shadow values are gone.
+- CI: the a11y job stops after 20 minutes.
+
 ## 1.4.1 (18 November 2026)
 
 ### Fixed

@@ -37,6 +37,8 @@ jobs:
   # axe on every story in Light and Dark and in Iris, Forest and Berry (check of 17 November). Runs next to build.
   a11y:
     runs-on: ubuntu-latest
+    # A normal run takes 5 to 11 minutes; stop a stuck run instead of the 6 hour default.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

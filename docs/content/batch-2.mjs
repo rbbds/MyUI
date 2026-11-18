@@ -180,7 +180,7 @@ export default [
     use: ['Inside MyUI components: you get it through Tag, Alert, Toast, Modal and Slideout.'],
     avoid: ['As a general icon button in your own layout: use Button icon.'],
     anatomy: ['Icon (X).', 'Hover surface around the icon.', 'Hit area of at least 24 px.'],
-    figmaProps: [['Size', 'xs, sm, md', 'xs: Tag. sm: Alert and Toast. md: Modal and Slideout.'], ['State', 'Default, Hover', '']],
+    figmaProps: [['Size', 'xs, sm, md', 'xs: Tag. sm: Alert and Toast. md: Modal and Slideout.'], ['State', 'Default, Hover, Focus', 'Focus: the standard focus ring around the hover shape.']],
     reactProps: [['size', "'xs' | 'sm' | 'md'", "Default 'sm'. Internal component: not exported from the package."], ['aria-label', 'string', 'Required. Comes from the labels of the component that uses it, for example labels.close.']],
     behaviour: ['The hover surface and hit area sit outside the icon (negative margin), so in the layout the button takes up only the icon size.', 'Focus: the standard focus ring.'],
     a11y: ['Native <button type="button"> with an aria-label. The icon is aria-hidden.', 'The hit area is at least 24 by 24 px (WCAG 2.5.8).'],
@@ -189,7 +189,7 @@ export default [
     dont: ['An X without an accessible name.'],
     tokens: ['--close-button-{foreground|foreground-hover|surface-hover}', '--close-button-{xs|sm|md}-{icon-size|radius}'],
     related: ['Tag', 'Alert', 'Toast', 'Modal', 'Slideout', 'Button icon'],
-    open: ['Figma has no Focus state yet; the code uses the standard focus ring.'],
+    open: [],
   },
   {
     id: 'stepper',
