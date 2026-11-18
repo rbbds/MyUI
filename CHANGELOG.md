@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.4.0 (18 November 2026)
 
 ### Added
 - **TableCard** `labels.region` (default "Table"): names the scroll area of a wide table that has no `title`. Exported `DEFAULT_TABLE_CARD_LABELS`.
