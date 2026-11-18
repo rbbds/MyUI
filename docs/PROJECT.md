@@ -125,6 +125,8 @@ scripts/
   lint-tokens.mjs              token-lint (npm run lint:tokens), regels in token-lint.config.mjs
   check-contrast.mjs           contrast control-randen en actieve optie (npm run check:contrast)
   check-literal-strings.mjs    geen vaste tekst in component-JSX (npm run check:strings)
+  check-a11y-stories.mjs       axe op alle stories × thema × merk (npm run check:a11y)
+  strip-dts-css.mjs            haalt CSS-imports uit dist/types (onderdeel van npm run build)
   suggest-component-tokens.mjs veilige koppelingen losse waarde → component token (--apply schrijft ze)
   lib/css.mjs                  CSS-parser met posities (lint en suggesties)
   docs/build-mdx.mjs           docs naar Storybook (npm run docs:build)
@@ -238,12 +240,12 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 
 ### Kwaliteitscheck (zo testen we)
 
-- axe via Playwright op elke story in Light en Dark (wachttijd circa 1200 ms per story).
+- `npm run check:a11y` (na `npm run build-storybook`): axe op elke story in Light en Dark × Iris, Forest en Berry, controleert ook of thema en merk staan. In CI als eigen job.
 - Screenshots in Iris, Forest en Berry.
 - `npm run typecheck` en `npm run build-storybook` moeten slagen.
 - `npm run test:browser`: Playwright in Chromium en WebKit voor gedrag dat axe niet ziet (Escape in panelen, focus, schermlezernamen). Scenario's staan in `tests/harness/main.tsx`, tests in `tests/browser/`.
 - Review van 12 november 2026 met alle bevindingen en de volgorde van oplossen: `claude/MyUI-review-2026-11-12.md` in het Claude Project.
-- Vaste checks in elke PR: `npx tsc --noEmit -p .`, `npm run build`, `npm run lint:tokens -- --strict`, `npm run check:strings`, `npm run check:contrast`, `npm run report:figma-bindings -- --strict`, `npm run docs:build`, Playwright (64 tests).
+- Vaste checks in elke PR: `npx tsc --noEmit -p .`, `npm run build`, `npm run lint:tokens -- --strict`, `npm run check:strings`, `npm run check:contrast`, `npm run report:figma-bindings -- --strict`, `npm run docs:build` (CI faalt als `src/docs` daarna verschilt), Playwright (64 tests), `npm run check:a11y`. De token-lint controleert naast px ook z-index, duren en radius in % (`rawAllow`).
 - Visuele regressie: Storybook van main en van de branch bouwen en vergelijken met `node scripts/compare-stories.mjs <oud> <nieuw>`.
 - Laatste stand (17 november): axe op alle 163 stories in Light en Dark, Iris, Forest en Berry (978 runs): 0 fouten. Schermlezers (VoiceOver, NVDA) zijn nog niet met de hand getest.
 - Onafhankelijke controle van 17 november: `claude/MyUI-controle-2026-11-17.md` in het Claude Project.

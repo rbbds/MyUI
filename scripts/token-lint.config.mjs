@@ -19,6 +19,16 @@ export default {
   unusedPending: [
   ],
 
+  // Rule 6 (check of 17 November, review L7): values Figma has no variable for. Only these values may appear in component CSS.
+  // A new value needs an entry here with a reason, or a token.
+  rawAllow: [
+    { kind: 'z-index', values: ['1', '2', '3', '4', '5'], reason: 'Stacking inside one component, for example a focused or current item above the shared border of its neighbours.' },
+    { kind: 'z-index', values: ['20', '30', '40', '50', '60'], reason: 'Layer order without popover support (fallback): 20 date and combobox panels, 30 popover and notifications, 40 menu and header panel, 50 tooltip, 60 toasts. With popover support these panels sit in the top layer and z-index does not matter.' },
+    { kind: 'duration', values: ['.12s', '.15s', '.2s', '.22s'], reason: 'Short transitions (hover, open, slide). Figma has no motion tokens; base.css turns motion off with prefers-reduced-motion.' },
+    { kind: 'duration', values: ['.8s', '1s', '1.6s'], reason: 'Loop speed of Spinner (.8s), Button loading (1s) and Skeleton shimmer (1.6s).' },
+    { kind: 'radius', values: ['50%'], reason: 'A circle (status dot, slider thumb, radio, avatar ring). Figma draws these as an ellipse or with border/radius/full; 50% stays round at every size.' },
+  ],
+
   // Tokens outside the component layer that component CSS may use.
   // text-*: text styles (Figma text styles). shadow-*, focus-ring*: effect styles.
   allowedNonComponent: ['text', 'shadow', 'focus-ring'],
@@ -47,9 +57,19 @@ export default {
     { property: '^grid-template-columns$', declValue: 'minmax\\(', reason: 'Wrap point of a grid (minmax(240px, 1fr)). Layout logic, like flex-basis.' },
     { property: '^text-underline-offset$', reason: 'Figma has no variable for underline offset.' },
     { property: '^margin', px: '^-', reason: 'Margin correction: pulls a padded hit area back into line. Figma draws the result, not the correction.' },
-    { property: '^(top|right|bottom|left|inset|transform)$', reason: 'Position or offset of a layer (arrow, badge on an icon, toast region, toggle knob travel). Figma sets positions without variables.' },
+    // Positions and offsets (check of 17 November: was one rule for every position; now per selector, so a new value is visible).
+    { property: '^(top|right|bottom|left)$', selector: '^\\.rb-toast-region$', reason: 'Screen margin of the toast region (16 px, 24 px from 600 px). Figma places it on the frame without variables.' },
+    { property: '^(top|right|bottom|left)$', selector: '^\\.rb-tooltip--(top|right|bottom|left)$', px: '^8px$', reason: 'Fallback distance of a tooltip without popover support (keuze 25).' },
+    { property: '^top$', selector: '^\\.rb-menu$', px: '^4px$', reason: 'Fallback distance of a menu without popover support (keuze 25).' },
+    { property: '^(top|right)$', selector: '^\\.rb-notif-button__count$', px: '^2px$', reason: 'Offset of the count on the bell icon. Figma places it absolute without variables.' },
+    { property: '^bottom$', selector: '^\\.rb-activity__item:not\\(:last-child\\)::before$', px: '^4px$', reason: 'End of the timeline line, just above the next dot.' },
+    { property: '^transform$', selector: 'rb-toggle__knob$', px: '^20px$', reason: 'Knob travel of the md toggle (track minus knob minus inset). Figma uses two variants, no variable.' },
     { property: '^background-image$', reason: 'Gradient stop (strike-through line, shimmer). Figma has no variables for gradient geometry.' },
-    { property: '^box-shadow$', reason: 'Box-shadow line used as a ring or an inside border (tab track, avatar ring, flag edge). Figma draws these as strokes or effects.' },
+    // Box-shadow lines (per selector since the check of 17 November).
+    { property: '^box-shadow$', selector: '^\\.rb-flag::after$', px: '^1px$', reason: 'Hairline edge so a white flag stays visible on white. Figma: inside stroke on the flag.' },
+    { property: '^box-shadow$', selector: '^\\.rb-tabs__list--underline$', px: '^-1px$', reason: 'Track under the tabs drawn as an inset line, so it does not add height.' },
+    { property: '^box-shadow$', selector: '^\\.rb-tabs__list--underline \\.rb-tab\\[aria-selected="true"\\](:focus-visible)?$', px: '^-2px$', reason: 'Indicator of the selected tab, drawn inside the tab. Candidate for a token (tabs/indicator-width): Figma first.' },
+    { property: '^box-shadow$', selector: '^\\.rb-avatar__status$', px: '^1\\.5px$', reason: 'Ring between the status dot and the avatar. Off the grid; candidate for a token (avatar/status-ring-width): Figma first.' },
     { declValue: 'calc\\(100(vw|dvh) - 32px\\)', px: '^32px$', reason: 'Screen margin: an overlay never touches the edge of a small screen.' },
     { declValue: '- 1px\\)', px: '^1px$', reason: 'Padding minus the 1 px border, so the outer size stays on the 4 px grid.' },
     { selector: '\\.rb-variant__input$', reason: 'Visually hidden native input (1 x 1 px).' },

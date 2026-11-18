@@ -14,6 +14,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      # Fails when the generated Storybook docs differ from docs/content/*.mjs (someone edited the output, or forgot docs:build).
+      - run: npm run docs:build && git diff --exit-code -- src/docs
       # Fails on any token-lint finding (keuze 18b). Writes the job summary and an artifact.
       - run: npm run lint:tokens -- --strict
       # Fails when a component token has no binding in Figma and is not pending (docs/reports/figma-bindings.json, keuze 18b).
@@ -31,3 +33,17 @@ jobs:
       - run: npm run build-storybook
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:browser
+
+  # axe on every story in Light and Dark and in Iris, Forest and Berry (check of 17 November). Runs next to build.
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build-storybook
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:a11y -- --workers 4

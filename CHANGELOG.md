@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- **Type declarations** no longer import CSS (`import './Button.css'` in `dist/types`). In TypeScript 6 or later without a `declare module '*.css'` and with `skipLibCheck` off, that gave 47 errors TS2882 in your project. Build step `scripts/strip-dts-css.mjs`.
+
+### Changed (tooling, no change in components)
+- CI: `npm run docs:build` must leave `src/docs` unchanged, and a new job runs axe on every story in Light and Dark and in Iris, Forest and Berry (`npm run check:a11y`, 984 runs, 0 problems).
+- Token-lint rule 6 (`raw`): z-index, durations and a percentage radius are only allowed with a value and reason in `rawAllow` (review L7). The allowlist for positions and box-shadow lines is now per selector instead of per property.
+
 ## 1.4.0 (18 November 2026)
 
 ### Added
