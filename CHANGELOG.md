@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.5.0 (18 November 2026)
 
 ### Added
 - Tokens `--tab-indicator-width` (2 px, the line under the selected underline tab) and `--avatar-status-ring-width`. Both were fixed values in CSS and are now set in Figma.
