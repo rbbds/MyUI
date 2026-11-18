@@ -8,6 +8,7 @@
 //   3. unknown  A var() that is no token and not local (defined in component CSS, or private: --_name).
 //   4. unused Tokens that nothing uses: not component CSS, not TSX, not another token.
 //   5. duplicate  The same token declared twice in the same mode.
+//   6. raw    Values that Figma has no token for: z-index, durations and a percentage radius. Only the values in rawAllow (with a reason).
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { readTokens, layerOf, refsIn } from './lib/tokens.mjs';
@@ -40,7 +41,7 @@ const decls = cssFiles.flatMap(parseCss).map((d) => ({ ...d, file: relative('.',
 const definedInCss = new Set(decls.filter((d) => d.property.startsWith('--')).map((d) => d.property.slice(2)));
 const isLocal = (k) => k.startsWith('_') || definedInCss.has(k);
 
-const findings = { px: [], layer: [], unknown: [], unused: [], duplicate: [] };
+const findings = { px: [], layer: [], unknown: [], unused: [], duplicate: [], raw: [] };
 
 // Rule 1: px.
 const matchesAllow = (d, px, a) =>
@@ -57,6 +58,18 @@ for (const d of decls) {
     if (config.pxAllow.some((a) => matchesAllow(d, px, a))) continue;
     findings.px.push({ ...d, px });
   }
+}
+
+// Rule 6: raw values without a Figma token (z-index, durations, percentage radius). Allowed only per kind and value in rawAllow.
+const rawAllowed = (kind, value) => config.rawAllow.some((a) => a.kind === kind && a.values.includes(value));
+for (const d of decls) {
+  if (d.property.startsWith('--')) continue;
+  const plain = d.value.replace(/var\([^)]*\)/g, '');
+  const raw = [];
+  if (d.property === 'z-index' && /^-?\d+$/.test(plain.trim())) raw.push(['z-index', plain.trim()]);
+  if (/^(transition|animation)/.test(d.property)) for (const [t] of plain.matchAll(/(?<![\w.])\d*\.?\d+m?s\b/g)) raw.push(['duration', t]);
+  if (/radius/.test(d.property)) for (const [r] of plain.matchAll(/(?<![\w.])\d*\.?\d+%/g)) raw.push(['radius', r]);
+  for (const [kind, value] of raw) if (!rawAllowed(kind, value)) findings.raw.push({ ...d, kind, raw: value });
 }
 
 // Rules 2 and 3: which tokens component CSS may use.
@@ -116,6 +129,7 @@ const label = {
   unknown: 'var() naar een token die niet bestaat',
   unused: 'Ongebruikte tokens',
   duplicate: 'Dubbele tokens (zelfde mode)',
+  raw: 'Waarde zonder token buiten rawAllow (z-index, duur, radius in %)',
 };
 const md = [];
 md.push('# Token-lint', '');
@@ -157,13 +171,17 @@ section('duplicate', (list) => {
   md.push('| Token | Mode | Eerst | Daarna |', '| --- | --- | --- | --- |');
   for (const x of list) md.push(`| \`--${x.token}\` | ${x.mode} | \`${x.first}\` | \`${x.file}:${x.line} ${x.value}\` |`);
 });
+section('raw', (list) => {
+  md.push('| Soort | Waarde | Plek |', '| --- | --- | --- |');
+  for (const x of list) md.push(`| ${x.kind} | \`${x.raw}\` | \`${x.file}:${x.line}\` ${x.selector} |`);
+});
 const report = md.join('\n') + '\n';
 
 console.log(`Token-lint: ${total} bevindingen`, count);
 for (const [k, list] of Object.entries(findings)) {
   for (const x of list.slice(0, 5)) {
     const where = `${x.file}:${x.line}`;
-    const what = k === 'px' ? `${x.property}: ${x.px}` : k === 'unused' ? `--${x.token} (${x.layer})` : k === 'duplicate' ? `--${x.token} (${x.mode})` : `--${x.token}`;
+    const what = k === 'px' ? `${x.property}: ${x.px}` : k === 'raw' ? `${x.property}: ${x.raw} (${x.kind})` : k === 'unused' ? `--${x.token} (${x.layer})` : k === 'duplicate' ? `--${x.token} (${x.mode})` : `--${x.token}`;
     console.log(`  ${k.padEnd(9)} ${where}  ${what}`);
   }
   if (list.length > 5) console.log(`  ${k.padEnd(9)} … en nog ${list.length - 5}`);
