@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.4.1 (18 November 2026)
 
 ### Fixed
 - **Type declarations** no longer import CSS (`import './Button.css'` in `dist/types`). In TypeScript 6 or later without a `declare module '*.css'` and with `skipLibCheck` off, that gave 47 errors TS2882 in your project. Build step `scripts/strip-dts-css.mjs`.
