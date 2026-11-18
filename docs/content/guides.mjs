@@ -257,6 +257,47 @@ export const guides = [
 // Figma changelog: shown on the page "📝 Changelog" in the Figma file. Newest first.
 export const figmaChangelog = [
   {
+    version: '1.5.0',
+    items: [
+      'New tokens tab/indicator-width and avatar/status-ring-width: the line under the selected tab and the ring around the avatar status dot. The status ring is 2 px (was 1.5 px).',
+      'Close button has State=Focus (xs, sm, md).',
+    ],
+  },
+  {
+    version: '1.4.0',
+    items: [
+      'New states: Date picker Disabled, Quantity stepper At maximum, Table header cell Focus.',
+      'Nav item: the ring around the indicator dot is 2 px. Cart button: the count uses the 12 px text size.',
+      'New Docs frame for Close button. The Docs frames of Table, Date picker, Mega menu and Quantity stepper are updated.',
+    ],
+  },
+  {
+    version: '1.3.0',
+    items: [
+      'The variable picker shows only the base tokens: surface, text and border colors, border width, spacing (gap and padding) and radius. Component tokens no longer show in the picker; they stay bound inside the components.',
+      'New base tokens: spacing (2 to 80 px) and radius for control, containers and overlays, plus full. Radius follows the brand.',
+    ],
+  },
+  {
+    version: '1.2.0',
+    items: [
+      'Button group and Pagination: the current option has a 2 px ring and a background in the brand color. Before, only a light gray background showed it.',
+    ],
+  },
+  {
+    version: '1.1.0',
+    items: [
+      'New: Mega menu (panel with 2 to 4 columns and a featured block), Mobile nav (accordion for the mobile menu) and Header Show search.',
+      'New states: _Header nav item Expanded and Has menu, _Mega menu link Current, _Mobile nav sublink, Input Error empty, Date picker Error, Quantity stepper Focus value and Focus button, _Field action Focus, Button group Disabled.',
+      'Focus: effect style Focus ring/inset. A field shows one focus ring at a time. Focus states have a fill so the ring renders.',
+      'Search input: the clear button is a _Field action (24 px with a 20 px icon). The base is Fill, so instances can be narrower than 320 px.',
+      'Component tokens are grouped in category folders (component-tokens/<category>/...). Unbound and duplicate tokens are removed: every component token is bound in Figma and used in code.',
+      'Control borders are lighter (color/border/control) and still WCAG. Checkbox and Radio follow the line height of their label.',
+      'Close button, Checkbox group, Radio group and Selection card group are components. Docs frames are regenerated on every component page.',
+      "Code: LinkProvider for router links, 'use client' for Next.js and labels on every component. Old props still work until 2.0.0.",
+    ],
+  },
+  {
     version: '1.0.0',
     items: [
       'New page How to use with guides for designers and developers, and the versioning policy.',
