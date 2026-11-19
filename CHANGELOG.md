@@ -3,6 +3,7 @@
 ## Unreleased
 
 ### Docs
+- README: links to Storybook, CHANGELOG and npm at the top, new sections Routing (`LinkProvider` for Next.js and React Router), Not in MyUI yet, and Questions and bugs. The component table now lists the dashboard and portal components, Mega menu, Mobile nav, Bottom navigation and the form inputs added since 1.0.
 - Figma changelog (page 📝 Changelog, source `figmaChangelog` in `docs/content/guides.mjs`): versions 1.1.0 to 1.5.0 added. 1.1.0 was only in Figma, now also in the source.
 
 ## 1.5.0 (18 November 2026)

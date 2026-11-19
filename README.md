@@ -5,7 +5,9 @@ White label React component library and design tokens. Built from the Figma file
 - React 18+ components, TypeScript types, no runtime CSS-in-JS
 - Design tokens as CSS custom properties, Light and Dark mode, responsive type and spacing
 - Icons: [Lucide](https://lucide.dev) (`lucide-react`)
-- Storybook 10 with a Light/Dark toolbar toggle and the a11y addon
+- Storybook 10 with Theme (Light, Dark) and Brand (Iris, Forest, Berry) toolbar toggles and the a11y addon
+
+**Storybook:** https://my-ui-two.vercel.app (start at Getting started) · **Changes:** [CHANGELOG.md](CHANGELOG.md) · **npm:** [@rbbds/ui](https://www.npmjs.com/package/@rbbds/ui)
 
 ## Getting started
 
@@ -44,6 +46,30 @@ Load the fonts yourself (for example `@fontsource-variable/inter`), or set `--br
 
 Full guides for designers and developers, and the versioning policy, are in Storybook under **Getting started**: https://my-ui-two.vercel.app
 
+### Routing
+
+Wrap your app in `LinkProvider` so every MyUI link (NavItem, Header, Mega menu, Breadcrumbs, Card and more) uses your router and does not reload the page. Without it, MyUI renders a plain `<a href>`. The build has `'use client'`, so this works in the Next.js App Router.
+
+```tsx
+import { LinkProvider } from '@rbbds/ui';
+
+// Next.js
+import NextLink from 'next/link';
+<LinkProvider component={NextLink}>{children}</LinkProvider>
+
+// React Router: map href to to
+import { Link as RouterLink } from 'react-router';
+<LinkProvider component={({ href, ...props }) => <RouterLink to={href} {...props} />}>{children}</LinkProvider>
+```
+
+### Not in MyUI yet
+
+Charts, a carousel for product rows, a postcode API for street and city, and payment logos. Ask before you build one of these yourself, so it can become part of MyUI.
+
+### Questions and bugs
+
+Open an issue in [rbbds/MyUI](https://github.com/rbbds/MyUI/issues). What changed per version is in [CHANGELOG.md](CHANGELOG.md).
+
 More context (architecture, conventions, open points): [docs/PROJECT.md](docs/PROJECT.md).
 
 ## Token architecture
@@ -75,12 +101,13 @@ The build also writes `dist/tokens.json` (import `@rbbds/ui/tokens.json`): every
 | Group | Components |
 |---|---|
 | Buttons | `Button`, `ButtonIcon`, `ButtonGroup` |
-| Form inputs | `Input`, `Select`, `Textarea`, `Slider`, `RangeSlider`, `SearchInput`, `DatePicker`, `Calendar`, `Combobox`, `Field` |
+| Form inputs | `Input`, `Select`, `Textarea`, `Slider`, `RangeSlider`, `SearchInput`, `DatePicker`, `DateRangePicker`, `Calendar`, `Combobox`, `Field`, `PasswordInput`, `CopyInput`, `VerificationCode` |
 | Selection | `Checkbox`, `Radio`, `RadioGroup`, `Toggle`, `SelectionCard`, `SelectionCardGroup` |
-| Display | `Badge`, `Tag`, `Avatar`, `AvatarGroup`, `Divider`, `FeaturedIcon`, `Spinner`, `Skeleton`, `Kbd`, `ProgressBar`, `Tooltip` |
-| Feedback and overlays | `Alert`, `Toast`, `ToastRegion`, `Modal`, `Slideout`, `DropdownMenu`, `CommandMenu` |
-| Navigation | `Header`, `Sidebar`, `SidebarUser`, `Tabs`, `Breadcrumbs`, `Pagination`, `NavItem`, `Stepper` |
-| Content | `Card`, `Accordion`, `EmptyState`, `FileUpload`, `FileUploadItem`, `TableCard`, `Table`, `TableHeader`, `PersonCell` |
+| Display | `Badge`, `Tag`, `Avatar`, `AvatarGroup`, `Divider`, `FeaturedIcon`, `Spinner`, `Skeleton`, `Kbd`, `ProgressBar`, `Tooltip`, `StatusIndicator` |
+| Feedback and overlays | `Alert`, `Banner`, `Toast`, `ToastRegion`, `Modal`, `Slideout`, `Popover`, `DropdownMenu`, `CommandMenu` |
+| Navigation | `Header`, `MegaMenu`, `MobileNav`, `Sidebar`, `DualSidebar`, `SidebarUser`, `Tabs`, `Breadcrumbs`, `Pagination`, `NavItem`, `Stepper`, `BottomNavigation`, `LinkProvider` |
+| Content | `Card`, `Accordion`, `EmptyState`, `FileUpload`, `FileUploadItem`, `TableCard`, `Table`, `TableHeader`, `PersonCell`, `TableToolbar`, `TableBulkActions` |
+| Dashboards and portals | `PageHeader`, `MetricCard`, `DescriptionList`, `DocumentList`, `ActivityFeed`, `NotificationButton`, `NotificationPanel`, `SettingsSection`, `Checklist` |
 | E-commerce | `ProductCard`, `ProductGrid`, `Price`, `Rating`, `QuantityStepper`, `StockIndicator`, `ProductGallery`, `VariantPicker`, `AddToCart`, `CartItem`, `CartSummary`, `PromoCode`, `CartButton`, `MiniCart`, `AddressFields`, `FilterGroup`, `ActiveFilters` |
 | Flags (`@rbbds/ui/flags`) | `Flag`, `CountrySelect` |
 
