@@ -115,7 +115,7 @@
     ]
   ],
   "behaviour": [
-    "Focus: border in the brand color plus a focus ring. When a button in the field (clear, help, calendar) has focus, only that button gets the ring.",
+    "Focus: a blue border plus a focus ring. When a button in the field (clear, help, calendar) has focus, only that button gets the ring.",
     "Error: red border and error message. Stays until the input is correct.",
     "Disabled: you cannot edit it, lower contrast colors."
   ],

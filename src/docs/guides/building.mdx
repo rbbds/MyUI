@@ -46,6 +46,7 @@ Rules for anyone who adds or changes a component in the Figma file. They keep sp
 
 - Focus is the effect style Focus ring/brand on the base. Use Focus ring/error for destructive actions.
 - The ring is a shadow, so it does not move the layout. It follows one token for the color: effect-tokens/border/focus. In CSS this is `--focus-ring`.
+- The focus color is blue in every brand (info 500 in Light, info 400 in Dark). It does not follow the brand color: people know blue as focus, and it stays clear next to a red error border.
 - Do not add a focus border or a focus color to a single component. Inputs are the exception: their border also changes color on focus.
 - Inside a scroll area the ring would be cut off. Use the inset ring there. In CSS this is `--focus-ring-inset`.
 

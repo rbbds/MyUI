@@ -13,6 +13,8 @@ const PAIRS = [
   ['command-item-border-active', 'command-item-surface-active'],
   // L5: the ring of the current option in Button group and Pagination, on the page and on its own fill.
   ...['button-group', 'pagination'].flatMap((c) => [...SURFACES, `${c}-surface-current`].map((bg) => [`${c}-border-current`, bg])),
+  // The focus ring and the focus border of a field on every surface, 3:1.
+  ...['effect-border-focus', 'input-border-focus'].flatMap((fg) => SURFACES.map((bg) => [fg, bg])),
   // Button label on its own fill, 4.5:1. Transparent fills (tertiary, link) fall through to the page.
   ...['primary', 'accent', 'secondary', 'tertiary', 'link', 'primary-destructive', 'secondary-destructive', 'tertiary-destructive', 'link-destructive']
     .flatMap((h) => ['default', 'hover', 'pressed'].map((st) => [`button-${h}-foreground-${st}`, `button-${h}-surface-${st}`, TEXT])),

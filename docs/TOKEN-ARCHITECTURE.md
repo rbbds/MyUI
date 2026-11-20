@@ -88,14 +88,14 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | brand/border-width/default, strong | alias to ∙ border | Pick from a list |
 | brand/dark/* | alias to the brand scale | Set by the Brand builder (which step works on a dark background) |
 
-**Primary** is the main brand color: buttons, links, focus, active states.
+**Primary** is the main brand color: buttons, links, active states. Focus is not a brand color: it is blue in every brand (since 1.7.0).
 **Accent** is a second brand color: highlights, badges, tags, illustrations and, later, charts.
 
 ### 3. Alias collections (hidden)
 
 | Collection | Modes | Content |
 | --- | --- | --- |
-| ↳ theme | Light, Dark | Only colors: color/surface, color/foreground, color/border, color/focus, color/overlay, shadow colors. Points to Brand. Only white, black and the alpha values come straight from ∙ color (since 1.6.0). |
+| ↳ theme | Light, Dark | Only colors: color/surface, color/foreground, color/border, color/focus, color/overlay, shadow colors. Points to Brand. Only white, black, the alpha values and the focus color (info 500 and 400) come straight from ∙ color. |
 | ↳ style | Value | border/radius/*, border/width/*, font/family/*, font/weight/*, spacing/*, effects/shadow geometry, icon-size/* |
 | ↳ screen-size | xl, lg, md, sm, xs | Responsive type, spacing, containers, breakpoint strings |
 | ↳ size | sm, md, lg | icon/size (16, 20, 24) and, later, control sizes |
