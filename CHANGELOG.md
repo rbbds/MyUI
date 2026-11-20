@@ -8,14 +8,17 @@ Planned as 1.6.0 (minor: new tokens and a new state, nothing renamed or removed)
 - **Accent button per brand.** New brand tokens `--brand-color-accent-solid-surface`, `-surface-hover`, `-surface-pressed` and `-foreground`. A brand with a dark accent color can now give the accent button that exact color with white text. Iris, Forest and Berry keep accent 400 with dark text: the defaults point to the same values as before.
 - **Pressed state for buttons.** Button, Button destructive and Button icon change color while you press them (`:active`). New tokens `--button-<hierarchy>-surface-pressed`, `-foreground-pressed` and `-border-pressed` for every hierarchy, and five theme tokens (`--color-surface-brand-solid-pressed`, `--color-surface-error-solid-pressed`, `--color-surface-error-subtle-pressed`, `--color-foreground-brand-pressed`, `--color-foreground-error-pressed`). Figma: State=Pressed in the three button sets.
 - Brand builder: toggle "Use my exact accent color on buttons" and an accent button in the preview. myui-brand skill: optional `colors.accentButton` in brand-input.json (schema, script and a second example). Input without it gives exactly the same output as before.
-- `npm run check:contrast` also checks the button label on its fill in Default, Hover and Pressed (4.5:1), and `npm run check:brand` runs the two brand examples.
+- `npm run check:contrast` also checks the button label on its fill in Default, Hover and Pressed (4.5:1), and `npm run check:brand` runs the brand examples.
+
+- **Grays and status colors per brand.** New brand tokens `--brand-color-neutral-*`, `--brand-color-success-*`, `-warning-*`, `-error-*` and `-info-*` (12 steps each). They point to the MyUI grays and status colors, so nothing changes until a brand sets its own. Brand builder: new fields "Gray tint", "Success", "Warning", "Error" and "Information". myui-brand skill: optional `colors.neutral`, `success`, `warning`, `error` and `info`, and a third example.
+
+### Fixed
+- Dark: white text on the primary button on hover was 4.35:1 (Forest) and 4.29:1 (Berry), and 3.76:1 on the primary destructive button. Hover and pressed now get darker in Dark too (steps 700 and 800, the same as in Light). This also changes the hover color of a checked checkbox and radio, the toggle and the Bottom navigation action in Dark.
 
 ### Changed
+- The theme tokens (`--color-*`) point to `--brand-color-neutral-*` and the brand status tokens instead of straight to `--gray-*`, `--error-*` and so on. The resolved colors are the same. `--gray-*` and the status primitives still exist.
 - `--color-surface-accent-solid`, `--color-surface-accent-solid-hover` and `--color-foreground-on-accent` now point to the new brand tokens instead of straight to accent 400, accent 500 and gray 900. The resolved colors are the same. If you overrode `--color-surface-accent-solid` yourself, that still works.
 - tokens.css: about 70 lines moved within their block (the Figma export sorts a few groups differently now). No values changed.
-
-### Known
-- In Dark, white text on the primary button on hover is 4.35:1 (Forest) and 4.29:1 (Berry), and on the primary destructive button on hover 3.76:1. Found by the new check, not new in this version, not fixed yet.
 
 ### Docs
 - README: links to Storybook, CHANGELOG and npm at the top, new sections Routing (`LinkProvider` for Next.js and React Router), Not in MyUI yet, and Questions and bugs. The component table now lists the dashboard and portal components, Mega menu, Mobile nav, Bottom navigation and the form inputs added since 1.0.

@@ -44,6 +44,14 @@ test.describe('Accent button: brand tokens', () => {
     await expect.poll(() => background(page, 'Accent')).toBe('rgb(26, 84, 59)');
     await page.mouse.up();
   });
+  test('a brand sets its own grays and error color', async ({ page }) => {
+    await page.goto('/?s=button-pressed');
+    await page.addStyleTag({ content: ':root{--brand-color-neutral-700:#402a55;--brand-color-neutral-300:#b9a7c9;--brand-color-error-600:#a3122b}' });
+    const secondary = page.getByRole('button', { name: 'Secondary' });
+    await expect.poll(() => secondary.evaluate((el) => getComputedStyle(el).color)).toBe('rgb(64, 42, 85)');
+    expect(await secondary.evaluate((el) => getComputedStyle(el).borderTopColor)).toBe('rgb(185, 167, 201)');
+    expect(await background(page, 'Delete')).toBe('rgb(163, 18, 43)');
+  });
   test('without brand tokens the accent button keeps accent 400 with dark text', async ({ page }) => {
     await page.goto('/?s=button-pressed');
     expect(await background(page, 'Accent')).toBe(await token(page, '--brand-color-accent-400'));

@@ -20,6 +20,11 @@
       "properties": {
         "primary": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Main brand color: buttons, links, focus, active states." },
         "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional second brand color: highlights, badges, tags, illustrations." },
+        "neutral": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional. Tints the grays (text, borders, backgrounds) with the hue of this color. A color without hue gives pure grays. Leave it out to keep the MyUI grays." },
+        "success": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional. Your own color for success. Leave it out to keep the MyUI green." },
+        "warning": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional. Your own color for warnings. Leave it out to keep the MyUI orange." },
+        "error": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional. Your own color for errors and destructive buttons. Leave it out to keep the MyUI red." },
+        "info": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional. Your own color for information. Leave it out to keep the MyUI blue." },
         "accentButton": {
           "type": "object",
           "additionalProperties": false,

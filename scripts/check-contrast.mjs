@@ -18,11 +18,6 @@ const PAIRS = [
     .flatMap((h) => ['default', 'hover', 'pressed'].map((st) => [`button-${h}-foreground-${st}`, `button-${h}-surface-${st}`, TEXT])),
 ];
 
-// Known and not fixed yet: in Dark, hover on the primary and the primary destructive button gets lighter
-// (step 500) and white text drops below 4.5:1. Found in 1.6.0 when this check was added. Reported, does not fail.
-const KNOWN = new Set(['button-primary-foreground-hover', 'button-primary-destructive-foreground-hover']);
-const known = [];
-
 const { values } = readTokens();
 const BRANDS = ['default', 'brand:forest', 'brand:berry'];
 const THEMES = ['default', 'theme:dark'];
@@ -56,10 +51,9 @@ for (const [fg, bg, min = MIN] of PAIRS) {
     const f = over(parse(resolve(fg, brand, theme)), b);
     const r = ratio(f, b);
     cells.push(r);
-    if (r < min) (KNOWN.has(fg) ? known : fails).push(`--${fg} on --${bg} (${[label[brand] || 'Iris', label[theme] || 'Light'].join(', ')}): ${r.toFixed(2)}:1, needs ${min}:1`);
+    if (r < min) fails.push(`--${fg} on --${bg} (${[label[brand] || 'Iris', label[theme] || 'Light'].join(', ')}): ${r.toFixed(2)}:1, needs ${min}:1`);
   }
   rows.push(`  ${`--${fg} on --${bg}`.padEnd(62)} min ${Math.min(...cells).toFixed(2)}:1${min === MIN ? '' : ` (needs ${min}:1)`}`);
 }
 console.log(`Contrast (minimum ${MIN}:1, button labels ${TEXT}:1, Iris/Forest/Berry x Light/Dark):\n${rows.join('\n')}`);
-if (known.length) console.log(`\nKnown, not fixed yet (${known.length}):\n  ${known.join('\n  ')}`);
 if (fails.length) { console.error(`\n${fails.length} below the minimum:\n  ${fails.join('\n  ')}`); process.exit(1); }
