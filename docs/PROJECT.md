@@ -154,6 +154,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 
 **What a brand can change (all in `↳ brand`):**
 - `brand/color/primary/*` and `brand/color/accent/*` (12-step scales)
+- `brand/color/heading`: color of titles in Light (default neutral 900; in Dark titles use neutral 50)
 - `brand/color/neutral/*`, `success/*`, `warning/*`, `error/*`, `info/*` (12 steps each, default an alias to `∙ color`): own grays and status colors per brand
 - `brand/color/accent-solid/*`: color, hover, pressed and text color of the accent button (default accent 400, 500, 600 and gray 900)
 - `brand/font/body`, `brand/font/title`, `brand/font-weight/*`
@@ -275,6 +276,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #42 | `LinkProvider` (router-links), `'use client'`, L2/L6/L9, Docs-frames opnieuw gegenereerd |
 | #58 | F1a: accent-knop per merk (`--brand-color-accent-solid-*`), pressed-state voor Button, Button destructive en Button icon, contrastcheck voor knoplabels, `check:brand`, pixelvergelijking in zes combinaties |
 | #59 | F1b: grijzen en statuskleuren per merk (`--brand-color-neutral-*`, `-success-*`, `-warning-*`, `-error-*`, `-info-*`), Brand builder en brand.json, contrastfix hover en pressed in Dark |
+| #60 | F1c: kopkleur per merk (`--brand-color-heading`, `--color-foreground-heading`, 24 title-tokens), Getting started en README bijgewerkt voor alle F1-stappen |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

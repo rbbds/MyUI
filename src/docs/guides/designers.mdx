@@ -45,8 +45,21 @@ Screen-size is only for templates and full pages. Leave it on the default for si
 
 1. Make your brand values with the Brand builder in Storybook, or let your AI tool read your brand guide with the myui-brand skill.
 2. Both give you a primary color, an accent color (bright yellow by default) and fonts, with a contrast check.
-3. Open the variables, go to the collection `↳ brand` and add a mode with your brand name. Copy the values from `figma-brand.json` into that mode.
-4. Set that mode on your pages. All components follow.
+3. Optional, only when your brand has them: the exact color of the accent button (for a dark accent with white text), a heading color, a gray tint and your own colors for success, warning, error and information.
+4. Open the variables, go to the collection `↳ brand` and add a mode with your brand name. Copy the values from `figma-brand.json` into that mode.
+5. Set that mode on your pages. All components follow.
+
+## What a brand can change
+
+Everything a brand can change is in the collection `↳ brand`. You do not edit the other collections.
+
+Colors with your own values: brand/color/primary and brand/color/accent (12 steps each).
+
+Colors that follow MyUI until you change them: brand/color/neutral (grays), success, warning, error and info (12 steps each), brand/color/heading (titles in Light) and brand/color/accent-solid (the accent button: surface, hover, pressed and text color). In your mode they are a link to the MyUI default.
+
+To change one: select the value in your mode, detach the link and type or paste your own color. The other brands keep the default. To go back: link the value again to the same variable in ∙ color, or copy the link from the mode Iris.
+
+Fonts, font weights, radius and border width are in `↳ brand` too.
 
 ## 7. Updates
 

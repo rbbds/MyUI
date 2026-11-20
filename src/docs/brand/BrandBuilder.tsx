@@ -13,10 +13,10 @@ import { Header } from '../../components/Navigation/AppShell';
 import { accentButtonColors, brandScale, contrast, neutralScale, STATUS, STATUS_TEXT, STEPS, type AccentButton, type Step } from './color';
 
 /* Optional colors: empty = keep the MyUI default. */
-const EXTRA = ['neutral', ...STATUS] as const;
+const EXTRA = ['heading', 'neutral', ...STATUS] as const;
 type Extra = (typeof EXTRA)[number];
-const EXTRA_LABEL: Record<Extra, string> = { neutral: 'Gray tint', success: 'Success', warning: 'Warning', error: 'Error', info: 'Information' };
-const EXTRA_HINT: Record<Extra, string> = { neutral: 'Text, borders and backgrounds get the hue of this color.', success: 'Default: green.', warning: 'Default: orange.', error: 'Default: red. Also the destructive button.', info: 'Default: blue.' };
+const EXTRA_LABEL: Record<Extra, string> = { heading: 'Heading color', neutral: 'Gray tint', success: 'Success', warning: 'Warning', error: 'Error', info: 'Information' };
+const EXTRA_HINT: Record<Extra, string> = { heading: 'Titles in Light. In Dark titles keep the light text color.', neutral: 'Text, borders and backgrounds get the hue of this color.', success: 'Default: green.', warning: 'Default: orange.', error: 'Default: red. Also the destructive button.', info: 'Default: blue.' };
 const isHex6 = (v: string) => /^#[0-9a-f]{6}$/i.test(v);
 import './BrandBuilder.css';
 
@@ -57,7 +57,7 @@ export function BrandBuilder() {
   const [accentText, setAccentText] = useState(STYLE_ACCENT.iris);
   const [accentExact, setAccentExact] = useState(false);
   const [accentOverride, setAccentOverride] = useState<Partial<AccentButton>>({});
-  const [extra, setExtra] = useState<Record<Extra, string>>({ neutral: '', success: '', warning: '', error: '', info: '' });
+  const [extra, setExtra] = useState<Record<Extra, string>>({ heading: '', neutral: '', success: '', warning: '', error: '', info: '' });
   const [body, setBody] = useState('Inter');
   const [title, setTitle] = useState('Inter');
   const [logo, setLogo] = useState<string | null>(null);
@@ -77,7 +77,8 @@ export function BrandBuilder() {
   const accentBtn = useMemo(() => (accentExact ? accentButtonColors(accent, accentOverride) : null), [accentExact, accent, accentOverride]);
 
   /* Grays and status colors: only the ones that are filled in. They set --brand-color-<name>-*. */
-  const extraScales = useMemo(() => EXTRA.flatMap((k) => { const v = extra[k].trim().toLowerCase(); if (!isHex6(v)) return []; const sc = k === 'neutral' ? neutralScale(v) : brandScale(v)?.scale; return sc ? [[k, sc] as [Extra, Record<Step, string>]] : []; }), [extra]);
+  const heading = isHex6(extra.heading.trim()) ? extra.heading.trim().toLowerCase() : null;
+  const extraScales = useMemo(() => EXTRA.flatMap((k) => { const v = extra[k].trim().toLowerCase(); if (k === 'heading' || !isHex6(v)) return []; const sc = k === 'neutral' ? neutralScale(v) : brandScale(v)?.scale; return sc ? [[k, sc] as [Exclude<Extra, 'heading'>, Record<Step, string>]] : []; }), [extra]);
 
   /* Apply to the whole preview: tokens are computed on <html>, so overrides must live there. */
   useEffect(() => {
@@ -88,6 +89,7 @@ export function BrandBuilder() {
     if (scale) STEPS.forEach((s) => props.push([`--brand-color-primary-${s}`, scale[s]]));
     if (accentScale) STEPS.forEach((s) => props.push([`--brand-color-accent-${s}`, accentScale[s]]));
     if (accentBtn) props.push(['--brand-color-accent-solid-surface', accentBtn.surface], ['--brand-color-accent-solid-surface-hover', accentBtn.hover], ['--brand-color-accent-solid-surface-pressed', accentBtn.pressed], ['--brand-color-accent-solid-foreground', accentBtn.foreground]);
+    if (heading) props.push(['--brand-color-heading', heading]);
     extraScales.forEach(([k, sc]) => STEPS.forEach((s) => props.push([`--brand-color-${k}-${s}`, sc[s]])));
     props.forEach(([k, v]) => root.style.setProperty(k, v));
     loadGoogleFont(body);
@@ -96,7 +98,7 @@ export function BrandBuilder() {
       props.forEach(([k]) => root.style.removeProperty(k));
       if (prevBrand) root.setAttribute('data-brand', prevBrand); else root.removeAttribute('data-brand');
     };
-  }, [style, scale, accentScale, accentBtn, extraScales, body, title]);
+  }, [style, scale, accentScale, accentBtn, heading, extraScales, body, title]);
 
   useEffect(() => () => { if (logo) URL.revokeObjectURL(logo); }, [logo]);
 
@@ -167,6 +169,7 @@ export function BrandBuilder() {
     { label: 'Link in Dark (primary 400 on dark)', ratio: contrast(scale['400'], '#0b0f17') },
     ...(accentScale && accentBtn ? (['surface', 'hover', 'pressed'] as const).map((k) => ({ label: `Text on an accent button${k === 'surface' ? '' : `, ${k}`} (${accentBtn.foreground} on ${accentBtn[k]})`, ratio: contrast(accentBtn.foreground, accentBtn[k]) })) : accentScale ? [{ label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accentScale['400']) }] : []),
     ...(accentScale ? [{ label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
+    ...(heading ? [{ label: 'Heading on white', ratio: contrast(heading, '#ffffff') }] : []),
     ...extraScales.flatMap(([k, sc]): { label: string; ratio: number; min?: number }[] => k === 'neutral'
       ? [{ label: 'Text on white (neutral 900)', ratio: contrast(sc['900'], '#ffffff') }, { label: 'Light text on white (neutral 500)', ratio: contrast(sc['500'], '#ffffff') }, { label: 'Text on the dark background (neutral 50 on neutral 950)', ratio: contrast(sc['50'], sc['950']) }, { label: 'Field border on white (neutral 400)', ratio: contrast(sc['400'], '#ffffff'), min: 3 }]
       : [{ label: `${EXTRA_LABEL[k]} text on white (${k} ${STATUS_TEXT[k]})`, ratio: contrast(sc[STATUS_TEXT[k]], '#ffffff') }, ...(k === 'error' ? [{ label: 'White text on a destructive button (error 600)', ratio: contrast('#ffffff', sc['600']) }] : [])]),
@@ -182,7 +185,7 @@ ${style === 'iris' ? '   2. You do not need data-brand: Iris is the default.' : 
 ${fontPkgs.length ? `   3. Host the fonts yourself: npm i ${fontPkgs.join(' ')} and import the weights 400, 500, 600 and 700.` : '   3. Inter: npm i @fontsource-variable/inter'} */
 ${selector} {
 ${STEPS.map((s) => `  --brand-color-primary-${s}: ${scale[s]};`).join('\n')}
-${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]};`).join('\n') : ''}${accentBtn ? `\n  --brand-color-accent-solid-surface: ${accentBtn.surface};\n  --brand-color-accent-solid-surface-hover: ${accentBtn.hover};\n  --brand-color-accent-solid-surface-pressed: ${accentBtn.pressed};\n  --brand-color-accent-solid-foreground: ${accentBtn.foreground};` : ''}${extraScales.map(([k, sc]) => '\n' + STEPS.map((s) => `  --brand-color-${k}-${s}: ${sc[s]};`).join('\n')).join('')}
+${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]};`).join('\n') : ''}${accentBtn ? `\n  --brand-color-accent-solid-surface: ${accentBtn.surface};\n  --brand-color-accent-solid-surface-hover: ${accentBtn.hover};\n  --brand-color-accent-solid-surface-pressed: ${accentBtn.pressed};\n  --brand-color-accent-solid-foreground: ${accentBtn.foreground};` : ''}${heading ? `\n  --brand-color-heading: ${heading};` : ''}${extraScales.map(([k, sc]) => '\n' + STEPS.map((s) => `  --brand-color-${k}-${s}: ${sc[s]};`).join('\n')).join('')}
   --brand-font-body: ${stack(body)};
   --brand-font-title: ${stack(title)};
 }
@@ -191,7 +194,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
     collection: '↳ brand',
     mode: name,
     basedOn: STYLES.find((s) => s.id === style)!.name,
-    values: { ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, scale[s]])), ...(accentScale ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accentScale[s]])) : {}), ...(accentBtn ? { 'brand/color/accent-solid/surface': accentBtn.surface, 'brand/color/accent-solid/surface-hover': accentBtn.hover, 'brand/color/accent-solid/surface-pressed': accentBtn.pressed, 'brand/color/accent-solid/foreground': accentBtn.foreground } : {}), ...Object.fromEntries(extraScales.flatMap(([k, sc]) => STEPS.map((s) => [`brand/color/${k}/${s}`, sc[s]]))), 'brand/font/body': body, 'brand/font/title': title },
+    values: { ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, scale[s]])), ...(accentScale ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accentScale[s]])) : {}), ...(accentBtn ? { 'brand/color/accent-solid/surface': accentBtn.surface, 'brand/color/accent-solid/surface-hover': accentBtn.hover, 'brand/color/accent-solid/surface-pressed': accentBtn.pressed, 'brand/color/accent-solid/foreground': accentBtn.foreground } : {}), ...(heading ? { 'brand/color/heading': heading } : {}), ...Object.fromEntries(extraScales.flatMap(([k, sc]) => STEPS.map((s) => [`brand/color/${k}/${s}`, sc[s]]))), 'brand/font/body': body, 'brand/font/title': title },
   }, null, 2) : '';
 
   const copy = async (what: string, text: string) => {
@@ -310,7 +313,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
           </fieldset>
 
           <fieldset className="bb-fieldset">
-            <legend className="bb-legend">Grays and status colors</legend>
+            <legend className="bb-legend">Headings, grays and status colors</legend>
             <p className="bb-note">Optional. Leave a field empty to keep the MyUI default.</p>
             {EXTRA.map((k) => (
               <Input key={k} label={EXTRA_LABEL[k]} placeholder="#" value={extra[k]} onChange={(e) => setExtra((x) => ({ ...x, [k]: e.target.value }))} hint={EXTRA_HINT[k]} error={extra[k].trim() && !isHex6(extra[k].trim()) ? 'Use # and 6 characters, for example #6b7585.' : undefined} />

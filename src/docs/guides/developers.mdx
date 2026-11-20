@@ -74,15 +74,25 @@ Make your brand CSS with the Brand builder in Storybook or the myui-brand skill 
 
 Only change `--brand-*` tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.
 
+Headings: `--brand-color-heading` sets the color of titles in Light (cards, modals, page headers and so on). In Dark titles keep the light text color. For your own headings use color: var(`--base-color-foreground-heading`).
+
 Grays and status colors are brand tokens too: `--brand-color-neutral-*`, -success-*, -warning-*, -error-* and -info-* (12 steps each). By default they point to the MyUI grays, green, orange, red and blue. Set them only when your brand has its own. The Brand builder makes the 12 steps from one color.
 
 The accent button uses accent 400 with dark text. Is your accent a dark color? Set `--brand-color-accent-solid-surface`, -surface-hover, -surface-pressed and -foreground. The Brand builder does this for you with "Use my exact accent color on buttons".
 
 ```css
+/* The Brand builder writes all 12 steps of every scale. This shows one line per kind. */
 :root {
   --brand-color-primary-600: #0284c7;
   --brand-color-accent-400: #facc15;
   --brand-font-body: "Manrope", system-ui, sans-serif;
+
+  /* Optional */
+  --brand-color-accent-solid-surface: #2f7d5b;    /* exact accent button color */
+  --brand-color-accent-solid-foreground: #ffffff;
+  --brand-color-heading: #36254b;                 /* titles in Light */
+  --brand-color-neutral-900: #1c1722;             /* your own grays */
+  --brand-color-error-600: #c8322f;               /* your own status color */
 }
 ```
 

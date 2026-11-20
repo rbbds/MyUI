@@ -79,6 +79,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | --- | --- | --- |
 | brand/color/primary/25 … 950 | color (hex) | Paste from the Brand builder |
 | brand/color/accent/25 … 950 | color (hex) | Paste from the Brand builder |
+| brand/color/heading | alias or color | Default: neutral 900. The color of titles in Light. In Dark titles use neutral 50 (since 1.6.0) |
 | brand/color/neutral, success, warning, error, info (25 … 950) | alias or color | Default: alias to ∙ color. Replace with your own colors only when the brand has its own grays or status colors (since 1.6.0) |
 | brand/color/accent-solid/surface, surface-hover, surface-pressed, foreground | alias or color | Default: accent 400, 500, 600 and gray 900. Change them for a dark accent that needs white text on the accent button (since 1.6.0) |
 | brand/font/body, brand/font/title | string | Type the font name |

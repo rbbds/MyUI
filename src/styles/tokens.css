@@ -189,6 +189,7 @@
 --brand-color-error-800:var(--error-800);
 --brand-color-error-900:var(--error-900);
 --brand-color-error-950:var(--error-950);
+--brand-color-heading:var(--brand-color-neutral-900);
 --brand-color-info-100:var(--info-100);
 --brand-color-info-200:var(--info-200);
 --brand-color-info-25:var(--info-25);
@@ -502,6 +503,7 @@
 --color-foreground-error:var(--brand-color-error-600);
 --color-foreground-error-hover:var(--brand-color-error-700);
 --color-foreground-error-pressed:var(--brand-color-error-800);
+--color-foreground-heading:var(--brand-color-heading);
 --color-foreground-info:var(--brand-color-info-600);
 --color-foreground-inverted:var(--base-white);
 --color-foreground-inverted-secondary:var(--brand-color-neutral-300);
@@ -578,6 +580,7 @@
 --color-foreground-error:var(--brand-color-error-400);
 --color-foreground-error-hover:var(--brand-color-error-300);
 --color-foreground-error-pressed:var(--brand-color-error-200);
+--color-foreground-heading:var(--brand-color-neutral-50);
 --color-foreground-info:var(--brand-color-info-400);
 --color-foreground-inverted:var(--brand-color-neutral-950);
 --color-foreground-inverted-secondary:var(--brand-color-neutral-600);
@@ -634,6 +637,7 @@
 --base-color-foreground-accent:var(--color-foreground-accent);
 --base-color-foreground-brand:var(--color-foreground-brand);
 --base-color-foreground-error:var(--color-foreground-error);
+--base-color-foreground-heading:var(--color-foreground-heading);
 --base-color-foreground-info:var(--color-foreground-info);
 --base-color-foreground-on-solid:var(--color-foreground-on-solid);
 --base-color-foreground-primary:var(--color-foreground-primary);
@@ -896,7 +900,7 @@
 --accordion-border-width:var(--border-width-containers-default);
 --accordion-foreground-icon:var(--color-foreground-quaternary);
 --accordion-foreground-text:var(--color-foreground-tertiary);
---accordion-foreground-title:var(--color-foreground-primary);
+--accordion-foreground-title:var(--color-foreground-heading);
 --accordion-gap:var(--spacing-2);
 --accordion-header-gap:var(--spacing-4);
 --accordion-item-gap:var(--spacing-0);
@@ -911,7 +915,7 @@
 --card-content-gap:var(--spacing-2);
 --card-foreground-meta:var(--color-foreground-brand);
 --card-foreground-text:var(--color-foreground-tertiary);
---card-foreground-title:var(--color-foreground-primary);
+--card-foreground-title:var(--color-foreground-heading);
 --card-gap:var(--spacing-4);
 --card-media:var(--color-surface-tertiary);
 --card-padding:var(--spacing-6);
@@ -924,7 +928,7 @@
 --checklist-done-icon:var(--color-foreground-success);
 --checklist-foreground-done:var(--color-foreground-tertiary);
 --checklist-foreground-text:var(--color-foreground-secondary);
---checklist-foreground-title:var(--color-foreground-primary);
+--checklist-foreground-title:var(--color-foreground-heading);
 --checklist-gap:var(--spacing-4);
 --checklist-header-gap:var(--spacing-2);
 --checklist-icon-size:var(--icon-size-md);
@@ -940,7 +944,7 @@
 --checklist-text-gap:var(--spacing-0-5);
 --empty-state-actions-gap:var(--spacing-3);
 --empty-state-foreground-text:var(--color-foreground-tertiary);
---empty-state-foreground-title:var(--color-foreground-primary);
+--empty-state-foreground-title:var(--color-foreground-heading);
 --empty-state-gap:var(--spacing-4);
 --empty-state-max-width:480px;
 --empty-state-padding-vertical:var(--spacing-8);
@@ -983,7 +987,7 @@
 --settings-column-gap:var(--spacing-8);
 --settings-divider:var(--color-border-secondary);
 --settings-foreground-description:var(--color-foreground-secondary);
---settings-foreground-title:var(--color-foreground-primary);
+--settings-foreground-title:var(--color-foreground-heading);
 --settings-intro-gap:var(--spacing-1);
 --settings-padding:var(--spacing-6);
 --settings-radius:var(--border-radius-containers-md);
@@ -1001,7 +1005,7 @@
 --activity-dot-size:10px;
 --activity-foreground-text:var(--color-foreground-secondary);
 --activity-foreground-time:var(--color-foreground-tertiary);
---activity-foreground-title:var(--color-foreground-primary);
+--activity-foreground-title:var(--color-foreground-heading);
 --activity-gap:var(--spacing-4);
 --activity-icon-size:var(--icon-size-sm);
 --activity-item-padding-bottom:var(--spacing-6);
@@ -1033,7 +1037,7 @@
 --document-list-divider:var(--color-border-secondary);
 --document-list-dot-size:8px;
 --document-list-foreground-meta:var(--color-foreground-tertiary);
---document-list-foreground-title:var(--color-foreground-primary);
+--document-list-foreground-title:var(--color-foreground-heading);
 --document-list-header-border-width:var(--border-width-containers-default);
 --document-list-header-gap:var(--spacing-4);
 --document-list-item-gap:var(--spacing-4);
@@ -1111,7 +1115,7 @@
 --cart-button-surface-count:var(--color-surface-brand-solid);
 --cart-item-actions-gap:var(--spacing-2);
 --cart-item-foreground-options:var(--color-foreground-tertiary);
---cart-item-foreground-title:var(--color-foreground-primary);
+--cart-item-foreground-title:var(--color-foreground-heading);
 --cart-item-gap:var(--spacing-4);
 --cart-item-main-gap:var(--spacing-3);
 --cart-item-media-radius:var(--border-radius-containers-sm);
@@ -1121,7 +1125,7 @@
 --cart-summary-border-width:var(--border-width-containers-default);
 --cart-summary-foreground:var(--color-foreground-secondary);
 --cart-summary-foreground-discount:var(--color-foreground-success);
---cart-summary-foreground-title:var(--color-foreground-primary);
+--cart-summary-foreground-title:var(--color-foreground-heading);
 --cart-summary-foreground-total:var(--color-foreground-primary);
 --cart-summary-gap:var(--spacing-4);
 --cart-summary-items-gap:var(--spacing-4);
@@ -1138,7 +1142,7 @@
 --filter-filters-gap:var(--spacing-2);
 --filter-foreground-count:var(--color-foreground-tertiary);
 --filter-foreground-icon:var(--color-foreground-quaternary);
---filter-foreground-title:var(--color-foreground-primary);
+--filter-foreground-title:var(--color-foreground-heading);
 --filter-gap:var(--spacing-3);
 --filter-heading-gap:var(--spacing-1);
 --filter-options-gap:var(--spacing-2);
@@ -1170,7 +1174,7 @@
 --product-card-border:var(--color-border-secondary);
 --product-card-border-width:var(--border-width-containers-default);
 --product-card-foreground-meta:var(--color-foreground-tertiary);
---product-card-foreground-title:var(--color-foreground-primary);
+--product-card-foreground-title:var(--color-foreground-heading);
 --product-card-gap:var(--spacing-2);
 --product-card-media:var(--color-surface-tertiary);
 --product-card-padding:var(--spacing-4);
@@ -1252,7 +1256,7 @@
 --alert-error-icon:var(--color-foreground-error);
 --alert-error-surface:var(--color-surface-error-subtle);
 --alert-foreground-text:var(--color-foreground-secondary);
---alert-foreground-title:var(--color-foreground-primary);
+--alert-foreground-title:var(--color-foreground-heading);
 --alert-gap:var(--spacing-3);
 --alert-glyph-icon-size:var(--icon-size-md);
 --alert-gray-border:var(--color-border-primary);
@@ -1282,7 +1286,7 @@
 --banner-error-icon:var(--color-foreground-error);
 --banner-error-surface:var(--color-surface-error-subtle);
 --banner-foreground-text:var(--color-foreground-secondary);
---banner-foreground-title:var(--color-foreground-primary);
+--banner-foreground-title:var(--color-foreground-heading);
 --banner-gap:var(--spacing-3);
 --banner-gray-border:var(--color-border-secondary);
 --banner-gray-icon:var(--color-foreground-secondary);
@@ -1345,7 +1349,7 @@
 --calendar-cells-padding-vertical-sm:var(--spacing-1);
 --calendar-chevron-icon-size:var(--icon-size-md);
 --calendar-foreground-switch-icon:var(--color-foreground-tertiary);
---calendar-foreground-title:var(--color-foreground-primary);
+--calendar-foreground-title:var(--color-foreground-heading);
 --calendar-foreground-weekday:var(--color-foreground-tertiary);
 --calendar-gap:var(--spacing-3);
 --calendar-padding:var(--spacing-4);
@@ -1554,7 +1558,7 @@
 --logo-tagline-foreground:var(--color-foreground-secondary);
 --logo-wordmark-foreground:var(--color-foreground-primary);
 --mega-menu-link-foreground-description:var(--color-foreground-tertiary);
---mega-menu-link-foreground-title:var(--color-foreground-primary);
+--mega-menu-link-foreground-title:var(--color-foreground-heading);
 --mega-menu-link-gap:var(--spacing-3);
 --mega-menu-link-icon-foreground:var(--color-foreground-secondary);
 --mega-menu-link-icon-size:var(--icon-size-md);
@@ -1574,7 +1578,7 @@
 --mega-menu-featured-radius:var(--border-radius-overlays-md);
 --mega-menu-featured-surface:var(--color-surface-secondary);
 --mega-menu-featured-text:var(--color-foreground-secondary);
---mega-menu-featured-title:var(--color-foreground-primary);
+--mega-menu-featured-title:var(--color-foreground-heading);
 --mega-menu-featured-width:320px;
 --mega-menu-gap:var(--spacing-10);
 --mega-menu-heading-foreground:var(--color-foreground-tertiary);
@@ -1624,7 +1628,7 @@
 --nav-item-surface-hover:var(--color-surface-hover);
 --page-header-actions-gap:var(--spacing-3);
 --page-header-foreground-description:var(--color-foreground-secondary);
---page-header-foreground-title:var(--color-foreground-primary);
+--page-header-foreground-title:var(--color-foreground-heading);
 --page-header-gap:var(--spacing-5);
 --page-header-padding-bottom:var(--spacing-5);
 --page-header-row-gap:var(--spacing-4);
@@ -1643,7 +1647,7 @@
 --sidebar-border-width:var(--border-width-default);
 --sidebar-foreground-email:var(--color-foreground-tertiary);
 --sidebar-foreground-name:var(--color-foreground-primary);
---sidebar-foreground-panel-title:var(--color-foreground-primary);
+--sidebar-foreground-panel-title:var(--color-foreground-heading);
 --sidebar-gap:var(--spacing-6);
 --sidebar-group-gap:var(--spacing-1);
 --sidebar-logo-mark-gap:var(--spacing-2);
@@ -1669,7 +1673,7 @@
 --stepper-foreground-current:var(--color-foreground-brand);
 --stepper-foreground-indicator:var(--color-foreground-on-solid);
 --stepper-foreground-text:var(--color-foreground-tertiary);
---stepper-foreground-title:var(--color-foreground-primary);
+--stepper-foreground-title:var(--color-foreground-heading);
 --stepper-foreground-upcoming:var(--color-foreground-tertiary);
 --stepper-gap:var(--spacing-3);
 --stepper-indicator-complete:var(--color-surface-brand-solid);
@@ -1768,7 +1772,7 @@
 --modal-footer-gap:var(--spacing-3);
 --modal-foreground-body:var(--color-foreground-secondary);
 --modal-foreground-text:var(--color-foreground-tertiary);
---modal-foreground-title:var(--color-foreground-primary);
+--modal-foreground-title:var(--color-foreground-heading);
 --modal-gap:var(--spacing-4);
 --modal-lg-width:720px;
 --modal-md-width:560px;
@@ -1792,7 +1796,7 @@
 --notification-footer-padding-vertical:var(--spacing-3);
 --notification-foreground-text:var(--color-foreground-secondary);
 --notification-foreground-time:var(--color-foreground-tertiary);
---notification-foreground-title:var(--color-foreground-primary);
+--notification-foreground-title:var(--color-foreground-heading);
 --notification-header-border-width:var(--border-width-containers-default);
 --notification-header-gap:var(--spacing-3);
 --notification-item-gap:var(--spacing-3);
@@ -1813,7 +1817,7 @@
 --popover-border-width:var(--border-width-overlays-default);
 --popover-content-gap:var(--spacing-2);
 --popover-foreground-text:var(--color-foreground-secondary);
---popover-foreground-title:var(--color-foreground-primary);
+--popover-foreground-title:var(--color-foreground-heading);
 --popover-gap:var(--spacing-3);
 --popover-header-gap:var(--spacing-2);
 --popover-padding:var(--spacing-4);
@@ -1826,7 +1830,7 @@
 --slideout-footer-gap:var(--spacing-3);
 --slideout-foreground-body:var(--color-foreground-secondary);
 --slideout-foreground-text:var(--color-foreground-tertiary);
---slideout-foreground-title:var(--color-foreground-primary);
+--slideout-foreground-title:var(--color-foreground-heading);
 --slideout-gap:var(--spacing-4);
 --slideout-header-border-width:var(--border-width-default);
 --slideout-lg-width:640px;
@@ -1853,7 +1857,7 @@
 --selection-card-border-width-checked:var(--border-width-strong);
 --selection-card-foreground-disabled:var(--color-foreground-disabled);
 --selection-card-foreground-text:var(--color-foreground-tertiary);
---selection-card-foreground-title:var(--color-foreground-primary);
+--selection-card-foreground-title:var(--color-foreground-heading);
 --selection-card-gap:var(--spacing-3);
 --selection-card-padding:var(--spacing-4);
 --selection-card-radius:var(--border-radius-containers-sm);

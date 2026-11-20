@@ -53,8 +53,19 @@ export const guides = [
         steps: [
           'Make your brand values with the Brand builder in Storybook, or let your AI tool read your brand guide with the myui-brand skill.',
           'Both give you a primary color, an accent color (bright yellow by default) and fonts, with a contrast check.',
+          'Optional, only when your brand has them: the exact color of the accent button (for a dark accent with white text), a heading color, a gray tint and your own colors for success, warning, error and information.',
           'Open the variables, go to the collection ↳ brand and add a mode with your brand name. Copy the values from figma-brand.json into that mode.',
           'Set that mode on your pages. All components follow.',
+        ],
+      },
+      {
+        heading: 'What a brand can change',
+        paragraphs: [
+          'Everything a brand can change is in the collection ↳ brand. You do not edit the other collections.',
+          'Colors with your own values: brand/color/primary and brand/color/accent (12 steps each).',
+          'Colors that follow MyUI until you change them: brand/color/neutral (grays), success, warning, error and info (12 steps each), brand/color/heading (titles in Light) and brand/color/accent-solid (the accent button: surface, hover, pressed and text color). In your mode they are a link to the MyUI default.',
+          'To change one: select the value in your mode, detach the link and type or paste your own color. The other brands keep the default. To go back: link the value again to the same variable in ∙ color, or copy the link from the mode Iris.',
+          'Fonts, font weights, radius and border width are in ↳ brand too.',
         ],
       },
       {
@@ -115,10 +126,11 @@ export const guides = [
         paragraphs: [
           'Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in node_modules/@rbbds/ui/skills). Load that CSS after styles.css.',
           'Only change --brand-* tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.',
+          'Headings: --brand-color-heading sets the color of titles in Light (cards, modals, page headers and so on). In Dark titles keep the light text color. For your own headings use color: var(--base-color-foreground-heading).',
           'Grays and status colors are brand tokens too: --brand-color-neutral-*, -success-*, -warning-*, -error-* and -info-* (12 steps each). By default they point to the MyUI grays, green, orange, red and blue. Set them only when your brand has its own. The Brand builder makes the 12 steps from one color.',
           'The accent button uses accent 400 with dark text. Is your accent a dark color? Set --brand-color-accent-solid-surface, -surface-hover, -surface-pressed and -foreground. The Brand builder does this for you with "Use my exact accent color on buttons".',
         ],
-        code: ':root {\n  --brand-color-primary-600: #0284c7;\n  --brand-color-accent-400: #facc15;\n  --brand-font-body: "Manrope", system-ui, sans-serif;\n}',
+        code: '/* The Brand builder writes all 12 steps of every scale. This shows one line per kind. */\n:root {\n  --brand-color-primary-600: #0284c7;\n  --brand-color-accent-400: #facc15;\n  --brand-font-body: "Manrope", system-ui, sans-serif;\n\n  /* Optional */\n  --brand-color-accent-solid-surface: #2f7d5b;    /* exact accent button color */\n  --brand-color-accent-solid-foreground: #ffffff;\n  --brand-color-heading: #36254b;                 /* titles in Light */\n  --brand-color-neutral-900: #1c1722;             /* your own grays */\n  --brand-color-error-600: #c8322f;               /* your own status color */\n}',
       },
       {
         heading: '7. Language and dates',
@@ -261,6 +273,7 @@ export const figmaChangelog = [
   {
     version: '1.6.0',
     items: [
+      'New brand variable brand/color/heading: the color of titles in Light. It points to neutral 900 by default. In Dark titles use neutral 50. 24 title tokens (card, modal, page header, alert and more) now use color/foreground/heading. New base token color/foreground/heading for your own headings.',
       'New brand variables brand/color/neutral, success, warning, error and info (12 steps each). They point to ∙ color by default. Replace the alias with a color in the mode of your brand to give that brand its own grays or status colors. ↳ theme now points to these instead of to ∙ color.',
       'Dark: the primary and the destructive button get darker on hover and while pressed (steps 700 and 800), like in Light. White text on hover was below 4.5:1. The checked checkbox and radio, the toggle and the Bottom navigation action follow on hover.',
       'Button, Button destructive and Button icon have State=Pressed, in the column after Hover. New tokens button/<hierarchy>/surface-pressed, foreground-pressed and border-pressed.',
