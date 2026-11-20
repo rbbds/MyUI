@@ -212,7 +212,7 @@ export const guides = [
       {
         heading: '6. Focus',
         bullets: [
-          'Focus is the effect style Focus ring/brand on the base. Use Focus ring/error for destructive actions.',
+          'Focus is the effect style Focus ring/default on the base. Use Focus ring/error for destructive actions.',
           'The ring is a shadow, so it does not move the layout. It follows one token for the color: effect-tokens/border/focus. In CSS this is --focus-ring.',
           'The focus color is blue in every brand (info 500 in Light, info 400 in Dark). It does not follow the brand color: people know blue as focus, and it stays clear next to a red error border.',
           'Do not add a focus border or a focus color to a single component. Inputs are the exception: their border also changes color on focus.',
@@ -275,6 +275,7 @@ export const figmaChangelog = [
     version: '1.7.0',
     items: [
       'The focus color is blue in every brand: color/border/focus points to info 500 (Light) and info 400 (Dark) instead of the brand color. The focus ring, the focus border of Input and Verification code, and the active line of Menu item and Command item follow.',
+      'The effect style Focus ring/brand is now called Focus ring/default. Layers that use it stay linked.',
     ],
   },
   {
