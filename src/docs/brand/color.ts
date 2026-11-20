@@ -96,3 +96,18 @@ export function accentButtonColors(hex: string, override: Partial<AccentButton> 
   const foreground = (override.foreground || (min(WHITE) >= min(GRAY_900) ? WHITE : GRAY_900)).toLowerCase();
   return { surface, hover, pressed, foreground };
 }
+
+/**
+ * Grays with the hue of your color: same lightness and amount of color as the MyUI grays, so contrast stays the same.
+ * A color with (almost) no hue gives pure grays. Copy in skills/myui-brand/scripts/build-brand.mjs.
+ */
+const GRAYS: Record<Step, string> = { '25': '#fcfcfd', '50': '#f8f9fb', '100': '#f1f3f6', '200': '#e3e7ed', '300': '#cbd2dc', '400': '#838d9a', '500': '#6b7585', '600': '#4d5666', '700': '#384150', '800': '#222935', '900': '#141a24', '950': '#0b0f17' };
+export function neutralScale(hex: string): Record<Step, string> | null {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return null;
+  const [, c, h] = rgbToOklch(rgb);
+  return Object.fromEntries(STEPS.map((s) => { const [l, gc] = rgbToOklch(hexToRgb(GRAYS[s])!); return [s, rgbToHex(fit(l, c < 0.004 ? 0 : gc, h))]; })) as Record<Step, string>;
+}
+export const STATUS = ['success', 'warning', 'error', 'info'] as const;
+/** The step each status color uses for text in Light. */
+export const STATUS_TEXT: Record<(typeof STATUS)[number], Step> = { success: '700', warning: '700', error: '600', info: '600' };

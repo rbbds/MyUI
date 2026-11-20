@@ -79,6 +79,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | --- | --- | --- |
 | brand/color/primary/25 … 950 | color (hex) | Paste from the Brand builder |
 | brand/color/accent/25 … 950 | color (hex) | Paste from the Brand builder |
+| brand/color/neutral, success, warning, error, info (25 … 950) | alias or color | Default: alias to ∙ color. Replace with your own colors only when the brand has its own grays or status colors (since 1.6.0) |
 | brand/color/accent-solid/surface, surface-hover, surface-pressed, foreground | alias or color | Default: accent 400, 500, 600 and gray 900. Change them for a dark accent that needs white text on the accent button (since 1.6.0) |
 | brand/font/body, brand/font/title | string | Type the font name |
 | brand/font-weight/* | alias to ∙ typography | Pick from a list |
@@ -93,7 +94,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 
 | Collection | Modes | Content |
 | --- | --- | --- |
-| ↳ theme | Light, Dark | Only colors: color/surface, color/foreground, color/border, color/focus, color/overlay, shadow colors. Points to Brand and ∙ color. |
+| ↳ theme | Light, Dark | Only colors: color/surface, color/foreground, color/border, color/focus, color/overlay, shadow colors. Points to Brand. Only white, black and the alpha values come straight from ∙ color (since 1.6.0). |
 | ↳ style | Value | border/radius/*, border/width/*, font/family/*, font/weight/*, spacing/*, effects/shadow geometry, icon-size/* |
 | ↳ screen-size | xl, lg, md, sm, xs | Responsive type, spacing, containers, breakpoint strings |
 | ↳ size | sm, md, lg | icon/size (16, 20, 24) and, later, control sizes |

@@ -115,6 +115,7 @@ export const guides = [
         paragraphs: [
           'Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in node_modules/@rbbds/ui/skills). Load that CSS after styles.css.',
           'Only change --brand-* tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.',
+          'Grays and status colors are brand tokens too: --brand-color-neutral-*, -success-*, -warning-*, -error-* and -info-* (12 steps each). By default they point to the MyUI grays, green, orange, red and blue. Set them only when your brand has its own. The Brand builder makes the 12 steps from one color.',
           'The accent button uses accent 400 with dark text. Is your accent a dark color? Set --brand-color-accent-solid-surface, -surface-hover, -surface-pressed and -foreground. The Brand builder does this for you with "Use my exact accent color on buttons".',
         ],
         code: ':root {\n  --brand-color-primary-600: #0284c7;\n  --brand-color-accent-400: #facc15;\n  --brand-font-body: "Manrope", system-ui, sans-serif;\n}',
@@ -260,6 +261,8 @@ export const figmaChangelog = [
   {
     version: '1.6.0',
     items: [
+      'New brand variables brand/color/neutral, success, warning, error and info (12 steps each). They point to ∙ color by default. Replace the alias with a color in the mode of your brand to give that brand its own grays or status colors. ↳ theme now points to these instead of to ∙ color.',
+      'Dark: the primary and the destructive button get darker on hover and while pressed (steps 700 and 800), like in Light. White text on hover was below 4.5:1. The checked checkbox and radio, the toggle and the Bottom navigation action follow on hover.',
       'Button, Button destructive and Button icon have State=Pressed, in the column after Hover. New tokens button/<hierarchy>/surface-pressed, foreground-pressed and border-pressed.',
       'New brand variables brand/color/accent-solid/surface, surface-hover, surface-pressed and foreground: a brand can give the accent button its exact color and text color. Iris, Forest and Berry keep accent 400 with dark text.',
     ],

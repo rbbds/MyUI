@@ -9,6 +9,8 @@
 //   figma-brand.json       values for the ↳ brand collection in Figma (also read by the Brand import plugin)
 // With colors.accentButton the accent button uses your exact accent color (--brand-color-accent-solid-*).
 // Without it nothing changes: accent 400 with dark text.
+// colors.neutral tints the grays, colors.success, warning, error and info replace a status color (--brand-color-<name>-*).
+// Leave them out to keep the MyUI defaults.
 // It prints a short report. The exit code is 1 when the input is not valid, 0 otherwise (contrast warnings do not fail).
 //
 // The color math is the same as the Brand builder in Storybook (src/docs/brand/color.ts). Keep them in sync.
@@ -91,6 +93,18 @@ function accentButtonColors(hex, override = {}) {
   const foreground = (override.foreground || (min(WHITE) >= min(GRAY_900) ? WHITE : GRAY_900)).toLowerCase();
   return { surface, hover, pressed, foreground };
 }
+/* Grays with the hue of your color: same lightness and amount of color as the MyUI grays, so contrast stays the same.
+   A color with (almost) no hue gives pure grays. Copy of neutralScale() in color.ts. */
+const GRAYS = { 25: '#fcfcfd', 50: '#f8f9fb', 100: '#f1f3f6', 200: '#e3e7ed', 300: '#cbd2dc', 400: '#838d9a', 500: '#6b7585', 600: '#4d5666', 700: '#384150', 800: '#222935', 900: '#141a24', 950: '#0b0f17' };
+function neutralScale(hex) {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return null;
+  const [, c, h] = rgbToOklch(rgb);
+  return Object.fromEntries(STEPS.map((s) => { const [l, gc] = rgbToOklch(hexToRgb(GRAYS[s])); return [s, rgbToHex(fit(l, c < 0.004 ? 0 : gc, h))]; }));
+}
+const STATUS = ['success', 'warning', 'error', 'info'];
+/* The step each status color uses for text in Light (see ↳ theme). */
+const STATUS_TEXT = { success: '700', warning: '700', error: '600', info: '600' };
 
 /* ---------- brand ---------- */
 const STYLES = { iris: 'Iris', forest: 'Forest', berry: 'Berry' };
@@ -106,6 +120,7 @@ function validate(input) {
   if (!STYLES[input.style]) errors.push('style must be "iris", "forest" or "berry".');
   if (!input.colors || !isHex(input.colors.primary)) errors.push('colors.primary must be a hex color like #0e5e6f.');
   if (input.colors?.accent !== undefined && !isHex(input.colors.accent)) errors.push('colors.accent must be a hex color like #e07a2f, or left out.');
+  for (const k of ['neutral', ...STATUS]) if (input.colors?.[k] !== undefined && !isHex(input.colors[k])) errors.push(`colors.${k} must be a hex color like #6b7585, or left out.`);
   if (input.colors?.accentButton !== undefined) {
     const ab = input.colors.accentButton;
     if (!ab || typeof ab !== 'object' || Array.isArray(ab)) errors.push('colors.accentButton must be an object, for example {} or { "foreground": "#ffffff" }.');
@@ -118,7 +133,7 @@ function validate(input) {
   return errors;
 }
 
-function checksFor(primary, accent, button) {
+function checksFor(primary, accent, button, neutral, status = {}) {
   const list = [
     { id: 'button-text', label: 'White text on a primary button (primary 600)', ratio: contrast('#ffffff', primary['600']) },
     { id: 'link-light', label: 'Link on white (primary 600)', ratio: contrast(primary['600'], '#ffffff') },
@@ -127,7 +142,15 @@ function checksFor(primary, accent, button) {
   if (accent && button) list.push(...['surface', 'hover', 'pressed'].map((k) => ({ id: `accent-button-${k}`, label: `Text on an accent button${k === 'surface' ? '' : `, ${k}`} (${button.foreground} on ${button[k]})`, ratio: contrast(button.foreground, button[k]) })));
   else if (accent) list.push({ id: 'accent-button', label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accent['400']) });
   if (accent) list.push({ id: 'accent-text', label: 'Accent text on white (accent 700)', ratio: contrast(accent['700'], '#ffffff') });
-  return list.map((c) => ({ ...c, ratio: Math.round(c.ratio * 100) / 100, pass: c.ratio >= 4.5 }));
+  if (neutral) list.push(
+    { id: 'neutral-text', label: 'Text on white (neutral 900)', ratio: contrast(neutral['900'], '#ffffff') },
+    { id: 'neutral-text-light', label: 'Light text on white (neutral 500)', ratio: contrast(neutral['500'], '#ffffff') },
+    { id: 'neutral-text-dark', label: 'Text on the dark background (neutral 50 on neutral 950)', ratio: contrast(neutral['50'], neutral['950']) },
+    { id: 'neutral-border', label: 'Field border on white (neutral 400)', ratio: contrast(neutral['400'], '#ffffff'), min: 3 },
+  );
+  for (const k of STATUS) if (status[k]) list.push({ id: `${k}-text`, label: `${k[0].toUpperCase()}${k.slice(1)} text on white (${k} ${STATUS_TEXT[k]})`, ratio: contrast(status[k][STATUS_TEXT[k]], '#ffffff') });
+  if (status.error) list.push({ id: 'error-button', label: 'White text on a destructive button (error 600)', ratio: contrast('#ffffff', status.error['600']) });
+  return list.map((c) => ({ ...c, ratio: Math.round(c.ratio * 100) / 100, pass: c.ratio >= (c.min || 4.5) }));
 }
 
 /* Nearest darker or lighter version of the primary color that passes the light-mode checks. */
@@ -151,10 +174,13 @@ export function buildBrand(input) {
   const primary = brandScale(input.colors.primary);
   const accent = input.colors.accent ? brandScale(input.colors.accent) : null;
   const button = accent && input.colors.accentButton ? accentButtonColors(input.colors.accent, input.colors.accentButton) : null;
-  const checks = checksFor(primary.scale, accent?.scale, button);
+  const neutral = input.colors.neutral ? neutralScale(input.colors.neutral) : null;
+  const status = Object.fromEntries(STATUS.filter((k) => input.colors[k]).map((k) => [k, brandScale(input.colors[k]).scale]));
+  const checks = checksFor(primary.scale, accent?.scale, button, neutral, status);
   const warnings = [];
   const failing = checks.filter((c) => !c.pass);
-  const primaryFails = failing.filter((c) => !c.id.startsWith('accent-'));
+  const other = /^(accent|neutral|success|warning|error|info)-/;
+  const primaryFails = failing.filter((c) => !other.test(c.id));
   if (primaryFails.length) {
     const s = suggestPrimary(input.colors.primary);
     warnings.push(`Contrast too low: ${primaryFails.map((f) => `${f.label} ${f.ratio}:1`).join(', ')}. Need 4.5:1.${s ? ` A close color that passes: ${s}.` : ''}`);
@@ -165,6 +191,9 @@ export function buildBrand(input) {
   if (buttonFails.length) warnings.push(`Text on the accent button is too low in contrast: ${buttonFails.map((f) => `${f.label} ${f.ratio}:1`).join(', ')}. Need 4.5:1. Change colors.accentButton.foreground or pick a darker or lighter accent.`);
   const accentText = failing.find((c) => c.id === 'accent-text');
   if (accentText) warnings.push(`Accent text on white is ${accentText.ratio}:1. Use the accent for shapes and backgrounds, not for small text.`);
+  const otherFails = failing.filter((c) => /^(neutral|success|warning|error|info)-/.test(c.id));
+  if (otherFails.length) warnings.push(`Contrast too low: ${otherFails.map((f) => `${f.label} ${f.ratio}:1 (need ${f.min || 4.5}:1)`).join(', ')}. Pick a darker color for that field, or leave it out to keep the MyUI default.`);
+  const extra = [...(neutral ? [['neutral', neutral]] : []), ...STATUS.filter((k) => status[k]).map((k) => [k, status[k]])];
   const brandSlug = slug(input.name);
   const name = STYLES[input.style];
   const selector = input.style === 'iris' ? ':root' : `:root[data-brand="${input.style}"]`;
@@ -175,7 +204,7 @@ ${input.style === 'iris' ? '   2. You do not need data-brand: Iris is the defaul
 ${fontPkgs.length ? `   3. Host the fonts yourself, for example: npm i ${fontPkgs.join(' ')} (check the font license first).` : '   3. Inter: npm i @fontsource-variable/inter'} */
 ${selector} {
 ${STEPS.map((s) => `  --brand-color-primary-${s}: ${primary.scale[s]};`).join('\n')}
-${accent ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accent.scale[s]};`).join('\n') + '\n' : ''}${button ? `  --brand-color-accent-solid-surface: ${button.surface};\n  --brand-color-accent-solid-surface-hover: ${button.hover};\n  --brand-color-accent-solid-surface-pressed: ${button.pressed};\n  --brand-color-accent-solid-foreground: ${button.foreground};\n` : ''}  --brand-font-body: ${stack(input.fonts.body)};
+${accent ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accent.scale[s]};`).join('\n') + '\n' : ''}${button ? `  --brand-color-accent-solid-surface: ${button.surface};\n  --brand-color-accent-solid-surface-hover: ${button.hover};\n  --brand-color-accent-solid-surface-pressed: ${button.pressed};\n  --brand-color-accent-solid-foreground: ${button.foreground};\n` : ''}${extra.map(([k, sc]) => STEPS.map((s) => `  --brand-color-${k}-${s}: ${sc[s]};`).join('\n') + '\n').join('')}  --brand-font-body: ${stack(input.fonts.body)};
   --brand-font-title: ${stack(input.fonts.title)};
 }
 `;
@@ -187,6 +216,7 @@ ${accent ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accent.scale[s]};`).
       ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, primary.scale[s]])),
       ...(accent ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accent.scale[s]])) : {}),
       ...(button ? { 'brand/color/accent-solid/surface': button.surface, 'brand/color/accent-solid/surface-hover': button.hover, 'brand/color/accent-solid/surface-pressed': button.pressed, 'brand/color/accent-solid/foreground': button.foreground } : {}),
+      ...Object.fromEntries(extra.flatMap(([k, sc]) => STEPS.map((s) => [`brand/color/${k}/${s}`, sc[s]]))),
       'brand/font/body': input.fonts.body,
       'brand/font/title': input.fonts.title,
     },
@@ -196,6 +226,7 @@ ${accent ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accent.scale[s]};`).
     generator: 'myui-brand 1.0',
     primary: { input: input.colors.primary, anchor: primary.anchor, scale: primary.scale },
     accent: accent ? { input: input.colors.accent, anchor: accent.anchor, scale: accent.scale, ...(button ? { button } : {}) } : null,
+    ...Object.fromEntries(extra.map(([k, sc]) => [k, { input: input.colors[k], scale: sc }])),
     fontStacks: { body: stack(input.fonts.body), title: stack(input.fonts.title) },
     checks,
     warnings: [...(input.notes || []), ...warnings],
