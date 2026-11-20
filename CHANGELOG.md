@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-Planned as 1.7.0.
+## 1.7.0 (20 November 2026)
 
 ### Changed
 - **The focus color is blue in every brand.** `--color-border-focus` points to `--info-500` (Light) and `--info-400` (Dark) instead of the brand color. You see it in the focus ring (`--focus-ring`, `--focus-ring-inset`), the focus border of Input and Verification code, and the line next to the active Menu item and Command item. This is a visible change for Iris, Forest and Berry. Why: people know blue as focus, and on a pink or red brand the focus border looked like the error border.
