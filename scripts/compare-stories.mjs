@@ -17,7 +17,9 @@ const out = []; let next = 0;
 const shot = async (pg, port, j) => { try { await pg.goto(`http://localhost:${port}/iframe.html?id=${j.id}&viewMode=story&globals=theme:${j.theme};brand:${j.brand}`, { waitUntil: 'networkidle', timeout: 15000 }); await pg.addStyleTag({ content: '*{animation:none!important;transition:none!important}' }); await pg.waitForTimeout(150); return await pg.screenshot({ fullPage: true }); } catch { return null; } };
 const worker = async () => { const pg = await b.newPage({ viewport: { width: 1000, height: 800 } });
   while (next < jobs.length) { const j = jobs[next++]; const key = `${j.id}--${j.brand}-${j.theme}`;
-    const a = await shot(pg, 7101, j), c = await shot(pg, 7102, j);
+    let a = await shot(pg, 7101, j), c = await shot(pg, 7102, j);
+    // Een story met een plaatje of font dat net te laat laadt, verschilt soms één keer. Daarom bij een verschil nog één keer.
+    if (a && c && !a.equals(c)) { a = await shot(pg, 7101, j); c = await shot(pg, 7102, j); }
     if (!a || !c) { out.push(key + ' ERR'); continue; }
     if (!a.equals(c)) { out.push(key); fs.writeFileSync(`/tmp/shots/${key}-old.png`, a); fs.writeFileSync(`/tmp/shots/${key}-new.png`, c); } }
   await pg.close(); };
