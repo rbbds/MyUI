@@ -214,7 +214,7 @@ export default [
       ['help', 'ReactNode', 'Extra explanation behind a help icon in the field, shown in a Tooltip. Figma: Help icon.'],
       ['labels', '{ help }', 'Name of the help button. Default "More information".'],
     ],
-    behaviour: ['Focus: border in the brand color plus a focus ring. When a button in the field (clear, help, calendar) has focus, only that button gets the ring.', 'Error: red border and error message. Stays until the input is correct.', 'Disabled: you cannot edit it, lower contrast colors.'],
+    behaviour: ['Focus: a blue border plus a focus ring. When a button in the field (clear, help, calendar) has focus, only that button gets the ring.', 'Error: red border and error message. Stays until the input is correct.', 'Disabled: you cannot edit it, lower contrast colors.'],
     a11y: [
       'The label is linked with for/id. Hint and error with aria-describedby.',
       'With an error: aria-invalid="true".',

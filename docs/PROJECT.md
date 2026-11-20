@@ -277,6 +277,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #58 | F1a: accent-knop per merk (`--brand-color-accent-solid-*`), pressed-state voor Button, Button destructive en Button icon, contrastcheck voor knoplabels, `check:brand`, pixelvergelijking in zes combinaties |
 | #59 | F1b: grijzen en statuskleuren per merk (`--brand-color-neutral-*`, `-success-*`, `-warning-*`, `-error-*`, `-info-*`), Brand builder en brand.json, contrastfix hover en pressed in Dark |
 | #60 | F1c: kopkleur per merk (`--brand-color-heading`, `--color-foreground-heading`, 24 title-tokens), Getting started en README bijgewerkt voor alle F1-stappen |
+| #61 | Release 1.6.0 |
+| #62 | Focuskleur is blauw in elk merk (`--color-border-focus` naar info 500 en 400), contrastcheck voor focus |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

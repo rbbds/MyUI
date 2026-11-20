@@ -482,7 +482,7 @@
 --color-border-disabled:var(--brand-color-neutral-200);
 --color-border-error:var(--brand-color-error-500);
 --color-border-error-subtle:var(--brand-color-error-200);
---color-border-focus:var(--brand-color-primary-500);
+--color-border-focus:var(--info-500);
 --color-border-focus-error:var(--brand-color-error-500);
 --color-border-info-subtle:var(--brand-color-info-200);
 --color-border-inverted:var(--base-white);
@@ -559,7 +559,7 @@
 --color-border-disabled:var(--brand-color-neutral-800);
 --color-border-error:var(--brand-color-error-400);
 --color-border-error-subtle:var(--brand-color-error-800);
---color-border-focus:var(--brand-color-primary-400);
+--color-border-focus:var(--info-400);
 --color-border-focus-error:var(--brand-color-error-400);
 --color-border-info-subtle:var(--brand-color-info-800);
 --color-border-inverted:var(--brand-color-neutral-950);
@@ -1425,7 +1425,7 @@
 --input-border-default:var(--color-border-control);
 --input-border-disabled:var(--color-border-disabled);
 --input-border-error:var(--color-border-error);
---input-border-focus:var(--color-border-brand);
+--input-border-focus:var(--color-border-focus);
 --input-border-hover:var(--color-border-control-hover);
 --input-border-width:var(--border-width-default);
 --input-error-icon-size:var(--icon-size-sm);
