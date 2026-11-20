@@ -31,7 +31,7 @@
     ],
     [
       "State",
-      "Default, Hover, Focus, Disabled, Loading",
+      "Default, Hover, Pressed, Focus, Disabled, Loading",
       ""
     ],
     [

@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 17 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 20 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -154,6 +154,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 
 **What a brand can change (all in `↳ brand`):**
 - `brand/color/primary/*` and `brand/color/accent/*` (12-step scales)
+- `brand/color/accent-solid/*`: color, hover, pressed and text color of the accent button (default accent 400, 500, 600 and gray 900)
 - `brand/font/body`, `brand/font/title`, `brand/font-weight/*`
 - `brand/radius/control|containers|overlays/*`
 - `brand/border-width/*`
@@ -271,6 +272,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #25–#27 | Building components guide, control-hoogtes op 4 px, tokens.json, llms.txt |
 | #28–#41 | Review 12 november, PR 1 t/m 8: browsertests, token-lint, contrast, panelenlaag, teksten als prop (`labels`), component tokens in CSS, strikte token-checks, API-afstemming met deprecations, Input help, toegankelijkheid (focus, aria-disabled, hit areas), Mega menu, Mobile nav en Header search |
 | #42 | `LinkProvider` (router-links), `'use client'`, L2/L6/L9, Docs-frames opnieuw gegenereerd |
+| #58 | F1a: accent-knop per merk (`--brand-color-accent-solid-*`), pressed-state voor Button, Button destructive en Button icon, contrastcheck voor knoplabels, `check:brand`, pixelvergelijking in zes combinaties |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

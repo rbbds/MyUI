@@ -20,8 +20,10 @@ jobs:
       - run: npm run lint:tokens -- --strict
       # Fails when a component token has no binding in Figma and is not pending (docs/reports/figma-bindings.json, keuze 18b).
       - run: npm run report:figma-bindings -- --strict
-      # Fails when a control border or the active option is below 3:1 in any style or theme.
+      # Fails when a control border or the active option is below 3:1, or a button label below 4.5:1, in any style or theme.
       - run: npm run check:contrast
+      # Fails when a brand example of the myui-brand skill is not valid or has a contrast problem.
+      - run: npm run check:brand
       # Fails on fixed user-facing text in component JSX: every text must be a prop.
       - run: npm run check:strings
       - uses: actions/upload-artifact@v4

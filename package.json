@@ -60,6 +60,7 @@
     "test:browser": "playwright test",
     "check:a11y": "node scripts/check-a11y-stories.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",
+    "check:brand": "node scripts/check-brand-examples.mjs",
     "check:strings": "node scripts/check-literal-strings.mjs",
     "lint:tokens": "node scripts/lint-tokens.mjs --md reports/token-lint.md --json reports/token-lint.json",
     "report:figma-bindings": "node scripts/figma-binding-report.mjs"

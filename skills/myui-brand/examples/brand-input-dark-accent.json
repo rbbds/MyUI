@@ -1,0 +1,11 @@
+{
+  "$schema": "../brand.schema.json",
+  "name": "Northwind Print",
+  "style": "iris",
+  "colors": { "primary": "#b4236f", "accent": "#2f7d5b", "accentButton": {} },
+  "fonts": { "body": "Inter", "title": "Inter" },
+  "sources": [
+    { "field": "colors.accent", "from": "Example: a dark accent that needs white text on buttons", "confidence": "stated" }
+  ],
+  "notes": []
+}
