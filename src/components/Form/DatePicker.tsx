@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useLocale } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import { ButtonIcon } from '../Button/Button';
 import { Field, type FieldBaseProps } from './Field';
@@ -124,11 +124,12 @@ export const DEFAULT_CALENDAR_LABELS: CalendarLabels = {
 export function Calendar({
   value, onValueChange, onChange, defaultMonth, min, max, disablePast, disableFuture, shouldDisableDate,
   views = ['year', 'day'], openTo, showDaysOutsideCurrentMonth = false, fixedWeekNumber,
-  yearsPerRow = 3, yearsOrder = 'asc', locale = 'en-US', weekStartsOn = 1, autoFocus,
+  yearsPerRow = 3, yearsOrder = 'asc', locale: localeProp, weekStartsOn = 1, autoFocus,
   labels, previousLabel, nextLabel, switchViewLabel,
   rangeStart, rangeEnd, onDayHover, month: monthProp, onMonthChange, hidePrevious, hideNext, className,
 }: CalendarProps) {
-  const l = mergeLabels(DEFAULT_CALENDAR_LABELS, labels, { previous: previousLabel, next: nextLabel, switchView: switchViewLabel });
+  const locale = useLocale(localeProp);
+  const l = useLabels('calendar', DEFAULT_CALENDAR_LABELS, labels, { previous: previousLabel, next: nextLabel, switchView: switchViewLabel });
   const choose = (d: Date) => { onValueChange?.(d); onChange?.(d); };
   const today = startOfDay(new Date());
   const lo = startOfDay(new Date(Math.max((min ?? DEFAULT_MIN).getTime(), disablePast ? today.getTime() : -Infinity)));
@@ -411,8 +412,9 @@ export const DEFAULT_DATE_PICKER_LABELS: DatePickerLabels = {
 };
 
 /** Text input (date in the order of the locale) with a calendar popover. Typing always works; the calendar is an extra. */
-export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onValueChange, onChange, min, max, disabled, name, id, locale = 'en-US', placeholder, hideFormat, labels, calendarLabel, calendarProps, className }, ref) {
-  const l = mergeLabels(DEFAULT_DATE_PICKER_LABELS, labels, { calendar: calendarLabel });
+export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(function DatePicker({ label, hideLabel, hint, error, required, size = 'md', value, defaultValue = null, onValueChange, onChange, min, max, disabled, name, id, locale: localeProp, placeholder, hideFormat, labels, calendarLabel, calendarProps, className }, ref) {
+  const locale = useLocale(localeProp);
+  const l = useLabels('datePicker', DEFAULT_DATE_PICKER_LABELS, labels, { calendar: calendarLabel });
   const [date, commit] = useControlled<Date | null>(value, defaultValue);
   const [text, setText] = useState(date ? formatDate(date, locale) : '');
   const [problem, setProblem] = useState<'invalid' | 'unavailable' | null>(null);

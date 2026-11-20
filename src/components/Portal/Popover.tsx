@@ -3,7 +3,7 @@ import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import { X } from 'lucide-react';
 import { ButtonIcon } from '../Button/Button';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import './Portal2.css';
 
@@ -46,7 +46,7 @@ export const DEFAULT_POPOVER_LABELS: PopoverLabels = { close: 'Close' };
  * For actions only use DropdownMenu; for one sentence use Tooltip.
  */
 export function Popover({ trigger, title, children, actions, closable = true, labels, closeLabel, align = 'start', arrow = false, open: openProp, defaultOpen = false, onOpenChange, className }: PopoverProps) {
-  const l = mergeLabels(DEFAULT_POPOVER_LABELS, labels, { close: closeLabel });
+  const l = useLabels('popover', DEFAULT_POPOVER_LABELS, labels, { close: closeLabel });
   const [open, set] = useControlled(openProp, defaultOpen, onOpenChange);
   const root = useRef<HTMLSpanElement>(null);
   const panel = useRef<HTMLDivElement>(null);

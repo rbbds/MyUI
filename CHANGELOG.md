@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+Planned as 1.8.0.
+
+### Added
+- **`LocaleProvider`.** Sets the language for every component inside it: the format of dates, numbers and amounts (`locale`), the built-in texts per component (`labels`) and single texts such as a title or a placeholder (`texts`). A `locale` or `labels` prop on a component still wins. Without a provider everything stays en-US and English, as before.
+- `locale` prop on Cart summary and Mini cart.
+- Exports: `LocaleProvider`, `useLocale`, `DEFAULT_LOCALE`, `DEFAULT_TEXT_LABELS` and the types `LocaleDefinition`, `CompleteLocale`, `LocaleLabels`, `LocaleTexts`, `TextKey`, `LabelSets`.
+- Storybook: a Locale toggle in the toolbar (en-US, nl-NL).
+
+### Fixed
+- Cart summary and Mini cart always showed amounts in the en-US format, also next to a Price with another locale. They now follow the `LocaleProvider` or their own `locale` prop.
+
+### Changed
+- The default quick picks of Date range picker and the default rules of Password input follow the language of the `LocaleProvider`. `defaultDateRangePresets()` and `passwordRequirements()` themselves still return English texts unless you pass labels.
+
 ## 1.7.0 (20 November 2026)
 
 ### Changed

@@ -217,6 +217,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Overlays: Dropdown menu, Modal, Slideout, Command menu (⌘K)
 - Navigation: Header (met mobiel menu en `search`), Mega menu, Mobile nav, Sidebar (inklapbaar, twee niveaus, Dual), Nav item, Tabs, Breadcrumbs, Pagination, Stepper, Bottom navigation
 - Routing: `LinkProvider` geeft alle MyUI-links je router-link (Next.js, React Router). Build heeft `'use client'`.
+- Taal: `LocaleProvider` zet de locale (Intl-opmaak) en de teksten voor alle componenten. Componenten lezen ze met `useLocale`, `useLabels('key', DEFAULT_…_LABELS, labels)` en `useText('component.prop', prop)` uit `src/utils/locale.tsx`. Elke tekstset staat in `src/locales/registry.ts`.
 - Data display: Table. Content: Card, Accordion, Empty state, File upload
 - Utilities: Divider, Featured icon, Spinner, Skeleton, Kbd
 - Flags: 250+ vlaggen en CountrySelect (aparte entry)
@@ -279,6 +280,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #60 | F1c: kopkleur per merk (`--brand-color-heading`, `--color-foreground-heading`, 24 title-tokens), Getting started en README bijgewerkt voor alle F1-stappen |
 | #61 | Release 1.6.0 |
 | #62 | Focuskleur is blauw in elk merk (`--color-border-focus` naar info 500 en 400), contrastcheck voor focus |
+| #63 | Release 1.7.0 |
+| #64 | F2a: `LocaleProvider` (locale en teksten voor alle componenten), bedragen in Cart summary en Mini cart volgen de locale, Locale-schakelaar in Storybook |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

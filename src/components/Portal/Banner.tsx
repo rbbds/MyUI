@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { CircleAlert, CircleCheck, Info, TriangleAlert, X } from 'lucide-react';
 import { ButtonIcon } from '../Button/Button';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import type { StatusColor } from '../Display/Display';
 import './Portal.css';
 
@@ -41,7 +41,7 @@ export interface BannerProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title
 
 /** Page-wide message above the content (maintenance, incomplete data, new feature). Inside content, use Alert. */
 export function Banner({ color = 'brand', title, children, icon, actions, action, onClose, labels, closeLabel, regionLabel, className, role, ...rest }: BannerProps) {
-  const l = mergeLabels(DEFAULT_BANNER_LABELS, labels, { close: closeLabel, region: regionLabel });
+  const l = useLabels('banner', DEFAULT_BANNER_LABELS, labels, { close: closeLabel, region: regionLabel });
   const act = actions ?? action;
   return (
     <div className={cx('rb-banner', `rb-banner--${color}`, className)} role={role} aria-label={role === 'region' ? l.region : undefined} {...rest}>

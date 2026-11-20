@@ -2,7 +2,7 @@ import { forwardRef, useId, useMemo, useRef, useState, type ButtonHTMLAttributes
 import { Link } from '../../utils/link';
 import { Bell } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { Button, ButtonIcon } from '../Button/Button';
 import { usePanelDismiss, usePlacement } from '../../utils/panel';
 import './Portal2.css';
@@ -24,9 +24,10 @@ export const DEFAULT_NOTIFICATION_BUTTON_LABELS: NotificationButtonLabels = { co
 
 /** Bell button for the header. Accessible name includes the count: "Notifications, 3 unread". */
 export const NotificationButton = forwardRef<HTMLButtonElement, NotificationButtonProps>(function NotificationButton(
-  { count = 0, label = 'Notifications', labels, countLabel, className, ...rest }, ref,
+  { count = 0, label: labelProp, labels, countLabel, className, ...rest }, ref,
 ) {
-  const l = mergeLabels(DEFAULT_NOTIFICATION_BUTTON_LABELS, labels, { count: countLabel });
+  const label = useText('notificationButton.label', labelProp);
+  const l = useLabels('notificationButton', DEFAULT_NOTIFICATION_BUTTON_LABELS, labels, { count: countLabel });
   return (
     <ButtonIcon ref={ref} hierarchy="tertiary" size="md" className={cx('rb-notif-button', className)} aria-label={count > 0 ? `${label}, ${l.count(count)}` : label} {...rest}
       icon={<><Bell aria-hidden="true" />{count > 0 && <span className="rb-notif-button__count" aria-hidden="true">{count > 99 ? '99+' : count}</span>}</>} />
@@ -55,7 +56,7 @@ export interface NotificationItemLabels {
 export const DEFAULT_NOTIFICATION_ITEM_LABELS: NotificationItemLabels = { unread: 'Unread' };
 
 export function NotificationItem({ title, children, time, dateTime, unread, avatar, href, onClick, labels, unreadLabel }: NotificationItemProps) {
-  const l = mergeLabels(DEFAULT_NOTIFICATION_ITEM_LABELS, labels, { unread: unreadLabel });
+  const l = useLabels('notificationItem', DEFAULT_NOTIFICATION_ITEM_LABELS, labels, { unread: unreadLabel });
   const inner = (
     <>
       {avatar}
@@ -93,8 +94,9 @@ export interface NotificationPanelLabels { emptyTitle: string; emptyText: string
 export const DEFAULT_NOTIFICATION_PANEL_LABELS: NotificationPanelLabels = { emptyTitle: 'No new notifications', emptyText: 'You are all caught up.', markAll: 'Mark all as read' };
 
 /** Panel with notifications. Use it in NotificationMenu or on its own page. */
-export function NotificationPanel({ title = 'Notifications', onMarkAllRead, markAllLabel, footer, empty, labels, children, id, className }: NotificationPanelProps) {
-  const l = mergeLabels(DEFAULT_NOTIFICATION_PANEL_LABELS, labels, { markAll: markAllLabel });
+export function NotificationPanel({ title: titleProp, onMarkAllRead, markAllLabel, footer, empty, labels, children, id, className }: NotificationPanelProps) {
+  const title = useText('notificationPanel.title', titleProp);
+  const l = useLabels('notificationPanel', DEFAULT_NOTIFICATION_PANEL_LABELS, labels, { markAll: markAllLabel });
   const titleId = useId();
   const has = Array.isArray(children) ? children.length > 0 : Boolean(children);
   return (

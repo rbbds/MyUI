@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { LinkProvider, NavItem as NavItemLink, Breadcrumbs, Header, MobileNav, Alert, Button, Calendar, QuantityStepper, Table, TableBulkActions, TableCard, ButtonGroup, ButtonIcon, Card, CartButton, Combobox, DualSidebar, NavItem, Pagination, SearchInput, Tabs, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, Input, Modal, Popover, Toast, ToastRegion, Tooltip } from '../../src';
+import { Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
@@ -25,6 +25,8 @@ const megaLinks = [
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
 const scenarios: Record<string, ReactNode> = {
+  'locale-nl': <LocaleProvider locale="nl-NL" labels={{ cartSummary: { total: 'Totaal' } }} texts={{ 'cartSummary.title': 'Overzicht', 'spinner.label': 'Laden' }}><CartSummary subtotal={1234.56} total={1234.56} /><p data-testid="own-locale"><Price amount={2} locale="en-US" /></p><QuantityStepper /><Spinner /></LocaleProvider>,
+  'locale-none': <><CartSummary subtotal={1234.56} total={1234.56} /><QuantityStepper /><Spinner /></>,
   'heading-color': <Alert title="Heads up">Body text</Alert>,
   'button-pressed': <div style={{ display: 'flex', gap: 16 }}><Button>Primary</Button><Button hierarchy="accent">Accent</Button><Button hierarchy="secondary">Secondary</Button><Button destructive>Delete</Button><Button aria-disabled>Switched off</Button></div>,
   'modal-dropdown': <InModal><DropdownMenu label="Actions" trigger={<Button hierarchy="secondary">Menu</Button>} items={[{ label: 'Edit', onSelect: () => {} }, { label: 'Delete', onSelect: () => {} }]} /></InModal>,

@@ -1,6 +1,7 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react';
 import { ArrowDown, ArrowUp, Minus } from 'lucide-react';
 import { cx } from '../../utils/cx';
+import { useLabels } from '../../utils/locale';
 import './Portal.css';
 
 export type MetricTrend = 'up' | 'down' | 'neutral';
@@ -33,7 +34,7 @@ export const DEFAULT_METRIC_CARD_LABELS: Record<MetricTrend, string> = { up: 'Up
 
 /** KPI tile: label, value and the change versus the previous period. */
 export function MetricCard({ label, value, delta, trend = 'neutral', meta, icon, menu, footer, labels, trendLabels, className, ...rest }: MetricCardProps) {
-  const l = { ...DEFAULT_METRIC_CARD_LABELS, ...labels, ...trendLabels };
+  const l = useLabels('metricCard', DEFAULT_METRIC_CARD_LABELS, labels, trendLabels);
   const labelId = useId();
   const Icon = ICON[trend];
   return (

@@ -2,7 +2,7 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { Link } from '../../utils/link';
 import { Heart, ShoppingCart } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { Button, ButtonIcon } from '../Button/Button';
 import { Price, Rating, StockIndicator, type StockStatus } from './Basics';
 import './Commerce.css';
@@ -44,7 +44,7 @@ export function ProductCard({
   title, href, image, meta, price, compareAt, currency, rating, reviewCount, badge, swatches, stock,
   wishlisted, onToggleWishlist, onAddToCart, addToCartLabel, layout = 'vertical', labels, className, ...rest
 }: ProductCardProps) {
-  const l = mergeLabels(DEFAULT_PRODUCT_CARD_LABELS, labels, { addToCart: addToCartLabel });
+  const l = useLabels('productCard', DEFAULT_PRODUCT_CARD_LABELS, labels, { addToCart: addToCartLabel });
   const shown = swatches?.slice(0, 4) ?? [];
   return (
     <article className={cx('rb-product-card', `rb-product-card--${layout}`, stock === 'out' && 'rb-product-card--out', className)} {...rest}>

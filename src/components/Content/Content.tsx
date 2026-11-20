@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useId, useRef, useState, type DragEvent, type HT
 import { Link } from '../../utils/link';
 import { ArrowDown, ArrowUp, ChevronsUpDown, CircleAlert, CircleCheck, CloudUpload, File as FileIcon, Minus, Plus, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled, type HeadingLevel } from '../../utils/useControlled';
 import { ButtonIcon } from '../Button/Button';
 import { FeaturedIcon, ProgressBar } from '../Display/Display';
@@ -27,7 +27,7 @@ export const DEFAULT_TABLE_CARD_LABELS: TableCardLabels = { region: 'Table' };
 export function TableCard({ title, badge, actions, toolbar, headingLevel = 3, labels, className, children, ...rest }: TableCardProps) {
   const H = `h${headingLevel}` as 'h3';
   const titleId = useId();
-  const l = mergeLabels(DEFAULT_TABLE_CARD_LABELS, labels);
+  const l = useLabels('tableCard', DEFAULT_TABLE_CARD_LABELS, labels);
   // Only a table that is wider than its card is a tab stop: otherwise Tab would land on an area with nothing to scroll.
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollable, setScrollable] = useState(false);
@@ -198,7 +198,7 @@ export interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputEleme
 }
 /** Drop zone backed by a real file input: click, keyboard and drag-and-drop. */
 export function FileUpload({ onFiles, hint, labels, actionLabel, dropLabel, disabled, className, ...rest }: FileUploadProps) {
-  const l = mergeLabels(DEFAULT_FILE_UPLOAD_LABELS, labels, { action: actionLabel, drop: dropLabel });
+  const l = useLabels('fileUpload', DEFAULT_FILE_UPLOAD_LABELS, labels, { action: actionLabel, drop: dropLabel });
   const [active, setActive] = useState(false);
   const hintId = useId();
   const onDrop = (e: DragEvent) => { e.preventDefault(); setActive(false); if (!disabled) onFiles(Array.from(e.dataTransfer.files)); };
@@ -232,7 +232,7 @@ export const DEFAULT_FILE_UPLOAD_ITEM_LABELS: FileUploadItemLabels = {
 };
 export interface FileUploadItemProps { name: string; size?: string; progress?: number; status?: 'uploading' | 'complete' | 'error'; error?: ReactNode; onRemove?: () => void; labels?: Partial<FileUploadItemLabels> }
 export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove, labels }: FileUploadItemProps) {
-  const l = { ...DEFAULT_FILE_UPLOAD_ITEM_LABELS, ...labels };
+  const l = useLabels('fileUploadItem', DEFAULT_FILE_UPLOAD_ITEM_LABELS, labels);
   const isErr = status === 'error';
   return (
     <div className={cx('rb-file', isErr && 'rb-file--error')}>

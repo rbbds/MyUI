@@ -2,7 +2,7 @@ import { useId, useState, type FormEvent, type HTMLAttributes, type ReactNode } 
 import { Link } from '../../utils/link';
 import { ShoppingBag, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useLocale, useText } from '../../utils/locale';
 import { Button, ButtonIcon } from '../Button/Button';
 import { Input } from '../Form/Input';
 import { Tag } from '../Display/Display';
@@ -40,7 +40,7 @@ export const DEFAULT_CART_ITEM_LABELS: CartItemLabels = {
 
 /** Product line in the cart, mini cart or order summary. */
 export function CartItem({ title, href, image, options, price, compareAt, quantity, maxQuantity = 99, onQuantityChange, onRemove, readOnly, size = 'md', currency, labels, className, ...rest }: CartItemProps) {
-  const l = { ...DEFAULT_CART_ITEM_LABELS, ...labels };
+  const l = useLabels('cartItem', DEFAULT_CART_ITEM_LABELS, labels);
   const name = typeof title === 'string' ? title : '';
   return (
     <div className={cx('rb-cart-item', `rb-cart-item--${size}`, className)} {...rest}>
@@ -84,26 +84,31 @@ export interface CartSummaryProps extends Omit<HTMLAttributes<HTMLElement>, 'tit
   /** Slot above the rows, e.g. read-only CartItems in checkout (order summary). */
   children?: ReactNode;
   currency?: string;
+  /** Locale for the amounts, for example `nl-NL`. Default: the LocaleProvider, else en-US. */
+  locale?: string;
   labels?: Partial<CartSummaryLabels>;
 }
 
 /** Totals block for cart and checkout. Use children for the order summary in checkout. */
-export function CartSummary({ title = 'Summary', subtotal, lines = [], total, totalNote = 'Including VAT', promo, actions, action, children, currency = 'EUR', labels, className, ...rest }: CartSummaryProps) {
-  const l = { ...DEFAULT_CART_SUMMARY_LABELS, ...labels };
+export function CartSummary({ title: titleProp, subtotal, lines = [], total, totalNote: totalNoteProp, promo, actions, action, children, currency = 'EUR', locale: localeProp, labels, className, ...rest }: CartSummaryProps) {
+  const locale = useLocale(localeProp);
+  const totalNote = useText('cartSummary.totalNote', totalNoteProp);
+  const title = useText('cartSummary.title', titleProp);
+  const l = useLabels('cartSummary', DEFAULT_CART_SUMMARY_LABELS, labels);
   const id = useId();
   return (
     <section className={cx('rb-cart-summary', className)} aria-labelledby={id} {...rest}>
       <h2 id={id} className="rb-cart-summary__title">{title}</h2>
       {children && <div className="rb-cart-summary__items">{children}</div>}
       <dl className="rb-cart-summary__rows">
-        <div className="rb-cart-summary__row"><dt>{l.subtotal}</dt><dd>{formatMoney(subtotal, currency)}</dd></div>
+        <div className="rb-cart-summary__row"><dt>{l.subtotal}</dt><dd>{formatMoney(subtotal, currency, locale)}</dd></div>
         {lines.map((l, i) => (
           <div key={i} className={cx('rb-cart-summary__row', l.amount < 0 && 'is-discount')}>
             <dt>{l.label}</dt>
-            <dd>{l.note ?? (l.amount < 0 ? `− ${formatMoney(-l.amount, currency)}` : formatMoney(l.amount, currency))}</dd>
+            <dd>{l.note ?? (l.amount < 0 ? `− ${formatMoney(-l.amount, currency, locale)}` : formatMoney(l.amount, currency, locale))}</dd>
           </div>
         ))}
-        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>{l.total}</dt><dd>{formatMoney(total, currency)}</dd></div>
+        <div className="rb-cart-summary__row rb-cart-summary__row--total"><dt>{l.total}</dt><dd>{formatMoney(total, currency, locale)}</dd></div>
       </dl>
       {totalNote && <p className="rb-cart-summary__note">{totalNote}</p>}
       {promo}
@@ -128,8 +133,9 @@ export interface PromoCodeProps {
 }
 
 /** Discount code field. After applying, the code is shown as a removable Tag. */
-export function PromoCode({ onApply, applied, onRemove, label = 'Discount code', buttonLabel, labels, className }: PromoCodeProps) {
-  const l = mergeLabels(DEFAULT_PROMO_CODE_LABELS, labels, { apply: buttonLabel });
+export function PromoCode({ onApply, applied, onRemove, label: labelProp, buttonLabel, labels, className }: PromoCodeProps) {
+  const label = useText('promoCode.label', labelProp);
+  const l = useLabels('promoCode', DEFAULT_PROMO_CODE_LABELS, labels, { apply: buttonLabel });
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | undefined>();
   const [busy, setBusy] = useState(false);
@@ -163,8 +169,9 @@ export interface CartButtonProps { count: number; onClick?: () => void; label?: 
 export interface CartButtonLabels { count: (count: number) => string }
 export const DEFAULT_CART_BUTTON_LABELS: CartButtonLabels = { count: (count) => `${count} ${count === 1 ? 'item' : 'items'}` };
 /** Header button with item count. The count is part of the accessible name. */
-export function CartButton({ count, onClick, label = 'Cart', labels, className }: CartButtonProps) {
-  const l = { ...DEFAULT_CART_BUTTON_LABELS, ...labels };
+export function CartButton({ count, onClick, label: labelProp, labels, className }: CartButtonProps) {
+  const label = useText('cartButton.label', labelProp);
+  const l = useLabels('cartButton', DEFAULT_CART_BUTTON_LABELS, labels);
   return (
     <span className={cx('rb-cart-button', className)}>
       <ButtonIcon hierarchy="tertiary" icon={<ShoppingBag />} aria-label={`${label}, ${l.count(count)}`} onClick={onClick} />
@@ -182,6 +189,8 @@ export interface MiniCartProps {
   itemCount: number;
   subtotal: number;
   currency?: string;
+  /** Locale for the amounts, for example `nl-NL`. Default: the LocaleProvider, else en-US. */
+  locale?: string;
   onCheckout?: () => void;
   cartHref?: string;
   /** Extra line in the footer, e.g. "€12.05 to go for free shipping". */
@@ -195,8 +204,9 @@ export const DEFAULT_MINI_CART_LABELS: MiniCartLabels = {
 };
 
 /** Cart in a Slideout: opens from the header after "Add to cart" or a click on the CartButton. */
-export function MiniCart({ open, onClose, children, itemCount, subtotal, currency = 'EUR', onCheckout, cartHref = '#', note, labels }: MiniCartProps) {
-  const l = { ...DEFAULT_MINI_CART_LABELS, ...labels };
+export function MiniCart({ open, onClose, children, itemCount, subtotal, currency = 'EUR', locale: localeProp, onCheckout, cartHref = '#', note, labels }: MiniCartProps) {
+  const locale = useLocale(localeProp);
+  const l = useLabels('miniCart', DEFAULT_MINI_CART_LABELS, labels);
   const empty = itemCount === 0;
   return (
     <Slideout
@@ -208,7 +218,7 @@ export function MiniCart({ open, onClose, children, itemCount, subtotal, currenc
         <div className="rb-mini-cart__footer">
           <div className="rb-mini-cart__totals">
             {note && <p className="rb-mini-cart__note">{note}</p>}
-            <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>{l.subtotal}</span><span>{formatMoney(subtotal, currency)}</span></div>
+            <div className="rb-cart-summary__row rb-cart-summary__row--total"><span>{l.subtotal}</span><span>{formatMoney(subtotal, currency, locale)}</span></div>
           </div>
           <Button fullWidth onClick={onCheckout}>{l.checkout}</Button>
           <Button fullWidth hierarchy="secondary" onClick={() => { window.location.href = cartHref; }}>{l.viewCart}</Button>

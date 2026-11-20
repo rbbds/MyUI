@@ -69,6 +69,22 @@ import { Link as RouterLink } from 'react-router';
 <LinkProvider component={({ href, ...props }) => <RouterLink to={href} {...props} />}>{children}</LinkProvider>
 ```
 
+### Language
+
+All built-in texts are English, and dates, numbers and amounts use `en-US`. Wrap your app in `LocaleProvider` to change that for every component at once. A `locale` or `labels` prop on a component still wins.
+
+```tsx
+import { LocaleProvider } from '@rbbds/ui';
+
+<LocaleProvider
+  locale="nl-NL"
+  labels={{ cartSummary: { subtotal: 'Subtotaal', total: 'Totaal' } }}
+  texts={{ 'cartSummary.title': 'Overzicht' }}
+>
+  {children}
+</LocaleProvider>
+```
+
 ### Not in MyUI yet
 
 Charts, a carousel for product rows, a postcode API for street and city, and payment logos. Ask before you build one of these yourself, so it can become part of MyUI.

@@ -4,6 +4,7 @@ import '../src/styles/index.css';
 import '@fontsource/source-serif-4/400.css';
 import '@fontsource/source-serif-4/600.css';
 import '@fontsource/source-serif-4/700.css';
+import { LocaleProvider } from '../src/utils/locale';
 
 const preview: Preview = {
   globalTypes: {
@@ -32,8 +33,20 @@ const preview: Preview = {
         dynamicTitle: true,
       },
     },
+    locale: {
+      description: 'Language: formats of dates, numbers and amounts (LocaleProvider)',
+      toolbar: {
+        title: 'Locale',
+        icon: 'globe',
+        items: [
+          { value: 'en-US', title: 'English (en-US)' },
+          { value: 'nl-NL', title: 'Nederlands (nl-NL)' },
+        ],
+        dynamicTitle: true,
+      },
+    },
   },
-  initialGlobals: { theme: 'light', brand: 'iris' },
+  initialGlobals: { theme: 'light', brand: 'iris', locale: 'en-US' },
   decorators: [
     (Story, context) => {
       const theme = context.globals.theme ?? 'light';
@@ -46,7 +59,7 @@ const preview: Preview = {
       }
       return (
         <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', fontFamily: 'var(--brand-font-body)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
-          <Story />
+          <LocaleProvider locale={context.globals.locale ?? 'en-US'}><Story /></LocaleProvider>
         </div>
       );
     },

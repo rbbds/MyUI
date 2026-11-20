@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useId, useImperativeHandle, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import { Field, type FieldBaseProps } from './Field';
 import { usePlacement } from '../../utils/panel';
@@ -57,8 +57,10 @@ const norm = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').to
  * Select with search and a visual per option (APG "combobox with listbox popup").
  * Use it when a native select is not enough: long lists that need filtering, or options that need a flag or avatar.
  */
-export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onValueChange, onChange, placeholder = 'Choose or type to search', disabled, name, id, emptyText = 'No results', toggleLabel, labels, className }, ref) {
-  const l = mergeLabels(DEFAULT_COMBOBOX_LABELS, labels, { toggle: toggleLabel });
+export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(function Combobox({ label, hideLabel, hint, error, required, size = 'md', options, value, defaultValue = null, onValueChange, onChange, placeholder: placeholderProp, disabled, name, id, emptyText: emptyTextProp, toggleLabel, labels, className }, ref) {
+  const placeholder = useText('combobox.placeholder', placeholderProp);
+  const emptyText = useText('combobox.emptyText', emptyTextProp);
+  const l = useLabels('combobox', DEFAULT_COMBOBOX_LABELS, labels, { toggle: toggleLabel });
   const [selectedValue, setSelectedValue] = useControlled<string | null>(value, defaultValue, (v) => { const o = options.find((x) => x.value === v) ?? null; onValueChange?.(v, o); onChange?.(v, o); });
   const selected = options.find((o) => o.value === selectedValue) ?? null;
   const [text, setText] = useState(selected?.label ?? '');

@@ -1,6 +1,6 @@
 import { forwardRef, useId, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import './Form.css';
 
@@ -35,7 +35,7 @@ export interface RangeSliderProps extends Omit<HTMLAttributes<HTMLDivElement>, '
 
 /** Slider with two handles (from/to), e.g. a price range. Two native range inputs, so keyboard and screen readers work. */
 export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(function RangeSlider({ label, hideLabel, hint, min = 0, max = 100, step = 1, value, defaultValue, onValueChange, onChange, formatValue = String, labels, minLabel, maxLabel, disabled, className, ...rest }, ref) {
-  const l = mergeLabels(DEFAULT_RANGE_SLIDER_LABELS, labels, { min: minLabel, max: maxLabel });
+  const l = useLabels('rangeSlider', DEFAULT_RANGE_SLIDER_LABELS, labels, { min: minLabel, max: maxLabel });
   const [[lo, hi], set] = useControlled<[number, number]>(value, defaultValue ?? [min, max], (v) => { onValueChange?.(v); onChange?.(v); });
   const id = useId();
   const pct = (n: number) => ((n - min) / (max - min)) * 100;

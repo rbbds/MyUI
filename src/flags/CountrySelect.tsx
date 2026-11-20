@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { Combobox, type ComboboxProps } from '../components/Form/Combobox';
 import { Flag, flagCodes } from './Flag';
+import { useLocale, useText } from '../utils/locale';
 
 export interface CountrySelectProps extends Omit<ComboboxProps, 'options'> {
   /** Limit the list to these ISO codes. Defaults to all countries with a flag. */
@@ -16,7 +17,11 @@ export interface CountrySelectProps extends Omit<ComboboxProps, 'options'> {
 }
 
 /** Country picker with flags and search. Names come from the browser (Intl), so no data files are needed. */
-export function CountrySelect({ countries, preferred = [], locale = 'en-US', preferredLabel = 'Popular', allLabel = 'All countries', hideFlags, placeholder = 'Choose a country', ...rest }: CountrySelectProps) {
+export function CountrySelect({ countries, preferred = [], locale: localeProp, preferredLabel: preferredLabelProp, allLabel: allLabelProp, hideFlags, placeholder: placeholderProp, ...rest }: CountrySelectProps) {
+  const locale = useLocale(localeProp);
+  const preferredLabel = useText('countrySelect.preferredLabel', preferredLabelProp);
+  const placeholder = useText('countrySelect.placeholder', placeholderProp);
+  const allLabel = useText('countrySelect.allLabel', allLabelProp);
   const options = useMemo(() => {
     const names = new Intl.DisplayNames([locale], { type: 'region' });
     const en = new Intl.DisplayNames(['en'], { type: 'region' });

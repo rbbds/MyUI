@@ -134,8 +134,14 @@ export const guides = [
       },
       {
         heading: '7. Language and dates',
-        paragraphs: ['All built-in labels are English and dates and amounts use en-US. Components with texts have a labels prop with English defaults (DEFAULT_X_LABELS). Components with dates or amounts have a locale prop, for example locale="nl-NL".'],
-        code: '<Pagination page={2} pageCount={8} onPageChange={setPage}\n  label="Paginering"\n  labels={{ previous: "Vorige", next: "Volgende", pageStatus: (p, c) => `Pagina ${p} van ${c}` }} />',
+        codeFirst: true,
+        code: 'import { LocaleProvider } from \'@rbbds/ui\';\n\n<LocaleProvider\n  locale="nl-NL"\n  labels={{ cartSummary: { subtotal: "Subtotaal", total: "Totaal" } }}\n  texts={{ "cartSummary.title": "Overzicht" }}\n>\n  <App />\n</LocaleProvider>',
+        paragraphs: [
+          'All built-in texts are English, and dates, numbers and amounts use en-US.',
+          'Put a LocaleProvider around your app to change that for every component at once. The locale sets the format: with nl-NL an amount is € 1.234,56 and the calendar shows Dutch month names.',
+          'Your own texts go in labels, per component. The key is the name of the component: cartSummary, pagination, datePicker. Single texts, such as a title or a placeholder, go in texts as component.prop.',
+          'A locale or labels prop on a component still wins over the provider. Without a provider nothing changes.',
+        ],
       },
       {
         heading: '8. Props that work the same everywhere',
@@ -143,6 +149,7 @@ export const guides = [
           'value, defaultValue and onValueChange: leave value out and the component keeps its own state from defaultValue. onValueChange gets the value. onChange on Input, Select, Textarea and Checkbox gets the native event.',
           'Open state: open, defaultOpen and onOpenChange (DropdownMenu, Popover). Modal and Slideout are always controlled.',
           'label: the accessible name of the component itself (Tabs, ButtonGroup, Pagination, Breadcrumbs, Stepper, BottomNavigation, Header, Sidebar). aria-label also works.',
+          'locale: the format of dates, numbers and amounts, for example locale="nl-NL". Default: the LocaleProvider, else en-US.',
           'labels: all built-in texts in one object. The older single text props (closeLabel, clearLabel, …) still work but are deprecated.',
           'variant: the look (Tabs underline or pill, VariantPicker color or size). type is only the HTML type (Button) or the kind of input (SelectionCard radio or checkbox).',
           'actions: the slot for buttons or links (Alert, Banner, Card, CartSummary, DescriptionList, DocumentList, EmptyState, Popover).',

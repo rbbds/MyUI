@@ -1,7 +1,7 @@
 import { useId, type HTMLAttributes, type ReactNode } from 'react';
 import { Circle, CircleCheck } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import type { HeadingLevel } from '../../utils/useControlled';
 import { ProgressBar } from '../Display/Display';
 import './Portal2.css';
@@ -27,7 +27,7 @@ export const DEFAULT_CHECKLIST_LABELS: ChecklistLabels = { progress: (d, t) => `
 
 /** Onboarding progress: title, progress and steps. Hide it when everything is done. */
 export function Checklist({ title, done, total, labels, progressLabel, headingLevel = 2, className, children, ...rest }: ChecklistProps) {
-  const l = mergeLabels(DEFAULT_CHECKLIST_LABELS, labels, { progress: progressLabel });
+  const l = useLabels('checklist', DEFAULT_CHECKLIST_LABELS, labels, { progress: progressLabel });
   const id = useId();
   const H = `h${headingLevel}` as 'h2';
   return (
@@ -62,7 +62,7 @@ export interface ChecklistItemLabels {
 export const DEFAULT_CHECKLIST_ITEM_LABELS: ChecklistItemLabels = { done: 'Done' };
 
 export function ChecklistItem({ title, status, description, actions, action, labels, doneLabel }: ChecklistItemProps) {
-  const l = mergeLabels(DEFAULT_CHECKLIST_ITEM_LABELS, labels, { done: doneLabel });
+  const l = useLabels('checklistItem', DEFAULT_CHECKLIST_ITEM_LABELS, labels, { done: doneLabel });
   return (
     <li className={cx('rb-checklist__item', `rb-checklist__item--${status}`)} aria-current={status === 'current' ? 'step' : undefined}>
       {status === 'done' ? <CircleCheck aria-hidden="true" className="rb-checklist__icon" /> : <Circle aria-hidden="true" className="rb-checklist__icon" />}

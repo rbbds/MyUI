@@ -2,6 +2,7 @@ import { forwardRef, type AnchorHTMLAttributes, type HTMLAttributes, type ReactN
 import { Link } from '../../utils/link';
 import { cx } from '../../utils/cx';
 import './BottomNavigation.css';
+import { useText } from '../../utils/locale';
 
 export interface BottomNavItemProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   icon: ReactNode;
@@ -47,7 +48,8 @@ export interface BottomNavigationProps extends HTMLAttributes<HTMLElement> {
 }
 
 /** App navigation at the bottom of the screen on mobile. Replaces the Sidebar below 900px. */
-export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(function BottomNavigation({ children, action, label = 'Main menu', 'aria-label': ariaLabel, className, ...rest }, ref) {
+export const BottomNavigation = forwardRef<HTMLElement, BottomNavigationProps>(function BottomNavigation({ children, action, label: labelProp, 'aria-label': ariaLabel, className, ...rest }, ref) {
+  const label = useText('bottomNavigation.label', labelProp);
   const items = (Array.isArray(children) ? children : [children]).map((c, i) => <li key={i}>{c}</li>);
   if (action) {
     const inner = <span className="rb-bottom-nav__action-icon" aria-hidden="true">{action.icon}</span>;

@@ -1,7 +1,7 @@
 import { forwardRef, useId, useState, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { Minus, Plus, Star } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useLocale, useText } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import './Commerce.css';
 
@@ -26,8 +26,9 @@ export const formatMoney = (amount: number, currency = 'EUR', locale = 'en-US') 
   new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount);
 
 /** Price with optional sale price. Screen readers hear "Was … Now …". */
-export function Price({ amount, compareAt, currency = 'EUR', locale = 'en-US', size = 'md', suffix, labels, className, ...rest }: PriceProps) {
-  const l = { ...DEFAULT_PRICE_LABELS, ...labels };
+export function Price({ amount, compareAt, currency = 'EUR', locale: localeProp, size = 'md', suffix, labels, className, ...rest }: PriceProps) {
+  const locale = useLocale(localeProp);
+  const l = useLabels('price', DEFAULT_PRICE_LABELS, labels);
   const sale = compareAt !== undefined && compareAt > amount;
   return (
     <span className={cx('rb-price', `rb-price--${size}`, sale && 'rb-price--sale', className)} {...rest}>
@@ -67,8 +68,9 @@ export const DEFAULT_RATING_LABELS: RatingLabels = {
 };
 
 /** Star rating (read-only). One accessible name: "4.5 out of 5 stars, 128 reviews". */
-export function Rating({ value, max = 5, count, size = 'md', showValue, locale = 'en-US', labels, className, ...rest }: RatingProps) {
-  const l = { ...DEFAULT_RATING_LABELS, ...labels };
+export function Rating({ value, max = 5, count, size = 'md', showValue, locale: localeProp, labels, className, ...rest }: RatingProps) {
+  const locale = useLocale(localeProp);
+  const l = useLabels('rating', DEFAULT_RATING_LABELS, labels);
   const v = Math.max(0, Math.min(max, Math.round(value * 2) / 2));
   const num = v.toLocaleString(locale, { maximumFractionDigits: 1 });
   const label = [l.rating(num, max), count !== undefined ? l.reviews(count) : null].filter(Boolean).join(', ');
@@ -118,10 +120,11 @@ export const DEFAULT_QUANTITY_STEPPER_LABELS: QuantityStepperLabels = { decrease
 
 /** Number field with − and + buttons. Typing works too; the value is clamped to min and max. */
 export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps>(function QuantityStepper(
-  { value, defaultValue = 1, onValueChange, onChange, min = 1, max = 99, size = 'md', label = 'Quantity', labels, decreaseLabel, increaseLabel, disabled, className, id, ...rest },
+  { value, defaultValue = 1, onValueChange, onChange, min = 1, max = 99, size = 'md', label: labelProp, labels, decreaseLabel, increaseLabel, disabled, className, id, ...rest },
   ref,
 ) {
-  const l = mergeLabels(DEFAULT_QUANTITY_STEPPER_LABELS, labels, { decrease: decreaseLabel, increase: increaseLabel });
+  const label = useText('quantityStepper.label', labelProp);
+  const l = useLabels('quantityStepper', DEFAULT_QUANTITY_STEPPER_LABELS, labels, { decrease: decreaseLabel, increase: increaseLabel });
   const [draft, setDraft] = useState<string | null>(null);
   const [v, setValue] = useControlled(value, defaultValue, (n) => { onValueChange?.(n); onChange?.(n); });
   const autoId = useId();
@@ -168,10 +171,11 @@ export const DEFAULT_STOCK_LABELS: Record<StockStatus, string> = { 'in-stock': '
 
 /** Availability with a colored dot. The text carries the meaning, the dot only supports it. */
 export function StockIndicator({ status, children, labels, className, ...rest }: StockIndicatorProps) {
+  const l = useLabels('stock', DEFAULT_STOCK_LABELS, labels);
   return (
     <span className={cx('rb-stock', `rb-stock--${status}`, className)} {...rest}>
       <span className="rb-stock__dot" aria-hidden="true" />
-      {children ?? { ...DEFAULT_STOCK_LABELS, ...labels }[status]}
+      {children ?? l[status]}
     </span>
   );
 }

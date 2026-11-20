@@ -1,7 +1,7 @@
 import { useId, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { ChevronLeft, ChevronRight, ShoppingCart, Truck } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import { Button, ButtonIcon } from '../Button/Button';
 import { QuantityStepper, StockIndicator, type StockStatus } from './Basics';
@@ -24,7 +24,7 @@ export interface ProductGalleryProps {
 
 /** Main image with thumbnails. Arrows and thumbnails both switch; arrow keys work on the thumbnails. */
 export function ProductGallery({ images, label, labels, className }: ProductGalleryProps) {
-  const l = { ...DEFAULT_PRODUCT_GALLERY_LABELS, ...labels };
+  const l = useLabels('productGallery', DEFAULT_PRODUCT_GALLERY_LABELS, labels);
   const [i, setI] = useState(0);
   const thumbs = useRef<HTMLDivElement>(null);
   const n = images.length;
@@ -99,7 +99,7 @@ export interface VariantPickerProps {
 /** Color swatches or size chips. A native radio group, so arrow keys and screen readers work out of the box. */
 export function VariantPicker({ label, variant, type: typeProp, options, value, defaultValue, onValueChange, onChange, name, aside, error, labels, className }: VariantPickerProps) {
   const type = variant ?? typeProp ?? 'size';
-  const l = { ...DEFAULT_VARIANT_PICKER_LABELS, ...labels };
+  const l = useLabels('variantPicker', DEFAULT_VARIANT_PICKER_LABELS, labels);
   const [v, setValue] = useControlled<string | undefined>(value, defaultValue, (x) => { if (x === undefined) return; onValueChange?.(x); onChange?.(x); });
   const auto = useId();
   const current = options.find((o) => o.value === v);
@@ -161,8 +161,9 @@ export interface AddToCartProps {
 }
 
 /** Purchase block on the product page: stock, quantity, add-to-cart button and delivery promise. */
-export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label = 'Add to cart', productName, aside, loading, hierarchy = 'accent', labels, className }: AddToCartProps) {
-  const l = { ...DEFAULT_ADD_TO_CART_LABELS, ...labels };
+export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label: labelProp, productName, aside, loading, hierarchy = 'accent', labels, className }: AddToCartProps) {
+  const label = useText('addToCart.label', labelProp);
+  const l = useLabels('addToCart', DEFAULT_ADD_TO_CART_LABELS, labels);
   const [q, setQ] = useState(1);
   const out = stock === 'out';
   return (
