@@ -10,7 +10,7 @@ import { Alert } from '../../components/Overlay/Alert';
 import { Card } from '../../components/Content/Content';
 import { Badge } from '../../components/Display/Display';
 import { Header } from '../../components/Navigation/AppShell';
-import { brandScale, contrast, STEPS } from './color';
+import { accentButtonColors, brandScale, contrast, STEPS, type AccentButton } from './color';
 import './BrandBuilder.css';
 
 /* Styles = the brand modes in Figma (↳ brand) and the data-brand blocks in tokens.css. */
@@ -21,7 +21,7 @@ const STYLES = [
 ] as const;
 type StyleId = (typeof STYLES)[number]['id'];
 const STYLE_COLOR: Record<StyleId, string> = { iris: '#4f46e0', forest: '#176f42', berry: '#c21d67' };
-/* Accent: one bright yellow for every style. Buttons use accent 400 with dark text (gray 900). */
+/* Accent: one bright yellow for every style. Buttons use accent 400 with dark text (gray 900), unless "exact accent color" is on. */
 const STYLE_ACCENT: Record<StyleId, string> = { iris: '#facc15', forest: '#facc15', berry: '#facc15' };
 
 /* Free Google Fonts; self-host them in a project with @fontsource. */
@@ -48,6 +48,8 @@ export function BrandBuilder() {
   const [hexText, setHexText] = useState(STYLE_COLOR.iris);
   const [accent, setAccent] = useState(STYLE_ACCENT.iris);
   const [accentText, setAccentText] = useState(STYLE_ACCENT.iris);
+  const [accentExact, setAccentExact] = useState(false);
+  const [accentOverride, setAccentOverride] = useState<Partial<AccentButton>>({});
   const [body, setBody] = useState('Inter');
   const [title, setTitle] = useState('Inter');
   const [logo, setLogo] = useState<string | null>(null);
@@ -63,6 +65,8 @@ export function BrandBuilder() {
   const scale = result?.scale;
   const accentResult = useMemo(() => brandScale(accent), [accent]);
   const accentScale = accentResult?.scale;
+  /* Exact accent color on buttons: sets --brand-color-accent-solid-*. Off = accent 400 with dark text (the default). */
+  const accentBtn = useMemo(() => (accentExact ? accentButtonColors(accent, accentOverride) : null), [accentExact, accent, accentOverride]);
 
   /* Apply to the whole preview: tokens are computed on <html>, so overrides must live there. */
   useEffect(() => {
@@ -72,6 +76,7 @@ export function BrandBuilder() {
     const props: [string, string][] = [['--brand-font-body', stack(body)], ['--brand-font-title', stack(title)]];
     if (scale) STEPS.forEach((s) => props.push([`--brand-color-primary-${s}`, scale[s]]));
     if (accentScale) STEPS.forEach((s) => props.push([`--brand-color-accent-${s}`, accentScale[s]]));
+    if (accentBtn) props.push(['--brand-color-accent-solid-surface', accentBtn.surface], ['--brand-color-accent-solid-surface-hover', accentBtn.hover], ['--brand-color-accent-solid-surface-pressed', accentBtn.pressed], ['--brand-color-accent-solid-foreground', accentBtn.foreground]);
     props.forEach(([k, v]) => root.style.setProperty(k, v));
     loadGoogleFont(body);
     loadGoogleFont(title);
@@ -79,7 +84,7 @@ export function BrandBuilder() {
       props.forEach(([k]) => root.style.removeProperty(k));
       if (prevBrand) root.setAttribute('data-brand', prevBrand); else root.removeAttribute('data-brand');
     };
-  }, [style, scale, accentScale, body, title]);
+  }, [style, scale, accentScale, accentBtn, body, title]);
 
   useEffect(() => () => { if (logo) URL.revokeObjectURL(logo); }, [logo]);
 
@@ -97,11 +102,11 @@ export function BrandBuilder() {
   const onAccent = (v: string) => {
     setAccentText(v);
     const h = v.startsWith('#') ? v : `#${v}`;
-    if (/^#[0-9a-f]{6}$/i.test(h)) setAccent(h.toLowerCase());
+    if (/^#[0-9a-f]{6}$/i.test(h)) { setAccent(h.toLowerCase()); setAccentOverride({}); }
   };
   /* brand.json from the myui-brand skill: the input file or the full output (both have name, style, colors and fonts). */
   const applyBrandJson = (text: string) => {
-    let data: { name?: unknown; style?: unknown; colors?: { primary?: unknown; accent?: unknown }; fonts?: { body?: unknown; title?: unknown } };
+    let data: { name?: unknown; style?: unknown; colors?: { primary?: unknown; accent?: unknown; accentButton?: unknown }; fonts?: { body?: unknown; title?: unknown } };
     try { data = JSON.parse(text); } catch { setImportError('This is not valid JSON. Paste the whole brand.json or brand-input.json.'); return; }
     const hex = (v: unknown) => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
     const styleId = STYLES.find((st) => st.id === data.style)?.id;
@@ -117,6 +122,12 @@ export function BrandBuilder() {
     setStyle(styleId);
     setColor(primary); setHexText(primary);
     if (acc) { setAccent(acc); setAccentText(acc); }
+    const ab = data.colors!.accentButton;
+    if (acc && ab && typeof ab === 'object' && !Array.isArray(ab)) {
+      const o: Partial<AccentButton> = {};
+      for (const k of ['surface', 'hover', 'pressed', 'foreground'] as const) { const v = (ab as Record<string, unknown>)[k]; if (hex(v)) o[k] = (v as string).toLowerCase(); }
+      setAccentExact(true); setAccentOverride(o);
+    } else { setAccentExact(false); setAccentOverride({}); }
     setBody(fb); setTitle(ft);
     setImportError(undefined);
     setImported(typeof data.name === 'string' ? data.name : 'brand');
@@ -140,7 +151,8 @@ export function BrandBuilder() {
     { label: 'White text on a button (primary 600)', ratio: contrast('#ffffff', scale['600']) },
     { label: 'Link on white (primary 600)', ratio: contrast(scale['600'], '#ffffff') },
     { label: 'Link in Dark (primary 400 on dark)', ratio: contrast(scale['400'], '#0b0f17') },
-    ...(accentScale ? [{ label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accentScale['400']) }, { label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
+    ...(accentScale && accentBtn ? (['surface', 'hover', 'pressed'] as const).map((k) => ({ label: `Text on an accent button${k === 'surface' ? '' : `, ${k}`} (${accentBtn.foreground} on ${accentBtn[k]})`, ratio: contrast(accentBtn.foreground, accentBtn[k]) })) : accentScale ? [{ label: 'Dark text on an accent button (gray 900 on accent 400)', ratio: contrast('#101828', accentScale['400']) }] : []),
+    ...(accentScale ? [{ label: 'Accent text on white (accent 700)', ratio: contrast(accentScale['700'], '#ffffff') }] : []),
   ] : [];
   const failing = checks.filter((c) => c.ratio < 4.5);
 
@@ -153,7 +165,7 @@ ${style === 'iris' ? '   2. You do not need data-brand: Iris is the default.' : 
 ${fontPkgs.length ? `   3. Host the fonts yourself: npm i ${fontPkgs.join(' ')} and import the weights 400, 500, 600 and 700.` : '   3. Inter: npm i @fontsource-variable/inter'} */
 ${selector} {
 ${STEPS.map((s) => `  --brand-color-primary-${s}: ${scale[s]};`).join('\n')}
-${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]};`).join('\n') : ''}
+${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]};`).join('\n') : ''}${accentBtn ? `\n  --brand-color-accent-solid-surface: ${accentBtn.surface};\n  --brand-color-accent-solid-surface-hover: ${accentBtn.hover};\n  --brand-color-accent-solid-surface-pressed: ${accentBtn.pressed};\n  --brand-color-accent-solid-foreground: ${accentBtn.foreground};` : ''}
   --brand-font-body: ${stack(body)};
   --brand-font-title: ${stack(title)};
 }
@@ -162,7 +174,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
     collection: '↳ brand',
     mode: name,
     basedOn: STYLES.find((s) => s.id === style)!.name,
-    values: { ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, scale[s]])), ...(accentScale ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accentScale[s]])) : {}), 'brand/font/body': body, 'brand/font/title': title },
+    values: { ...Object.fromEntries(STEPS.map((s) => [`brand/color/primary/${s}`, scale[s]])), ...(accentScale ? Object.fromEntries(STEPS.map((s) => [`brand/color/accent/${s}`, accentScale[s]])) : {}), ...(accentBtn ? { 'brand/color/accent-solid/surface': accentBtn.surface, 'brand/color/accent-solid/surface-hover': accentBtn.hover, 'brand/color/accent-solid/surface-pressed': accentBtn.pressed, 'brand/color/accent-solid/foreground': accentBtn.foreground } : {}), 'brand/font/body': body, 'brand/font/title': title },
   }, null, 2) : '';
 
   const copy = async (what: string, text: string) => {
@@ -188,7 +200,7 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
           <Badge color="brand">New</Badge>
           <h2 className="bb-h">Welcome to {name}</h2>
           <p className="bb-p">This is how your brand looks in the MyUI components.</p>
-          <div className="bb-row"><Button>Get started</Button><Button hierarchy="secondary">Learn more</Button><Button hierarchy="link">See examples</Button></div>
+          <div className="bb-row"><Button>Get started</Button><Button hierarchy="accent">Add to cart</Button><Button hierarchy="secondary">Learn more</Button><Button hierarchy="link">See examples</Button></div>
         </div>
         <div className="bb-grid">
           <div className="bb-stack">
@@ -275,7 +287,9 @@ ${accentScale ? STEPS.map((s) => `  --brand-color-accent-${s}: ${accentScale[s]}
                 ))}
               </ol>
             )}
-            <p className="bb-note">A second brand color for highlights, badges, tags and illustrations.</p>
+            <p className="bb-note">A second brand color for highlights, badges, tags and illustrations, and for the accent button.</p>
+            <Toggle label="Use my exact accent color on buttons" checked={accentExact} onChange={(e) => { setAccentExact(e.target.checked); if (!e.target.checked) setAccentOverride({}); }} />
+            <p className="bb-note">{accentBtn ? `The accent button is ${accentBtn.surface}, ${accentBtn.hover} on hover and ${accentBtn.pressed} while pressed, with ${accentBtn.foreground === '#ffffff' ? 'white' : accentBtn.foreground === '#141a24' ? 'dark' : accentBtn.foreground} text.` : 'Off: the accent button uses step 400 with dark text. Turn this on for a dark accent color that needs white text.'}</p>
           </fieldset>
 
           <Select label="Font for text" value={body} onChange={(e) => setBody(e.target.value)} options={fontOptions} />

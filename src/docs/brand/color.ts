@@ -78,3 +78,21 @@ export function contrast(a: string, b: string): number {
   const [x, y] = [lum(A), lum(B)].sort((p, q) => q - p);
   return (x + 0.05) / (y + 0.05);
 }
+
+/**
+ * Accent button in the exact accent color: hover and pressed are the next two darker steps, and the text is
+ * white or gray 900, whichever has the most contrast on all three. Copy in skills/myui-brand/scripts/build-brand.mjs.
+ */
+export const WHITE = '#ffffff';
+export const GRAY_900 = '#141a24';
+export type AccentButton = { surface: string; hover: string; pressed: string; foreground: string };
+export function accentButtonColors(hex: string, override: Partial<AccentButton> = {}): AccentButton | null {
+  const r = brandScale(hex);
+  if (!r) return null;
+  const i = STEPS.indexOf(r.anchor);
+  const step = (n: number) => r.scale[STEPS[Math.min(STEPS.length - 1, i + n)]];
+  const surface = (override.surface || r.scale[r.anchor]).toLowerCase(), hover = (override.hover || step(1)).toLowerCase(), pressed = (override.pressed || step(2)).toLowerCase();
+  const min = (fg: string) => Math.min(...[surface, hover, pressed].map((bg) => contrast(fg, bg)));
+  const foreground = (override.foreground || (min(WHITE) >= min(GRAY_900) ? WHITE : GRAY_900)).toLowerCase();
+  return { surface, hover, pressed, foreground };
+}

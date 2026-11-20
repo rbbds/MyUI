@@ -79,6 +79,7 @@ This is the only place a designer edits. The Brand builder in Storybook creates 
 | --- | --- | --- |
 | brand/color/primary/25 … 950 | color (hex) | Paste from the Brand builder |
 | brand/color/accent/25 … 950 | color (hex) | Paste from the Brand builder |
+| brand/color/accent-solid/surface, surface-hover, surface-pressed, foreground | alias or color | Default: accent 400, 500, 600 and gray 900. Change them for a dark accent that needs white text on the accent button (since 1.6.0) |
 | brand/font/body, brand/font/title | string | Type the font name |
 | brand/font-weight/* | alias to ∙ typography | Pick from a list |
 | brand/radius/control, containers, overlays (xs … lg) | alias to ∙ border | Pick a style: square, soft, round |

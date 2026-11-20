@@ -26,7 +26,7 @@
     [
       "Hierarchy",
       "Primary, Accent, Secondary, Tertiary, Link",
-      "Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. Use it once per screen."
+      "Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. A brand with a dark accent can set the exact button color and the text color (--brand-color-accent-solid-*). Use it once per screen."
     ],
     [
       "Size",
@@ -35,8 +35,8 @@
     ],
     [
       "State",
-      "Default, Hover, Focus, Disabled, Loading",
-      "Interaction state."
+      "Default, Hover, Pressed, Focus, Disabled, Loading",
+      "Interaction state. Pressed is one step darker than Hover."
     ],
     [
       "Label",

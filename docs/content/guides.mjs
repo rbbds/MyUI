@@ -115,6 +115,7 @@ export const guides = [
         paragraphs: [
           'Make your brand CSS with the Brand builder in Storybook or the myui-brand skill (in node_modules/@rbbds/ui/skills). Load that CSS after styles.css.',
           'Only change --brand-* tokens: colors, fonts, radius, border width and font weight. Spacing and sizes stay the same, so the components keep working.',
+          'The accent button uses accent 400 with dark text. Is your accent a dark color? Set --brand-color-accent-solid-surface, -surface-hover, -surface-pressed and -foreground. The Brand builder does this for you with "Use my exact accent color on buttons".',
         ],
         code: ':root {\n  --brand-color-primary-600: #0284c7;\n  --brand-color-accent-400: #facc15;\n  --brand-font-body: "Manrope", system-ui, sans-serif;\n}',
       },
@@ -256,6 +257,13 @@ export const guides = [
 
 // Figma changelog: shown on the page "📝 Changelog" in the Figma file. Newest first.
 export const figmaChangelog = [
+  {
+    version: '1.6.0',
+    items: [
+      'Button, Button destructive and Button icon have State=Pressed, in the column after Hover. New tokens button/<hierarchy>/surface-pressed, foreground-pressed and border-pressed.',
+      'New brand variables brand/color/accent-solid/surface, surface-hover, surface-pressed and foreground: a brand can give the accent button its exact color and text color. Iris, Forest and Berry keep accent 400 with dark text.',
+    ],
+  },
   {
     version: '1.5.0',
     items: [

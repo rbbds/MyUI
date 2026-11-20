@@ -27,9 +27,9 @@ export default [
       'Trailing icon (optional): after the label, for example an arrow for "next".',
     ],
     figmaProps: [
-      ['Hierarchy', 'Primary, Accent, Secondary, Tertiary, Link', 'Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. Use it once per screen.'],
+      ['Hierarchy', 'Primary, Accent, Secondary, Tertiary, Link', 'Visual weight. Accent is for the action that sells (Add to cart, Buy now): bright yellow with dark text by default, set per brand with the accent color. A brand with a dark accent can set the exact button color and the text color (--brand-color-accent-solid-*). Use it once per screen.'],
       ['Size', 'sm, md, lg', 'Footprint. md is the default.'],
-      ['State', 'Default, Hover, Focus, Disabled, Loading', 'Interaction state.'],
+      ['State', 'Default, Hover, Pressed, Focus, Disabled, Loading', 'Interaction state. Pressed is one step darker than Hover.'],
       ['Label', 'text', 'Via _Button.'],
       ['Icon leading / Icon trailing', 'boolean', 'Shows the icon.'],
       ['Leading icon / Trailing icon', 'instance swap', 'Pick a Lucide icon. The color follows the label.'],
@@ -97,7 +97,7 @@ export default [
     figmaProps: [
       ['Hierarchy', 'Primary, Secondary, Tertiary, Link', 'Primary to confirm, Tertiary or Link for a less prominent delete action.'],
       ['Size', 'sm, md, lg', ''],
-      ['State', 'Default, Hover, Focus, Disabled, Loading', ''],
+      ['State', 'Default, Hover, Pressed, Focus, Disabled, Loading', ''],
       ['Label, icons', 'via _Button', 'Same as Button.'],
     ],
     reactProps: [['destructive', 'boolean', 'Set to true on Button or ButtonIcon. All other props are the same as Button.']],
@@ -127,7 +127,7 @@ export default [
     figmaProps: [
       ['Hierarchy', 'Primary, Secondary, Tertiary', 'Secondary by default in code.'],
       ['Size', 'sm, md, lg', ''],
-      ['State', 'Default, Hover, Focus, Disabled, Loading', ''],
+      ['State', 'Default, Hover, Pressed, Focus, Disabled, Loading', ''],
       ['Icon', 'instance swap', 'Via _Button icon.'],
     ],
     reactProps: [

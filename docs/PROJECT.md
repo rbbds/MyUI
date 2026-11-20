@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 17 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 20 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -154,6 +154,7 @@ Full plan and rules: `docs/TOKEN-ARCHITECTURE.md`.
 
 **What a brand can change (all in `↳ brand`):**
 - `brand/color/primary/*` and `brand/color/accent/*` (12-step scales)
+- `brand/color/accent-solid/*`: color, hover, pressed and text color of the accent button (default accent 400, 500, 600 and gray 900)
 - `brand/font/body`, `brand/font/title`, `brand/font-weight/*`
 - `brand/radius/control|containers|overlays/*`
 - `brand/border-width/*`

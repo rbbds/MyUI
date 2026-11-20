@@ -25,6 +25,7 @@ const megaLinks = [
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
 const scenarios: Record<string, ReactNode> = {
+  'button-pressed': <div style={{ display: 'flex', gap: 16 }}><Button>Primary</Button><Button hierarchy="accent">Accent</Button><Button hierarchy="secondary">Secondary</Button><Button destructive>Delete</Button><Button aria-disabled>Switched off</Button></div>,
   'modal-dropdown': <InModal><DropdownMenu label="Actions" trigger={<Button hierarchy="secondary">Menu</Button>} items={[{ label: 'Edit', onSelect: () => {} }, { label: 'Delete', onSelect: () => {} }]} /></InModal>,
   'modal-popover': <InModal><Popover title="Help" trigger={<Button hierarchy="secondary">Info</Button>}>Text</Popover></InModal>,
   'modal-datepicker': <InModal><DatePicker label="Date" /></InModal>,

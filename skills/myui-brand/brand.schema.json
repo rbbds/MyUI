@@ -19,7 +19,18 @@
       "additionalProperties": false,
       "properties": {
         "primary": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Main brand color: buttons, links, focus, active states." },
-        "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional second brand color: highlights, badges, tags, illustrations." }
+        "accent": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Optional second brand color: highlights, badges, tags, illustrations." },
+        "accentButton": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Optional. Makes the accent button use your exact accent color instead of accent 400 with dark text. Use {} to let the script pick hover, pressed and the text color. Needs colors.accent.",
+          "properties": {
+            "surface": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Button color. Default: colors.accent." },
+            "hover": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Button color on hover. Default: one step darker." },
+            "pressed": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Button color while pressed. Default: two steps darker." },
+            "foreground": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$", "description": "Text and icon color. Default: white or gray 900, whichever has the most contrast." }
+          }
+        }
       }
     },
     "fonts": {
