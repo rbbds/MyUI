@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-Planned as 1.6.0 (minor: new tokens and a new state, nothing renamed or removed).
+## 1.6.0 (20 November 2026)
 
 ### Added
 - **Accent button per brand.** New brand tokens `--brand-color-accent-solid-surface`, `-surface-hover`, `-surface-pressed` and `-foreground`. A brand with a dark accent color can now give the accent button that exact color with white text. Iris, Forest and Berry keep accent 400 with dark text: the defaults point to the same values as before.
