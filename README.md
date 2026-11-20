@@ -34,13 +34,20 @@ Load the fonts yourself (for example `@fontsource-variable/inter`), or set `--br
 
 - **Style:** `data-brand="forest"` or `data-brand="berry"` on `<html>`. Iris needs no attribute.
 - **Theme:** `data-theme="dark"` on `<html>`, or on any element for a dark section.
-- **Your own brand:** make the CSS with the Brand builder in Storybook, or let your AI tool do it with the **myui-brand skill** (`skills/myui-brand`, also in the npm package). Only change `--brand-*` tokens: colors, fonts, radius, border width and font weight.
+- **Your own brand:** make the CSS with the Brand builder in Storybook, or let your AI tool do it with the **myui-brand skill** (`skills/myui-brand`, also in the npm package). Only change `--brand-*` tokens: colors, fonts, radius, border width and font weight. Optional, only when your brand has them: the exact accent button color, a heading color, a gray tint and your own status colors.
 
 ```css
 :root {
   --brand-color-primary-600: #0284c7;
   --brand-color-accent-400: #facc15;
   --brand-font-body: "Manrope", system-ui, sans-serif;
+
+  /* Optional. The Brand builder writes all 12 steps of every scale. */
+  --brand-color-accent-solid-surface: #2f7d5b;   /* exact accent button color */
+  --brand-color-accent-solid-foreground: #ffffff;
+  --brand-color-heading: #36254b;                /* titles in Light */
+  --brand-color-neutral-900: #1c1722;            /* your own grays */
+  --brand-color-error-600: #c8322f;              /* your own status color */
 }
 ```
 
@@ -78,7 +85,7 @@ Same four layers as in Figma:
 
 | Layer | Figma collection | CSS prefix | Example |
 |---|---|---|---|
-| Primitives + brand | `brand`, `spacing`, `border`, `typography` | `--brand-*`, `--spacings-*`, `--radius-*`, `--font-*` | `--brand-color-primary-600` |
+| Primitives + brand | `color`, `brand`, `spacing`, `border`, `typography` | `--gray-*`, `--brand-*`, `--spacings-*`, `--radius-*`, `--font-*` | `--brand-color-primary-600` |
 | Theme alias (Light/Dark) | `theme-(alias)` | `--color-*`, `--spacing-*`, `--border-*` | `--color-surface-primary` |
 | Screen size alias | `screen-size-(alias)` | `--typography-*`, `--responsive-*` | `--typography-titles-h1` |
 | Mapped (component) | `mapped` | `--{component}-*`, `--text-*` | `--button-primary-surface-default` |

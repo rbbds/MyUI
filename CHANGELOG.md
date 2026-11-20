@@ -11,6 +11,7 @@ Planned as 1.6.0 (minor: new tokens and a new state, nothing renamed or removed)
 - `npm run check:contrast` also checks the button label on its fill in Default, Hover and Pressed (4.5:1), and `npm run check:brand` runs the brand examples.
 
 - **Grays and status colors per brand.** New brand tokens `--brand-color-neutral-*`, `--brand-color-success-*`, `-warning-*`, `-error-*` and `-info-*` (12 steps each). They point to the MyUI grays and status colors, so nothing changes until a brand sets its own. Brand builder: new fields "Gray tint", "Success", "Warning", "Error" and "Information". myui-brand skill: optional `colors.neutral`, `success`, `warning`, `error` and `info`, and a third example.
+- **Heading color per brand.** New brand token `--brand-color-heading` (default: the text color) and theme token `--color-foreground-heading`. 24 title tokens (`--card-foreground-title`, `--modal-foreground-title`, `--page-header-foreground-title` and more) now point to it. In Dark titles keep the light text color. For your own headings: `color: var(--base-color-foreground-heading)`. Brand builder: field "Heading color". myui-brand skill: optional `colors.heading`.
 
 ### Fixed
 - Dark: white text on the primary button on hover was 4.35:1 (Forest) and 4.29:1 (Berry), and 3.76:1 on the primary destructive button. Hover and pressed now get darker in Dark too (steps 700 and 800, the same as in Light). This also changes the hover color of a checked checkbox and radio, the toggle and the Bottom navigation action in Dark.
@@ -21,6 +22,7 @@ Planned as 1.6.0 (minor: new tokens and a new state, nothing renamed or removed)
 - tokens.css: about 70 lines moved within their block (the Figma export sorts a few groups differently now). No values changed.
 
 ### Docs
+- Getting started (For designers, For developers) and the README: what a brand can change since 1.6.0, how to replace a default in your own mode in Figma, and a full CSS example.
 - README: links to Storybook, CHANGELOG and npm at the top, new sections Routing (`LinkProvider` for Next.js and React Router), Not in MyUI yet, and Questions and bugs. The component table now lists the dashboard and portal components, Mega menu, Mobile nav, Bottom navigation and the form inputs added since 1.0.
 - Figma changelog (page 📝 Changelog, source `figmaChangelog` in `docs/content/guides.mjs`): versions 1.1.0 to 1.5.0 added. 1.1.0 was only in Figma, now also in the source.
 

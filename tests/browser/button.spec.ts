@@ -58,3 +58,16 @@ test.describe('Accent button: brand tokens', () => {
     expect(await page.getByRole('button', { name: 'Accent' }).evaluate((el) => getComputedStyle(el).color)).toBe(await token(page, '--gray-900'));
   });
 });
+
+test.describe('Heading color: brand token', () => {
+  const titleColor = (page: Page) => page.getByText('Heads up').evaluate((el) => getComputedStyle(el).color);
+  test('titles follow --brand-color-heading in Light and keep the light text color in Dark', async ({ page }) => {
+    await page.goto('/?s=heading-color');
+    expect(await titleColor(page)).toBe(await token(page, '--color-foreground-primary'));
+    await page.addStyleTag({ content: ':root{--brand-color-heading:#36254b}' });
+    await expect.poll(() => titleColor(page)).toBe('rgb(54, 37, 75)');
+    expect(await page.getByText('Body text').evaluate((el) => getComputedStyle(el).color)).not.toBe('rgb(54, 37, 75)');
+    await page.evaluate(() => document.documentElement.setAttribute('data-theme', 'dark'));
+    await expect.poll(() => titleColor(page)).toBe(await token(page, '--brand-color-neutral-50'));
+  });
+});
