@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-Planned as 1.8.0.
+## 1.8.0 (21 November 2026)
 
 ### Added
 - **`LocaleProvider`.** Sets the language for every component inside it: the format of dates, numbers and amounts (`locale`), the built-in texts per component (`labels`) and single texts such as a title or a placeholder (`texts`). A `locale` or `labels` prop on a component still wins. Without a provider everything stays en-US and English, as before.
