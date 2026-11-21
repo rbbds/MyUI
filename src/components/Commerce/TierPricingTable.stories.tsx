@@ -4,3 +4,4 @@ import meta, * as S from './Commerce.cases';
 export default { ...meta, title: 'E-commerce/Tier pricing table' } as typeof meta;
 export const TierPricingTables = S.TierPricingTables;
 export const TierPricingWithAddToCart = S.TierPricingWithAddToCart;
+export const TierPricingDutch = S.TierPricingDutch;

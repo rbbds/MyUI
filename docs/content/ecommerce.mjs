@@ -142,7 +142,7 @@ export const docs = [
   },
   {
     id: 'tier-pricing-table', name: 'Tier pricing table', page: P, figma: { node: '17503:558', base: '_Tier row' }, react: 'TierPricingTable',
-    stories: { file: f + 'TierPricingTable.stories', items: ['TierPricingTables', 'TierPricingWithAddToCart'] },
+    stories: { file: f + 'TierPricingTable.stories', items: ['TierPricingTables', 'TierPricingWithAddToCart', 'TierPricingDutch'] },
     summary: 'Unit price per quantity tier, for bulk orders. The row that matches the current quantity is marked.',
     use: ['Product page for bulk orders, above or next to Add to cart.', 'Anywhere the price each depends on the quantity.'],
     avoid: ['One fixed price: use Price.', 'Comparing plans or products: use a Table.', 'The total of the order: show that next to the buy button or in Cart summary.'],
