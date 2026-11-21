@@ -1,7 +1,7 @@
 import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { CircleAlert, CircleHelp } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { Tooltip } from '../Display/Display';
 import { Field, type FieldBaseProps } from './Field';
 
@@ -26,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { label, hideLabel, hint, error, required, size = 'md', iconLeading, prefix, suffix, help, labels, disabled, className, id, 'aria-describedby': describedByProp, ...rest },
   ref,
 ) {
-  const l = mergeLabels(DEFAULT_INPUT_LABELS, labels);
+  const l = useLabels('input', DEFAULT_INPUT_LABELS, labels);
   return (
     <Field id={id} label={label} hideLabel={hideLabel} hint={hint} error={error} required={required} disabled={disabled} className={className}>
       {({ id, describedBy, invalid }) => (

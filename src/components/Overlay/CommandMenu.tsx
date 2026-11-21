@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useId, useMemo, useRef, useState, type DialogHTM
 import { Search } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { useModalDialog } from '../../utils/dialog';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { mergeRefs } from '../../utils/refs';
 import { Kbd } from '../Display/Feedback';
 import './CommandMenu.css';
@@ -57,8 +57,11 @@ const safeId = (id: string) => id.replace(/[^\w-]/g, '_');
  * Keyboard-first search over pages and actions. Combobox (input) + listbox (results);
  * arrow keys move aria-activedescendant, Enter runs the item, Escape closes.
  */
-export const CommandMenu = forwardRef<HTMLDialogElement, CommandMenuProps>(function CommandMenu({ open, onClose, items, label = 'Commands', placeholder = 'Search or type a command…', emptyText = 'No results found.', showHints = true, hintLabels, labels, className, ...rest }, ref) {
-  const l = mergeLabels(DEFAULT_COMMAND_MENU_LABELS, labels, hintLabels);
+export const CommandMenu = forwardRef<HTMLDialogElement, CommandMenuProps>(function CommandMenu({ open, onClose, items, label: labelProp, placeholder: placeholderProp, emptyText: emptyTextProp, showHints = true, hintLabels, labels, className, ...rest }, ref) {
+  const placeholder = useText('commandMenu.placeholder', placeholderProp);
+  const label = useText('commandMenu.label', labelProp);
+  const emptyText = useText('commandMenu.emptyText', emptyTextProp);
+  const l = useLabels('commandMenu', DEFAULT_COMMAND_MENU_LABELS, labels, hintLabels);
   const list = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);

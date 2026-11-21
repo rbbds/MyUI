@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { Button } from '../Button/Button';
 import { Skeleton } from '../Display/Feedback';
 import './Portal.css';
@@ -45,7 +45,7 @@ export const DEFAULT_TABLE_BULK_ACTIONS_LABELS: TableBulkActionsLabels = { count
  * so no one acts on rows they cannot see.
  */
 export function TableBulkActions({ count, onClear, actions, labels, countLabel, clearLabel, className, ...rest }: TableBulkActionsProps) {
-  const l = mergeLabels(DEFAULT_TABLE_BULK_ACTIONS_LABELS, labels, { count: countLabel, clear: clearLabel });
+  const l = useLabels('tableBulkActions', DEFAULT_TABLE_BULK_ACTIONS_LABELS, labels, { count: countLabel, clear: clearLabel });
   /* M11: the live region is always there, so the first change ("1 selected") is read out too */
   const status = <p className="rb-visually-hidden" role="status">{count > 0 ? l.count(count) : ''}</p>;
   if (count < 1) return status;

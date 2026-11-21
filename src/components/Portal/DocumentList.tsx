@@ -2,7 +2,7 @@ import { useId, type HTMLAttributes, type ReactNode } from 'react';
 import { Link } from '../../utils/link';
 import { Download, FileText } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import type { HeadingLevel } from '../../utils/useControlled';
 import { FeaturedIcon } from '../Display/Display';
 import './Portal2.css';
@@ -58,7 +58,7 @@ export interface DocumentItemLabels {
 export const DEFAULT_DOCUMENT_ITEM_LABELS: DocumentItemLabels = { download: (title) => `Download ${title}`, unread: 'New' };
 
 export function DocumentItem({ title, href, meta, unread, icon, downloadHref, labels, downloadLabel, unreadLabel }: DocumentItemProps) {
-  const l = mergeLabels(DEFAULT_DOCUMENT_ITEM_LABELS, labels, { download: downloadLabel === undefined ? undefined : () => downloadLabel, unread: unreadLabel });
+  const l = useLabels('documentItem', DEFAULT_DOCUMENT_ITEM_LABELS, labels, { download: downloadLabel === undefined ? undefined : () => downloadLabel, unread: unreadLabel });
   return (
     <li className={cx('rb-doc', unread && 'rb-doc--unread')}>
       {icon ?? <FeaturedIcon size="sm" color="gray" icon={<FileText />} />}

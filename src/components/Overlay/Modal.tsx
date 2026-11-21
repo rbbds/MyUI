@@ -2,7 +2,7 @@ import { forwardRef, useId, useMemo, type DialogHTMLAttributes, type ReactNode, 
 import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useModalDialog } from '../../utils/dialog';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { mergeRefs } from '../../utils/refs';
 import type { HeadingLevel } from '../../utils/useControlled';
 import './Overlay.css';
@@ -39,7 +39,7 @@ export interface ModalProps extends Omit<DialogHTMLAttributes<HTMLDialogElement>
  * and onClose also runs when a <form method="dialog"> inside closes it.
  */
 export const Modal = forwardRef<HTMLDialogElement, ModalProps>(function Modal({ open, onClose, title, description, icon, children, footer, size = 'md', headingLevel = 2, labels, closeLabel, initialFocus, className, ...rest }, ref) {
-  const l = mergeLabels(DEFAULT_MODAL_LABELS, labels, { close: closeLabel });
+  const l = useLabels('modal', DEFAULT_MODAL_LABELS, labels, { close: closeLabel });
   const H = `h${headingLevel}` as 'h2';
   const dialog = useModalDialog({ open, onClose, initialFocus });
   const dialogRef = useMemo(() => mergeRefs(dialog.ref, ref), [dialog.ref, ref]);

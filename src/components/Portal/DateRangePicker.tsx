@@ -3,6 +3,7 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { useControlled } from '../../utils/useControlled';
 import { mergeLabels } from '../../utils/labels';
+import { useLabels, useLocale, useText } from '../../utils/locale';
 import { Button } from '../Button/Button';
 import { Calendar, formatDate } from '../Form/DatePicker';
 import { Field, type FieldBaseProps } from '../Form/Field';
@@ -22,7 +23,7 @@ export const DEFAULT_DATE_RANGE_PRESET_LABELS: DateRangePresetLabels = {
 };
 /** Default quick picks, relative to today. Pass labels to translate them. */
 export const defaultDateRangePresets = (today = day(new Date()), labels: Partial<DateRangePresetLabels> = {}): DateRangePreset[] => {
-  const l = { ...DEFAULT_DATE_RANGE_PRESET_LABELS, ...labels };
+  const l = mergeLabels(DEFAULT_DATE_RANGE_PRESET_LABELS, labels);
   return [
     { label: l.today, range: () => ({ start: today, end: today }) },
     { label: l.yesterday, range: () => ({ start: plus(today, -1), end: plus(today, -1) }) },
@@ -72,10 +73,12 @@ const days = (r: DateRange) => (r.start && r.end ? Math.round((day(r.end).getTim
 /** Pick a period: quick picks, two months side by side, confirm with Apply. */
 export function DateRangePicker({
   label, hideLabel, hint, error, required, size = 'md', value, defaultValue = { start: null, end: null }, onValueChange, onChange,
-  presets = defaultDateRangePresets(), min, max, disabled, id, placeholder = 'Choose a period', locale = 'en-US',
+  presets: presetsProp, min, max, disabled, id, placeholder: placeholderProp, locale: localeProp,
   dialogLabel, labels, className,
 }: DateRangePickerProps) {
-  const l = mergeLabels(DEFAULT_DATE_RANGE_PICKER_LABELS, labels, { dialog: dialogLabel });
+  const locale = useLocale(localeProp);
+  const placeholder = useText('dateRangePicker.placeholder', placeholderProp);
+  const l = useLabels('dateRangePicker', DEFAULT_DATE_RANGE_PICKER_LABELS, labels, { dialog: dialogLabel });
   const [range, setRange] = useControlled<DateRange>(value, defaultValue, (r) => { onValueChange?.(r); onChange?.(r); });
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<DateRange>(range);
@@ -117,6 +120,9 @@ export function DateRangePicker({
     ? (hover < draft.start ? { start: hover, end: draft.start } : { start: draft.start, end: hover })
     : draft;
 
+  /* The default quick picks follow the language of the LocaleProvider. */
+  const presetLabels = useLabels('dateRangePreset', DEFAULT_DATE_RANGE_PRESET_LABELS);
+  const presets = presetsProp === undefined ? defaultDateRangePresets(undefined, presetLabels) : presetsProp;
   const presetList = presets || [];
   const activePreset = presetList.find((p) => { const r = p.range(); return same(r.start, draft.start) && same(r.end, draft.end); });
   const choosePreset = (p: DateRangePreset) => { const r = p.range(); setDraft(r); setMonth(new Date(r.start.getFullYear(), r.start.getMonth(), 1)); };

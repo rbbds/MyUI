@@ -2,7 +2,7 @@ import { forwardRef, useId, useMemo, type DialogHTMLAttributes, type ReactNode, 
 import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
 import { useModalDialog } from '../../utils/dialog';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { mergeRefs } from '../../utils/refs';
 import type { HeadingLevel } from '../../utils/useControlled';
 import './Slideout.css';
@@ -37,7 +37,7 @@ export interface SlideoutProps extends Omit<DialogHTMLAttributes<HTMLDialogEleme
  * Escape and the backdrop close it, and focus returns to the trigger. The page behind does not scroll.
  */
 export const Slideout = forwardRef<HTMLDialogElement, SlideoutProps>(function Slideout({ open, onClose, title, description, children, footer, size = 'md', side = 'right', headingLevel = 2, labels, closeLabel, initialFocus, className, ...rest }, ref) {
-  const l = mergeLabels(DEFAULT_SLIDEOUT_LABELS, labels, { close: closeLabel });
+  const l = useLabels('slideout', DEFAULT_SLIDEOUT_LABELS, labels, { close: closeLabel });
   const H = `h${headingLevel}` as 'h2';
   const dialog = useModalDialog({ open, onClose, initialFocus });
   const dialogRef = useMemo(() => mergeRefs(dialog.ref, ref), [dialog.ref, ref]);

@@ -1,7 +1,7 @@
 import { useId, useState, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled, type HeadingLevel } from '../../utils/useControlled';
 import { Button } from '../Button/Button';
 import { Checkbox, CheckboxGroup } from '../Selection/Checkbox';
@@ -35,7 +35,7 @@ export interface FilterGroupProps {
 
 /** Collapsible filter section with a checkbox list (or custom content). Stack several in a filter panel. */
 export function FilterGroup({ title, options = [], value: valueProp, defaultValue = [], onValueChange, onChange, limit = 6, defaultOpen = true, headingLevel = 3, children, labels, className }: FilterGroupProps) {
-  const l = { ...DEFAULT_FILTER_GROUP_LABELS, ...labels };
+  const l = useLabels('filterGroup', DEFAULT_FILTER_GROUP_LABELS, labels);
   const H = `h${headingLevel}` as 'h3';
   const [open, setOpen] = useState(defaultOpen);
   const [all, setAll] = useState(false);
@@ -94,7 +94,7 @@ export const DEFAULT_ACTIVE_FILTERS_LABELS: ActiveFiltersLabels = {
 
 /** Chosen filters as removable Tags, with "Clear all" and the number of results. */
 export function ActiveFilters({ filters, onRemove, onClear, resultCount, labels, className }: ActiveFiltersProps) {
-  const l = { ...DEFAULT_ACTIVE_FILTERS_LABELS, ...labels };
+  const l = useLabels('activeFilters', DEFAULT_ACTIVE_FILTERS_LABELS, labels);
   return (
     <div className={cx('rb-active-filters', className)}>
       {resultCount !== undefined && <p className="rb-active-filters__count" role="status">{l.results(resultCount)}</p>}

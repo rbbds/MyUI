@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { CircleAlert, CircleCheck, Info, TriangleAlert } from 'lucide-react';
 import { CloseButton } from '../Button/CloseButton';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { useTopModal } from '../../utils/panel';
 import type { StatusColor } from '../Display/Display';
 import './Overlay.css';
@@ -37,7 +37,7 @@ export interface AlertProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'
 
 /** Inline message tied to page content. Do not auto-dismiss. */
 export function Alert({ color = 'info', title, children, icon, actions, onClose, labels, closeLabel, className, role, ...rest }: AlertProps) {
-  const l = mergeLabels(DEFAULT_ALERT_LABELS, labels, { close: closeLabel });
+  const l = useLabels('alert', DEFAULT_ALERT_LABELS, labels, { close: closeLabel });
   return (
     <div className={cx('rb-alert', `rb-alert--${color}`, className)} role={role} {...rest}>
       <span className="rb-alert__icon" aria-hidden="true">{icon ?? ICONS[color]}</span>
@@ -65,7 +65,8 @@ export function Toast({ className, ...props }: ToastProps) {
  * While a Modal, Slideout or Command menu is open, the region renders inside that dialog: everything
  * outside it is inert and below the backdrop.
  */
-export function ToastRegion({ children, label = 'Notifications' }: { children: ReactNode; label?: string }) {
+export function ToastRegion({ children, label: labelProp }: { children: ReactNode; label?: string }) {
+  const label = useText('toastRegion.label', labelProp);
   const modal = useTopModal();
   const region = <section className="rb-toast-region" aria-label={label} aria-live="polite">{children}</section>;
   return modal ? createPortal(region, modal) : region;

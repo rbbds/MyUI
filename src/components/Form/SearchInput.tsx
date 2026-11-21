@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { Search, X } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels, useText } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import { Kbd } from '../Display/Feedback';
 import { Field } from './Field';
@@ -35,12 +35,13 @@ export interface SearchInputProps extends Omit<InputHTMLAttributes<HTMLInputElem
 
 /** Search field with clear button. Wrap it in <form role="search"> or a region with role="search". */
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(function SearchInput(
-  { label, hideLabel, showLabel, size = 'md', value, defaultValue = '', onValueChange, onChange, shortcut, labels, clearLabel, placeholder = 'Search', disabled, className, id, onKeyDown, ...rest },
+  { label, hideLabel, showLabel, size = 'md', value, defaultValue = '', onValueChange, onChange, shortcut, labels, clearLabel, placeholder: placeholderProp, disabled, className, id, onKeyDown, ...rest },
   ref,
 ) {
+  const placeholder = useText('searchInput.placeholder', placeholderProp);
   const inner = useRef<HTMLInputElement>(null);
   useImperativeHandle(ref, () => inner.current as HTMLInputElement);
-  const l = mergeLabels(DEFAULT_SEARCH_INPUT_LABELS, labels, { clear: clearLabel });
+  const l = useLabels('searchInput', DEFAULT_SEARCH_INPUT_LABELS, labels, { clear: clearLabel });
   const [current, set] = useControlled(value, defaultValue, (v) => { onValueChange?.(v); onChange?.(v); });
   const hidden = hideLabel ?? (showLabel === undefined ? true : !showLabel);
 

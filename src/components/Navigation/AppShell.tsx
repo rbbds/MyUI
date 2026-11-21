@@ -2,7 +2,7 @@ import { Children, useEffect, useId, useRef, useState, type HTMLAttributes, type
 import { Link } from '../../utils/link';
 import { ChevronDown, Menu, PanelLeft } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { ButtonIcon } from '../Button/Button';
 import { Divider } from '../Display/Display';
 import { Slideout } from '../Overlay/Slideout';
@@ -58,7 +58,7 @@ const menuHasCurrent = (m?: MegaMenuData) => Boolean(m?.columns.some((c) => c.li
  * Below 900px the links and the search move into a Slideout behind a menu button.
  */
 export function Header({ logo, links = [], search, actions, label, labels, navLabel, menuLabel, menuTitle, className, ...rest }: HeaderProps) {
-  const l = mergeLabels(DEFAULT_HEADER_LABELS, labels, { label: label ?? navLabel, menu: menuLabel, menuTitle });
+  const l = useLabels('header', DEFAULT_HEADER_LABELS, labels, { label: label ?? navLabel, menu: menuLabel, menuTitle });
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState<number | null>(null);
   const nav = useRef<HTMLElement>(null);
@@ -179,7 +179,7 @@ const asList = (nodes: ReactNode) => (
 
 /** App sidebar: logo, search, main navigation, footer navigation and user. Can collapse to icons only. */
 export function Sidebar({ logo, logoCollapsed, search, searchCollapsed, children, footer, user, userCollapsed, label, labels, navLabel, footerLabel, collapsed = false, onCollapsedChange, collapseLabel, expandLabel, className, ...rest }: SidebarProps) {
-  const l = mergeLabels(DEFAULT_SIDEBAR_LABELS, labels, { label: label ?? navLabel, footer: footerLabel, collapse: collapseLabel, expand: expandLabel });
+  const l = useLabels('sidebar', DEFAULT_SIDEBAR_LABELS, labels, { label: label ?? navLabel, footer: footerLabel, collapse: collapseLabel, expand: expandLabel });
   const navId = useId();
   const toggle = onCollapsedChange && (
     <ButtonIcon hierarchy="tertiary" size="sm" icon={<PanelLeft />} aria-label={collapsed ? l.expand : l.collapse} aria-expanded={!collapsed} aria-controls={navId} onClick={() => onCollapsedChange(!collapsed)} className="rb-sidebar__toggle" />
@@ -243,7 +243,7 @@ export const DEFAULT_DUAL_SIDEBAR_LABELS: DualSidebarLabels = { rail: 'Sections'
 
 /** Sidebar with two levels: a rail with the main sections and a panel with the pages of the chosen section. */
 export function DualSidebar({ logo, rail, railFooter, avatar, title, children, user, collapsed = false, onCollapsedChange, labels, railLabel, railFooterLabel, collapseLabel, className, ...rest }: DualSidebarProps) {
-  const l = mergeLabels(DEFAULT_DUAL_SIDEBAR_LABELS, labels, { rail: railLabel, railFooter: railFooterLabel, collapse: collapseLabel });
+  const l = useLabels('dualSidebar', DEFAULT_DUAL_SIDEBAR_LABELS, labels, { rail: railLabel, railFooter: railFooterLabel, collapse: collapseLabel });
   const titleId = useId();
   const panelId = useId();
   const expandRef = useRef<HTMLButtonElement>(null);

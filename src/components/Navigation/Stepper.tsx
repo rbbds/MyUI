@@ -2,7 +2,7 @@ import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
 import { Link } from '../../utils/link';
 import { Check } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import './Stepper.css';
 
 export interface StepItem {
@@ -40,7 +40,7 @@ export interface StepperProps extends HTMLAttributes<HTMLElement> {
 
 /** Progress through a multi-step flow. Renders <nav> with an ordered list. */
 export const Stepper = forwardRef<HTMLElement, StepperProps>(function Stepper({ steps, current, orientation = 'horizontal', label, labels, statusLabels, 'aria-label': ariaLabel, className, ...rest }, ref) {
-  const l = mergeLabels(DEFAULT_STEPPER_LABELS, labels, { ...statusLabels, label: label ?? ariaLabel });
+  const l = useLabels('stepper', DEFAULT_STEPPER_LABELS, labels, { ...statusLabels, label: label ?? ariaLabel });
   return (
     <nav ref={ref} aria-label={l.label} className={className} {...rest}>
       <ol className={cx('rb-stepper', `rb-stepper--${orientation}`)}>

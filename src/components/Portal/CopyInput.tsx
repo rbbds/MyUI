@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { Button } from '../Button/Button';
 import { Field, type FieldBaseProps } from '../Form/Field';
 import './Portal2.css';
@@ -29,7 +29,7 @@ export const DEFAULT_COPY_INPUT_LABELS: CopyInputLabels = { copy: 'Copy', copied
 
 /** Read-only value with a copy button, e.g. an account ID or an API key. */
 export function CopyInput({ label, hideLabel, hint, error, size = 'md', value, labels, copyLabel, copiedLabel, copiedMessage, id, className }: CopyInputProps) {
-  const l = mergeLabels(DEFAULT_COPY_INPUT_LABELS, labels, { copy: copyLabel, copied: copiedLabel, copiedMessage });
+  const l = useLabels('copyInput', DEFAULT_COPY_INPUT_LABELS, labels, { copy: copyLabel, copied: copiedLabel, copiedMessage });
   const [copied, setCopied] = useState(false);
   const timer = useRef<number | undefined>(undefined);
   const input = useRef<HTMLInputElement>(null);

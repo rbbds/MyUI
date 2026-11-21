@@ -2,6 +2,7 @@ import { forwardRef, useState, type InputHTMLAttributes } from 'react';
 import { Check, Circle, Eye, EyeOff } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled } from '../../utils/useControlled';
 import { Field, type FieldBaseProps } from '../Form/Field';
 import './Portal2.css';
@@ -14,7 +15,7 @@ export const DEFAULT_PASSWORD_REQUIREMENT_LABELS: PasswordRequirementLabels = {
 };
 /** The default rules, with your own texts if you pass them. */
 export const passwordRequirements = (labels: Partial<PasswordRequirementLabels> = {}): PasswordRequirement[] => {
-  const l = { ...DEFAULT_PASSWORD_REQUIREMENT_LABELS, ...labels };
+  const l = mergeLabels(DEFAULT_PASSWORD_REQUIREMENT_LABELS, labels);
   return [
     { label: l.length, test: (v) => v.length >= 12 },
     { label: l.case, test: (v) => /[a-z]/.test(v) && /[A-Z]/.test(v) },
@@ -56,10 +57,13 @@ const KEYS = ['empty', 'weak', 'fair', 'good', 'strong'] as const;
 
 /** Password field with show/hide. With showStrength: strength meter and requirement list for a new password. */
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(function PasswordInput(
-  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onValueChange, onChange, showStrength, requirements = defaultPasswordRequirements, showLabel, hideLabelText, labels, disabled, id, className, autoComplete, ...rest },
+  { label, hideLabel, hint, error, required, size = 'md', value, defaultValue = '', onValueChange, onChange, showStrength, requirements: requirementsProp, showLabel, hideLabelText, labels, disabled, id, className, autoComplete, ...rest },
   ref,
 ) {
-  const l = mergeLabels(DEFAULT_PASSWORD_INPUT_LABELS, labels, { show: showLabel, hide: hideLabelText });
+  /* The default rules follow the language of the LocaleProvider. */
+  const requirementLabels = useLabels('passwordRequirement', DEFAULT_PASSWORD_REQUIREMENT_LABELS);
+  const requirements = requirementsProp ?? passwordRequirements(requirementLabels);
+  const l = useLabels('passwordInput', DEFAULT_PASSWORD_INPUT_LABELS, labels, { show: showLabel, hide: hideLabelText });
   const [v, setValue] = useControlled(value, defaultValue, (x) => { onValueChange?.(x); onChange?.(x); });
   const [visible, setVisible] = useState(false);
   const met = requirements.map((r) => r.test(v));

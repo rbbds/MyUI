@@ -51,3 +51,5 @@ export * from './components/Portal/VerificationCode';
 export * from './components/Portal/PasswordInput';
 export * from './components/Portal/CopyInput';
 export { LinkProvider, type LinkComponent, type LinkComponentProps, type LinkProviderProps } from './utils/link';
+export { LocaleProvider, useLocale, DEFAULT_LOCALE, DEFAULT_TEXT_LABELS, type LocaleProviderProps, type LocaleDefinition, type CompleteLocale, type LocaleLabels, type LocaleTexts, type TextKey } from './utils/locale';
+export type { LabelSets } from './locales/registry';

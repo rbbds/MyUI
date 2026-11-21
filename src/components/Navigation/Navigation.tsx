@@ -2,7 +2,7 @@ import { forwardRef, useContext, createContext, useId, useRef, type AnchorHTMLAt
 import { Link } from '../../utils/link';
 import { ArrowLeft, ArrowRight, ChevronRight, House } from 'lucide-react';
 import { cx } from '../../utils/cx';
-import { mergeLabels } from '../../utils/labels';
+import { useLabels } from '../../utils/locale';
 import { useControlled, type AccessibleName } from '../../utils/useControlled';
 import { Button } from '../Button/Button';
 import './Navigation.css';
@@ -101,7 +101,7 @@ export const Breadcrumbs = forwardRef<HTMLElement, BreadcrumbsProps>(function Br
   { items, homeHref, back, label, labels, homeLabel, backLabel, 'aria-label': ariaLabel, className, ...rest },
   ref,
 ) {
-  const l = mergeLabels(DEFAULT_BREADCRUMBS_LABELS, labels, { home: homeLabel, back: backLabel, label: label ?? ariaLabel });
+  const l = useLabels('breadcrumbs', DEFAULT_BREADCRUMBS_LABELS, labels, { home: homeLabel, back: backLabel, label: label ?? ariaLabel });
   const Sep = () => <span className="rb-breadcrumbs__sep" aria-hidden="true"><ChevronRight /></span>;
   return (
     <nav ref={ref} className={cx('rb-breadcrumbs', className)} aria-label={l.label} {...rest}>
@@ -160,7 +160,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   { page, pageCount, onPageChange, label, labels, previousLabel, nextLabel, pageStatus, pageLabel, 'aria-label': ariaLabel, className, ...rest },
   ref,
 ) {
-  const l = mergeLabels(DEFAULT_PAGINATION_LABELS, labels, { label: label ?? ariaLabel, previous: previousLabel, next: nextLabel, pageStatus, page: pageLabel });
+  const l = useLabels('pagination', DEFAULT_PAGINATION_LABELS, labels, { label: label ?? ariaLabel, previous: previousLabel, next: nextLabel, pageStatus, page: pageLabel });
   return (
     <nav ref={ref} className={cx('rb-pagination', className)} aria-label={l.label} {...rest}>
       <Button hierarchy="secondary" size="sm" iconLeading={<ArrowLeft aria-hidden />} aria-disabled={page <= 1 || undefined} onClick={() => { if (page > 1) onPageChange(page - 1); }}>{l.previous}</Button>
