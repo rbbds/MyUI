@@ -6,7 +6,7 @@ import { useControlled } from '../../utils/useControlled';
 import './Commerce.css';
 
 /* ---------- Price ---------- */
-export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
+export interface PriceProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'prefix'> {
   /** Current price, e.g. 49.95. */
   amount: number;
   /** Original price. When higher than amount, it is shown struck through as "was … now …". */
@@ -14,35 +14,43 @@ export interface PriceProps extends HTMLAttributes<HTMLSpanElement> {
   currency?: string;
   locale?: string;
   size?: 'sm' | 'md' | 'lg';
-  /** Small text after the price, e.g. "per month" or "incl. VAT". */
+  /** Small text before the price, e.g. "From". */
+  prefix?: ReactNode;
+  /** Small text after the price, e.g. "per month" or "per piece". */
   suffix?: ReactNode;
-  /** Hidden texts for screen readers. */
+  /** Fixed number of decimals, e.g. 3 for a unit price such as €0.523. Default: what the currency uses (2 for EUR). */
+  decimals?: number;
+  /** Shows "excl. VAT" or "incl. VAT" after the price. The text comes from `labels`. Default: nothing. */
+  vat?: 'excl' | 'incl';
+  /** Texts: the hidden "Was" and "Now" for screen readers, and the VAT texts. */
   labels?: Partial<PriceLabels>;
 }
-export interface PriceLabels { was: string; now: string }
-export const DEFAULT_PRICE_LABELS: PriceLabels = { was: 'Was', now: 'Now' };
+export interface PriceLabels { was: string; now: string; vatExcl: string; vatIncl: string }
+export const DEFAULT_PRICE_LABELS: PriceLabels = { was: 'Was', now: 'Now', vatExcl: 'excl. VAT', vatIncl: 'incl. VAT' };
 
-export const formatMoney = (amount: number, currency = 'EUR', locale = 'en-US') =>
-  new Intl.NumberFormat(locale, { style: 'currency', currency }).format(amount);
+export const formatMoney = (amount: number, currency = 'EUR', locale = 'en-US', decimals?: number) =>
+  new Intl.NumberFormat(locale, { style: 'currency', currency, ...(decimals === undefined ? {} : { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) }).format(amount);
 
-/** Price with optional sale price. Screen readers hear "Was … Now …". */
-export function Price({ amount, compareAt, currency = 'EUR', locale: localeProp, size = 'md', suffix, labels, className, ...rest }: PriceProps) {
+/** Price with optional sale price, prefix, suffix and VAT text. Screen readers hear "Was … Now …". */
+export function Price({ amount, compareAt, currency = 'EUR', locale: localeProp, size = 'md', prefix, suffix, decimals, vat, labels, className, ...rest }: PriceProps) {
   const locale = useLocale(localeProp);
   const l = useLabels('price', DEFAULT_PRICE_LABELS, labels);
   const sale = compareAt !== undefined && compareAt > amount;
   return (
     <span className={cx('rb-price', `rb-price--${size}`, sale && 'rb-price--sale', className)} {...rest}>
+      {prefix && <span className="rb-price__prefix">{prefix}</span>}
       {sale && (
         <s className="rb-price__compare">
           <span className="rb-visually-hidden">{l.was} </span>
-          {formatMoney(compareAt!, currency, locale)}
+          {formatMoney(compareAt!, currency, locale, decimals)}
         </s>
       )}
       <span className="rb-price__amount">
         {sale && <span className="rb-visually-hidden">{l.now} </span>}
-        {formatMoney(amount, currency, locale)}
+        {formatMoney(amount, currency, locale, decimals)}
       </span>
       {suffix && <span className="rb-price__suffix">{suffix}</span>}
+      {vat && <span className="rb-price__vat">{vat === 'excl' ? l.vatExcl : l.vatIncl}</span>}
     </span>
   );
 }

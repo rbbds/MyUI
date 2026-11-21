@@ -15,7 +15,7 @@ export const nlNL: CompleteLocale = {
   locale: 'nl-NL',
   labels: {
     // E-commerce
-    price: { was: 'Van', now: 'Voor' },
+    price: { was: 'Van', now: 'Voor', vatExcl: 'excl. btw', vatIncl: 'incl. btw' },
     rating: { rating: (value, max) => `${value} van ${max} sterren`, reviews: (count) => `${count} ${count === 1 ? 'beoordeling' : 'beoordelingen'}` },
     quantityStepper: { decrease: 'Eén minder', increase: 'Eén meer' },
     stock: { 'in-stock': 'Op voorraad', low: 'Bijna uitverkocht', out: 'Uitverkocht', preorder: 'Pre-order' },
