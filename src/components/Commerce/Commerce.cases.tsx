@@ -16,6 +16,8 @@ import { ProductCard, ProductGrid } from './ProductCard';
 import { CartItem, CartSummary, PromoCode, CartButton, MiniCart } from './Cart';
 import { ProductGallery, VariantPicker, AddToCart } from './Product';
 import { TierPricingTable, useTierPricing } from './TierPricing';
+import { LocaleProvider } from '../../utils/locale';
+import { nlNL } from '../../locales/nl-NL';
 import { FilterGroup, ActiveFilters } from './Filters';
 import { AddressFields } from './Checkout';
 import { img, products } from './demo-data';
@@ -279,6 +281,37 @@ export const TierPricingWithAddToCart: Story = {
       </div>
     );
   },
+};
+
+function DutchBulkOrder() {
+  const [q, setQ] = useState(50);
+  const [msg, setMsg] = useState('');
+  const { active, hint } = useTierPricing(penTiers, q, { decimals: 3 });
+  return (
+    <div style={{ display: 'grid', gap: 24, maxWidth: 440 }}>
+      <Price prefix="Vanaf" amount={active ? active.unitPrice : penTiers[0].unitPrice} decimals={3} suffix="per stuk" vat="excl" size="lg" />
+      <TierPricingTable title="Staffelprijzen" tiers={penTiers} quantity={q} onTierSelect={(tier) => setQ(tier.min)} decimals={3} vat="excl" footnote="Inclusief één drukpositie." />
+      <AddToCart
+        productName="Balpen"
+        quantity={q}
+        onQuantityChange={setQ}
+        minQuantity={50}
+        maxQuantity={5000}
+        quantityStep={25}
+        quantityHint={hint}
+        delivery="Geleverd binnen 8 werkdagen"
+        onAdd={(n) => setMsg(`${n} balpennen toegevoegd aan je winkelwagen`)}
+        secondaryAction={{ label: 'Offerte aanvragen', onClick: (n) => setMsg(`Offerte aangevraagd voor ${n} balpennen`) }}
+        secondaryHint="Voor grote aantallen of een eigen opdruk. Je krijgt binnen één werkdag een prijs."
+      />
+      <p role="status">{msg}</p>
+    </div>
+  );
+}
+/** The same flow fully in Dutch: the nl-NL locale for the texts of MyUI, and Dutch texts from the page itself. */
+export const TierPricingDutch: Story = {
+  name: 'Tier pricing with Add to cart, in Dutch',
+  render: () => <LocaleProvider locale={nlNL}><DutchBulkOrder /></LocaleProvider>,
 };
 
 /* ---------- Checkout parts ---------- */
