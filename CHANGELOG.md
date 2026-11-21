@@ -6,6 +6,7 @@ Planned as 1.8.0.
 
 ### Added
 - **`LocaleProvider`.** Sets the language for every component inside it: the format of dates, numbers and amounts (`locale`), the built-in texts per component (`labels`) and single texts such as a title or a placeholder (`texts`). A `locale` or `labels` prop on a component still wins. Without a provider everything stays en-US and English, as before.
+- **Dutch (nl-NL).** `import { nlNL } from '@rbbds/ui/locales/nl-NL'` and `<LocaleProvider locale={nlNL}>`: every built-in text in Dutch (informal, "je") and Dutch formats (€ 1.234,56, 27-11-2026, week starts on Monday). A separate import, so an English site does not load it. The type `CompleteLocale` makes the type check fail when a text is missing.
 - `locale` prop on Cart summary and Mini cart.
 - Exports: `LocaleProvider`, `useLocale`, `DEFAULT_LOCALE`, `DEFAULT_TEXT_LABELS` and the types `LocaleDefinition`, `CompleteLocale`, `LocaleLabels`, `LocaleTexts`, `TextKey`, `LabelSets`.
 - Storybook: a Locale toggle in the toolbar (en-US, nl-NL).

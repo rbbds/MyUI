@@ -45,6 +45,10 @@
       "types": "./dist/types/flags/index.d.ts",
       "import": "./dist/flags.js"
     },
+    "./locales/nl-NL": {
+      "types": "./dist/types/locales/nl-NL.d.ts",
+      "import": "./dist/locales/nl-NL.js"
+    },
     "./styles.css": "./dist/styles.css",
     "./tokens.css": "./dist/tokens.css",
     "./tokens.json": "./dist/tokens.json"

@@ -217,7 +217,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Overlays: Dropdown menu, Modal, Slideout, Command menu (⌘K)
 - Navigation: Header (met mobiel menu en `search`), Mega menu, Mobile nav, Sidebar (inklapbaar, twee niveaus, Dual), Nav item, Tabs, Breadcrumbs, Pagination, Stepper, Bottom navigation
 - Routing: `LinkProvider` geeft alle MyUI-links je router-link (Next.js, React Router). Build heeft `'use client'`.
-- Taal: `LocaleProvider` zet de locale (Intl-opmaak) en de teksten voor alle componenten. Componenten lezen ze met `useLocale`, `useLabels('key', DEFAULT_…_LABELS, labels)` en `useText('component.prop', prop)` uit `src/utils/locale.tsx`. Elke tekstset staat in `src/locales/registry.ts`.
+- Taal: `LocaleProvider` zet de locale (Intl-opmaak) en de teksten voor alle componenten. Componenten lezen ze met `useLocale`, `useLabels('key', DEFAULT_…_LABELS, labels)` en `useText('component.prop', prop)` uit `src/utils/locale.tsx`. Elke tekstset staat in `src/locales/registry.ts`. Nederlands staat in `src/locales/nl-NL.ts` (aparte import `@rbbds/ui/locales/nl-NL`, je-vorm); het type `CompleteLocale` laat de typecheck falen als er een tekst ontbreekt.
 - Data display: Table. Content: Card, Accordion, Empty state, File upload
 - Utilities: Divider, Featured icon, Spinner, Skeleton, Kbd
 - Flags: 250+ vlaggen en CountrySelect (aparte entry)
@@ -282,6 +282,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #62 | Focuskleur is blauw in elk merk (`--color-border-focus` naar info 500 en 400), contrastcheck voor focus |
 | #63 | Release 1.7.0 |
 | #64 | F2a: `LocaleProvider` (locale en teksten voor alle componenten), bedragen in Cart summary en Mini cart volgen de locale, Locale-schakelaar in Storybook |
+| #65 | F2b: Nederlands (`@rbbds/ui/locales/nl-NL`): 53 tekstsets en 21 losse teksten, Locale-schakelaar in Storybook toont nu ook de teksten |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

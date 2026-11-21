@@ -5,6 +5,7 @@ import '@fontsource/source-serif-4/400.css';
 import '@fontsource/source-serif-4/600.css';
 import '@fontsource/source-serif-4/700.css';
 import { LocaleProvider } from '../src/utils/locale';
+import { nlNL } from '../src/locales/nl-NL';
 
 const preview: Preview = {
   globalTypes: {
@@ -34,7 +35,7 @@ const preview: Preview = {
       },
     },
     locale: {
-      description: 'Language: formats of dates, numbers and amounts (LocaleProvider)',
+      description: 'Language: formats and built-in texts (LocaleProvider)',
       toolbar: {
         title: 'Locale',
         icon: 'globe',
@@ -59,7 +60,7 @@ const preview: Preview = {
       }
       return (
         <div data-theme={theme} style={{ background: 'var(--color-surface-primary)', color: 'var(--color-foreground-primary)', fontFamily: 'var(--brand-font-body)', padding: 24, minHeight: context.viewMode === 'docs' ? undefined : '100vh', boxSizing: 'border-box' }}>
-          <LocaleProvider locale={context.globals.locale ?? 'en-US'}><Story /></LocaleProvider>
+          <LocaleProvider locale={context.globals.locale === 'nl-NL' ? nlNL : 'en-US'}><Story /></LocaleProvider>
         </div>
       );
     },

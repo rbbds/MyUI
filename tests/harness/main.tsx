@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
 import { Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
+import { nlNL } from '../../src/locales/nl-NL';
 
 /** One scenario per test, picked with ?s=name. Keep them small: one question each. */
 function InModal({ children, toast }: { children?: ReactNode; toast?: boolean }) {
@@ -25,6 +26,7 @@ const megaLinks = [
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
 const scenarios: Record<string, ReactNode> = {
+  'locale-nl-full': <LocaleProvider locale={nlNL}><CartSummary subtotal={1234.56} total={1234.56} /><QuantityStepper /><Spinner /><Pagination page={2} pageCount={8} onPageChange={() => {}} /></LocaleProvider>,
   'locale-nl': <LocaleProvider locale="nl-NL" labels={{ cartSummary: { total: 'Totaal' } }} texts={{ 'cartSummary.title': 'Overzicht', 'spinner.label': 'Laden' }}><CartSummary subtotal={1234.56} total={1234.56} /><p data-testid="own-locale"><Price amount={2} locale="en-US" /></p><QuantityStepper /><Spinner /></LocaleProvider>,
   'locale-none': <><CartSummary subtotal={1234.56} total={1234.56} /><QuantityStepper /><Spinner /></>,
   'heading-color': <Alert title="Heads up">Body text</Alert>,
