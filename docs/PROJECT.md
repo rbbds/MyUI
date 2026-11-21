@@ -1,6 +1,6 @@
 # MyUI (@rbbds/ui): projectoverzicht
 
-Stand: 20 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
+Stand: 21 november 2026. Werk dit bestand bij in elke PR die architectuur, conventies of open punten verandert. Een kopie staat in het Claude Project "MyUI · white label design system".
 
 Eigen white-label design system van Robert Trimp: een Figma-library plus een React-library met Storybook, om te hergebruiken in eigen projecten en voor klanten. Los van PGGM.
 
@@ -289,6 +289,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #69 | Add to cart: `minQuantity`, `quantityStep`, `quantityHint`, aantal naar de pagina, tweede actie met uitleg. Cart item: `minQuantity`, `quantityStep`. Hint en melding onder de hele rij |
 | #70 | Nieuw: Tier pricing table (`TierPricingTable`, `useTierPricing`), tokens `--tier-pricing-*`, Figma-pagina |
 | #71 | Story: de koopflow met staffels volledig in het Nederlands |
+| #72 | Release 1.9.0 |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |
