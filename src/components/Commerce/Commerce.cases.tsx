@@ -15,6 +15,7 @@ import { Price, Rating, QuantityStepper, StockIndicator, formatMoney } from './B
 import { ProductCard, ProductGrid } from './ProductCard';
 import { CartItem, CartSummary, PromoCode, CartButton, MiniCart } from './Cart';
 import { ProductGallery, VariantPicker, AddToCart } from './Product';
+import { TierPricingTable, useTierPricing } from './TierPricing';
 import { FilterGroup, ActiveFilters } from './Filters';
 import { AddressFields } from './Checkout';
 import { img, products } from './demo-data';
@@ -245,6 +246,35 @@ export const BulkOrder: Story = {
           secondaryAction={{ label: 'Request a quote', onClick: quote, loading: busy }}
           secondaryHint="For large orders or a custom print. You get a price within one working day."
         />
+        <p role="status">{msg}</p>
+      </div>
+    );
+  },
+};
+
+/* ---------- Tier pricing ---------- */
+const penTiers = [{ min: 50, unitPrice: 0.52 }, { min: 250, unitPrice: 0.48 }, { min: 500, unitPrice: 0.45 }, { min: 1000, unitPrice: 0.41 }];
+export const TierPricingTables: Story = {
+  name: 'Tier pricing table',
+  render: () => (
+    <div style={{ display: 'grid', gap: 32, maxWidth: 360 }}>
+      <TierPricingTable title="Volume prices" tiers={penTiers} quantity={300} decimals={3} vat="excl" />
+      <TierPricingTable title="Volume prices" tiers={penTiers} quantity={300} decimals={3} density="compact" showSaving={false} indicative footnote="Until you choose a print." />
+      <TierPricingTable title="Volume prices" tiers={penTiers} decimals={3} vat="excl" loading />
+    </div>
+  ),
+};
+export const TierPricingWithAddToCart: Story = {
+  name: 'Tier pricing with Add to cart',
+  render: () => {
+    const [q, setQ] = useState(50);
+    const [msg, setMsg] = useState('');
+    const { active, hint } = useTierPricing(penTiers, q, { decimals: 3 });
+    return (
+      <div style={{ display: 'grid', gap: 24, maxWidth: 440 }}>
+        <Price prefix="From" amount={active ? active.unitPrice : penTiers[0].unitPrice} decimals={3} suffix="per piece" vat="excl" size="lg" />
+        <TierPricingTable title="Volume prices" tiers={penTiers} quantity={q} onTierSelect={(tier) => setQ(tier.min)} decimals={3} vat="excl" />
+        <AddToCart productName="Ballpoint pen" quantity={q} onQuantityChange={setQ} minQuantity={50} maxQuantity={5000} quantityStep={25} quantityHint={hint} delivery="Delivered in 8 working days" onAdd={(n) => setMsg(`${n} pens added to your cart`)} />
         <p role="status">{msg}</p>
       </div>
     );

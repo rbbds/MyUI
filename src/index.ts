@@ -32,6 +32,7 @@ export * from './components/Commerce/Basics';
 export * from './components/Commerce/ProductCard';
 export * from './components/Commerce/Cart';
 export * from './components/Commerce/Product';
+export * from './components/Commerce/TierPricing';
 export * from './components/Commerce/Filters';
 export * from './components/Commerce/Checkout';
 export * from './components/Portal/MetricCard';

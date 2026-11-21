@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { AddToCart, Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, Toast, ToastRegion, Tooltip } from '../../src';
+import { AddToCart, Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, TierPricingTable, Toast, ToastRegion, Tooltip, useTierPricing } from '../../src';
 import { Info } from 'lucide-react';
 import { nlNL } from '../../src/locales/nl-NL';
 
@@ -37,12 +37,29 @@ function BuyBulk() {
     </div>
   );
 }
+function TierHintNl() { const { hint } = useTierPricing(tiers, 300, { decimals: 3 }); return <p data-testid="hint">{hint}</p>; }
+const tiers = [{ min: 250, unitPrice: 0.48 }, { min: 50, unitPrice: 0.52 }, { min: 1000, unitPrice: 0.41 }];
+function TierDemo() {
+  const [q, setQ] = useState(50);
+  const { hint } = useTierPricing(tiers, q, { decimals: 3 });
+  return (
+    <div style={{ width: 360 }}>
+      <TierPricingTable title="Volume prices" tiers={tiers} quantity={q} onTierSelect={(t) => setQ(t.min)} decimals={3} vat="excl" footnote="One print included" />
+      <p data-testid="q">{q}</p>
+      <p data-testid="hint">{hint}</p>
+      <Button onClick={() => setQ(20)}>Below</Button>
+    </div>
+  );
+}
 function CartMin() {
   const [q, setQ] = useState(50);
   return <CartItem title="Pen" price={0.52} quantity={q} minQuantity={50} maxQuantity={5000} quantityStep={25} onQuantityChange={setQ} onRemove={() => {}} />;
 }
 
 const scenarios: Record<string, ReactNode> = {
+  'tier': <TierDemo />,
+  'tier-static': <div style={{ width: 360 }}><TierPricingTable tiers={tiers} quantity={300} showSaving={false} indicative density="compact" /><div data-testid="loading"><TierPricingTable tiers={tiers} loading /></div></div>,
+  'tier-nl': <LocaleProvider locale={nlNL}><div style={{ width: 360 }}><TierPricingTable title="Staffelprijzen" tiers={tiers} quantity={1200} decimals={3} vat="excl" /><TierHintNl /></div></LocaleProvider>,
   'buy-plain': <div style={{ width: 440 }}><AddToCart onAdd={() => {}} aside={<ButtonIcon icon={<Info />} aria-label="Save" />} /></div>,
   'buy-bulk': <BuyBulk />,
   'cart-min': <div style={{ width: 480 }}><CartMin /></div>,
