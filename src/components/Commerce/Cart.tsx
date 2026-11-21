@@ -22,7 +22,11 @@ export interface CartItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'tit
   price: number;
   compareAt?: number;
   quantity: number;
+  /** Minimum order. Default 1. */
+  minQuantity?: number;
   maxQuantity?: number;
+  /** Order unit, e.g. 25 when the product is sold per 25. Default 1. */
+  quantityStep?: number;
   onQuantityChange?: (q: number) => void;
   onRemove?: () => void;
   /** Read-only version for the order summary in checkout. */
@@ -39,7 +43,7 @@ export const DEFAULT_CART_ITEM_LABELS: CartItemLabels = {
 };
 
 /** Product line in the cart, mini cart or order summary. */
-export function CartItem({ title, href, image, options, price, compareAt, quantity, maxQuantity = 99, onQuantityChange, onRemove, readOnly, size = 'md', currency, labels, className, ...rest }: CartItemProps) {
+export function CartItem({ title, href, image, options, price, compareAt, quantity, minQuantity = 1, maxQuantity = 99, quantityStep = 1, onQuantityChange, onRemove, readOnly, size = 'md', currency, labels, className, ...rest }: CartItemProps) {
   const l = useLabels('cartItem', DEFAULT_CART_ITEM_LABELS, labels);
   const name = typeof title === 'string' ? title : '';
   return (
@@ -53,7 +57,7 @@ export function CartItem({ title, href, image, options, price, compareAt, quanti
         </div>
         {!readOnly && (
           <div className="rb-cart-item__actions">
-            <QuantityStepper size="sm" value={quantity} max={maxQuantity} onValueChange={onQuantityChange} label={l.quantityOf(name)} />
+            <QuantityStepper size="sm" value={quantity} min={minQuantity} max={maxQuantity} step={quantityStep} onValueChange={onQuantityChange} label={l.quantityOf(name)} />
             {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 />} aria-label={l.remove(name)} onClick={onRemove} />}
           </div>
         )}

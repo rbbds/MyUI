@@ -38,6 +38,10 @@
 .rb-qty__input:focus{outline:none}
 .rb-qty__message,.rb-qty__hint{color:var(--input-foreground-hint);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);font-weight:var(--text-body-sub-text-font-weight)}
 .rb-qty__message:not(:empty),.rb-qty__hint:not([hidden]){margin-top:var(--input-field-gap)}
+.rb-qty__message:empty{position:absolute}
+.rb-add-to-cart__row>.rb-qty-field,.rb-cart-item__actions>.rb-qty-field{display:contents}
+.rb-add-to-cart__row>.rb-qty-field>:is(.rb-qty__message:not(:empty),.rb-qty__hint:not([hidden])){flex-basis:100%;order:1;margin-top:calc(var(--input-field-gap) - var(--add-to-cart-row-gap))}
+.rb-cart-item__actions>.rb-qty-field>:is(.rb-qty__message:not(:empty),.rb-qty__hint:not([hidden])){flex-basis:100%;order:1;margin-top:calc(var(--input-field-gap) - var(--cart-item-actions-gap))}
 .rb-qty--disabled{background:var(--qty-surface-disabled)}
 .rb-qty--disabled .rb-qty__input{color:var(--qty-foreground-disabled)}
 
@@ -90,7 +94,7 @@
 .rb-cart-item__title a:hover{text-decoration:underline}
 .rb-cart-item__title a:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--focus-radius-inline)}
 .rb-cart-item__options{margin:0;color:var(--cart-item-foreground-options);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height)}
-.rb-cart-item__actions{display:flex;align-items:center;gap:var(--cart-item-actions-gap)}
+.rb-cart-item__actions{display:flex;flex-wrap:wrap;align-items:center;gap:var(--cart-item-actions-gap)}
 .rb-cart-item__price{flex-direction:column;align-items:flex-end;text-align:right;gap:0}
 @media (max-width:479px){.rb-cart-item{grid-template-columns:auto 1fr}.rb-cart-item__price{grid-column:2;align-items:flex-start;text-align:left}}
 
@@ -160,6 +164,8 @@
 .rb-add-to-cart__row{display:flex;flex-wrap:wrap;gap:var(--add-to-cart-row-gap);align-items:center}
 .rb-add-to-cart__button{flex:1;min-width:180px}
 .rb-add-to-cart__delivery{display:flex;align-items:center;gap:var(--add-to-cart-delivery-gap);margin:0;color:var(--stock-foreground);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-add-to-cart__secondary{display:flex;flex-direction:column;align-items:flex-start;gap:var(--input-field-gap)}
+.rb-add-to-cart__secondary-hint{margin:0;color:var(--input-foreground-hint);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);font-weight:var(--text-body-sub-text-font-weight)}
 .rb-add-to-cart__delivery svg{width:var(--add-to-cart-icon-size);height:var(--add-to-cart-icon-size);flex:none;color:var(--stock-foreground-in-stock)}
 
 /* ---------- Filters ---------- */

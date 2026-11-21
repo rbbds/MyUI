@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, Toast, ToastRegion, Tooltip } from '../../src';
+import { AddToCart, Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, Toast, ToastRegion, Tooltip } from '../../src';
 import { Info } from 'lucide-react';
 import { nlNL } from '../../src/locales/nl-NL';
 
@@ -25,7 +25,27 @@ const megaLinks = [
 
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
+function BuyBulk() {
+  const [q, setQ] = useState(50);
+  const [log, setLog] = useState<string[]>([]);
+  const [busy, setBusy] = useState(false);
+  return (
+    <div style={{ width: 440 }}>
+      <AddToCart productName="Pen" quantity={q} onQuantityChange={setQ} minQuantity={50} maxQuantity={5000} quantityStep={25} quantityHint={`Hint for ${q}`} onAdd={(n) => setLog((l) => [...l, `add ${n}`])} aside={<ButtonIcon icon={<Info />} aria-label="Save" />} secondaryAction={{ label: 'Request a quote', loading: busy, onClick: (n) => { setBusy(true); setLog((l) => [...l, `quote ${n}`]); } }} secondaryHint="For large orders." />
+      <p data-testid="log">{log.join(', ')}</p>
+      <Button onClick={() => setBusy(false)}>Done</Button>
+    </div>
+  );
+}
+function CartMin() {
+  const [q, setQ] = useState(50);
+  return <CartItem title="Pen" price={0.52} quantity={q} minQuantity={50} maxQuantity={5000} quantityStep={25} onQuantityChange={setQ} onRemove={() => {}} />;
+}
+
 const scenarios: Record<string, ReactNode> = {
+  'buy-plain': <div style={{ width: 440 }}><AddToCart onAdd={() => {}} aside={<ButtonIcon icon={<Info />} aria-label="Save" />} /></div>,
+  'buy-bulk': <BuyBulk />,
+  'cart-min': <div style={{ width: 480 }}><CartMin /></div>,
   'qty-step': <><div data-testid="plain"><QuantityStepper defaultValue={2} max={5} label="Plain" /></div><div data-testid="unit"><QuantityStepper defaultValue={50} min={50} max={5000} step={25} label="Pens" hint="Add more for a lower price" /></div><LocaleProvider locale={nlNL}><div data-testid="nl"><QuantityStepper defaultValue={12} min={1} max={120} step={12} /></div></LocaleProvider></>,
   'price-unit': <><p data-testid="en"><Price prefix="From" amount={0.523} decimals={3} suffix="per piece" vat="excl" /></p><p data-testid="pad"><Price amount={0.52} decimals={3} /></p><p data-testid="plain"><Price amount={79.95} /></p><LocaleProvider locale={nlNL}><p data-testid="nl"><Price prefix="v.a." amount={0.523} decimals={3} suffix="per stuk" vat="incl" /></p></LocaleProvider></>,
   'locale-nl-full': <LocaleProvider locale={nlNL}><CartSummary subtotal={1234.56} total={1234.56} /><QuantityStepper /><Spinner /><Pagination page={2} pageCount={8} onPageChange={() => {}} /></LocaleProvider>,

@@ -141,6 +141,12 @@ export function VariantPicker({ label, variant, type: typeProp, options, value, 
 /* ---------- Add to cart ---------- */
 export interface AddToCartLabels { quantity: string; quantityOf: (productName: string) => string; soldOut: string }
 export const DEFAULT_ADD_TO_CART_LABELS: AddToCartLabels = { quantity: 'Quantity', quantityOf: (productName) => `Quantity ${productName}`, soldOut: 'Sold out' };
+export interface AddToCartSecondaryAction {
+  label: ReactNode;
+  /** Called with the chosen quantity. */
+  onClick: (quantity: number) => void;
+  loading?: boolean;
+}
 export interface AddToCartProps {
   onAdd: (quantity: number) => void;
   stock?: StockStatus;
@@ -148,35 +154,62 @@ export interface AddToCartProps {
   stockText?: ReactNode;
   /** Delivery promise, e.g. "Order before 22:00, delivered tomorrow". */
   delivery?: ReactNode;
+  /** Quantity from outside, when the page needs it live (for a price per quantity). */
+  quantity?: number;
+  /** Start quantity. Default: the lowest quantity you can order. */
+  defaultQuantity?: number;
+  onQuantityChange?: (quantity: number) => void;
+  /** Minimum order. Default 1. */
+  minQuantity?: number;
   maxQuantity?: number;
+  /** Order unit, e.g. 25 when the product is sold per 25. Default 1. */
+  quantityStep?: number;
+  /** Line below the quantity and the button, e.g. "Add 200 more for €0.48 each". */
+  quantityHint?: ReactNode;
   label?: string;
   productName?: string;
   /** Extra actions next to the button, e.g. a wishlist ButtonIcon. */
   aside?: ReactNode;
   loading?: boolean;
+  /** Second, smaller action below the buy button, e.g. "Request a quote". */
+  secondaryAction?: AddToCartSecondaryAction;
+  /** One line that says when to choose the second action. */
+  secondaryHint?: ReactNode;
   /** Button style. Accent (default) makes the buy action stand out from the brand color. */
   hierarchy?: 'accent' | 'primary';
   className?: string;
   labels?: Partial<AddToCartLabels>;
 }
 
-/** Purchase block on the product page: stock, quantity, add-to-cart button and delivery promise. */
-export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, maxQuantity = 10, label: labelProp, productName, aside, loading, hierarchy = 'accent', labels, className }: AddToCartProps) {
+/** Purchase block on the product page: stock, quantity, add-to-cart button, delivery promise and an optional second action. */
+export function AddToCart({ onAdd, stock = 'in-stock', stockText, delivery, quantity, defaultQuantity, onQuantityChange, minQuantity = 1, maxQuantity = 10, quantityStep = 1, quantityHint, label: labelProp, productName, aside, loading, secondaryAction, secondaryHint, hierarchy = 'accent', labels, className }: AddToCartProps) {
   const label = useText('addToCart.label', labelProp);
   const l = useLabels('addToCart', DEFAULT_ADD_TO_CART_LABELS, labels);
-  const [q, setQ] = useState(1);
+  const step = quantityStep >= 1 ? Math.round(quantityStep) : 1;
+  const [q, setQ] = useControlled(quantity, defaultQuantity ?? Math.ceil(minQuantity / step) * step, onQuantityChange);
+  const hintId = useId();
   const out = stock === 'out';
+  // One action at a time: while one is busy, the other does not respond, so nothing is sent twice.
+  const busy = Boolean(loading) || Boolean(secondaryAction?.loading);
   return (
     <div className={cx('rb-add-to-cart', className)}>
       <StockIndicator status={stock}>{stockText}</StockIndicator>
       <div className="rb-add-to-cart__row">
-        <QuantityStepper value={q} onValueChange={setQ} max={maxQuantity} disabled={out} label={productName ? l.quantityOf(productName) : l.quantity} />
-        <Button className="rb-add-to-cart__button" hierarchy={hierarchy} iconLeading={<ShoppingCart />} disabled={out} loading={loading} onClick={() => onAdd(q)}>
+        <QuantityStepper value={q} onValueChange={setQ} min={minQuantity} max={maxQuantity} step={step} hint={quantityHint} disabled={out} label={productName ? l.quantityOf(productName) : l.quantity} />
+        <Button className="rb-add-to-cart__button" hierarchy={hierarchy} iconLeading={<ShoppingCart />} disabled={out} loading={loading} aria-disabled={(busy && !loading) || undefined} onClick={() => onAdd(q)}>
           {out ? l.soldOut : label}
         </Button>
         {aside}
       </div>
       {delivery && !out && <p className="rb-add-to-cart__delivery"><Truck aria-hidden="true" />{delivery}</p>}
+      {secondaryAction && (
+        <div className="rb-add-to-cart__secondary">
+          <Button hierarchy="secondary" loading={secondaryAction.loading} aria-disabled={(busy && !secondaryAction.loading) || undefined} aria-describedby={secondaryHint ? hintId : undefined} onClick={() => secondaryAction.onClick(q)}>
+            {secondaryAction.label}
+          </Button>
+          {secondaryHint && <p id={hintId} className="rb-add-to-cart__secondary-hint">{secondaryHint}</p>}
+        </div>
+      )}
     </div>
   );
 }
