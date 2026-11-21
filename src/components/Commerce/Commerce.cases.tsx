@@ -67,6 +67,18 @@ export const Prices: Story = {
     </div>
   ),
 };
+/** Unit prices for large quantities: a prefix, three decimals, "per piece" and the VAT text. */
+export const UnitPrices: Story = {
+  render: () => (
+    <div style={col}>
+      <Price prefix="From" amount={0.523} decimals={3} suffix="per piece" vat="excl" />
+      <Price amount={0.52} decimals={3} suffix="per piece" />
+      <Price amount={0.489} compareAt={0.523} decimals={3} suffix="per piece" vat="excl" />
+      <Price amount={261.5} vat="excl" />
+      <Price amount={316.42} vat="incl" size="lg" />
+    </div>
+  ),
+};
 export const Ratings: Story = {
   render: () => (
     <div style={col}>

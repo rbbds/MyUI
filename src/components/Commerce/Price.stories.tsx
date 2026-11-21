@@ -3,3 +3,4 @@ import meta, * as S from './Commerce.cases';
 
 export default { ...meta, title: 'E-commerce/Price' } as typeof meta;
 export const Prices = S.Prices;
+export const UnitPrices = S.UnitPrices;
