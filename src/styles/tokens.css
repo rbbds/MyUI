@@ -1858,6 +1858,7 @@
 --selection-card-group-legend-foreground:var(--color-foreground-secondary);
 --selection-card-group-legend-gap:var(--spacing-3);
 --selection-card-aside-media-height:24px;
+--selection-card-badge-gap:var(--spacing-2);
 --selection-card-border:var(--color-border-secondary);
 --selection-card-border-checked:var(--color-border-brand);
 --selection-card-border-width:var(--border-width-default);

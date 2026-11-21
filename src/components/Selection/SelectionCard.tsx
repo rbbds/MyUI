@@ -13,20 +13,29 @@ export interface SelectionCardProps extends Omit<InputHTMLAttributes<HTMLInputEl
   icon?: ReactNode;
   /** Right-aligned extra, e.g. a price ("Free", "€4.95") or a payment logo. */
   aside?: ReactNode;
+  /** Slot next to the title, usually a Badge ("Recommended"). Text and images only: it is part of the label. */
+  badge?: ReactNode;
+  /** Slot for a line below the description: short facts, or the reason why the option is disabled. Stays readable when disabled. Text and images only. */
+  meta?: ReactNode;
+  /** Slot for free content below the option, inside the card but outside the label: an Alert, extra fields, links, buttons. */
+  children?: ReactNode;
 }
 
-/** Large clickable option. The whole card is the label of a native radio or checkbox. */
+/** Large clickable option. The option is the label of a native radio or checkbox. */
 export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(function SelectionCard(
-  { type = 'radio', title, description, icon, aside, disabled, className, ...rest },
+  { type = 'radio', title, description, icon, aside, badge, meta, children, disabled, className, ...rest },
   ref,
 ) {
   const id = useId();
-  return (
-    <label className={cx('rb-selection-card', disabled && 'rb-selection-card--disabled', className)}>
+  const describedBy = cx(rest['aria-describedby'], badge ? `${id}-b` : undefined, description ? `${id}-d` : undefined, meta ? `${id}-m` : undefined) || undefined;
+  const titleNode = <span id={`${id}-t`} className="rb-selection-card__title">{title}</span>;
+  const option = (
+    <>
       {icon && <span className="rb-selection-card__icon" aria-hidden="true">{icon}</span>}
       <span className="rb-selection-card__text">
-        <span id={`${id}-t`} className="rb-selection-card__title">{title}</span>
+        {badge ? <span className="rb-selection-card__heading">{titleNode}<span id={`${id}-b`} className="rb-selection-card__badge">{badge}</span></span> : titleNode}
         {description && <span id={`${id}-d`} className="rb-selection-card__description">{description}</span>}
+        {meta && <span id={`${id}-m`} className="rb-selection-card__meta">{meta}</span>}
       </span>
       {aside && <span className="rb-selection-card__aside">{aside}</span>}
       <span data-size="sm" className={cx('rb-check', 'rb-check--sm', type === 'radio' && 'rb-check--radio', disabled && 'rb-check--disabled')}>
@@ -37,8 +46,8 @@ export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(fu
             className="rb-check__input"
             disabled={disabled}
             aria-labelledby={`${id}-t`}
-            aria-describedby={description ? `${id}-d` : undefined}
             {...rest}
+            aria-describedby={describedBy}
           />
           {type === 'radio' ? (
             <span className="rb-check__dot" aria-hidden="true" />
@@ -47,7 +56,18 @@ export const SelectionCard = forwardRef<HTMLInputElement, SelectionCardProps>(fu
           )}
         </span>
       </span>
-    </label>
+    </>
+  );
+  const classes = cx('rb-selection-card', disabled && 'rb-selection-card--disabled', className);
+  // Without content the card itself is the label, as before. With content the label is the top part,
+  // so buttons and links in the content do not sit inside a label.
+  // Pass null or false as children to keep the slot open while it is empty: the option then does not remount when content appears.
+  if (children === undefined) return <label className={classes}>{option}</label>;
+  return (
+    <div className={cx(classes, 'rb-selection-card--has-content')}>
+      <label className="rb-selection-card__main">{option}</label>
+      <div className="rb-selection-card__content">{children}</div>
+    </div>
   );
 });
 

@@ -25,6 +25,8 @@ const PAIRS = [
   // A row only has the hover color while its button is hovered, and the button then has its hover color.
   ['button-link-foreground-hover', 'table-surface-hover', TEXT],
   ['tier-pricing-border-active', 'table-surface-selected'],
+  // Selection card: the meta line keeps the text color on a disabled card, because it carries the reason.
+  ...['selection-card-surface', 'selection-card-surface-checked', 'selection-card-surface-disabled'].map((bg) => ['selection-card-foreground-text', bg, TEXT]),
 ];
 
 const { values } = readTokens();

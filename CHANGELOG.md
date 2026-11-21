@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased
+
+Planned as 1.10.0.
+
+### Added
+- **Selection card: three slots.** `badge` sits next to the title (usually a Badge such as "Recommended"). `meta` is a line below the explanation for short facts, or for the reason why an option is disabled; it stays readable on a disabled card. `children` is free content below the option, inside the card but outside the label, so an Alert with buttons, extra fields or links work there. Without these props Selection card renders as before.
+- Stories "Pattern: decoration method", in English and in Dutch: a recommended option, an option that is not ideal with a warning and actions, an option that is off with the reason, and a loading state. Built with Selection card, Badge, Alert and Skeleton; the rules live in the story, not in a component.
+- Token `--selection-card-badge-gap`: the space between the title and the badge.
+- Figma: Selection card has a native Badge slot (Show badge), a Meta text (Show meta) and a native Content slot (Show content). All off by default.
+- Building components guide: section "Slots before fixed props".
+- `check:contrast` checks the text color of Selection card on its three surfaces.
+
+### Changed
+- Figma: clip content is off on all 31 native slots (Card, Modal, Slideout, Table, Sidebar and others), so a focus ring or shadow of the content is not cut off. No slot had overflowing content, so nothing looks different.
+
 ## 1.9.0 (21 November 2026)
 
 ### Added

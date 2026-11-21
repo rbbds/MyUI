@@ -17,9 +17,11 @@
   ],
   "anatomy": [
     "Featured icon (optional).",
-    "Title.",
+    "Title, with an optional badge slot next to it.",
     "Explanation.",
-    "Radio or checkbox at the top right."
+    "Optional meta line: short facts, or the reason why the option is off.",
+    "Radio or checkbox at the top right.",
+    "Optional content slot below the option, inside the card."
   ],
   "figmaProps": [
     [
@@ -46,6 +48,21 @@
       "Aside / Show aside",
       "via _Selection card",
       "Price or logo on the right, for example for delivery options."
+    ],
+    [
+      "Badge / Show badge",
+      "slot, via _Selection card",
+      "Native slot next to the title with a Badge in it. Off by default."
+    ],
+    [
+      "Meta / Show meta",
+      "text, via _Selection card",
+      "Line below the explanation. Stays readable in Disabled. Off by default."
+    ],
+    [
+      "Content / Show content",
+      "slot, via _Selection card",
+      "Native slot below the option: put an Alert, fields or links in it. Off by default."
     ]
   ],
   "reactProps": [
@@ -75,6 +92,21 @@
       "Price (\"Free\", \"€2.95\") or logo on the right. It is part of the label, so it is read out."
     ],
     [
+      "badge",
+      "ReactNode",
+      "Slot next to the title, usually a Badge. Text and images only: it is read out as part of the description."
+    ],
+    [
+      "meta",
+      "ReactNode",
+      "Slot for a line below the explanation. Stays readable when the card is disabled, so use it for the reason. Text and images only."
+    ],
+    [
+      "children",
+      "ReactNode",
+      "Slot for free content below the option, inside the card but outside the label: an Alert, extra fields, links, buttons. Pass null while it is empty to keep the slot open."
+    ],
+    [
       "name / value / checked / onChange",
       "native",
       ""
@@ -86,10 +118,14 @@
     ]
   ],
   "behaviour": [
-    "Clicking anywhere on the card selects it. Chosen: brand background and a thicker border."
+    "Clicking anywhere on the card selects it. Chosen: brand background and a thicker border.",
+    "With content (children) the top part is the clickable option and the content below it is free: a click there does not change the choice.",
+    "An empty content slot takes no space.",
+    "Pattern \"decoration method\" (see Examples): a recommended option, an option that is not ideal with a warning and actions after you choose it, an option that is off with the reason, and a loading state with Skeleton. The rules live in your page, not in Selection card."
   ],
   "a11y": [
-    "Native input inside a <label>. Title as the name, explanation as the description.",
+    "Native input inside a <label>. Title as the name; badge, explanation and meta as the description.",
+    "Content sits outside the label, so buttons and links in it work with the keyboard and a screen reader.",
     "Always put the group in SelectionCardGroup (fieldset + legend).",
     "Focus ring around the whole card."
   ],
@@ -100,7 +136,8 @@
     "Keep the explanations about the same length, so the cards have the same height."
   ],
   "dont": [
-    "Links or buttons inside a card: they catch the click."
+    "Links or buttons in the title, explanation, badge or meta: they sit inside the label and catch the click. Put them in the content slot.",
+    "A disabled card without a reason."
   ],
   "tokens": [
     "--selection-card-*",

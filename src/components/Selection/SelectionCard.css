@@ -19,3 +19,11 @@
 @media (max-width:599px){.rb-selection-card-group__items{grid-template-columns:1fr!important}}
 .rb-selection-card__aside{flex:none;align-self:center;color:var(--selection-card-foreground-title);font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);line-height:var(--text-body-sub-text-semibold-line-height);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 .rb-selection-card__aside img,.rb-selection-card__aside svg{display:block;height:var(--selection-card-aside-media-height);width:auto}
+.rb-selection-card__heading{display:flex;flex-wrap:wrap;align-items:center;gap:var(--selection-card-badge-gap)}
+.rb-selection-card__badge{display:inline-flex;align-items:center;gap:var(--selection-card-badge-gap)}
+.rb-selection-card__meta{color:var(--selection-card-foreground-text);font-family:var(--text-body-description-font-family);font-size:var(--text-body-description-font-size);line-height:var(--text-body-description-line-height);font-weight:var(--text-body-description-font-weight)}
+.rb-selection-card--has-content{flex-direction:column;align-items:stretch;cursor:default}
+.rb-selection-card__main{display:flex;align-items:flex-start;gap:var(--selection-card-gap);cursor:pointer}
+.rb-selection-card--disabled .rb-selection-card__main{cursor:not-allowed}
+.rb-selection-card__content{display:flex;flex-direction:column;gap:var(--selection-card-gap);min-width:0}
+.rb-selection-card__content:empty{display:none}
