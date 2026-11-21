@@ -6,7 +6,7 @@
     "base": "_Price"
   },
   "react": "Price",
-  "summary": "Price with an optional old price (sale) and an extra like \"per month\". Amounts are formatted with Intl (en-US, euro).",
+  "summary": "Price with an optional old price (sale), a text before and after it, and a VAT text. Amounts are formatted with Intl: en-US and euro by default, or the locale of the LocaleProvider.",
   "use": [
     "Everywhere a product amount is shown."
   ],
@@ -14,9 +14,11 @@
     "Totals in an overview: use Cart summary."
   ],
   "anatomy": [
+    "Prefix, for example \"From\".",
     "Amount.",
     "Old price (struck through, for a sale).",
-    "Extra text."
+    "Suffix, for example \"per piece\".",
+    "VAT text."
   ],
   "figmaProps": [
     [
@@ -30,14 +32,14 @@
       "True: amount in the error color, old price visible."
     ],
     [
-      "Amount, Compare, Suffix",
+      "Amount, Compare, Prefix, Suffix, VAT",
       "text",
       ""
     ],
     [
-      "Show compare, Show suffix",
+      "Show compare, Show prefix, Show suffix, Show VAT",
       "boolean",
-      ""
+      "All off by default."
     ]
   ],
   "reactProps": [
@@ -62,27 +64,41 @@
       ""
     ],
     [
-      "suffix",
+      "prefix, suffix",
       "ReactNode",
-      ""
+      "Small text before and after the amount: \"From\", \"per piece\"."
+    ],
+    [
+      "decimals",
+      "number",
+      "Fixed number of decimals, for example 3 for a unit price such as €0.523. Default: what the currency uses."
+    ],
+    [
+      "vat",
+      "'excl' | 'incl'",
+      "Shows the VAT text after the price. Default: nothing."
     ],
     [
       "labels",
-      "{ was, now }",
-      "Hidden texts for screen readers. Defaults in DEFAULT_PRICE_LABELS."
+      "{ was, now, vatExcl, vatIncl }",
+      "The hidden \"Was\" and \"Now\" for screen readers and the VAT texts. Defaults in DEFAULT_PRICE_LABELS."
     ]
   ],
   "behaviour": [
-    "You can also use formatMoney(amount) on its own."
+    "You can also use formatMoney(amount, currency, locale, decimals) on its own.",
+    "With decimals the amount always has that many decimals: 0.52 with decimals 3 is €0.520. In a list the decimal marks then line up.",
+    "The old price uses the same number of decimals as the amount."
   ],
   "a11y": [
-    "Screen readers hear \"Was €99.95 Now €79.95\". A strike-through alone is not enough."
+    "Screen readers hear \"Was €99.95 Now €79.95\". A strike-through alone is not enough.",
+    "Prefix, amount, suffix and VAT text are read as one phrase, in that order: \"From €0.523 per piece excl. VAT\"."
   ],
   "content": [
-    "Show \"incl. VAT\" if your customers are consumers and it is not mentioned anywhere else."
+    "Show the VAT text when it is not clear from the page: \"incl.\" for consumers, \"excl.\" for business customers.",
+    "Use vat for the VAT text and suffix for the unit (\"per piece\", \"per month\"). Then the VAT text is the same everywhere and follows the language."
   ],
   "do": [
-    "Use the same size for all prices in an overview."
+    "Use the same size and the same number of decimals for all prices in an overview."
   ],
   "dont": [
     "An old price that was never real."
@@ -94,5 +110,9 @@
     "Product card",
     "Cart item"
   ],
-  "open": []
+  "open": [
+    "Assumption: decimals is a fixed number, not a maximum. Change this if price lists show 0.52 and 0.523 next to each other.",
+    "Assumption: no VAT text by default. A shop chooses excl. or incl. itself; there is no global setting for it yet.",
+    "Rounding is left to Intl (half away from zero). There is no own rounding rule."
+  ]
 }

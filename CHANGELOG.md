@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+Planned as 1.9.0.
+
+### Added
+- **Price: `prefix`, `decimals` and `vat`.** `prefix` is a small text before the amount ("From"). `decimals` is a fixed number of decimals, for unit prices such as €0.523. `vat="excl"` or `vat="incl"` shows the VAT text after the price; the text comes from the new labels `vatExcl` and `vatIncl`, so it follows the `LocaleProvider` (nl-NL: "excl. btw", "incl. btw"). Without these props Price looks the same as before.
+- `formatMoney(amount, currency, locale, decimals)`: optional fourth argument.
+- Figma: Price has the properties Prefix, Show prefix, VAT and Show VAT (off by default).
+
+### Changed
+- Figma: the default text of the Suffix property of Price is "per piece" instead of "incl. VAT", now that VAT has its own property.
+
 ## 1.8.0 (21 November 2026)
 
 ### Added
