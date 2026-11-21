@@ -51,6 +51,11 @@
       ""
     ],
     [
+      "minQuantity, quantityStep",
+      "number",
+      "Minimum order and order unit, default 1. Use the same values as on the product page."
+    ],
+    [
       "onQuantityChange, onRemove",
       "",
       ""
@@ -72,7 +77,8 @@
     ]
   ],
   "behaviour": [
-    "Changing the quantity works straight away, and so does removing. After removing you can show a Toast with \"Undo\"."
+    "Changing the quantity works straight away, and so does removing. After removing you can show a Toast with \"Undo\".",
+    "A typed quantity below the minimum or outside the order unit is corrected. The message sits below the stepper and the remove button, which stay in place."
   ],
   "a11y": [
     "Remove button: \"Remove {title}\". Quantity field: \"Quantity {title}\"."

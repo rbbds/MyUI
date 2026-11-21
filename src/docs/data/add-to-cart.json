@@ -6,7 +6,7 @@
     "base": "_Add to cart"
   },
   "react": "AddToCart",
-  "summary": "Buy block on the product page: stock, quantity, \"Add to cart\" button and delivery time.",
+  "summary": "Buy block on the product page: stock, quantity, \"Add to cart\" button and delivery time. Optional: a minimum order, an order unit and a second action such as \"Request a quote\".",
   "use": [
     "Product page, below the Variant picker."
   ],
@@ -16,7 +16,9 @@
   "anatomy": [
     "Stock indicator.",
     "Quantity stepper, Accent button (fills the space), optional wishlist.",
-    "Delivery time with a truck icon."
+    "Optional hint below that row, over the full width.",
+    "Delivery time with a truck icon.",
+    "Optional second action: a secondary button with one line of explanation below it."
   ],
   "figmaProps": [
     [
@@ -33,6 +35,21 @@
       "Show wishlist, Show delivery",
       "boolean",
       ""
+    ],
+    [
+      "Quantity hint, Show quantity hint",
+      "text, boolean",
+      "Line below the row. Off by default."
+    ],
+    [
+      "Show secondary action",
+      "boolean",
+      "Off by default. Change the button text in the nested Button."
+    ],
+    [
+      "Secondary hint, Show secondary hint",
+      "text, boolean",
+      "The line below the second button."
     ]
   ],
   "reactProps": [
@@ -52,9 +69,24 @@
       ""
     ],
     [
-      "maxQuantity",
+      "quantity, defaultQuantity, onQuantityChange",
+      "number, number, (quantity) => void",
+      "Use these when the page needs the quantity live, for example for a price per quantity. Without them Add to cart keeps the quantity itself."
+    ],
+    [
+      "minQuantity, maxQuantity",
       "number",
-      "Default 10."
+      "Default 1 and 10. Give a higher max for bulk orders."
+    ],
+    [
+      "quantityStep",
+      "number",
+      "Order unit, default 1. See Quantity stepper."
+    ],
+    [
+      "quantityHint",
+      "ReactNode",
+      "Line below the quantity and the button, for example \"Add 200 more for €0.48 each\"."
     ],
     [
       "label, productName",
@@ -72,6 +104,16 @@
       ""
     ],
     [
+      "secondaryAction",
+      "{ label, onClick(quantity), loading? }",
+      "Second, smaller action below the buy button."
+    ],
+    [
+      "secondaryHint",
+      "ReactNode",
+      "One line that says when to choose the second action."
+    ],
+    [
       "hierarchy",
       "'accent' | 'primary'",
       "Default 'accent', so the buy action stands out from the brand color."
@@ -83,17 +125,27 @@
     ]
   ],
   "behaviour": [
-    "After adding, the Mini cart usually opens (see Examples)."
+    "After adding, the Mini cart usually opens (see Examples).",
+    "With a minimum order the quantity starts at that minimum.",
+    "The hint, and the message after a corrected quantity, sit below the whole row. The stepper and the buttons stay in place.",
+    "While one action is busy, the other does not respond, so nothing is sent twice.",
+    "When sold out the second action stays available."
   ],
   "a11y": [
-    "Announce that the item was added (Mini cart or a status message), not only visually."
+    "Announce that the item was added (Mini cart or a status message), not only visually.",
+    "The explanation is the description of the second button, so a screen reader reads it with the button.",
+    "A busy button keeps the focus and says it is busy (aria-busy)."
   ],
   "content": [
-    "Button: \"Add to cart\". Sold out: \"Sold out\"."
+    "Button: \"Add to cart\". Sold out: \"Sold out\".",
+    "Second action: say what you get and when. \"For large orders or a custom print. You get a price within one working day.\""
   ],
-  "do": [],
+  "do": [
+    "Keep one main action. The second action is always the smaller one."
+  ],
   "dont": [
-    "A disabled button with no explanation why."
+    "A disabled button with no explanation why.",
+    "A second action without a line that says how it differs from buying."
   ],
   "tokens": [
     "--stock-*",
@@ -106,6 +158,9 @@
     "Variant picker"
   ],
   "open": [
-    "\"Email me when it is back in stock\" does not exist yet."
+    "\"Email me when it is back in stock\" does not exist yet.",
+    "Assumption: when sold out the second action stays available, because asking for a quote can still make sense. Hide it yourself if it does not.",
+    "Assumption: the second action sits on its own row, left, at its own width, so it does not compete with the buy button.",
+    "maxQuantity stays 10 by default. A shop for bulk orders has to set it on every product page."
   ]
 }

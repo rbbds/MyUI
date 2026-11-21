@@ -223,6 +223,33 @@ export const AddToCartExample: Story = {
     );
   },
 };
+export const BulkOrder: Story = {
+  name: 'Bulk order with a second action',
+  render: () => {
+    const [q, setQ] = useState(50);
+    const [msg, setMsg] = useState('');
+    const [busy, setBusy] = useState(false);
+    const quote = (n: number) => { setBusy(true); window.setTimeout(() => { setBusy(false); setMsg(`Quote requested for ${n} pens`); }, 1500); };
+    return (
+      <div style={{ ...col, maxWidth: 440 }}>
+        <AddToCart
+          productName="Ballpoint pen"
+          quantity={q}
+          onQuantityChange={setQ}
+          minQuantity={50}
+          maxQuantity={5000}
+          quantityStep={25}
+          quantityHint={q < 250 ? `Add ${250 - q} more for a lower price each` : 'You have the lowest price each'}
+          delivery="Delivered in 8 working days"
+          onAdd={(n) => setMsg(`${n} pens added to your cart`)}
+          secondaryAction={{ label: 'Request a quote', onClick: quote, loading: busy }}
+          secondaryHint="For large orders or a custom print. You get a price within one working day."
+        />
+        <p role="status">{msg}</p>
+      </div>
+    );
+  },
+};
 
 /* ---------- Checkout parts ---------- */
 export const DeliveryAndPayment: Story = {
