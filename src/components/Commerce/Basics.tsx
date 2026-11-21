@@ -1,4 +1,4 @@
-import { forwardRef, useId, useState, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, useId, useState, type CSSProperties, type HTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
 import { Minus, Plus, Star } from 'lucide-react';
 import { cx } from '../../utils/cx';
 import { useLabels, useLocale, useText } from '../../utils/locale';
@@ -102,13 +102,17 @@ export function Rating({ value, max = 5, count, size = 'md', showValue, locale: 
 }
 
 /* ---------- Quantity stepper ---------- */
-export interface QuantityStepperProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'size'> {
+export interface QuantityStepperProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'value' | 'defaultValue' | 'onChange' | 'size' | 'step'> {
   value?: number;
   defaultValue?: number;
-  /** Called with the new quantity (clamped to min and max). */
+  /** Called with the new quantity (within min and max, and a multiple of step). */
   onValueChange?: (value: number) => void;
   min?: number;
   max?: number;
+  /** Order unit, e.g. 12 for a box of twelve. − and + go per step; a typed number is rounded up to the next step. Default 1. */
+  step?: number;
+  /** Line below the stepper, e.g. "Add 20 more for €0.48 each". A message about a corrected number takes its place for a moment. */
+  hint?: ReactNode;
   size?: 'sm' | 'md';
   /** Accessible name, e.g. "Quantity Wool sweater". */
   label?: string;
@@ -123,45 +127,87 @@ export interface QuantityStepperProps extends Omit<InputHTMLAttributes<HTMLInput
 export interface QuantityStepperLabels {
   decrease: string;
   increase: string;
+  /** Button names when step is more than 1. */
+  decreaseBy: (step: number) => string;
+  increaseBy: (step: number) => string;
+  /** Messages after a typed number was corrected. */
+  minimum: (min: number) => string;
+  maximum: (max: number) => string;
+  stepped: (value: number, step: number) => string;
 }
-export const DEFAULT_QUANTITY_STEPPER_LABELS: QuantityStepperLabels = { decrease: 'One less', increase: 'One more' };
+export const DEFAULT_QUANTITY_STEPPER_LABELS: QuantityStepperLabels = {
+  decrease: 'One less',
+  increase: 'One more',
+  decreaseBy: (step) => `${step} less`,
+  increaseBy: (step) => `${step} more`,
+  minimum: (min) => `Minimum is ${min}`,
+  maximum: (max) => `Maximum is ${max}`,
+  stepped: (value, step) => `Changed to ${value}. Sold per ${step}.`,
+};
 
-/** Number field with − and + buttons. Typing works too; the value is clamped to min and max. */
+/** Number field with − and + buttons. Typing works too; a number outside min, max or step is corrected and explained. */
 export const QuantityStepper = forwardRef<HTMLInputElement, QuantityStepperProps>(function QuantityStepper(
-  { value, defaultValue = 1, onValueChange, onChange, min = 1, max = 99, size = 'md', label: labelProp, labels, decreaseLabel, increaseLabel, disabled, className, id, ...rest },
+  { value, defaultValue = 1, onValueChange, onChange, min = 1, max = 99, step = 1, hint, size = 'md', label: labelProp, labels, decreaseLabel, increaseLabel, disabled, className, id, 'aria-describedby': describedBy, ...rest },
   ref,
 ) {
   const label = useText('quantityStepper.label', labelProp);
   const l = useLabels('quantityStepper', DEFAULT_QUANTITY_STEPPER_LABELS, labels, { decrease: decreaseLabel, increase: increaseLabel });
   const [draft, setDraft] = useState<string | null>(null);
+  const [message, setMessage] = useState<string | null>(null);
   const [v, setValue] = useControlled(value, defaultValue, (n) => { onValueChange?.(n); onChange?.(n); });
   const autoId = useId();
-  const set = (n: number) => setValue(Math.max(min, Math.min(max, Number.isFinite(n) ? Math.round(n) : min)));
+  const inputId = id ?? autoId;
+  // Valid numbers are multiples of the step: the limits move inward to the nearest one.
+  const s = Number.isFinite(step) && step >= 1 ? Math.round(step) : 1;
+  const lo = Math.ceil(min / s) * s;
+  const hi = Math.max(lo, Math.floor(max / s) * s);
+  const digits = Math.max(2, String(hi).length);
+  const commit = () => {
+    if (draft === null) return;
+    const n = parseInt(draft, 10);
+    let next = Number.isFinite(n) ? n : lo;
+    let note: string | null = null;
+    if (next < lo) { next = lo; if (Number.isFinite(n)) note = l.minimum(lo); }
+    else if (next > hi) { next = hi; note = l.maximum(hi); }
+    else if (next % s !== 0) { next = Math.ceil(next / s) * s; note = l.stepped(next, s); }
+    setDraft(null);
+    setMessage(note);
+    setValue(next);
+  };
+  const press = (next: number) => { setDraft(null); setMessage(null); setValue(Math.max(lo, Math.min(hi, next))); };
+  const describedByIds = cx(describedBy, message ? `${inputId}-message` : hint ? `${inputId}-hint` : undefined) || undefined;
   return (
-    <div className={cx('rb-qty', `rb-qty--${size}`, disabled && 'rb-qty--disabled', className)}>
-      {/* M9: at the limit the button stays focusable (aria-disabled), so focus does not drop to the page */}
-      <button type="button" className="rb-qty__btn" aria-label={l.decrease} aria-controls={id ?? autoId} disabled={disabled} aria-disabled={v <= min || undefined} onClick={() => { if (v > min) set(v - 1); }}>
-        <Minus aria-hidden="true" />
-      </button>
-      <input
-        ref={ref}
-        id={id ?? autoId}
-        className="rb-qty__input"
-        type="number"
-        inputMode="numeric"
-        aria-label={label}
-        min={min}
-        max={max}
-        value={draft ?? v}
-        disabled={disabled}
-        onChange={(e) => setDraft(e.target.value)}
-        onBlur={() => { if (draft !== null) { set(parseInt(draft, 10)); setDraft(null); } }}
-        onKeyDown={(e) => { if (e.key === 'Enter' && draft !== null) { set(parseInt(draft, 10)); setDraft(null); } }}
-        {...rest}
-      />
-      <button type="button" className="rb-qty__btn" aria-label={l.increase} aria-controls={id ?? autoId} disabled={disabled} aria-disabled={v >= max || undefined} onClick={() => { if (v < max) set(v + 1); }}>
-        <Plus aria-hidden="true" />
-      </button>
+    <div className={cx('rb-qty-field', className)}>
+      <div className={cx('rb-qty', `rb-qty--${size}`, disabled && 'rb-qty--disabled')} style={digits > 2 ? ({ '--_digits': digits } as CSSProperties) : undefined}>
+        {/* M9: at the limit the button stays focusable (aria-disabled), so focus does not drop to the page */}
+        <button type="button" className="rb-qty__btn" aria-label={s > 1 ? l.decreaseBy(s) : l.decrease} aria-controls={inputId} disabled={disabled} aria-disabled={v <= lo || undefined} onClick={() => { if (v > lo) press(Math.ceil(v / s) * s - s); }}>
+          <Minus aria-hidden="true" />
+        </button>
+        <input
+          ref={ref}
+          id={inputId}
+          className="rb-qty__input"
+          type="number"
+          inputMode="numeric"
+          aria-label={label}
+          aria-describedby={describedByIds}
+          min={lo}
+          max={hi}
+          step={s > 1 ? s : undefined}
+          value={draft ?? v}
+          disabled={disabled}
+          onChange={(e) => { setDraft(e.target.value); setMessage(null); }}
+          onBlur={commit}
+          onKeyDown={(e) => { if (e.key === 'Enter') commit(); }}
+          {...rest}
+        />
+        <button type="button" className="rb-qty__btn" aria-label={s > 1 ? l.increaseBy(s) : l.increase} aria-controls={inputId} disabled={disabled} aria-disabled={v >= hi || undefined} onClick={() => { if (v < hi) press(Math.floor(v / s) * s + s); }}>
+          <Plus aria-hidden="true" />
+        </button>
+      </div>
+      {/* Always in the page, so a screen reader announces the message when it appears. */}
+      <span id={`${inputId}-message`} className="rb-qty__message" role="status">{message}</span>
+      {hint && <span id={`${inputId}-hint`} className="rb-qty__hint" hidden={message !== null}>{hint}</span>}
     </div>
   );
 });
