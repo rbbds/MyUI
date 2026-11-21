@@ -6,6 +6,7 @@ import type { DEFAULT_ADDRESS_FIELDS_LABELS } from '../components/Commerce/Check
 import type { DEFAULT_ACTIVE_FILTERS_LABELS, DEFAULT_FILTER_GROUP_LABELS } from '../components/Commerce/Filters';
 import type { DEFAULT_ADD_TO_CART_LABELS, DEFAULT_PRODUCT_GALLERY_LABELS, DEFAULT_VARIANT_PICKER_LABELS } from '../components/Commerce/Product';
 import type { DEFAULT_PRODUCT_CARD_LABELS } from '../components/Commerce/ProductCard';
+import type { DEFAULT_TIER_PRICING_LABELS } from '../components/Commerce/TierPricing';
 import type { DEFAULT_FILE_UPLOAD_ITEM_LABELS, DEFAULT_FILE_UPLOAD_LABELS, DEFAULT_TABLE_CARD_LABELS } from '../components/Content/Content';
 import type { DEFAULT_AVATAR_GROUP_LABELS, DEFAULT_AVATAR_LABELS, DEFAULT_TAG_LABELS } from '../components/Display/Display';
 import type { DEFAULT_COMBOBOX_LABELS } from '../components/Form/Combobox';
@@ -80,6 +81,7 @@ export interface LabelSets {
   sidebar: typeof DEFAULT_SIDEBAR_LABELS;
   slideout: typeof DEFAULT_SLIDEOUT_LABELS;
   stepper: typeof DEFAULT_STEPPER_LABELS;
+  tierPricing: typeof DEFAULT_TIER_PRICING_LABELS;
   stock: typeof DEFAULT_STOCK_LABELS;
   tableBulkActions: typeof DEFAULT_TABLE_BULK_ACTIONS_LABELS;
   tableCard: typeof DEFAULT_TABLE_CARD_LABELS;

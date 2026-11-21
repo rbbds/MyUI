@@ -130,7 +130,7 @@ The build also writes `dist/tokens.json` (import `@rbbds/ui/tokens.json`): every
 | Navigation | `Header`, `MegaMenu`, `MobileNav`, `Sidebar`, `DualSidebar`, `SidebarUser`, `Tabs`, `Breadcrumbs`, `Pagination`, `NavItem`, `Stepper`, `BottomNavigation`, `LinkProvider` |
 | Content | `Card`, `Accordion`, `EmptyState`, `FileUpload`, `FileUploadItem`, `TableCard`, `Table`, `TableHeader`, `PersonCell`, `TableToolbar`, `TableBulkActions` |
 | Dashboards and portals | `PageHeader`, `MetricCard`, `DescriptionList`, `DocumentList`, `ActivityFeed`, `NotificationButton`, `NotificationPanel`, `SettingsSection`, `Checklist` |
-| E-commerce | `ProductCard`, `ProductGrid`, `Price`, `Rating`, `QuantityStepper`, `StockIndicator`, `ProductGallery`, `VariantPicker`, `AddToCart`, `CartItem`, `CartSummary`, `PromoCode`, `CartButton`, `MiniCart`, `AddressFields`, `FilterGroup`, `ActiveFilters` |
+| E-commerce | `ProductCard`, `ProductGrid`, `Price`, `Rating`, `QuantityStepper`, `StockIndicator`, `ProductGallery`, `VariantPicker`, `AddToCart`, `TierPricingTable`, `CartItem`, `CartSummary`, `PromoCode`, `CartButton`, `MiniCart`, `AddressFields`, `FilterGroup`, `ActiveFilters` |
 | Flags (`@rbbds/ui/flags`) | `Flag`, `CountrySelect` |
 
 ## Development

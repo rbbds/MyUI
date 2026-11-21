@@ -1223,6 +1223,13 @@
 --stock-foreground-out:var(--color-foreground-error);
 --stock-gap:var(--spacing-2);
 --swatch-color-border-width:var(--border-width-default);
+--tier-pricing-border-active:var(--color-border-brand);
+--tier-pricing-cell-padding-horizontal:var(--spacing-4);
+--tier-pricing-cell-padding-vertical:var(--spacing-3);
+--tier-pricing-cell-padding-vertical-compact:var(--spacing-2);
+--tier-pricing-foreground-saving:var(--color-foreground-success);
+--tier-pricing-gap:var(--spacing-2);
+--tier-pricing-marker-width:var(--border-width-containers-strong);
 --variant-border:var(--color-border-primary);
 --variant-border-checked:var(--color-border-brand);
 --variant-chip-radius:var(--border-radius-control-md);

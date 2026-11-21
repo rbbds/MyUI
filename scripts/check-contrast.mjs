@@ -18,6 +18,13 @@ const PAIRS = [
   // Button label on its own fill, 4.5:1. Transparent fills (tertiary, link) fall through to the page.
   ...['primary', 'accent', 'secondary', 'tertiary', 'link', 'primary-destructive', 'secondary-destructive', 'tertiary-destructive', 'link-destructive']
     .flatMap((h) => ['default', 'hover', 'pressed'].map((st) => [`button-${h}-foreground-${st}`, `button-${h}-surface-${st}`, TEXT])),
+  // Tier pricing table: texts and the marker on the active row. The saving is green on a normal row only;
+  // on the active row it takes the primary text color, because green on the tint is below 4.5:1.
+  ['tier-pricing-foreground-saving', 'table-surface', TEXT],
+  ...['table-surface', 'table-surface-selected'].flatMap((bg) => ['table-foreground-primary', 'button-link-foreground-default'].map((fg) => [fg, bg, TEXT])),
+  // A row only has the hover color while its button is hovered, and the button then has its hover color.
+  ['button-link-foreground-hover', 'table-surface-hover', TEXT],
+  ['tier-pricing-border-active', 'table-surface-selected'],
 ];
 
 const { values } = readTokens();

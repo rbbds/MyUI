@@ -5,6 +5,11 @@
 Planned as 1.9.0.
 
 ### Added
+- **New component: Tier pricing table** (`TierPricingTable`). Unit price per quantity tier for bulk orders: quantity, price each and the saving compared to the first tier. The row that matches `quantity` is marked (`aria-current`, a line on the left, bold text) and the new price is read out when the tier changes. `onTierSelect` makes the quantity of each row a button. Also: `title`, `footnote`, `vat`, `decimals`, `showSaving`, `indicative`, `loading` and `density`. Texts in `labels`, also in nl-NL.
+- `useTierPricing(tiers, quantity)`: the active tier, the next tier and a ready-made hint such as "Add 200 more and pay €0.480 each", for `quantityHint` of Add to cart.
+- Tokens `--tier-pricing-*` (7): cell padding, gap, the marker of the active row and the color of the saving. The rest of the look comes from the `--table-*` tokens.
+- Figma: page Tier pricing table with the component (Density, State, Saving) and the base components `_Tier row`, `_Tier header` and `_Tier row skeleton`.
+- `check:contrast` checks the texts and the marker of the active row in Tier pricing table.
 - **Price: `prefix`, `decimals` and `vat`.** `prefix` is a small text before the amount ("From"). `decimals` is a fixed number of decimals, for unit prices such as €0.523. `vat="excl"` or `vat="incl"` shows the VAT text after the price; the text comes from the new labels `vatExcl` and `vatIncl`, so it follows the `LocaleProvider` (nl-NL: "excl. btw", "incl. btw"). Without these props Price looks the same as before.
 - `formatMoney(amount, currency, locale, decimals)`: optional fourth argument.
 - Figma: Price has the properties Prefix, Show prefix, VAT and Show VAT (off by default).
