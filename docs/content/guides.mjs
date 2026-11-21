@@ -281,6 +281,16 @@ export const guides = [
 // Figma changelog: shown on the page "📝 Changelog" in the Figma file. Newest first.
 export const figmaChangelog = [
   {
+    version: '1.9.0',
+    items: [
+      'New page Tier pricing table: the unit price per quantity tier for bulk orders. The component has Density, State (Default, Loading) and Saving. The base components are _Tier row, _Tier header and _Tier row skeleton. 7 new tokens under e-commerce/tier-pricing; the rest of the look comes from the table tokens.',
+      'Price has the properties Prefix, Show prefix, VAT and Show VAT (off by default). The default text of Suffix is "per piece".',
+      'Quantity stepper has the properties Hint and Show hint (off by default). The number field has a minimum width and grows with the number.',
+      'Add to cart has the properties Quantity hint, Show quantity hint, Show secondary action, Secondary hint and Show secondary hint. The new parts are off by default.',
+      'Fixed: the icon in the Add to cart button, and in the disabled button of Product card (Horizontal, Sold out), now has the same color as the text.',
+    ],
+  },
+  {
     version: '1.7.0',
     items: [
       'The focus color is blue in every brand: color/border/focus points to info 500 (Light) and info 400 (Dark) instead of the brand color. The focus ring, the focus border of Input and Verification code, and the active line of Menu item and Command item follow.',
