@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-Planned as 1.9.0.
+## 1.9.0 (21 November 2026)
 
 ### Added
 - **New component: Tier pricing table** (`TierPricingTable`). Unit price per quantity tier for bulk orders: quantity, price each and the saving compared to the first tier. The row that matches `quantity` is marked (`aria-current`, a line on the left, bold text) and the new price is read out when the tier changes. `onTierSelect` makes the quantity of each row a button. Also: `title`, `footnote`, `vat`, `decimals`, `showSaving`, `indicative`, `loading` and `density`. Texts in `labels`, also in nl-NL.
@@ -29,6 +27,7 @@ Planned as 1.9.0.
 
 ### Fixed
 - Figma: the cart icon in the Add to cart button was white on the accent color while the text was dark. The icon now uses the same token as the text (`button/accent/foreground-default`). In code this was already right.
+- Figma: in Product card (Horizontal, Sold out) the icon of the disabled button had the default icon color. It now uses the same token as the text (`button/secondary/foreground-disabled`).
 - Figma: Quantity stepper with a two-digit number was 3px wider than in code. The space around the number is now `spacing/2,5` (md) and `spacing/2` (sm).
 - Figma: the default text of the Suffix property of Price is "per piece" instead of "incl. VAT", now that VAT has its own property.
 
