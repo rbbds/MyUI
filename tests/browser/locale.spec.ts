@@ -25,4 +25,17 @@ test.describe('LocaleProvider', () => {
     await expect(summary).toContainText('Total');
     await expect(page.getByRole('spinbutton', { name: 'Quantity' })).toBeVisible();
   });
+  test('nlNL translates the texts and sets the formats', async ({ page }) => {
+    await page.goto('/?s=locale-nl-full');
+    const summary = page.locator('.rb-cart-summary').first();
+    await expect(summary).toContainText('Overzicht');
+    await expect(summary).toContainText('Subtotaal');
+    await expect(summary).toContainText('Totaal');
+    await expect(summary).toContainText('Inclusief btw');
+    await expect(summary).toContainText(`€${nbsp}1.234,56`);
+    await expect(page.getByRole('spinbutton', { name: 'Aantal' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Eén meer' })).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Paginering' })).toBeVisible();
+    await expect(page.getByRole('status').filter({ hasText: 'Laden' })).toBeAttached();
+  });
 });

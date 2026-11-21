@@ -135,12 +135,14 @@ export const guides = [
       {
         heading: '7. Language and dates',
         codeFirst: true,
-        code: 'import { LocaleProvider } from \'@rbbds/ui\';\n\n<LocaleProvider\n  locale="nl-NL"\n  labels={{ cartSummary: { subtotal: "Subtotaal", total: "Totaal" } }}\n  texts={{ "cartSummary.title": "Overzicht" }}\n>\n  <App />\n</LocaleProvider>',
+        code: 'import { LocaleProvider } from \'@rbbds/ui\';\nimport { nlNL } from \'@rbbds/ui/locales/nl-NL\';\n\n<LocaleProvider locale={nlNL}>\n  <App />\n</LocaleProvider>\n\n// Your own words on top of the locale\n<LocaleProvider\n  locale={nlNL}\n  labels={{ cartSummary: { total: "Totaal excl. btw" } }}\n  texts={{ "cartSummary.title": "Je bestelling" }}\n>\n  <App />\n</LocaleProvider>',
         paragraphs: [
           'All built-in texts are English, and dates, numbers and amounts use en-US.',
-          'Put a LocaleProvider around your app to change that for every component at once. The locale sets the format: with nl-NL an amount is € 1.234,56 and the calendar shows Dutch month names.',
+          'Put a LocaleProvider around your app to change that for every component at once. MyUI comes with Dutch: nlNL from @rbbds/ui/locales/nl-NL has every built-in text in Dutch (informal, "je") and sets the formats: an amount is € 1.234,56 and a date is 27-11-2026.',
+          'Another language: pass only a tag, for example locale="de-DE". The formats change and the texts stay English until you pass your own.',
           'Your own texts go in labels, per component. The key is the name of the component: cartSummary, pagination, datePicker. Single texts, such as a title or a placeholder, go in texts as component.prop.',
           'A locale or labels prop on a component still wins over the provider. Without a provider nothing changes.',
+          'Next.js App Router: put the LocaleProvider in your own client component (a file that starts with \'use client\'), next to your other providers. A locale has functions for plurals, and a server component cannot pass functions on.',
         ],
       },
       {

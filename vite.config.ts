@@ -18,7 +18,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: { index: resolve(import.meta.dirname, 'src/index.ts'), flags: resolve(import.meta.dirname, 'src/flags/index.ts') },
+      entry: { index: resolve(import.meta.dirname, 'src/index.ts'), flags: resolve(import.meta.dirname, 'src/flags/index.ts'), 'locales/nl-NL': resolve(import.meta.dirname, 'src/locales/nl-NL.ts') },
       formats: ['es'],
       fileName: (_format, name) => `${name}.js`,
       cssFileName: 'styles',

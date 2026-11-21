@@ -73,14 +73,13 @@ import { Link as RouterLink } from 'react-router';
 
 All built-in texts are English, and dates, numbers and amounts use `en-US`. Wrap your app in `LocaleProvider` to change that for every component at once. A `locale` or `labels` prop on a component still wins.
 
+Dutch is included: `nlNL` has every built-in text and sets the formats (€ 1.234,56, 27-11-2026). For another language pass a tag such as `locale="de-DE"` and your own `labels`.
+
 ```tsx
 import { LocaleProvider } from '@rbbds/ui';
+import { nlNL } from '@rbbds/ui/locales/nl-NL';
 
-<LocaleProvider
-  locale="nl-NL"
-  labels={{ cartSummary: { subtotal: 'Subtotaal', total: 'Totaal' } }}
-  texts={{ 'cartSummary.title': 'Overzicht' }}
->
+<LocaleProvider locale={nlNL} labels={{ cartSummary: { total: 'Totaal excl. btw' } }}>
   {children}
 </LocaleProvider>
 ```
