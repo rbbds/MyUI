@@ -101,6 +101,18 @@ export const QuantitySteppers: Story = {
     );
   },
 };
+export const OrderUnits: Story = {
+  render: () => {
+    const [q, setQ] = useState(50);
+    return (
+      <div style={col}>
+        <QuantityStepper value={q} onValueChange={setQ} min={50} max={5000} step={25} label="Quantity pens" hint={q < 250 ? `Add ${250 - q} more for a lower price each` : 'You have the lowest price each'} />
+        <span>Quantity: {q} (minimum 50, per 25, max 5000). Type 30 or 60 to see the message.</span>
+        <QuantityStepper size="sm" defaultValue={12} min={1} max={120} step={12} label="Quantity boxes" />
+      </div>
+    );
+  },
+};
 export const StockStatuses: Story = {
   render: () => (
     <div style={col}>

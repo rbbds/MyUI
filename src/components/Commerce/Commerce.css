@@ -23,6 +23,7 @@
 .rb-rating__value{color:var(--rating-foreground-value);font-weight:var(--text-body-sub-text-semibold-font-weight)}
 
 /* ---------- Quantity stepper ---------- */
+.rb-qty-field{display:inline-flex;flex-direction:column;align-items:flex-start;width:fit-content;max-width:100%}
 .rb-qty{display:inline-flex;width:fit-content;align-items:stretch;border:var(--qty-border-width) solid var(--qty-border);border-radius:var(--qty-radius);background:var(--qty-surface);overflow:hidden}
 .rb-qty--md{height:var(--qty-size-md)}.rb-qty--sm{height:var(--qty-size-sm)}
 .rb-qty:has(.rb-qty__input:focus-visible){box-shadow:var(--focus-ring)}
@@ -32,9 +33,11 @@
 .rb-qty__btn:hover:not(:disabled):not([aria-disabled="true"]){background:var(--qty-surface-hover);color:var(--qty-foreground)}
 .rb-qty__btn:disabled,.rb-qty__btn[aria-disabled="true"]{color:var(--qty-foreground-disabled);cursor:not-allowed}
 .rb-qty__btn:focus-visible{outline:none;box-shadow:var(--focus-ring-inset)}
-.rb-qty__input{width:3.5ch;min-width:var(--_w);padding:0;border:0;border-inline:var(--qty-value-border-width) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
+.rb-qty__input{width:calc(var(--_w) + (var(--_digits,2) - 2) * 1ch);min-width:var(--_w);padding:0;border:0;border-inline:var(--qty-value-border-width) solid var(--qty-border);background:transparent;color:var(--qty-foreground);text-align:center;font-family:var(--text-body-sub-text-semibold-font-family);font-size:var(--text-body-sub-text-semibold-font-size);font-weight:var(--text-body-sub-text-semibold-font-weight);-moz-appearance:textfield;appearance:textfield}
 .rb-qty__input::-webkit-outer-spin-button,.rb-qty__input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .rb-qty__input:focus{outline:none}
+.rb-qty__message,.rb-qty__hint{color:var(--input-foreground-hint);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height);font-weight:var(--text-body-sub-text-font-weight)}
+.rb-qty__message:not(:empty),.rb-qty__hint:not([hidden]){margin-top:var(--input-field-gap)}
 .rb-qty--disabled{background:var(--qty-surface-disabled)}
 .rb-qty--disabled .rb-qty__input{color:var(--qty-foreground-disabled)}
 

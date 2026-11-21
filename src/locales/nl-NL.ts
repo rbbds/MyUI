@@ -17,7 +17,7 @@ export const nlNL: CompleteLocale = {
     // E-commerce
     price: { was: 'Van', now: 'Voor', vatExcl: 'excl. btw', vatIncl: 'incl. btw' },
     rating: { rating: (value, max) => `${value} van ${max} sterren`, reviews: (count) => `${count} ${count === 1 ? 'beoordeling' : 'beoordelingen'}` },
-    quantityStepper: { decrease: 'Eén minder', increase: 'Eén meer' },
+    quantityStepper: { decrease: 'Eén minder', increase: 'Eén meer', decreaseBy: (step) => `${step} minder`, increaseBy: (step) => `${step} meer`, minimum: (min) => `Minimaal ${min}`, maximum: (max) => `Maximaal ${max}`, stepped: (value, step) => `Aangepast naar ${value}. Je bestelt per ${step}.` },
     stock: { 'in-stock': 'Op voorraad', low: 'Bijna uitverkocht', out: 'Uitverkocht', preorder: 'Pre-order' },
     cartItem: { quantity: (quantity) => `Aantal: ${quantity}`, quantityOf: (title) => `Aantal ${title}`, remove: (title) => `Verwijder ${title}` },
     cartSummary: { subtotal: 'Subtotaal', total: 'Totaal' },

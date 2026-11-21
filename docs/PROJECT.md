@@ -285,6 +285,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #65 | F2b: Nederlands (`@rbbds/ui/locales/nl-NL`): 53 tekstsets en 21 losse teksten, Locale-schakelaar in Storybook toont nu ook de teksten |
 | #66 | Release 1.8.0 |
 | #67 | Price: `prefix`, `decimals` (stukprijzen zoals € 0,523) en `vat` (excl. of incl. btw, uit de labels) |
+| #68 | Quantity stepper: `step` (verpakkingseenheid), melding na een correctie, `hint`, veld groeit mee met het grootste getal |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

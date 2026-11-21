@@ -26,6 +26,7 @@ const megaLinks = [
 const options = [{ value: 'nl', label: 'Netherlands' }, { value: 'be', label: 'Belgium' }, { value: 'de', label: 'Germany' }];
 
 const scenarios: Record<string, ReactNode> = {
+  'qty-step': <><div data-testid="plain"><QuantityStepper defaultValue={2} max={5} label="Plain" /></div><div data-testid="unit"><QuantityStepper defaultValue={50} min={50} max={5000} step={25} label="Pens" hint="Add more for a lower price" /></div><LocaleProvider locale={nlNL}><div data-testid="nl"><QuantityStepper defaultValue={12} min={1} max={120} step={12} /></div></LocaleProvider></>,
   'price-unit': <><p data-testid="en"><Price prefix="From" amount={0.523} decimals={3} suffix="per piece" vat="excl" /></p><p data-testid="pad"><Price amount={0.52} decimals={3} /></p><p data-testid="plain"><Price amount={79.95} /></p><LocaleProvider locale={nlNL}><p data-testid="nl"><Price prefix="v.a." amount={0.523} decimals={3} suffix="per stuk" vat="incl" /></p></LocaleProvider></>,
   'locale-nl-full': <LocaleProvider locale={nlNL}><CartSummary subtotal={1234.56} total={1234.56} /><QuantityStepper /><Spinner /><Pagination page={2} pageCount={8} onPageChange={() => {}} /></LocaleProvider>,
   'locale-nl': <LocaleProvider locale="nl-NL" labels={{ cartSummary: { total: 'Totaal' } }} texts={{ 'cartSummary.title': 'Overzicht', 'spinner.label': 'Laden' }}><CartSummary subtotal={1234.56} total={1234.56} /><p data-testid="own-locale"><Price amount={2} locale="en-US" /></p><QuantityStepper /><Spinner /></LocaleProvider>,

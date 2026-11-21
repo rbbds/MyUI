@@ -8,8 +8,14 @@ Planned as 1.9.0.
 - **Price: `prefix`, `decimals` and `vat`.** `prefix` is a small text before the amount ("From"). `decimals` is a fixed number of decimals, for unit prices such as €0.523. `vat="excl"` or `vat="incl"` shows the VAT text after the price; the text comes from the new labels `vatExcl` and `vatIncl`, so it follows the `LocaleProvider` (nl-NL: "excl. btw", "incl. btw"). Without these props Price looks the same as before.
 - `formatMoney(amount, currency, locale, decimals)`: optional fourth argument.
 - Figma: Price has the properties Prefix, Show prefix, VAT and Show VAT (off by default).
+- **Quantity stepper: `step` and `hint`.** `step` is the order unit (default 1): − and + go per step, a typed number is rounded up to the next step, and the buttons are named after it ("25 less", "25 more"). Valid numbers are multiples of the step; `min` and `max` move inward to the nearest one. `hint` is a line below the stepper, for example "Add 20 more for €0.48 each".
+- New labels for Quantity stepper: `decreaseBy`, `increaseBy`, `minimum`, `maximum` and `stepped`, also in nl-NL.
+- Figma: Quantity stepper has the properties Hint and Show hint (off by default), and an example with a large number.
 
 ### Changed
+- **Quantity stepper explains a corrected number.** A typed number below `min` or above `max` was corrected without a word. Now a message below the stepper says why ("Minimum is 1", "Maximum is 99"), as a status for screen readers. It goes away at the next change. This also happens without the new props: in Cart item the row is a little higher while the message shows.
+- Quantity stepper: the number field grows with the largest number, so 1000 or 10000 fits. With the default `max` of 99 the width is the same as before. Figma: the field has a minimum width instead of a fixed one.
+- Quantity stepper has one extra element around it (`.rb-qty-field`) for the line below. `className` is now on that element. The look without a hint or message is the same.
 - Figma: the default text of the Suffix property of Price is "per piece" instead of "incl. VAT", now that VAT has its own property.
 
 ## 1.8.0 (21 November 2026)

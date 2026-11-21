@@ -3,3 +3,4 @@ import meta, * as S from './Commerce.cases';
 
 export default { ...meta, title: 'E-commerce/Quantity stepper' } as typeof meta;
 export const QuantitySteppers = S.QuantitySteppers;
+export const OrderUnits = S.OrderUnits;

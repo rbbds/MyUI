@@ -6,17 +6,19 @@
     "base": "_Quantity stepper"
   },
   "react": "QuantityStepper",
-  "summary": "Choose an amount with − and +. You can also type. The value stays between min and max.",
+  "summary": "Choose an amount with − and +. You can also type. The value stays between min and max, and follows the order unit (step) when there is one.",
   "use": [
-    "Amount in the cart and on the product page."
+    "Amount in the cart and on the product page.",
+    "Bulk orders: a minimum order and an order unit, for example per 25."
   ],
   "avoid": [
-    "Large numbers or money amounts: use Input with type number."
+    "Money amounts or numbers without limits: use Input with type number."
   ],
   "anatomy": [
     "Minus button.",
-    "Number (native number field).",
-    "Plus button."
+    "Number (native number field). It grows with the largest number.",
+    "Plus button.",
+    "Optional line below: a hint, or a message after a correction."
   ],
   "figmaProps": [
     [
@@ -32,7 +34,17 @@
     [
       "Value",
       "text",
-      ""
+      "The field grows with the number."
+    ],
+    [
+      "Hint",
+      "text",
+      "The line below the stepper. Also used for the message after a correction."
+    ],
+    [
+      "Show hint",
+      "boolean",
+      "Off by default."
     ]
   ],
   "reactProps": [
@@ -49,7 +61,17 @@
     [
       "min, max",
       "number",
-      "Default 1 and 99."
+      "Default 1 and 99. Give a higher max for bulk orders; the field grows with it."
+    ],
+    [
+      "step",
+      "number",
+      "Order unit, default 1. − and + go per step. A typed number is rounded up to the next step."
+    ],
+    [
+      "hint",
+      "ReactNode",
+      "Line below the stepper, for example \"Add 20 more for €0.48 each\". You fill it yourself: the stepper knows no prices."
     ],
     [
       "label",
@@ -58,7 +80,7 @@
     ],
     [
       "labels",
-      "{ decrease, increase }",
+      "{ decrease, increase, decreaseBy(step), increaseBy(step), minimum(min), maximum(max), stepped(value, step) }",
       "decreaseLabel and increaseLabel are deprecated."
     ],
     [
@@ -69,14 +91,22 @@
   ],
   "behaviour": [
     "A typed value is checked on Enter or when you leave the field.",
+    "A number that is too low, too high or not a multiple of the step is corrected. A message below the stepper says why: \"Minimum is 50\", \"Maximum is 5000\" or \"Changed to 75. Sold per 25.\" The message goes away at the next change.",
+    "Valid numbers are multiples of the step. With step 12 and min 1 the lowest number is 12.",
+    "While a message shows, it takes the place of the hint, so there is always one line.",
     "− is off at the minimum, + at the maximum. They keep focus (aria-disabled), so you can keep pressing without losing your place."
   ],
   "a11y": [
-    "Native number field: arrow up and down work.",
+    "Native number field: arrow up and down work, per step.",
+    "The message is a status: a screen reader reads it when it appears. The hint or the message is also the description of the field.",
+    "With a step the buttons are named after it: \"25 less\", \"25 more\".",
     "The buttons have their own names and point to the field (aria-controls).",
     "Focus is visible on the part that has it: a ring inside − or +, a ring around the stepper for the field."
   ],
-  "content": [],
+  "content": [
+    "Keep the hint to one short line.",
+    "The default messages have no unit. Add one through labels when it helps: \"Minimum is 50 pieces\"."
+  ],
   "do": [
     "Give a label with the product name when there are several on one page."
   ],
@@ -90,5 +120,10 @@
     "Cart item",
     "Add to cart"
   ],
-  "open": []
+  "open": [
+    "Assumption: valid numbers are multiples of the step counted from 0, and min and max move inward to the nearest multiple. Not built: a step that starts at the minimum (min 50, step 12: 50, 62, 74).",
+    "Assumption: a typed number is rounded up to the next step, so a customer never gets less than asked.",
+    "Assumption: the message has the same color as the hint, because the number is already right. Not tested whether it stands out enough.",
+    "Add to cart and Cart item do not pass min and step yet."
+  ]
 }
