@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { AddToCart, Alert, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, Spinner, Table, TableBulkActions, TableCard, Tabs, TierPricingTable, Toast, ToastRegion, Tooltip, useTierPricing } from '../../src';
+import { AddToCart, Alert, Badge, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, SelectionCard, SelectionCardGroup, Spinner, Table, TableBulkActions, TableCard, Tabs, TierPricingTable, Toast, ToastRegion, Tooltip, useTierPricing } from '../../src';
 import { Info } from 'lucide-react';
 import { nlNL } from '../../src/locales/nl-NL';
 
@@ -51,6 +51,22 @@ function TierDemo() {
     </div>
   );
 }
+function CardSlots() {
+  const [v, setV] = useState('a');
+  const [clicks, setClicks] = useState(0);
+  return (
+    <div style={{ width: 420 }}>
+      <SelectionCardGroup legend="Method">
+        <SelectionCard name="m" value="a" checked={v === 'a'} onChange={() => setV('a')} title="Print" badge={<Badge size="sm">Recommended</Badge>} description="Any colors." meta="8 working days" />
+        <SelectionCard name="m" value="b" checked={v === 'b'} onChange={() => setV('b')} title="Screen" description="Solid colors." meta="Max. 4 colors">
+          {v === 'b' && <Alert color="warning" title="Your logo has 6 colors" actions={<Button size="sm" onClick={() => setClicks((n) => n + 1)}>Use fewer colors</Button>} />}
+        </SelectionCard>
+        <SelectionCard name="m" value="c" title="Engraving" description="Lasered." meta="Not available for this material." disabled />
+      </SelectionCardGroup>
+      <p data-testid="state">{v} {clicks}</p>
+    </div>
+  );
+}
 function CartMin() {
   const [q, setQ] = useState(50);
   return <CartItem title="Pen" price={0.52} quantity={q} minQuantity={50} maxQuantity={5000} quantityStep={25} onQuantityChange={setQ} onRemove={() => {}} />;
@@ -60,6 +76,7 @@ const scenarios: Record<string, ReactNode> = {
   'tier': <TierDemo />,
   'tier-static': <div style={{ width: 360 }}><TierPricingTable tiers={tiers} quantity={300} showSaving={false} indicative density="compact" /><div data-testid="loading"><TierPricingTable tiers={tiers} loading /></div></div>,
   'tier-nl': <LocaleProvider locale={nlNL}><div style={{ width: 360 }}><TierPricingTable title="Staffelprijzen" tiers={tiers} quantity={1200} decimals={3} vat="excl" /><TierHintNl /></div></LocaleProvider>,
+  'card-slots': <CardSlots />,
   'buy-plain': <div style={{ width: 440 }}><AddToCart onAdd={() => {}} aside={<ButtonIcon icon={<Info />} aria-label="Save" />} /></div>,
   'buy-bulk': <BuyBulk />,
   'cart-min': <div style={{ width: 480 }}><CartMin /></div>,

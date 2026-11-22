@@ -85,7 +85,7 @@ Niet nodig: code en tokens. Die staan in de repo en in Figma, en een kopie raakt
 - Untitled UI is de referentie voor welke componenten erin horen.
 - Zelfde 4 tokenlagen als bij PGGM, maar met eigen inhoud.
 - Iconen: Lucide (outlined). Componentmaten: sm, md, lg.
-- Figma-componenten op de PGGM-manier: een base component (`_Button (base)`) waarvan de varianten instances zijn, zodat je alleen de base aanpast. Native Figma slots voor inhoud (card, modal, slideout), geen nep-slots.
+- Figma-componenten op de PGGM-manier: een base component (`_Button (base)`) waarvan de varianten instances zijn, zodat je alleen de base aanpast. Altijd native Figma slots voor inhoud (`createSlot`, property van het type slot), nooit een zelfgemaakte placeholder met instance swap. Clip content staat uit op elk slot. Kijk eerst hoe een bestaand component het doet (Card: slot `Content` met `Show content`, gap via een token, standaard leeg).
 - Gebruik per klant: `npm install @rbbds/ui`, stijl kiezen, kleuren, fonts en logo aanpassen in code. Geen apart merk per klant in Figma nodig.
 - Alles gratis.
 - Templates per stijl (Iris, Forest, Berry) zijn uitgesteld. Robert komt erop terug.
@@ -204,6 +204,8 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 - Per script maar één paginawissel; je kunt wel nodes aan andere pagina's toevoegen.
 - In instances kun je x/y en layoutMode niet overschrijven. Voor een andere layout: aparte base maken en swappen.
 - Geen property-koppelingen op sublagen of slot-inhoud in instances.
+- Slots boven vaste props: een plek voor inhoud krijgt een naam en is een slot (in React een `ReactNode`-prop, in Figma een native slot). Geen prop met een vaste betekenis als een slot hetzelfde kan. Interactieve inhoud nooit in een `<label>`: geef die een eigen slot buiten het label.
+- Een meting in Figma direct na een wijziging kan verouderd zijn. Lees maten in een aparte stap opnieuw voordat je meldt dat iets gelijk is gebleven.
 - Button op volle breedte: FILL op de wrapper-instance én op het binnenste kind; na een swap opnieuw zetten.
 - Kleur koppelen: eerst de waarde ophalen (`resolveForConsumer`) en die als placeholder gebruiken, anders rendert het zwart.
 - De huidige pagina kun je niet verwijderen; eerst wisselen.
@@ -292,6 +294,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #71 | Story: de koopflow met staffels volledig in het Nederlands |
 | #72 | Release 1.9.0 |
 | #73 | Figma-changelog voor 1.9.0. Releases: Claude maakt voortaan ook de GitHub Release aan, na de merge van de release-PR |
+| #74 | Selection card: slots `badge`, `meta` en `children` (content). Patroon "decoration method" als story. Figma: clip content uit op alle 31 slots |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |

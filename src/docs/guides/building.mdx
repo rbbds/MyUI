@@ -55,3 +55,11 @@ Rules for anyone who adds or changes a component in the Figma file. They keep sp
 - Bind every padding, gap, radius, border width and color to a component token. Component tokens point to the mapped tokens, never to primitives.
 - Name tokens after the part: mobile-nav-item/sub-padding-horizontal, mega-menu/columns-gap.
 - Content areas that people fill themselves are slots with a fixed gap token.
+
+## 8. Slots before fixed props
+
+- A place for content gets a name and is a slot. In React that is a prop of type ReactNode (badge, meta, aside, actions, children). In Figma it is a native slot. Do not add a prop with one fixed meaning when a slot does the same.
+- Always use native Figma slots, never a home-made placeholder with an instance swap. Turn clip content off on the slot, so a focus ring or a shadow of the content is not cut off.
+- Give a slot a Show property that is off by default, and a gap token. Look at Card first: slot Content with Show content.
+- Buttons, links and fields never go inside a label. A component whose whole surface is a label (Selection card) gets a separate slot outside the label for that content.
+- Business rules stay in the page. A component gives the slots; which option is recommended or not ideal is decided by the page. Show the whole flow as a pattern story.
