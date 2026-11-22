@@ -66,10 +66,11 @@ export const nlNL: CompleteLocale = {
     // Content and data
     tableCard: { region: 'Tabel' },
     tableBulkActions: { count: (n) => `${n} geselecteerd`, clear: 'Wis selectie' },
-    fileUpload: { action: 'Klik om te uploaden', drop: 'of sleep een bestand hierheen' },
+    fileUpload: { action: 'Klik om te uploaden', drop: 'of sleep een bestand hierheen', files: 'Bestanden' },
     fileUploadItem: {
       failed: 'Uploaden is mislukt. Probeer het opnieuw.', uploading: (name) => `${name} uploaden`, uploaded: 'Geüpload',
       remove: (name) => `Verwijder ${name}`, uploadedFile: (name) => `${name} is geüpload`, failedFile: (name) => `${name}: uploaden is mislukt`,
+      processing: 'Bestand controleren', processingFile: (name) => `${name} wordt gecontroleerd`,
     },
     tag: { remove: (label) => `Verwijder ${label}`.trim() },
     avatar: { online: 'Online', offline: 'Offline' },

@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../../src/styles/index.css';
-import { AddToCart, Alert, Badge, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, SelectionCard, SelectionCardGroup, Spinner, Table, TableBulkActions, TableCard, Tabs, TierPricingTable, Toast, ToastRegion, Tooltip, useTierPricing } from '../../src';
+import { AddToCart, Alert, Badge, Breadcrumbs, Button, ButtonGroup, ButtonIcon, Calendar, Card, CartButton, CartItem, CartSummary, Combobox, CommandMenu, DatePicker, DateRangePicker, DropdownMenu, DualSidebar, FileUpload, FileUploadItem, Header, Input, LinkProvider, LocaleProvider, MobileNav, Modal, NavItem, NavItem as NavItemLink, Pagination, Popover, Price, QuantityStepper, SearchInput, SelectionCard, SelectionCardGroup, Spinner, Table, TableBulkActions, TableCard, Tabs, TierPricingTable, Toast, ToastRegion, Tooltip, useTierPricing } from '../../src';
 import { Info } from 'lucide-react';
 import { nlNL } from '../../src/locales/nl-NL';
 
@@ -67,6 +67,27 @@ function CardSlots() {
     </div>
   );
 }
+function Files() {
+  const [log, setLog] = useState<string[]>([]);
+  const add = (x: string) => setLog((l) => [...l, x]);
+  return (
+    <div style={{ width: 512 }}>
+      <div data-testid="plain"><FileUpload onFiles={() => {}} hint="PDF" /></div>
+      <div data-testid="loose"><FileUploadItem name="old.pdf" size="1 KB" progress={40} onRemove={() => add('remove old')} /></div>
+      <div data-testid="group">
+        <FileUpload onFiles={() => {}} hint="PNG">
+          <FileUploadItem name="a.png" size="1 MB" status="processing" onRemove={() => add('remove a')} />
+          <FileUploadItem name="a-very-long-file-name-that-keeps-going-and-going-and-going-until-it-no-longer-fits-in-the-row.png" size="2 MB" status="complete" media={<span data-testid="thumb" style={{ width: 40, height: 40, display: 'block' }} />} actions={<Button size="sm" hierarchy="tertiary" onClick={() => add('replace')}>Replace</Button>} onRemove={() => add('remove b')}>
+            <Alert color="warning" title="Low resolution" />
+          </FileUploadItem>
+          <FileUploadItem name="c.docx" status="error" error="Wrong type." actions={<Button size="sm" hierarchy="tertiary" onClick={() => add('retry')}>Try again</Button>} />
+        </FileUpload>
+      </div>
+      <LocaleProvider locale={nlNL}><div data-testid="nl"><FileUpload onFiles={() => {}}><FileUploadItem name="d.png" status="processing" /></FileUpload></div></LocaleProvider>
+      <p data-testid="log">{log.join(', ')}</p>
+    </div>
+  );
+}
 function CartMin() {
   const [q, setQ] = useState(50);
   return <CartItem title="Pen" price={0.52} quantity={q} minQuantity={50} maxQuantity={5000} quantityStep={25} onQuantityChange={setQ} onRemove={() => {}} />;
@@ -76,6 +97,7 @@ const scenarios: Record<string, ReactNode> = {
   'tier': <TierDemo />,
   'tier-static': <div style={{ width: 360 }}><TierPricingTable tiers={tiers} quantity={300} showSaving={false} indicative density="compact" /><div data-testid="loading"><TierPricingTable tiers={tiers} loading /></div></div>,
   'tier-nl': <LocaleProvider locale={nlNL}><div style={{ width: 360 }}><TierPricingTable title="Staffelprijzen" tiers={tiers} quantity={1200} decimals={3} vat="excl" /><TierHintNl /></div></LocaleProvider>,
+  'files': <Files />,
   'card-slots': <CardSlots />,
   'buy-plain': <div style={{ width: 440 }}><AddToCart onAdd={() => {}} aside={<ButtonIcon icon={<Info />} aria-label="Save" />} /></div>,
   'buy-bulk': <BuyBulk />,

@@ -295,6 +295,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #72 | Release 1.9.0 |
 | #73 | Figma-changelog voor 1.9.0. Releases: Claude maakt voortaan ook de GitHub Release aan, na de merge van de release-PR |
 | #74 | Selection card: slots `badge`, `meta` en `children` (content). Patroon "decoration method" als story. Figma: clip content uit op alle 31 slots |
+| #75 | File upload: bestanden als slot in het component. File upload item: slots `media`, `actions`, `children`, status `processing`, verwijderen na complete. Patroon "artwork check" als story |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |
