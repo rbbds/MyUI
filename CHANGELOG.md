@@ -9,10 +9,15 @@ Planned as 1.10.0.
 - Stories "Pattern: decoration method", in English and in Dutch: a recommended option, an option that is not ideal with a warning and actions, an option that is off with the reason, and a loading state. Built with Selection card, Badge, Alert and Skeleton; the rules live in the story, not in a component.
 - Token `--selection-card-badge-gap`: the space between the title and the badge.
 - Figma: Selection card has a native Badge slot (Show badge), a Meta text (Show meta) and a native Content slot (Show content). All off by default.
+- **File upload: the files are part of the component.** `FileUpload` has a `children` slot for `FileUploadItem` elements. They become a named list below the drop zone. Without children File upload renders as before.
+- **File upload item: three slots and a new status.** `media` replaces the icon (a thumbnail), `actions` is for your own buttons on the right ("Try again", "Replace"), and `children` is free content below the file, inside the card. Status `processing` shows a spinner with a text instead of the progress bar, for when the upload is done and the file is being checked. New labels `processing` and `processingFile`, and `files` on File upload, also in nl-NL.
+- Stories "Pattern: artwork check", in English and in Dutch: upload, check, a result with a list of checks, a warning with actions, a wrong file type and a check that timed out. The checks live in the story, not in a component.
+- Figma: File upload has a native Files slot (Show files) with File upload items in it. File upload item has native slots Media, Actions and Content, a Show icon property and the state Processing.
 - Building components guide: section "Slots before fixed props".
 - `check:contrast` checks the text color of Selection card on its three surfaces.
 
 ### Changed
+- File upload item: a complete file can be removed. Before, the remove button disappeared when the upload was done. The done icon and the buttons on the right now share one center line.
 - Figma: clip content is off on all 31 native slots (Card, Modal, Slideout, Table, Sidebar and others), so a focus ring or shadow of the content is not cut off. No slot had overflowing content, so nothing looks different.
 
 ## 1.9.0 (21 November 2026)

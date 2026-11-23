@@ -72,6 +72,16 @@
 .rb-file__name{margin:0;color:var(--file-upload-file-name-foreground);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--text-body-sub-text-medium-font-family);font-size:var(--text-body-sub-text-medium-font-size);line-height:var(--text-body-sub-text-medium-line-height);font-weight:var(--text-body-sub-text-medium-font-weight)}
 .rb-file__meta{margin:0;color:var(--file-upload-meta-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
 .rb-file--error .rb-file__meta{color:var(--file-upload-meta-foreground-2)}
+.rb-file__media{flex-shrink:0;display:inline-flex}
+.rb-file__trailing{flex-shrink:0;display:flex;align-items:center;gap:var(--file-upload-gap)}
+.rb-file__trailing:empty{display:none}
+.rb-file__processing{display:flex;align-items:center;gap:var(--file-upload-gap);margin:0;color:var(--file-upload-meta-foreground);font-family:var(--text-body-sub-text-font-family);font-size:var(--text-body-sub-text-font-size);line-height:var(--text-body-sub-text-line-height)}
+.rb-file--has-content{flex-direction:column;align-items:stretch}
+.rb-file__main{display:flex;align-items:flex-start;gap:var(--file-upload-gap)}
+.rb-file__body{display:flex;flex-direction:column;gap:var(--file-upload-gap);min-width:0}
+.rb-file__body:empty{display:none}
+.rb-upload-group,.rb-upload-group__files{display:flex;flex-direction:column;gap:var(--file-upload-gap)}
+.rb-upload-group__files:empty{display:none}
 .rb-file__done{display:inline-flex;color:var(--file-upload-foreground-icon)}
 .rb-file__done svg{width:var(--file-upload-done-icon-size);height:var(--file-upload-done-icon-size)}
 .rb-file .rb-progress__indicator{background:var(--file-item-progress)}

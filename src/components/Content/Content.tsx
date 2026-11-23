@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId, useRef, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
+import { createContext, forwardRef, useContext, useEffect, useId, useRef, useState, type DragEvent, type HTMLAttributes, type InputHTMLAttributes, type ReactNode, type ThHTMLAttributes } from 'react';
 import { Link } from '../../utils/link';
 import { ArrowDown, ArrowUp, ChevronsUpDown, CircleAlert, CircleCheck, CloudUpload, File as FileIcon, Minus, Plus, Trash2 } from 'lucide-react';
 import { cx } from '../../utils/cx';
@@ -185,24 +185,29 @@ export interface FileUploadLabels {
   /** Link-like text, also the name of the file input. */
   action: string;
   drop: string;
+  /** Name of the list of files below the drop zone. */
+  files: string;
 }
-export const DEFAULT_FILE_UPLOAD_LABELS: FileUploadLabels = { action: 'Click to upload', drop: 'or drag a file here' };
+export const DEFAULT_FILE_UPLOAD_LABELS: FileUploadLabels = { action: 'Click to upload', drop: 'or drag a file here', files: 'Files' };
 export interface FileUploadProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   onFiles: (files: File[]) => void;
   hint?: ReactNode;
+  /** Slot for the files below the drop zone: FileUploadItem elements. They become a list. */
+  children?: ReactNode;
   labels?: Partial<FileUploadLabels>;
   /** @deprecated Use labels.action. Removed in 2.0.0. */
   actionLabel?: string;
   /** @deprecated Use labels.drop. Removed in 2.0.0. */
   dropLabel?: string;
 }
-/** Drop zone backed by a real file input: click, keyboard and drag-and-drop. */
-export function FileUpload({ onFiles, hint, labels, actionLabel, dropLabel, disabled, className, ...rest }: FileUploadProps) {
+const FileListContext = createContext(false);
+/** Drop zone backed by a real file input: click, keyboard and drag-and-drop. With children: the files below it, as a list. */
+export function FileUpload({ onFiles, hint, children, labels, actionLabel, dropLabel, disabled, className, ...rest }: FileUploadProps) {
   const l = useLabels('fileUpload', DEFAULT_FILE_UPLOAD_LABELS, labels, { action: actionLabel, drop: dropLabel });
   const [active, setActive] = useState(false);
   const hintId = useId();
   const onDrop = (e: DragEvent) => { e.preventDefault(); setActive(false); if (!disabled) onFiles(Array.from(e.dataTransfer.files)); };
-  return (
+  const zone = (
     <div
       className={cx('rb-upload', active && 'rb-upload--active', disabled && 'rb-upload--disabled', className)}
       onDragOver={(e) => { e.preventDefault(); if (!disabled) setActive(true); }}
@@ -217,6 +222,16 @@ export function FileUpload({ onFiles, hint, labels, actionLabel, dropLabel, disa
       </div>
     </div>
   );
+  // Without files the drop zone is the whole component, as before.
+  if (children === undefined) return zone;
+  return (
+    <div className="rb-upload-group">
+      {zone}
+      <FileListContext.Provider value>
+        <div className="rb-upload-group__files" role="list" aria-label={l.files}>{children}</div>
+      </FileListContext.Provider>
+    </div>
+  );
 }
 
 export interface FileUploadItemLabels {
@@ -225,26 +240,61 @@ export interface FileUploadItemLabels {
   uploadedFile: (name: string) => string;
   /** Read out when the upload fails. */
   failedFile: (name: string) => string;
+  /** Shown next to the spinner while the file is being processed. */
+  processing: string;
+  /** Read out when processing starts. */
+  processingFile: (name: string) => string;
 }
 export const DEFAULT_FILE_UPLOAD_ITEM_LABELS: FileUploadItemLabels = {
   failed: 'Upload failed. Try again.', uploading: (name) => `Upload ${name}`, uploaded: 'Uploaded', remove: (name) => `Remove ${name}`,
   uploadedFile: (name) => `${name} uploaded`, failedFile: (name) => `${name}: upload failed`,
+  processing: 'Checking file', processingFile: (name) => `Checking ${name}`,
 };
-export interface FileUploadItemProps { name: string; size?: string; progress?: number; status?: 'uploading' | 'complete' | 'error'; error?: ReactNode; onRemove?: () => void; labels?: Partial<FileUploadItemLabels> }
-export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove, labels }: FileUploadItemProps) {
+export interface FileUploadItemProps {
+  name: string;
+  size?: string;
+  progress?: number;
+  /** processing: the upload is done and the file is being checked or converted. */
+  status?: 'uploading' | 'processing' | 'complete' | 'error';
+  error?: ReactNode;
+  onRemove?: () => void;
+  /** Slot that replaces the icon, for example a thumbnail of the file. */
+  media?: ReactNode;
+  /** Slot on the right for your own buttons, for example "Try again" or "Replace". */
+  actions?: ReactNode;
+  /** Slot for free content below the file, inside the card: the result of a check, an Alert, extra fields. Pass null while it is empty. */
+  children?: ReactNode;
+  labels?: Partial<FileUploadItemLabels>;
+}
+export function FileUploadItem({ name, size, progress = 0, status = 'uploading', error, onRemove, media, actions, children, labels }: FileUploadItemProps) {
   const l = useLabels('fileUploadItem', DEFAULT_FILE_UPLOAD_ITEM_LABELS, labels);
+  const inList = useContext(FileListContext);
   const isErr = status === 'error';
-  return (
-    <div className={cx('rb-file', isErr && 'rb-file--error')}>
+  const main = (
+    <>
       {/* L6: only the result is read out, not every step of the progress bar */}
-      <span className="rb-visually-hidden" role="status">{status === 'complete' ? l.uploadedFile(name) : isErr ? l.failedFile(name) : ''}</span>
-      <FeaturedIcon color={isErr ? 'error' : 'brand'} size="md" icon={isErr ? <CircleAlert /> : <FileIcon />} />
+      <span className="rb-visually-hidden" role="status">{status === 'complete' ? l.uploadedFile(name) : isErr ? l.failedFile(name) : status === 'processing' ? l.processingFile(name) : ''}</span>
+      {media !== undefined && media !== null ? <span className="rb-file__media">{media}</span> : <FeaturedIcon color={isErr ? 'error' : 'brand'} size="md" icon={isErr ? <CircleAlert /> : <FileIcon />} />}
       <div className="rb-file__content">
         <p className="rb-file__name">{name}</p>
         <p className="rb-file__meta">{isErr ? error ?? l.failed : size}</p>
-        {!isErr && <ProgressBar label={l.uploading(name)} value={status === 'complete' ? 100 : progress} />}
+        {status === 'processing' && <p className="rb-file__processing"><span className="rb-spinner rb-spinner--sm" aria-hidden="true" />{l.processing}</p>}
+        {!isErr && status !== 'processing' && <ProgressBar label={l.uploading(name)} value={status === 'complete' ? 100 : progress} />}
       </div>
-      {status === 'complete' ? <span className="rb-file__done" role="img" aria-label={l.uploaded}><CircleCheck aria-hidden="true" /></span> : onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={l.remove(name)} onClick={onRemove} />}
+      <div className="rb-file__trailing">
+        {actions}
+        {status === 'complete' && <span className="rb-file__done" role="img" aria-label={l.uploaded}><CircleCheck aria-hidden="true" /></span>}
+        {onRemove && <ButtonIcon hierarchy="tertiary" size="sm" icon={<Trash2 aria-hidden />} aria-label={l.remove(name)} onClick={onRemove} />}
+      </div>
+    </>
+  );
+  const classes = cx('rb-file', isErr && 'rb-file--error');
+  const role = inList ? 'listitem' : undefined;
+  if (children === undefined) return <div className={classes} role={role}>{main}</div>;
+  return (
+    <div className={cx(classes, 'rb-file--has-content')} role={role}>
+      <div className="rb-file__main">{main}</div>
+      <div className="rb-file__body">{children}</div>
     </div>
   );
 }

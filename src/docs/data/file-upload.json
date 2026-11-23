@@ -6,7 +6,7 @@
     "base": "_File upload"
   },
   "react": "FileUpload",
-  "summary": "Drop zone with a real file input, plus File upload items that show the progress and status of each file.",
+  "summary": "Drop zone with a real file input, with the files below it. Each file shows its progress and status, and has slots for a preview, your own actions and free content.",
   "use": [
     "Add documents or images to a form or project."
   ],
@@ -15,7 +15,9 @@
   ],
   "anatomy": [
     "Drop zone: featured icon, action link, drag text, hint.",
-    "File upload item: file icon, name, size, progress, status, remove button."
+    "Files: a list of File upload items below the drop zone.",
+    "File upload item: file icon or your own media, name, size, progress or a spinner with text, and on the right your own actions, the done icon and the remove button.",
+    "Optional content below a file, inside its card."
   ],
   "figmaProps": [
     [
@@ -29,9 +31,29 @@
       "Allowed types and maximum size."
     ],
     [
+      "File upload: Files / Show files",
+      "slot, boolean",
+      "Native slot below the drop zone with File upload items in it. Off by default. Add, remove or reorder the items in the slot."
+    ],
+    [
       "_File upload item: State",
-      "Uploading, Complete, Error",
-      ""
+      "Uploading, Processing, Complete, Error",
+      "Processing: a spinner with a text instead of the progress bar. Change the text with Processing text."
+    ],
+    [
+      "_File upload item: Media / Show media, Show icon",
+      "slot, boolean",
+      "Native slot for a preview. Turn Show icon off when you use it."
+    ],
+    [
+      "_File upload item: Actions / Show actions",
+      "slot, boolean",
+      "Native slot on the right for your own buttons."
+    ],
+    [
+      "_File upload item: Content / Show content",
+      "slot, boolean",
+      "Native slot below the file for free content."
     ]
   ],
   "reactProps": [
@@ -51,34 +73,71 @@
       ""
     ],
     [
-      "FileUploadItem name / size / progress / status / error / onRemove",
+      "FileUpload children",
+      "ReactNode",
+      "Slot for the files: FileUploadItem elements. They become a named list below the drop zone."
+    ],
+    [
+      "FileUploadItem name / size / progress / error / onRemove",
       "",
-      ""
+      "onRemove also works when the file is complete."
+    ],
+    [
+      "FileUploadItem status",
+      "'uploading' | 'processing' | 'complete' | 'error'",
+      "processing: the upload is done and the file is being checked or converted."
+    ],
+    [
+      "FileUploadItem media",
+      "ReactNode",
+      "Slot that replaces the icon, for example a thumbnail."
+    ],
+    [
+      "FileUploadItem actions",
+      "ReactNode",
+      "Slot on the right for your own buttons: \"Try again\", \"Replace\"."
+    ],
+    [
+      "FileUploadItem children",
+      "ReactNode",
+      "Slot for free content below the file, inside the card: the result of a check, an Alert. Pass null while it is empty."
+    ],
+    [
+      "labels (FileUpload)",
+      "{ action, drop, files }",
+      "files is the name of the list."
     ],
     [
       "labels (FileUploadItem)",
-      "{ failed, uploading(name), uploaded, remove(name) }",
+      "{ failed, uploading(name), uploaded, remove(name), processing, processingFile(name) }",
       "Defaults in DEFAULT_FILE_UPLOAD_ITEM_LABELS."
     ]
   ],
   "behaviour": [
     "Clicking opens the file picker. Dragging shows the Drag over state.",
-    "Each file gets its own item with progress."
+    "Each file gets its own item with progress.",
+    "The drop zone passes every file on. Checking the type and the size is up to your page: show the reason in an item with status error.",
+    "Pattern \"artwork check\" (see Examples): upload, check, a result with a list of checks, a warning with actions, a wrong file type and a check that timed out. The checks and their rules live in your page."
   ],
   "a11y": [
     "Works fully without dragging: the action link opens the native file input.",
     "File upload item reads out only the result (\"report.pdf uploaded\", or that the upload failed) in a status region; the progress bar is not read out at every step.",
-    "The remove button has a label with the file name."
+    "The remove button has a label with the file name.",
+    "With children the files are a list with a name, so a screen reader says how many files there are.",
+    "Processing is read out once (\"Checking report.pdf\")."
   ],
   "content": [
     "The hint names the file types and maximum size: \"PDF, JPG or PNG (max. 10 MB)\".",
     "The error message names the cause: \"The file is larger than 10 MB.\""
   ],
   "do": [
-    "Check the type and size before uploading."
+    "Check the type and size before uploading.",
+    "Give an error its own action in the actions slot, for example \"Try again\".",
+    "Say it when a result is an estimate."
   ],
   "dont": [
-    "Offer drag and drop only."
+    "Offer drag and drop only.",
+    "A warning without a next step."
   ],
   "tokens": [
     "--file-upload-{surface|border|foreground}-*",
@@ -90,5 +149,8 @@
     "Progress",
     "Featured icon"
   ],
-  "open": []
+  "open": [
+    "In State Complete the progress bar stays at 100%. With content below the file that is a lot in one card.",
+    "Not built: a component for the list of checks. The pattern uses a description list with a Badge per row."
+  ]
 }
