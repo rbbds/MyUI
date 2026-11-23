@@ -3,4 +3,4 @@ import meta, * as S from './Commerce.cases';
 
 export default { ...meta, title: 'E-commerce/Add to cart' } as typeof meta;
 export const AddToCartExample = S.AddToCartExample;
-export const BulkOrder = S.BulkOrder;
+export const BulkOrder = { ...S.BulkOrder, name: 'Bulk order with a second action' };

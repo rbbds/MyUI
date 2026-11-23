@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Fixed
+- Storybook: the stories for Tier pricing table, Add to cart (bulk order) and File upload show their full name in the sidebar, for example "Pattern: artwork check, in Dutch" instead of "Artwork Check Pattern Dutch". The links to the stories do not change.
+
 ## 1.10.0 (23 November 2026)
 
 ### Added

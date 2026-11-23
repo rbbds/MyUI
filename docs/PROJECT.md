@@ -37,7 +37,7 @@ Git
 - Nooit direct op main. Na een merge altijd een nieuwe branch vanaf main en eerst checken of de vorige PR nog open staat.
 - Commits met auteur "Robert Trimp <robert.trimp@gmail.com>". PR's via gh api (REST).
 - Werk CHANGELOG.md bij bij elke wijziging.
-- Releases: Claude maakt de release-PR (versie, kop in CHANGELOG.md, `figmaChangelog` in docs/content/guides.mjs). Robert mergt. Daarna maakt Claude de GitHub Release (tag `vX.Y.Z` op main), en alleen als package.json op main die versie heeft en CI op main groen is. Mergen blijft bij Robert.
+- Releases: Claude maakt de release-PR (versie, kop in CHANGELOG.md, `figmaChangelog` in docs/content/guides.mjs). Robert mergt. Claude controleert daarna dat package.json op main die versie heeft en dat CI op main groen is, en meldt dat de release kan. Robert publiceert de GitHub Release (tag `vX.Y.Z` op main): Claude mag vanuit zijn sessie geen releases aanmaken (GitHub weigert het met 403). Daarna controleert Claude npm en werkt de Figma-pagina's Changelog en How to use bij. Nooit de release publiceren voordat de release-PR is gemerged.
 
 Antwoorden
 - Nederlands, geen em dashes, kort en scanbaar, concreet.
@@ -297,6 +297,7 @@ Storybook-pagina waar je een stijl kiest, een huisstijlkleur, fonts en logo invu
 | #74 | Selection card: slots `badge`, `meta` en `children` (content). Patroon "decoration method" als story. Figma: clip content uit op alle 31 slots |
 | #75 | File upload: bestanden als slot in het component. File upload item: slots `media`, `actions`, `children`, status `processing`, verwijderen na complete. Patroon "artwork check" als story |
 | #76 | Release 1.10.0 |
+| #77 | Releasestappen gecorrigeerd (Robert publiceert de GitHub Release), namen van stories in de zijbalk |
 | #43–#44 | Release 1.1.0, Figma-bestandsnaam in de docs |
 | #45–#46 | L5: zichtbare actieve optie in Button group en Pagination, release 1.2.0 |
 | #47–#49 | Base tokens voor spacing en radius, scopes alleen op base tokens, release 1.3.0 |
