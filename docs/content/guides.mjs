@@ -291,6 +291,16 @@ export const guides = [
 // Figma changelog: shown on the page "📝 Changelog" in the Figma file. Newest first.
 export const figmaChangelog = [
   {
+    version: '1.10.0',
+    items: [
+      'Selection card has a native Badge slot next to the title (Show badge), a Meta text below the explanation (Show meta) and a native Content slot below the option (Show content). All off by default.',
+      'File upload has a native Files slot below the drop zone with File upload items in it (Show files, off by default). You no longer place File upload items yourself.',
+      'File upload item has native slots Media, Actions and Content, a Show icon property and the new state Processing (a spinner with a text). In Complete the remove button stays, and the done icon lines up with the buttons.',
+      'Clip content is off on all native slots in the file, so a focus ring or a shadow of the content is not cut off.',
+      'New token selection-card/badge-gap.',
+    ],
+  },
+  {
     version: '1.9.0',
     items: [
       'New page Tier pricing table: the unit price per quantity tier for bulk orders. The component has Density, State (Default, Loading) and Saving. The base components are _Tier row, _Tier header and _Tier row skeleton. 7 new tokens under e-commerce/tier-pricing; the rest of the look comes from the table tokens.',

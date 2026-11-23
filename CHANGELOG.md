@@ -1,8 +1,6 @@
 # Changelog
 
-## Unreleased
-
-Planned as 1.10.0.
+## 1.10.0 (23 November 2026)
 
 ### Added
 - **Selection card: three slots.** `badge` sits next to the title (usually a Badge such as "Recommended"). `meta` is a line below the explanation for short facts, or for the reason why an option is disabled; it stays readable on a disabled card. `children` is free content below the option, inside the card but outside the label, so an Alert with buttons, extra fields or links work there. Without these props Selection card renders as before.
