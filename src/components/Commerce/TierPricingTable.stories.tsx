@@ -2,6 +2,6 @@
 import meta, * as S from './Commerce.cases';
 
 export default { ...meta, title: 'E-commerce/Tier pricing table' } as typeof meta;
-export const TierPricingTables = S.TierPricingTables;
-export const TierPricingWithAddToCart = S.TierPricingWithAddToCart;
-export const TierPricingDutch = S.TierPricingDutch;
+export const TierPricingTables = { ...S.TierPricingTables, name: 'Tier pricing table' };
+export const TierPricingWithAddToCart = { ...S.TierPricingWithAddToCart, name: 'Tier pricing with Add to cart' };
+export const TierPricingDutch = { ...S.TierPricingDutch, name: 'Tier pricing with Add to cart, in Dutch' };
